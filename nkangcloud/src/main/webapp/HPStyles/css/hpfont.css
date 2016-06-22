@@ -1,0 +1,20 @@
+@font-face {
+	font-family: HPSimplified_Bd;
+	font-style: normal;
+	font-weight: normal;
+	src: url("../hpfont/hps-euro-bold-eot.eot") ;
+	src: url("../hpfont/hps-euro-bold-woff.woff ") format("woff"), url("../hpfont/hps-euro-bold-ttf.ttf") format("truetype");
+}
+@font-face {
+	font-family: HPSimplified_Rg;
+	font-style: normal;
+	font-weight: normal;
+	src: url("../hpfont/hps-euro-regular-eot.eot");
+	src: url("../hpfont/hps-euro-regular-woff.woff") format("woff"), url("../hpfont/hps-euro-regular-ttf.ttf") format("truetype");
+}
+span.StepN:before{
+
+	content: "\f111";
+	font-family: 'icomoon';	
+
+}
