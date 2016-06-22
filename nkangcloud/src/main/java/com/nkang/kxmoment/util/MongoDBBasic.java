@@ -46,52 +46,77 @@ public class MongoDBBasic {
             mongoDB.addUser(username, password.toCharArray());
 
 		    DBCollection mongoCollection = mongoDB.getCollection("masterdata");
-		    log.info("----------------get started");
 		    List<DBObject> list = new ArrayList<DBObject>();
 			ResourceBundle resourceBundle=ResourceBundle.getBundle("MDMExtract_0_0-50000");
 			String recordinfo = "";
 			for(int i = 1; i <= 50000; i ++){
 				recordinfo=resourceBundle.getString(String.valueOf(i));
 				String[] info = recordinfo.split("\\|");
-				log.info("-----in size loop end 1 ----" + i + " with " + info[0]);
-			    DBObject basic = new BasicDBObject();  
-			    basic.put("OtherPartySiteInstanceId"			, info[0]);    
-			    basic.put("OrganizationID"						, info[1]);    
-			    basic.put("OrganizationNonLatinName"			, info[2]); 
-			    basic.put("OrganizationNonLatinAddress"			, info[3]); 
-			    basic.put("Lat"									, info[4]); 
-			    basic.put("Lng"									, info[5]); 
-			    basic.put("OrganizationLatinName"				, info[6]); 
-			    basic.put("NonlatinCity"						, info[7]); 
-			    basic.put("Found Year"							, info[8]); 
-			    basic.put("CountOfEmployee"						, info[9]); 
-			    basic.put("State"								, info[10]); 
-			    basic.put("BRID"								, info[11]); 
-			    basic.put("CityRegion"							, info[12]); 
-			    basic.put("Anunal Revene"						, info[13]); 
-			    basic.put("BRIID"								, info[14]); 
-			    basic.put("SalesCoverageSegments"				, info[15]); 
-			    basic.put("IsCompetitor"						, info[16]); 
-			    basic.put("OnlyPresaleCustomer"					, info[17]); 
-			    basic.put("isReturnPartnerFlag"					, info[18]); 
-			    basic.put("QualityGrade"						, info[19]); 
-			    list.add(basic);
+			    DBObject basic = new BasicDBObject(); 
+			    if(!StringUtils.isEmpty(info[0])){
+			    	basic.put("OtherPartySiteInstanceId"			, info[0]);
+			    }
+			    if(!StringUtils.isEmpty(info[1])){
+			    	basic.put("OrganizationID"						, info[1]);  
+			    }
+/*			    if(!StringUtils.isEmpty(info[2])){
+			    	basic.put("OrganizationNonLatinName"			, info[2]);
+			    }
+			    if(!StringUtils.isEmpty(info[3])){
+			    	basic.put("OrganizationNonLatinAddress"			, info[3]); 
+			    }*/
+			    if(!StringUtils.isEmpty(info[4])){
+			    	basic.put("Lat"									, info[4]);
+			    }
+			    if(!StringUtils.isEmpty(info[5])){
+			    	basic.put("Lng"									, info[5]);
+			    }
+			    if(!StringUtils.isEmpty(info[6])){
+			    	basic.put("OrganizationLatinName"				, info[6]); 
+			    }
+			    /*if(!StringUtils.isEmpty(info[7])){
+			    	basic.put("NonlatinCity"						, info[7]); 
+			    }
+			    if(!StringUtils.isEmpty(info[8])){
+			    	basic.put("Found Year"							, info[8]);
+			    }
+			    if(!StringUtils.isEmpty(info[9])){
+			    	basic.put("CountOfEmployee"						, info[9]); 
+			    }
+			    if(!StringUtils.isEmpty(info[10])){
+			    	basic.put("State"								, info[10]); 
+			    }
+			    if(!StringUtils.isEmpty(info[11])){
+			    	basic.put("BRID"								, info[11]);
+			    }
+			    if(!StringUtils.isEmpty(info[12])){
+			    	basic.put("CityRegion"							, info[12]); 
+			    }
+			    if(!StringUtils.isEmpty(info[13])){
+			    	basic.put("Anunal Revene"						, info[13]);
+			    }
+			    if(!StringUtils.isEmpty(info[14])){
+			    	basic.put("BRIID"								, info[14]); 
+			    }
+			    if(!StringUtils.isEmpty(info[15])){
+			    	basic.put("SalesCoverageSegments"				, info[15]); 
+			    }
+			    if(!StringUtils.isEmpty(info[16])){
+			    	basic.put("IsCompetitor"						, info[16]); 
+			    }
+			    if(!StringUtils.isEmpty(info[17])){
+			    	basic.put("OnlyPresaleCustomer"					, info[17]);
+			    }
+			    if(!StringUtils.isEmpty(info[18])){
+			    	basic.put("isReturnPartnerFlag"					, info[18]);
+			    }
+			    if(!StringUtils.isEmpty(info[19])){
+			    	basic.put("QualityGrade"						, info[19]); 
+			    }
+*/
 			    mongoCollection.insert(basic);
-/*			    if(i==5000){
-			    	log.info("-----in size loop end 1.1 ----" + i + " with " + info[0]);
-	                mongoCollection.insert(list);
-	                list.clear();  
-			    }*/
-/*			    if(i!=0 && i % 2000 == 0){
-	                mongoCollection.insert(list);
-	                list.clear();  
-			    }*/
 				recordinfo = "";
-				log.info("-----in size loop end 2----" + i + " with " + info[0]);
 			}
-			
-			//mongoCollection.insert(list);
-			
 		    mongoClient.close();
 		    
 	} catch (Exception e) {
