@@ -1,0 +1,285 @@
+
+/* custom.css */
+
+/* 1 */ 
+
+/* vc_carousel.css */
+
+/* 1   */ .vc-carousel-indicators {
+/* 2   */   position: absolute;
+/* 3   */   bottom: 10px;
+/* 4   */   left: 50%;
+/* 5   */   z-index: 15;
+/* 6   */   width: 60%;
+/* 7   */   margin-left: -30%;
+/* 8   */   padding-left: 0;
+/* 9   */   list-style: none;
+/* 10  */   text-align: center;
+/* 11  */ }
+/* 12  */ .vc-carousel-indicators li {
+/* 13  */   display: inline-block;
+/* 14  */   width: 10px;
+/* 15  */   height: 10px;
+/* 16  */   margin: 1px;
+/* 17  */   text-indent: -999px;
+/* 18  */   border-radius: 10px;
+/* 19  */   cursor: pointer;
+/* 20  */   border: 1px solid #808080;
+/* 21  */   background-color: #808080;
+/* 22  */ }
+/* 23  */ .vc-carousel-indicators .vc-active {
+/* 24  */   margin: 0;
+/* 25  */   width: 12px;
+/* 26  */   height: 12px;
+/* 27  */   background-color: transparent;
+/* 28  */   border: 1px solid #808080;
+/* 29  */ }
+/* 30  */ .vc-carousel-indicators .vc-partial {
+/* 31  */   opacity: 0.5;
+/* 32  */ }
+/* 33  */ .vc-carousel {
+/* 34  */   position: relative;
+/* 35  */ }
+/* 36  */ .vc-carousel .vc-carousel-inner {
+/* 37  */   position: relative;
+/* 38  */   overflow: hidden;
+/* 39  */   width: 100%;
+/* 40  */ }
+/* 41  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline {
+/* 42  */   position: relative;
+/* 43  */   overflow: hidden;
+/* 44  */ }
+/* 45  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner {
+/* 46  */   left: 0;
+/* 47  */   position: relative;
+/* 48  */   width: 100%;
+/* 49  */ }
+/* 50  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner.vc-transition {
+
+/* vc_carousel.css */
+
+/* 51  */   -webkit-transition: 0.5s ease left;
+/* 52  */   transition: 0.5s ease left;
+/* 53  */ }
+/* 54  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner.vc-transition.vc-swipe-transition {
+/* 55  */   -webkit-transition-duration: 0.2s;
+/* 56  */   transition-duration: 0.2s;
+/* 57  */ }
+/* 58  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner > .vc-item {
+/* 59  */   float: left;
+/* 60  */   visibility: hidden;
+/* 61  */ }
+/* 62  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner > .vc-item > img,
+/* 63  */ .vc-carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner > .vc-item > a > img {
+/* 64  */   display: block;
+/* 65  */   max-width: 100%;
+/* 66  */   height: auto;
+/* 67  */   line-height: 1;
+/* 68  */ }
+/* 69  */ .vc-carousel.vc-per-view-more .vc-carousel-slideline .vc-carousel-slideline-inner > .vc-item > .vc-inner {
+/* 70  */   margin: 10px;
+/* 71  */ }
+/* 72  */ .vc-carousel.vc_carousel_vertical .vc-carousel-slideline {
+/* 73  */   overflow: hidden;
+/* 74  */ }
+/* 75  */ .vc-carousel.vc_carousel_vertical .vc-carousel-slideline .vc-carousel-slideline-inner {
+/* 76  */   width: 100%;
+/* 77  */ }
+/* 78  */ .vc-carousel.vc_carousel_vertical .vc-carousel-slideline .vc-carousel-slideline-inner.vc-transition {
+/* 79  */   -webkit-transition-property: top;
+/* 80  */   transition-property: top;
+/* 81  */ }
+/* 82  */ .vc-carousel.vc_carousel_vertical .vc-carousel-slideline .vc-carousel-slideline-inner .vc-item {
+/* 83  */   float: none;
+/* 84  */ }
+/* 85  */ .vc-carousel.vc_carousel_vertical .vc-carousel-indicators {
+/* 86  */   position: absolute;
+/* 87  */   top: 2%;
+/* 88  */   right: 3%;
+/* 89  */   left: auto;
+/* 90  */   width: 10px;
+/* 91  */ }
+/* 92  */ .vc-carousel.vc_carousel_vertical .vc-carousel-indicators li {
+/* 93  */   display: block;
+/* 94  */   margin: 0 auto 3px;
+/* 95  */   width: 6px;
+/* 96  */   height: 6px;
+/* 97  */ }
+/* 98  */ .vc-carousel.vc_carousel_vertical .vc-carousel-indicators li.vc-active {
+/* 99  */   width: 8px;
+/* 100 */   height: 8px;
+
+/* vc_carousel.css */
+
+/* 101 */   margin: 0 auto 1px;
+/* 102 */ }
+/* 103 */ .vc-carousel.vc-build .vc-carousel-slideline .vc-carousel-slideline-inner > .vc-item {
+/* 104 */   visibility: visible;
+/* 105 */ }
+/* 106 */ .vc-carousel-control {
+/* 107 */   position: absolute;
+/* 108 */   padding: 0;
+/* 109 */   top: 50%;
+/* 110 */   left: 0;
+/* 111 */   bottom: 0;
+/* 112 */   margin-top: -15px;
+/* 113 */   width: 60px;
+/* 114 */   height: 30px;
+/* 115 */   opacity: 0.5;
+/* 116 */   filter: alpha(opacity=50);
+/* 117 */   font-size: 30px;
+/* 118 */   text-align: center;
+/* 119 */   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+/* 120 */   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+/* 121 */ }
+/* 122 */ .vc-carousel-control:hover,
+/* 123 */ .vc-carousel-control:focus {
+/* 124 */   text-decoration: none;
+/* 125 */   opacity: 0.9;
+/* 126 */   filter: alpha(opacity=90);
+/* 127 */ }
+/* 128 */ .vc-carousel-control.vc-left {
+/* 129 */   /*
+/* 130 *|         background-image: -webkit-gradient(linear, 0% top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
+/* 131 *|         background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0%), color-stop(rgba(0, 0, 0, 0.0001) 100%));
+/* 132 *|         background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+/* 133 *|         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+/* 134 *|         background-repeat: repeat-x;
+/* 135 *|         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+/* 136 *|         */
+/* 137 */ 
+/* 138 */ }
+/* 139 */ .vc-carousel-control.vc-right {
+/* 140 */   left: auto;
+/* 141 */   right: 0;
+/* 142 */   /*
+/* 143 *|         background-image: -webkit-gradient(linear, 0% top, 100% top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
+/* 144 *|         background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0%), color-stop(rgba(0, 0, 0, 0.5) 100%));
+/* 145 *|         background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+/* 146 *|         background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+/* 147 *|         background-repeat: repeat-x;
+/* 148 *|         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+/* 149 *|         */
+/* 150 */ 
+
+/* vc_carousel.css */
+
+/* 151 */ }
+/* 152 */ .vc-carousel-control .icon-prev,
+/* 153 */ .vc-carousel-control .icon-next,
+/* 154 */ .vc-carousel-control .glyphicon-chevron-left,
+/* 155 */ .vc-carousel-control .glyphicon-chevron-right {
+/* 156 */   position: absolute;
+/* 157 */   top: 50%;
+/* 158 */   left: 50%;
+/* 159 */   z-index: 5;
+/* 160 */   display: inline-block;
+/* 161 */ }
+/* 162 */ .vc-carousel-control .icon-prev,
+/* 163 */ .vc-carousel-control .icon-next {
+/* 164 */   width: 20px;
+/* 165 */   height: 20px;
+/* 166 */   margin-top: -10px;
+/* 167 */   margin-left: -10px;
+/* 168 */   font-family: serif;
+/* 169 */ }
+/* 170 */ .vc-carousel-control .icon-prev:before {
+/* 171 */   content: '\2039';
+/* 172 */   position: relative;
+/* 173 */   top: -10px;
+/* 174 */ }
+/* 175 */ .vc-carousel-control .icon-next:before {
+/* 176 */   content: '\203a';
+/* 177 */   position: relative;
+/* 178 */   top: -10px;
+/* 179 */ }
+/* 180 */ .vc-carousel-caption {
+/* 181 */   position: absolute;
+/* 182 */   left: 15%;
+/* 183 */   right: 15%;
+/* 184 */   bottom: 20px;
+/* 185 */   z-index: 10;
+/* 186 */   padding-top: 20px;
+/* 187 */   padding-bottom: 20px;
+/* 188 */   color: #ffffff;
+/* 189 */   text-align: center;
+/* 190 */   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+/* 191 */ }
+/* 192 */ .vc-carousel-caption .btn {
+/* 193 */   text-shadow: none;
+/* 194 */ }
+/* 195 */ @media screen and (min-width: 768px) {
+/* 196 */   .vc-carousel-control .icon-prev,
+/* 197 */   .vc-carousel-control .icon-next {
+/* 198 */     width: 30px;
+/* 199 */     height: 30px;
+/* 200 */     margin-top: -15px;
+
+/* vc_carousel.css */
+
+/* 201 */     margin-left: -15px;
+/* 202 */     font-size: 30px;
+/* 203 */     display: block;
+/* 204 */     padding: 0;
+/* 205 */   }
+/* 206 */   .vc-carousel-caption {
+/* 207 */     left: 20%;
+/* 208 */     right: 20%;
+/* 209 */     padding-bottom: 30px;
+/* 210 */   }
+/* 211 */   .vc-carousel-indicators {
+/* 212 */     bottom: 20px;
+/* 213 */   }
+/* 214 */ }
+/* 215 */ .clearfix:before,
+/* 216 */ .clearfix:after {
+/* 217 */   content: " ";
+/* 218 */   /* 1 */
+/* 219 */ 
+/* 220 */   display: table;
+/* 221 */   /* 2 */
+/* 222 */ 
+/* 223 */ }
+/* 224 */ .clearfix:after {
+/* 225 */   clear: both;
+/* 226 */ }
+/* 227 */ .pull-right {
+/* 228 */   float: right !important;
+/* 229 */ }
+/* 230 */ .pull-left {
+/* 231 */   float: left !important;
+/* 232 */ }
+/* 233 */ .hide {
+/* 234 */   display: none !important;
+/* 235 */ }
+/* 236 */ .show {
+/* 237 */   display: block !important;
+/* 238 */ }
+/* 239 */ .invisible {
+/* 240 */   visibility: hidden;
+/* 241 */ }
+/* 242 */ .text-hide {
+/* 243 */   font: 0/0 a;
+/* 244 */   color: transparent;
+/* 245 */   text-shadow: none;
+/* 246 */   background-color: transparent;
+/* 247 */   border: 0;
+/* 248 */ }
+/* 249 */ /* Wordpress fix. */
+/* 250 */ .entry-content ol.vc-carousel-indicators {
+
+/* vc_carousel.css */
+
+/* 251 */   margin: 0 0 0 -30%;
+/* 252 */ }
+/* 253 */ .entry-content .vc_carousel_vertical ol.vc-carousel-indicators {
+/* 254 */   margin: 1px 0 0 0;
+/* 255 */   bottom: auto;
+/* 256 */ }
+/* 257 */ .wpb_images_carousel.carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner > .item > a {
+/* 258 */   display: block;
+/* 259 */ }
+/* 260 */ .wpb_images_carousel.carousel .vc-carousel-inner .vc-carousel-slideline .vc-carousel-slideline-inner > .item > a > img {
+/* 261 */   margin: auto;
+/* 262 */ }
+/* 263 */ 

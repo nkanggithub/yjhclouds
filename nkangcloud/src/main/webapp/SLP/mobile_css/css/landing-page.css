@@ -1,0 +1,20 @@
+#custom-collapsible {
+    background-color: white  !important;
+    border-width: 0px !important; 
+}
+
+#custom-collapsible .ui-icon {
+     display: none;
+}
+
+#custom-collapsible h3 a {
+    border-bottom-width: 10px !important; 
+    border-color: white;
+    background: #0197d6;
+    color: white;   
+    text-shadow:none;
+    text-align:center;
+}
+#custom-collapsible .clicked {
+    background: #f05332  !important;
+}
