@@ -1,4 +1,4 @@
-package com.nkang.kxmoment.servlet;
+package com.nkang.kxmoment.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

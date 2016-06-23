@@ -105,6 +105,13 @@ public class CoreService
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
+				else if ("MGD".equals(textContent)) {
+					MongoDBBasic.getmongoDB();
+					respContent = "data loaded :\n";
+					textMessage.setContent(respContent);
+					respXml = MessageUtil.textMessageToXml(textMessage);
+				}
+				
 				else {
 					respContent = "OK：" + textContent + "\n";
 					textMessage.setContent(respContent);

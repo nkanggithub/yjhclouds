@@ -23,6 +23,7 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.nkang.kxmoment.service.CoreService;
+
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
 	public static void getmongoDB()
@@ -46,11 +47,12 @@ public class MongoDBBasic {
             mongoDB.addUser(username, password.toCharArray());
 
 		    DBCollection mongoCollection = mongoDB.getCollection("masterdata");
-		    List<DBObject> list = new ArrayList<DBObject>();
+
 			ResourceBundle resourceBundle=ResourceBundle.getBundle("MDMExtract_0_0-50000");
 			String recordinfo = "";
 			for(int i = 1; i <= 50000; i ++){
 				recordinfo=resourceBundle.getString(String.valueOf(i));
+				recordinfo = StringUtils.changeCharset(recordinfo, StringUtils.UTF_8);
 				String[] info = recordinfo.split("\\|");
 			    DBObject basic = new BasicDBObject(); 
 			    if(!StringUtils.isEmpty(info[0])){
@@ -59,12 +61,12 @@ public class MongoDBBasic {
 			    if(!StringUtils.isEmpty(info[1])){
 			    	basic.put("OrganizationID"						, info[1]);  
 			    }
-/*			    if(!StringUtils.isEmpty(info[2])){
+				    if(!StringUtils.isEmpty(info[2])){
 			    	basic.put("OrganizationNonLatinName"			, info[2]);
 			    }
 			    if(!StringUtils.isEmpty(info[3])){
 			    	basic.put("OrganizationNonLatinAddress"			, info[3]); 
-			    }*/
+			    }
 			    if(!StringUtils.isEmpty(info[4])){
 			    	basic.put("Lat"									, info[4]);
 			    }
@@ -74,7 +76,7 @@ public class MongoDBBasic {
 			    if(!StringUtils.isEmpty(info[6])){
 			    	basic.put("OrganizationLatinName"				, info[6]); 
 			    }
-			    /*if(!StringUtils.isEmpty(info[7])){
+			    if(!StringUtils.isEmpty(info[7])){
 			    	basic.put("NonlatinCity"						, info[7]); 
 			    }
 			    if(!StringUtils.isEmpty(info[8])){
@@ -110,10 +112,9 @@ public class MongoDBBasic {
 			    if(!StringUtils.isEmpty(info[18])){
 			    	basic.put("isReturnPartnerFlag"					, info[18]);
 			    }
-			    if(!StringUtils.isEmpty(info[19])){
-			    	basic.put("QualityGrade"						, info[19]); 
-			    }
-*/
+			    basic.put("QualityGrade"							, ""); 
+			    
+			    
 			    mongoCollection.insert(basic);
 				recordinfo = "";
 			}
