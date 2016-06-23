@@ -22,15 +22,110 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.service.CoreService;
 
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
+	public static String mongoDBInsert(OrgOtherPartySiteInstance opsi){
+			try {
+				String databaseName = "VGWUeoTkcVUrpONUGzUO";
+				String host = "mongo.duapp.com";
+				String port = "8908";
+				String username = "473c34a48268d02986e607cb5d7d564c";
+				String password = "807640004b73f4ec49d3d3af79493ade";
+				String serverName = host + ":" + port;
+				MongoClient mongoClient = new MongoClient(new ServerAddress(serverName), Arrays.asList(MongoCredential.createMongoCRCredential(username, databaseName,password.toCharArray())),new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
+				DB mongoDB = mongoClient.getDB(databaseName);
+				mongoDB.addUser(username, password.toCharArray());
+				DBCollection mongoCollection = mongoDB.getCollection("masterdata");
+				DBObject dbo = new BasicDBObject();
+				
+				dbo.put("amid2", opsi.getAmid2());
+				dbo.put("branchIndicator", opsi.getBranchIndicator());
+				dbo.put("charScriptCode", opsi.getCharScriptCode());
+				dbo.put("cityRegion", opsi.getCityRegion());
+				dbo.put("countOfEmployee", opsi.getCountOfEmployee());
+				dbo.put("countryCode", opsi.getCountryCode());
+				dbo.put("countryName", opsi.getCountryName());
+				dbo.put("countryRegionCode", opsi.getCountryRegionCode());
+				dbo.put("countryRegionName", opsi.getCountryRegionName());
+				dbo.put("deletionIndicator", opsi.getDeletionIndicator());
+				dbo.put("domesticDuns", opsi.getDomesticDuns());
+				dbo.put("duns", opsi.getDuns());
+				dbo.put("focusAccountIndicator", opsi.getFocusAccountIndicator());
+				dbo.put("globalAccountIndicator", opsi.getGlobalAccountIndicator());
+				dbo.put("globalDuns", opsi.getGlobalDuns());
+				dbo.put("globalDunsName", opsi.getGlobalDunsName());
+				dbo.put("headDuns", opsi.getHeadDuns());
+				dbo.put("headDunsName", opsi.getHeadDunsName());
+				dbo.put("hyperscaleAccountIndicator", opsi.getHyperscaleAccountIndicator());
+				dbo.put("includePartnerOrgIndicator", opsi.getIncludePartnerOrgIndicator());
+				dbo.put("indicatorBags", opsi.getIndicatorBags());
+				dbo.put("industrySegmentNames", opsi.getIndustrySegmentNames());
+				dbo.put("industryVerticalNames", opsi.getIndustryVerticalNames());
+				dbo.put("isCompetitor", opsi.getIsCompetitor());
+				dbo.put("isGlobalAccount", opsi.getIsGlobalAccount());
+				dbo.put("isOutOfBusiness", opsi.getIsOutOfBusiness());
+				dbo.put("languageCode", opsi.getLanguageCode());
+				dbo.put("latinCity", opsi.getLatinCity());
+				dbo.put("latinStreet1LongName", opsi.getLatinStreet1LongName());
+				dbo.put("mailingSiteDuns", opsi.getMailingSiteDuns());
+				dbo.put("namedAccountIndicator", opsi.getNamedAccountIndicator());
+				dbo.put("nonlatinCity", opsi.getNonlatinCity());
+				dbo.put("nonlatinStreet1LongName", opsi.getNonlatinStreet1LongName());
+				dbo.put("onlyPresaleCustomer", opsi.getOnlyPresaleCustomer());
+				dbo.put("organizationExtendedName", opsi.getOrganizationExtendedName());
+				dbo.put("organizationId", opsi.getOrganizationId());
+				dbo.put("organizationLegalName", opsi.getOrganizationLegalName());
+				dbo.put("organizationNonLatinExtendedName", opsi.getOrganizationNonLatinExtendedName());
+				dbo.put("organizationNonLatinLegalName", opsi.getOrganizationNonLatinLegalName());
+				dbo.put("organizationNonLatinReportingName", opsi.getOrganizationNonLatinReportingName());
+				dbo.put("organizationReportingName", opsi.getOrganizationReportingName());
+				dbo.put("orgCountryCode", opsi.getOrgCountryCode());
+				dbo.put("orgCountryName", opsi.getOrgCountryName());
+				dbo.put("parentCountryCode", opsi.getParentCountryCode());
+				dbo.put("parentOrganizationId", opsi.getParentOrganizationId());
+				dbo.put("parentOrganizationName", opsi.getParentOrganizationName());
+				dbo.put("postalCode", opsi.getPostalCode());
+				dbo.put("postalCode2", opsi.getPostalCode2());
+				dbo.put("presalesId", opsi.getPresalesId());
+				dbo.put("rad", opsi.getRad());
+				dbo.put("radBags", opsi.getRadBags());
+				dbo.put("rplStatusCode", opsi.getRplStatusCode());
+				//opsi.setReturnPartnerFlag(radBagsreturnPartnerFlag);
+				dbo.put("rplStatusTime", opsi.getRplStatusTime());
+				dbo.put("salesCoverageSegments", opsi.getSalesCoverageSegments());
+				dbo.put("siteDuns", opsi.getSiteDuns());
+				dbo.put("siteId", opsi.getSiteId());
+				dbo.put("siteInstanceId", opsi.getSiteInstanceId());
+				dbo.put("siteName", opsi.getSiteName());
+				dbo.put("slsCrgSegmtNameBags", opsi.getSlsCrgSegmtNameBags());
+				dbo.put("state", opsi.getState());
+				dbo.put("streetAddress1", opsi.getStreetAddress1());
+				dbo.put("streetAddress2", opsi.getStreetAddress2());
+				dbo.put("streetAddress3", opsi.getStreetAddress3());
+				dbo.put("targetSegmentNames", opsi.getTargetSegmentNames());
+				dbo.put("targetSubSegmentNames", opsi.getTargetSubSegmentNames());
+				dbo.put("taxIds", opsi.getTaxIds());
+				dbo.put("tgtSegmtNameBags", opsi.getTgtSegmtNameBags());
+				dbo.put("topAccountIndicator", opsi.getTopAccountIndicator());
+				dbo.put("topParentOrganizationId", opsi.getTopParentOrganizationId());
+				dbo.put("topParentOrganizationName", opsi.getTopParentOrganizationName());
+				dbo.put("worldRegion", opsi.getWorldRegion());
+				dbo.put("worldRegionPath", opsi.getWorldRegionPath());
+
+				mongoCollection.insert(dbo);
+				mongoClient.close();
+			} catch (Exception e) {
+				return "error";
+			}
+		return "ok";
+	}
+
 	public static void getmongoDB()
 	{
-		
         try {
-
             String databaseName = "VGWUeoTkcVUrpONUGzUO"; 
             String host = "mongo.duapp.com";
             String port = "8908";

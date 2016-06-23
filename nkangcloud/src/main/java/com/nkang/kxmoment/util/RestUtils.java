@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
 public class RestUtils {
@@ -180,7 +181,7 @@ public class RestUtils {
 	}
 	
     public static void getEnv() {  
-        System.getProperties().list(System.out);//得到当前的系统属性。并将属性列表输出到控制台  
+        System.getProperties().list(System.out);//??????????????????????  
         String encoding = System.getProperty("file.encoding");  
         log.info("Encoding:" + encoding);  
     }
@@ -284,11 +285,11 @@ public class RestUtils {
      }
 
       /**
-       * 删除当前Menu
+       * ????Menu
       * @Title: deleteMenu
-      * @Description: 删除当前Menu
-      * @param @return    设定文件
-      * @return String    返回类型
+      * @Description: ????Menu
+      * @param @return    ????
+      * @return String    ????
       * @throws
        */
      public static String deleteMenu(String access_token)
@@ -302,8 +303,8 @@ public class RestUtils {
             http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");    
             http.setDoOutput(true);        
             http.setDoInput(true);
-            System.setProperty("sun.net.client.defaultConnectTimeout", "30000");//连接超时30秒
-            System.setProperty("sun.net.client.defaultReadTimeout", "30000"); //读取超时30秒 
+            System.setProperty("sun.net.client.defaultConnectTimeout", "30000");//????30?
+            System.setProperty("sun.net.client.defaultReadTimeout", "30000"); //????30? 
              http.connect();
             OutputStream os= http.getOutputStream();    
             os.flush();
@@ -338,6 +339,266 @@ public class RestUtils {
        s = Math.round(s * 10000) / 10000;
        return s/1000;
     }
+    
+    
+	public static String callMasterDataUpsert(OrgOtherPartySiteInstance opsi) throws UnsupportedEncodingException {
+		String url = "http://shenan.duapp.com/masterdataupsert?";
+		if(opsi != null){
+			if(!StringUtils.isEmpty(opsi.getSiteInstanceId())){
+				url = url + "siteInstanceId="+URLEncoder.encode(opsi.getSiteInstanceId(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getAddressType())){
+				url = url + "&addressType="+URLEncoder.encode(opsi.getAddressType(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getBranchIndicator())){
+				url = url + "&branchIndicator="+URLEncoder.encode(opsi.getBranchIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCharScriptCode())){
+				url = url + "&charScriptCode="+URLEncoder.encode(opsi.getCharScriptCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCityRegion())){
+				url = url + "&cityRegion="+URLEncoder.encode(opsi.getCityRegion(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCountOfEmployee())){
+				url = url + "&countOfEmployee="+URLEncoder.encode(opsi.getCountOfEmployee(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCountryCode())){
+				url = url + "&countryCode="+URLEncoder.encode(opsi.getCountryCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCountryName())){
+				url = url + "&countryName="+URLEncoder.encode(opsi.getCountryName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCountryRegionCode())){
+				url = url + "&countryRegionCode="+URLEncoder.encode(opsi.getCountryRegionCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getCountryRegionName())){
+				url = url + "&countryRegionName="+URLEncoder.encode(opsi.getCountryRegionName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getDeletionIndicator())){
+				url = url + "&deletionIndicator="+URLEncoder.encode(opsi.getDeletionIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getDomesticDuns())){
+				url = url + "&domesticDuns="+URLEncoder.encode(opsi.getDomesticDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getDuns())){
+				url = url + "&duns="+URLEncoder.encode(opsi.getDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getFocusAccountIndicator())){
+				url = url + "&focusAccountIndicator="+URLEncoder.encode(opsi.getFocusAccountIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getGlobalAccountIndicator())){
+				url = url + "&globalAccountIndicator="+URLEncoder.encode(opsi.getGlobalAccountIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getGlobalDuns())){
+				url = url + "&globalDuns="+URLEncoder.encode(opsi.getGlobalDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getGlobalDunsName())){
+				url = url + "&globalDunsName="+URLEncoder.encode(opsi.getGlobalDunsName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getHeadDuns())){
+				url = url + "&headDuns="+URLEncoder.encode(opsi.getHeadDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getHeadDunsName())){
+				url = url + "&headDunsName="+URLEncoder.encode(opsi.getHeadDunsName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getHyperscaleAccountIndicator())){
+				url = url + "&HyperscaleAccountIndicator="+URLEncoder.encode(opsi.getHyperscaleAccountIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIncludePartnerOrgIndicator())){
+				url = url + "&includePartnerOrgIndicator="+URLEncoder.encode(opsi.getIncludePartnerOrgIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIndicatorBags())){
+				url = url + "&indicatorBags="+URLEncoder.encode(opsi.getIndicatorBags(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIndustrySegmentNames())){
+				url = url + "&industrySegmentNames="+URLEncoder.encode(opsi.getIndustrySegmentNames(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIndustryVerticalNames())){
+				url = url + "&industryVerticalNames="+URLEncoder.encode(opsi.getIndustryVerticalNames(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIsCompetitor())){
+				url = url + "&isCompetitor="+URLEncoder.encode(opsi.getIsCompetitor(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIsGlobalAccount())){
+				url = url + "&isGlobalAccount="+URLEncoder.encode(opsi.getIsGlobalAccount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getIsOutOfBusiness())){
+				url = url + "&isOutOfBusiness="+URLEncoder.encode(opsi.getIsOutOfBusiness(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getLanguageCode())){
+				url = url + "&languageCode="+URLEncoder.encode(opsi.getLanguageCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getLatinCity())){
+				url = url + "&latinCity="+URLEncoder.encode(opsi.getLatinCity(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getLatinStreet1LongName())){
+				url = url + "&latinStreet1LongName="+URLEncoder.encode(opsi.getLatinStreet1LongName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getMailingSiteDuns())){
+				url = url + "&mailingSiteDuns="+URLEncoder.encode(opsi.getMailingSiteDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getNamedAccountIndicator())){
+				url = url + "&namedAccountIndicator="+URLEncoder.encode(opsi.getNamedAccountIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getNonlatinCity())){
+				url = url + "&nonlatinCity="+URLEncoder.encode(opsi.getNonlatinCity(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getNonlatinStreet1LongName())){
+				url = url + "&nonlatinStreet1LongName="+URLEncoder.encode(opsi.getNonlatinStreet1LongName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOnlyPresaleCustomer())){
+				url = url + "&onlyPresaleCustomer="+URLEncoder.encode(opsi.getOnlyPresaleCustomer(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationExtendedName())){
+				url = url + "&organizationExtendedName="+URLEncoder.encode(opsi.getOrganizationExtendedName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationId())){
+				url = url + "&organizationId="+URLEncoder.encode(opsi.getOrganizationId(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationLegalName())){
+				url = url + "&organizationLegalName="+URLEncoder.encode(opsi.getOrganizationLegalName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinExtendedName())){
+				url = url + "&organizationNonLatinExtendedName="+URLEncoder.encode(opsi.getOrganizationNonLatinExtendedName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinLegalName())){
+				url = url + "&organizationNonLatinLegalName="+URLEncoder.encode(opsi.getOrganizationNonLatinLegalName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinReportingName())){
+				url = url + "&organizationNonLatinReportingName="+URLEncoder.encode(opsi.getOrganizationNonLatinReportingName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrganizationReportingName())){
+				url = url + "&organizationReportingName="+URLEncoder.encode(opsi.getOrganizationReportingName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrgCountryCode())){
+				url = url + "&orgCountryCode="+URLEncoder.encode(opsi.getOrgCountryCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getOrgCountryName())){
+				url = url + "&orgCountryName="+URLEncoder.encode(opsi.getOrgCountryName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getParentCountryCode())){
+				url = url + "&parentCountryCode="+URLEncoder.encode(opsi.getParentCountryCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getParentOrganizationId())){
+				url = url + "&parentOrganizationId="+URLEncoder.encode(opsi.getParentOrganizationId(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getParentOrganizationName())){
+				url = url + "&parentOrganizationName="+URLEncoder.encode(opsi.getParentOrganizationName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getPostalCode())){
+				url = url + "&postalCode="+URLEncoder.encode(opsi.getPostalCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getPostalCode2())){
+				url = url + "&postalCode2="+URLEncoder.encode(opsi.getPostalCode2(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getPresalesId())){
+				url = url + "&presalesId="+URLEncoder.encode(opsi.getPresalesId(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getRad())){
+				url = url + "&rad="+URLEncoder.encode(opsi.getRad(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getRadBags())){
+				url = url + "&radBags="+URLEncoder.encode(opsi.getRadBags(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getRplStatusCode())){
+				url = url + "&rplStatusCode="+URLEncoder.encode(opsi.getRplStatusCode(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getRplStatusTime())){
+				url = url + "&rplStatusTime="+URLEncoder.encode(opsi.getRplStatusTime(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getSalesCoverageSegments())){
+				url = url + "&salesCoverageSegments="+URLEncoder.encode(opsi.getSalesCoverageSegments(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getSiteDuns())){
+				url = url + "&siteDuns="+URLEncoder.encode(opsi.getSiteDuns(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getSiteId())){
+				url = url + "&siteId="+URLEncoder.encode(opsi.getSiteId(),"UTF-8");
+			}
+
+			
+			
+			
+/*			if(!StringUtils.isEmpty(opsi.getSiteInstanceId())){
+				url = url + "&siteInstanceId="+URLEncoder.encode(opsi.getSiteInstanceId(),"UTF-8");
+			}*/
+			
+			
+			
+			
+			if(!StringUtils.isEmpty(opsi.getSiteName())){
+				url = url + "&siteName="+URLEncoder.encode(opsi.getSiteName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getSlsCrgSegmtNameBags())){
+				url = url + "&slsCrgSegmtNameBags="+URLEncoder.encode(opsi.getSlsCrgSegmtNameBags(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getState())){
+				url = url + "&state="+URLEncoder.encode(opsi.getState(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getStreetAddress1())){
+				url = url + "&streetAddress1="+URLEncoder.encode(opsi.getStreetAddress1(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getStreetAddress2())){
+				url = url + "&streetAddress2="+URLEncoder.encode(opsi.getStreetAddress2(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getStreetAddress3())){
+				url = url + "&streetAddress3="+URLEncoder.encode(opsi.getStreetAddress3(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTargetSegmentNames())){
+				url = url + "&targetSegmentNames="+URLEncoder.encode(opsi.getTargetSegmentNames(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTargetSubSegmentNames())){
+				url = url + "&targetSubSegmentNames="+URLEncoder.encode(opsi.getTargetSubSegmentNames(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTaxIds())){
+				url = url + "&taxIds="+URLEncoder.encode(opsi.getTaxIds(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTgtSegmtNameBags())){
+				url = url + "&tgtSegmtNameBags="+URLEncoder.encode(opsi.getTgtSegmtNameBags(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTopAccountIndicator())){
+				url = url + "&topAccountIndicator="+URLEncoder.encode(opsi.getTopAccountIndicator(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTopParentOrganizationId())){
+				url = url + "&topParentOrganizationId="+URLEncoder.encode(opsi.getTopParentOrganizationId(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getTopParentOrganizationName())){
+				url = url + "&topParentOrganizationName="+URLEncoder.encode(opsi.getTopParentOrganizationName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getWorldRegion())){
+				url = url + "&worldRegion="+URLEncoder.encode(opsi.getWorldRegion(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(opsi.getWorldRegionPath())){
+				url = url + "&worldRegionPath="+URLEncoder.encode(opsi.getWorldRegionPath(),"UTF-8");
+			}
+			
+		}
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+	           System.setProperty("http.proxyPort", "8080");  
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           String message = new String(jsonBytes, "UTF-8");
+	           //JSONObject demoJson = new JSONObject(message);
+	           is.close();
+	           System.out.println("ok http ---------" + url);
+	       } catch (Exception e) {
+	    	   System.out.println("error http ---------" + e.getMessage());
+	    	   return "failed";
+	       } 
+		return "success";
+}
 
 }
 
