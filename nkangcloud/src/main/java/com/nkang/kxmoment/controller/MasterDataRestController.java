@@ -1,4 +1,4 @@
-package com.nkang.kxmoment.service;
+package com.nkang.kxmoment.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -20,8 +20,8 @@ import com.nkang.kxmoment.util.SolrUtils.SolrClientUtils;
 public class testMain{
 	private static Logger log=Logger.getLogger(testMain.class);
 	private static Timer timer= new Timer();
-	public static void main(String[] args) throws Exception {
-
+	//public static void main(String[] args) throws Exception {
+		public static void a() throws Exception {
 /*		
 		Date date = new Date();  
 		String ds = String.format("%tF",date);  
