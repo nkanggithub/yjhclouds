@@ -87,6 +87,9 @@ public class MasterDataRestController {
 								@RequestParam(value="streetAddress2", required=false) String streetAddress2,
 								@RequestParam(value="streetAddress3", required=false) String streetAddress3,
 								@RequestParam(value="addressType", required=false) String addressType,
+								@RequestParam(value="lat", required=false) String lat,
+								@RequestParam(value="lng", required=false) String lng,
+								@RequestParam(value="qualityGrade", required=false) String qualityGrade,
 								@RequestParam(value="returnPartnerFlag", required=false) String returnPartnerFlag)
 	{
 		try{
@@ -164,7 +167,9 @@ public class MasterDataRestController {
 			opsi.setTopParentOrganizationName(topParentOrganizationName);
 			opsi.setWorldRegion(worldRegion);
 			opsi.setWorldRegionPath(worldRegionPath);	
-			
+			opsi.setLat(lat);
+			opsi.setLng(lng);
+			opsi.setQualityGrade(qualityGrade);
 
 			MongoDBBasic.mongoDBInsert(opsi);
 		}

@@ -515,17 +515,6 @@ public class RestUtils {
 			if(!StringUtils.isEmpty(opsi.getSiteId())){
 				url = url + "&siteId="+URLEncoder.encode(opsi.getSiteId(),"UTF-8");
 			}
-
-			
-			
-			
-/*			if(!StringUtils.isEmpty(opsi.getSiteInstanceId())){
-				url = url + "&siteInstanceId="+URLEncoder.encode(opsi.getSiteInstanceId(),"UTF-8");
-			}*/
-			
-			
-			
-			
 			if(!StringUtils.isEmpty(opsi.getSiteName())){
 				url = url + "&siteName="+URLEncoder.encode(opsi.getSiteName(),"UTF-8");
 			}
@@ -571,7 +560,23 @@ public class RestUtils {
 			if(!StringUtils.isEmpty(opsi.getWorldRegionPath())){
 				url = url + "&worldRegionPath="+URLEncoder.encode(opsi.getWorldRegionPath(),"UTF-8");
 			}
-			
+			//not from parameter but calculation
+			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinExtendedName()) || !StringUtils.isEmpty(opsi.getCityRegion())    ){
+				try {
+					String latlnginfo = getlatLngwithQuery(opsi.getOrganizationNonLatinExtendedName(), opsi.getCityRegion());
+					if(!StringUtils.isEmpty(latlnginfo)){
+						url = url + "&lat="+URLEncoder.encode(latlnginfo,"UTF-8");
+						url = url + "&lng="+URLEncoder.encode(latlnginfo,"UTF-8");
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if(!StringUtils.isEmpty(opsi.getQualityGrade())){
+				url = url + "&qualityGrade="+URLEncoder.encode(opsi.getQualityGrade(),"UTF-8");
+			}
 		}
 		try {
 	           URL urlGet = new URL(url);
@@ -598,7 +603,67 @@ public class RestUtils {
 	    	   return "failed";
 	       } 
 		return "success";
-}
+	}
+
+	public static String getlatLngwithQuery(String Query, String Region) throws Exception{
+		String latlng = "";
+		if(Query != null){
+			Query = URLEncoder.encode(Query, "UTF-8");
+		}
+		else{
+			Query = "Query";
+		}
+		if(Region != null){
+			Region = URLEncoder.encode(Region, "UTF-8");
+		}
+		else{
+			Region = "China";
+		}
+		String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/json");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           String message = new String(jsonBytes, "UTF-8");
+	           log.info(message);
+	           JSONObject demoJson = new JSONObject(message);
+	           if(demoJson.has("results")){
+		           JSONArray ResultJA = demoJson.getJSONArray("results");
+		           if(ResultJA.length() > 0){
+		        	   JSONObject placeJO = ResultJA.getJSONObject(0);
+		        	   if(placeJO != null &&placeJO.has("location")){
+		        		   try{
+					           JSONObject locationJO = placeJO.getJSONObject("location");
+					           String lng = locationJO.getString("lng");
+					           String lat = locationJO.getString("lat");
+					           if(lng !="" && lat != ""){
+					        	   latlng = lat + "-" + lng;
+					           }
+		        		   }
+		        		   catch(Exception e){
+		        			   latlng = "";
+		        		   }
+		        	   }
+		           }
+	           }
+	           is.close();
+	       } catch (Exception e) {
+	    	   latlng = "";
+	       }
+		return latlng;
+	}
+	
+	
 
 }
 

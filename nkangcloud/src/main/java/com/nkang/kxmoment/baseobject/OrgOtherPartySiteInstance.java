@@ -76,7 +76,31 @@ public class OrgOtherPartySiteInstance {
 	private String streetAddress3;
 	private String addressType;
 	private String returnPartnerFlag;
-
+	private String lat;
+	private String lng;
+	private String qualityGrade;
+	
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getQualityGrade() {
+		return qualityGrade;
+	}
+	public void setQualityGrade(String qualityGrade) {
+		this.qualityGrade = qualityGrade;
+	}
+	public String getReturnPartnerFlag() {
+		return returnPartnerFlag;
+	}
 	public String isReturnPartnerFlag() {
 		return returnPartnerFlag;
 	}

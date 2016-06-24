@@ -114,7 +114,9 @@ public class MongoDBBasic {
 				dbo.put("topParentOrganizationName", opsi.getTopParentOrganizationName());
 				dbo.put("worldRegion", opsi.getWorldRegion());
 				dbo.put("worldRegionPath", opsi.getWorldRegionPath());
-
+				dbo.put("lat", opsi.getLat());
+				dbo.put("lng", opsi.getLng());
+				dbo.put("qualityGrade", opsi.getQualityGrade());
 				mongoCollection.insert(dbo);
 				mongoClient.close();
 			} catch (Exception e) {
