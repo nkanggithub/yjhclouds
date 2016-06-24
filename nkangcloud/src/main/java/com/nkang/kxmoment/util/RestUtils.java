@@ -565,8 +565,9 @@ public class RestUtils {
 				try {
 					String latlnginfo = getlatLngwithQuery(opsi.getOrganizationNonLatinExtendedName(), opsi.getCityRegion());
 					if(!StringUtils.isEmpty(latlnginfo)){
-						url = url + "&lat="+URLEncoder.encode(latlnginfo,"UTF-8");
-						url = url + "&lng="+URLEncoder.encode(latlnginfo,"UTF-8");
+						String [] latlngarray = latlnginfo.split("-");
+						url = url + "&lat="+URLEncoder.encode(latlngarray[0],"UTF-8");
+						url = url + "&lng="+URLEncoder.encode(latlngarray[1],"UTF-8");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

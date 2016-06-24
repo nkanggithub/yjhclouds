@@ -7,7 +7,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 @SpringBootApplication
 public class WebAppStart extends SpringBootServletInitializer {
-    public static void main(String[] args) throws Exception {
+    public static void mains(String[] args) throws Exception {
         SpringApplication.run(WebAppStart.class, args);
     }
 }
