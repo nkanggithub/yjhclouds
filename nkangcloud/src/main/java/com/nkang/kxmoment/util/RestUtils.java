@@ -608,7 +608,7 @@ public class RestUtils {
 
 	public static String getlatLngwithQuery(String Query, String Region) throws Exception{
 		String latlng = "";
-		if(Query != null){
+		/*if(Query != null){
 			Query = URLEncoder.encode(Query, "UTF-8");
 		}
 		else{
@@ -619,7 +619,7 @@ public class RestUtils {
 		}
 		else{
 			Region = "China";
-		}
+		}*/
 		String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
 		try {
 	           URL urlGet = new URL(url);

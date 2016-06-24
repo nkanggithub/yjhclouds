@@ -149,7 +149,7 @@ public class SolrClientUtils{
 		OrganizationSearch4Solr solrSearchParams = new OrganizationSearch4Solr();
 		solrSearchParams.setCountryCode("CN");
 		solrSearchParams.setCharScriptCode("HANS");
-		solrSearchParams.setOrgId("23074049");
+		//solrSearchParams.setOrgId("23074049");
 		solrSearchParams.setStateProvinceName("重庆");
 		QueryResponse queryResponse = SolrClientUtils.queryOrgInformations(solrSearchParams, section);
 		
