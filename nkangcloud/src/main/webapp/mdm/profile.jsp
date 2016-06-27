@@ -496,4 +496,3 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
   <!-- END FOOTER --> 
   </body>
   </html>
-</apex:page>

@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -105,13 +107,7 @@ public class CoreService
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
-				else if ("MGD".equals(textContent)) {
-					MongoDBBasic.getmongoDB();
-					respContent = "data loaded :\n";
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}
-				
+
 				else {
 					respContent = "OK：" + textContent + "\n";
 					textMessage.setContent(respContent);
@@ -120,7 +116,10 @@ public class CoreService
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "IMAGE";
-				MongoDBBasic.getmongoDB();
+				DBObject query = new BasicDBObject();
+				query.put("industrySegmentNames", "[Oil and Gas]");
+				List<DBObject> results = MongoDBBasic.getDistinctSubjectArea("industrySegmentNames");
+				respContent = respContent + MongoDBBasic.getTotalRecordCount() +"|"+ MongoDBBasic.getSelectedDocumentWithQuery(query) + "|" + results.size();
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -132,6 +131,12 @@ public class CoreService
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
 				respContent = "VOICE";
+				List<DBObject> results = MongoDBBasic.getDistinctSubjectArea("industrySegmentNames");
+				respContent = respContent + results.size() + "\n";
+/*				for(DBObject dbo : results){
+					respContent =  respContent + dbo.get("industrySegmentNames") + "\n";
+				}*/
+				
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}

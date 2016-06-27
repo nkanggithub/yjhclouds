@@ -1,8 +1,5 @@
 package com.nkang.kxmoment.controller;
 
-/*import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;*/
 
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +9,7 @@ import com.nkang.kxmoment.util.MongoDBBasic;
 
 @RestController
 public class MasterDataRestController {
+	
 	@RequestMapping("/masterdataupsert")
 	public String getMasterData(@RequestParam(value="siteInstanceId", required=false) String siteInstanceId,
 								@RequestParam(value="organizationId", required=false) String organizationId,
@@ -171,7 +169,8 @@ public class MasterDataRestController {
 			opsi.setLng(lng);
 			opsi.setQualityGrade(qualityGrade);
 
-			MongoDBBasic.mongoDBInsert(opsi);
+			MongoDBBasic mongoDBBasic = new MongoDBBasic();
+			mongoDBBasic.mongoDBInsert(opsi);
 		}
 		catch(Exception e){
 			return "failed";
@@ -179,4 +178,6 @@ public class MasterDataRestController {
 
 		return "success";
 	}
+
+
 }

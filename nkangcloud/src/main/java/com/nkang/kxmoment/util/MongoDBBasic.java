@@ -17,28 +17,61 @@ import com.ctc.wstx.util.StringUtil;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
+import com.mongodb.WriteResult;
+import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.service.CoreService;
 
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
-	public static String mongoDBInsert(OrgOtherPartySiteInstance opsi){
+/*	private  MongoClient mongoClient;
+	private  DBCollection mongoCollection;
+	private  MongoClientCollection mongoClientCollection;*/
+	private static DB mongoDB;
+	private static String collectionMasterDataName = "masterdata";
+/*	public MongoDBBasic(){
+		mongoDB = getMongoClient();
+	}*/
+	
+	private static DB getMongoDB(){
+		MongoClientCollection mongoClientCollection = new MongoClientCollection();
+		ResourceBundle resourceBundle=ResourceBundle.getBundle("database_info");
+		String databaseName=resourceBundle.getString("databaseName");
+		String hostm = resourceBundle.getString("hostm");
+		String portm = resourceBundle.getString("portm");
+		String usrname=resourceBundle.getString("usrname");
+		String passwrd=resourceBundle.getString("passwrd");
+        String serverName = hostm + ":" + portm;
+        
+        //get mongo client
+        MongoClient mongoClient = new MongoClient(
+        		new ServerAddress(serverName),
+        		Arrays.asList(MongoCredential.createMongoCRCredential(usrname, databaseName,passwrd.toCharArray())),
+        		new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
+        mongoClientCollection.setMongoClient(mongoClient);
+        
+      //get mongo DB
+        mongoDB = mongoClient.getDB(databaseName);
+        mongoDB.addUser(usrname, passwrd.toCharArray());
+        //mongoClientCollection.setMongoDB(mongoDB);
+        
+      //get mongo Collection
+	   // DBCollection mongoCollection = mongoDB.getCollection("masterdata");
+        //mongoClientCollection.setMongoCollection(mongoCollection);
+        return mongoDB;
+	}
+	
+	public String mongoDBInsert(OrgOtherPartySiteInstance opsi){
 			try {
-				String databaseName = "VGWUeoTkcVUrpONUGzUO";
-				String host = "mongo.duapp.com";
-				String port = "8908";
-				String username = "473c34a48268d02986e607cb5d7d564c";
-				String password = "807640004b73f4ec49d3d3af79493ade";
-				String serverName = host + ":" + port;
-				MongoClient mongoClient = new MongoClient(new ServerAddress(serverName), Arrays.asList(MongoCredential.createMongoCRCredential(username, databaseName,password.toCharArray())),new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
-				DB mongoDB = mongoClient.getDB(databaseName);
-				mongoDB.addUser(username, password.toCharArray());
-				DBCollection mongoCollection = mongoDB.getCollection("masterdata");
+				if(mongoDB == null){
+					mongoDB = getMongoDB();
+				}
 				DBObject dbo = new BasicDBObject();
 				
 				dbo.put("amid2", opsi.getAmid2());
@@ -117,110 +150,83 @@ public class MongoDBBasic {
 				dbo.put("lat", opsi.getLat());
 				dbo.put("lng", opsi.getLng());
 				dbo.put("qualityGrade", opsi.getQualityGrade());
-				mongoCollection.insert(dbo);
-				mongoClient.close();
+				mongoDB.getCollection(collectionMasterDataName).insert(dbo);
 			} catch (Exception e) {
 				return "error";
 			}
 		return "ok";
 	}
 
-	public static void getmongoDB()
-	{
-        try {
-            String databaseName = "VGWUeoTkcVUrpONUGzUO"; 
-            String host = "mongo.duapp.com";
-            String port = "8908";
-            String username = "473c34a48268d02986e607cb5d7d564c";//用户名(api key);
-            String password = "807640004b73f4ec49d3d3af79493ade";//密码(secret key)
-            String serverName = host + ":" + port;
-
-            MongoClient mongoClient = new MongoClient(
-            		new ServerAddress(serverName),
-            		Arrays.asList(MongoCredential.createMongoCRCredential(username, databaseName,password.toCharArray())),
-            		new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
-            
-            DB mongoDB = mongoClient.getDB(databaseName);
-            mongoDB.addUser(username, password.toCharArray());
-
-		    DBCollection mongoCollection = mongoDB.getCollection("masterdata");
-
-			ResourceBundle resourceBundle=ResourceBundle.getBundle("MDMExtract_0_0-50000");
-			String recordinfo = "";
-			for(int i = 1; i <= 50000; i ++){
-				recordinfo=resourceBundle.getString(String.valueOf(i));
-				recordinfo = StringUtils.changeCharset(recordinfo, StringUtils.UTF_8);
-				String[] info = recordinfo.split("\\|");
-			    DBObject basic = new BasicDBObject(); 
-			    if(!StringUtils.isEmpty(info[0])){
-			    	basic.put("OtherPartySiteInstanceId"			, info[0]);
-			    }
-			    if(!StringUtils.isEmpty(info[1])){
-			    	basic.put("OrganizationID"						, info[1]);  
-			    }
-				    if(!StringUtils.isEmpty(info[2])){
-			    	basic.put("OrganizationNonLatinName"			, info[2]);
-			    }
-			    if(!StringUtils.isEmpty(info[3])){
-			    	basic.put("OrganizationNonLatinAddress"			, info[3]); 
-			    }
-			    if(!StringUtils.isEmpty(info[4])){
-			    	basic.put("Lat"									, info[4]);
-			    }
-			    if(!StringUtils.isEmpty(info[5])){
-			    	basic.put("Lng"									, info[5]);
-			    }
-			    if(!StringUtils.isEmpty(info[6])){
-			    	basic.put("OrganizationLatinName"				, info[6]); 
-			    }
-			    if(!StringUtils.isEmpty(info[7])){
-			    	basic.put("NonlatinCity"						, info[7]); 
-			    }
-			    if(!StringUtils.isEmpty(info[8])){
-			    	basic.put("Found Year"							, info[8]);
-			    }
-			    if(!StringUtils.isEmpty(info[9])){
-			    	basic.put("CountOfEmployee"						, info[9]); 
-			    }
-			    if(!StringUtils.isEmpty(info[10])){
-			    	basic.put("State"								, info[10]); 
-			    }
-			    if(!StringUtils.isEmpty(info[11])){
-			    	basic.put("BRID"								, info[11]);
-			    }
-			    if(!StringUtils.isEmpty(info[12])){
-			    	basic.put("CityRegion"							, info[12]); 
-			    }
-			    if(!StringUtils.isEmpty(info[13])){
-			    	basic.put("Anunal Revene"						, info[13]);
-			    }
-			    if(!StringUtils.isEmpty(info[14])){
-			    	basic.put("BRIID"								, info[14]); 
-			    }
-			    if(!StringUtils.isEmpty(info[15])){
-			    	basic.put("SalesCoverageSegments"				, info[15]); 
-			    }
-			    if(!StringUtils.isEmpty(info[16])){
-			    	basic.put("IsCompetitor"						, info[16]); 
-			    }
-			    if(!StringUtils.isEmpty(info[17])){
-			    	basic.put("OnlyPresaleCustomer"					, info[17]);
-			    }
-			    if(!StringUtils.isEmpty(info[18])){
-			    	basic.put("isReturnPartnerFlag"					, info[18]);
-			    }
-			    basic.put("QualityGrade"							, ""); 
-			    
-			    
-			    mongoCollection.insert(basic);
-				recordinfo = "";
-			}
-		    mongoClient.close();
-		    
-	} catch (Exception e) {
-		System.out.println(e.getMessage());
+	public static String getTotalRecordCount() {
+		if(mongoDB == null){
+			mongoDB = getMongoDB();
+		}
+		String result = String.valueOf(mongoDB.getCollection(collectionMasterDataName).getCount());
+        return result;
 	}
-}
+	
+	public boolean isDocumentExsit(String collectionName, DBObject query) {
+        boolean result = false;
+        DBCursor dbCursor = null;
+        DBCollection collection = mongoDB.getCollection(collectionName);
+        if (null != collection) {
+            dbCursor = collection.find(query);
+            if (null != dbCursor && dbCursor.hasNext()) {
+                result = true;
+            }
+        }
+        return result;
+	}
+	
+	public static int getSelectedDocumentWithQuery(DBObject query) {
+		if(mongoDB == null){
+			mongoDB = getMongoDB();
+		}
+        int cnt = 0;
+        if (null != mongoDB.getCollection(collectionMasterDataName)) {
+        	cnt = (int) mongoDB.getCollection(collectionMasterDataName).getCount(query);
+        }
+        return cnt;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<DBObject> getDistinctSubjectArea(String fieldname) {
+		if(mongoDB == null){
+			mongoDB = getMongoDB();
+		}
+		List<DBObject> result = null;
+        if (null != mongoDB.getCollection(collectionMasterDataName)) {
+        	result = mongoDB.getCollection(collectionMasterDataName).distinct(fieldname);
+        }
+        return result;
+	}
+	
+	public DBObject selectDocument(String collectionName, DBObject query) {
+		DBObject result = null;
+		DBCursor dbCursor = null;
+		DBCollection collection = mongoDB.getCollection(collectionName);
+		if (null != collection) {
+			dbCursor = collection.find(query);
+			if (null != dbCursor && dbCursor.hasNext()) {
+				result = dbCursor.next();
+			}
+		}
+		return result;
+	}
+	
+	public boolean deleteDocument(String collectionName, DBObject query) {
+		boolean result = false;
+		WriteResult writeResult = null;
+		DBCollection collection = mongoDB.getCollection(collectionName);
+		if (null != collection) {
+			writeResult = collection.remove(query);
+			if (null != writeResult) {
+				if (writeResult.getN() > 0) {
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
 
- 
 }

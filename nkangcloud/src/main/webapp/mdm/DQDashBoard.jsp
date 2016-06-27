@@ -388,7 +388,7 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
               <ul class="nav pull-right top-menu">
                 <li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Welcome <span class="username colorBlue"> <%= wcu.getNickname()%> </span> 
-						<span><a style="float:right;" href="baidu.com"> <img src="<%= wcu.getHeadimgurl()%>" alt="userImage" class="userImage" alt="no_username"/></a></span> 
+						<span><a style="float:right;" href="http://shenan.duapp.com/mdm/profile.jsp?UID=<%= uid%>"> <img src="<%= wcu.getHeadimgurl()%>" alt="userImage" class="userImage" alt="no_username"/></a></span> 
                   	</a>
                 </li>
               </ul>
