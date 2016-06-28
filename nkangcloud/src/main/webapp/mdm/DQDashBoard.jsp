@@ -411,7 +411,7 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
         <div class="BDheading">
           <div class="span8"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
-            <h2> <span class="colorDarkBlue"> Master Data Lake Quality Grade</span></h2>
+            <h4> <span class="colorDarkBlue"> Master Data Lake Quality Grade</span></h4>
           </div>
           <div class="span4 BoardFormbtn" ></div>
         </div>
@@ -468,8 +468,7 @@ var percent2 = 100*percent;
 
                 <div class="BoardTit">
                   <div class="span8">
-                      <h4 style="float:right;"><%= new Date()%></h4>
-                      <span style="float:left"><%= curLoc %></span>
+                      <h4 style="float:right;"><%= curLoc%></h4>
                   </div>
                 </div>
               </div>
