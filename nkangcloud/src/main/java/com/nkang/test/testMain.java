@@ -28,8 +28,8 @@ public class testMain{
 	private static Logger log=Logger.getLogger(testMain.class);
 	private static Timer timer= new Timer();
 	public static void main(String[] args) throws Exception {
-		MongoDBBasic mongoDBBasic =new MongoDBBasic();
-		mongoDBBasic.mongoDBInsert(null);
+		System.out.println(RestUtils.CallGetJSFirstSegmentArea());
+		
 /*		List<OrgOtherPartySiteInstance> opsiList = new ArrayList<OrgOtherPartySiteInstance>();
 		opsiList = SolrClientUtils.getOPSIList(0);
 		for (OrgOtherPartySiteInstance opsi : opsiList) {

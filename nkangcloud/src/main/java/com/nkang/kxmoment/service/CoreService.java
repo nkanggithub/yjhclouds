@@ -115,11 +115,18 @@ public class CoreService
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-				respContent = "IMAGE";
+				respContent = "IMAGE" + "\n";
 				DBObject query = new BasicDBObject();
 				query.put("industrySegmentNames", "[Oil and Gas]");
 				List<DBObject> results = MongoDBBasic.getDistinctSubjectArea("industrySegmentNames");
-				respContent = respContent + MongoDBBasic.getTotalRecordCount() +"|"+ MongoDBBasic.getSelectedDocumentWithQuery(query) + "|" + results.size();
+				
+
+				List<DBObject> resultsqueryNonLatinCity = MongoDBBasic.getDistinctSubjectArea("nonlatinCity");
+				
+				
+				List<DBObject> resultscityRegion = MongoDBBasic.getDistinctSubjectArea("cityRegion");
+				
+				respContent = respContent + "Total Records: " + MongoDBBasic.getTotalRecordCount() +"\n Total Oil Gas: "+ MongoDBBasic.getSelectedDocumentWithQuery(query) + "\n Total Subject Area: " + results.size()+"\n Total City: "+ resultsqueryNonLatinCity.size()+" \n Total City Region: " +resultscityRegion.size();
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -148,11 +155,40 @@ public class CoreService
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
 				String eventType = requestObject.element("Event").getText();
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-					respContent = "感谢您的关注 - SUBSCRIBE";
+/*					respContent = "感谢您的关注 - SUBSCRIBE";
 					textMessage.setContent(respContent);
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
 					DBUtils.createUser(wcu);
 					respXml = MessageUtil.textMessageToXml(textMessage);
+					*/
+					
+					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
+					DBUtils.createUser(wcu);
+					MongoDBBasic.createUser(wcu);
+					
+					articleList.clear();
+					Article article = new Article();
+					article.setTitle("Master Data Quality Governace");
+					article.setDescription("Master Data Quality Governace Reporting");
+					article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+					article.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
+					articleList.add(article);
+					Article article2 = new Article();
+					article2.setTitle("User Profile");
+					article2.setDescription("Master Data Quality Governace Reporting");
+					article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
+					article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
+					articleList.add(article2);
+					Article article3 = new Article();
+					article3.setTitle("Data Dashboard");
+					article3.setDescription("Master Data Dashboard");
+					article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+					article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
+					articleList.add(article3);
+					newsMessage.setArticleCount(articleList.size());
+					newsMessage.setArticles(articleList);
+					respXml = MessageUtil.newsMessageToXml(newsMessage);
+					
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
@@ -177,11 +213,9 @@ public class CoreService
 						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
 						article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
 						articleList.add(article3);
-						log.info("Before");
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-						log.info("After");
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
 						CurType = "customer";
@@ -354,7 +388,9 @@ public class CoreService
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_LOCATION)) {
 					respContent = "upload location detail.";
 					textMessage.setContent(respContent);
+					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
 					DBUtils.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText());
+					MongoDBBasic.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText(),wcu);
 					//respXml = MessageUtil.textMessageToXml(textMessage);
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_VIEW)) {
 					respContent = "page redirect.";
@@ -362,42 +398,10 @@ public class CoreService
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 			}
-/*			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-				String lat = requestObject.element("Location_X").getText();
-				String lng = requestObject.element("Location_Y").getText();
-				String addr = requestObject.element("Label").getText();
-				List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
-				List<String> cityInfo = new ArrayList<String>();
-				cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
-				NearByOpptsExt = DBUtils.getNearByOppt(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
-
-				Article article = new Article();
-				article.setTitle(NearByOpptsExt.size() + " NearBy HPE ");
-				article.setDescription(NearByOpptsExt.size() + " Found Near By You \n" + addr);
-				article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-				article.setUrl("http://shenan.duapp.com/index.jsp");
-				articleList.add(article);
-				if(NearByOpptsExt.size() < opptCount ){
-					opptCount = NearByOpptsExt.size();
-				}
-				for(int i = 0; i < opptCount ;  i++){
-					Article articlevar = new Article();
-					articlevar.setTitle(NearByOpptsExt.get(i).getOpptName() + "\n" + NearByOpptsExt.get(i).getSegmentArea() + "\n" + NearByOpptsExt.get(i).getDistance() + " KM");
-					articlevar.setDescription("NearBy Opportunity");
-					articlevar.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM");
-					articlevar.setUrl("http://shenan.duapp.com/index.jsp");
-					articleList.add(articlevar);
-				}
-				
-				newsMessage.setArticleCount(articleList.size());
-				newsMessage.setArticles(articleList);
-				respXml = MessageUtil.newsMessageToXml(newsMessage);
-			}*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//log.info("SENDING COMP :" + respXml);
 		return respXml;
 	}
 }

@@ -2,20 +2,22 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>  
-<%@ page import="com.nkang.kxmoment.util.DBUtils"%>
+<%-- <%@ page import="com.nkang.kxmoment.util.DBUtils"%> --%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%					
+
 MdmDataQualityView mqv = new MdmDataQualityView();
-mqv= DBUtils.getDataQualityReport();
-String AccessKey = DBUtils.getValidAccessKey();
+//mqv= DBUtils.getDataQualityReport();
+mqv= RestUtils.callGetDataQualityReport();
+//String AccessKey = DBUtils.getValidAccessKey();
+String AccessKey =RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID"); 
-GeoLocation loc = DBUtils.getDBUserGeoInfo(uid);
+//GeoLocation loc = DBUtils.getDBUserGeoInfo(uid);
+GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
-List<String> listOfSegmentArea = new ArrayList<String>();
-listOfSegmentArea = DBUtils.getFilterSegmentArea();
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -60,21 +62,21 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
 		    	gauges = null;
 		         <% 
 			         MdmDataQualityView mqvByStateCityJB = new MdmDataQualityView();
-			         mqvByStateCityJB = DBUtils.getDataQualityReport("重庆市","江北区");
+			         mqvByStateCityJB = RestUtils.callGetDataQualityReportByParameter("重庆市","江北区");
 			         MdmDataQualityView mqvByStateCityYB = new MdmDataQualityView();
-			         mqvByStateCityYB = DBUtils.getDataQualityReport("重庆市","渝北区");
+			         mqvByStateCityYB = RestUtils.callGetDataQualityReportByParameter("重庆市","渝北区");
 			         MdmDataQualityView mqvByStateCitySPB = new MdmDataQualityView();
-			         mqvByStateCitySPB = DBUtils.getDataQualityReport("重庆市","沙坪坝区");
+			         mqvByStateCitySPB = RestUtils.callGetDataQualityReportByParameter("重庆市","沙坪坝区");
 			         MdmDataQualityView mqvByStateCityBB = new MdmDataQualityView();
-			         mqvByStateCityBB = DBUtils.getDataQualityReport("重庆市","北碚区");
+			         mqvByStateCityBB = RestUtils.callGetDataQualityReportByParameter("重庆市","北碚区");
 			         MdmDataQualityView mqvByStateCityNA = new MdmDataQualityView();
-			         mqvByStateCityNA = DBUtils.getDataQualityReport("重庆市","南岸区");
+			         mqvByStateCityNA = RestUtils.callGetDataQualityReportByParameter("重庆市","南岸区");
 			         MdmDataQualityView mqvByStateCityBN = new MdmDataQualityView();
-			         mqvByStateCityBN = DBUtils.getDataQualityReport("重庆市","巴南区");
+			         mqvByStateCityBN = RestUtils.callGetDataQualityReportByParameter("重庆市","巴南区");
 			         MdmDataQualityView mqvByStateCityJLP = new MdmDataQualityView();
-			         mqvByStateCityJLP = DBUtils.getDataQualityReport("重庆市","九龙坡区");
+			         mqvByStateCityJLP = RestUtils.callGetDataQualityReportByParameter("重庆市","九龙坡区");
 			         MdmDataQualityView mqvByStateCityZX = new MdmDataQualityView();
-			         mqvByStateCityZX = DBUtils.getDataQualityReport("重庆市","忠县");
+			         mqvByStateCityZX = RestUtils.callGetDataQualityReportByParameter("重庆市","忠县");
 		         %>
 		     });
 		    
@@ -89,7 +91,7 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
 				var LegendOptions = ['Smartphone','Tablet'];
 				//Data
 				var d = [
-							<%=DBUtils.getJSFirstSegmentArea()%>
+							<%=RestUtils.CallGetJSFirstSegmentArea()%>
 						];
 
 				//Options for the Radar chart, other than default
@@ -212,6 +214,7 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
 
 <style>
 /* Dashboard Style Start */
+
         .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
         .legend span {
 				width: 33.333333%;
@@ -227,9 +230,11 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
         }
         #fillgauge5{
         	position:relative;
+        	/* left:25%; */
         	left:25%;
         	top:-25px;
         }
+
         #svgDistribution{
             position:relative;
         	left:10%;
@@ -417,13 +422,14 @@ listOfSegmentArea = DBUtils.getFilterSegmentArea();
               
 <svg id="fillgauge4" width="0%" height="0" onclick="gauge4.update(NewValue());"></svg>
 <svg id="fillgauge5" width="50%" height="220" onclick="gauge5.update(NewValue());"></svg>
+
 <script>
 var percent = <%= mqv.getPercents() %>
 var percent2 = 100*percent;
   var gauge4 = loadLiquidFillGauge("fillgauge4", 50);
     var config4 = liquidFillGaugeDefaultSettings();
     config4.circleThickness = 0.15;
-    config4.circleColor = "#00b287";
+   config4.circleColor = "#EDEDED";
     config4.textColor = "#00b287";
     config4.waveTextColor = "#00b287";
     config4.waveColor = "#00b287";
@@ -447,13 +453,13 @@ var percent2 = 100*percent;
     config5.waveAnimateTime = 5000;
     config5.waveHeight = 0;
     config5.waveAnimate = false;
+    config4.waveRise = true;
     config5.waveCount = 2;
     config5.waveOffset = 0.25;
     config5.textSize = 1.2;
     config5.minValue = 30;
-    config5.maxValue = 150
+    config5.maxValue = 150;
     config5.displayPercent = false;
-
     function NewValue(){
         return 100*mqv.getPercents;
     }
@@ -462,7 +468,8 @@ var percent2 = 100*percent;
 
                 <div class="BoardTit">
                   <div class="span8">
-                      <h4>Visualizing Your Master Data Lake</h4>
+                      <h4 style="float:right;"><%= new Date()%></h4>
+                      <span style="float:left"><%= curLoc %></span>
                   </div>
                 </div>
               </div>

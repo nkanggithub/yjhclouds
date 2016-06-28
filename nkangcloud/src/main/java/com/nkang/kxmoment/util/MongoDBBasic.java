@@ -1,9 +1,9 @@
 package com.nkang.kxmoment.util;
 
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,9 +11,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
-import org.bson.BSONObject;
 
-import com.ctc.wstx.util.StringUtil;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -24,21 +23,19 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+import com.mysql.jdbc.Statement;
+import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
-import com.nkang.kxmoment.service.CoreService;
+import com.nkang.kxmoment.baseobject.WeChatUser;
 
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
-/*	private  MongoClient mongoClient;
-	private  DBCollection mongoCollection;
-	private  MongoClientCollection mongoClientCollection;*/
 	private static DB mongoDB;
 	private static String collectionMasterDataName = "masterdata";
-/*	public MongoDBBasic(){
-		mongoDB = getMongoClient();
-	}*/
-	
+	private static String access_key = "Access_Key";
+	private static String wechat_user = "Wechat_User";
+
 	private static DB getMongoDB(){
 		MongoClientCollection mongoClientCollection = new MongoClientCollection();
 		ResourceBundle resourceBundle=ResourceBundle.getBundle("database_info");
@@ -48,23 +45,171 @@ public class MongoDBBasic {
 		String usrname=resourceBundle.getString("usrname");
 		String passwrd=resourceBundle.getString("passwrd");
         String serverName = hostm + ":" + portm;
-        
-        //get mongo client
+
         MongoClient mongoClient = new MongoClient(
         		new ServerAddress(serverName),
         		Arrays.asList(MongoCredential.createMongoCRCredential(usrname, databaseName,passwrd.toCharArray())),
         		new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
         mongoClientCollection.setMongoClient(mongoClient);
-        
-      //get mongo DB
+
         mongoDB = mongoClient.getDB(databaseName);
         mongoDB.addUser(usrname, passwrd.toCharArray());
-        //mongoClientCollection.setMongoDB(mongoDB);
-        
-      //get mongo Collection
-	   // DBCollection mongoCollection = mongoDB.getCollection("masterdata");
-        //mongoClientCollection.setMongoCollection(mongoCollection);
+
         return mongoDB;
+	}
+	
+	public static String getValidAccessKey(){
+		String AccessKey = QueryAccessKey();
+		if(AccessKey == null){
+			AccessKey = RestUtils.getAccessKey();
+		}	
+		return AccessKey;
+	}
+	
+	public static void updateAccessKey(String key, String expiresIn){
+		try{
+			mongoDB = getMongoDB();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			DBObject update = new BasicDBObject();
+			update.put("ExpiresIn", Integer.valueOf(expiresIn));
+			update.put("LastUpdated", DateUtil.timestamp2Str(cursqlTS));
+			update.put("AKey", key);
+			update.put("ID", "1");
+			mongoDB.getCollection(access_key).update(new BasicDBObject().append("ID", "1"), update);
+		}
+		catch(Exception e){
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
+		}
+		finally{
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
+		}
+	}
+	
+	public static String QueryAccessKey(){
+		String validKey = null;
+		mongoDB = getMongoDB();
+		java.sql.Timestamp sqlTS = null;;
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+	    try{
+			DBObject query = new BasicDBObject();
+			query.put("ID", "1");
+			validKey =mongoDB.getCollection(access_key).findOne(query).get("AKey").toString();
+			String timehere = mongoDB.getCollection(access_key).findOne(query).get("LastUpdated").toString();
+			sqlTS = DateUtil.str2Timestamp(timehere);
+	    	int diff = (int) ((cursqlTS.getTime() - sqlTS.getTime())/1000);
+	    	if((7200 - diff) > 0){
+	    		log.info(diff + " is less than 7200. so use original valid Key as : "+ validKey);
+	    	}
+	    	else{
+	    		log.info(diff + " is close to 7200. and is to re-generate the key");
+	    		validKey = null;
+	    	}
+	    	
+	    }catch(Exception e){
+	    	e.printStackTrace();
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
+	    }
+	    finally{
+	    	mongoDB.getMongo().close();
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
+	    }
+	    
+	    return validKey;
+	}
+	
+	public static boolean createUser(WeChatUser wcu){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+	    	DBObject insert = new BasicDBObject();
+	    	insert.put("OpenID", wcu.getOpenid());
+	    	insert.put("HeadUrl", wcu.getHeadimgurl());
+	    	insert.put("NickName", wcu.getNickname());
+	    	insert.put("Created", DateUtil.timestamp2Str(cursqlTS));
+	    	insert.put("FormatAddress", "");
+	    	insert.put("CurLAT", "");
+	    	insert.put("CurLNG", "");
+	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+			mongoDB.getCollection(wechat_user).insert(insert);
+			log.info("-----Wechat user created----" + wcu.getOpenid() + ":" + wcu.getNickname());
+			ret = true;
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	ret = false;
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return ret;
+	}
+	
+	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+	    	List<DBObject> arrayHistdbo = new ArrayList<DBObject>();
+	    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+            if (null != dbcur) {
+            	while(dbcur.hasNext()){
+            		DBObject o = dbcur.next();
+            		BasicDBList hist = (BasicDBList) o.get("VisitHistory");
+            		if(hist != null){
+                		Object[] visitHistory = hist.toArray();
+                		for(Object dbobj : visitHistory){
+                			if(dbobj instanceof DBObject){
+                				arrayHistdbo.add((DBObject)dbobj);
+                			}
+                		}
+            		}
+            	}
+
+            	String faddr = RestUtils.getUserCurLocWithLatLng(Lat, Lng);
+    	    	DBObject update = new BasicDBObject();
+    	    	update.put("OpenID", wcu.getOpenid());
+    	    	update.put("HeadUrl", wcu.getHeadimgurl());
+    	    	update.put("NickName", wcu.getNickname());
+    	    	update.put("Created", DateUtil.timestamp2Str(cursqlTS));
+    	    	update.put("FormatAddress", faddr);
+    	    	update.put("CurLAT", Lat);
+    	    	update.put("CurLNG", Lng);
+    	    	update.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+    	    	DBObject innerInsert = new BasicDBObject();
+    	    	innerInsert.put("lat", Lat);
+    	    	innerInsert.put("lng", Lng);
+    	    	innerInsert.put("visitDate", DateUtil.timestamp2Str(cursqlTS));
+    	    	innerInsert.put("FAddr", faddr);
+    	    	arrayHistdbo.add(innerInsert);
+    	    	update.put("VisitHistory", arrayHistdbo);
+    			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);
+    			log.info("----end updating user----4 \n" + wr);
+            }
+            ret = true;
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	log.info("-----error occurs---"+ e.getMessage());
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    	ret = false;
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return ret;
 	}
 	
 	public String mongoDBInsert(OrgOtherPartySiteInstance opsi){
@@ -229,4 +374,25 @@ public class MongoDBBasic {
 		return result;
 	}
 
+	public static GeoLocation getDBUserGeoInfo(String OpenID){
+		mongoDB = getMongoDB();
+		GeoLocation loc = new GeoLocation();
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("OpenID", OpenID);
+	    	DBObject result = mongoDB.getCollection(wechat_user).findOne(query);
+    		loc.setLAT(result.get("CurLAT").toString());
+    		loc.setLNG(result.get("CurLNG").toString());
+    		loc.setFAddr(result.get("FormatAddress").toString());
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	log.info("error---getDBUserGeoInfo: " + e.getMessage());
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return loc;
+	}
 }

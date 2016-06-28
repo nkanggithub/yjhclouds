@@ -1,10 +1,18 @@
 package com.nkang.kxmoment.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
+import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
+import com.nkang.kxmoment.util.RestUtils;
 
 
 @RestController
@@ -178,6 +186,82 @@ public class MasterDataRestController {
 
 		return "success";
 	}
+	
+	@RequestMapping("/getValidAccessKey")
+	public String getValidAccessKey(@RequestParam(value="accessKey", required=false) String siteInstanceId){
+		String AK="";
+		try{
+			AK = MongoDBBasic.getValidAccessKey();
+		}
+		catch(Exception e){
+			AK = "failed";
+		}
+		return AK;
+	}
 
-
+	@RequestMapping("/updateWechatUser")
+	public String updateWechatUser(	@RequestParam(value="OpenID", required=false) String OpenID,
+									@RequestParam(value="Lat", required=false) String Lat,
+									@RequestParam(value="Lng", required=false) String Lng,
+									@RequestParam(value="AccessKey", required=false) String AccessKey)
+	{
+		boolean result=false;
+		try{
+			WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, OpenID);
+			result = MongoDBBasic.updateUser(OpenID, Lat, Lng, wcu);
+		}
+		catch(Exception e){
+			result = false;
+		}
+		return String.valueOf(result);
+	}
+	
+	@RequestMapping("/getDBUserGeoInfo")
+	public static GeoLocation callGetDBUserGeoInfo(@RequestParam(value="OpenID", required=false) String OpenID){
+		GeoLocation geoLocation = new GeoLocation();
+		try{
+			geoLocation = MongoDBBasic.getDBUserGeoInfo(OpenID);
+		}		
+		catch(Exception e){
+			geoLocation = null;
+		}
+		return geoLocation;
+	}
+	
+	@RequestMapping("/getDataQualityReport")
+	public static MdmDataQualityView callGetDataQualityReport(){
+		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
+		try{
+			mdmDataQualityView = DBUtils.getDataQualityReport();
+		}		
+		catch(Exception e){
+			mdmDataQualityView = null;
+		}
+		return mdmDataQualityView;
+	}
+	
+	@RequestMapping("/getDataQualityReportByParameter")
+	public static MdmDataQualityView callGetDataQualityReportByParameter(@RequestParam(value="stateProvince", required=false) String stateProvince,
+																		 @RequestParam(value="city", required=false) String city){
+		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
+		try{
+			mdmDataQualityView = DBUtils.getDataQualityReport(stateProvince, city);
+		}		
+		catch(Exception e){
+			mdmDataQualityView = null;
+		}
+		return mdmDataQualityView;
+	}
+	
+	@RequestMapping("/getFilterSegmentArea")
+	public static  List<String> callGetFilterSegmentArea(){
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		try{
+			listOfSegmentArea = DBUtils.getFilterSegmentArea();
+		}		
+		catch(Exception e){
+			listOfSegmentArea = null;
+		}
+		return listOfSegmentArea;
+	}
 }

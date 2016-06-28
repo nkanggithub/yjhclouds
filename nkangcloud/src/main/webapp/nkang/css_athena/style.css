@@ -4581,7 +4581,8 @@ img.fnone {
 	padding-right: 5px !important;
 }
 .BoardTit {
-	background: url("img/subtitleBg.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+	/* background: url("img/subtitleBg.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0); */
+	background: #00b287;
 	bottom: 0;
 	/*height: 52px;*/
 	position: absolute;
