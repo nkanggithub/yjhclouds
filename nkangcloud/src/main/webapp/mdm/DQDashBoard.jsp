@@ -7,14 +7,10 @@
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%					
-
 MdmDataQualityView mqv = new MdmDataQualityView();
-//mqv= DBUtils.getDataQualityReport();
 mqv= RestUtils.callGetDataQualityReport();
-//String AccessKey = DBUtils.getValidAccessKey();
 String AccessKey =RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID"); 
-//GeoLocation loc = DBUtils.getDBUserGeoInfo(uid);
 GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
@@ -23,12 +19,12 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
 	<meta charset="utf-8" />
-	<title>HPE - MDM Quality DashBoard</title>
+	<title>HPE - MDM DashBoard</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="hpe" />
-	<link rel="icon" type="image/x-icon" href="../../webitem/hpe.ico">
-	<link rel="short icon" type="image/x-icon" href="../../webitem/hpe.ico">
+	<link rel="icon" type="image/x-icon" href="../webitem/hpe.ico">
+	<link rel="short icon" type="image/x-icon" href="../webitem/hpe.ico">
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" 			rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css" 	rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/font-awesome/css/font-awesome.css" 			rel="stylesheet" type="text/css"/>
@@ -180,19 +176,7 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 			createGauge("g4t4591", "g4t4591");
 			createGauge("g4t4592", "g4t4592");
 			createGauge("g4t4593", "g4t4593");
-			createGauge("g4t4594", "g4t4594");
-			createGauge("g4t4595", "g4t4595");
-			createGauge("g4t4596", "g4t4596");
-			createGauge("g4t4597", "g4t4597");
-			createGauge("g4t4598", "g4t4598");
-			createGauge("g9t2971", "g9t2971");
-			createGauge("g9t2972", "g9t2972");
-			createGauge("g9t2973", "g9t2973");
-			createGauge("g9t2974", "g9t2974");
-			createGauge("g9t2975", "g9t2975");
-			createGauge("g9t2976", "g9t2976");
-			createGauge("g9t2977", "g9t2977");
-			createGauge("g9t2978", "g9t2978");
+			
 		}
 		
 		function updateGauges()
@@ -468,7 +452,7 @@ var percent2 = 100*percent;
 
                 <div class="BoardTit">
                   <div class="span8">
-                      <h4 style="float:right;"><%= curLoc%></h4>
+                      <h4 style="float:left;"><%= curLoc%></h4>
                   </div>
                 </div>
               </div>
@@ -483,10 +467,11 @@ var percent2 = 100*percent;
 
               <div id="LBreadmore" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
                 <div class="modal-header">
-                  profile
-                </div>
+                  <h2>More about data lake</h2>
+                </div><br />
                 <div class="modal-body readmoreHpop" style="white-space: pre-line;">
-                    Manage your profile here
+                    If you think of a datamart as a store of bottled water – cleansed and packaged and structured for easy consumption – the data lake is a large body of water in a more natural state. The contents of the data lake stream in from a source to fill the lake, and various users of the lake can come to examine, dive in, or take samples
+  					<br /> --Pentaho CTO James Dixon	
                 </div>
                 <div class="modal-footer">
                   <button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -529,19 +514,6 @@ var percent2 = 100*percent;
                       			<span id="g4t4591GaugeContainer"></span>
 								<span id="g4t4592GaugeContainer"></span>
 								<span id="g4t4593GaugeContainer"></span>
-								<span id="g4t4594GaugeContainer"></span>
-								<span id="g4t4595GaugeContainer"></span>
-								<span id="g4t4596GaugeContainer"></span>
-								<span id="g4t4597GaugeContainer"></span>
-								<span id="g4t4598GaugeContainer"></span>
-								<span id="g9t2971GaugeContainer"></span>
-								<span id="g9t2972GaugeContainer"></span>
-								<span id="g9t2973GaugeContainer"></span>
-								<span id="g9t2974GaugeContainer"></span>
-								<span id="g9t2975GaugeContainer"></span>
-								<span id="g9t2976GaugeContainer"></span>
-								<span id="g9t2977GaugeContainer"></span>
-								<span id="g9t2978GaugeContainer"></span>
                                 <!-- <form>
                                         <table class="table">
                                             
@@ -707,8 +679,6 @@ var percent2 = 100*percent;
     </div>
 <!-- Modal PAGE End-->   
 
-  <!-- BEGIN FOOTER -->
   <div id="footer"> <span>©</span> Hewlett-Packard Enterprise Development Company, L.P.   |   HP Restricted </div>
-  <!-- END FOOTER --> 
   </body>
   </html>

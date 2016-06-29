@@ -75,7 +75,7 @@ public class MongoDBBasic {
 			update.put("LastUpdated", DateUtil.timestamp2Str(cursqlTS));
 			update.put("AKey", key);
 			update.put("ID", "1");
-			mongoDB.getCollection(access_key).update(new BasicDBObject().append("ID", "1"), update);
+			mongoDB.getCollection(access_key).update(new BasicDBObject().append("ID", "1"), update, true, false);
 		}
 		catch(Exception e){
 			if(mongoDB.getMongo() != null){
