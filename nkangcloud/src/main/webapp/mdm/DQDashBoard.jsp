@@ -524,7 +524,7 @@ var percent2 = 100*percent;
                     </div>
                   </div>
                 </div>
-                <div class="SocialElements tab-pane active" id="SocialElements">
+                <div class="SocialElements tab-pane active" id="SocialElements"> <!-- Nati -->
  					<script>
 						var comptitor = <%= mqv.getNumberOfCompetitor()  %>
 						var partner = <%= mqv.getNumberOfPartner()  %>
@@ -679,6 +679,6 @@ var percent2 = 100*percent;
     </div>
 <!-- Modal PAGE End-->   
 
-  <div id="footer"> <span>©</span> Hewlett-Packard Enterprise Development Company, L.P.   |   HP Restricted </div>
+  <div id="footer"> <span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.   |   HP Restricted </div>
   </body>
   </html>

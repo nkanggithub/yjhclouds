@@ -264,4 +264,17 @@ public class MasterDataRestController {
 		}
 		return listOfSegmentArea;
 	}
+	
+	@RequestMapping("/insertCommentsFromVisitor")
+	public static  boolean callInsertCommentsFromVisitor(@RequestParam(value="OpenID", required=false) String OpenID,
+														 @RequestParam(value="comments", required=false) String comments){
+		boolean ret = false;
+		try{
+			ret = MongoDBBasic.InsertCommentsFromVisitor(OpenID, comments);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
 }

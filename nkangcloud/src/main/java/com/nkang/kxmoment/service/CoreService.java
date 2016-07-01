@@ -171,7 +171,7 @@ public class CoreService
 					article.setTitle("Master Data Quality Governace");
 					article.setDescription("Master Data Quality Governace Reporting");
 					article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
-					article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp");
+					article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
 					Article article2 = new Article();
 					article2.setTitle("User Profile");
@@ -199,7 +199,7 @@ public class CoreService
 						article.setTitle("Master Data Quality Governace");
 						article.setDescription("Master Data Quality Governace Reporting");
 						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
-						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp");
+						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("User Profile");

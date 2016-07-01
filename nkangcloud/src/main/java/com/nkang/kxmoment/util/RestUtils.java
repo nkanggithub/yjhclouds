@@ -29,7 +29,6 @@ public class RestUtils {
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "Y";
 	public static String getAccessKey() {
-			//https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
 			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
 			String expires_in = null;
@@ -40,6 +39,10 @@ public class RestUtils {
 		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           } 
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 		           http.connect();
@@ -72,6 +75,10 @@ public class RestUtils {
 	           http.setRequestProperty("Content-Type","application/json");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -136,6 +143,10 @@ public class RestUtils {
 	           http.setRequestProperty("Content-Type","application/json");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -200,6 +211,10 @@ public class RestUtils {
 	           http.setRequestProperty("Content-Type","application/json");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -232,6 +247,10 @@ public class RestUtils {
 	           http.setRequestProperty("Content-Type","application/json");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -267,6 +286,10 @@ public class RestUtils {
              http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");    
              http.setDoOutput(true);        
              http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
              System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
              System.setProperty("sun.net.client.defaultReadTimeout", "30000");
              http.connect();
@@ -299,6 +322,10 @@ public class RestUtils {
             http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");    
             http.setDoOutput(true);        
             http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
             System.setProperty("sun.net.client.defaultConnectTimeout", "30000");//????30?
             System.setProperty("sun.net.client.defaultReadTimeout", "30000"); //????30? 
              http.connect();
@@ -780,6 +807,10 @@ public class RestUtils {
 	           http.setRequestProperty("Content-Type","application/json");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -863,7 +894,36 @@ public class RestUtils {
 		Ret =  Ret + "[" + RetStr.substring(0, RetStr.length()-1) + "], [" + RetStr2.substring(0, RetStr2.length()-1) + "]";
 	    return Ret;
 	}
+	
+	public static String callInsertCommentsFromVisitor(String OpenID, String InputValue){
+		String url = "http://shenan.duapp.com/insertCommentsFromVisitor?OpenID="+OpenID+"&comments="+InputValue;
+		String message = "false";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }  
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           is.close();
 
+	       } catch (Exception e) {
+	    	   log.info("error callInsertCommentsFromVisitor ---------" + e.getMessage());
+	    	   message =  "failed with " + e.getMessage();
+	       }
+		return message;
+	}
 }
 
 

@@ -35,6 +35,7 @@ public class MongoDBBasic {
 	private static String collectionMasterDataName = "masterdata";
 	private static String access_key = "Access_Key";
 	private static String wechat_user = "Wechat_User";
+	private static String wechat_comments = "Wechat_Comments";
 
 	private static DB getMongoDB(){
 		MongoClientCollection mongoClientCollection = new MongoClientCollection();
@@ -394,5 +395,33 @@ public class MongoDBBasic {
 	    	}
 	    }
 		return loc;
+	}
+	
+	public static boolean InsertCommentsFromVisitor(String OpenID, String comments){
+		mongoDB = getMongoDB();
+		boolean ret = false;
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime());
+	    try{
+	    	DBObject insert = new BasicDBObject();
+	    	insert.put("OpenID", OpenID);
+	    	insert.put("CreatedDate", DateUtil.timestamp2Str(cursqlTS));
+	    	insert.put("Comments", comments);
+	    	DBCollection result = mongoDB.getCollection(wechat_comments);
+	    	result.insert(insert);
+	    	ret = true;
+	    }catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    	ret = false;
+	    	e.printStackTrace();
+	    	log.info("error---getDBUserGeoInfo: " + e.getMessage());
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return ret;
 	}
 }
