@@ -185,6 +185,12 @@ public class CoreService
 					article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
 					article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
 					articleList.add(article3);
+					Article article4 = new Article();
+					article4.setTitle("Data Visualization");
+					article4.setDescription("Master Data Visualization");
+					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+					article4.setUrl("http://shenan.duapp.com/mdm/DQMenu.jsp?UID=" + fromUserName);
+					articleList.add(article4);
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
 					respXml = MessageUtil.newsMessageToXml(newsMessage);
@@ -213,6 +219,12 @@ public class CoreService
 						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
 						article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
 						articleList.add(article3);
+						Article article4 = new Article();
+						article4.setTitle("Data Visualization");
+						article4.setDescription("Master Data Visualization");
+						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+						article4.setUrl("http://shenan.duapp.com/mdm/DQMenu.jsp?UID=" + fromUserName);
+						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);

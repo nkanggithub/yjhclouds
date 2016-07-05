@@ -585,7 +585,7 @@ public class RestUtils {
 				url = url + "&worldRegionPath="+URLEncoder.encode(opsi.getWorldRegionPath(),"UTF-8");
 			}
 			//not from parameter but calculation
-			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinExtendedName()) || !StringUtils.isEmpty(opsi.getCityRegion())    ){
+/*			if(!StringUtils.isEmpty(opsi.getOrganizationNonLatinExtendedName()) || !StringUtils.isEmpty(opsi.getCityRegion())    ){
 				try {
 					String latlnginfo = getlatLngwithQuery(opsi.getOrganizationNonLatinExtendedName(), opsi.getCityRegion());
 					if(!StringUtils.isEmpty(latlnginfo)){
@@ -601,7 +601,7 @@ public class RestUtils {
 
 			if(!StringUtils.isEmpty(opsi.getQualityGrade())){
 				url = url + "&qualityGrade="+URLEncoder.encode(opsi.getQualityGrade(),"UTF-8");
-			}
+			}*/
 		}
 		try {
 	           URL urlGet = new URL(url);
@@ -624,7 +624,6 @@ public class RestUtils {
 	           String message = new String(jsonBytes, "UTF-8");
 	           //JSONObject demoJson = new JSONObject(message);
 	           is.close();
-	           System.out.println("ok http ---------" + url);
 	       } catch (Exception e) {
 	    	   System.out.println("error http ---------" + e.getMessage());
 	    	   return "failed";
@@ -895,6 +894,60 @@ public class RestUtils {
 	    return Ret;
 	}
 	
+	public static List<String> CallGetJSFirstSegmentAreaFromMongo(){
+		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo";
+		String message="error";
+		
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		List<String> listOfSegmentAreaRet = new ArrayList<String>();
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }  
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           String a = message.substring(1, message.length()-1);
+	           String [] sp = a.split("\",\"");
+	           int cnt = 0;
+	           for(String i : sp){
+	        	   cnt =  cnt + 1;
+	        	   String b = i.substring(1, i.length()-1);
+	        	   String [] d = b.split(",");
+	        	   for(int j = 0; j < d.length; j ++){
+	        		   if(cnt == 1){
+	        			   String t = d[j].trim();
+	        			   listOfSegmentArea.add(t.substring(1, t.length()));
+	        		   }else{
+	        			   listOfSegmentArea.add(d[j].trim());
+	        		   }
+	        	   }
+	           }
+	           is.close();
+	           for(String K : listOfSegmentArea){
+	        	   if(!listOfSegmentAreaRet.contains(K)){
+	        		   listOfSegmentAreaRet.add(K);
+	        	   }
+	           }
+	       } catch (Exception e) {
+	    	   log.info("error callGetDBUserGeoInfo ---------" + e.getMessage());
+	    	   message =  "failed with " + e.getMessage();
+	       }
+		return listOfSegmentAreaRet;
+	}
+	
 	public static String callInsertCommentsFromVisitor(String OpenID, String InputValue){
 		String url = "http://shenan.duapp.com/insertCommentsFromVisitor?OpenID="+OpenID+"&comments="+InputValue;
 		String message = "false";
@@ -924,6 +977,69 @@ public class RestUtils {
 	       }
 		return message;
 	}
+	
+	public static String callgetFilterRegionFromMongo(String state){
+		String url = "http://shenan.duapp.com/getFilterRegionFromMongo?state="+state;
+		String message = "false";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }  
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+
+	       } catch (Exception e) {
+	    	   log.info("error callInsertCommentsFromVisitor ---------" + e.getMessage());
+	    	   message =  "failed with " + e.getMessage();
+	       }
+		return message;
+	}
+	
+	public static String CallgetFilterTotalOPSIFromMongo(){
+		String url = "http://shenan.duapp.com/getFilterTotalOPSIFromMongo";
+		String message = "false";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }  
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+
+	       } catch (Exception e) {
+	    	   log.info("error CallgetFilterTotalOPSIFromMongo ---------" + e.getMessage());
+	    	   message =  "failed with " + e.getMessage();
+	       }
+		return message;
+	}
+	
 }
 
 

@@ -50,6 +50,7 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	<script src="../nkang/Chart.js"></script>
 	<script src="../nkang/gauge.js"></script>
 	<script src="../nkang/RadarChart.js"></script>
+
 	<script type="text/javascript">
 		$j = jQuery.noConflict();
 		$j(function(){
@@ -78,6 +79,11 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 		    
 		    $j("#liBoardPartner").click(function(){
 		    	updateGauges();
+		    });
+		    
+		    $j("#liSocialElements").click(function(){
+		    	
+			
 		    });
 		    
 		    $j("#liBoardCustomer").click(function(){
@@ -367,6 +373,21 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	.ui-selectmenu-status {
 	line-height: 1.0em;
 	}
+	
+	
+/* dashboar area start*/		
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+	.area {
+	  fill: #00b287;
+	}
+/* dashboar area end*/
+
+			
 </style>
 
 </head>
@@ -514,74 +535,38 @@ var percent2 = 100*percent;
                       			<span id="g4t4591GaugeContainer"></span>
 								<span id="g4t4592GaugeContainer"></span>
 								<span id="g4t4593GaugeContainer"></span>
-                                <!-- <form>
-                                        <table class="table">
-                                            
-                                        </table>
-										<input type = "button" value ="Save" class="myButtons" style="width:50%;float:right;"/>
-                                </form> -->
+
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="SocialElements tab-pane active" id="SocialElements"> <!-- Nati -->
- 					<script>
-						var comptitor = <%= mqv.getNumberOfCompetitor()  %>
-						var partner = <%= mqv.getNumberOfPartner()  %>
-						var customer = <%= mqv.getNumberOfCustomer()  %>
-						var salesData=[
-									{label:"Customer",value:customer , color:"#00b287"},
-									{label:"Partner", value:partner , color:"#4F920B"},
-									{label:"Competitor", value:comptitor , color:"#ECBD74"}
-								];
-						var svg = d3.select(".SocialElements").append("svg").attr("id","svgDistribution").attr("width",300).attr("height",280);
-						svg.append("g").attr("id","salesDonut");
-						Donut3D.draw("salesDonut", salesData, 150, 150, 130, 100, 30, 0.4);
-						function changeData(){
-							Donut3D.transition("salesDonut", salesData, 130, 100, 30, 0.4);
-						}
- 						function randomData(){
-							return salesData.map(function(d){ 
-								return {label:d.label, value:1000*Math.random(), color:d.color};});
-						}
-					</script>
+                	<div id="chart2">
+	                	<script>
+							var chart = c3.generate({
+							    data: {
+							        columns: [
+							            ['Customer', 70],
+							            ['Partner', 20],
+							            ['Competitor', 10]
+							        ],
+							        type: 'pie'
+							    },
+							    pie: {
+							        label: {
+							            format: function (value, ratio, id) {
+							                return d3.format('#')(value);
+							            }
+							        }
+							    },
+							    bindto: '#chart2'
+							});
 
-                      <div class="modal-body readmoreHpop" style="white-space: pre-line;">
-                          <table class="table">
-                              <tbody>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Customer:</strong></span>
-                                      </td>
-                                      <td>
-                                          <%= mqv.getNumberOfCustomer() %>
-                                      </td>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Leads:</strong></span>
-                                      </td>
-                                      <td>
-											<%= mqv.getNumberOfLeads() %>
-                                      </td> 
-                                  </tr>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Competitor:</strong></span>
-                                      </td>
-                                      <td>
-                                          <%= mqv.getNumberOfCompetitor() %> 
-                                      </td>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Partner:</strong></span>
-                                      </td>
-                                      <td>
-                                          <%= mqv.getNumberOfPartner() %>
-                                      </td> 
-                                  </tr>
-                                  
-                              </tbody>
-                          </table>
+						</script>
+                	</div>
 
-                      </div>
+						
+                      
                   </div>
                 <div class="tab-pane" id="BoardCompetitor">
                   <div>

@@ -265,6 +265,18 @@ public class MasterDataRestController {
 		return listOfSegmentArea;
 	}
 	
+	@RequestMapping("/getFilterSegmentAreaFromMongo")
+	public static  List<String> callGetFilterSegmentAreaFromMongo(){
+		List<String> segmentArea = new ArrayList<String>();
+		try{
+			segmentArea = MongoDBBasic.getFilterSegmentArea();
+		}		
+		catch(Exception e){
+			segmentArea.add("--2--" + e.getMessage().toString());
+		}
+		return segmentArea;
+	}
+	
 	@RequestMapping("/insertCommentsFromVisitor")
 	public static  boolean callInsertCommentsFromVisitor(@RequestParam(value="OpenID", required=false) String OpenID,
 														 @RequestParam(value="comments", required=false) String comments){
@@ -274,6 +286,70 @@ public class MasterDataRestController {
 		}		
 		catch(Exception e){
 			ret = false;
+		}
+		return ret;
+	}
+	
+	@RequestMapping("/getFilterRegionFromMongo")
+	public static  List<String> callGetFilterRegionFromMongo(@RequestParam(value="state", required=false) String state){
+		List<String> regions = new ArrayList<String>();
+		try{
+			regions = MongoDBBasic.getFilterRegionFromMongo(state);
+		}		
+		catch(Exception e){
+			regions.add("--2--" + e.getMessage().toString());
+		}
+		return regions;
+	}
+	
+	@RequestMapping("/getFilterNonLatinCityFromMongo")
+	public static  List<String> callGetFilterNonLatinCityFromMongo(@RequestParam(value="state", required=false) String state){
+		List<String> nonLatiCities = new ArrayList<String>();
+		try{
+			nonLatiCities = MongoDBBasic.getFilterNonLatinCitiesFromMongo(state);
+		}		
+		catch(Exception e){
+			nonLatiCities.add("--2--" + e.getMessage().toString());
+		}
+		return nonLatiCities;
+	}
+	
+	@RequestMapping("/getFilterStateFromMongo")
+	public static  List<String> callGetFilterStateFromMongo(){
+		List<String> states = new ArrayList<String>();
+		try{
+			states = MongoDBBasic.getFilterStateFromMongo();
+		}		
+		catch(Exception e){
+			states.add("--2--" + e.getMessage().toString());
+		}
+		return states;
+	}
+	
+	@RequestMapping("/getFilterCountOnCriteriaFromMongo")
+	public static  String CallgetFilterCountOnCriteriaFromMongo(@RequestParam(value="industrySegmentNames", required=false) String industrySegmentNames,
+																@RequestParam(value="nonlatinCity", required=false) String nonlatinCity,
+																@RequestParam(value="state", required=false) String state,
+																@RequestParam(value="cityRegion", required=false) String cityRegion
+			){
+		String ret = "error";
+		try{
+			ret = String.valueOf(MongoDBBasic.getFilterCountOnCriteriaFromMongo(industrySegmentNames,nonlatinCity,state,cityRegion)) ;
+		}		
+		catch(Exception e){
+			ret = e.getMessage().toString();
+		}
+		return ret;
+	}
+	
+	@RequestMapping("/getFilterTotalOPSIFromMongo")
+	public static  String CallgetFilterTotalOPSIFromMongo(){
+		String ret = "error";
+		try{
+			ret = MongoDBBasic.getFilterTotalOPSIFromMongo();
+		}		
+		catch(Exception e){
+			ret = e.getMessage().toString();
 		}
 		return ret;
 	}

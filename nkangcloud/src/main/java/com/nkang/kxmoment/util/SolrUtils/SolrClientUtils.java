@@ -30,8 +30,8 @@ public class SolrClientUtils{
 	public static QueryResponse queryOrgInformations(OrganizationSearch4Solr orgCriteria, int section) {
 		QueryResponse queryResponse = null;
         try {
-        	int start = section*50000;
-        	int end = (section*50000) + 50000;
+        	int start = section*20000;
+        	int end = (section*20000) + 20000;
         	SolrQuery query = getSolrQuery(orgCriteria, start, end);
 			queryResponse = solrServer.query(query);
 		} catch (SolrServerException e) {
@@ -46,7 +46,7 @@ public class SolrClientUtils{
 		SolrQuery query = new SolrQuery();
 		query.setHighlight(true).setStart(start);
         query.setTermsLimit(500);
-        query.setRows(50000);
+        query.setRows(20000);
         Map<String, String> map = new HashMap<String, String>();
         map.put("wt", "json");
         map.put("indent", "true");
