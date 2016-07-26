@@ -55,6 +55,9 @@ public class SolrClientUtils{
         if (!StringUtils.isEmpty(request.getOrgId())) {
         	queryPrams.append("organizationId:" + request.getOrgId() + " AND ");
         }
+        if (!StringUtils.isEmpty(request.getSiteinstanceId())) {
+        	queryPrams.append("siteInstanceId:" + request.getSiteinstanceId() + " AND ");
+        }
         List<String> orgIdList = request.getOrgIdList();
         if (orgIdList != null && orgIdList.size() > 0) {
         	String idsString = "+organizationId:(";
@@ -149,8 +152,9 @@ public class SolrClientUtils{
 		OrganizationSearch4Solr solrSearchParams = new OrganizationSearch4Solr();
 		solrSearchParams.setCountryCode("CN");
 		solrSearchParams.setCharScriptCode("HANS");
+		solrSearchParams.setStateProvinceName("上海");
 		//solrSearchParams.setOrgId("23074049");
-		solrSearchParams.setStateProvinceName("重庆");
+/*		solrSearchParams.setSiteinstanceId("36742221");*/
 		QueryResponse queryResponse = SolrClientUtils.queryOrgInformations(solrSearchParams, section);
 		
 		SolrDocumentList docs = queryResponse.getResults();

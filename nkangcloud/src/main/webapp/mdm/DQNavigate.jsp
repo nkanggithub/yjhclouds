@@ -186,11 +186,6 @@ catch(Exception e){
 					<span class="rightbuttom">380M</span>
 					<img class="icon" src="../MetroStyleFiles/person.png" alt="">
 				</a>
-<!-- 				<a class="box isotope-item" onClick="Javascript:IndustrySegmentCodes();" style="width: 20em; height: 12em; position: absolute; left: 0px; top: 0px; transform: translate3d(292px, 0px, 0px);">
-					<span class="subtitle">Industry Segment Area</span>
-					<span class="rightbuttom">1.2K</span>
-					<img class="cover" src="../MetroStyleFiles/gallery.jpg" alt="">
-				</a>  -->
 			</div>
 		</div>
 	</div>

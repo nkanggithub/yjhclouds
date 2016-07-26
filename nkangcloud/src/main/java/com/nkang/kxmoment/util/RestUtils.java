@@ -27,7 +27,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
-	private static String localInd = "Y";
+	private static String localInd = "N";
 	public static String getAccessKey() {
 			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
@@ -110,6 +110,10 @@ public class RestUtils {
 	           wcu.setSex(sex);
 	           wcu.setSubscribe(subscribe);
 	           wcu.setSubscribe_time(subscribe_time);
+	           
+	           WeChatUser wcutmp = MongoDBBasic.queryWeChatUser(openID);
+	           wcu.setLat(wcutmp.getLat());
+	           wcu.setLng(wcutmp.getLng());
 	           
 	           is.close();
 	       } catch (Exception e) {
@@ -228,6 +232,88 @@ public class RestUtils {
 	           if(demoJson.has("result")){
 	        	   JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
 		           ret = JsonFormatedLocation.getString("formatted_address");
+	           }
+	           is.close();
+	       } catch (Exception e) {
+	    	   e.printStackTrace();
+	       }
+		return ret;
+    }
+    
+    public static List<String> getUserCurLocWithLatLngV2(String lat, String lng){
+    	List<String> ret = new ArrayList<String>();
+    	String url =  "http://api.map.baidu.com/geocoder?key=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/json");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           String message = new String(jsonBytes, "UTF-8");
+	           log.info(message);
+	           JSONObject demoJson = new JSONObject(message);
+	           if(demoJson.has("result")){
+	        	   JSONObject JsonResult = demoJson.getJSONObject("result");
+	        	   
+	        	   if(JsonResult.has("addressComponent")){
+	        		   JSONObject addressComponent = JsonResult.getJSONObject("addressComponent");
+	        		   if(addressComponent.has("province")){
+	        			   ret.add(addressComponent.getString("province"));
+	        		   }
+	        		   else{
+	        			   ret.add("province");
+	        		   }
+
+	        		   if(addressComponent.has("city")){
+	        			   ret.add(addressComponent.getString("city"));
+	        		   }
+	        		   else{
+	        			   ret.add("city");
+	        		   }
+	        		   if(addressComponent.has("district")){
+	        			   ret.add(addressComponent.getString("district"));
+	        		   }
+	        		   else{
+	        			   ret.add("district");
+	        		   }
+	        		   if(addressComponent.has("street")){
+	        			   ret.add(addressComponent.getString("street"));
+	        		   }
+	        		   else{
+	        			   ret.add("street");
+	        		   }
+	        		   if(addressComponent.has("street_number")){
+	        			   ret.add(addressComponent.getString("street_number"));
+	        		   }
+	        		   else{
+	        			   ret.add("street_number");
+	        		   }
+	        		   if(addressComponent.has("direction")){
+	        			   ret.add(addressComponent.getString("direction"));
+	        		   }
+	        		   else{
+	        			   ret.add("direction");
+	        		   }
+	        		   if(addressComponent.has("distance")){
+	        			   ret.add(addressComponent.getString("distance"));
+	        		   }
+	        		   else{
+	        			   ret.add("distance");
+	        		   }
+	        	   }
+		           //ret = JsonFormatedLocation.getString("formatted_address");
 	           }
 	           is.close();
 	       } catch (Exception e) {
@@ -603,6 +689,7 @@ public class RestUtils {
 				url = url + "&qualityGrade="+URLEncoder.encode(opsi.getQualityGrade(),"UTF-8");
 			}*/
 		}
+		String message= "errorrrr";
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -621,11 +708,12 @@ public class RestUtils {
 	           int size = is.available();
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
-	           String message = new String(jsonBytes, "UTF-8");
+	           message = new String(jsonBytes, "UTF-8");
 	           //JSONObject demoJson = new JSONObject(message);
 	           is.close();
+	           //System.out.println(message + "- success http ---------" + url);
 	       } catch (Exception e) {
-	    	   System.out.println("error http ---------" + e.getMessage());
+	    	   System.out.println("error:::" + message + "failed http ---------" + url);
 	    	   return "failed";
 	       } 
 		return "success";
@@ -704,59 +792,73 @@ public class RestUtils {
 		return mdmDataQualityView;
 	}
 	
-	public static MdmDataQualityView callGetDataQualityReportByParameter(String stateProvince, String city){
-		String s="";
-		try {
-			s = URLEncoder.encode(stateProvince, "UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String c="";
-		try {
-			c = URLEncoder.encode(city, "UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"city="+c;
+	public static MdmDataQualityView callGetDataQualityReportByParameter(String stateProvince, String city, String cityRegion){
+
 		String message="error";
 		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
-		try {
-	           URL urlGet = new URL(url);
-	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-	           http.setRequestMethod("GET"); //must be get request
-	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-	           http.setDoOutput(true);
-	           http.setDoInput(true);
-	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
-		           System.setProperty("http.proxyPort", "8080");  
-	           }
-	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-	           http.connect();
-	           InputStream is = http.getInputStream();
-	           int size = is.available();
-	           byte[] jsonBytes = new byte[size];
-	           is.read(jsonBytes);
-	           message = new String(jsonBytes, "UTF-8");
-	           JSONObject demoJson = new JSONObject(message);
-	           mdmDataQualityView.setNumberOfCompetitor(Integer.valueOf(demoJson.getString("numberOfCompetitor")) );
-	           mdmDataQualityView.setNumberOfCustomer(Integer.valueOf(demoJson.getString("numberOfCustomer")) );
-	           mdmDataQualityView.setNumberOfEmptyCityArea(Integer.valueOf(demoJson.getString("numberOfEmptyCityArea")) );
-	           mdmDataQualityView.setNumberOfLeads(Integer.valueOf(demoJson.getString("numberOfLeads")) );
-	           mdmDataQualityView.setNumberOfNonGeo(Integer.valueOf(demoJson.getString("numberOfNonGeo")) );
-	           mdmDataQualityView.setNumberOfOppt(Integer.valueOf(demoJson.getString("numberOfOppt")) );
-	           mdmDataQualityView.setNumberOfPartner(Integer.valueOf(demoJson.getString("numberOfPartner")) );
-	           mdmDataQualityView.setNumberOfThreeGrade(Integer.valueOf(demoJson.getString("numberOfThreeGrade")) );
-	           mdmDataQualityView.setPercents(demoJson.getString("percents"));
-	           is.close();
+		
+		if(localInd == "Y"){
+			try {
+					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
+					String url = "http://shenan.duapp.com/getDataQualityReportByParameter?";
+					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
+						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
+						url =  url + "stateProvince="+stateProvince;
+					}
+					if(city != "" && city.toLowerCase() != "null"){
+						city = URLEncoder.encode(city, "UTF-8");
+						url =  url + "&nonlatinCity="+city;
+					}
+					if(cityRegion != "" && cityRegion.toLowerCase() != "null"){
+						cityRegion = URLEncoder.encode(cityRegion, "UTF-8");
+						url =  url + "&cityRegion="+cityRegion;
+					}
 
-	       } catch (Exception e) {
-	    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
-	    	   message =  "failed with " + e.getMessage();
-	       }
+				   //String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           JSONObject demoJson = new JSONObject(message);
+		           mdmDataQualityView.setNumberOfCompetitor(Integer.valueOf(demoJson.getString("numberOfCompetitor")) );
+		           mdmDataQualityView.setNumberOfCustomer(Integer.valueOf(demoJson.getString("numberOfCustomer")) );
+		           mdmDataQualityView.setNumberOfEmptyCityArea(Integer.valueOf(demoJson.getString("numberOfEmptyCityArea")) );
+		           mdmDataQualityView.setNumberOfLeads(Integer.valueOf(demoJson.getString("numberOfLeads")) );
+		           mdmDataQualityView.setNumberOfNonGeo(Integer.valueOf(demoJson.getString("numberOfNonGeo")) );
+		           mdmDataQualityView.setNumberOfOppt(Integer.valueOf(demoJson.getString("numberOfOppt")) );
+		           mdmDataQualityView.setNumberOfPartner(Integer.valueOf(demoJson.getString("numberOfPartner")) );
+		           mdmDataQualityView.setNumberOfThreeGrade(Integer.valueOf(demoJson.getString("numberOfThreeGrade")) );
+		           mdmDataQualityView.setPercents(demoJson.getString("percents"));
+		           is.close();
+
+		       } catch (Exception e) {
+		    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+				mdmDataQualityView = MongoDBBasic.getDataQualityReport(stateProvince, city,cityRegion);
+			}
+			catch (Exception e) {
+		    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		    }
+		}
 		return mdmDataQualityView;
 	}
 	
@@ -894,12 +996,11 @@ public class RestUtils {
 	    return Ret;
 	}
 	
-	public static List<String> CallGetJSFirstSegmentAreaFromMongo(){
-		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo";
+	public static List<String> CallGetJSFirstSegmentAreaFromMongo(String cntOfOPSI,String state){
+		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);
 		String message="error";
-		
 		List<String> listOfSegmentArea = new ArrayList<String>();
-		List<String> listOfSegmentAreaRet = new ArrayList<String>();
+
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -910,7 +1011,7 @@ public class RestUtils {
 	           if(localInd == "Y"){
 		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
 		           System.setProperty("http.proxyPort", "8080");  
-	           }  
+	           }
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -923,29 +1024,81 @@ public class RestUtils {
 	           String [] sp = a.split("\",\"");
 	           int cnt = 0;
 	           for(String i : sp){
-	        	   cnt =  cnt + 1;
-	        	   String b = i.substring(1, i.length()-1);
-	        	   String [] d = b.split(",");
-	        	   for(int j = 0; j < d.length; j ++){
-	        		   if(cnt == 1){
-	        			   String t = d[j].trim();
-	        			   listOfSegmentArea.add(t.substring(1, t.length()));
-	        		   }else{
-	        			   listOfSegmentArea.add(d[j].trim());
-	        		   }
+	        	   cnt = cnt + 1;
+	        	   if(cnt == 1){
+	        		   listOfSegmentArea.add(i.substring(1, i.length()));
+	        	   }
+	        	   else if(cnt == sp.length){
+	        		   listOfSegmentArea.add(i.substring(0, i.length()-1));
+	        	   }
+	        	   else{
+	        		   listOfSegmentArea.add(i.trim());
 	        	   }
 	           }
 	           is.close();
-	           for(String K : listOfSegmentArea){
-	        	   if(!listOfSegmentAreaRet.contains(K)){
-	        		   listOfSegmentAreaRet.add(K);
-	        	   }
-	           }
 	       } catch (Exception e) {
-	    	   log.info("error callGetDBUserGeoInfo ---------" + e.getMessage());
+	    	   log.info("error http CallGetJSFirstSegmentAreaFromMongo ---------" + e.getMessage());
 	    	   message =  "failed with " + e.getMessage();
 	       }
-		return listOfSegmentAreaRet;
+		return listOfSegmentArea;
+	}
+	
+	public static List<String> CallGetJSFirstSegmentAreaListFromMongo(String state){
+		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);;
+		String message="error";
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		
+		if(localInd == "Y"){
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }  
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           String a = message.substring(1, message.length()-1);
+		           String [] sp = a.split("\",\"");
+		           int cnt = 0;
+		           for(String i : sp){
+		        	   cnt = cnt + 1;
+		        	   if(cnt == 1){
+		        		   listOfSegmentArea.add(i.substring(1, i.length()));
+		        	   }
+		        	   else if(cnt == sp.length){
+		        		   listOfSegmentArea.add(i.substring(0, i.length()-1));
+		        	   }
+		        	   else{
+		        		   listOfSegmentArea.add(i.trim());
+		        	   }
+		           }
+		           is.close();
+		       } catch (Exception e) {
+		    	   log.info("error http CallGetJSFirstSegmentAreaListFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+				listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(state);
+			}
+			catch (Exception e) {
+		    	   log.info("error DB CallGetJSFirstSegmentAreaListFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		return listOfSegmentArea;
 	}
 	
 	public static String callInsertCommentsFromVisitor(String OpenID, String InputValue){
@@ -1009,37 +1162,174 @@ public class RestUtils {
 		return message;
 	}
 	
-	public static String CallgetFilterTotalOPSIFromMongo(){
-		String url = "http://shenan.duapp.com/getFilterTotalOPSIFromMongo";
+	public static String CallgetFilterTotalOPSIFromMongo(String state, String nonlatinCity, String cityRegion){
 		String message = "false";
-		try {
-	           URL urlGet = new URL(url);
-	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-	           http.setRequestMethod("GET"); //must be get request
-	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-	           http.setDoOutput(true);
-	           http.setDoInput(true);
-	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
-		           System.setProperty("http.proxyPort", "8080");  
-	           }  
-	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-	           http.connect();
-	           InputStream is = http.getInputStream();
-	           int size = is.available();
-	           byte[] jsonBytes = new byte[size];
-	           is.read(jsonBytes);
-	           message = new String(jsonBytes, "UTF-8");
-	           is.close();
+		if(localInd == "Y"){
+			String url = "http://shenan.duapp.com/getFilterTotalOPSIFromMongo";
+			
+			if(state != "" && state!= null && state.toLowerCase()!= "null"){
+				state = URLEncoder.encode(state);
+				url = url + "?state="+state;
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toLowerCase()!= "null"){
+				nonlatinCity = URLEncoder.encode(nonlatinCity);
+				url = url + "&nonlatinCity="+nonlatinCity;
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toLowerCase()!= "null"){
+				cityRegion = URLEncoder.encode(cityRegion);
+				url = url + "&cityRegion="+cityRegion;
+			}
+			
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }  
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           is.close();
 
-	       } catch (Exception e) {
-	    	   log.info("error CallgetFilterTotalOPSIFromMongo ---------" + e.getMessage());
-	    	   message =  "failed with " + e.getMessage();
-	       }
+		       } catch (Exception e) {
+		    	   log.info("error CallgetFilterTotalOPSIFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+				message = MongoDBBasic.getFilterTotalOPSIFromMongo(state, nonlatinCity, cityRegion);
+			}
+			catch (Exception e) {
+		    	   log.info("error CallgetFilterTotalOPSIFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		    }
+		}
 		return message;
 	}
 	
+	public static String CallgetFilterCountOnCriteriaFromMongo(String industrySegmentNames, String nonlatinCity, String state, String cityRegion){
+		String message = "0";
+		//if(true){
+		if(localInd == "Y"){
+		//	if(localInd == "Y"){
+			String parStr = "industrySegmentNames="+URLEncoder.encode(industrySegmentNames);
+			parStr = parStr + "&state="+URLEncoder.encode(state);
+			String url = "http://shenan.duapp.com/getFilterCountOnCriteriaFromMongo?"+parStr;
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }  
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           is.close();
+
+		       } catch (Exception e) {
+		    	   log.info("error http CallgetFilterCountOnCriteriaFromMongo ---------" + e.getMessage());
+		    	   //message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+
+				message =  MongoDBBasic.getFilterCountOnCriteriaFromMongo(industrySegmentNames, "", state, "");
+			}
+			catch (Exception e) {
+		    	   log.info("error DB CallgetFilterCountOnCriteriaFromMongo ---------" + e.getMessage());
+		    	   //message =  "failed with " + e.getMessage();
+		    }
+		}
+
+		return message;
+	}
+	
+	public static List<String> CallGetFilterNonLatinCityFromMongo(String state){
+		List<String> ret = new ArrayList<String>();
+		String message = "false";
+		if(localInd == "Y"){
+			String parStr = "state="+URLEncoder.encode(state);
+			String url = "http://shenan.duapp.com/getFilterNonLatinCityFromMongo?"+parStr;
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }  
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           //String a = message.substring(1, message.length()-1);
+		           String [] sp = message.split("\",\"");
+		           int cnt = 0;
+		           for(String i : sp){
+		        	   cnt = cnt + 1;
+		        	   if(i.contains(state)){
+		   					i = i.replaceAll("\\s+","");
+		   					i = i.replaceAll(state, "");
+		        	   }
+		        	   if(cnt == 1){
+		        		   ret.add(i.substring(2, i.length()));
+		        	   }
+		        	   else if(cnt == sp.length){
+		        		   ret.add(i.substring(0, i.length()-1));
+		        	   }
+		        	   else{
+		        		   ret.add(i.trim());
+		        	   }
+		           }
+		           is.close();
+		           //ret.add(e;)
+
+		       } catch (Exception e) {
+		    	   log.info("error http CallGetFilterNonLatinCityFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+				ret =  MongoDBBasic.getFilterNonLatinCitiesFromMongo(state);
+			}
+			catch (Exception e) {
+		    	   log.info("error DB CallGetFilterNonLatinCityFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		    }
+		}
+
+		return ret;
+	}
 }
 
 

@@ -47,7 +47,7 @@
 	</servlet-mapping> -->
 
     <welcome-file-list>  
-        <welcome-file>/mdm/DQDashBoard.jsp</welcome-file>  
+        <welcome-file>/mdm/DQMenu.jsp</welcome-file>  
     </welcome-file-list> 
 <!--     <session-config>
 		<session-timeout>15</session-timeout>

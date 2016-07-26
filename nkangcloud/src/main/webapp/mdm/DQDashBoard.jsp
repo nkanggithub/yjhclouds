@@ -59,21 +59,21 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 		    	gauges = null;
 		         <% 
 			         MdmDataQualityView mqvByStateCityJB = new MdmDataQualityView();
-			         mqvByStateCityJB = RestUtils.callGetDataQualityReportByParameter("重庆市","江北区");
+			         mqvByStateCityJB = RestUtils.callGetDataQualityReportByParameter("重庆市","江北区","");
 			         MdmDataQualityView mqvByStateCityYB = new MdmDataQualityView();
-			         mqvByStateCityYB = RestUtils.callGetDataQualityReportByParameter("重庆市","渝北区");
+			         mqvByStateCityYB = RestUtils.callGetDataQualityReportByParameter("重庆市","渝北区","");
 			         MdmDataQualityView mqvByStateCitySPB = new MdmDataQualityView();
-			         mqvByStateCitySPB = RestUtils.callGetDataQualityReportByParameter("重庆市","沙坪坝区");
+			         mqvByStateCitySPB = RestUtils.callGetDataQualityReportByParameter("重庆市","沙坪坝区","");
 			         MdmDataQualityView mqvByStateCityBB = new MdmDataQualityView();
-			         mqvByStateCityBB = RestUtils.callGetDataQualityReportByParameter("重庆市","北碚区");
+			         mqvByStateCityBB = RestUtils.callGetDataQualityReportByParameter("重庆市","北碚区","");
 			         MdmDataQualityView mqvByStateCityNA = new MdmDataQualityView();
-			         mqvByStateCityNA = RestUtils.callGetDataQualityReportByParameter("重庆市","南岸区");
+			         mqvByStateCityNA = RestUtils.callGetDataQualityReportByParameter("重庆市","南岸区","");
 			         MdmDataQualityView mqvByStateCityBN = new MdmDataQualityView();
-			         mqvByStateCityBN = RestUtils.callGetDataQualityReportByParameter("重庆市","巴南区");
+			         mqvByStateCityBN = RestUtils.callGetDataQualityReportByParameter("重庆市","巴南区","");
 			         MdmDataQualityView mqvByStateCityJLP = new MdmDataQualityView();
-			         mqvByStateCityJLP = RestUtils.callGetDataQualityReportByParameter("重庆市","九龙坡区");
+			         mqvByStateCityJLP = RestUtils.callGetDataQualityReportByParameter("重庆市","九龙坡区","");
 			         MdmDataQualityView mqvByStateCityZX = new MdmDataQualityView();
-			         mqvByStateCityZX = RestUtils.callGetDataQualityReportByParameter("重庆市","忠县");
+			         mqvByStateCityZX = RestUtils.callGetDataQualityReportByParameter("重庆市","忠县","");
 		         %>
 		     });
 		    

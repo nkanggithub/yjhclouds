@@ -116,17 +116,6 @@ public class CoreService
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				respContent = "IMAGE" + "\n";
-				DBObject query = new BasicDBObject();
-				query.put("industrySegmentNames", "[Oil and Gas]");
-				List<DBObject> results = MongoDBBasic.getDistinctSubjectArea("industrySegmentNames");
-				
-
-				List<DBObject> resultsqueryNonLatinCity = MongoDBBasic.getDistinctSubjectArea("nonlatinCity");
-				
-				
-				List<DBObject> resultscityRegion = MongoDBBasic.getDistinctSubjectArea("cityRegion");
-				
-				respContent = respContent + "Total Records: " + MongoDBBasic.getTotalRecordCount() +"\n Total Oil Gas: "+ MongoDBBasic.getSelectedDocumentWithQuery(query) + "\n Total Subject Area: " + results.size()+"\n Total City: "+ resultsqueryNonLatinCity.size()+" \n Total City Region: " +resultscityRegion.size();
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -140,10 +129,7 @@ public class CoreService
 				respContent = "VOICE";
 				List<DBObject> results = MongoDBBasic.getDistinctSubjectArea("industrySegmentNames");
 				respContent = respContent + results.size() + "\n";
-/*				for(DBObject dbo : results){
-					respContent =  respContent + dbo.get("industrySegmentNames") + "\n";
-				}*/
-				
+
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -155,13 +141,7 @@ public class CoreService
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
 				String eventType = requestObject.element("Event").getText();
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-/*					respContent = "感谢您的关注 - SUBSCRIBE";
-					textMessage.setContent(respContent);
-					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
-					DBUtils.createUser(wcu);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-					*/
-					
+
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
 					DBUtils.createUser(wcu);
 					MongoDBBasic.createUser(wcu);
@@ -370,18 +350,7 @@ public class CoreService
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
-					
-					else if (eventKey.equals("B3")) {// 2048
-						Article article = new Article();
-						article.setTitle("2048ÓÎÏ·");
-						article.setDescription("ÓÎÏ·¹æÔòºÜ¼òµ¥£¬Ã¿´Î¿ÉÒÔÑ¡ÔñÉÏÏÂ×óÓÒÆäÖÐÒ»¸ö·½ÏòÈ¥»¬¶¯£¬Ã¿»¬¶¯Ò»´Î£¬ËùÓÐµÄÊý×Ö·½¿é¶¼»áÍù»¬¶¯µÄ·½Ïò¿¿Â£Íâ£¬ÏµÍ³Ò²»áÔÚ¿Õ°×µÄµØ·½ÂÒÊý³öÏÖÒ»¸öÊý×Ö·½¿é£¬ÏàÍ¬Êý×ÖµÄ·½¿éÔÚ¿¿Â£¡¢Ïà×²Ê±»áÏà¼Ó¡£ÏµÍ³¸øÓèµÄÊý×Ö·½¿é²»ÊÇ2¾ÍÊÇ4£¬Íæ¼ÒÒªÏë°ì·¨ÔÚÕâÐ¡Ð¡µÄ16¸ñ·¶Î§ÖÐ´Õ³ö¡°2048¡±Õâ¸öÊý×Ö·½¿é");
-						article.setPicUrl("http://kaixinmoment.duapp.com/2048/1395908994962.png");
-						article.setUrl("http://kaixinmoment.duapp.com/2048");
-						articleList.add(article);
-						newsMessage.setArticleCount(articleList.size());
-						newsMessage.setArticles(articleList);
-						respXml = MessageUtil.newsMessageToXml(newsMessage);
-					}
+
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_SCAN_TEXT)) {
 					String eventKey = requestObject.element("EventKey").getText();
 					if (eventKey.equals("C1")) {

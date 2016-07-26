@@ -113,7 +113,7 @@ public class DBUtils {
 	    		loc.setLNG(rs.getString("CurLNG"));
 	    		loc.setFAddr(rs.getString("FormatAddress"));
 			}
-	    	log.info("LAT:" + loc.getLAT() + "LNG :" + loc.getLNG());
+
 	    	stmt.close();
 	    	conn.close();
 	    }catch(Exception e){
@@ -177,7 +177,6 @@ public class DBUtils {
 		msqlu = new MySqlUtil();
 		String sqlQueryKey = "SELECT * FROM Opportunity WHERE OpptLAT =  'LAT' AND OpptLNG =  'LNG' LIMIT 1200";
 		String sqlQueryKey2 = "SELECT * FROM Opportunity WHERE OpptLAT =  'LAT' AND OpptLNG =  'LNG' AND CityArea = '重庆市' LIMIT 1200";
-		log.info("SQL" + sqlQueryKey2);
 	    Connection conn = null;
 	    try{
 	    	conn = msqlu.getConnection();
@@ -243,8 +242,7 @@ public class DBUtils {
 
 		//String sqlUpdateKey = "UPDATE Opportunity SET CityArea= '" + CityRegion + "', QualityGrade='" + qualityGrade+ "', OpptLAT='" + lat + "' , OpptLNG='" + lng +"' where OPSIID = '" + OpsiID + "'";
 		String sqlUpdateKey = "UPDATE Opportunity SET QualityGrade='" + qualityGrade+ "', OpptLAT='" + lat + "' , OpptLNG='" + lng +"' where OPSIID = '" + OpsiID + "'";
-	    
-		log.info("---Update OPPT Query---" + sqlUpdateKey);
+
 		Connection conn = null;
 	    try{
 	    	conn = msqlu.getConnection();
@@ -261,7 +259,6 @@ public class DBUtils {
 	}
 	
 	public static MdmDataQualityView getDataQualityReport(){
-		log.info("get Data Quality Report Start");
 		mqv = new MdmDataQualityView();
 		msqlu = new MySqlUtil();
 		String sqlQuerynumberOfNonGeo = "SELECT count(*) as num FROM Opportunity WHERE (OpptLAT =  'LAT' AND OpptLNG =  'LNG') or (OpptLAT =  '' AND OpptLNG =  '') limit 2";
@@ -310,12 +307,10 @@ public class DBUtils {
 	    finally{
 	    	if (conn != null) try {conn.close();} catch (Exception ignore){} 
 	    }
-	    log.info("get Data Quality Report End");
 	    return mqv;
 	}
 	
 	public static MdmDataQualityView getDataQualityReport(String stateProvince, String city){
-		log.info("get Data Quality Report Start");
 		MdmDataQualityView mqv = new MdmDataQualityView();
 		msqlu = new MySqlUtil();
 		String additionalQuery = " 1=1 and ";
@@ -373,7 +368,6 @@ public class DBUtils {
 	    finally{
 	    	if (conn != null) try {conn.close();} catch (Exception ignore){} 
 	    }
-	    log.info("get Data Quality Report End");
 	    return mqv;
 	}
 	
@@ -463,7 +457,7 @@ public class DBUtils {
 	}
 	
 	public static String getJSMoreFiveOfCustomers(String fromUserName, String bizType, int lastLi){
-		log.info("---LSTID---" + lastLi);
+
 		GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
 		String lat = geol.getLAT();
 		String lng = geol.getLNG();
@@ -480,7 +474,6 @@ public class DBUtils {
 			Ret = Ret + "li.innerHTML = '<span style=\" float:left;\">" + NearByOpptsExt.get(i).getOpptName() + "</span><span style=\" float:right; \">" +NearByOpptsExt.get(i).getDistance() + "</span>'; ";
 			Ret = Ret + "el.appendChild(li, el.childNodes[0]); ";
 		}
-		log.info("--:" + Ret);
 		return Ret;
 	}
 	
@@ -595,7 +588,7 @@ public class DBUtils {
 
 		msqlu = new MySqlUtil();
 		String sqlQueryKey = "SELECT * FROM Opportunity WHERE OpptLAT !='LAT' AND OpptLAT !='' AND " + SubSQL + " LIMIT 10000";
-		log.info("SQL" + sqlQueryKey);
+
 	    Connection conn = null;
 	    try{
 	    	conn = msqlu.getConnection();
@@ -629,7 +622,7 @@ public class DBUtils {
 	    }
 	    finally{
 	    	if (conn != null) try {conn.close();} catch (Exception ignore){}
-	    	log.info("SQL Completed: " + bizType + " : " + Oppts.size());
+
 	    }
 	    return Oppts;
 	}

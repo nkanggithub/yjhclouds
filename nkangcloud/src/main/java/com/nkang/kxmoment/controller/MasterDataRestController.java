@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
+import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -98,6 +99,7 @@ public class MasterDataRestController {
 								@RequestParam(value="qualityGrade", required=false) String qualityGrade,
 								@RequestParam(value="returnPartnerFlag", required=false) String returnPartnerFlag)
 	{
+		String ret = "error";
 		try{
 			OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 			opsi.setAmid2(amid2);
@@ -177,14 +179,13 @@ public class MasterDataRestController {
 			opsi.setLng(lng);
 			opsi.setQualityGrade(qualityGrade);
 
-			MongoDBBasic mongoDBBasic = new MongoDBBasic();
-			mongoDBBasic.mongoDBInsert(opsi);
+			ret = MongoDBBasic.mongoDBInsert(opsi);
 		}
 		catch(Exception e){
-			return "failed";
+			ret = "failed";
 		}
 
-		return "success";
+		return ret;
 	}
 	
 	@RequestMapping("/getValidAccessKey")
@@ -241,11 +242,12 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/getDataQualityReportByParameter")
-	public static MdmDataQualityView callGetDataQualityReportByParameter(@RequestParam(value="stateProvince", required=false) String stateProvince,
-																		 @RequestParam(value="city", required=false) String city){
+	public static MdmDataQualityView callGetDataQualityReportByParameter(   @RequestParam(value="stateProvince", required=false) String stateProvince,
+																			@RequestParam(value="nonlatinCity", required=false) String nonlatinCity,
+																			@RequestParam(value="cityRegion", required=false) String cityRegion){
 		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
 		try{
-			mdmDataQualityView = DBUtils.getDataQualityReport(stateProvince, city);
+			mdmDataQualityView = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
 		}		
 		catch(Exception e){
 			mdmDataQualityView = null;
@@ -266,10 +268,10 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/getFilterSegmentAreaFromMongo")
-	public static  List<String> callGetFilterSegmentAreaFromMongo(){
+	public static  List<String> callGetFilterSegmentAreaFromMongo(@RequestParam(value="state", required=false) String state){
 		List<String> segmentArea = new ArrayList<String>();
 		try{
-			segmentArea = MongoDBBasic.getFilterSegmentArea();
+			segmentArea = MongoDBBasic.getFilterSegmentArea(state);
 		}		
 		catch(Exception e){
 			segmentArea.add("--2--" + e.getMessage().toString());
@@ -343,14 +345,45 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/getFilterTotalOPSIFromMongo")
-	public static  String CallgetFilterTotalOPSIFromMongo(){
+	public static  String CallgetFilterTotalOPSIFromMongo(
+																@RequestParam(value="state", required=false) String state,
+																@RequestParam(value="nonlatinCity", required=false) String nonlatinCity,
+																@RequestParam(value="cityRegion", required=false) String cityRegion){
 		String ret = "error";
 		try{
-			ret = MongoDBBasic.getFilterTotalOPSIFromMongo();
+			ret = MongoDBBasic.getFilterTotalOPSIFromMongo(state, nonlatinCity, cityRegion);
 		}		
 		catch(Exception e){
 			ret = e.getMessage().toString();
 		}
 		return ret;
 	}
+	
+	@RequestMapping("/getFilterOnIndustryByAggregateFromMongo")
+	public static  List<String> CallgetFilterOnIndustryByAggregateFromMongo(){
+		List<String> ret = new ArrayList<String>();
+		ret.add("--in rest service--");
+		try{
+			ret = MongoDBBasic.getFilterOnIndustryByAggregateFromMongo();
+		}		
+		catch(Exception e){
+			ret.add("----" + e.getMessage());
+		}
+		return ret;
+	}
+	
+	@RequestMapping("/setLocationtoMongoDB")
+	public static  String CallsetLocationtoMongoDB(@RequestParam(value="state", required=false) String state){
+		String ret;
+
+		try{
+			ret = MongoDBBasic.setLocationtoMongoDB(state);
+		}		
+		catch(Exception e){
+			ret = "error occurs...";
+		}
+		return ret;
+	}
+	
+	
 }

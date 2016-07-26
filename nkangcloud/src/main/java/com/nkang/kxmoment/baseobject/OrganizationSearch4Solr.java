@@ -20,7 +20,14 @@ public class OrganizationSearch4Solr {
 	private String businessAreaGroup;
 	private String sellIntoMarketCode;
 	private String charScriptCode;
+	private String siteinstanceId;
 	
+	public String getSiteinstanceId() {
+		return siteinstanceId;
+	}
+	public void setSiteinstanceId(String siteinstanceId) {
+		this.siteinstanceId = siteinstanceId;
+	}
 	public String getCharScriptCode() {
 		return charScriptCode;
 	}

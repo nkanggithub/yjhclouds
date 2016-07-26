@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.util;
 
+import static java.util.Arrays.asList;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,7 +13,9 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.bson.Document;
 
+import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -24,8 +27,10 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+import com.mongodb.client.AggregateIterable;
 import com.mysql.jdbc.Statement;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -127,6 +132,29 @@ public class MongoDBBasic {
 	    return validKey;
 	}
 	
+	public static WeChatUser queryWeChatUser(String OpenID){
+		mongoDB = getMongoDB();
+
+		WeChatUser ret = new WeChatUser();
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("OpenID", OpenID);
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	ret.setLat(queryresult.get("CurLAT").toString());
+	    	ret.setLng(queryresult.get("CurLNG").toString());
+	    	ret.setOpenid(OpenID);
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	ret = null;
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return ret;
+	}
+	
 	public static boolean createUser(WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
@@ -214,7 +242,9 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public String mongoDBInsert(OrgOtherPartySiteInstance opsi){
+	public static String mongoDBInsert(OrgOtherPartySiteInstance opsi){
+		String ret = "error";
+		mongoDB = getMongoDB();
 			try {
 				if(mongoDB == null){
 					mongoDB = getMongoDB();
@@ -298,43 +328,21 @@ public class MongoDBBasic {
 				dbo.put("lng", opsi.getLng());
 				dbo.put("qualityGrade", opsi.getQualityGrade());
 				mongoDB.getCollection(collectionMasterDataName).insert(dbo);
-			} catch (Exception e) {
-				return "error";
-			}
-		return "ok";
+				ret = "ok";
+			} catch(Exception e){
+				ret = "error";
+		    	if(mongoDB.getMongo() != null){
+		    		mongoDB.getMongo().close();
+		    	}
+		    }
+		    finally{
+		    	if(mongoDB.getMongo() != null){
+		    		mongoDB.getMongo().close();
+		    	}
+		    }
+		return ret;
 	}
 
-	public static String getTotalRecordCount() {
-		if(mongoDB == null){
-			mongoDB = getMongoDB();
-		}
-		String result = String.valueOf(mongoDB.getCollection(collectionMasterDataName).getCount());
-        return result;
-	}
-	
-	public boolean isDocumentExsit(String collectionName, DBObject query) {
-        boolean result = false;
-        DBCursor dbCursor = null;
-        DBCollection collection = mongoDB.getCollection(collectionName);
-        if (null != collection) {
-            dbCursor = collection.find(query);
-            if (null != dbCursor && dbCursor.hasNext()) {
-                result = true;
-            }
-        }
-        return result;
-	}
-	
-	public static int getSelectedDocumentWithQuery(DBObject query) {
-		if(mongoDB == null){
-			mongoDB = getMongoDB();
-		}
-        int cnt = 0;
-        if (null != mongoDB.getCollection(collectionMasterDataName)) {
-        	cnt = (int) mongoDB.getCollection(collectionMasterDataName).getCount(query);
-        }
-        return cnt;
-	}
 	
 	@SuppressWarnings("unchecked")
 	public static List<DBObject> getDistinctSubjectArea(String fieldname) {
@@ -358,34 +366,8 @@ public class MongoDBBasic {
 	    }
         return result;
 	}
-	
-	public DBObject selectDocument(String collectionName, DBObject query) {
-		DBObject result = null;
-		DBCursor dbCursor = null;
-		DBCollection collection = mongoDB.getCollection(collectionName);
-		if (null != collection) {
-			dbCursor = collection.find(query);
-			if (null != dbCursor && dbCursor.hasNext()) {
-				result = dbCursor.next();
-			}
-		}
-		return result;
-	}
-	
-	public boolean deleteDocument(String collectionName, DBObject query) {
-		boolean result = false;
-		WriteResult writeResult = null;
-		DBCollection collection = mongoDB.getCollection(collectionName);
-		if (null != collection) {
-			writeResult = collection.remove(query);
-			if (null != writeResult) {
-				if (writeResult.getN() > 0) {
-					result = true;
-				}
-			}
-		}
-		return result;
-	}
+
+
 
 	public static GeoLocation getDBUserGeoInfo(String OpenID){
 		mongoDB = getMongoDB();
@@ -438,16 +420,31 @@ public class MongoDBBasic {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<String> getFilterSegmentArea(){
+	public static List<String> getFilterSegmentArea(String state){
 		mongoDB = getMongoDB();
 		List<String> listOfSegmentArea = new ArrayList<String>();
 		@SuppressWarnings("rawtypes")
 		List results;
 	    try{
-	    	results =  mongoDB.getCollection(collectionMasterDataName).distinct("industrySegmentNames");
+	    	//results =  mongoDB.getCollection(collectionMasterDataName).distinct("industrySegmentNames");
+	    	BasicDBObject query = new BasicDBObject();
+/*			if(state != "" && state != null && state.toLowerCase() != "null" ){
+				Pattern pattern3 = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
+				query.put("state", pattern3);
+			}*/
+			query.put("state", state);
+	    	results =  mongoDB.getCollection(collectionMasterDataName).distinct("industrySegmentNames", query);
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
-	    			listOfSegmentArea.add((String) results.get(i));
+	    			String tmp =  (String) results.get(i);
+	    			tmp =  tmp.trim();
+	    			tmp =  tmp.substring(1,tmp.length()-1);
+	    			String [] d = tmp.split(",");
+	    			for(int j = 0; j < d.length; j ++){
+	    				if(!listOfSegmentArea.contains(d[j].trim())){
+	    					listOfSegmentArea.add(d[j].trim());
+	    				}
+		        	}
 	    		}
 	    	}
 	    }catch(Exception e){
@@ -470,13 +467,20 @@ public class MongoDBBasic {
 		@SuppressWarnings("rawtypes")
 		List results;
 	    try{
-	    	DBObject query1 = new BasicDBObject("state", "重庆市");  
+	    	DBObject dbquery = new BasicDBObject();  
+			if(state != "" && state != null && state != "null" ){
+				Pattern pattern = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE); 
+				dbquery.put("state", pattern);
+			}
+					
+/*	    	DBObject query1 = new BasicDBObject("state", "重庆市");  
 	    	DBObject query2 = new BasicDBObject("state", "重庆");     
 	    	BasicDBList or = new BasicDBList();
 	    	or.add(query1);
 	    	or.add(query2);
-	    	DBObject query = new BasicDBObject("$or", or);
-	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("cityRegion", query);
+	    	DBObject query = new BasicDBObject("$or", or);*/
+
+	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("cityRegion", dbquery);
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
 	    			listOfRegion.add((String) results.get(i));
@@ -502,17 +506,28 @@ public class MongoDBBasic {
 		@SuppressWarnings("rawtypes")
 		List results;
 	    try{
-	    	DBObject query1 = new BasicDBObject("state", "重庆市");  
+	    	DBObject dbquery = new BasicDBObject();  
+			if(state != "" && state != null && state != "null" ){
+				Pattern pattern = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE); 
+				dbquery.put("state", pattern);
+			}
+			
+/*	    	DBObject query1 = new BasicDBObject("state", state);  
 	    	DBObject query2 = new BasicDBObject("state", "重庆");     
 	    	BasicDBList or = new BasicDBList();
 	    	or.add(query1);
 	    	or.add(query2);
-	    	DBObject query = new BasicDBObject("$or", or);
+	    	DBObject query = new BasicDBObject("$or", or);*/
 
-	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", query);
+	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
-	    			listOfNonLatinCities.add((String) results.get(i));
+	    			String tmpStr = (String) results.get(i);
+		        	   if(tmpStr.contains(state)){
+		        		   tmpStr = tmpStr.replaceAll("\\s+","");
+		        		   tmpStr = tmpStr.replaceAll(state, "");
+		        	   }
+	    			listOfNonLatinCities.add(tmpStr);
 	    		}
 	    	}
 	    }catch(Exception e){
@@ -534,6 +549,7 @@ public class MongoDBBasic {
 		List<String> listOfstates = new ArrayList<String>();
 		@SuppressWarnings("rawtypes")
 		List results;
+
 	    try{
 	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("state");
 	    	for(int i = 0; i < results.size(); i ++){
@@ -556,35 +572,43 @@ public class MongoDBBasic {
 	}
 	
 	public static String getFilterCountOnCriteriaFromMongo(String industrySegmentNames, String nonlatinCity, String state, String cityRegion){
+		log.info(industrySegmentNames + "-------1");
 		mongoDB = getMongoDB();
-		String ret = "error";
+		log.info(industrySegmentNames + "-------2");
+		String ret = "0";
 		DBObject query  = new BasicDBObject();
 		if(industrySegmentNames != "" && industrySegmentNames != null && industrySegmentNames != "null" ){
 			Pattern pattern = Pattern.compile("^.*" + industrySegmentNames + ".*$", Pattern.CASE_INSENSITIVE); 
-			query.put("industrySegmentNames", pattern);
+			//query.put("industrySegmentNames", pattern);
+			query.put("industrySegmentNames", industrySegmentNames);
+			log.info(industrySegmentNames + "-------3");
 		}
-		if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity != "null" ){
+		if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity.toLowerCase() != "null" ){
 			Pattern pattern2 = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("nonlatinCity", pattern2);
+			log.info(industrySegmentNames + "-------4");
 		}
-		if(state != "" && state != null && state != "null" ){
+		if(state != "" && state != null && state.toLowerCase() != "null" ){
 			Pattern pattern3 = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("state", pattern3);
+			log.info(industrySegmentNames + "-------5");
 		}
-		if(cityRegion != "" && cityRegion != null && cityRegion != "null" ){
+		if(cityRegion != "" && cityRegion != null && cityRegion.toLowerCase() != "null" ){
 			Pattern pattern4 = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("cityRegion", pattern4);
+			log.info(industrySegmentNames + "-------6");
 		}
 	    try{
 	    	//Pattern pattern = Pattern.compile("^.*name8.*$", Pattern.CASE_INSENSITIVE);
 	    	ret = String.valueOf( mongoDB.getCollection(collectionMasterDataName).count(query));
+	    	log.info(industrySegmentNames + "-------7--" + ret);
 	    }catch(Exception e){
-	    	ret = "Exception: " + e.getMessage().toString();
+	    	log.info(industrySegmentNames + "-------8" + e.getMessage());
+	    	ret = "0";
 	    	if(mongoDB.getMongo() != null){
 	    		mongoDB.getMongo().close();
 	    	}
 	    }
-	    
 	    finally{
 	    	if(mongoDB.getMongo() != null){
 	    		mongoDB.getMongo().close();
@@ -594,11 +618,32 @@ public class MongoDBBasic {
 	}
 	
 	
-	public static String getFilterTotalOPSIFromMongo(){
+	@SuppressWarnings("unused")
+	public static String getFilterTotalOPSIFromMongo(String stateProvince, String nonlatinCity, String cityRegion){
 		mongoDB = getMongoDB();
 		String ret = "0";
 	    try{
-	    	ret = String.valueOf(mongoDB.getCollection(collectionMasterDataName).find().count()) ;
+	    	DBObject query = new BasicDBObject();
+	    	if(stateProvince != "" && stateProvince!= null && stateProvince.toLowerCase()!= "null"){
+	    		Pattern patternst = Pattern.compile("^.*" + stateProvince + ".*$", Pattern.CASE_INSENSITIVE);
+				query.put("state", patternst);
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toLowerCase()!= "null"){
+				Pattern patternstnc = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+				query.put("nonlatinCity", patternstnc);
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toLowerCase()!= "null"){
+				Pattern patterncr = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
+				query.put("cityRegion", patterncr);
+			}
+			
+			if(query != null){
+				ret = String.valueOf(mongoDB.getCollection(collectionMasterDataName).find(query).count()) ;
+			}
+			else{
+				ret = String.valueOf(mongoDB.getCollection(collectionMasterDataName).find().count()) ;
+			}
+	    	
 	    }catch(Exception e){
 	    	ret =  ret + "--1--" + e.getMessage().toString();
 	    	if(mongoDB.getMongo() != null){
@@ -613,6 +658,139 @@ public class MongoDBBasic {
 	    return ret;
 	}
 	
+	public static MdmDataQualityView getDataQualityReport(String stateProvince, String nonlatinCity, String cityRegion){
+		MdmDataQualityView mqv = new MdmDataQualityView();
+		mongoDB = getMongoDB();
+		try{
+			// competitor
+			int cnt_competitor = 0;
+			BasicDBObject query_competitor = new BasicDBObject();
+			query_competitor.put("isCompetitor", "true");
+			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+				query_competitor.put("state", stateProvince);
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+				query_competitor.put("nonlatinCity", nonlatinCity);
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+				query_competitor.put("cityRegion", cityRegion);
+			}
+			cnt_competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor).count();
+			// partner
+			int cnt_partner = 0;
+			BasicDBObject query_partner = new BasicDBObject();
+			query_partner.put("includePartnerOrgIndicator", "true");
+			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+				query_partner.put("state", stateProvince);
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+				query_partner.put("nonlatinCity", nonlatinCity);
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+				query_partner.put("cityRegion", cityRegion);
+			}
+			cnt_partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner).count();
+			// customer
+			int cnt_customer = 0;
+			BasicDBObject query_customer = new BasicDBObject();
+			query_customer.put("onlyPresaleCustomer", "true");
+			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+				query_customer.put("state", stateProvince);
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+				query_customer.put("nonlatinCity", nonlatinCity);
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+				query_customer.put("cityRegion", cityRegion);
+			}
+			cnt_customer = mongoDB.getCollection(collectionMasterDataName).find(query_customer).count();
+			
+			// potential leads
+			int cnt_lead = 0;
+			BasicDBObject query_leads = new BasicDBObject();
+			query_leads.put("onlyPresaleCustomer", "false");
+			query_partner.put("includePartnerOrgIndicator", "false");
+			query_competitor.put("isCompetitor", "false");
+			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+				query_leads.put("state", stateProvince);
+			}
+			if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+				query_leads.put("nonlatinCity", nonlatinCity);
+			}
+			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+				query_leads.put("cityRegion", cityRegion);
+			}
+			cnt_lead = mongoDB.getCollection(collectionMasterDataName).find(query_leads).count();
+			
+			mqv.setNumberOfCompetitor(cnt_competitor);
+			mqv.setNumberOfPartner(cnt_partner);
+			mqv.setNumberOfCustomer(cnt_customer);
+			mqv.setPercents("0.68");
+			mqv.setNumberOfLeads(cnt_lead);
+			mqv.setNumberOfOppt(cnt_lead);
+			mqv.setNumberOfEmptyCityArea(1000);
+			mqv.setNumberOfThreeGrade(2000);
+			mqv.setNumberOfNonGeo(2000);
+
+		}catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		
+		return mqv;
+	}
 	
+	public static List<String> getFilterOnIndustryByAggregateFromMongo(){
+		List<String> ret = new ArrayList<String>();
+		mongoDB = getMongoDB();
+		ret.add("--connected---");
+		try{
+			DBObject fields = new BasicDBObject("industrySegmentNames", 1);
+			fields.put("industrySegmentNames", 1);
+			fields.put("_id", 0);
+			DBObject project = new BasicDBObject("$project", fields);
+			ret.add("--projecting completed---");
+			DBObject groupFields = new BasicDBObject("_id", "$industrySegmentNames");
+			groupFields.put("count", new BasicDBObject("$sum", 1));
+			DBObject group = new BasicDBObject("$group", groupFields);
+			ret.add("--group completed---");
+			AggregationOutput aop = mongoDB.getCollection(collectionMasterDataName).aggregate(project, group);
+			ret.add("--aggregate completed---");
+			Iterable<DBObject> results = aop.results();
+			int i = 0;
+			while(results.iterator().hasNext()){
+				i = i + 1;
+			}
+			ret.add("---count---" + i);
+			ret.add("---desc---" + results.toString());
+		}catch(Exception e){
+			ret.add("--exception---" + e.getMessage());
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+
+		
+		return ret;
+	}
+	
+	public static String setLocationtoMongoDB(String state){
+		String ret = "error";
+		//mongoDB = getMongoDB();
+		
+		
+		return ret;
+	}
 	
 }

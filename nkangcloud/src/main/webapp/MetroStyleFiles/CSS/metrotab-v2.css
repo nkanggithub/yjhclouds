@@ -148,7 +148,8 @@ p {
 }
 .mt-content {
 	width:100%;
-
+	top:10px;
+	height:100%;
 }
 .mt-minibar {
 	width:100%;
@@ -500,7 +501,7 @@ p {
 
 .imagesize{
 	width:290px;
-	height:270px;
+	height:220px;
 }
 .PositionR{
 	position:relative;
@@ -539,3 +540,68 @@ p {
 	height: 40px;
 	width: 40px;
 }
+
+#chart2{
+	position:relative;
+	top:30px;
+	left:-5px;
+}
+#chart3{
+	position:relative;
+	top:30px;
+	left:-5px;
+}
+#chart3Radar{
+	position:relative;
+	top:30px;
+	left:1px;
+}
+
+#chart4{
+	position:relative;
+	top:30px;
+	left:1px;
+}
+
+#chart5{
+	position:relative;
+	top:25px;
+	left:1px;
+}
+
+#radardetailid{
+	display:none;
+}
+
+
+/*-- D3 Bar H Start --*/
+.chart .legend {
+		  fill: black;
+		  font: 14px sans-serif;
+		  text-anchor: start;
+		  font-size: 12px;
+		}
+		
+		.chart text {
+		  fill: white;
+		  font: 10px sans-serif;
+		  text-anchor: end;
+		}
+		
+		.chart .label {
+		  fill: black;
+		  font: 14px sans-serif;
+		  text-anchor: end;
+		}
+		
+		.bar:hover {
+		  fill: #00b287;
+		}
+
+		.axis path,
+		.axis line {
+		  fill: none;
+		  stroke: #000;
+		  shape-rendering: crispEdges;
+		}		
+/*-- D3 Bar H End --*/
