@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.mongodb.DBObject;
+import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -385,5 +386,30 @@ public class MasterDataRestController {
 		return ret;
 	}
 	
+	
+	@RequestMapping("/LoadClientIntoMongoDB")
+	public static String CallLoadClientIntoMongoDB(@RequestParam(value="ClientID", required=false) String ClientID,
+			@RequestParam(value="ClientIdentifier", required=false) String ClientIdentifier,
+			@RequestParam(value="ClientDesc", required=false) String ClientDesc){
+		String ret="Completed";
+		try{
+			ret = MongoDBBasic.CallLoadClientIntoMongoDB(ClientID,ClientIdentifier,ClientDesc);
+		}		
+		catch(Exception e){
+			ret = "error occurs...";
+		}
+		return ret;
+	}
+	@RequestMapping("/CallGetClientFromMongoDB")
+	public static List<ClientInformation> CallGetClientFromMongoDB(){
+		List<ClientInformation> ret = new ArrayList<ClientInformation>();
+		try{
+			ret = MongoDBBasic.CallGetClientFromMongoDB();
+		}		
+		catch(Exception e){
+			//ret.add(e.getMessage());
+		}
+		return ret;
+	}
 	
 }
