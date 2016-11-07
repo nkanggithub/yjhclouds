@@ -62,9 +62,9 @@ public class MessageUtil {
 		Element root = doc.getRootElement();
 		
 		List<Element> list = root.elements();
-		for (Element e : list) {
+/*		for (Element e : list) {
 			log.info(e.getName() + "-:- " + e.getText());
-		}
+		}*/
 		
 		return root;
 

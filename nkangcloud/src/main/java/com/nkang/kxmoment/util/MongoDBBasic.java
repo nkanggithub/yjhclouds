@@ -172,7 +172,6 @@ public class MongoDBBasic {
 	    	insert.put("CurLNG", "");
 	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
 			mongoDB.getCollection(wechat_user).insert(insert);
-			log.info("-----Wechat user created----" + wcu.getOpenid() + ":" + wcu.getNickname());
 			ret = true;
 	    }catch(Exception e){
 	    	e.printStackTrace();
@@ -225,12 +224,10 @@ public class MongoDBBasic {
     	    	arrayHistdbo.add(innerInsert);
     	    	update.put("VisitHistory", arrayHistdbo);
     			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);
-    			log.info("----end updating user----4 \n" + wr);
             }
             ret = true;
 	    }catch(Exception e){
 	    	e.printStackTrace();
-	    	log.info("-----error occurs---"+ e.getMessage());
 	    	if(mongoDB.getMongo() != null){
 	    		mongoDB.getMongo().close();
 	    	}
@@ -383,7 +380,6 @@ public class MongoDBBasic {
     		loc.setFAddr(result.get("FormatAddress").toString());
 	    }catch(Exception e){
 	    	e.printStackTrace();
-	    	log.info("error---getDBUserGeoInfo: " + e.getMessage());
 	    }
 	    finally{
 	    	if(mongoDB.getMongo() != null){
@@ -576,36 +572,29 @@ public class MongoDBBasic {
 	}
 	
 	public static String getFilterCountOnCriteriaFromMongo(String industrySegmentNames, String nonlatinCity, String state, String cityRegion){
-		log.info(industrySegmentNames + "-------1");
 		mongoDB = getMongoDB();
-		log.info(industrySegmentNames + "-------2");
 		String ret = "0";
 		DBObject query  = new BasicDBObject();
 		if(industrySegmentNames != "" && industrySegmentNames != null && industrySegmentNames != "null" ){
 			Pattern pattern = Pattern.compile("^.*" + industrySegmentNames + ".*$", Pattern.CASE_INSENSITIVE); 
 			//query.put("industrySegmentNames", pattern);
 			query.put("industrySegmentNames", industrySegmentNames);
-			log.info(industrySegmentNames + "-------3");
 		}
 		if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity.toLowerCase() != "null" ){
 			Pattern pattern2 = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("nonlatinCity", pattern2);
-			log.info(industrySegmentNames + "-------4");
 		}
 		if(state != "" && state != null && state.toLowerCase() != "null" ){
 			Pattern pattern3 = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("state", pattern3);
-			log.info(industrySegmentNames + "-------5");
 		}
 		if(cityRegion != "" && cityRegion != null && cityRegion.toLowerCase() != "null" ){
 			Pattern pattern4 = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
 			query.put("cityRegion", pattern4);
-			log.info(industrySegmentNames + "-------6");
 		}
 	    try{
 	    	//Pattern pattern = Pattern.compile("^.*name8.*$", Pattern.CASE_INSENSITIVE);
 	    	ret = String.valueOf( mongoDB.getCollection(collectionMasterDataName).count(query));
-	    	log.info(industrySegmentNames + "-------7--" + ret);
 	    }catch(Exception e){
 	    	log.info(industrySegmentNames + "-------8" + e.getMessage());
 	    	ret = "0";
@@ -852,4 +841,37 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static OrgOtherPartySiteInstance getOPSIWithOutLatLngFromMongoDB() {
+		mongoDB = getMongoDB();
+		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+	    try{
+	    	DBObject dbquery = new BasicDBObject();  
+			dbquery.put("lat", null);
+			dbquery.put("lng", null);
+			DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
+			opsi.setSiteName(queryresult.get("siteName").toString());
+			opsi.setCityRegion(queryresult.get("cityRegion").toString());
+			opsi.setSiteInstanceId(queryresult.get("siteInstanceId").toString());
+			
+			log.info("OPSI ID --------- " + opsi.getSiteInstanceId());
+			log.info("cityRegion --------- " + opsi.getCityRegion());
+			log.info("SiteName --------- " + opsi.getSiteName());
+			log.info("Query Result --------- " + queryresult.toString());
+			
+	    }catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+	    return opsi;
+
+	}
+
 }

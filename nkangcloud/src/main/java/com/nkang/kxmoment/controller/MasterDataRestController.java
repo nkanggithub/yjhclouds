@@ -412,4 +412,15 @@ public class MasterDataRestController {
 		return ret;
 	}
 	
+	@RequestMapping("/CallGetOPSIWithOutLatLngFromMongoDB")
+	public static OrgOtherPartySiteInstance CallgetOPSIWithOutLatLngFromMongoDB(){
+		OrgOtherPartySiteInstance ret = new OrgOtherPartySiteInstance();
+		try{
+			ret = MongoDBBasic.getOPSIWithOutLatLngFromMongoDB();
+		}		
+		catch(Exception e){
+			//ret.add(e.getMessage());
+		}
+		return ret;
+	}
 }

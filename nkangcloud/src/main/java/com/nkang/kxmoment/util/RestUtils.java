@@ -55,7 +55,6 @@ public class RestUtils {
 		           JSONObject demoJson = new JSONObject(message);
 		           accessToken = demoJson.getString("access_token");
 		           expires_in = demoJson.getString("expires_in");
-		           log.info("Get New Access Key :" + accessToken);
 		           DBUtils.updateAccessKey(accessToken, expires_in);
 		           MongoDBBasic.updateAccessKey(accessToken, expires_in);
 		           is.close();
@@ -137,10 +136,8 @@ public class RestUtils {
 		else{
 			Region = "China";
 		}
-		log.info("Get Started 2: " + OpsiId + " City " + Region + " Query " + Query);
 		
 		String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
-		log.info(url);
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -160,7 +157,6 @@ public class RestUtils {
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
 	           String message = new String(jsonBytes, "UTF-8");
-	           log.info(message);
 	           JSONObject demoJson = new JSONObject(message);
 	           if(demoJson.has("results")){
 		           JSONArray ResultJA = demoJson.getJSONArray("results");
@@ -192,7 +188,6 @@ public class RestUtils {
 	           }
 
 	           is.close();
-	           //log.info("--Organization ID :" + OpptID + " Updated");
 	       } catch (Exception e) {
 	    	   System.out.println(new java.sql.Timestamp(new java.util.Date().getTime()) + "Exception Occurs in getLocationDetailsforOppt with OPSI: "+ OpsiId +"---" + e.toString());
 	    	   e.printStackTrace();
@@ -200,11 +195,7 @@ public class RestUtils {
 		return StatusMessage;
 	}
 	
-    public static void getEnv() {  
-        System.getProperties().list(System.out);//??????????????????????  
-        String encoding = System.getProperty("file.encoding");  
-        log.info("Encoding:" + encoding);  
-    }
+
     
     public static String getUserCurLocWithLatLng(String lat, String lng){
     	String ret = "";
@@ -228,7 +219,6 @@ public class RestUtils {
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
 	           String message = new String(jsonBytes, "UTF-8");
-	           log.info(message);
 	           JSONObject demoJson = new JSONObject(message);
 	           if(demoJson.has("result")){
 	        	   JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
@@ -263,7 +253,6 @@ public class RestUtils {
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
 	           String message = new String(jsonBytes, "UTF-8");
-	           log.info(message);
 	           JSONObject demoJson = new JSONObject(message);
 	           if(demoJson.has("result")){
 	        	   JSONObject JsonResult = demoJson.getJSONObject("result");
@@ -346,7 +335,6 @@ public class RestUtils {
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
 	           String message = new String(jsonBytes, "UTF-8");
-	           log.info(message);
 	           JSONObject demoJson = new JSONObject(message);
 	           if(demoJson.has("result")){
 	        	   JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
@@ -921,7 +909,6 @@ public class RestUtils {
 	           byte[] jsonBytes = new byte[size];
 	           is.read(jsonBytes);
 	           String message = new String(jsonBytes, "UTF-8");
-	           log.info(message);
 	           JSONObject demoJson = new JSONObject(message);
 	           if(demoJson.has("results")){
 		           JSONArray ResultJA = demoJson.getJSONArray("results");
@@ -1421,6 +1408,12 @@ public class RestUtils {
 		}
 		return ret;
 	}
+	
+/*	public static OrgOtherPartySiteInstance CallGetOPSIWithOutLatLng(){
+		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+		opsi = MongoDBBasic.CallgetOPSIWithOutLatLngFromMongoDB();
+		return opsi;
+	}*/
 
 }
 
