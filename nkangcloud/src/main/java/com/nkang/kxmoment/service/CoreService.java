@@ -141,9 +141,8 @@ public class CoreService
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
 				String eventType = requestObject.element("Event").getText();
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
-					DBUtils.createUser(wcu);
+					//DBUtils.createUser(wcu);
 					MongoDBBasic.createUser(wcu);
 					
 					articleList.clear();
@@ -370,7 +369,7 @@ public class CoreService
 					respContent = "upload location detail.";
 					textMessage.setContent(respContent);
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
-					DBUtils.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText());
+					//DBUtils.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText());
 					MongoDBBasic.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText(),wcu);
 					//respXml = MessageUtil.textMessageToXml(textMessage);
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_VIEW)) {
