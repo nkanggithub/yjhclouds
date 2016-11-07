@@ -1,14 +1,9 @@
 package com.nkang.kxmoment.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Timer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
-import com.nkang.kxmoment.baseobject.MdmDataQualityView;
-import com.nkang.kxmoment.baseobject.Opportunity;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
@@ -30,9 +22,7 @@ import com.nkang.kxmoment.util.CronJob;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
-import com.nkang.kxmoment.util.MySqlUtil;
 import com.nkang.kxmoment.util.RestUtils;
-import com.nkang.kxmoment.util.StopWatch;
 
 public class CoreService
 {
@@ -175,7 +165,7 @@ public class CoreService
 					respXml = MessageUtil.newsMessageToXml(newsMessage);
 					
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
-					
+					// Inactive the User - To-Be-Done
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
 					String eventKey = requestObject.element("EventKey").getText();
 					if(eventKey.equals("MDLAKE")){
