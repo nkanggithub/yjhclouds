@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -40,7 +41,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           } 
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -76,7 +77,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -148,7 +149,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -216,7 +217,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -251,7 +252,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -334,7 +335,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -373,7 +374,7 @@ public class RestUtils {
              http.setDoOutput(true);        
              http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
              System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -409,7 +410,7 @@ public class RestUtils {
             http.setDoOutput(true);        
             http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
             System.setProperty("sun.net.client.defaultConnectTimeout", "30000");//????30?
@@ -698,7 +699,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -730,7 +731,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -762,7 +763,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -822,7 +823,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           }
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -874,7 +875,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }  
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -909,7 +910,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           } 
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -961,7 +962,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }  
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1009,7 +1010,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1057,7 +1058,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           }  
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1112,7 +1113,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }  
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1142,7 +1143,7 @@ public class RestUtils {
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
 	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 		           System.setProperty("http.proxyPort", "8080");  
 	           }  
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1188,7 +1189,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           }  
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1234,7 +1235,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           }  
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1280,7 +1281,7 @@ public class RestUtils {
 		           http.setDoOutput(true);
 		           http.setDoInput(true);
 		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", "web-proxy.atl.hp.com");  
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
 			           System.setProperty("http.proxyPort", "8080");  
 		           }  
 		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
@@ -1301,7 +1302,10 @@ public class RestUtils {
 		   					i = i.replaceAll(state, "");
 		        	   }
 		        	   if(cnt == 1){
-		        		   ret.add(i.substring(2, i.length()));
+		        		   String a  = i.substring(2, i.length());
+		        		   if(!a.isEmpty()){
+		        			   ret.add(a);
+		        		   }
 		        	   }
 		        	   else if(cnt == sp.length){
 		        		   ret.add(i.substring(0, i.length()-1));
@@ -1330,6 +1334,94 @@ public class RestUtils {
 
 		return ret;
 	}
+
+	public static String CallLoadClientIntoMongoDB(String ClientID,
+			String ClientIdentifier, String ClientDesc) {
+		String ret = "";
+		String message= "";
+		String parStr = "ClientID=" + URLEncoder.encode(ClientID);
+		parStr = parStr + "&ClientIdentifier="
+				+ URLEncoder.encode(ClientIdentifier);
+		parStr = parStr + "&ClientDesc=" + URLEncoder.encode(ClientDesc);
+		String url = "http://shenan.duapp.com/LoadClientIntoMongoDB?" + parStr;
+		try {
+			URL urlGet = new URL(url);
+			HttpURLConnection http = (HttpURLConnection) urlGet
+					.openConnection();
+			http.setRequestMethod("GET"); // must be get request
+			http.setRequestProperty("Content-Type",
+					"application/x-www-form-urlencoded");
+			http.setDoOutput(true);
+			http.setDoInput(true);
+			if (localInd == "Y") {
+				System.setProperty("http.proxyHost", Constants.proxyInfo);
+				System.setProperty("http.proxyPort", "8080");
+			}
+			System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+			System.setProperty("sun.net.client.defaultReadTimeout", "30000");
+			http.connect();
+			InputStream is = http.getInputStream();
+			int size = is.available();
+			byte[] jsonBytes = new byte[size];
+			is.read(jsonBytes);
+			message = new String(jsonBytes, "UTF-8");
+			// String a = message.substring(1, message.length()-1);
+
+			is.close();
+			// ret.add(e;)
+
+		} catch (Exception e) {
+			log.info("error http CallLoadClientIntoMongoDB ---------"
+					+ e.getMessage());
+			message = "failed with " + e.getMessage();
+		}
+
+		return ret;
+	}
+	
+	public static List<ClientInformation> CallGetClientFromMongoDB() {
+		List<ClientInformation> ret = new ArrayList<ClientInformation>();
+		String message= "";
+		String url = "http://shenan.duapp.com/CallGetClientFromMongoDB";
+		if(localInd == "Y"){
+			try {
+				URL urlGet = new URL(url);
+				HttpURLConnection http = (HttpURLConnection) urlGet
+						.openConnection();
+				http.setRequestMethod("GET"); // must be get request
+				http.setRequestProperty("Content-Type",
+						"application/x-www-form-urlencoded");
+				http.setDoOutput(true);
+				http.setDoInput(true);
+				if (localInd == "Y") {
+					System.setProperty("http.proxyHost", Constants.proxyInfo);
+					System.setProperty("http.proxyPort", "8080");
+				}
+				System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+				System.setProperty("sun.net.client.defaultReadTimeout", "30000");
+				http.connect();
+				InputStream is = http.getInputStream();
+				int size = is.available();
+				byte[] jsonBytes = new byte[size];
+				is.read(jsonBytes);
+				message = new String(jsonBytes, "UTF-8");
+				// String a = message.substring(1, message.length()-1);
+
+				is.close();
+				// ret.add(e;)
+
+			} catch (Exception e) {
+				log.info("error http CallLoadClientIntoMongoDB ---------"
+						+ e.getMessage());
+				message = "failed with " + e.getMessage();
+			}
+		}
+		else{
+			ret = MongoDBBasic.CallGetClientFromMongoDB();
+		}
+		return ret;
+	}
+
 }
 
 

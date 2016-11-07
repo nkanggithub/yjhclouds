@@ -14,4 +14,6 @@ public final class Constants {
 	public static final String convertString = "<%=value%>";
 	//https://maps.googleapis.com/maps/api/geocode/json?address=aaaa6&key=AIzaSyB3bZ1N7XRiQu2M4ZB3QQMxd3VVLnzrRK4
 	//https://maps.googleapis.com/maps/api/place/textsearch/json?query=%E9%87%8D%E5%BA%86%E6%83%A0%E6%99%AE&key=AIzaSyB3bZ1N7XRiQu2M4ZB3QQMxd3VVLnzrRK4
+	public static final String proxyInfo = "web-proxy.austin.hpecorp.net";
+	//web-proxy.austin.hpecorp.net:8080
 }
