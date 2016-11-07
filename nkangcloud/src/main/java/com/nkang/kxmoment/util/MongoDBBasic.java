@@ -29,6 +29,7 @@ import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.mongodb.client.AggregateIterable;
 import com.mysql.jdbc.Statement;
+import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
@@ -41,6 +42,7 @@ public class MongoDBBasic {
 	private static String collectionMasterDataName = "masterdata";
 	private static String access_key = "Access_Key";
 	private static String wechat_user = "Wechat_User";
+	private static String client_pool = "ClientPool";
 	private static String wechat_comments = "Wechat_Comments";
 
 	private static DB getMongoDB(){
@@ -523,11 +525,13 @@ public class MongoDBBasic {
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
 	    			String tmpStr = (String) results.get(i);
-		        	   if(tmpStr.contains(state)){
-		        		   tmpStr = tmpStr.replaceAll("\\s+","");
-		        		   tmpStr = tmpStr.replaceAll(state, "");
-		        	   }
-	    			listOfNonLatinCities.add(tmpStr);
+	        	    if(tmpStr.contains(state)){
+	        		   tmpStr = tmpStr.replaceAll("\\s+","");
+	        		   tmpStr = tmpStr.replaceAll(state, "");
+	        	    }
+	        	    if(tmpStr != null && !tmpStr.isEmpty() && tmpStr!="."){
+	        	    	listOfNonLatinCities.add(tmpStr);
+	        	    }
 	    		}
 	    	}
 	    }catch(Exception e){
@@ -793,4 +797,59 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static String CallLoadClientIntoMongoDB(String ClientID, String ClientIdentifier,String ClientDesc){
+		String ret = "error while loading client data";
+		mongoDB = getMongoDB();
+	    try{
+	    	DBObject insert = new BasicDBObject();
+	    	insert.put("ClientID", ClientID);
+	    	insert.put("ClientIdentifier",ClientIdentifier);
+	    	insert.put("ClientDesc", ClientDesc);
+			mongoDB.getCollection(client_pool).insert(insert);
+			ret = "Loading Completed";
+	    }catch(Exception e){
+	    	ret = "Loading in error";
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		return ret;
+	}
+	
+	public static List<ClientInformation> CallGetClientFromMongoDB(){
+		List<ClientInformation> ret = new ArrayList<ClientInformation>();
+		ClientInformation ci;
+		mongoDB = getMongoDB();
+	    try{
+	    	DBCursor queryresults = mongoDB.getCollection(client_pool).find();
+            if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		ci = new ClientInformation();
+            		DBObject o = queryresults.next();
+            		ci.setClientDescription(o.get("ClientDesc").toString());
+            		ci.setClientID(o.get("ClientID").toString());
+            		ci.setClientIdentifier(o.get("ClientIdentifier").toString());
+            		if(ci != null){
+            			ret.add(ci);
+            		}
+            	}
+            }
+
+	    }catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		return ret;
+	}
 }
