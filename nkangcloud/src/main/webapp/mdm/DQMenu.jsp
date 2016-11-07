@@ -1,7 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
 <%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %>
-<%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>  
+<%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>
+<%@ page import="com.nkang.kxmoment.baseobject.ClientInformation" %>    
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
@@ -171,6 +172,10 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					swal("<%= lst.size() %> Industries Presented within <%= userState%>");}, 200); 
 				$("#radardetailid").show();
 			});
+	}
+	
+	function showDetailsForClient(paraStr){
+		swal("MDCP Client Identifier", paraStr, "success");
 	}
 
 	function userlocationsave(obj){
@@ -345,7 +350,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
         </div>
         
 <!-- START CONTENT -->
-        <div class="mt-contentblock mt-contentblockstyle floatleft" style="padding: 5px; height: 100%; width:100%; display: block;">
+        <div class="mt-contentblock  floatleft" style="padding: 5px; height: 100%; width:100%; display: block;">
 	        <div class="mt-content jspScrollable" style="height: 100%; top: 0px; overflow: hidden; padding: 0px; width: 100%;" tabindex="0">
 				<div class="jspContainer" style="width: 100%; height: 100%;">
 					<div class="jspPane" style="padding: 0px; top: 0px; width: 100%;">
@@ -415,7 +420,14 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	    	String b = "['竞争'";
 	    	String c = "['伙伴'";
 	    	String d = "";
-	    	for(int i = 0; i < 10 ; i ++){
+	    	int countOfCity = 0;
+	    	if(listOfCities.size() <= 10){
+	    		countOfCity = listOfCities.size();
+	    	}
+	    	else{
+	    		countOfCity = 10;
+	    	}
+	    	for(int i = 0; i < countOfCity ; i ++){
 	    		 MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
 	    		 a = a + "," + mqvByStateCity.getNumberOfCustomer();
 	    		 b = b + "," + mqvByStateCity.getNumberOfCompetitor();
@@ -734,34 +746,18 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div data-mtid="openmes">
 	<br />
 	<ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Unison Partner Portal</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Salesforce.com</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Siebel PRM</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Ecplise</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Big Machine Integration</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>SBS</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Midaxo</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>PCS</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Workbench</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Columbus</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Autonomy</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Csifdirect</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Cust-loyalty-center</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Ecomcat</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Egomui</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Globalswlicensing</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>ISAC</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>NGC</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Onlinepricebk</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>PPMWFM</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Pricinganalytics</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>QuickSilver</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>REM</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Salesids</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>SEMS</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Smartquote</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Watson</a></li>
-		<li class="active"><a href="#"><span class="badge pull-right">2</span>Target Builder</a></li>
+		<%
+		List<ClientInformation> clientList = new ArrayList<ClientInformation>();
+		clientList = RestUtils.CallGetClientFromMongoDB();
+		String htmlcustli = "<div class=\"well well-sm\">"+clientList.size()+" Active Clients in service</div>";
+		if(clientList.size()!= 0){
+			for(ClientInformation ci : clientList){
+				htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + ci.getClientIdentifier() + "');\"><span class=\"badge pull-right\">" + ci.getClientID() + "</span>"+ ci.getClientDescription() +"</a></li>";
+			}
+		}
+		%>
+		
+		<%= htmlcustli%>
 	</ul>
 
 </div>
@@ -845,13 +841,15 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 						</div>
 					</div>
 					<!-- End Social Connection -->
-
+					<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
 					<!-- Start Info -->
 					<div  data-show="fadeInDown">
-
+						<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">a
+						<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
 					</div>
 
 				</div>
+				<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
 			</div>
 		</div>
 		<!-- End Content Holder -->
