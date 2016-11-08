@@ -200,7 +200,6 @@ public class CoreService
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
 						CurType = "customer";
-						log.info("I am here custmer");
 						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -230,11 +229,9 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-						log.info("customer Send");
 						
 					} else if (eventKey.equals("nbcompe")) {// Competitor
 						CurType = "competitor";
-						log.info("I am here competitor");
 						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -266,10 +263,8 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-						log.info("competitor Send");
 					} else if (eventKey.equals("nbpartner")) {// Partner
 						CurType = "partner";
-						log.info("I am here partner");
 						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -302,11 +297,9 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-						log.info("partner Send");
 					}
 					else if (eventKey.equals("nboppt")) {// Partner
 						CurType = "";
-						log.info("I am here Opportunity");
 						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -359,9 +352,7 @@ public class CoreService
 					respContent = "upload location detail.";
 					textMessage.setContent(respContent);
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
-					//DBUtils.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText());
 					MongoDBBasic.updateUser(fromUserName, requestObject.element("Latitude").getText(), requestObject.element("Longitude").getText(),wcu);
-					//respXml = MessageUtil.textMessageToXml(textMessage);
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_VIEW)) {
 					respContent = "page redirect.";
 					textMessage.setContent(respContent);
