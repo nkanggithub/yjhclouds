@@ -191,6 +191,28 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static boolean removeUser(String OpenID){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+			DBObject removeQuery = new BasicDBObject();
+			removeQuery.put("OpenID", OpenID);
+			mongoDB.getCollection(wechat_user).remove(removeQuery);
+			ret = true;
+	    }catch(Exception e){
+	    	e.printStackTrace();
+	    	ret = false;
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return ret;
+	}
+	
+	
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
