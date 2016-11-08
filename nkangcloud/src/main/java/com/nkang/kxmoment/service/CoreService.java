@@ -19,7 +19,6 @@ import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
 import com.nkang.kxmoment.util.CronJob;
-import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -34,7 +33,7 @@ public class CoreService
 	{
 		String respXml = null;
 		String respContent = "unknown request type.";
-		String AccessKey = DBUtils.getValidAccessKey();
+		String AccessKey = MongoDBBasic.getValidAccessKey();
 		try {
 			Element requestObject 	= 	MessageUtil.parseXml(request);
 			String fromUserName 	= 	requestObject.element("FromUserName").getText();
@@ -85,19 +84,6 @@ public class CoreService
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
-				else if ("CLR".equals(textContent)) {
-					respContent = "MDM DataBase Cleaning:\n";
-					respContent = respContent + DBUtils.CleanDatabase();
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}
-				else if ("LDSA".equals(textContent)) {
-					respContent = "MDM Segament Load :\n";
-					respContent = respContent + DBUtils.LoadSegmentArea() + " of " + DBUtils.getAllSegmentArea().size();
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}
-
 				else {
 					respContent = "OK：" + textContent + "\n";
 					textMessage.setContent(respContent);
@@ -133,8 +119,10 @@ public class CoreService
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
 					//DBUtils.createUser(wcu);
-					Boolean ret = MongoDBBasic.createUser(wcu);
-
+					Boolean ret =  false;
+					if(wcu.getOpenid() != "" || wcu.getOpenid() != null){
+						ret = MongoDBBasic.createUser(wcu);
+					}
 					articleList.clear();
 					Article article = new Article();
 					article.setTitle("Master Data Quality Governace");
@@ -206,14 +194,14 @@ public class CoreService
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
 						CurType = "customer";
-						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
+						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
 						String addr = geol.getFAddr();
 						List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
 						List<String> cityInfo = new ArrayList<String>();
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
-						NearByOpptsExt = DBUtils.getNearByOppt(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
+						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " Customers NearBy HPE ");
 						article.setDescription(NearByOpptsExt.size() + " Customers " +  "Found Near By You \n" + addr);
@@ -238,7 +226,7 @@ public class CoreService
 						
 					} else if (eventKey.equals("nbcompe")) {// Competitor
 						CurType = "competitor";
-						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
+						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
 						String addr = geol.getFAddr();
@@ -246,7 +234,7 @@ public class CoreService
 						List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
 						List<String> cityInfo = new ArrayList<String>();
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
-						NearByOpptsExt = DBUtils.getNearByOppt(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
+						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " Competitors NearBy HPE");
@@ -271,7 +259,7 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					} else if (eventKey.equals("nbpartner")) {// Partner
 						CurType = "partner";
-						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
+						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
 						String addr = geol.getFAddr();
@@ -279,7 +267,7 @@ public class CoreService
 						List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
 						List<String> cityInfo = new ArrayList<String>();
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
-						NearByOpptsExt = DBUtils.getNearByOppt(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
+						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " Partners NearBy HPE");
@@ -306,7 +294,7 @@ public class CoreService
 					}
 					else if (eventKey.equals("nboppt")) {// Partner
 						CurType = "";
-						GeoLocation geol = DBUtils.getDBUserGeoInfo(fromUserName);
+						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
 						String addr = geol.getFAddr();
@@ -314,7 +302,7 @@ public class CoreService
 						List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
 						List<String> cityInfo = new ArrayList<String>();
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
-						NearByOpptsExt = DBUtils.getNearByOppt(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), "", lat, lng);
+						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), "", lat, lng);
 
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " Opportunity NearBy HPE ");

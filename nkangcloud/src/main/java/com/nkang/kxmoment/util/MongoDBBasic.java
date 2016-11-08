@@ -149,12 +149,15 @@ public class MongoDBBasic {
 	    	ret.setOpenid(OpenID);
 	    }catch(Exception e){
 	    	e.printStackTrace();
-	    	ret = null;
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
 	    }
 	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+	    	mongoDB.getMongo().close();
+			if(mongoDB.getMongo() != null){
+				mongoDB.getMongo().close();
+			}
 	    }
 		return ret;
 	}
@@ -899,29 +902,7 @@ public class MongoDBBasic {
 
 	}
 	
-	public static GeoLocation getDBUserGeoInfoFromMongoDB(String OpenID){
-		GeoLocation loc = null;
-		mongoDB = getMongoDB();
-	    try{
-	    	DBObject dbquery = new BasicDBObject();  
-	    	dbquery.put("OpenID", OpenID);
-	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(dbquery);
-			loc.setLAT(queryresult.get("CurLAT").toString());
-			loc.setLNG(queryresult.get("CurLNG").toString());
-			loc.setFAddr(queryresult.get("FormatAddress").toString());
-	    }catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
-		return loc;
-	}
-	
+
 	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
 		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
 		ExtendedOpportunity opptExt = null;

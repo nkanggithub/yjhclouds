@@ -125,7 +125,7 @@ public class DBUtils {
 		return loc;
 	}
 	
-	public static String QueryAccessKey(){
+	/*public static String QueryAccessKey(){
 		String validKey = null;
 		msqlu = new MySqlUtil();
 
@@ -145,7 +145,7 @@ public class DBUtils {
 	    	
 	    	int diff = (int) ((cursqlTS.getTime() - sqlTS.getTime())/1000);
 	    	if((7200 - diff) > 0){
-	    		log.info(diff + " is less than 7200. so use original valid Key as : "+ validKey);
+	    		//log.info(diff + " is less than 7200. so use original valid Key as : "+ validKey);
 	    	}
 	    	else{
 	    		log.info(diff + " is close to 7200. and is to re-generate the key");
@@ -162,16 +162,16 @@ public class DBUtils {
 	    }
 	    
 	    return validKey;
-	}
+	}*/
 
-	public static String getValidAccessKey(){
+/*	public static String getValidAccessKey(){
 		String AccessKey = DBUtils.QueryAccessKey();
 		if(AccessKey == null){
 			AccessKey = RestUtils.getAccessKey();
 		}	
 		return AccessKey;
 	}
-	
+	*/
 	public static List<Opportunity> QueryOppt(){
 		List<Opportunity> Oppts =  new ArrayList<Opportunity>();
 		msqlu = new MySqlUtil();
