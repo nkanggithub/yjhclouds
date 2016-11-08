@@ -2,6 +2,8 @@ package com.nkang.kxmoment.util;
 
 import static java.util.Arrays.asList;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -903,14 +905,20 @@ public class MongoDBBasic {
 	}
 	
 
-	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
+	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng) throws UnsupportedEncodingException{
 		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
 		ExtendedOpportunity opptExt = null;
 	    try{
-	    	DBObject dbquery = new BasicDBObject();  
-	    	dbquery.put("state", StateProvince);
-	    	dbquery.put("nonlatinCity", OpptCityName);
-	    	dbquery.put("cityRegion", CityArea);
+	    	DBObject dbquery = new BasicDBObject(); 
+	    	if(!StringUtils.isEmpty(StateProvince)){
+	    		dbquery.put("state", StateProvince);
+	    	}
+	    	if(!StringUtils.isEmpty(OpptCityName)){
+	    		dbquery.put("nonlatinCity", OpptCityName);
+	    	}
+	    	if(!StringUtils.isEmpty(CityArea)){
+	    		dbquery.put("cityRegion", CityArea);
+	    	}
 	    	if(bizType == "customer"){
 	    		dbquery.put("onlyPresaleCustomer", "true");
 	    	}
@@ -920,8 +928,9 @@ public class MongoDBBasic {
 	    	if(bizType == "competitor"){
 	    		dbquery.put("isCompetitor", "true");
 	    	}
-	    	dbquery.put("lat", lat);
-	    	dbquery.put("lng", lng);
+
+	    	dbquery.put("lat", new BasicDBObject("$ne", null));
+	    	dbquery.put("lng", new BasicDBObject("$ne", null));
 	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery);
             if (null != queryresults) {
             	while(queryresults.hasNext()){

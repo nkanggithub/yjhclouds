@@ -201,6 +201,7 @@ public class CoreService
 						List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
 						List<String> cityInfo = new ArrayList<String>();
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
+						log.info("--Size--- + "+ cityInfo.size() + cityInfo.toString());
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " Customers NearBy HPE ");
