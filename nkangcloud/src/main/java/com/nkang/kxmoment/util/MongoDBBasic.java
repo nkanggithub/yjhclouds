@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ import com.mongodb.WriteResult;
 import com.mongodb.client.AggregateIterable;
 import com.mysql.jdbc.Statement;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
@@ -111,7 +113,7 @@ public class MongoDBBasic {
 			sqlTS = DateUtil.str2Timestamp(timehere);
 	    	int diff = (int) ((cursqlTS.getTime() - sqlTS.getTime())/1000);
 	    	if((7200 - diff) > 0){
-	    		log.info(diff + " is less than 7200. so use original valid Key as : "+ validKey);
+	    		//log.info(diff + " is less than 7200. so use original valid Key as : "+ validKey);
 	    	}
 	    	else{
 	    		log.info(diff + " is close to 7200. and is to re-generate the key");
@@ -162,22 +164,16 @@ public class MongoDBBasic {
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		Boolean ret = false;
 	    try{
-	    	if(queryWeChatUser(wcu.getOpenid()) != null){
-	    		
-	    	}
-	    	else{
-		    	DBObject insert = new BasicDBObject();
-		    	insert.put("OpenID", wcu.getOpenid());
-		    	insert.put("HeadUrl", wcu.getHeadimgurl());
-		    	insert.put("NickName", wcu.getNickname());
-		    	insert.put("Created", DateUtil.timestamp2Str(cursqlTS));
-		    	insert.put("FormatAddress", "");
-		    	insert.put("CurLAT", "");
-		    	insert.put("CurLNG", "");
-		    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
-				mongoDB.getCollection(wechat_user).insert(insert);
-	    	}
-
+	    	DBObject insert = new BasicDBObject();
+	    	insert.put("OpenID", wcu.getOpenid());
+	    	insert.put("HeadUrl", wcu.getHeadimgurl());
+	    	insert.put("NickName", wcu.getNickname());
+	    	insert.put("Created", DateUtil.timestamp2Str(cursqlTS));
+	    	insert.put("FormatAddress", "");
+	    	insert.put("CurLAT", "");
+	    	insert.put("CurLNG", "");
+	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+			mongoDB.getCollection(wechat_user).insert(insert);
 			ret = true;
 	    }catch(Exception e){
 	    	e.printStackTrace();
@@ -901,6 +897,86 @@ public class MongoDBBasic {
 	    }
 	    return opsi;
 
+	}
+	
+	public static GeoLocation getDBUserGeoInfoFromMongoDB(String OpenID){
+		GeoLocation loc = null;
+		mongoDB = getMongoDB();
+	    try{
+	    	DBObject dbquery = new BasicDBObject();  
+	    	dbquery.put("OpenID", OpenID);
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(dbquery);
+			loc.setLAT(queryresult.get("CurLAT").toString());
+			loc.setLNG(queryresult.get("CurLNG").toString());
+			loc.setFAddr(queryresult.get("FormatAddress").toString());
+	    }catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return loc;
+	}
+	
+	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
+		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
+		ExtendedOpportunity opptExt = null;
+	    try{
+	    	DBObject dbquery = new BasicDBObject();  
+	    	dbquery.put("state", StateProvince);
+	    	dbquery.put("nonlatinCity", OpptCityName);
+	    	dbquery.put("cityRegion", CityArea);
+	    	if(bizType == "customer"){
+	    		dbquery.put("onlyPresaleCustomer", "true");
+	    	}
+	    	if(bizType == "partner"){
+	    		dbquery.put("includePartnerOrgIndicator", "true");
+	    	}
+	    	if(bizType == "competitor"){
+	    		dbquery.put("isCompetitor", "true");
+	    	}
+	    	dbquery.put("lat", lat);
+	    	dbquery.put("lng", lng);
+	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery);
+            if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		DBObject o = queryresults.next();
+    	    		opptExt =  new ExtendedOpportunity();
+    	    		opptExt.setOpptLAT(o.get("lat").toString());
+    	    		opptExt.setOpptLNG(o.get("lng").toString());
+    	    		opptExt.setOPSIID(o.get("siteInstanceId").toString());
+    	    		opptExt.setOpptID(o.get("organizationId").toString());
+    	    		opptExt.setOpptName(o.get("siteName").toString());
+    	    		opptExt.setOpptCityName(o.get("state").toString());
+    	    		opptExt.setCityArea(o.get("nonlatinCity").toString());
+    	    		opptExt.setOpptAddress(o.get("streetAddress1").toString());
+    	    		opptExt.setOpptEstdYr("");
+    	    		opptExt.setOpptGblHc(o.get("countOfEmployee").toString());
+    	    		opptExt.setOpptYrRev("");
+    	    		opptExt.setSegmentArea(o.get("industrySegmentNames").toString());
+    	    		opptExt.setDistance(RestUtils.GetDistance(Double.parseDouble(opptExt.getOpptLNG()), Double.parseDouble(opptExt.getOpptLAT()), Double.parseDouble(lng), Double.parseDouble(lat))); 
+    	    		if(opptExt.getDistance() < 100){ // only return  distance less than 45 KM
+    	    			Oppts.add(opptExt);
+    	    		}
+    	    		Collections.sort(Oppts);
+            	}
+            }
+
+	    }catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+	    finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+	    }
+		return Oppts;
 	}
 
 }

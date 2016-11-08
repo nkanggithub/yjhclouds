@@ -55,7 +55,7 @@ public class RestUtils {
 		           JSONObject demoJson = new JSONObject(message);
 		           accessToken = demoJson.getString("access_token");
 		           expires_in = demoJson.getString("expires_in");
-		           DBUtils.updateAccessKey(accessToken, expires_in);
+		           //DBUtils.updateAccessKey(accessToken, expires_in);
 		           MongoDBBasic.updateAccessKey(accessToken, expires_in);
 		           is.close();
 		       } catch (Exception e) {
