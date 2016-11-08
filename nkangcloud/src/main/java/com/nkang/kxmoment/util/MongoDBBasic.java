@@ -134,10 +134,10 @@ public class MongoDBBasic {
 	    return validKey;
 	}
 	
+	@SuppressWarnings("null")
 	public static WeChatUser queryWeChatUser(String OpenID){
 		mongoDB = getMongoDB();
-
-		WeChatUser ret = new WeChatUser();
+		WeChatUser ret = null;
 	    try{
 	    	DBObject query = new BasicDBObject();
 	    	query.put("OpenID", OpenID);
@@ -162,16 +162,22 @@ public class MongoDBBasic {
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		Boolean ret = false;
 	    try{
-	    	DBObject insert = new BasicDBObject();
-	    	insert.put("OpenID", wcu.getOpenid());
-	    	insert.put("HeadUrl", wcu.getHeadimgurl());
-	    	insert.put("NickName", wcu.getNickname());
-	    	insert.put("Created", DateUtil.timestamp2Str(cursqlTS));
-	    	insert.put("FormatAddress", "");
-	    	insert.put("CurLAT", "");
-	    	insert.put("CurLNG", "");
-	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
-			mongoDB.getCollection(wechat_user).insert(insert);
+	    	if(queryWeChatUser(wcu.getOpenid()) != null){
+	    		
+	    	}
+	    	else{
+		    	DBObject insert = new BasicDBObject();
+		    	insert.put("OpenID", wcu.getOpenid());
+		    	insert.put("HeadUrl", wcu.getHeadimgurl());
+		    	insert.put("NickName", wcu.getNickname());
+		    	insert.put("Created", DateUtil.timestamp2Str(cursqlTS));
+		    	insert.put("FormatAddress", "");
+		    	insert.put("CurLAT", "");
+		    	insert.put("CurLNG", "");
+		    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+				mongoDB.getCollection(wechat_user).insert(insert);
+	    	}
+
 			ret = true;
 	    }catch(Exception e){
 	    	e.printStackTrace();
@@ -841,15 +847,16 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static OrgOtherPartySiteInstance getOPSIWithOutLatLngFromMongoDB() {
 		mongoDB = getMongoDB();
 		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 	    try{
 	    	DBObject dbquery = new BasicDBObject();  
-			dbquery.put("lat", null);
-			dbquery.put("lng", null);
+/*			dbquery.put("lat", null);
+			dbquery.put("lng", null);*/
+			dbquery.put("siteInstanceId", "265185667");
 			DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
 			opsi.setSiteName(queryresult.get("siteName").toString());
 			opsi.setCityRegion(queryresult.get("cityRegion").toString());

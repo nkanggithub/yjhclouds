@@ -166,6 +166,7 @@ public class CoreService
 					
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					// Inactive the User - To-Be-Done
+
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
 					String eventKey = requestObject.element("EventKey").getText();
 					if(eventKey.equals("MDLAKE")){
