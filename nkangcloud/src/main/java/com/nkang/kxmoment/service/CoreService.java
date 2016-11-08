@@ -133,8 +133,8 @@ public class CoreService
 				if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
 					WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, fromUserName);
 					//DBUtils.createUser(wcu);
-					MongoDBBasic.createUser(wcu);
-					
+					Boolean ret = MongoDBBasic.createUser(wcu);
+
 					articleList.clear();
 					Article article = new Article();
 					article.setTitle("Master Data Quality Governace");
@@ -163,7 +163,11 @@ public class CoreService
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
 					respXml = MessageUtil.newsMessageToXml(newsMessage);
-					
+					if(!ret){
+						respContent = "User Initialization Failed：\n";
+						textMessage.setContent(respContent);
+						respXml = MessageUtil.textMessageToXml(textMessage);
+					}
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
 					// Inactive the User - To-Be-Done
 					MongoDBBasic.removeUser(fromUserName);
