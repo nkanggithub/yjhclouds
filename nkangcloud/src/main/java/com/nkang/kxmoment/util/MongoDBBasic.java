@@ -913,12 +913,12 @@ public class MongoDBBasic {
 	    	if(!StringUtils.isEmpty(StateProvince)){
 	    		dbquery.put("state", StateProvince);
 	    	}
-	    	if(!StringUtils.isEmpty(OpptCityName)){
-	    		dbquery.put("nonlatinCity", OpptCityName);
-	    	}
 	    	if(!StringUtils.isEmpty(CityArea)){
-	    		dbquery.put("cityRegion", CityArea);
+	    		dbquery.put("nonlatinCity", CityArea);
 	    	}
+/*	    	if(!StringUtils.isEmpty(CityArea)){
+	    		dbquery.put("cityRegion", CityArea);
+	    	}*/
 	    	if(bizType == "customer"){
 	    		dbquery.put("onlyPresaleCustomer", "true");
 	    	}
@@ -928,12 +928,16 @@ public class MongoDBBasic {
 	    	if(bizType == "competitor"){
 	    		dbquery.put("isCompetitor", "true");
 	    	}
-
-	    	dbquery.put("lat", new BasicDBObject("$ne", null));
-	    	dbquery.put("lng", new BasicDBObject("$ne", null));
+	    	dbquery.put("lat", "29.605249");
+	    	dbquery.put("lng","106.361582");
+/*	    	dbquery.put("lat", new BasicDBObject("$ne", "NULL"));
+	    	dbquery.put("lng", new BasicDBObject("$ne", "NULL"));*/
+	    	log.info("---QueryResult:" + dbquery.toString());
 	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery);
             if (null != queryresults) {
+            	log.info("---QueryResult 2:" +queryresults.count());
             	while(queryresults.hasNext()){
+            		log.info("---QueryResult 3:");
             		DBObject o = queryresults.next();
     	    		opptExt =  new ExtendedOpportunity();
     	    		opptExt.setOpptLAT(o.get("lat").toString());
