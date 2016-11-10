@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -422,5 +423,12 @@ public class MasterDataRestController {
 			//ret.add(e.getMessage());
 		}
 		return ret;
+	}
+	
+	@RequestMapping("/CallGetNearByOpptFromMongoDB")
+	public static List<ExtendedOpportunity> CallGetNearByOpptFromMongoDB(){
+		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
+		Oppts = MongoDBBasic.getNearByOpptFromMongoDB("重庆市", "沙坪坝区", "沙坪坝区", "customer", "29.605249", "106.361582");
+		return Oppts;
 	}
 }

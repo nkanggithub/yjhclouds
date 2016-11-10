@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -1409,11 +1410,7 @@ public class RestUtils {
 		return ret;
 	}
 	
-/*	public static OrgOtherPartySiteInstance CallGetOPSIWithOutLatLng(){
-		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
-		opsi = MongoDBBasic.CallgetOPSIWithOutLatLngFromMongoDB();
-		return opsi;
-	}*/
+
 
 }
 

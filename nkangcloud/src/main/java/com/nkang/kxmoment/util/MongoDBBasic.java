@@ -905,20 +905,17 @@ public class MongoDBBasic {
 	}
 	
 
-	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng) throws UnsupportedEncodingException{
+	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
 		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
 		ExtendedOpportunity opptExt = null;
 	    try{
 	    	DBObject dbquery = new BasicDBObject(); 
-	    	if(!StringUtils.isEmpty(StateProvince)){
+/*	    	if(!StringUtils.isEmpty(StateProvince)){
 	    		dbquery.put("state", StateProvince);
 	    	}
 	    	if(!StringUtils.isEmpty(CityArea)){
 	    		dbquery.put("nonlatinCity", CityArea);
 	    	}
-/*	    	if(!StringUtils.isEmpty(CityArea)){
-	    		dbquery.put("cityRegion", CityArea);
-	    	}*/
 	    	if(bizType == "customer"){
 	    		dbquery.put("onlyPresaleCustomer", "true");
 	    	}
@@ -927,17 +924,16 @@ public class MongoDBBasic {
 	    	}
 	    	if(bizType == "competitor"){
 	    		dbquery.put("isCompetitor", "true");
-	    	}
-	    	dbquery.put("lat", "29.605249");
-	    	dbquery.put("lng","106.361582");
+	    	}*/
+	    	dbquery.put("siteInstanceId", "257010104");
 /*	    	dbquery.put("lat", new BasicDBObject("$ne", "NULL"));
 	    	dbquery.put("lng", new BasicDBObject("$ne", "NULL"));*/
-	    	log.info("---QueryResult:" + dbquery.toString());
+	    	log.info("---Query--:" + dbquery.toString());
 	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery);
             if (null != queryresults) {
-            	log.info("---QueryResult 2:" +queryresults.count());
+            	log.info("---QueryResult 2:" + queryresults.toString());
             	while(queryresults.hasNext()){
-            		log.info("---QueryResult 3:");
+            		log.info("---QueryResult 3: ");
             		DBObject o = queryresults.next();
     	    		opptExt =  new ExtendedOpportunity();
     	    		opptExt.setOpptLAT(o.get("lat").toString());
