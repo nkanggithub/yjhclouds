@@ -905,12 +905,14 @@ public class MongoDBBasic {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
 		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
 		ExtendedOpportunity opptExt = null;
+		mongoDB = getMongoDB();
 	    try{
 	    	DBObject dbquery = new BasicDBObject(); 
-/*	    	if(!StringUtils.isEmpty(StateProvince)){
+	    	if(!StringUtils.isEmpty(StateProvince)){
 	    		dbquery.put("state", StateProvince);
 	    	}
 	    	if(!StringUtils.isEmpty(CityArea)){
@@ -919,21 +921,17 @@ public class MongoDBBasic {
 	    	if(bizType == "customer"){
 	    		dbquery.put("onlyPresaleCustomer", "true");
 	    	}
-	    	if(bizType == "partner"){
+	    	else if(bizType == "partner"){
 	    		dbquery.put("includePartnerOrgIndicator", "true");
 	    	}
-	    	if(bizType == "competitor"){
+	    	else if(bizType == "competitor"){
 	    		dbquery.put("isCompetitor", "true");
-	    	}*/
-	    	dbquery.put("siteInstanceId", "257010104");
-/*	    	dbquery.put("lat", new BasicDBObject("$ne", "NULL"));
-	    	dbquery.put("lng", new BasicDBObject("$ne", "NULL"));*/
-	    	log.info("---Query--:" + dbquery.toString());
+	    	}
+	    	dbquery.put("lat", new BasicDBObject("$ne", null));
+	    	dbquery.put("lng", new BasicDBObject("$ne", null));
 	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery);
             if (null != queryresults) {
-            	log.info("---QueryResult 2:" + queryresults.toString());
             	while(queryresults.hasNext()){
-            		log.info("---QueryResult 3: ");
             		DBObject o = queryresults.next();
     	    		opptExt =  new ExtendedOpportunity();
     	    		opptExt.setOpptLAT(o.get("lat").toString());
@@ -949,7 +947,7 @@ public class MongoDBBasic {
     	    		opptExt.setOpptYrRev("");
     	    		opptExt.setSegmentArea(o.get("industrySegmentNames").toString());
     	    		opptExt.setDistance(RestUtils.GetDistance(Double.parseDouble(opptExt.getOpptLNG()), Double.parseDouble(opptExt.getOpptLAT()), Double.parseDouble(lng), Double.parseDouble(lat))); 
-    	    		if(opptExt.getDistance() < 100){ // only return  distance less than 45 KM
+    	    		if(opptExt.getDistance() < 4000){ // only return  distance less than 45 KM
     	    			Oppts.add(opptExt);
     	    		}
     	    		Collections.sort(Oppts);

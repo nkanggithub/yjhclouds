@@ -28,7 +28,6 @@ public class CoreService
 
 	private static Logger log = Logger.getLogger(CoreService.class);
 	private static Timer timer= new Timer();
-	private static String CurType = "";
 	public static String processRequest(HttpServletRequest request)
 	{
 		String respXml = null;
@@ -193,7 +192,7 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
-						CurType = "customer";
+						String CurType = "customer";
 						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -225,7 +224,7 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 						
 					} else if (eventKey.equals("nbcompe")) {// Competitor
-						CurType = "competitor";
+						String CurType = "competitor";
 						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -258,7 +257,7 @@ public class CoreService
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					} else if (eventKey.equals("nbpartner")) {// Partner
-						CurType = "partner";
+						String CurType = "partner";
 						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
@@ -293,7 +292,7 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if (eventKey.equals("nboppt")) {// Partner
-						CurType = "";
+						String CurType = "";
 						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
 						String lng = geol.getLNG();
