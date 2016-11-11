@@ -145,7 +145,7 @@ public class CoreService
 					article4.setTitle("Data Visualization");
 					article4.setDescription("Master Data Visualization");
 					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-					article4.setUrl("http://shenan.duapp.com/mdm/DQMenu.jsp?UID=" + fromUserName);
+					article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
 					articleList.add(article4);
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
@@ -185,7 +185,7 @@ public class CoreService
 						article4.setTitle("Data Visualization");
 						article4.setDescription("Master Data Visualization");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-						article4.setUrl("http://shenan.duapp.com/mdm/DQMenu.jsp?UID=" + fromUserName);
+						article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
 						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
