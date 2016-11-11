@@ -1,18 +1,15 @@
 <%@ page language="java" pageEncoding="UTF-8"%> 
 <%@ page import="java.util.*" %>
-<%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %> 
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %> 
-<%-- <%@ page import="com.nkang.kxmoment.util.DBUtils"%> --%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%					
-//String AccessKey = DBUtils.getValidAccessKey();
 String AccessKey =RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID"); 
-//GeoLocation loc = DBUtils.getDBUserGeoInfo(uid);
 GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
+
 session.setAttribute("location",curLoc);
 %>
 <!DOCTYPE HTML>
@@ -20,8 +17,12 @@ session.setAttribute("location",curLoc);
   <head>
 	<meta charset="utf-8" />
 	<title>HPE - Master Data Management</title>
-	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!-- <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	 -->
+	 
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
+	<meta content="" name="hpe" />
 
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" 				rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css" 	rel="stylesheet" type="text/css"/>
@@ -42,14 +43,7 @@ session.setAttribute("location",curLoc);
 	<script src="../nkang/js_athena/common-scripts.js"></script>
 
 <style>
-	body{
-		width:100%;
-		min-width:450px;
-		max-width:600px;
-		padding:0px;
-		margin-left:auto;
-		margin-right:auto;
-	}
+
 	#weather{
 		margin-bottom:20px;
 	}
