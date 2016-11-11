@@ -17,15 +17,16 @@ String uid = request.getParameter("UID");
 GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
+
+session.setAttribute("location",curLoc);
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
 	<meta charset="utf-8" />
 	<title>HPE - Master Data Management</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta content="" name="description" />
-	<meta content="" name="hpe" />
 
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" 				rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css" 	rel="stylesheet" type="text/css"/>
@@ -35,7 +36,7 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	<link href="../nkang/css_athena/style-responsive.css" 							rel="stylesheet" type="text/css"/>
 	<link href="../nkang/css_athena/style-default.css" 								rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/data-tables/DT_bootstrap.css" 				rel="stylesheet" type="text/css"/>
-	<script src="../nkang/js_athena/jquery-1.8.3.min.js"></script>
+	<script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
 	<script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 	<script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
 	<script src="../nkang/js_athena/typeahead.js"></script>
@@ -46,6 +47,32 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	<script src="../nkang/js_athena/common-scripts.js"></script>
 
 <style>
+	body{
+		width:100%;
+		min-width:450px;
+		max-width:600px;
+		padding:0px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	#weather{
+		margin-bottom:20px;
+	}
+	#weather tr td{
+		height:50px;
+	}
+	#weather_suggest{
+		margin-top:20px;
+	}
+	#weather_suggest tr td{
+		line-height:35px;
+	}
+	#weather_div_loading{
+		text-align:center;
+	}
+	#main-content {
+		margin-bottom: 0px !important;
+	}
 	.HpLogo{
 	width:200px;
 	height:60px;
@@ -61,7 +88,9 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	.mainTitle{
 	font-size:15px;
 	}
-
+a:hover,a:link{
+	text-decoration:none;
+	}
 	.loading {
 	display: none;
 	opacity: 0.7;
@@ -74,8 +103,19 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	background-color: #FFFFFF;
 	z-index: 1000;
 	}
-
-
+.matesUserImage {
+	border-radius: 30px;
+	height: 60px;
+	width: 60px;
+}
+.Work_Mates_div{
+	width:100%;
+	padding:0px;
+}
+.Work_Mates_div .Work_Mates_div_li{
+	float:left;
+	margin:20px;
+}
 	.myButtons{
 	background: none  !important;
 	border: 0px  !important;
@@ -164,7 +204,49 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	}
 </style>
 <script>
-      $j = jQuery.noConflict();
+var $j = jQuery.noConflict();
+$j(window).load(function() {
+	jQuery.ajax({
+			type : "GET",
+			url : "../userProfile/getWeather",
+			data : {location:$j('#location').text()},
+			cache : false,
+			success : function(data) {
+				var jsons = eval('(' + data + ')');
+				if(jsons.status='success'){
+					var tbody;
+					for(var i=0;i<jsons.results[0].weather_data.length;i++){
+						var temp=jsons.results[0].weather_data[i];
+						var tr="<tr>";
+						if(i==0){
+							tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;&nbsp;'+temp.date+'</b></td></tr><tr>';
+							tr+='<td width="25%" align="left">今天</td>';
+						}else{
+							tr+='<td width="25%" align="left">'+temp.date+'</td>';
+						}
+						tr+='<td width="45%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+temp.weather +'</td>';
+						tr+='<td width="30%" align="right">'+temp.temperature+' </td>';
+						 tr+="</tr>";
+						 tbody+=tr;
+					}
+					$j('#weather').html(tbody);
+				//	$j('weather_div_loading').css({'display':'none'});
+				//	$j('weather_div').css({'display':'block'});
+					tbody="";
+					for(var i=0;i<jsons.results[0].index.length;i++){
+						var temp=jsons.results[0].index[i];
+						var tr="<tr>";
+						tr+='<td width="15%" align="right" valign="top"><nobr><b>'+temp.tipt+'：</b></nobr></td>';
+						tr+='<td width="85%" align="left">'+temp.des+'</td>';
+						 tr+="</tr>";
+						 tbody+=tr;
+					}
+					$j('#weather_suggest').html(tbody);
+				}
+			}
+		});
+});
+    //  $j = jQuery.noConflict();
       function myAlter(err) {
           $('#myAlterMessage').html(err);
           $('#DivMyAlter').modal('show');
@@ -202,9 +284,12 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 			  <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000" alt="HP Logo" class="HpLogo"/> 
               <ul class="nav pull-right top-menu">
                 <li class="dropdown">
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Welcome <span class="username colorBlue"> <%= wcu.getNickname()%> </span> 
-						<span><a style="float:right;" href="baidu.com"> <img src="<%= wcu.getHeadimgurl()%>" alt="userImage" class="userImage" alt="no_username"/></a></span> 
-                  	</a>
+                	<a href="#" class="dropdown-toggle" data-toggle="dropdown"> Welcome <span class="username colorBlue">  <%= wcu.getNickname()%>  </span> 	</a>
+						<span><a style="float:right;" href="baidu.com"> 
+						<img src="<%= wcu.getHeadimgurl()%>" alt="userImage" class="userImage" alt="no_username"/>
+                        <!-- <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="userImage" alt="no_username"/> -->
+                        </a></span> 
+                  
                 </li>
               </ul>
          </div>
@@ -217,65 +302,26 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
     <div id="main-content">
       <div class="BDbg">
         <div class="BDheading">
-          <div class="span8"> 
+          <div class="span12"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
-            <h2> <span class="colorDarkBlue">Location:</span> <span style="float:right;margin-right:10px;" class="colorDarkBlue"> <%= curLoc%></span></h2>
+            <h2><nobr> <span class="colorDarkBlue">Location:</span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
+            <%= curLoc%>
+            </span></nobr></h2>
           </div>
-          <div class="span4 BoardFormbtn" ></div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top:0px;">
           <div class="row-fluid mtop10">
-            <div class="span8">
+            <div class="span12">
               <div class="PositionR">
                   <img src="https://pbs.twimg.com/media/CUBPE5fXIAE8k8a.png" class="BoardDetailImage"/>
-                <div class="BoardTit">
-                  <div class="span8">
-                      <h4>Manage your Profile </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="span4">
-              <div class="BDdetailHeight">
-                  <div>
-						<a class="" data-toggle="modal" href="#LBreadmore"> Read more </a> 
-                  </div>
-              </div>  
-
-              <div id="LBreadmore" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
-                <div class="modal-header">
-                  profile
-                </div>
-                <div class="modal-body readmoreHpop" style="white-space: pre-line;">
-                    Manage your profile here
-                </div>
-                <div class="modal-footer">
-                  <button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                </div>
-              </div>
-                
-                
-                
-              <div id="TopicReadMore" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
-                <div class="modal-header">
-                  <h3>Profile</h3>
-                </div>
-                <div class="modal-body">
-                  <div id="Topic"></div>
-                </div>
-                <div class="modal-footer">
-                  <button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                </div>
-              </div>
-
+               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="container-fluid">
         <div class="row-fluid mtop20">
-          <div class="span8">
+          <div class="span12">
             <div class="TABclass">
               <ul class="nav nav-tabs" id="myTabs">
                 <li id="liSocialElements" class="active"><a href="#SocialElements" data-toggle="tab">Social Elements</a></li>
@@ -287,9 +333,52 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
                   <div>
                     <div class="panel-group" id="accordion">
                       <div id="DivLearnings">
-                                <form>
+                      		<div  style="float:right;padding-bottom:10px;"><a class="" data-toggle="modal" href="#LBreadmore">Manage your Profile </a></div>
+                            
+                            <div id="LBreadmore" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
+                <div class="modal-header">
+                 <b> Manage your profile</b>
+                </div>
+                <div class="modal-body readmoreHpop" style="white-space: pre-line;">
+                   <table style="width:100%;">
+                   	<tr>
+                    	<td width="30%" align="right">Email:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text"/></td>
+                    </tr><tr>
+                    	<td width="30%" align="right">Email:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text"/></td>
+                    </tr><tr>
+                    	<td width="30%" align="right">Email:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text"/></td>
+                    </tr><tr>
+                    	<td width="30%" align="right">Email:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text"/></td>
+                    </tr><tr>
+                    	<td width="30%" align="right">Email:&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><input type="text"/></td>
+                    </tr>
+                   </table>
+                </div>
+                <div class="modal-footer">               
+						<button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                         <button class="btnAthenaSave" data-dismiss="modal" aria-hidden="true">Save</button>
+                </div>
+              </div>
+                             <!--  
+                              <form>
+                                <input type = "button" value ="Save" class="myButtons" style="width:50%;float:right;"/>
+                                </form>
+                                -->
                                         <table class="table">
                                             <tbody>
+                                             <tr >
+                                                     <td class="text-right">
+                                                        <span style="text-align:right;"><strong>Profile Photo:</strong></span>
+                                                     </td>
+                                                    <td>
+														NKANG
+													</td>
+                                                  </tr>
                                                   <tr>
                                                      <td class="text-right">
                                                         <span style="text-align:right;"><strong>Nick Name:</strong></span>
@@ -314,6 +403,14 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
                                                         NKANG
                                                     </td> 
                                                   </tr>
+                                                   <tr>
+                                                     <td class="text-right">
+                                                        <span style="text-align:right;" ><strong>Phone:</strong></span>
+                                                     </td>
+                                                    <td>
+                                                        NKANG
+                                                    </td> 
+                                                  </tr>
                                                   <tr>
                                                      <td class="text-right">
                                                          <span style="text-align:right;"><strong>Project Manager:</strong></span>
@@ -330,121 +427,151 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
                                                         NKANG
                                                     </td>  
                                                   </tr>
-                                                  <tr >
-                                                     <td class="text-right">
-                                                        <span style="text-align:right;"><strong>Profile Photo:</strong></span>
-                                                     </td>
-                                                    <td>
-														NKANG
-													</td>
-                                                  </tr>
+                                                 
                                              </tbody>
                                         </table>
-										<input type = "button" value ="Save" class="myButtons" style="width:50%;float:right;"/>
-                                </form>
+										
                       </div>
                     </div>
                   </div>
                 </div>
                   <div class="tab-pane active" id="SocialElements">
-                      <div class="modal-header">
-							Opportunities :<%= mqv.getNumberOfLeads() %>
-                      </div>
-                      <div class="modal-header">
-							Competitors :<%= mqv.getNumberOfCompetitor() %>  
-                      </div>
-                      <div class="modal-body readmoreHpop" style="white-space: pre-line;">
-                          <table class="table">
-                              <tbody>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Customer:</strong></span>
-                                      </td>
-                                      <td>
-                                          <%= mqv.getNumberOfCustomer() %>
-                                      </td>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Count Of Partner:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel ><%= mqv.getNumberOfPartner() %></apex:outputLabel>
-                                      </td> 
-                                  </tr>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Country:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!country}</apex:outputLabel>
-                                      </td>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>City:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!city}</apex:outputLabel>
-                                      </td> 
-                                  </tr>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Sunrise:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!sunrise}</apex:outputLabel>
-                                      </td> 
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Sunset:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!sunset}</apex:outputLabel>
-                                      </td> 
-                                  </tr>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Pressure:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!pressure}</apex:outputLabel>
-                                      </td> 
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Humidity:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!humidity}</apex:outputLabel>
-                                      </td> 
-                                  </tr>
-                                  <tr>
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>rising:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!rising}</apex:outputLabel>
-                                      </td> 
-                                      <td class="text-right">
-                                          <span style="text-align:right;"><strong>Visibility:</strong></span>
-                                      </td>
-                                      <td>
-                                          <apex:outputLabel >{!visibility}</apex:outputLabel>
-                                      </td> 
-                                  </tr> 
-                              </tbody>
-                          </table>
-
-                      </div>
+                  <!-- 
+               		   <div id="weather_div_loading">
+               		   <img alt="内容加载中,请稍后..." src="../MetroStyleFiles/loading.gif" height="55" width="55">
+               		   		<b>内容加载中,请稍后...</b>
+               		   </div> style="display:none"
+               		    -->
+                  		<div id="weather_div">
+		                   <div class="modal-header">
+		                       <table width="100%" id="weather">
+		                       </table>
+		                    </div>
+		                   	<table width="100%" id="weather_suggest">
+		                     </table>
+	                  </div>
                   </div>
                 <div class="tab-pane" id="WorkMates">
                   <div>
                       <div > <!-- class="span4" -->
                           <div class="row-fluid">
-                              <div class="hpit_athena_rightDiv span12">
-                                  <div style="overflow: auto; width: auto; max-height:442px;">
-                                      <span>My Work Mates</span>
-                                      <ul class="item-list scroller padding" data-always-visible="1" id="navlist">
-                                          <div id="divContMember">
-                                              <apex:repeat value="{!MemberList}" var="m">
-                                                  <li><apex:image url="{!IF(m.FormalHeadUrl__c == '', m.HeadUrl__c, m.FormalHeadUrl__c)}" styleClass="userImage" alt="no_username"/><span style="width:50px">{!IF(m.FormalName__c == '',m.UserNickName__c,m.FormalName__c)}</span></li>
-                                              </apex:repeat>
+                              <div class="hpit_athena_rightDiv span12" style="margin:0px;">
+                                  <div style="overflow: auto; width: auto; max-height:442px;margin:0px;padding:0px;">
+                                      <ul class="Work_Mates_div">
+                                      	<li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
                                           </div>
+                                        </li>
+                                      <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li>
+                                        <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li>
+                                         <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li> <li class="Work_Mates_div_li">
+                                        	<div class="Work_Mates_div_list_div">
+                                           	 	<div class="Work_Mates_img_div">
+                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
+                                         		</div>
+                                         		<div class="Work_Mates_img_div">
+                                        			 <span>username</span>
+                                        		 </div>
+                                          </div>
+                                        </li>
                                       </ul>
+                                     
                                   </div>
                               </div>
                           </div>
@@ -496,7 +623,7 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 <!-- Modal PAGE End-->   
 
   <!-- BEGIN FOOTER -->
-  <div id="footer"> <span>©</span> Hewlett-Packard Enterprise Development Company, L.P.   |   HP Restricted </div>
+  <div id="footer"> <span><nobr>© Hewlett-Packard Enterprise Development Company, L.P.   |   HP Restricted </nobr></span></div>
   <!-- END FOOTER --> 
   </body>
   </html>
