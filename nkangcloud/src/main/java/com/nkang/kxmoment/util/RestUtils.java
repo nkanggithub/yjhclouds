@@ -1,12 +1,15 @@
 package com.nkang.kxmoment.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -29,7 +32,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
-	private static String localInd = "N";
+	private static String localInd = "Y";
 	public static String getAccessKey() {
 			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
@@ -196,7 +199,37 @@ public class RestUtils {
 		return StatusMessage;
 	}
 	
+	public static String  getWeatherInform(String cityName){ 
+         String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=重庆&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
+         StringBuffer strBuf;  
+         try {                              
+             baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location="+URLEncoder.encode(cityName, "utf-8")+"&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";                    
+         } catch (UnsupportedEncodingException e1) {               
+             e1.printStackTrace();                     
+         }  
+         strBuf = new StringBuffer();  
+         try{  
+             URL url = new URL(baiduUrl);  
+             if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	         } 
+	         System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	         System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	         URLConnection conn = url.openConnection();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//转码。  
+             String line = null;  
+             while ((line = reader.readLine()) != null)  
+                 strBuf.append(line + " ");  
+                 reader.close();  
+         }catch(MalformedURLException e) {  
+             e.printStackTrace();   
+         }catch(IOException e){  
+             e.printStackTrace();   
+         }     
 
+         return strBuf.toString();  
+     }  
     
     public static String getUserCurLocWithLatLng(String lat, String lng){
     	String ret = "";
