@@ -308,7 +308,7 @@ $j(window).load(function() {
           <div class="row-fluid mtop10">
             <div class="span12">
               <div class="PositionR">
-                  <img src="https://pbs.twimg.com/media/CUBPE5fXIAE8k8a.png" class="BoardDetailImage"/>
+                  <img src="../MetroStyleFiles/image/socialHPE.png" class="BoardDetailImage"/>
                </div>
             </div>
           </div>
