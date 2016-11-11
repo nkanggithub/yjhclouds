@@ -6,11 +6,18 @@
 <%					
 String AccessKey =RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID"); 
-GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
-WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
-
-session.setAttribute("location",curLoc);
+String curLoc ;
+WeChatUser wcu ;
+if(session.getAttribute("location")==null){
+	GeoLocation loc= RestUtils.callGetDBUserGeoInfo(uid);
+	wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+	curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
+	session.setAttribute("location",curLoc);
+	session.setAttribute("wcu",wcu);
+}else{
+	wcu=(WeChatUser)session.getAttribute("wcu");
+	curLoc=(String)session.getAttribute("location");
+}
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -225,7 +232,13 @@ $j(window).load(function() {
 					for(var i=0;i<jsons.results[0].index.length;i++){
 						var temp=jsons.results[0].index[i];
 						var tr="<tr>";
-						tr+='<td width="15%" align="right" valign="top"><nobr><b>'+temp.tipt+'：</b></nobr></td>';
+						var tipt;
+						if(temp.tipt.length > 4){
+							tipt="紫外线";
+						}else{
+							tipt=temp.tipt;
+						}
+						tr+='<td width="15%" align="right" valign="top" ><nobr><b>'+tipt+'：</b></nobr></td>';
 						tr+='<td width="85%" align="left">'+temp.des+'</td>';
 						 tr+="</tr>";
 						 tbody+=tr;
