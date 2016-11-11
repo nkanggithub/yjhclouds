@@ -59,8 +59,28 @@ ul li, ol li {
 	line-height: 20px !important;
 	font-size: 13px !important;
 	border: none !important;
-	color: #fff;
+	color: #fff !important;
 }
+.btnAthenaSave {
+	border-radius: 0;
+	background: #b3b3b3;
+	background-color: #007DBA !important;
+	outline: none;
+	border: none;
+	box-shadow: none;
+	text-shadow: none;
+	padding: 4px 35px !important;
+	border-radius: 0 5px !important;
+	font-weight: normal !important;
+	line-height: 20px !important;
+	font-size: 13px !important;
+	border: none !important;
+	color: #fff !important;
+}
+
+	.btnAthenaSave:hover{
+	background-color: #D7410B !important;
+	}
 .btnAthenaPopRate {
 	padding: 1px 16px !important;
 }
@@ -652,9 +672,10 @@ a, a:focus, a:hover, a:active {
 	font-size: 12px;
 	padding: 10px 1%;
 	position: fixed;
-	text-align: left;
-	width: 98%;
+	text-align: center;
+	width: 100%;
 	z-index: 102;
+	left:0;
 }
 /* general form */
 form legend {
