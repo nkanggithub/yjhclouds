@@ -6,10 +6,6 @@
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%					
-
-MdmDataQualityView mqv = new MdmDataQualityView();
-//mqv= DBUtils.getDataQualityReport();
-mqv= RestUtils.callGetDataQualityReport();
 //String AccessKey = DBUtils.getValidAccessKey();
 String AccessKey =RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID"); 
@@ -17,7 +13,6 @@ String uid = request.getParameter("UID");
 GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
-
 session.setAttribute("location",curLoc);
 %>
 <!DOCTYPE HTML>
