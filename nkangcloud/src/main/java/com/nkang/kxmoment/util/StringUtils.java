@@ -13,7 +13,7 @@ public final class StringUtils {
 	public static final String UTF_8 = "UTF-8";
     private StringUtils() {}
 
-	//clear null value
+	//clear  null value
 	public static String clearNull(String temp){
 		return temp.replace(" ","");	
 	}
