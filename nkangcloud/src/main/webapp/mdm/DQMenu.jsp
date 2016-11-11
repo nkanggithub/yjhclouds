@@ -1,5 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%> 
-<%@ page import="java.util.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<%-- <%@ page import="java.util.*" %>
 <%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientInformation" %>    
@@ -30,58 +32,48 @@ String userName = "Visitor";
 if(wcu.getNickname() != null && wcu.getNickname() != ""){
 	userName = wcu.getNickname();
 }
-String userImage = "../MetroStyleFiles/gallery.jpg";
+String userImage = "MetroStyleFiles//gallery.jpg";
 if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	userImage = wcu.getHeadimgurl();
 }
 
-%>
-<!DOCTYPE html>
+%> --%>
 <html class=" js csstransitions">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>MDM Makes it Matter</title> 
 	<meta content="" name="hpe" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="icon" type="image/x-icon" href="../webitem/hpe.ico"/>
-	<link rel="short icon" type="image/x-icon" href="../webitem/hpe.ico"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/sonhlab-base.css"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/metrotab-v2.css"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/metro-bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/global-demo.css"/>	
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/animation-effects.css"/>		
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/openmes.css"/>
-	<link rel="stylesheet" type="text/css" href="../nkang/c3.css"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/pageLoad.css"/>
+	<link rel="icon" type="image/x-icon" href="webitem/hpe.ico"/>
+	<link rel="short icon" type="image/x-icon" href="webitem/hpe.ico"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/sonhlab-base.css"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metrotab-v2.css"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metro-bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/global-demo.css"/>	
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/animation-effects.css"/>		
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/openmes.css"/>
+	<link rel="stylesheet" type="text/css" href="nkang/c3.css"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//sweetalert.css"/>
+	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/pageLoad.css"/>
 
-	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.min.2.1.1.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.easing.min.13.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.jscrollpane.min.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/modernizr-transitions.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/metrotab-v2.min.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/JS/openmes.min.js"></script>
-	<script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
-    <script type="text/javascript" src="../nkang/liquidFillGauge.js"></script>
-	<script type="text/javascript" src="../nkang/Chart.js"></script>
-	<script type="text/javascript" src="../nkang/gauge.js"></script>
-	<script type="text/javascript" src="../nkang/RadarChart.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.min.2.1.1.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.easing.min.13.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/modernizr-transitions.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/metrotab-v2.min.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//JS/openmes.min.js"></script>
+	<script type="text/javascript" src="MetroStyleFiles//sweetalert.min.js"></script>
+    <script type="text/javascript" src="nkang/liquidFillGauge.js"></script>
+	<script type="text/javascript" src="nkang/Chart.js"></script>
+	<script type="text/javascript" src="nkang/gauge.js"></script>
+	<script type="text/javascript" src="nkang/RadarChart.js"></script>
 
-	<script type="text/javascript" src="../nkang/d3.v3.min.js"></script>
-	<script type="text/javascript" src="../nkang/c3.min.js"></script>
+	<script type="text/javascript" src="nkang/d3.v3.min.js"></script>
+	<script type="text/javascript" src="nkang/c3.min.js"></script>
 
 	<script type="text/javascript">
-		$(window).load(function() {
-			$("#goaway").fadeOut("slow");
-			$(".mes-openbt").openmes({ext: 'php'});
-		});
-
-	</script>
-	
-	<script type="text/javascript">
-
 	$(document).ready(function() {
 		$('.metrotabs').metrotabs({
 				outeffect : 'swing',
@@ -93,71 +85,79 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				minibartitle: 'Master Data Lake Quality Grade',
 				mtEffect : 'vertical' // vertical | horizontal | fade
 			});
+		
+		$("#openmes").on("click",function(){
+			
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "getOpenMes",
+				success : function(data) {
+					  if (data) {				  
+							var htmlcustli = "<div class=\"well well-sm\">"+data.length+" Active Clients in service</div>";
+							if(data.length!=0){
+							for(var i=0;i<data.length;i++){
+								htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + data[i].clientIdentifier + "');\"><span class=\"badge pull-right\">" + data[i].clientID + "</span>"+ data[i].clientDescription+"</a></li>";
+							}
+							}
+							$("#openmesChart").html(htmlcustli);
+					  }
+				},
+				error:function(data)
+				{
+					console.log("failed..."+data.toString());
+				}
+			
+		});
+		});
+		$("#espresso").on("click",function(){
+			
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "getChart2?userState="+$("#userState").html(),
+				success : function(data) {
+					  if (data) {				  
+						  var chart = c3.generate({
+								data: {
+									columns: [
+									          data[0],
+									          data[1],
+									         data[2]
+									         ]
+								},
+								axis: {
+									x: {
+										type: 'category',
+										categories: [data[3]]
+									}
+								},
+								zoom: {
+							        enabled: true
+							    },
+							    bindto : '#chart2'
+							});
+						  loadChart2();
+							
+					  }
+				},
+				error:function(data)
+				{
+					console.log("failed..."+data.toString());
+				}
+			
+		});
+		});
+		
+		
 		// $("#conporlan").bind("click", loadChart4);
 		//document.getElementById("conporlan").addEventListener('click',loadChart4,false);
 		//var clickEvent = $("#conporlan").data('events')["click"];
 		//alert(JSON.stringify(clickEvent));
+		var username= $("#username").text();
+		var addressInfo= $("#addressInfo").text();
 		
 	});
-
-	function CommentMe(){
-		swal(
-				{
-					title: "Dear <%= wcu.getNickname()%> Comment US!",   
-					text: "Drop us a message and do things better together",   
-					type: "input",   
-					showCancelButton: true,   
-					closeOnConfirm: false,   
-					animation: "slide-from-top",   
-					inputPlaceholder: "Write something" 
-				}, 
-				function(inputValue){
-					inputVar = inputValue;
-					if (inputValue === false) return false;      
-					if (inputValue === "") {     
-						swal.showInputError("You need to write something!");     
-						return false;   
-					}
-					swal("Thank You!", "We will contact you soon", "success"); 
-				}
-			);
-	}
-	
-	function OrganizationInformation(){
-		swal("200M", <%= RestUtils.CallgetFilterTotalOPSIFromMongo("null","null","null") %>+" Organizations", "success");
-	}
-	
-	function loadChart(obj){
-		var chartobj = $("#chart3");
-		$("#openfooter_loadC3").html(chartobj);
-		chartobj.show();
-	}
-	
-	
-	function loadChart2(obj){
- 		var chartobj = $("#chart2");
- 		$("#openfooter_loadC2").append(chartobj);
-		//$("#openfooter_loadC2").html(chartobj);
-		chartobj.show();
-     }
-	
-	function loadChartRadar(obj){
-		var chartobj = $("#chart3Radar");
-		$("#americano_loadChart").html(chartobj);
-		chartobj.show();
-	}
-	
-	function loadChart4(obj){
-		var chartobj = $("#chart4");
-		$("#conporlan_loadChart").html(chartobj);
-		chartobj.show();
-	}
-	
-	function loadChart5(obj){
-		var chartobj = $("#chart5");
-		$("#capuqino_loadChart").html(chartobj);
-		chartobj.show();
-	}
 	
 	function loadChartRadarWithDetail(obj){
 		swal({   
@@ -169,25 +169,22 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			showLoaderOnConfirm: true, }, 
 			function(){   
 				setTimeout(function(){     
-					swal("<%= lst.size() %> Industries Presented within <%= userState%>");}, 200); 
+					swal(document.getElementById("username").innerHTML+" Industries Presented within  "+document.getElementById("userState").innerHTML);}, 200); 
 				$("#radardetailid").show();
 			});
 	}
 	
-	function showDetailsForClient(paraStr){
-		swal("MDCP Client Identifier", paraStr, "success");
-	}
-
+	
 	function userlocationsave(obj){
 		swal(
 				{
-					title: "Dear <%= wcu.getNickname()%>!",   
+					title: "Dear "+document.getElementById("username").innerHTML+"!",   
 					text: "Drop you city name",   
 					type: "input",   
 					showCancelButton: true,   
 					closeOnConfirm: false,   
 					animation: "slide-from-top",   
-					inputPlaceholder: "<%= addressInfo.get(0)%> | <%= addressInfo.get(1)%> | <%= addressInfo.get(2)%> | <%= addressInfo.get(3)%> | <%= addressInfo.get(4)%>" 
+					inputPlaceholder: document.getElementById("addressInfo").innerHTML
 				}, 
 				function(inputValue){
 					inputVar = inputValue;
@@ -215,20 +212,116 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					 
 				}
 			);
+
 	}
+		$(window).load(function() {
+			$("#goaway").fadeOut("slow");
+			$(".mes-openbt").openmes({ext: 'php'});
+		});
+		
+		function loadChart(obj){
+			var chartobj = $("#chart3");
+			$("#openfooter_loadC3").html(chartobj);
+			 $("#chart2").hide();
+			 $("#chart4").hide();
+			 $("#chart5").hide();
+			 $("#chart3Radar").hide();
+			chartobj.show();
+			
+		}
+		
+		
+		function loadChart2(){
+	 		var chartobj = $("#chart2");
+	 		$("#openfooter_loadC2").append(chartobj);
+			//$("#openfooter_loadC2").html(chartobj);
+			 $("#chart3").hide();
+			 $("#chart4").hide();
+			 $("#chart5").hide();
+			 $("#chart3Radar").hide();
+			chartobj.show();
+	     }
+		
+		function loadChartRadar(obj){
+			var chartobj = $("#chart3Radar");
+			$("#americano_loadChart").html(chartobj);
+			$("#chart3").hide();
+			 $("#chart4").hide();
+			 $("#chart5").hide();
+			 $("#chart2").hide();
+			chartobj.show();
+		}
+		
+		function loadChart4(obj){
+			var chartobj = $("#chart4");
+			$("#conporlan_loadChart").html(chartobj);
+			$("#chart3").hide();
+			 $("#chart2").hide();
+			 $("#chart5").hide();
+			 $("#chart3Radar").hide();
+			chartobj.show();
+		}
+		
+		function loadChart5(obj){
+			var chartobj = $("#chart5");
+			$("#capuqino_loadChart").html(chartobj);
+			$("#chart3").hide();
+			 $("#chart4").hide();
+			 $("#chart2").hide();
+			 $("#chart3Radar").hide();
+			chartobj.show();
+		}
+		function CommentMe(){
+			swal(
+					{
+						title: "Dear Comment US!",   
+						text: "Drop us a message and do things better together",   
+						type: "input",   
+						showCancelButton: true,   
+						closeOnConfirm: false,   
+						animation: "slide-from-top",   
+						inputPlaceholder: "Write something" 
+					}, 
+					function(inputValue){
+						inputVar = inputValue;
+						if (inputValue === false) return false;      
+						if (inputValue === "") {     
+							swal.showInputError("You need to write something!");     
+							return false;   
+						}
+						swal("Thank You!", "We will contact you soon", "success"); 
+					}
+				);
+		}
+		function OrganizationInformation(){
+			swal("200M", document.getElementById("totalOPSI").innerHTML+" Organizations", "success");
+		}
+		function showDetailsForClient(paraStr){
+			swal("MDCP Client Identifier", paraStr, "success");
+		}
 	</script>
+	
 
 </head>
 <body>
+<div id="username" style="display:none">${ userInfo.nickname } </div>
+<div id="radarSize" style="display:none">${ radarSize } </div>
+<div id="userState" style="display:none">${ userState } </div>
+<div id="totalOPSI" style="display:none">${ totalOPSI } </div>
+<div id="addressInfo" style="display:none">
+<c:forEach items="${userInfo.addressInfo}" var="addressInfo">
+ ${addressInfo} |
+</c:forEach>
+ </div>
 	<div class="loader more" id="goaway"></div>
 	<div class="demo-content">
 		<img class="mes-openbt" data-mesid="message-5" style="width:150px;height:58px;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000" alt="HP Logo"/> 
 	</div>
 
 <div id="userInfo">
-	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=<%= uid%>" class="navbar-link"><%= userName %></a><br />
-		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=<%= uid%>"><img src="<%= userImage %>" alt="userImage" class="userImage pull-right"/></a>
-		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="../MetroStyleFiles/setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:260px;right:-30%; z-index: 8;"/>
+	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp" class="navbar-link">${ userInfo.nickname }</a><br />
+		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
+		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:260px;right:-30%; z-index: 8;"/>
 	</p>
 
 </div>
@@ -288,42 +381,42 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
         <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;" >
             <div id="tileboxjs" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/datalake.png" alt="">
+	                <img src="MetroStyleFiles//datalake.png" alt="">
 	                <span class="light-text"><strong>Data Lake</strong></span>
                 </a>
             </div>
 			
-			<div id="openmes" class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
+			<div id="openmes"  class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/person.png" alt="">
+	                <img src="MetroStyleFiles//person.png" alt="">
 	                <span class="light-text">Show Case</span>
                 </a>
             </div>
             
             <div id="capuqino" data-ext="html" onclick="javascript:loadChart5(this);" class="tile-bt-long solid-orange-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/image/icon.png" alt="">
+	                <img src="MetroStyleFiles//image/icon.png" alt="">
 	                <span class="light-text">卡布奇诺</span>
                 </a>
             </div>
             
 			<div id="openfooter" onclick="javascript:loadChart(this);" class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/visualview.png" alt="">
+	                <img src="MetroStyleFiles//visualview.png" alt="">
 	                <span class="light-text">Business Type</span>
                 </a>
             </div>
             
             <div id="conporlan" onclick="javascript:loadChart4(this);" class="tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
                 <a href="javascript:void(0);" target="_blank">
-					<img src="../MetroStyleFiles/image/icon.png" alt="">
+					<img src="MetroStyleFiles//image/icon.png" alt="">
 					<span class="light-text">康宝蓝</span>
                 </a>
             </div>
 			
-			<div id="espresso" onclick="javascript:loadChart2(this);" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
+			<div id="espresso" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/location.png" alt="">
+	                <img src="MetroStyleFiles//location.png" alt="">
 	                <span class="light-text">Geolocation</span>
                 </a>
             </div>
@@ -331,7 +424,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			
 			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt-long solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="../MetroStyleFiles/industry.png" alt="">
+	                <img src="MetroStyleFiles//industry.png" alt="">
 	                <span class="light-text">Industry</span>
                 </a>
             </div>
@@ -339,7 +432,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
             <div id="joinus" class="tile-bt-long solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
 		        <div class="tile-bt-long solid-green hovershadow-green">
 		            <a href="javascript:void(0);" onClick="Javascript:CommentMe();"  title="move together">
-		                <img src="../MetroStyleFiles/image/documents.png" alt="MetroTab Docs">
+		                <img src="MetroStyleFiles//image/documents.png" alt="MetroTab Docs">
 		                <span class="light-text" style="margin-left:5px; font-size:20px;">Join US</span>
 		            </a>
 		        </div>
@@ -355,16 +448,16 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				<div class="jspContainer" style="width: 100%; height: 100%;">
 					<div class="jspPane" style="padding: 0px; top: 0px; width: 100%;">
 						<div>
-							<h3><a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=<%= uid%>" target="_blank" class="dark-text">Master Data Lake</a></h3>
+							<h3><a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="dark-text">Master Data Lake</a></h3>
 							<p>
-								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=<%= uid%>" target="_blank" class="resimg"><img class="imagesize" src="../MetroStyleFiles/image/datalakedashboard.jpg" alt="TileBox jQuery"></a>
+								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="resimg"><img class="imagesize" src="MetroStyleFiles//image/datalakedashboard.jpg" alt="TileBox jQuery"></a>
 							</p>
 							<p>
 								 If you think of a datamart as a store of bottled water – cleansed and packaged and structured for easy consumption – the data lake is a large body of water in a more natural state. The contents of the data lake stream in from a source to fill the lake, and various users of the lake can come to examine, dive in, or take samples
 						  		 <br /> --Pentaho CTO James Dixon
 						  	</p>    
 							<div class="readmore">
-								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=<%= uid%>" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
+								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
 								<div class="clearspace"></div>
 							</div>
 						</div>
@@ -413,55 +506,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		</script>
 </div>
 <div id="chart2">
- 	<script>
-	    <% 
-	    	List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
-	    	String a = "['客户'";
-	    	String b = "['竞争'";
-	    	String c = "['伙伴'";
-	    	String d = "";
-	    	int countOfCity = 0;
-	    	if(listOfCities.size() <= 10){
-	    		countOfCity = listOfCities.size();
-	    	}
-	    	else{
-	    		countOfCity = 10;
-	    	}
-	    	for(int i = 0; i < countOfCity ; i ++){
-	    		 MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
-	    		 a = a + "," + mqvByStateCity.getNumberOfCustomer();
-	    		 b = b + "," + mqvByStateCity.getNumberOfCompetitor();
-	    		 c = c + "," + mqvByStateCity.getNumberOfPartner();
-	    		 d = d + "'"+ listOfCities.get(i) +"',";
-	    	}
-	    	a = a + "]";
-	    	b = b + "]";
-	    	c = c + "]";
-	    	d = d.substring(0, d.length()-1);
-	    	d = d + "";
-	    %>
-	    
-		var chart = c3.generate({
-			data: {
-				columns: [
-				          <%= a%>,
-				          <%= b%>,
-				          <%= c%>
-				         ]
-			},
-			axis: {
-				x: {
-					type: 'category',
-					categories: [<%= d%>]
-				}
-			},
-			zoom: {
-		        enabled: true
-		    },
-		    bindto : '#chart2'
-		});
-		$("#chart2").hide(); 
-	</script>
  </div>
  <div id="chart3Radar" onclick="javascript:loadChartRadarWithDetail(this);">
 	 <script>
@@ -745,20 +789,8 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <!-- MetroTab Content 摩卡-->
 <div data-mtid="openmes">
 	<br />
-	<ul class="nav nav-pills nav-stacked">
-		<%
-		List<ClientInformation> clientList = new ArrayList<ClientInformation>();
-		clientList = RestUtils.CallGetClientFromMongoDB();
-		String htmlcustli = "<div class=\"well well-sm\">"+clientList.size()+" Active Clients in service</div>";
-		if(clientList.size()!= 0){
-			for(ClientInformation ci : clientList){
-				htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + ci.getClientIdentifier() + "');\"><span class=\"badge pull-right\">" + ci.getClientID() + "</span>"+ ci.getClientDescription() +"</a></li>";
-			}
-		}
-		%>
-		
-		<%= htmlcustli%>
-	</ul>
+ 	<ul  id="openmesChart" class="nav nav-pills nav-stacked">
+	</ul> 
 
 </div>
 <!-- End MetroTab Content 摩卡-->
@@ -775,9 +807,9 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div data-mtid="tileboxjs">
 	<div>
 			<p>
-				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=<%= uid%>"
+				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }"
 					target="_blank" class="resimg"><img class="imagesize"
-					src="../MetroStyleFiles/image/datalakedashboard.jpg"
+					src="MetroStyleFiles//image/datalakedashboard.jpg"
 					alt="TileBox jQuery"></a>
 			</p>
 			<p>
@@ -789,7 +821,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				--Pentaho CTO James Dixon
 			</p>
 			<div class="readmore">
-				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=<%= uid%>" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
+				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
 				<div class="clearspace"></div>
 			</div>
 
@@ -817,7 +849,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					<div class="mes-content item-ctrlbar-5" data-show="fade"
 						data-showdura="200">
 						<div class="mes-closebt light-text floatleft">
-							<img src="../MetroStyleFiles/exit.png"
+							<img src="MetroStyleFiles//exit.png"
 								style="width: 40px; height: 40px;" />
 						</div>
 						<div class="clearspace"></div>
@@ -827,7 +859,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					<!-- Start Header Photo -->
 					<div class="mes-content item-headerphoto" data-show="bounceInDown">
 						<img style="width: 100%; height: 200px;"
-							src="../MetroStyleFiles/reallake.jpg" alt="demo-headphoto">
+							src="MetroStyleFiles//reallake.jpg" alt="demo-headphoto">
 					</div>
 					<!-- End Header Photo -->
 
@@ -841,15 +873,15 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 						</div>
 					</div>
 					<!-- End Social Connection -->
-					<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
+					<img  src="MetroStyleFiles//image/datalakepure.jpg" alt="demo-headphoto">
 					<!-- Start Info -->
 					<div  data-show="fadeInDown">
-						<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">a
-						<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
+						<img  src="MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">a
+						<img  src="MetroStyleFiles//image/datalakepure.jpg" alt="demo-headphoto">
 					</div>
 
 				</div>
-				<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+				<img  src="MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
 			</div>
 		</div>
 		<!-- End Content Holder -->
