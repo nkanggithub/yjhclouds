@@ -215,13 +215,13 @@ $j(window).load(function() {
 						var temp=jsons.results[0].weather_data[i];
 						var tr="<tr>";
 						if(i==0){
-							tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;&nbsp;'+temp.date+'</b></td></tr><tr>';
-							tr+='<td width="25%" align="left">今天</td>';
+							tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b></td></tr><tr>';
+							tr+='<td width="20%" align="left">今天</td>';
 						}else{
-							tr+='<td width="25%" align="left">'+temp.date+'</td>';
+							tr+='<td width="20%" align="left">'+temp.date+'</td>';
 						}
-						tr+='<td width="45%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+temp.weather +'</td>';
-						tr+='<td width="30%" align="right">'+temp.temperature+' </td>';
+						tr+='<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+temp.weather +'</td>';
+						tr+='<td width="25%" align="right">'+temp.temperature+' </td>';
 						 tr+="</tr>";
 						 tbody+=tr;
 					}
