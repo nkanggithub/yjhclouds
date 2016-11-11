@@ -32,7 +32,7 @@ String userName = "Visitor";
 if(wcu.getNickname() != null && wcu.getNickname() != ""){
 	userName = wcu.getNickname();
 }
-String userImage = "MetroStyleFiles//gallery.jpg";
+String userImage = "../MetroStyleFiles/gallery.jpg";
 if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	userImage = wcu.getHeadimgurl();
 }
@@ -44,34 +44,34 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<title>MDM Makes it Matter</title> 
 	<meta content="" name="hpe" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="icon" type="image/x-icon" href="webitem/hpe.ico"/>
-	<link rel="short icon" type="image/x-icon" href="webitem/hpe.ico"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/sonhlab-base.css"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metrotab-v2.css"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metro-bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/global-demo.css"/>	
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/animation-effects.css"/>		
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/openmes.css"/>
-	<link rel="stylesheet" type="text/css" href="nkang/c3.css"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//sweetalert.css"/>
-	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/pageLoad.css"/>
+	<link rel="icon" type="image/x-icon" href="../webitem/hpe.ico"/>
+	<link rel="short icon" type="image/x-icon" href="../webitem/hpe.ico"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/sonhlab-base.css"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/metrotab-v2.css"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/metro-bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/global-demo.css"/>	
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/animation-effects.css"/>		
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/openmes.css"/>
+	<link rel="stylesheet" type="text/css" href="../nkang/c3.css"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/pageLoad.css"/>
 
-	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.min.2.1.1.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.easing.min.13.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.jscrollpane.min.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/modernizr-transitions.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/metrotab-v2.min.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//JS/openmes.min.js"></script>
-	<script type="text/javascript" src="MetroStyleFiles//sweetalert.min.js"></script>
-    <script type="text/javascript" src="nkang/liquidFillGauge.js"></script>
-	<script type="text/javascript" src="nkang/Chart.js"></script>
-	<script type="text/javascript" src="nkang/gauge.js"></script>
-	<script type="text/javascript" src="nkang/RadarChart.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.min.2.1.1.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.easing.min.13.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/modernizr-transitions.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/metrotab-v2.min.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/JS/openmes.min.js"></script>
+	<script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../nkang/liquidFillGauge.js"></script>
+	<script type="text/javascript" src="../nkang/Chart.js"></script>
+	<script type="text/javascript" src="../nkang/gauge.js"></script>
+	<script type="text/javascript" src="../nkang/RadarChart.js"></script>
 
-	<script type="text/javascript" src="nkang/d3.v3.min.js"></script>
-	<script type="text/javascript" src="nkang/c3.min.js"></script>
+	<script type="text/javascript" src="../nkang/d3.v3.min.js"></script>
+	<script type="text/javascript" src="../nkang/c3.min.js"></script>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -321,7 +321,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="userInfo">
 	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp" class="navbar-link">${ userInfo.nickname }</a><br />
 		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
-		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:260px;right:-30%; z-index: 8;"/>
+		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="../MetroStyleFiles/setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:260px;right:-30%; z-index: 8;"/>
 	</p>
 
 </div>
@@ -381,42 +381,42 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
         <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;" >
             <div id="tileboxjs" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//datalake.png" alt="">
+	                <img src="../MetroStyleFiles/datalake.png" alt="">
 	                <span class="light-text"><strong>Data Lake</strong></span>
                 </a>
             </div>
 			
 			<div id="openmes"  class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//person.png" alt="">
+	                <img src="../MetroStyleFiles/person.png" alt="">
 	                <span class="light-text">Show Case</span>
                 </a>
             </div>
             
             <div id="capuqino" data-ext="html" onclick="javascript:loadChart5(this);" class="tile-bt-long solid-orange-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//image/icon.png" alt="">
+	                <img src="../MetroStyleFiles/image/icon.png" alt="">
 	                <span class="light-text">卡布奇诺</span>
                 </a>
             </div>
             
 			<div id="openfooter" onclick="javascript:loadChart(this);" class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//visualview.png" alt="">
+	                <img src="../MetroStyleFiles/visualview.png" alt="">
 	                <span class="light-text">Business Type</span>
                 </a>
             </div>
             
             <div id="conporlan" onclick="javascript:loadChart4(this);" class="tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
                 <a href="javascript:void(0);" target="_blank">
-					<img src="MetroStyleFiles//image/icon.png" alt="">
+					<img src="../MetroStyleFiles/image/icon.png" alt="">
 					<span class="light-text">康宝蓝</span>
                 </a>
             </div>
 			
 			<div id="espresso" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//location.png" alt="">
+	                <img src="../MetroStyleFiles/location.png" alt="">
 	                <span class="light-text">Geolocation</span>
                 </a>
             </div>
@@ -424,7 +424,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			
 			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt-long solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//industry.png" alt="">
+	                <img src="../MetroStyleFiles/industry.png" alt="">
 	                <span class="light-text">Industry</span>
                 </a>
             </div>
@@ -432,7 +432,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
             <div id="joinus" class="tile-bt-long solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
 		        <div class="tile-bt-long solid-green hovershadow-green">
 		            <a href="javascript:void(0);" onClick="Javascript:CommentMe();"  title="move together">
-		                <img src="MetroStyleFiles//image/documents.png" alt="MetroTab Docs">
+		                <img src="../MetroStyleFiles/image/documents.png" alt="MetroTab Docs">
 		                <span class="light-text" style="margin-left:5px; font-size:20px;">Join US</span>
 		            </a>
 		        </div>
@@ -450,7 +450,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 						<div>
 							<h3><a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="dark-text">Master Data Lake</a></h3>
 							<p>
-								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="resimg"><img class="imagesize" src="MetroStyleFiles//image/datalakedashboard.jpg" alt="TileBox jQuery"></a>
+								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="resimg"><img class="imagesize" src="../MetroStyleFiles/image/datalakedashboard.jpg" alt="TileBox jQuery"></a>
 							</p>
 							<p>
 								 If you think of a datamart as a store of bottled water – cleansed and packaged and structured for easy consumption – the data lake is a large body of water in a more natural state. The contents of the data lake stream in from a source to fill the lake, and various users of the lake can come to examine, dive in, or take samples
@@ -809,7 +809,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			<p>
 				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }"
 					target="_blank" class="resimg"><img class="imagesize"
-					src="MetroStyleFiles//image/datalakedashboard.jpg"
+					src="../MetroStyleFiles/image/datalakedashboard.jpg"
 					alt="TileBox jQuery"></a>
 			</p>
 			<p>
@@ -849,7 +849,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					<div class="mes-content item-ctrlbar-5" data-show="fade"
 						data-showdura="200">
 						<div class="mes-closebt light-text floatleft">
-							<img src="MetroStyleFiles//exit.png"
+							<img src="../MetroStyleFiles/exit.png"
 								style="width: 40px; height: 40px;" />
 						</div>
 						<div class="clearspace"></div>
@@ -859,7 +859,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					<!-- Start Header Photo -->
 					<div class="mes-content item-headerphoto" data-show="bounceInDown">
 						<img style="width: 100%; height: 200px;"
-							src="MetroStyleFiles//reallake.jpg" alt="demo-headphoto">
+							src="../MetroStyleFiles/reallake.jpg" alt="demo-headphoto">
 					</div>
 					<!-- End Header Photo -->
 
@@ -873,15 +873,15 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 						</div>
 					</div>
 					<!-- End Social Connection -->
-					<img  src="MetroStyleFiles//image/datalakepure.jpg" alt="demo-headphoto">
+					<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
 					<!-- Start Info -->
 					<div  data-show="fadeInDown">
-						<img  src="MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">a
-						<img  src="MetroStyleFiles//image/datalakepure.jpg" alt="demo-headphoto">
+						<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">a
+						<img  src="../MetroStyleFiles/image/datalakepure.jpg" alt="demo-headphoto">
 					</div>
 
 				</div>
-				<img  src="MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+				<img  src="../MetroStyleFiles/image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
 			</div>
 		</div>
 		<!-- End Content Holder -->
