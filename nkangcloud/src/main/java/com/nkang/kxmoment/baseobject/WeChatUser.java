@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.List;
+
 
 public class WeChatUser {
 	public String subscribe;
@@ -14,8 +16,15 @@ public class WeChatUser {
 	public String unionid;
 	public String remark;
 	public String groupid;
+	public List<String> getAddressInfo() {
+		return addressInfo;
+	}
+	public void setAddressInfo(List<String> addressInfo) {
+		this.addressInfo = addressInfo;
+	}
 	public String Lat;
 	public String Lng;
+	List<String > addressInfo;
 	
 	public String getLat() {
 		return Lat;
