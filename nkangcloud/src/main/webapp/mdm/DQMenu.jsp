@@ -129,7 +129,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 								axis: {
 									x: {
 										type: 'category',
-										categories: [data[3]]
+										categories: data[3]
 									}
 								},
 								zoom: {
