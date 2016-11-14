@@ -321,7 +321,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="userInfo">
 	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="navbar-link">${ userInfo.nickname }</a><br />
 		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
-		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:260px;right:-30%; z-index: 8;"/>
+		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:217px;right:-30%; z-index: 8;"/>
 	</p>
 
 </div>
@@ -378,7 +378,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
  
 	<!-- START METROTAB -->
     <div class="metrotabs" >
-        <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;" >
+        <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-40px;left:5px" >
             <div id="tileboxjs" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//datalake.png" alt="">
