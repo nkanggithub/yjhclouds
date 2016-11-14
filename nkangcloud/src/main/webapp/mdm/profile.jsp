@@ -57,11 +57,8 @@ if(session.getAttribute("location")==null){
 	#weather tr td{
 		height:50px;
 	}
-	#weather_suggest{
-		margin-top:20px;
-	}
 	#weather_suggest tr td{
-		line-height:35px;
+		line-height:20px;
 	}
 	#weather_div_loading{
 		text-align:center;
@@ -213,6 +210,7 @@ function getLocation(){
 		data : {uid:$j("#uid").val()},
 		cache : false,
 		success : function(data) {
+			if(data!="")
 			$j("#location").text(data);
 			$j("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
 		}
@@ -277,14 +275,18 @@ function getNowFormatDate() {
     var seperator2 = ":";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
+    var minute=date.getMinutes();
     if (month >= 1 && month <= 9) {
         month = "0" + month;
     }
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
+    if (minute >= 0 && minute <= 9) {
+    	minute = "0" + minute;
+    }
     var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + date.getMinutes();
+            + " " + date.getHours() + seperator2 + minute;
           //  + seperator2 + date.getSeconds();
     return currentdate;
 }
@@ -347,7 +349,7 @@ function getNowFormatDate() {
           <div class="span12"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
             <h2><nobr> <span class="colorDarkBlue" id="location"><%= curLoc%></span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
-            <img src="../MetroStyleFiles/setuplocation.png" onclick="getLocation();" id="locationImg" style="height:25px;cursor:pointer;"/>
+            <img src="../MetroStyleFiles/setuplocation.png" onclick="getLocation();" id="locationImg" style="height:25px;cursor:pointer;margin-top:-5px;"/>
             </span></nobr></h2>
           </div>
         </div>
