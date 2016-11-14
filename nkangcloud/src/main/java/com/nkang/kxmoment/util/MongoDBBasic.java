@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -766,6 +767,78 @@ public class MongoDBBasic {
 		}
 		
 		return mqv;
+	}
+	
+	/*
+	 * author  chang-zheng
+	 */
+	public static List<MdmDataQualityView> getDataQualityReport(String stateProvince, List<String> ListnonlatinCity, String cityRegion){
+		List<MdmDataQualityView> ListMqv = new ArrayList<MdmDataQualityView>();
+		MdmDataQualityView mqv;
+		mongoDB = getMongoDB();
+		try{
+			// competitor
+			int cnt_competitor = 0;
+			// partner
+			int cnt_partner = 0;
+			// customer
+			int cnt_customer = 0;
+			// potential leads
+			int cnt_lead = 0;
+			
+			BasicDBObject query_all = new BasicDBObject();
+			if(ListnonlatinCity != null){
+			
+				query_all.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
+			}
+			
+			DBCursor dBcu= mongoDB.getCollection(collectionMasterDataName).find(query_all);
+			for(String str : ListnonlatinCity){
+				mqv = new MdmDataQualityView();
+				while(dBcu.hasNext()){
+					DBObject dbOject = dBcu.next();
+
+					if(dbOject.get("nonlatinCity").equals(str)){
+						
+						if(dbOject.get("isCompetitor").equals("true")){
+							cnt_competitor++;
+						}
+						else if(dbOject.get("includePartnerOrgIndicator").equals("true")){
+							cnt_partner++;
+						}
+						else if(dbOject.get("onlyPresaleCustomer").equals("true")){
+							cnt_customer++;
+						}
+						else if(dbOject.get("onlyPresaleCustomer").equals("false")){
+							cnt_lead++;
+						}
+					}
+				
+				}
+				mqv.setNumberOfCompetitor(cnt_competitor);
+				mqv.setNumberOfPartner(cnt_partner);
+				mqv.setNumberOfCustomer(cnt_customer);
+				mqv.setPercents("0.68");
+				mqv.setNumberOfLeads(cnt_lead);
+				mqv.setNumberOfOppt(cnt_lead);
+				mqv.setNumberOfEmptyCityArea(1000);
+				mqv.setNumberOfThreeGrade(2000);
+				mqv.setNumberOfNonGeo(2000);
+				ListMqv.add(mqv);
+			}
+			
+		}catch(Exception e){
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		finally{
+	    	if(mongoDB.getMongo() != null){
+	    		mongoDB.getMongo().close();
+	    	}
+		}
+		
+		return ListMqv;
 	}
 	
 	public static List<String> getFilterOnIndustryByAggregateFromMongo(){

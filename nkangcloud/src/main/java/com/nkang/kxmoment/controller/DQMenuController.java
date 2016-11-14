@@ -110,4 +110,15 @@ public class DQMenuController {
 		request.getSession().setAttribute("totalOPSI", totalOPSI);
 		return "DQMenu";
 	}
+	
+	/*
+	 * author  chang-zheng
+	 */
+	@RequestMapping("/GetDataQualityReportByParameter")
+	public @ResponseBody List<MdmDataQualityView> getDataQualityReport(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "userState") String userState)
+	{
+		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
+		List<MdmDataQualityView> mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
+		return mqvByStateCity;
+	}
 }
