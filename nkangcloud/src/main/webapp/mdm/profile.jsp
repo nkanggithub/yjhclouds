@@ -204,6 +204,20 @@ var $j = jQuery.noConflict();
 $j(window).load(function() {
 	getWeather();
 });
+function getLocation(){
+	//$j("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
+	$j("#locationImg").attr("src","../MetroStyleFiles/loading.gif" );
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getLocation",
+		data : {uid:$j("#uid").val()},
+		cache : false,
+		success : function(data) {
+			$j("#location").text(data);
+			$j("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
+		}
+	});
+}
 function getWeather(){
 	jQuery.ajax({
 		type : "GET",
@@ -305,7 +319,7 @@ function getNowFormatDate() {
       </script>
   </head>
   <body>
-
+<input id="uid" type="hidden" value="<%=uid%>"/>
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -332,8 +346,8 @@ function getNowFormatDate() {
         <div class="BDheading">
           <div class="span12"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
-            <h2><nobr> <span class="colorDarkBlue"><%= curLoc%></span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
-            <img src="../MetroStyleFiles/setuplocation.png" style="height:25px;"/>
+            <h2><nobr> <span class="colorDarkBlue" id="location"><%= curLoc%></span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
+            <img src="../MetroStyleFiles/setuplocation.png" onclick="getLocation();" id="locationImg" style="height:25px;cursor:pointer;"/>
             </span></nobr></h2>
           </div>
         </div>
