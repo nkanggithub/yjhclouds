@@ -208,7 +208,7 @@ function getWeather(){
 	jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getWeather",
-		data : {location:$j('#location').text()},
+		data : {},
 		cache : false,
 		success : function(data) {
 			var jsons = eval('(' + data + ')');
