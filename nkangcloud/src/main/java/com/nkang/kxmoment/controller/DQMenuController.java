@@ -28,7 +28,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class DQMenuController {
-	
+	private List<Object[]> tempString=null;
 	public DQMenuController()
 	{
 		System.out.println("start to load dqmenu class......");
@@ -53,6 +53,8 @@ public class DQMenuController {
 	{
 		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
 		List<Object[]> finalString=new ArrayList<Object[]>();
+		if(tempString==null){
+		
 		Object[] a = new Object[11];
 		a[0]="客户";
 		Object[] b = new Object[11];
@@ -79,7 +81,9 @@ public class DQMenuController {
     	finalString.add(b);
     	finalString.add(c);
     	finalString.add(d);
-		return finalString;
+    	tempString=finalString;
+		}
+		return tempString;
 	}
 	
 	@RequestMapping("/DQMenu")
