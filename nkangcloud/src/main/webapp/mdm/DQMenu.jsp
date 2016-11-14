@@ -378,7 +378,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
  
 	<!-- START METROTAB -->
     <div class="metrotabs" >
-        <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-40px;left:5px" >
+        <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-25px;left:5px" >
             <div id="tileboxjs" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//datalake.png" alt="">
