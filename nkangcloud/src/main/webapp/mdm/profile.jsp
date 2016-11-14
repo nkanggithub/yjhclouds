@@ -306,8 +306,8 @@ $j(window).load(function() {
         <div class="BDheading">
           <div class="span12"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
-            <h2><nobr> <span class="colorDarkBlue">Location:</span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
-            <%= curLoc%>
+            <h2><nobr> <span class="colorDarkBlue"><%= curLoc%></span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
+            <img src="../MetroStyleFiles/setuplocation.png" style="height:20px;"/>
             </span></nobr></h2>
           </div>
         </div>
@@ -327,7 +327,7 @@ $j(window).load(function() {
             <div class="TABclass">
               <ul class="nav nav-tabs" id="myTabs">
                 <li id="liSocialElements" class="active"><a href="#SocialElements" data-toggle="tab">Social Elements</a></li>
-                <li id="liBoardContent" ><a href="#BoardContent" data-toggle="tab">Profile</a></li>
+                <li id="liBoardContent" ><a href="#BoardContent" data-toggle="tab">Recognition</a></li>
                 <li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work Mates</a></li>
               </ul>
               <div class="tab-content" id="dvTabContent">
@@ -438,6 +438,22 @@ $j(window).load(function() {
                   </div>
                 </div>
                   <div class="tab-pane active" id="SocialElements">
+                   <!-- start -->
+ <div  style="float:right;padding-bottom:10px;"><a class="" data-toggle="modal" href="#WeatherDetails">Detail>> </a></div>
+                            
+                  <div id="WeatherDetails" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
+                <div class="modal-header">
+                 <b>推荐指数</b>
+                </div>
+                <div class="modal-body readmoreHpop" style="white-space: pre-line;padding:0px;">
+                	<table width="95%" align="center" id="weather_suggest" style="margin-top:-15px;">
+		                     </table>
+		        </div>
+                <div class="modal-footer">               
+						<button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>
+              </div>
+              <!-- end -->
                   <!-- 
                		   <div id="weather_div_loading">
                		   <img alt="内容加载中,请稍后..." src="../MetroStyleFiles/loading.gif" height="55" width="55">
@@ -445,12 +461,8 @@ $j(window).load(function() {
                		   </div> style="display:none"
                		    -->
                   		<div id="weather_div">
-		                   <div class="modal-header">
 		                       <table width="100%" id="weather">
 		                       </table>
-		                    </div>
-		                   	<table width="100%" id="weather_suggest">
-		                     </table>
 	                  </div>
                   </div>
                 <div class="tab-pane" id="WorkMates">
