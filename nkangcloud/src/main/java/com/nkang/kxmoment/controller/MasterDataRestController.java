@@ -424,11 +424,5 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-	
-	@RequestMapping("/CallGetNearByOpptFromMongoDB")
-	public static List<ExtendedOpportunity> CallGetNearByOpptFromMongoDB(){
-		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
-		Oppts = MongoDBBasic.getNearByOpptFromMongoDB("重庆市", "沙坪坝区", "沙坪坝区", "customer", "29.605249", "106.361582");
-		return Oppts;
-	}
+
 }
