@@ -202,52 +202,74 @@ a:hover,a:link{
 <script>
 var $j = jQuery.noConflict();
 $j(window).load(function() {
-	jQuery.ajax({
-			type : "GET",
-			url : "../userProfile/getWeather",
-			data : {location:$j('#location').text()},
-			cache : false,
-			success : function(data) {
-				var jsons = eval('(' + data + ')');
-				if(jsons.status='success'){
-					var tbody;
-					for(var i=0;i<jsons.results[0].weather_data.length;i++){
-						var temp=jsons.results[0].weather_data[i];
-						var tr="<tr>";
-						if(i==0){
-							tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b></td></tr><tr>';
-							tr+='<td width="20%" align="left">今天</td>';
-						}else{
-							tr+='<td width="20%" align="left">'+temp.date+'</td>';
-						}
-						tr+='<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+temp.weather +'</td>';
-						tr+='<td width="25%" align="right">'+temp.temperature+' </td>';
-						 tr+="</tr>";
-						 tbody+=tr;
-					}
-					$j('#weather').html(tbody);
-				//	$j('weather_div_loading').css({'display':'none'});
-				//	$j('weather_div').css({'display':'block'});
-					tbody="";
-					for(var i=0;i<jsons.results[0].index.length;i++){
-						var temp=jsons.results[0].index[i];
-						var tr="<tr>";
-						var tipt;
-						if(temp.tipt.length > 4){
-							tipt="紫外线";
-						}else{
-							tipt=temp.tipt;
-						}
-						tr+='<td width="15%" align="right" valign="top" ><nobr><b>'+tipt+'：</b></nobr></td>';
-						tr+='<td width="85%" align="left">'+temp.des+'</td>';
-						 tr+="</tr>";
-						 tbody+=tr;
-					}
-					$j('#weather_suggest').html(tbody);
-				}
-			}
-		});
+	getWeather();
 });
+function getWeather(){
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getWeather",
+		data : {location:$j('#location').text()},
+		cache : false,
+		success : function(data) {
+			var jsons = eval('(' + data + ')');
+			if(jsons.status='success'){
+				var tbody;
+				for(var i=0;i<jsons.results[0].weather_data.length;i++){
+					var temp=jsons.results[0].weather_data[i];
+					var tr="<tr>";
+					if(i==0){
+						tr+='<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>18℃</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
+						//tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b> <img src="../MetroStyleFiles/refresh.png" style="height:30px;cursor:pointer;" onclick="getWeather();"/></td></tr><tr>';
+						tr+='<td width="20%" align="left">今天</td>';
+					}else{
+						tr+='<td width="20%" align="left">'+temp.date+'</td>';
+					}
+					tr+='<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+temp.weather +'</td>';
+					tr+='<td width="25%" align="right">'+temp.temperature+' </td>';
+					 tr+="</tr>";
+					 tbody+=tr;
+				}
+				tbody+='<tr><td colspan="3" align="center">'+getNowFormatDate()+'</td></tr>';
+				$j('#weather').html(tbody);
+			//	$j('weather_div_loading').css({'display':'none'});
+			//	$j('weather_div').css({'display':'block'});
+				tbody="";
+				for(var i=0;i<jsons.results[0].index.length;i++){
+					var temp=jsons.results[0].index[i];
+					var tr="<tr>";
+					var tipt;
+					if(temp.tipt.length > 4){
+						tipt="紫外线";
+					}else{
+						tipt=temp.tipt;
+					}
+					tr+='<td width="15%" align="right" valign="top" ><nobr><b>'+tipt+'：</b></nobr></td>';
+					tr+='<td width="85%" align="left">'+temp.des+'</td>';
+					 tr+="</tr>";
+					 tbody+=tr;
+				}
+				$j('#weather_suggest').html(tbody);
+			}
+		}
+	});
+}
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes();
+          //  + seperator2 + date.getSeconds();
+    return currentdate;
+}
     //  $j = jQuery.noConflict();
       function myAlter(err) {
           $('#myAlterMessage').html(err);
@@ -307,7 +329,7 @@ $j(window).load(function() {
           <div class="span12"> 
             <div id="divBoardName"  style="dispaly:none" title='LBName'></div>
             <h2><nobr> <span class="colorDarkBlue"><%= curLoc%></span> <span style="float:right;margin-right:10px;" class="colorDarkBlue" id="location"> 
-            <img src="../MetroStyleFiles/setuplocation.png" style="height:20px;"/>
+            <img src="../MetroStyleFiles/setuplocation.png" style="height:25px;"/>
             </span></nobr></h2>
           </div>
         </div>
@@ -439,11 +461,9 @@ $j(window).load(function() {
                 </div>
                   <div class="tab-pane active" id="SocialElements">
                    <!-- start -->
- <div  style="float:right;padding-bottom:10px;"><a class="" data-toggle="modal" href="#WeatherDetails">Detail>> </a></div>
-                            
                   <div id="WeatherDetails" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
-                <div class="modal-header">
-                 <b>推荐指数</b>
+                <div class="modal-header" style="text-align:center;">
+                 <img src="../MetroStyleFiles/index.png" style="height:55px;"/>
                 </div>
                 <div class="modal-body readmoreHpop" style="white-space: pre-line;padding:0px;">
                 	<table width="95%" align="center" id="weather_suggest" style="margin-top:-15px;">
@@ -461,7 +481,7 @@ $j(window).load(function() {
                		   </div> style="display:none"
                		    -->
                   		<div id="weather_div">
-		                       <table width="100%" id="weather">
+		                       <table width="100%" id="weather" style="margin-bottom:-20px;">
 		                       </table>
 	                  </div>
                   </div>
