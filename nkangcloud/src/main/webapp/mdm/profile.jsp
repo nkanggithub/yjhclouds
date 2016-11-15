@@ -216,6 +216,8 @@ function getLocation(){
 	});
 }
 function getWeather(){
+	if($j("#refreshImg")!=null&&$j("#refreshImg")!=undefined)
+	$j("#refreshImg").attr("src","../MetroStyleFiles/loading.gif" );
 	jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getWeather",
@@ -233,7 +235,7 @@ function getWeather(){
 						var start=dateT.lastIndexOf("：");
 						var end=dateT.lastIndexOf(")");
 						dateT=dateT.substring(start+1,end);
-						tr+='<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'+dateT+'</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
+						tr+='<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img id="refreshImg" src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'+dateT+'</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
 						//tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b> <img src="../MetroStyleFiles/refresh.png" style="height:30px;cursor:pointer;" onclick="getWeather();"/></td></tr><tr>';
 						tr+='<td width="20%" align="left">今天</td>';
 					}else{
@@ -264,6 +266,7 @@ function getWeather(){
 					 tbody+=tr;
 				}
 				$j('#weather_suggest').html(tbody);
+				$j("#refreshImg").attr("src","../MetroStyleFiles/refresh.png" );
 			}
 		}
 	});
