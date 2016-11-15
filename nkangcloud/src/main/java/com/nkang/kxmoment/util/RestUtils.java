@@ -22,7 +22,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -130,7 +129,7 @@ public class RestUtils {
 	
 	
 	public static String  getWeatherInform(String cityName){ 
-         String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=重庆&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
+         String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=??&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
          StringBuffer strBuf;  
          try {                              
              baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location="+URLEncoder.encode(cityName, "utf-8")+"&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";                    
@@ -147,7 +146,7 @@ public class RestUtils {
 	         System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	         System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	         URLConnection conn = url.openConnection();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//转码。  
+             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//???  
              String line = null;  
              while ((line = reader.readLine()) != null)  
                  strBuf.append(line + " ");  
@@ -1365,21 +1364,26 @@ public class RestUtils {
 	}
 
 	public static String CallLoadClientIntoMongoDB(String ClientID,
-			String ClientIdentifier, String ClientDesc) {
+			String ClientIdentifier, String ClientDesc, String WebService) {
 		String ret = "";
 		String message= "";
 		String parStr = "ClientID=" + URLEncoder.encode(ClientID);
 		parStr = parStr + "&ClientIdentifier="
 				+ URLEncoder.encode(ClientIdentifier);
 		parStr = parStr + "&ClientDesc=" + URLEncoder.encode(ClientDesc);
+		parStr = parStr + "&WebService=" + URLEncoder.encode(WebService);
+
+		String parStr2 = "{\"ClientID\":\""+ ClientID +"\",\"ClientIdentifier\":\""+ ClientIdentifier +"\", \"ClientDesc\":\""+ ClientDesc +"\",  \"WebService\":\""+ WebService +"\"}";
+	    log.info("-----JSON---" + parStr2);
+		
+
 		String url = "http://"+Constants.baehost+"/LoadClientIntoMongoDB?" + parStr;
+		//String url = "http://"+Constants.baehost+"/LoadClientIntoMongoDB";
 		try {
 			URL urlGet = new URL(url);
-			HttpURLConnection http = (HttpURLConnection) urlGet
-					.openConnection();
-			http.setRequestMethod("GET"); // must be get request
-			http.setRequestProperty("Content-Type",
-					"application/x-www-form-urlencoded");
+			HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+			http.setRequestMethod("POST"); // must be get request
+			http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 			http.setDoOutput(true);
 			http.setDoInput(true);
 			if (localInd == "Y") {
@@ -1462,7 +1466,7 @@ public class RestUtils {
 	         System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	         System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	         URLConnection conn = url.openConnection();
-             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//转码。  
+             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//???  
              String line = null;  
              while ((line = reader.readLine()) != null)  
                  strBuf.append(line + " ");  
