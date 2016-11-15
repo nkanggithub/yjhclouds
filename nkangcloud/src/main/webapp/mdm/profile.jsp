@@ -254,7 +254,7 @@ function getWeather(){
 		cache : false,
 		success : function(data) {
 			var jsons = eval('(' + data + ')');
-			if(jsons.status='success'){
+			if(jsons.status=='success'&&jsons.results.length>0){
 				var tbody;
 				for(var i=0;i<jsons.results[0].weather_data.length;i++){
 					var temp=jsons.results[0].weather_data[i];
