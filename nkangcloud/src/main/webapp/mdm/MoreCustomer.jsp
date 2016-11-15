@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>  
-<%@ page import="com.nkang.kxmoment.util.DBUtils"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
@@ -61,7 +61,7 @@ int curNum = 0;
 			var div = document.getElementById('scroller');
 	        var lis = div.getElementsByTagName("li");
 	        curNum = lis.length;
-			<%= DBUtils.getJSMoreFiveOfCustomers(fromUserName, "customer", curNum)%>
+			<%= MongoDBBasic.getJSMoreFiveOfCustomersFromMongoDB(fromUserName, "customer", curNum)%>
 			myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
 		}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
@@ -73,7 +73,7 @@ int curNum = 0;
 			var div = document.getElementById('scroller');
 	        var lis = div.getElementsByTagName("li");
 	        curNum = lis.length;
-			<%= DBUtils.getJSMoreFiveOfCustomers(fromUserName, "customer", curNum)%>
+			<%= MongoDBBasic.getJSMoreFiveOfCustomersFromMongoDB(fromUserName, "customer", curNum)%>
 			myScroll.refresh();		// Remember to refresh when contents are loaded (ie: on ajax completion)
 		}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
@@ -292,7 +292,7 @@ body {
 		</div>
 
 		<ul id="thelist">
-			<%= DBUtils.getJSListOfCustomers(fromUserName, "customer")%>
+			<%= MongoDBBasic.getJSListOfCustomersFromMongoDB(fromUserName, "customer")%>
 		</ul>
 		<div id="pullUp">
 			<span class="pullUpIcon"></span><span class="pullUpLabel">Pull Up to Refresh...</span>

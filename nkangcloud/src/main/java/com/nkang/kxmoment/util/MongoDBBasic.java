@@ -1,22 +1,16 @@
 package com.nkang.kxmoment.util;
 
-import static java.util.Arrays.asList;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
+
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -1037,5 +1031,48 @@ public class MongoDBBasic {
 		
 		return false;
 	    }
+	    
+	    public static String getJSListOfCustomersFromMongoDB(String fromUserName, String bizType){
+		GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
+		String lat = geol.getLAT();
+		String lng = geol.getLNG();
+		List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
+		List<String> cityInfo = new ArrayList<String>();
+		cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
+		NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), bizType, lat, lng);
+		int opptCnt = NearByOpptsExt.size();
+		String Ret = "";
+		int it = 30;
+		if(opptCnt <= 30){
+			it = opptCnt;
+		}
+		for(int i = 0; i < it ; i ++){
+			//Ret =  Ret + "<li>" + NearByOpptsExt.get(i).getDistance() + " KM " + NearByOpptsExt.get(i).getOpptName() + "<br />" + NearByOpptsExt.get(i).getSegmentArea() + "</li>";
+			Ret =  Ret + "<li id=\" customer" + i + " \"><span style='float:left;'>" + NearByOpptsExt.get(i).getOpptName() + " </span> <span style='float:right;'>" + NearByOpptsExt.get(i).getDistance() + " KM </span></li>";
+		}
+
+	    return Ret;
+	}
+	    
+	    public static String getJSMoreFiveOfCustomersFromMongoDB(String fromUserName, String bizType, int lastLi){
+
+		GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
+		String lat = geol.getLAT();
+		String lng = geol.getLNG();
+		List<ExtendedOpportunity> NearByOpptsExt =  new ArrayList<ExtendedOpportunity>();
+		List<String> cityInfo = new ArrayList<String>();
+		cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
+		NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), bizType, lat, lng);
+		int opptCnt = NearByOpptsExt.size();
+		String Ret = "";
+		
+		for (int i=0; i<5; i++) {
+			Ret = Ret + "li = document.createElement('li'); ";
+			Ret = Ret + "li.setAttribute('id','customer" + i + "');";
+			Ret = Ret + "li.innerHTML = '<span style=\" float:left;\">" + NearByOpptsExt.get(i).getOpptName() + "</span><span style=\" float:right; \">" +NearByOpptsExt.get(i).getDistance() + "</span>'; ";
+			Ret = Ret + "el.appendChild(li, el.childNodes[0]); ";
+		}
+		return Ret;
+	}
 	    // END
 }
