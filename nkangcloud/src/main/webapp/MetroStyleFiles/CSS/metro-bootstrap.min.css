@@ -5158,6 +5158,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 	text-align:center;
 	font-size: 13px;
 	margin-bottom: 0;
+    margin-top: -80px;
 }
 
 .panel>.list-group {
