@@ -371,7 +371,7 @@ function getNowFormatDate() {
           <div class="span12">
             <div class="TABclass">
               <ul class="nav nav-tabs" id="myTabs">
-                <li id="liSocialElements" class="active"><a href="#SocialElements" data-toggle="tab">Social Elements</a></li>
+                <li id="liSocialElements" class="active"><a href="#SocialElements" data-toggle="tab">Socialization</a></li>
                 <li id="liBoardContent" ><a href="#BoardContent" data-toggle="tab">Recognition</a></li>
                 <li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work Mates</a></li>
               </ul>
