@@ -221,7 +221,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		
 		function loadChart(obj){
 			var chartobj = $("#chart3");
-			$("#openfooter_loadC3").html(chartobj);
+/* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
@@ -233,7 +233,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		
 		function loadChart2(){
 	 		var chartobj = $("#chart2");
-	 		$("#openfooter_loadC2").append(chartobj);
+/* 	 		$("#openfooter_loadC2").append(chartobj); */
 			//$("#openfooter_loadC2").html(chartobj);
 			 $("#chart3").hide();
 			 $("#chart4").hide();
@@ -481,30 +481,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 </section>
 
  
-<div id="chart3">
-		<script>
-			var chart = c3.generate({
-						data : {
-							columns : [ 
-									        [ 'Customer',60],
-											[ 'Partner', 30],
-											[ 'Competitor', 5],
-											[ 'Lead', 5] 
-						    		  ],
-							type : 'pie'
-						},
-						pie : {
-							label : {
-								format : function(value, ratio, id) {
-									return d3.format('#')(value);
-								}
-							}
-						},
-						bindto : '#chart3'
-					});
-			$("#chart3").hide();
-		</script>
-</div>
 <div id="chart2">
  </div>
  <div id="chart3Radar" onclick="javascript:loadChartRadarWithDetail(this);">
@@ -770,7 +746,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
 
 <!-- MetroTab Content espresso浓缩-->
-<div data-mtid="espresso" id="openfooter_loadC22"> 
+<div data-mtid="espresso" id="openfooter_loadC22" style="display:none"> 
 	<div id="openfooter_loadC2"></div>
 </div>
 <!-- End MetroTab Content  espresso浓缩-->
@@ -797,9 +773,11 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
 
 <!-- Start MetroTab Content 玛琪雅朵-->
-<div data-mtid="openfooter" id="openfooter_loadC33">
-	<div id="openfooter_loadC3"></div>
+ <div data-mtid="openfooter" id="openfooter_loadC33" style="display:none">
+	<div id="openfooter_loadC3">
+
 </div>
+</div> 
 <!-- End MetroTab Content 玛琪雅朵-->
 
 
@@ -911,7 +889,33 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 </div> -->
 <!-- END MESSAGE STATION -->
 
+	<div id="chart3">
+		<script>
+			var chart = c3.generate({
+						data : {
+							columns : [ 
+									        [ 'Customer',60],
+											[ 'Partner', 30],
+											[ 'Competitor', 5],
+											[ 'Lead', 5] 
+						    		  ],
+							type : 'pie'
+						},
+						pie : {
+							label : {
+								format : function(value, ratio, id) {
+									return d3.format('#')(value);
+								}
+							}
+						},
+						bindto : '#chart3'
+					});
+			$("#chart3").hide();
+		</script>
+</div>
+	<div id="chart2">
 
+</div>
 <div class="panel-footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
 
 </body></html>
