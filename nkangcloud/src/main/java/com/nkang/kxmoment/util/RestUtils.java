@@ -35,7 +35,7 @@ public class RestUtils {
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "N";
 	public static String getAccessKey() {
-			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
+			String url = "https://"+Constants.baiduapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
 			String expires_in = null;
 			try {
@@ -72,7 +72,7 @@ public class RestUtils {
 	public static WeChatUser getWeChatUserInfo(String akey, String openID){
 		WeChatUser wcu = new WeChatUser();
 		
-		String url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token="+ akey +"&openid="+ openID;
+		String url = "https://"+Constants.baiduapihost+"/cgi-bin/user/info?access_token="+ akey +"&openid="+ openID;
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -388,7 +388,7 @@ public class RestUtils {
     
     public static String createMenu(String access_token) {
         String menu = "{\"button\":[{\"name\":\"Near By\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Opportunity\",\"key\":\"nboppt\"},{\"type\":\"click\",\"name\":\"Customer\",\"key\":\"nbcust\"},{\"type\":\"click\",\"name\":\"Competitor\",\"key\":\"nbcompe\"},{\"type\":\"click\",\"name\":\"Partner\",\"key\":\"nbpartner\"}]},{\"name\":\"MDG\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Data Lake\",\"key\":\"MDLAKE\"},{\"type\":\"click\",\"name\":\"Customer Care\",\"key\":\"05_SIGN\"}]}]}";
-        String action = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+access_token;
+        String action = "https://"+Constants.baiduapihost+"/cgi-bin/menu/create?access_token="+access_token;
           try {
              URL url = new URL(action);
              HttpURLConnection http =   (HttpURLConnection) url.openConnection();    
@@ -423,7 +423,7 @@ public class RestUtils {
 
     public static String deleteMenu(String access_token)
      {
-         String action = "https://api.weixin.qq.com/cgi-bin/menu/delete? access_token="+access_token;
+         String action = "https://"+Constants.baiduapihost+"/cgi-bin/menu/delete? access_token="+access_token;
          try {
             URL url = new URL(action);
             HttpURLConnection http =   (HttpURLConnection) url.openConnection();    
@@ -476,7 +476,7 @@ public class RestUtils {
     
     
 	public static String callMasterDataUpsert(OrgOtherPartySiteInstance opsi) throws UnsupportedEncodingException {
-		String url = "http://shenan.duapp.com/masterdataupsert?";
+		String url = "http://"+Constants.baehost+"/masterdataupsert?";
 		if(opsi != null){
 			if(!StringUtils.isEmpty(opsi.getSiteInstanceId())){
 				url = url + "siteInstanceId="+URLEncoder.encode(opsi.getSiteInstanceId(),"UTF-8");
@@ -744,7 +744,7 @@ public class RestUtils {
 	}
 
 	public static String callGetValidAccessKey(){
-		String url = "http://shenan.duapp.com/getValidAccessKey";
+		String url = "http://"+Constants.baehost+"/getValidAccessKey";
 		String message="error";
 		try {
 	           URL urlGet = new URL(url);
@@ -775,7 +775,7 @@ public class RestUtils {
 	}
 	
 	public static MdmDataQualityView callGetDataQualityReport(){
-		String url = "http://shenan.duapp.com/getDataQualityReport";
+		String url = "http://"+Constants.baehost+"/getDataQualityReport";
 		String message="error";
 		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
 		try {
@@ -897,7 +897,7 @@ public class RestUtils {
 		if(localInd == "Y"){
 			try {
 					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
-					String url = "http://shenan.duapp.com/getDataQualityReportByParameter?";
+					String url = "http://"+Constants.baehost+"/getDataQualityReportByParameter?";
 					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
 						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
 						url =  url + "stateProvince="+stateProvince;
@@ -960,7 +960,7 @@ public class RestUtils {
 	}
 	
 	public static GeoLocation callGetDBUserGeoInfo(String OpenId){
-		String url = "http://shenan.duapp.com/getDBUserGeoInfo?OpenID="+OpenId;
+		String url = "http://"+Constants.baehost+"/getDBUserGeoInfo?OpenID="+OpenId;
 		String message="error";
 		GeoLocation geoLocation = new GeoLocation();
 		try {
@@ -1045,7 +1045,7 @@ public class RestUtils {
 	}
 	
 	public static String CallGetJSFirstSegmentArea(){
-		String url = "http://shenan.duapp.com/getFilterSegmentArea";
+		String url = "http://"+Constants.baehost+"/getFilterSegmentArea";
 		String message="error";
 		
 		List<String> listOfSegmentArea = new ArrayList<String>();
@@ -1093,7 +1093,7 @@ public class RestUtils {
 	}
 	
 	public static List<String> CallGetJSFirstSegmentAreaFromMongo(String cntOfOPSI,String state){
-		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);
+		String url = "http://"+Constants.baehost+"/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);
 		String message="error";
 		List<String> listOfSegmentArea = new ArrayList<String>();
 
@@ -1140,7 +1140,7 @@ public class RestUtils {
 	}
 	
 	public static List<String> CallGetJSFirstSegmentAreaListFromMongo(String state){
-		String url = "http://shenan.duapp.com/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);;
+		String url = "http://"+Constants.baehost+"/getFilterSegmentAreaFromMongo?state="+URLEncoder.encode(state);;
 		String message="error";
 		List<String> listOfSegmentArea = new ArrayList<String>();
 		
@@ -1198,7 +1198,7 @@ public class RestUtils {
 	}
 	
 	public static String callInsertCommentsFromVisitor(String OpenID, String InputValue){
-		String url = "http://shenan.duapp.com/insertCommentsFromVisitor?OpenID="+OpenID+"&comments="+InputValue;
+		String url = "http://"+Constants.baehost+"/insertCommentsFromVisitor?OpenID="+OpenID+"&comments="+InputValue;
 		String message = "false";
 		try {
 	           URL urlGet = new URL(url);
@@ -1228,7 +1228,7 @@ public class RestUtils {
 	}
 	
 	public static String callgetFilterRegionFromMongo(String state){
-		String url = "http://shenan.duapp.com/getFilterRegionFromMongo?state="+state;
+		String url = "http://"+Constants.baehost+"/getFilterRegionFromMongo?state="+state;
 		String message = "false";
 		try {
 	           URL urlGet = new URL(url);
@@ -1261,7 +1261,7 @@ public class RestUtils {
 	public static String CallgetFilterTotalOPSIFromMongo(String state, String nonlatinCity, String cityRegion){
 		String message = "false";
 		if(localInd == "Y"){
-			String url = "http://shenan.duapp.com/getFilterTotalOPSIFromMongo";
+			String url = "http://"+Constants.baehost+"/getFilterTotalOPSIFromMongo";
 			
 			if(state != "" && state!= null && state.toLowerCase()!= "null"){
 				state = URLEncoder.encode(state);
@@ -1321,7 +1321,7 @@ public class RestUtils {
 		//	if(localInd == "Y"){
 			String parStr = "industrySegmentNames="+URLEncoder.encode(industrySegmentNames);
 			parStr = parStr + "&state="+URLEncoder.encode(state);
-			String url = "http://shenan.duapp.com/getFilterCountOnCriteriaFromMongo?"+parStr;
+			String url = "http://"+Constants.baehost+"/getFilterCountOnCriteriaFromMongo?"+parStr;
 			try {
 		           URL urlGet = new URL(url);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -1367,7 +1367,7 @@ public class RestUtils {
 		String message = "false";
 		if(localInd == "Y"){
 			String parStr = "state="+URLEncoder.encode(state);
-			String url = "http://shenan.duapp.com/getFilterNonLatinCityFromMongo?"+parStr;
+			String url = "http://"+Constants.baehost+"/getFilterNonLatinCityFromMongo?"+parStr;
 			try {
 		           URL urlGet = new URL(url);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -1438,7 +1438,7 @@ public class RestUtils {
 		parStr = parStr + "&ClientIdentifier="
 				+ URLEncoder.encode(ClientIdentifier);
 		parStr = parStr + "&ClientDesc=" + URLEncoder.encode(ClientDesc);
-		String url = "http://shenan.duapp.com/LoadClientIntoMongoDB?" + parStr;
+		String url = "http://"+Constants.baehost+"/LoadClientIntoMongoDB?" + parStr;
 		try {
 			URL urlGet = new URL(url);
 			HttpURLConnection http = (HttpURLConnection) urlGet
@@ -1477,7 +1477,7 @@ public class RestUtils {
 	public static List<ClientInformation> CallGetClientFromMongoDB() {
 		List<ClientInformation> ret = new ArrayList<ClientInformation>();
 		String message= "";
-		String url = "http://shenan.duapp.com/CallGetClientFromMongoDB";
+		String url = "http://"+Constants.baehost+"/CallGetClientFromMongoDB";
 		if(localInd == "Y"){
 			try {
 				URL urlGet = new URL(url);
