@@ -902,7 +902,6 @@ public class MongoDBBasic {
 	    try{
 	    	DBCursor queryresults = mongoDB.getCollection(wechat_user).find().limit(100);
             if (null != queryresults) {
-            	log.info("--Result:" + queryresults.toString());
             	while(queryresults.hasNext()){
             		weChatMDLUser = new WeChatMDLUser();
             		DBObject o = queryresults.next();
