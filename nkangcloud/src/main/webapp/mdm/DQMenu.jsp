@@ -139,7 +139,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 							    bindto : '#chart2'
 							});
 						 
-							
+							console.log("pass by....");
 					  }
 				},
 				error:function(data)
@@ -152,7 +152,47 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			  loadChart2();
 		});
 		
-		
+		$("#openfooter").on("click",function(){
+			var chart3HTML=$("#chart3").html();
+			  if(chart3HTML==""){
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "getOpenfooter",
+				success : function(data) {
+					  if (data) {
+						  var chart = c3.generate({
+								data : {
+									columns : [
+										          data[0],
+										          data[1],
+										         data[2],
+										         data[3]
+								    		  ],
+									type : 'pie'
+								},
+								pie : {
+									label : {
+										format : function(value, ratio, id) {
+											return d3.format('#')(value);
+										}
+									}
+								},
+								bindto : '#chart3'
+							});
+						 
+							
+					  }
+				},
+				error:function(data)
+				{
+					console.log("failed..."+data.toString());
+				}
+			
+		});
+		} 
+			  loadChart();
+		});
 		// $("#conporlan").bind("click", loadChart4);
 		//document.getElementById("conporlan").addEventListener('click',loadChart4,false);
 		//var clickEvent = $("#conporlan").data('events')["click"];
@@ -222,7 +262,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			$(".mes-openbt").openmes({ext: 'php'});
 		});
 		
-		function loadChart(obj){
+		function loadChart(){
 			 $("#chart3").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
@@ -413,7 +453,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
                 </a>
             </div>
             
-			<div id="openfooter" onclick="javascript:loadChart(this);" class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
+			<div id="openfooter"  class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//visualview.png" alt="">
 	                <span class="light-text">Business Type</span>
@@ -899,30 +939,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 </div> -->
 <!-- END MESSAGE STATION -->
 
-	<div id="chart3">
-		<script>
-			var chart = c3.generate({
-						data : {
-							columns : [ 
-									        [ 'Customer',60],
-											[ 'Partner', 30],
-											[ 'Competitor', 5],
-											[ 'Lead', 5] 
-						    		  ],
-							type : 'pie'
-						},
-						pie : {
-							label : {
-								format : function(value, ratio, id) {
-									return d3.format('#')(value);
-								}
-							}
-						},
-						bindto : '#chart3'
-					});
-			$("#chart3").hide();
-		</script>
-</div>
+	<div id="chart3"></div>
 	<div id="chart2"></div>
 <div class="panel-footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
 
