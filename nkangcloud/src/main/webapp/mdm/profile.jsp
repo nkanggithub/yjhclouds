@@ -50,9 +50,6 @@ if(session.getAttribute("location")==null){
 	<script src="../nkang/js_athena/common-scripts.js"></script>
 
 <style>
-*:hover,*:active {
-border:0px;
-	}
 	#weather{
 		margin-bottom:20px;
 	}
