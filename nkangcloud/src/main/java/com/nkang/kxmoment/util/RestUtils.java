@@ -1518,7 +1518,31 @@ public class RestUtils {
 		}
 		return ret;
 	}
-	
+	public static  String getMDLUserLists(){
+		String urlStr = "http://shenan.duapp.com/CallGetWeChatUserFromMongoDB";
+		StringBuffer strBuf =new StringBuffer("");
+		try {
+			 URL url = new URL(urlStr);  
+             if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	         } 
+	         System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	         System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	         URLConnection conn = url.openConnection();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//转码。  
+             String line = null;  
+             while ((line = reader.readLine()) != null)  
+                 strBuf.append(line + " ");  
+                 reader.close();  
+         }catch(MalformedURLException e) {  
+             e.printStackTrace();   
+         }catch(IOException e){  
+             e.printStackTrace();   
+         }     
+         return strBuf.toString();  
+	}
+
 
 
 }
