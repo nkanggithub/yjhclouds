@@ -256,6 +256,25 @@ public class MasterDataRestController {
 		}
 		return mdmDataQualityView;
 	}
+	/*
+	 * author chang-zheng
+	 */
+	@RequestMapping("/getDataQualityReportByParameterV2")
+	public static List<MdmDataQualityView> callGetDataQualityReportByParameter(   @RequestParam(value="stateProvince", required=false) String stateProvince,
+																			@RequestParam(value="nonlatinCity", required=false) List<String> nonlatinCity,
+																			@RequestParam(value="cityRegion", required=false) String cityRegion){
+	//	MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
+		List<MdmDataQualityView> Listmv = new ArrayList<MdmDataQualityView>();
+		try{
+			//mdmDataQualityView = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
+			Listmv = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
+		}		
+		catch(Exception e){
+			//mdmDataQualityView = null;
+			Listmv =null;
+		}
+		return Listmv;
+	}
 	
 	@RequestMapping("/getFilterSegmentArea")
 	public static  List<String> callGetFilterSegmentArea(){
