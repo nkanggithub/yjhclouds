@@ -740,15 +740,22 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static String CallLoadClientIntoMongoDB(String ClientID, String ClientIdentifier,String ClientDesc){
+	public static String CallLoadClientIntoMongoDB(String ClientID, String ClientIdentifier,String ClientDesc, String WebService){
 		String ret = "error while loading client data";
 		mongoDB = getMongoDB();
 	    try{
 	    	DBObject insert = new BasicDBObject();
+	    	log.info("---1" + ClientID);
+	    	log.info("---2" + ClientIdentifier);
+	    	log.info("---3" + ClientDesc);
+	    	log.info("---4" + WebService);
+	    	
 	    	insert.put("ClientID", ClientID);
 	    	insert.put("ClientIdentifier",ClientIdentifier);
 	    	insert.put("ClientDesc", ClientDesc);
+	    	insert.put("WebService", WebService.split(","));
 			mongoDB.getCollection(client_pool).insert(insert);
+			log.info("---5--------------");
 			ret = "Loading Completed";
 	    }
 		catch(Exception e){
