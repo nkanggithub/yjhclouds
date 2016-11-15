@@ -111,13 +111,14 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		});
 		});
 		$("#espresso").on("click",function(){
-			
+			var chart2HTML=$("#chart2").html();
+			  if(chart2HTML==""){
 			$.ajax({
 				type : "POST",
 				dataType : "json",
 				url : "getChart2?userState="+$("#userState").html(),
 				success : function(data) {
-					  if (data) {				  
+					  if (data) {
 						  var chart = c3.generate({
 								data: {
 									columns: [
@@ -137,7 +138,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 							    },
 							    bindto : '#chart2'
 							});
-						  loadChart2();
+						 
 							
 					  }
 				},
@@ -147,6 +148,8 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				}
 			
 		});
+		} 
+			  loadChart2();
 		});
 		
 		
@@ -220,26 +223,31 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		});
 		
 		function loadChart(obj){
-			var chartobj = $("#chart3");
+			 $("#chart3").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
-			chartobj.show();
 			
 		}
 		
-		
+		function hideAll(obj){
+			 $("#chart3").hide();
+			 $("#chart2").hide();
+			 $("#chart4").hide();
+			 $("#chart5").hide();
+			 $("#chart3Radar").hide();
+		}
 		function loadChart2(){
-	 		var chartobj = $("#chart2");
+	 		$("#chart2").show();
 /* 	 		$("#openfooter_loadC2").append(chartobj); */
 			//$("#openfooter_loadC2").html(chartobj);
 			 $("#chart3").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
-			chartobj.show();
+
 	     }
 		
 		function loadChartRadar(obj){
@@ -261,7 +269,12 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			 $("#chart3Radar").hide();
 			chartobj.show();
 		}
-		
+		function loadOpenMe(obj)
+		{
+			$("#openMeDiv").show();
+			$("#chart3").hide();
+			 $("#chart2").hide();
+		}
 		function loadChart5(obj){
 			var chartobj = $("#chart5");
 			$("#capuqino_loadChart").html(chartobj);
@@ -377,16 +390,16 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <section id="mainform">
  
 	<!-- START METROTAB -->
-    <div class="metrotabs" >
+    <div class="metrotabs">
         <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-25px;left:5px" >
-            <div id="tileboxjs" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
+            <div id="tileboxjs"  onclick="javascript:hideAll(this);" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//datalake.png" alt="">
 	                <span class="light-text"><strong>Data Lake</strong></span>
                 </a>
             </div>
 			
-			<div id="openmes"  class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
+			<div id="openmes"   onclick="javascript:loadOpenMe(this);" class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//person.png" alt="">
 	                <span class="light-text">Show Case</span>
@@ -443,7 +456,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
         </div>
         
 <!-- START CONTENT -->
-        <div class="mt-contentblock  floatleft" style="padding: 5px; height: 100%; width:100%; display: block;">
+        <div id="openMeDiv" class="mt-contentblock  floatleft" style="padding: 5px; height: 100%; width:100%; display: block;">
 	        <div class="mt-content jspScrollable" style="height: 100%; top: 0px; overflow: hidden; padding: 0px; width: 100%;" tabindex="0">
 				<div class="jspContainer" style="width: 100%; height: 100%;">
 					<div class="jspPane" style="padding: 0px; top: 0px; width: 100%;">
@@ -480,9 +493,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<!-- END METROTAB -->
 </section>
 
- 
-<div id="chart2">
- </div>
  <div id="chart3Radar" onclick="javascript:loadChartRadarWithDetail(this);">
 	 <script>
 		var w = 250, h = 250;
@@ -913,9 +923,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			$("#chart3").hide();
 		</script>
 </div>
-	<div id="chart2">
-
-</div>
+	<div id="chart2"></div>
 <div class="panel-footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
 
 </body></html>
