@@ -12,6 +12,7 @@ import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -433,10 +434,22 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/CallGetOPSIWithOutLatLngFromMongoDB")
-	public static OrgOtherPartySiteInstance CallgetOPSIWithOutLatLngFromMongoDB(){
-		OrgOtherPartySiteInstance ret = new OrgOtherPartySiteInstance();
+	public static int CallgetOPSIWithOutLatLngFromMongoDB(){
+		int ret = 0;
 		try{
 			ret = MongoDBBasic.getOPSIWithOutLatLngFromMongoDB();
+		}		
+		catch(Exception e){
+			//ret.add(e.getMessage());
+		}
+		return ret;
+	}
+	
+	@RequestMapping("/CallGetWeChatUserFromMongoDB")
+	public static List<WeChatMDLUser> CallGetWeChatUserFromMongoDB(){
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();;
+		try{
+			ret = MongoDBBasic.getWeChatUserFromMongoDB();
 		}		
 		catch(Exception e){
 			//ret.add(e.getMessage());
