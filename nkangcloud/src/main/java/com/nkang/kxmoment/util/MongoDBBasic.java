@@ -39,11 +39,12 @@ import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
-	private static DB mongoDB;
+	private static DB mongoDB = null;
 	private static String collectionMasterDataName = "masterdata";
 	private static String access_key = "Access_Key";
 	private static String wechat_user = "Wechat_User";
@@ -51,6 +52,9 @@ public class MongoDBBasic {
 	private static String wechat_comments = "Wechat_Comments";
 
 	private static DB getMongoDB(){
+		if(mongoDB != null){
+			return mongoDB;
+		}
 		MongoClientCollection mongoClientCollection = new MongoClientCollection();
 		ResourceBundle resourceBundle=ResourceBundle.getBundle("database_info");
 		String databaseName=resourceBundle.getString("databaseName");
@@ -92,14 +96,7 @@ public class MongoDBBasic {
 			mongoDB.getCollection(access_key).update(new BasicDBObject().append("ID", "1"), update, true, false);
 		}
 		catch(Exception e){
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
-		}
-		finally{
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
+			log.info("updateAccessKey--" + e.getMessage());
 		}
 	}
 	
@@ -123,19 +120,10 @@ public class MongoDBBasic {
 	    		validKey = null;
 	    	}
 	    	
-	    }catch(Exception e){
-	    	e.printStackTrace();
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
 	    }
-	    finally{
-	    	mongoDB.getMongo().close();
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
-	    }
-	    
+		catch(Exception e){
+			log.info("QueryAccessKey--" + e.getMessage());
+		}
 	    return validKey;
 	}
 	
@@ -150,18 +138,10 @@ public class MongoDBBasic {
 	    	ret.setLat(queryresult.get("CurLAT").toString());
 	    	ret.setLng(queryresult.get("CurLNG").toString());
 	    	ret.setOpenid(OpenID);
-	    }catch(Exception e){
-	    	e.printStackTrace();
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
 	    }
-	    finally{
-	    	mongoDB.getMongo().close();
-			if(mongoDB.getMongo() != null){
-				mongoDB.getMongo().close();
-			}
-	    }
+		catch(Exception e){
+			log.info("queryWeChatUser--" + e.getMessage());
+		}
 		return ret;
 	}
 	
@@ -181,15 +161,10 @@ public class MongoDBBasic {
 	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
 			mongoDB.getCollection(wechat_user).insert(insert);
 			ret = true;
-	    }catch(Exception e){
-	    	e.printStackTrace();
-	    	ret = false;
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("createUser--" + e.getMessage());
+		}
 		return ret;
 	}
 	
@@ -202,15 +177,10 @@ public class MongoDBBasic {
 			removeQuery.put("OpenID", OpenID);
 			mongoDB.getCollection(wechat_user).remove(removeQuery);
 			ret = true;
-	    }catch(Exception e){
-	    	e.printStackTrace();
-	    	ret = false;
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("removeUser--" + e.getMessage());
+		}
 		return ret;
 	}
 	
@@ -256,18 +226,10 @@ public class MongoDBBasic {
     			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);
             }
             ret = true;
-	    }catch(Exception e){
-	    	e.printStackTrace();
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    	ret = false;
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
 		return ret;
 	}
 	
@@ -358,17 +320,10 @@ public class MongoDBBasic {
 				dbo.put("qualityGrade", opsi.getQualityGrade());
 				mongoDB.getCollection(collectionMasterDataName).insert(dbo);
 				ret = "ok";
-			} catch(Exception e){
-				ret = "error";
-		    	if(mongoDB.getMongo() != null){
-		    		mongoDB.getMongo().close();
-		    	}
-		    }
-		    finally{
-		    	if(mongoDB.getMongo() != null){
-		    		mongoDB.getMongo().close();
-		    	}
-		    }
+			} 
+			catch(Exception e){
+				log.info("mongoDBInsert--" + e.getMessage());
+			}
 		return ret;
 	}
 
@@ -383,16 +338,8 @@ public class MongoDBBasic {
 	        }
 		}
 		catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-
-	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+			log.info("getDistinctSubjectArea--" + e.getMessage());
+		}
         return result;
 	}
 
@@ -408,14 +355,10 @@ public class MongoDBBasic {
     		loc.setLAT(result.get("CurLAT").toString());
     		loc.setLNG(result.get("CurLNG").toString());
     		loc.setFAddr(result.get("FormatAddress").toString());
-	    }catch(Exception e){
-	    	e.printStackTrace();
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getDBUserGeoInfo--" + e.getMessage());
+		}
 		return loc;
 	}
 	
@@ -431,19 +374,10 @@ public class MongoDBBasic {
 	    	DBCollection result = mongoDB.getCollection(wechat_comments);
 	    	result.insert(insert);
 	    	ret = true;
-	    }catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    	ret = false;
-	    	e.printStackTrace();
-	    	log.info("error---getDBUserGeoInfo: " + e.getMessage());
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("InsertCommentsFromVisitor--" + e.getMessage());
+		}
 		return ret;
 	}
 	
@@ -475,17 +409,10 @@ public class MongoDBBasic {
 		        	}
 	    		}
 	    	}
-	    }catch(Exception e){
-	    	listOfSegmentArea.add("--1--" + e.getMessage().toString());
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterSegmentArea--" + e.getMessage());
+		}
 	    return listOfSegmentArea;
 	}
 	
@@ -514,17 +441,10 @@ public class MongoDBBasic {
 	    			listOfRegion.add((String) results.get(i));
 	    		}
 	    	}
-	    }catch(Exception e){
-	    	listOfRegion.add("--1--" + e.getMessage().toString());
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterRegionFromMongo--" + e.getMessage());
+		}
 	    return listOfRegion;
 	}
 
@@ -560,17 +480,10 @@ public class MongoDBBasic {
 	        	    }
 	    		}
 	    	}
-	    }catch(Exception e){
-	    	listOfNonLatinCities.add("--1--" + e.getMessage().toString());
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterNonLatinCitiesFromMongo--" + e.getMessage());
+		}
 	    return listOfNonLatinCities;
 	}
 	
@@ -587,17 +500,10 @@ public class MongoDBBasic {
 	    			listOfstates.add((String) results.get(i));
 	    		}
 	    	}
-	    }catch(Exception e){
-	    	listOfstates.add("--1--" + e.getMessage().toString());
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterStateFromMongo--" + e.getMessage());
+		}
 	    return listOfstates;
 	}
 	
@@ -625,18 +531,10 @@ public class MongoDBBasic {
 	    try{
 	    	//Pattern pattern = Pattern.compile("^.*name8.*$", Pattern.CASE_INSENSITIVE);
 	    	ret = String.valueOf( mongoDB.getCollection(collectionMasterDataName).count(query));
-	    }catch(Exception e){
-	    	log.info(industrySegmentNames + "-------8" + e.getMessage());
-	    	ret = "0";
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterCountOnCriteriaFromMongo--" + e.getMessage());
+		}
 	    return ret;
 	}
 	
@@ -667,17 +565,10 @@ public class MongoDBBasic {
 				ret = String.valueOf(mongoDB.getCollection(collectionMasterDataName).find().count()) ;
 			}
 	    	
-	    }catch(Exception e){
-	    	ret =  ret + "--1--" + e.getMessage().toString();
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getFilterTotalOPSIFromMongo--" + e.getMessage());
+		}
 	    return ret;
 	}
 	
@@ -755,15 +646,9 @@ public class MongoDBBasic {
 			mqv.setNumberOfThreeGrade(2000);
 			mqv.setNumberOfNonGeo(2000);
 
-		}catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 		}
-		finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+		catch(Exception e){
+			log.info("getDataQualityReport--" + e.getMessage());
 		}
 		
 		return mqv;
@@ -827,15 +712,9 @@ public class MongoDBBasic {
 				ListMqv.add(mqv);
 			}
 			
-		}catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 		}
-		finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+		catch(Exception e){
+			log.info("getDataQualityReport--" + e.getMessage());
 		}
 		
 		return ListMqv;
@@ -864,19 +743,10 @@ public class MongoDBBasic {
 			}
 			ret.add("---count---" + i);
 			ret.add("---desc---" + results.toString());
-		}catch(Exception e){
-			ret.add("--exception---" + e.getMessage());
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 		}
-		finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+		catch(Exception e){
+			log.info("getFilterOnIndustryByAggregateFromMongo--" + e.getMessage());
 		}
-
-		
 		return ret;
 	}
 	
@@ -898,16 +768,9 @@ public class MongoDBBasic {
 	    	insert.put("ClientDesc", ClientDesc);
 			mongoDB.getCollection(client_pool).insert(insert);
 			ret = "Loading Completed";
-	    }catch(Exception e){
-	    	ret = "Loading in error";
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-		}
-		finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+	    }
+		catch(Exception e){
+			log.info("CallLoadClientIntoMongoDB--" + e.getMessage());
 		}
 		return ret;
 	}
@@ -931,49 +794,44 @@ public class MongoDBBasic {
             	}
             }
 
-	    }catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-		}
-		finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+	    }
+		catch(Exception e){
+			log.info("CallGetClientFromMongoDB--" + e.getMessage());
 		}
 		return ret;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static OrgOtherPartySiteInstance getOPSIWithOutLatLngFromMongoDB() {
+	public static int getOPSIWithOutLatLngFromMongoDB() {
 		mongoDB = getMongoDB();
-		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+		int ret = 0;
 	    try{
-	    	DBObject dbquery = new BasicDBObject();  
-/*			dbquery.put("lat", null);
-			dbquery.put("lng", null);*/
-			dbquery.put("siteInstanceId", "265185667");
-			DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
-			opsi.setSiteName(queryresult.get("siteName").toString());
-			opsi.setCityRegion(queryresult.get("cityRegion").toString());
-			opsi.setSiteInstanceId(queryresult.get("siteInstanceId").toString());
-			
-			log.info("OPSI ID --------- " + opsi.getSiteInstanceId());
-			log.info("cityRegion --------- " + opsi.getCityRegion());
-			log.info("SiteName --------- " + opsi.getSiteName());
-			log.info("Query Result --------- " + queryresult.toString());
-			
-	    }catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
+	    	DBObject dbquery = new BasicDBObject(); 
+	    	dbquery.put("lat", new BasicDBObject("$eq", null));
+	    	dbquery.put("lng", new BasicDBObject("$eq", null));
+	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery).limit(10);
+            if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		log.info("----1--");
+            		DBObject o = queryresults.next();
+            		String opsi =  o.get("siteInstanceId").toString();
+            		log.info("----2--");
+            		if(!StringUtils.isEmpty(opsi)){
+            			log.info("----3--");
+            			DBObject update = new BasicDBObject();
+            	    	update.put("lat", "111");
+            	    	update.put("lng", "222");
+            			WriteResult wr = mongoDB.getCollection(collectionMasterDataName).update(new BasicDBObject().append("siteInstanceId", opsi), update);
+            			log.info("----4--");
+            			ret = ret + 1;
+            		}
+            	}
+            }
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
-	    return opsi;
+		catch(Exception e){
+			log.info("getOPSIWithOutLatLngFromMongoDB--" + e.getMessage());
+		}
+	    return ret;
 
 	}
 	
@@ -1027,17 +885,44 @@ public class MongoDBBasic {
             	}
             }
 
-	    }catch(Exception e){
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
 	    }
-	    finally{
-	    	if(mongoDB.getMongo() != null){
-	    		mongoDB.getMongo().close();
-	    	}
-	    }
+		catch(Exception e){
+			log.info("getNearByOpptFromMongoDB--" + e.getMessage());
+		}
 		return Oppts;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public static List<WeChatMDLUser> getWeChatUserFromMongoDB() {
+		mongoDB = getMongoDB();
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+		WeChatMDLUser weChatMDLUser = null;
+	    try{
+	    	DBCursor queryresults = mongoDB.getCollection(wechat_user).find().limit(100);
+            if (null != queryresults) {
+            	log.info("--Result:" + queryresults.toString());
+            	while(queryresults.hasNext()){
+            		
+            		weChatMDLUser = new WeChatMDLUser();
+            		DBObject o = queryresults.next();
+            		log.info("--Result object---:" + o.toString());
+            		weChatMDLUser.setCreated(o.get("Created").toString());
+            		weChatMDLUser.setCurLAT(o.get("CurLAT").toString());
+            		weChatMDLUser.setCurLNG(o.get("CurLNG").toString());
+            		weChatMDLUser.setFormatAddress(o.get("FormatAddress").toString());
+            		weChatMDLUser.setHeadUrl(o.get("HeadUrl").toString());
+            		weChatMDLUser.setLastUpdatedDate(o.get("LastUpdatedDate").toString());
+            		weChatMDLUser.setNickName(o.get("NickName").toString());
+            		weChatMDLUser.setOpenID(o.get("OpenID").toString());
+            		if(weChatMDLUser != null){
+            			ret.add(weChatMDLUser);
+            		}
+            	}
+            }
+	    }
+		catch(Exception e){
+			log.info("getWeChatUserFromMongoDB--" + e.getMessage());
+		}
+	    return ret;
+	}
 }
