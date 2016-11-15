@@ -295,6 +295,7 @@ function getWeather(){
 					 tbody+=tr;
 				}
 				$j('#weather_suggest').html(tbody);
+				if($j("#refreshImg")!=null&&$j("#refreshImg")!=undefined)
 				$j("#refreshImg").attr("src","../MetroStyleFiles/refresh.png" );
 			}
 		}
@@ -545,7 +546,7 @@ function getNowFormatDate() {
                       <div > <!-- class="span4" -->
                           <div class="row-fluid">
                               <div class="hpit_athena_rightDiv span12" style="margin:0px;">
-                                  <div style="overflow: auto; width: auto; max-height:442px;margin:0px;padding:0px;">
+                                  <div style="overflow-y: auto; max-height:442px;margin:0px;padding:0px;overflow-x: hidden;">
                                       <ul class="Work_Mates_div" id="Work_Mates_ul">
                                       </ul>
                                   </div>
