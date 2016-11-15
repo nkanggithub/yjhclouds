@@ -2,13 +2,13 @@ package com.nkang.kxmoment.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
-import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -261,20 +261,20 @@ public class MasterDataRestController {
 	 * author chang-zheng
 	 */
 	@RequestMapping("/getDataQualityReportByParameterV2")
-	public static List<MdmDataQualityView> callGetDataQualityReportByParameter(   @RequestParam(value="stateProvince", required=false) String stateProvince,
+	public static Map<String, MdmDataQualityView> callGetDataQualityReportByParameter(   @RequestParam(value="stateProvince", required=false) String stateProvince,
 																			@RequestParam(value="nonlatinCity", required=false) List<String> nonlatinCity,
 																			@RequestParam(value="cityRegion", required=false) String cityRegion){
 	//	MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
-		List<MdmDataQualityView> Listmv = new ArrayList<MdmDataQualityView>();
+		Map<String, MdmDataQualityView> map = new HashMap<String, MdmDataQualityView>();
 		try{
 			//mdmDataQualityView = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
-			Listmv = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
+			map = MongoDBBasic.getDataQualityReport(stateProvince, nonlatinCity, cityRegion);
 		}		
 		catch(Exception e){
 			//mdmDataQualityView = null;
-			Listmv =null;
+			map = null;
 		}
-		return Listmv;
+		return map;
 	}
 	
 	@RequestMapping("/getFilterSegmentArea")

@@ -13,6 +13,8 @@ import java.util.List;
 
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -119,10 +121,10 @@ public class DQMenuController {
 	 * author  chang-zheng
 	 */
 	@RequestMapping("/GetDataQualityReportByParameter")
-	public @ResponseBody List<MdmDataQualityView> getDataQualityReport(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "userState") String userState)
+	public @ResponseBody  Map<String, MdmDataQualityView> getDataQualityReport(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "userState") String userState)
 	{
 		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
-		List<MdmDataQualityView> mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
-		return mqvByStateCity;
+		 Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
+		return mapByStateCity;
 	}
 }
