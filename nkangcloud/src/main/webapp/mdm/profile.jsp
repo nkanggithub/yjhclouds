@@ -199,7 +199,36 @@ a:hover,a:link{
 var $j = jQuery.noConflict();
 $j(window).load(function() {
 	getWeather();
+	getMDLUserLists();
 });
+function getMDLUserLists(){
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {},
+		cache : false,
+		success : function(data) {
+			data='{"results":'+data+'}';
+			var jsons = eval('(' + data + ')');
+			var ul="";
+			for(var i=0;i<jsons.results.length;i++){
+				var temp=jsons.results[i];
+				var li='	<li class="Work_Mates_div_li">'
+					+'                                        	<div class="Work_Mates_div_list_div">'
+					+'                                           	 	<div class="Work_Mates_img_div">'
+					+'                                        			 <img src="'+temp.HeadUrl+'" alt="userImage" class="matesUserImage" alt="no_username"/> '
+					+'                                         		</div>'
+					+'                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
+					+'                                        			 <span>'+temp.NickName+'</span>'
+					+'                                        		 </div>'
+					+'                                          </div>'
+					+'                                        </li>';
+				ul+=li;
+			}
+			$j("#Work_Mates_ul").html(ul);
+		}
+	});
+}
 function getLocation(){
 	//$j("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
 	$j("#locationImg").attr("src","../MetroStyleFiles/loading.gif" );
@@ -517,121 +546,8 @@ function getNowFormatDate() {
                           <div class="row-fluid">
                               <div class="hpit_athena_rightDiv span12" style="margin:0px;">
                                   <div style="overflow: auto; width: auto; max-height:442px;margin:0px;padding:0px;">
-                                      <ul class="Work_Mates_div">
-                                      	<li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li>
-                                      <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li>
-                                        <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li>
-                                         <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li> <li class="Work_Mates_div_li">
-                                        	<div class="Work_Mates_div_list_div">
-                                           	 	<div class="Work_Mates_img_div">
-                                        			 <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="matesUserImage" alt="no_username"/> 
-                                         		</div>
-                                         		<div class="Work_Mates_img_div">
-                                        			 <span>username</span>
-                                        		 </div>
-                                          </div>
-                                        </li>
+                                      <ul class="Work_Mates_div" id="Work_Mates_ul">
                                       </ul>
-                                     
                                   </div>
                               </div>
                           </div>
