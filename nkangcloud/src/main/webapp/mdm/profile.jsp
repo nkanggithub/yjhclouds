@@ -50,7 +50,9 @@ if(session.getAttribute("location")==null){
 	<script src="../nkang/js_athena/common-scripts.js"></script>
 
 <style>
-
+*:hover,*:active {
+border:0px;
+	}
 	#weather{
 		margin-bottom:20px;
 	}
@@ -275,6 +277,7 @@ function getNowFormatDate() {
     var seperator2 = ":";
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
+    var hour =date.getHours();
     var minute=date.getMinutes();
     if (month >= 1 && month <= 9) {
         month = "0" + month;
@@ -282,11 +285,14 @@ function getNowFormatDate() {
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
+    if (hour >= 0 && hour <= 9) {
+    	hour = "0" + hour;
+    }
     if (minute >= 0 && minute <= 9) {
     	minute = "0" + minute;
     }
     var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
-            + " " + date.getHours() + seperator2 + minute;
+            + " " + hour + seperator2 + minute;
           //  + seperator2 + date.getSeconds();
     return currentdate;
 }
@@ -353,7 +359,7 @@ function getNowFormatDate() {
             </span></nobr></h2>
           </div>
         </div>
-        <div class="container-fluid" style="margin-top:0px;">
+        <div class="container-fluid" style="margin-top:-10px;">
           <div class="row-fluid mtop10">
             <div class="span12">
               <div class="PositionR">
