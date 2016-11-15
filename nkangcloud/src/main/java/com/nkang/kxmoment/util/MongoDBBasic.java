@@ -923,4 +923,112 @@ public class MongoDBBasic {
 		}
 	    return ret;
 	}
+	
+	// Bit Add Start
+	    public static DBObject getOpptByOpsiFromMongoDB(String opsi) {
+		DBObject queryresults = null;
+		mongoDB = getMongoDB();
+		try {
+		    DBObject dbquery = new BasicDBObject();
+		    if (!StringUtils.isEmpty(opsi)) {
+			dbquery.put("siteInstanceId", opsi);
+		    }
+
+		    DBCursor dbCursor = mongoDB.getCollection(collectionMasterDataName)
+			    .find(dbquery);
+		    if (null == dbCursor) {
+			queryresults = null;
+		    }else {
+			queryresults = dbCursor.next();
+		    }
+
+		} catch (Exception e) {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		} finally {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		}
+		return queryresults;
+	    }
+	    
+	    /***
+	     * search mongodb with condition lng&lat=null. only return one record.
+	     * @param inputString 
+	     * @return
+	     */
+	    public static DBObject getOpptFromMongoDB(String inputString) {
+		DBObject queryresult = null;
+		mongoDB = getMongoDB();
+		try {
+		    DBObject dbquery = new BasicDBObject();
+		    dbquery.put("lat", new BasicDBObject("$eq", null));
+		    dbquery.put("lng", new BasicDBObject("$eq", null));
+
+		    log.info("[getOpptFromMongoDB] query mongodb filter :"+dbquery.toString());
+		    DBObject dbObject = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
+			    
+		    if (null == dbObject) {
+			queryresult = null;
+		    }else {
+			queryresult = dbObject;
+		    }
+
+		} catch (Exception e) {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		} finally {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		}
+		return queryresult;
+	    }
+	    /***
+	     * search oppts from mongodb with lng=null&lat=null limit(limitSize)
+	     * @param limitSize integer of return row number.
+	     * @return oppts's json DBCursor
+	     */
+	    public static DBCursor getOpptListFromMongoDB(int limitSize) {
+		DBCursor queryresults = null;
+		mongoDB = getMongoDB();
+		try {
+		    DBObject dbquery = new BasicDBObject();
+		    dbquery.put("lat", new BasicDBObject("$eq", null));
+		    dbquery.put("lng", new BasicDBObject("$eq", null));
+
+		    log.info("[getOpptFromMongoDB] query mongodb filter :"+dbquery.toString());
+		    if (limitSize <= 0 || limitSize >302) {
+			limitSize = 302;
+		    } 
+		    queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery).limit(limitSize);
+		    if (queryresults.size() == 0) {
+			queryresults = null;
+		    }
+
+		} catch (Exception e) {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		} finally {
+		    if (mongoDB.getMongo() != null) {
+			mongoDB.getMongo().close();
+		    }
+		}
+		return queryresults;
+	    }
+
+	    //get one batch number of records from db. then update one by one?
+	    
+	    public static boolean updateOpptByJsonObj(String opsiID, DBObject opptJsonObj) {
+		boolean ret = false;
+		mongoDB = getMongoDB();
+		mongoDB.getCollection(collectionMasterDataName).update(new BasicDBObject().append("siteInstanceId", opsiID), opptJsonObj);
+		
+		return false;
+	    }
+	    // END
 }

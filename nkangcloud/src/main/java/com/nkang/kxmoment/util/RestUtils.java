@@ -18,9 +18,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -124,78 +127,7 @@ public class RestUtils {
 		return wcu;
 	}
 
-	public static String getLocationDetailsforOppt(String Query, String Region, String OpptID, String OpptAddr, String OpsiId, String CityRegion) throws Exception{
-		String StatusMessage = "";
-		if(Query != null){
-			Query = URLEncoder.encode(Query, "UTF-8");
-		}
-		else{
-			Query = "Query";
-		}
-		if(Region != null){
-			Region = URLEncoder.encode(Region, "UTF-8");
-		}
-		else{
-			Region = "China";
-		}
-		
-		String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
-		try {
-	           URL urlGet = new URL(url);
-	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-	           http.setRequestMethod("GET"); //must be get request
-	           http.setRequestProperty("Content-Type","application/json");
-	           http.setDoOutput(true);
-	           http.setDoInput(true);
-	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
-		           System.setProperty("http.proxyPort", "8080");  
-	           } 
-	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-	           http.connect();
-	           InputStream is = http.getInputStream();
-	           int size = is.available();
-	           byte[] jsonBytes = new byte[size];
-	           is.read(jsonBytes);
-	           String message = new String(jsonBytes, "UTF-8");
-	           JSONObject demoJson = new JSONObject(message);
-	           if(demoJson.has("results")){
-		           JSONArray ResultJA = demoJson.getJSONArray("results");
-		           if(ResultJA.length() > 0){
-		        	   JSONObject placeJO = ResultJA.getJSONObject(0);
-		        	   if(placeJO != null &&placeJO.has("location")){
-		        		   try{
-					           JSONObject locationJO = placeJO.getJSONObject("location");
-					           String lng = locationJO.getString("lng");
-					           String lat = locationJO.getString("lat");
-					           if(lng !="" && lat != ""){
-					        	   DBUtils.updateOppt(lat, lng, OpptID, String.valueOf(ResultJA.length()), OpptAddr, OpsiId, CityRegion);
-					           }
-		        		   }
-		        		   catch(Exception e){
-		        			   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-		        		   }
-		        	   }
-		        	   else{
-		        		   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-		        	   }
-		           }
-		           else{
-		        	   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-		           }
-	           }
-	           else{
-	        	   StatusMessage = demoJson.getString("status");
-	           }
-
-	           is.close();
-	       } catch (Exception e) {
-	    	   System.out.println(new java.sql.Timestamp(new java.util.Date().getTime()) + "Exception Occurs in getLocationDetailsforOppt with OPSI: "+ OpsiId +"---" + e.toString());
-	    	   e.printStackTrace();
-	       }
-		return StatusMessage;
-	}
+	
 	
 	public static String  getWeatherInform(String cityName){ 
          String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=重庆&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
@@ -1542,8 +1474,171 @@ public class RestUtils {
          }     
          return strBuf.toString();  
 	}
+	
+	//Bit Add Start
+		public static String getLocationDetailsforOppt(String Query, String Region, String OpptID, String OpptAddr, String OpsiId, String CityRegion) throws Exception{
+			String StatusMessage = "";
+			if(Query != null){
+				Query = URLEncoder.encode(Query, "UTF-8");
+			}
+			else{
+				Query = "Query";
+			}
+			if(Region != null){
+				Region = URLEncoder.encode(Region, "UTF-8");
+			}
+			else{
+				Region = "China";
+			}
+			
+			String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/json");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+			           System.setProperty("http.proxyPort", "8080");  
+		           } 
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           String message = new String(jsonBytes, "UTF-8");
+		           JSONObject demoJson = new JSONObject(message);
+		           if(demoJson.has("results")){
+			           JSONArray ResultJA = demoJson.getJSONArray("results");
+			           if(ResultJA.length() > 0){
+			        	   JSONObject placeJO = ResultJA.getJSONObject(0);
+			        	   if(placeJO != null &&placeJO.has("location")){
+			        		   try{
+						           JSONObject locationJO = placeJO.getJSONObject("location");
+						           String lng = locationJO.getString("lng");
+						           String lat = locationJO.getString("lat");
+						           if(lng !="" && lat != ""){
+						        	   DBUtils.updateOppt(lat, lng, OpptID, String.valueOf(ResultJA.length()), OpptAddr, OpsiId, CityRegion);
+						           }
+			        		   }
+			        		   catch(Exception e){
+			        			   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
+			        		   }
+			        	   }
+			        	   else{
+			        		   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
+			        	   }
+			           }
+			           else{
+			        	   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
+			           }
+		           }
+		           else{
+		        	   StatusMessage = demoJson.getString("status");
+		           }
 
+		           is.close();
+		       } catch (Exception e) {
+		    	   System.out.println(new java.sql.Timestamp(new java.util.Date().getTime()) + "Exception Occurs in getLocationDetailsforOppt with OPSI: "+ OpsiId +"---" + e.toString());
+		    	   e.printStackTrace();
+		       }
+			return StatusMessage;
+		}
+		
+		public static String getAndSetLocationDetailsforOpptObject(DBObject opptObject) throws Exception{
+		    String Query =opptObject.get("organizationNonLatinExtendedName").toString();
+		    String Region =opptObject.get("nonlatinCity").toString();
+		    String OpptID =opptObject.get("organizationId").toString();
+		    String OpptAddr =opptObject.get("nonlatinStreet1LongName").toString(); 
+		    String OpsiId =opptObject.get("siteInstanceId").toString();
+		    String CityRegion =opptObject.get("cityRegion").toString();
+		    log.info("CronJobForMangoDB Process opptObject Start : "+opptObject.toString());
+		    
+			String StatusMessage = "";
+			if(Query != null){
+				Query = URLEncoder.encode(Query, "UTF-8");
+			}
+			else{
+				Query = "Query";
+			}
+			if(Region != null){
+				Region = URLEncoder.encode(Region, "UTF-8");
+			}
+			else{
+				Region = "China";
+			}
+			
+			String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/json");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+			           System.setProperty("http.proxyPort", "8080");  
+		           } 
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           String message = new String(jsonBytes, "UTF-8");
+		           JSONObject demoJson = new JSONObject(message);
+		           if(demoJson.has("results")){
+			           JSONArray ResultJA = demoJson.getJSONArray("results");
+			           if(ResultJA.length() > 0){
+			        	   JSONObject placeJO = ResultJA.getJSONObject(0);
+			        	   if(placeJO != null &&placeJO.has("location")){
+			        		   try{
+						           JSONObject locationJO = placeJO.getJSONObject("location");
+						           String lng = locationJO.getString("lng");
+						           String lat = locationJO.getString("lat");
+						           opptObject.put("lng", lng);
+						           opptObject.put("lat", lat);
+						           if(lng !="" && lat != ""){
+						               MongoDBBasic.updateOpptByJsonObj(OpptID, opptObject);
+						               //DBUtils.updateOppt(lat, lng, OpptID, String.valueOf(ResultJA.length()), OpptAddr, OpsiId, CityRegion);
+						           }
+			        		   }
+			        		   catch(Exception e){
+			        		       opptObject.put("lng", "");
+						           opptObject.put("lat", "");
+						           MongoDBBasic.updateOpptByJsonObj(OpptID, opptObject);
+			        		   }
+			        	   }
+			        	   else{
+			        	       opptObject.put("lng", "");
+					           opptObject.put("lat", "");
+					           MongoDBBasic.updateOpptByJsonObj(OpptID, opptObject);
+			        	   }
+			           }
+			           else{
+			               opptObject.put("lng", "");
+				           opptObject.put("lat", "");
+				           MongoDBBasic.updateOpptByJsonObj(OpptID, opptObject);
+			           }
+		           }
+		           else{
+		        	   StatusMessage = demoJson.getString("status");
+		           }
 
+		           is.close();
+		       } catch (Exception e) {
+		    	   log.info(new java.sql.Timestamp(new java.util.Date().getTime()) + "Exception Occurs in getAndSetLocationDetailsforOpptObject with OPSI: "+ OpsiId +"---" + e.toString());
+		    	   log.info(e);
+		       }
+			return StatusMessage;
+		}
+		//END
 
 }
 
