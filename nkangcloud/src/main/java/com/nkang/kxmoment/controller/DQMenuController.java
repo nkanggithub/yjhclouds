@@ -30,7 +30,6 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class DQMenuController {
-	private List<Object[]> tempString=null;
 	public DQMenuController()
 	{
 		System.out.println("start to load dqmenu class......");
@@ -49,14 +48,34 @@ public class DQMenuController {
 		clientList.add(ci);*/
 		return clientList;
 	}
-	
+	@RequestMapping("/getOpenfooter")
+	public @ResponseBody List<Object[]>  getOpenfooter(HttpServletRequest request, HttpServletResponse response)
+	{
+		List<Object[]> finalString=new ArrayList<Object[]>();
+		
+		Object[] a = new Object[2];
+		a[0]="Customer";
+		Object[] b = new Object[2];
+		b[0]="Partner";
+		Object[] c = new Object[2];
+		c[0]="Competitor";
+		Object[] d = new Object[2];
+		d[0]="Lead";
+		a[1]=60;
+		b[1]=30;
+		c[1]=5;
+		d[1]=5;
+		finalString.add(a);
+    	finalString.add(b);
+    	finalString.add(c);
+    	finalString.add(d);
+		return finalString;
+	}
 	@RequestMapping("/getChart2")
 	public @ResponseBody List<Object[]> getChart2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
 		List<Object[]> finalString=new ArrayList<Object[]>();
-		if(tempString==null){
-		
 		Object[] a = new Object[11];
 		a[0]="客户";
 		Object[] b = new Object[11];
@@ -83,9 +102,7 @@ public class DQMenuController {
     	finalString.add(b);
     	finalString.add(c);
     	finalString.add(d);
-    	tempString=finalString;
-		}
-		return tempString;
+		return finalString;
 	}
 	
 	@RequestMapping("/DQMenu")
