@@ -14,17 +14,14 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ResourceBundle;
-
+import java.util.Map;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.mongodb.BasicDBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
-import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -818,75 +815,80 @@ public class RestUtils {
 	/*
 	 * author  chang-zheng
 	 */
-	public static List<MdmDataQualityView> callGetDataQualityReportByParameter(String stateProvince,List<String> city, String cityRegion){
+	public static Map<String, MdmDataQualityView> callGetDataQualityReportByParameter(String stateProvince,List<String> city, String cityRegion){
 
 		String message="error";
-//		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
+		MdmDataQualityView mdmDataQualityView = new MdmDataQualityView();
 		List<MdmDataQualityView> ListMqv = new ArrayList<MdmDataQualityView>();
-//		
+		Map<String, MdmDataQualityView> map = null;
 		if(localInd == "Y"){
-//			try {
-//					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
-//					String url = "http://shenan.duapp.com/getDataQualityReportByParameter?";
-//					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
-//						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
-//						url =  url + "stateProvince="+stateProvince;
-//					}
-//					if(city != "" && city.toLowerCase() != "null"){
-//						city = URLEncoder.encode(city, "UTF-8");
-//						url =  url + "&nonlatinCity="+city;
-//					}
-//				
-//					}
-//
-//				   //String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
-//		           URL urlGet = new URL(url);
-//		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-//		           http.setRequestMethod("GET"); //must be get request
-//		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-//		           http.setDoOutput(true);
-//		           http.setDoInput(true);
-//		           if(localInd == "Y"){
-//			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
-//			           System.setProperty("http.proxyPort", "8080");  
-//		           }
-//		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-//		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-//		           http.connect();
-//		           InputStream is = http.getInputStream();
-//		           int size = is.available();
-//		           byte[] jsonBytes = new byte[size];
-//		           is.read(jsonBytes);
-//		           message = new String(jsonBytes, "UTF-8");
-//		           System.out.println("============="+message);
-//		           JSONObject demoJson = new JSONObject(message);
-//		           mdmDataQualityView.setNumberOfCompetitor(Integer.valueOf(demoJson.getString("numberOfCompetitor")) );
-//		           mdmDataQualityView.setNumberOfCustomer(Integer.valueOf(demoJson.getString("numberOfCustomer")) );
-//		           mdmDataQualityView.setNumberOfEmptyCityArea(Integer.valueOf(demoJson.getString("numberOfEmptyCityArea")) );
-//		           mdmDataQualityView.setNumberOfLeads(Integer.valueOf(demoJson.getString("numberOfLeads")) );
-//		           mdmDataQualityView.setNumberOfNonGeo(Integer.valueOf(demoJson.getString("numberOfNonGeo")) );
-//		           mdmDataQualityView.setNumberOfOppt(Integer.valueOf(demoJson.getString("numberOfOppt")) );
-//		           mdmDataQualityView.setNumberOfPartner(Integer.valueOf(demoJson.getString("numberOfPartner")) );
-//		           mdmDataQualityView.setNumberOfThreeGrade(Integer.valueOf(demoJson.getString("numberOfThreeGrade")) );
-//		           mdmDataQualityView.setPercents(demoJson.getString("percents"));
-//		           is.close();
-//
-//		       } catch (Exception e) {
-//		    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
-//		    	   message =  "failed with " + e.getMessage();
-//		       }
+//			MdmDataQualityView mq = new MdmDataQualityView();
+//			mq.setNumberOfCompetitor(12);
+//			mq.setNumberOfCustomer(23);
+//			mq.setNumberOfEmptyCityArea(33);
+//			ListMqv.add(mq);
+			try {
+					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
+					String url = "http://shenan.duapp.com/getDataQualityReportByParameterV2?";
+					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
+						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
+						url =  url + "stateProvince="+stateProvince;
+					}
+					if(city != null){
+						//city = URLEncoder.encode(city, "UTF-8");
+						url =  url + "&nonlatinCity="+city;
+					}
+				
+					
+
+				   //String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           System.out.println("============="+message);
+		           JSONObject demoJson = new JSONObject(message);
+		           mdmDataQualityView.setNumberOfCompetitor(Integer.valueOf(demoJson.getString("numberOfCompetitor")) );
+		           mdmDataQualityView.setNumberOfCustomer(Integer.valueOf(demoJson.getString("numberOfCustomer")) );
+		           mdmDataQualityView.setNumberOfEmptyCityArea(Integer.valueOf(demoJson.getString("numberOfEmptyCityArea")) );
+		           mdmDataQualityView.setNumberOfLeads(Integer.valueOf(demoJson.getString("numberOfLeads")) );
+		           mdmDataQualityView.setNumberOfNonGeo(Integer.valueOf(demoJson.getString("numberOfNonGeo")) );
+		           mdmDataQualityView.setNumberOfOppt(Integer.valueOf(demoJson.getString("numberOfOppt")) );
+		           mdmDataQualityView.setNumberOfPartner(Integer.valueOf(demoJson.getString("numberOfPartner")) );
+		           mdmDataQualityView.setNumberOfThreeGrade(Integer.valueOf(demoJson.getString("numberOfThreeGrade")) );
+		           mdmDataQualityView.setPercents(demoJson.getString("percents"));
+		           is.close();
+
+		       } catch (Exception e) {
+		    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
 		}
 		else{
 			try{
 				//mdmDataQualityView = MongoDBBasic.getDataQualityReport(stateProvince, city,cityRegion);
-				ListMqv = MongoDBBasic.getDataQualityReport(stateProvince, city,cityRegion);
+				map = MongoDBBasic.getDataQualityReport(stateProvince, city,cityRegion);
 			}
 			catch (Exception e) {
 		    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
 		    	   message =  "failed with " + e.getMessage();
 		    }
 		}
-		return ListMqv;
+		return map;
 	}
 	
 	public static MdmDataQualityView callGetDataQualityReportByParameter(String stateProvince, String city, String cityRegion){

@@ -13,12 +13,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-import org.bson.Document;
-
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -31,8 +29,6 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
-import com.mongodb.client.AggregateIterable;
-import com.mysql.jdbc.Statement;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -659,20 +655,11 @@ public class MongoDBBasic {
 	/*
 	 * author  chang-zheng
 	 */
-	public static List<MdmDataQualityView> getDataQualityReport(String stateProvince, List<String> ListnonlatinCity, String cityRegion){
-		List<MdmDataQualityView> ListMqv = new ArrayList<MdmDataQualityView>();
-		MdmDataQualityView mqv;
+	public static Map<String, MdmDataQualityView> getDataQualityReport(String stateProvince, List<String> ListnonlatinCity, String cityRegion){
+		Map<String, MdmDataQualityView> map = new HashMap<String, MdmDataQualityView>();
 		mongoDB = getMongoDB();
+		
 		try{
-			// competitor
-			int cnt_competitor = 0;
-			// partner
-			int cnt_partner = 0;
-			// customer
-			int cnt_customer = 0;
-			// potential leads
-			int cnt_lead = 0;
-			
 			BasicDBObject query_all = new BasicDBObject();
 			if(ListnonlatinCity != null){
 			
@@ -681,45 +668,38 @@ public class MongoDBBasic {
 			
 			DBCursor dBcu= mongoDB.getCollection(collectionMasterDataName).find(query_all);
 			for(String str : ListnonlatinCity){
-				mqv = new MdmDataQualityView();
-				while(dBcu.hasNext()){
-					DBObject dbOject = dBcu.next();
-
-					if(dbOject.get("nonlatinCity").equals(str)){
-						
-						if(dbOject.get("isCompetitor").equals("true")){
-							cnt_competitor++;
-						}
-						else if(dbOject.get("includePartnerOrgIndicator").equals("true")){
-							cnt_partner++;
-						}
-						else if(dbOject.get("onlyPresaleCustomer").equals("true")){
-							cnt_customer++;
-						}
-						else if(dbOject.get("onlyPresaleCustomer").equals("false")){
-							cnt_lead++;
-						}
-					}
-				
+				MdmDataQualityView tmpmqv = new MdmDataQualityView();
+				tmpmqv.setPercents("0.68");
+				tmpmqv.setNumberOfEmptyCityArea(1000);
+				tmpmqv.setNumberOfThreeGrade(2000);
+				tmpmqv.setNumberOfNonGeo(2000);
+				map.put(str, tmpmqv);
+			}
+			
+			while(dBcu.hasNext()){
+				DBObject dbOject = dBcu.next();
+				String nonlatinCity = dbOject.get("nonlatinCity").toString();
+				MdmDataQualityView mqv = map.get(nonlatinCity);
+				if(dbOject.get("isCompetitor").equals("true")){
+					mqv.setNumberOfCompetitor(mqv.getNumberOfCompetitor()+1);
 				}
-				mqv.setNumberOfCompetitor(cnt_competitor);
-				mqv.setNumberOfPartner(cnt_partner);
-				mqv.setNumberOfCustomer(cnt_customer);
-				mqv.setPercents("0.68");
-				mqv.setNumberOfLeads(cnt_lead);
-				mqv.setNumberOfOppt(cnt_lead);
-				mqv.setNumberOfEmptyCityArea(1000);
-				mqv.setNumberOfThreeGrade(2000);
-				mqv.setNumberOfNonGeo(2000);
-				ListMqv.add(mqv);
+				else if(dbOject.get("includePartnerOrgIndicator").equals("true")){
+					mqv.setNumberOfPartner(mqv.getNumberOfPartner()+1);
+				}
+				else if(dbOject.get("onlyPresaleCustomer").equals("true")){
+					mqv.setNumberOfCustomer(mqv.getNumberOfCustomer()+1);
+				}
+				else if(dbOject.get("onlyPresaleCustomer").equals("false")){
+					mqv.setNumberOfLeads(mqv.getNumberOfLeads()+1);
+					mqv.setNumberOfOppt(mqv.getNumberOfOppt()+1);
+				}
 			}
 			
 		}
 		catch(Exception e){
 			log.info("getDataQualityReport--" + e.getMessage());
 		}
-		
-		return ListMqv;
+		return map;
 	}
 	
 	public static List<String> getFilterOnIndustryByAggregateFromMongo(){
