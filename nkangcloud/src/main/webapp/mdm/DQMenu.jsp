@@ -102,7 +102,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 							var htmlcustli = "<div class=\"well well-sm\" style='text-align:center;'><img src='mdm/images/People.png' width='25px' height='25px' alt='icon'/><p style='margin:0;text-align:center;font-size:14px'>"+data.length+" Active Clients in service</p></div>";
 							if(data.length!=0){
 							for(var i=0;i<data.length;i++){
-								htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + data[i].clientID + "');\"><span class=\"badge pull-right\">" + data[i].clientIdentifier + "</span>"+ data[i].clientDescription+"</a></li>";
+								htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + data[i].clientID + "','"+data[i].consumedWebService+"');\"><span class=\"badge pull-right\">" + data[i].clientIdentifier + "</span>"+ data[i].clientDescription+"</a></li>";
 							}
 							}
 							$("#openmesChart").html(htmlcustli);
@@ -331,7 +331,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		}
 		function loadChart5(obj){
 			var chartobj = $("#chart5");
-			$("#capuqino_loadChart").html(chartobj);
+//			$("#capuqino_loadChart").html(chartobj);
 			$("#chart3").hide();
 			 $("#chart4").hide();
 			 $("#chart2").hide();
@@ -361,10 +361,27 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				);
 		}
 		function OrganizationInformation(){
-			swal("200M", document.getElementById("totalOPSI").innerHTML+" Organizations", "success");
+			/*swal("200M", document.getElementById("totalOPSI").innerHTML+" Organizations", "success");*/
+			window.location.href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID="+document.getElementById("uid").innerHTML;
 		}
-		function showDetailsForClient(paraStr){
-			swal(paraStr, paraStr, "success");
+		function showDetailsForClient(paraStr,ws){
+			/*swal(paraStr,"<span style='color:red'>"+paraStr+"</span>", "success","true");*/
+			var datas=ws.split(",");
+			var text="";
+			for(var i=0;i<datas.length;i++)
+			{
+				text=text+"<p>"+datas[i]+"</p>"
+			}
+			   swal({  
+          title:paraStr,  
+          text:text,
+          type:"success",  
+		  html:"true",
+          showCancelButton:false,  
+          showConfirmButton:"true",  
+          confirmButtonText:"OK",  
+          animation:"slide-from-top"  
+        });
 		}
 	</script>
 	  <style type="text/css">
@@ -497,6 +514,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="radarSize" style="display:none">${ radarSize } </div>
 <div id="userState" style="display:none">${ userState } </div>
 <div id="totalOPSI" style="display:none">${ totalOPSI } </div>
+<div id="uid" style="display:none">${ uid }</div>
 <div id="addressInfo" style="display:none">
 <c:forEach items="${userInfo.addressInfo}" var="addressInfo">
  ${addressInfo} |
@@ -648,10 +666,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 								 If you think of a datamart as a store of bottled water – cleansed and packaged and structured for easy consumption – the data lake is a large body of water in a more natural state. The contents of the data lake stream in from a source to fill the lake, and various users of the lake can come to examine, dive in, or take samples
 						  		 <br /> --Pentaho CTO James Dixon
 						  	</p>    
-							<div class="readmore">
-								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
-								<div class="clearspace"></div>
-							</div>
 						</div>
 					</div>
 					<div class="jspVerticalBar">
@@ -987,10 +1001,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				users of the lake can come to examine, dive in, or take samples <br />
 				--Pentaho CTO James Dixon
 			</p>
-			<div class="readmore">
-				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="demoitem solid-blue-2 light-text floatleft">READ MORE</a>
-				<div class="clearspace"></div>
-			</div>
 
 		</div>
 </div>
