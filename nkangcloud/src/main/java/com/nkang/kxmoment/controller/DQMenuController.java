@@ -96,10 +96,10 @@ public class DQMenuController {
     	}
     	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
-    		 a[i+1]= mapByStateCity.get(listOfCities.get(i)).getNumberOfCustomer();
-    		 b[i+1] = mapByStateCity.get(listOfCities.get(i)).getNumberOfCompetitor();
-    		 c[i+1]=  mapByStateCity.get(listOfCities.get(i)).getNumberOfPartner();
-    		 d[i] =listOfCities.get(i);
+    		 a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
+    		 b[i+1] = mapByStateCity.get(tempOfCities.get(i)).getNumberOfCompetitor();
+    		 c[i+1]=  mapByStateCity.get(tempOfCities.get(i)).getNumberOfPartner();
+    		 d[i] =tempOfCities.get(i);
     		 
     		// MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
     		/* a[i+1]=mqvByStateCity.getNumberOfCustomer();
