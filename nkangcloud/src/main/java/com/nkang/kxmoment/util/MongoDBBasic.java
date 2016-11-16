@@ -160,6 +160,29 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static boolean registerUser(WeChatUser wcu){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("OpenID", wcu.getOpenid());
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	
+	    	
+	    	DBObject update = new BasicDBObject();
+	    	update.put("OpenID", wcu.getOpenid());
+	    	update.put("HeadUrl", wcu.getHeadimgurl());
+	    	update.put("NickName", wcu.getNickname());
+
+			ret = true;
+	    }
+		catch(Exception e){
+			log.info("registerUser--" + e.getMessage());
+		}
+		return ret;
+	}
+	
 	public static boolean removeUser(String OpenID){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
