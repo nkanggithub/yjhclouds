@@ -761,22 +761,33 @@ public class MongoDBBasic {
 	public static List<ClientInformation> CallGetClientFromMongoDB(){
 		List<ClientInformation> ret = new ArrayList<ClientInformation>();
 		ClientInformation ci;
+		
 		mongoDB = getMongoDB();
 	    try{
 	    	DBCursor queryresults = mongoDB.getCollection(client_pool).find();
             if (null != queryresults) {
             	while(queryresults.hasNext()){
             		ci = new ClientInformation();
+            		List<String> consumedWebServices = new ArrayList<String> ();
             		DBObject o = queryresults.next();
             		ci.setClientDescription(o.get("ClientDesc").toString());
             		ci.setClientID(o.get("ClientID").toString());
             		ci.setClientIdentifier(o.get("ClientIdentifier").toString());
+            		BasicDBList hist = (BasicDBList) o.get("WebService");
+            		if(hist != null){
+                		Object[] visitHistory = hist.toArray();
+                		for(Object dbobj : visitHistory){
+                			if(dbobj instanceof String){
+                				consumedWebServices.add((String)dbobj);
+                			}
+                		}
+            		}
+            		ci.setConsumedWebService(consumedWebServices);
             		if(ci != null){
             			ret.add(ci);
             		}
             	}
             }
-
 	    }
 		catch(Exception e){
 			log.info("CallGetClientFromMongoDB--" + e.getMessage());
