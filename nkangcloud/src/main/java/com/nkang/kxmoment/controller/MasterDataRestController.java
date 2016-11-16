@@ -493,10 +493,12 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/CallGetWeChatUserFromMongoDB")
-	public static List<WeChatMDLUser> CallGetWeChatUserFromMongoDB(){
+	public static List<WeChatMDLUser> CallGetWeChatUserFromMongoDB(
+			@RequestParam(value="openid", required=false) String openid
+			){
 		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();;
 		try{
-			ret = MongoDBBasic.getWeChatUserFromMongoDB();
+			ret = MongoDBBasic.getWeChatUserFromMongoDB(openid);
 		}		
 		catch(Exception e){
 			//ret.add(e.getMessage());

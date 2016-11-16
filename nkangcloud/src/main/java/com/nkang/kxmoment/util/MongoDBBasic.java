@@ -1018,12 +1018,20 @@ public class MongoDBBasic {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<WeChatMDLUser> getWeChatUserFromMongoDB() {
+	public static List<WeChatMDLUser> getWeChatUserFromMongoDB(String OpenID) {
 		mongoDB = getMongoDB();
 		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
 		WeChatMDLUser weChatMDLUser = null;
-	    try{
-	    	DBCursor queryresults = mongoDB.getCollection(wechat_user).find().limit(100);
+		DBCursor queryresults;
+		try{
+			if(!StringUtils.isEmpty(OpenID)){
+				DBObject query = new BasicDBObject();
+				query.put("OpenID", OpenID);
+				queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+			}
+			else{
+				queryresults = mongoDB.getCollection(wechat_user).find().limit(500);
+			}
             if (null != queryresults) {
             	while(queryresults.hasNext()){
             		weChatMDLUser = new WeChatMDLUser();
