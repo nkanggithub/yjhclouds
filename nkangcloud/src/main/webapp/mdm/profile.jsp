@@ -201,6 +201,12 @@ $j(window).load(function() {
 	getWeather();
 	getMDLUserLists();
 });
+
+function getUserInfo(username){
+	 $j('#UserInfoHead').text(username);
+	 $j('#UserInfoHead2').text(username);
+	 $j('#UserInfo').modal('show');
+}
 function getMDLUserLists(){
 	jQuery.ajax({
 		type : "GET",
@@ -216,10 +222,10 @@ function getMDLUserLists(){
 				var li='	<li class="Work_Mates_div_li">'
 					+'                                        	<div class="Work_Mates_div_list_div">'
 					+'                                           	 	<div class="Work_Mates_img_div">'
-					+'                                        			 <a class="" data-toggle="modal" href="#UserInfo"><img src="'+temp.HeadUrl+'" alt="userImage" class="matesUserImage" alt="no_username"/> </a> '
+					+'                                        			<img src="'+temp.headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''+temp.nickname+'\');"/> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
-					+'                                        			 <span>'+temp.NickName+'</span>'
+					+'                                        			 <span>'+temp.nickname+'</span>'
 					+'                                        		 </div>'
 					+'                                          </div>'
 					+'                                        </li>';
@@ -545,12 +551,12 @@ function getNowFormatDate() {
                   
              <div id="UserInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
                 <div class="modal-header">
-                 <b>user info</b>
+                 <b id="UserInfoHead"></b>
                 </div>
                 <div class="modal-body readmoreHpop" style="white-space: pre-line;padding:0px;">
                 	<table width="95%" align="center" id="weather_suggest" style="margin-top:-15px;">
                 		<tr>
-                			<td>想看他的信息呀？</td>
+                			<td>想看<b id="UserInfoHead2"></b>的信息呀？</td>
                 			<td>嘿嘿，不给你看</td>
                 		</tr>
 		                     </table>
