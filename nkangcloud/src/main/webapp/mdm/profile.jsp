@@ -202,9 +202,14 @@ $j(window).load(function() {
 	getMDLUserLists();
 });
 
-function getUserInfo(username){
+function getUserInfo(username,headimgurl){
 	 $j('#UserInfoHead').text(username);
-	 $j('#UserInfoHead2').text(username);
+	 var tbody='                		<tr>'
+		 +'                			<td colspan="2" align="center">'
+		 +'                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
+		 +'                			</td>'
+		 +'                		</tr>';
+	 $j('#UserInfo_tab').html(tbody);
 	 $j('#UserInfo').modal('show');
 }
 function getMDLUserLists(){
@@ -222,7 +227,7 @@ function getMDLUserLists(){
 				var li='	<li class="Work_Mates_div_li">'
 					+'                                        	<div class="Work_Mates_div_list_div">'
 					+'                                           	 	<div class="Work_Mates_img_div">'
-					+'                                        			<img src="'+temp.headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''+temp.nickname+'\');"/> '
+					+'                                        			<img src="'+temp.headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''+temp.nickname+'\',\''+temp.headimgurl+'\');"/> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
 					+'                                        			 <span>'+temp.nickname+'</span>'
@@ -550,34 +555,23 @@ function getNowFormatDate() {
                   
                   
              <div id="UserInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
+            	<!-- 
                 <div class="modal-header">
                  <b id="UserInfoHead"></b>
                 </div>
+                 -->
                 <div class="modal-body readmoreHpop" style="white-space: pre-line;padding:0px;">
-                	<table width="95%" align="center" id="weather_suggest" style="margin-top:-15px;">
-                		<tr>
-                			<td>想看<b id="UserInfoHead2"></b>的信息呀？</td>
-                			<td>嘿嘿，不给你看</td>
-                		</tr>
-		                     </table>
+                	<table width="95%" align="center" id="UserInfo_tab" style="margin-top:-15px;">
+		            	<!--  -->
+		            </table>
 		        </div>
                 <div class="modal-footer">               
 						<button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
                 </div>
               </div>
                 <div class="tab-pane" id="WorkMates">
-                  <div>
-                      <div > <!-- class="span4" -->
-                          <div class="row-fluid">
-                              <div class="hpit_athena_rightDiv span12" style="margin:0px;">
-                                  <div style="overflow-y: auto; max-height:442px;margin:0px;padding:0px;overflow-x: hidden;">
-                                      <ul class="Work_Mates_div" id="Work_Mates_ul">
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                       <ul class="Work_Mates_div" id="Work_Mates_ul">
+                       </ul>
                 </div>
               </div>
             </div>
