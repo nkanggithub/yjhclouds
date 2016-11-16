@@ -1382,7 +1382,7 @@ public class RestUtils {
 		try {
 			URL urlGet = new URL(url);
 			HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-			http.setRequestMethod("POST"); // must be get request
+			http.setRequestMethod("GET"); // must be get request
 			http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 			http.setDoOutput(true);
 			http.setDoInput(true);
@@ -1399,7 +1399,7 @@ public class RestUtils {
 			is.read(jsonBytes);
 			message = new String(jsonBytes, "UTF-8");
 			// String a = message.substring(1, message.length()-1);
-
+			ret = message;
 			is.close();
 			// ret.add(e;)
 
