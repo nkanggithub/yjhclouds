@@ -686,97 +686,87 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		for(String str : ListnonlatinCity){
 			MdmDataQualityView tmpmqv = new MdmDataQualityView();
+			tmpmqv=getDataQualityReport(stateProvince,str,cityRegion);
 			tmpmqv.setPercents("0.68");
 			tmpmqv.setNumberOfEmptyCityArea(1000);
 			tmpmqv.setNumberOfThreeGrade(2000);
 			tmpmqv.setNumberOfNonGeo(2000);
-			map.put(str, tmpmqv);
+			
+			try{
+				// competitor
+				int cnt_competitor = 0;
+				BasicDBObject query_competitor = new BasicDBObject();
+				query_competitor.put("isCompetitor", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_competitor.put("state", stateProvince);
+				}
+				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
+					query_competitor.put("nonlatinCity", str);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_competitor.put("cityRegion", cityRegion);
+				}
+				cnt_competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor).count();
+				// partner
+				int cnt_partner = 0;
+				BasicDBObject query_partner = new BasicDBObject();
+				query_partner.put("includePartnerOrgIndicator", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_partner.put("state", stateProvince);
+				}
+				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
+					query_partner.put("nonlatinCity", str);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_partner.put("cityRegion", cityRegion);
+				}
+				cnt_partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner).count();
+				// customer
+				int cnt_customer = 0;
+				BasicDBObject query_customer = new BasicDBObject();
+				query_customer.put("onlyPresaleCustomer", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_customer.put("state", stateProvince);
+				}
+				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
+					query_customer.put("nonlatinCity", str);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_customer.put("cityRegion", cityRegion);
+				}
+				cnt_customer = mongoDB.getCollection(collectionMasterDataName).find(query_customer).count();
+				
+				// potential leads
+				int cnt_lead = 0;
+				BasicDBObject query_leads = new BasicDBObject();
+				query_leads.put("onlyPresaleCustomer", "false");
+				query_partner.put("includePartnerOrgIndicator", "false");
+				query_competitor.put("isCompetitor", "false");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_leads.put("state", stateProvince);
+				}
+				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
+					query_leads.put("nonlatinCity", str);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_leads.put("cityRegion", cityRegion);
+				}
+				cnt_lead = mongoDB.getCollection(collectionMasterDataName).find(query_leads).count();
+				
+				tmpmqv.setNumberOfCompetitor(cnt_competitor);
+				tmpmqv.setNumberOfPartner(cnt_partner);
+				tmpmqv.setNumberOfCustomer(cnt_customer);
+				tmpmqv.setNumberOfLeads(cnt_lead);
+				tmpmqv.setNumberOfOppt(cnt_lead);
+				
+
+			}
+			catch(Exception e){
+				log.info("getDataQualityReport--" + e.getMessage());
+			}
+			
+			 map.put(str, tmpmqv);
 		}
-		try{
-			// competitor
-			BasicDBObject query_competitor = new BasicDBObject();
-			query_competitor.put("isCompetitor", "true");
-			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-				query_competitor.put("state", stateProvince);
-			}
-			if(ListnonlatinCity != null){
-				query_competitor.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
-			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-				query_competitor.put("cityRegion", cityRegion);
-			}
-			DBCursor DBcompetitor= mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
-			while(DBcompetitor.hasNext()){
-				DBObject dbOject = DBcompetitor.next();
-				String nonlatinCity = dbOject.get("nonlatinCity").toString();
-				MdmDataQualityView mqv = map.get(nonlatinCity);
-				mqv.setNumberOfCompetitor(mqv.getNumberOfCompetitor()+1);
-			}
-			// partner
-			BasicDBObject query_partner = new BasicDBObject();
-			query_partner.put("includePartnerOrgIndicator", "true");
-			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-				query_partner.put("state", stateProvince);
-			}
-			if(ListnonlatinCity != null){
-				query_partner.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
-			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-				query_partner.put("cityRegion", cityRegion);
-			}
-			DBCursor DBpartner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
-			while(DBpartner.hasNext()){
-				DBObject dbOject = DBpartner.next();
-				String nonlatinCity = dbOject.get("nonlatinCity").toString();
-				MdmDataQualityView mqv = map.get(nonlatinCity);
-				mqv.setNumberOfCompetitor(mqv.getNumberOfPartner()+1);
-			}
-			// customer
-			BasicDBObject query_customer = new BasicDBObject();
-			query_customer.put("onlyPresaleCustomer", "true");
-			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-				query_customer.put("state", stateProvince);
-			}
-			if(ListnonlatinCity != null){
-				query_customer.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
-			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-				query_customer.put("cityRegion", cityRegion);
-			}
-			DBCursor DBcustomer = mongoDB.getCollection(collectionMasterDataName).find(query_customer);
-			while(DBcustomer.hasNext()){
-				DBObject dbOject = DBcustomer.next();
-				String nonlatinCity = dbOject.get("nonlatinCity").toString();
-				MdmDataQualityView mqv = map.get(nonlatinCity);
-				mqv.setNumberOfCompetitor(mqv.getNumberOfCustomer()+1);
-			}
-			// potential leads
-			BasicDBObject query_leads = new BasicDBObject();
-			query_leads.put("onlyPresaleCustomer", "false");
-			query_partner.put("includePartnerOrgIndicator", "false");
-			query_competitor.put("isCompetitor", "false");
-			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-				query_leads.put("state", stateProvince);
-			}
-			if(ListnonlatinCity != null){
-				query_leads.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
-			if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-				query_leads.put("cityRegion", cityRegion);
-			}
-			DBCursor DBlead = mongoDB.getCollection(collectionMasterDataName).find(query_leads);
-			while(DBlead.hasNext()){
-				DBObject dbOject = DBlead.next();
-				String nonlatinCity = dbOject.get("nonlatinCity").toString();
-				MdmDataQualityView mqv = map.get(nonlatinCity);
-				mqv.setNumberOfCompetitor(mqv.getNumberOfLeads()+1);
-				mqv.setNumberOfCompetitor(mqv.getNumberOfOppt()+1);
-			}
-		}
-		catch(Exception e){
-			log.info("getDataQualityReport--" + e.getMessage());
-		}
-		
 		return map;
 	}
 	
