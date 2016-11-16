@@ -164,13 +164,24 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		Boolean ret = false;
+		String OpenID =  mdlUser.getOpenid();
 	    try{
 	    	DBObject query = new BasicDBObject();
-	    	query.put("OpenID", mdlUser.getOpenid());
+	    	query.put("OpenID", OpenID);
 	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
-	    	
-
-			ret = true;
+	    	if(queryresult != null){
+    	    	DBObject update = new BasicDBObject();
+    	    	update.put("suppovisor", mdlUser.getSuppovisor());
+    	    	update.put("registerDate", mdlUser.getRegisterDate());
+    	    	update.put("role", mdlUser.getRole());
+    	    	update.put("selfIntro", mdlUser.getSelfIntro());
+    	    	update.put("email", mdlUser.getEmail());
+    	    	update.put("phone", mdlUser.getPhone());
+    	    	update.put("point", "");
+    	    	update.put("like", "");
+    	    	WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);    	    	
+    	    	ret = true;
+	    	}
 	    }
 		catch(Exception e){
 			log.info("registerUser--" + e.getMessage());

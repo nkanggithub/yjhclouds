@@ -502,5 +502,30 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
+	
+	@RequestMapping("/CallRegisterUser")
+	public static boolean CallRegisterUser(@RequestParam(value="suppovisor", required=false) String suppovisor,
+			@RequestParam(value="registerDate", required=false) String registerDate,
+			@RequestParam(value="role", required=false) String role,
+			@RequestParam(value="selfIntro", required=false) String selfIntro,
+			@RequestParam(value="email", required=false) String email,
+			@RequestParam(value="phone", required=false) String phone
+			){
+		boolean ret = false;
+		WeChatMDLUser mdlUser = new WeChatMDLUser();
+		mdlUser.setSelfIntro(selfIntro);
+		mdlUser.setSuppovisor(suppovisor);
+		mdlUser.setRegisterDate(registerDate);
+		mdlUser.setRole(role);
+		mdlUser.setEmail(email);
+		mdlUser.setPhone(phone);
+		try{
+			ret = MongoDBBasic.registerUser(mdlUser);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
 
 }
