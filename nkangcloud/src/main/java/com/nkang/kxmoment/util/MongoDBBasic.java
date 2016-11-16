@@ -172,19 +172,17 @@ public class MongoDBBasic {
             if (null != dbcur) {
             	while(dbcur.hasNext()){
             		DBObject o = dbcur.next();
-            		BasicDBObject dbo = (BasicDBObject) o.get("Teamer");
-            		if(dbo != null){
-            			dbo.put("email", teamer.getEmail());
-            			dbo.put("phone", teamer.getPhone());
-            			dbo.put("registerDate", teamer.getRegisterDate());
-            			dbo.put("role", teamer.getRole());
-            			dbo.put("selfIntro", teamer.getSelfIntro());
-            			dbo.put("suppovisor", teamer.getSuppovisor());            			
-            			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), dbo);
-            		}
-            		else{
-            			WriteResult wr = mongoDB.getCollection(wechat_user).insert(new BasicDBObject().append("OpenID", OpenID), dbo);
-            		}
+            		DBObject dbo = new BasicDBObject();
+            		dbo.put("openid", teamer.getOpenid()); 
+        			dbo.put("email", teamer.getEmail());
+        			dbo.put("phone", teamer.getPhone());
+        			dbo.put("registerDate", teamer.getRegisterDate());
+        			dbo.put("role", teamer.getRole());
+        			dbo.put("selfIntro", teamer.getSelfIntro());
+        			dbo.put("suppovisor", teamer.getSuppovisor()); 
+        			o.put("Teamer", dbo);
+        			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), o);
+            		ret = true;
             	}
             }
 	    }
