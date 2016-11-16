@@ -656,8 +656,12 @@ public class MongoDBBasic {
 		try{
 			BasicDBObject query_all = new BasicDBObject();
 			if(ListnonlatinCity != null){
+				
 			
 				query_all.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
+			}
+			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+				query_all.put("state", stateProvince);
 			}
 			
 			DBCursor dBcu= mongoDB.getCollection(collectionMasterDataName).find(query_all);
