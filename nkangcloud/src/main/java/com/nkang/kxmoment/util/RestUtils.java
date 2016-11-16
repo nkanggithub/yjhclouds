@@ -34,7 +34,7 @@ public class RestUtils {
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "N";
 	public static String getAccessKey() {
-			String url = "https://"+Constants.baiduapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
+			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
 			String expires_in = null;
 			try {
@@ -71,7 +71,7 @@ public class RestUtils {
 	public static WeChatUser getWeChatUserInfo(String akey, String openID){
 		WeChatUser wcu = new WeChatUser();
 		
-		String url = "https://"+Constants.baiduapihost+"/cgi-bin/user/info?access_token="+ akey +"&openid="+ openID;
+		String url = "https://"+Constants.wechatapihost+"/cgi-bin/user/info?access_token="+ akey +"&openid="+ openID;
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -316,7 +316,7 @@ public class RestUtils {
     
     public static String createMenu(String access_token) {
         String menu = "{\"button\":[{\"name\":\"Near By\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Opportunity\",\"key\":\"nboppt\"},{\"type\":\"click\",\"name\":\"Customer\",\"key\":\"nbcust\"},{\"type\":\"click\",\"name\":\"Competitor\",\"key\":\"nbcompe\"},{\"type\":\"click\",\"name\":\"Partner\",\"key\":\"nbpartner\"}]},{\"name\":\"MDG\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Data Lake\",\"key\":\"MDLAKE\"},{\"type\":\"click\",\"name\":\"Customer Care\",\"key\":\"05_SIGN\"}]}]}";
-        String action = "https://"+Constants.baiduapihost+"/cgi-bin/menu/create?access_token="+access_token;
+        String action = "https://"+Constants.wechatapihost+"/cgi-bin/menu/create?access_token="+access_token;
           try {
              URL url = new URL(action);
              HttpURLConnection http =   (HttpURLConnection) url.openConnection();    
@@ -351,7 +351,7 @@ public class RestUtils {
 
     public static String deleteMenu(String access_token)
      {
-         String action = "https://"+Constants.baiduapihost+"/cgi-bin/menu/delete? access_token="+access_token;
+         String action = "https://"+Constants.wechatapihost+"/cgi-bin/menu/delete? access_token="+access_token;
          try {
             URL url = new URL(action);
             HttpURLConnection http =   (HttpURLConnection) url.openConnection();    
