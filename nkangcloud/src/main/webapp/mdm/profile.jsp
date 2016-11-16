@@ -216,7 +216,7 @@ function getMDLUserLists(){
 				var li='	<li class="Work_Mates_div_li">'
 					+'                                        	<div class="Work_Mates_div_list_div">'
 					+'                                           	 	<div class="Work_Mates_img_div">'
-					+'                                        			 <img src="'+temp.HeadUrl+'" alt="userImage" class="matesUserImage" alt="no_username"/> '
+					+'                                        			 <a class="" data-toggle="modal" href="#UserInfo"><img src="'+temp.HeadUrl+'" alt="userImage" class="matesUserImage" alt="no_username"/> </a> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
 					+'                                        			 <span>'+temp.NickName+'</span>'
@@ -541,6 +541,24 @@ function getNowFormatDate() {
 		                       </table>
 	                  </div>
                   </div>
+                  
+                  
+             <div id="UserInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="static">
+                <div class="modal-header">
+                 <b>user info</b>
+                </div>
+                <div class="modal-body readmoreHpop" style="white-space: pre-line;padding:0px;">
+                	<table width="95%" align="center" id="weather_suggest" style="margin-top:-15px;">
+                		<tr>
+                			<td>想看他的信息呀？</td>
+                			<td>嘿嘿，不给你看</td>
+                		</tr>
+		                     </table>
+		        </div>
+                <div class="modal-footer">               
+						<button class="btnAthena" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                </div>
+              </div>
                 <div class="tab-pane" id="WorkMates">
                   <div>
                       <div > <!-- class="span4" -->
