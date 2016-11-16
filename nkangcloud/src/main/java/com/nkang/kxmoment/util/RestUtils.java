@@ -129,10 +129,10 @@ public class RestUtils {
 	
 	
 	public static String  getWeatherInform(String cityName){ 
-         String baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location=??&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
+         String baiduUrl = "http://"+Constants.baiduapihost+"/telematics/v3/weather?location=??&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";  
          StringBuffer strBuf;  
          try {                              
-             baiduUrl = "http://api.map.baidu.com/telematics/v3/weather?location="+URLEncoder.encode(cityName, "utf-8")+"&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";                    
+             baiduUrl = "http://"+Constants.baiduapihost+"/telematics/v3/weather?location="+URLEncoder.encode(cityName, "utf-8")+"&output=json&ak=75cXdwpimZ6GaFMMdQj20GvS";                    
          } catch (UnsupportedEncodingException e1) {               
              e1.printStackTrace();                     
          }  
@@ -162,7 +162,7 @@ public class RestUtils {
     
     public static String getUserCurLocWithLatLng(String lat, String lng){
     	String ret = "";
-    	String url =  "http://api.map.baidu.com/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+    	String url =  "http://"+Constants.baiduapihost+"/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -196,7 +196,7 @@ public class RestUtils {
     
     public static List<String> getUserCurLocWithLatLngV2(String lat, String lng){
     	List<String> ret = new ArrayList<String>();
-    	String url =  "http://api.map.baidu.com/geocoder?key=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+    	String url =  "http://"+Constants.baiduapihost+"/geocoder?key=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -278,7 +278,7 @@ public class RestUtils {
     public static List<String> getUserCityInfoWithLatLng(String lat, String lng){
     	String ret = "";
     	List<String> CityComponent =  new ArrayList<String>();
-    	String url =  "http://api.map.baidu.com/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+    	String url =  "http://"+Constants.baiduapihost+"/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -930,7 +930,7 @@ public class RestUtils {
 	
 	public static String getlatLngwithQuery(String Query, String Region) throws Exception{
 		String latlng = "";
-		String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+		String url =  "http://"+Constants.baiduapihost+"/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -1495,7 +1495,7 @@ public class RestUtils {
 				Region = "China";
 			}
 			
-			String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+			String url =  "http://"+Constants.baiduapihost+"/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
 			try {
 		           URL urlGet = new URL(url);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -1576,7 +1576,7 @@ public class RestUtils {
 				Region = "China";
 			}
 			
-			String url =  "http://api.map.baidu.com/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
+			String url =  "http://"+Constants.baiduapihost+"/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
 			try {
 		           URL urlGet = new URL(url);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
