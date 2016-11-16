@@ -99,7 +99,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				url : "getOpenMes",
 				success : function(data) {
 					  if (data) {				  
-							var htmlcustli = "<div class=\"well well-sm\">"+data.length+" Active Clients in service</div>";
+							var htmlcustli = "<div class=\"well well-sm\" style='text-align:center;'><img src='mdm/images/People.png' width='25px' height='25px' alt='icon'/><p style='margin:0;text-align:center;font-size:14px'>"+data.length+" Active Clients in service</p></div>";
 							if(data.length!=0){
 							for(var i=0;i<data.length;i++){
 								htmlcustli = htmlcustli + "<li class=\"active\"><a href=\"#\" onclick=\"javascript:showDetailsForClient('" + data[i].clientID + "');\"><span class=\"badge pull-right\">" + data[i].clientIdentifier + "</span>"+ data[i].clientDescription+"</a></li>";
@@ -364,7 +364,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			swal("200M", document.getElementById("totalOPSI").innerHTML+" Organizations", "success");
 		}
 		function showDetailsForClient(paraStr){
-			swal("MDCP Client Identifier", paraStr, "success");
+			swal(paraStr, paraStr, "success");
 		}
 	</script>
 	  <style type="text/css">

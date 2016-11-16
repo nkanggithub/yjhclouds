@@ -134,7 +134,7 @@ catch(Exception e){
 	
 </head> 
 <body onload="stylerevise()">
-	<a href="http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=<%= uid%>"><img src="../MetroStyleFiles/HPE_White.png" alt="HP Logo" style="width:175px;height:80px;position:absolute;left:4%;top:2%; z-index:6;"/></a>
+	<a href="http://shenan.duapp.com/DQMenu?UID=<%= uid%>"><img src="../MetroStyleFiles/HPE_White.png" alt="HP Logo" style="width:175px;height:80px;position:absolute;left:4%;top:2%; z-index:6;"/></a>
 	<a><img id="data_lake_id" src="../MetroStyleFiles/lake-icon.png" onClick="Javascript:CommentMe();" class="data_lake_img"/></a>
 	<div class="metro-layout vertical">
 		<div class="header"></div>
