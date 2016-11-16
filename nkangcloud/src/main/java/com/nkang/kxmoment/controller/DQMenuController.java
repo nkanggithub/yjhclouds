@@ -1,29 +1,13 @@
 package com.nkang.kxmoment.controller;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-
-
-
-
-
-
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -90,22 +74,22 @@ public class DQMenuController {
     	}
     	else{
     		countOfCity = 10;
-//    		for(int i = 0; i < countOfCity ; i ++){
-//    			tempOfCities.add(listOfCities.get(i));
-//    		}
+    		for(int i = 0; i < countOfCity ; i ++){
+    			tempOfCities.add(listOfCities.get(i));
+    		}
     	}
-    	//Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
+    	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
-    		/* a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
+    		 a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
     		 b[i+1] = mapByStateCity.get(tempOfCities.get(i)).getNumberOfCompetitor();
     		 c[i+1]=  mapByStateCity.get(tempOfCities.get(i)).getNumberOfPartner();
     		 d[i] =tempOfCities.get(i);
-    		 */
-    		 MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
-    		 a[i+1]=mqvByStateCity.getNumberOfCustomer();
+    		 
+    		// MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
+    		/* a[i+1]=mqvByStateCity.getNumberOfCustomer();
     		 b[i+1] =mqvByStateCity.getNumberOfCompetitor();
     		 c[i+1]= mqvByStateCity.getNumberOfPartner();
-    		 d[i] =listOfCities.get(i);
+    		 d[i] =listOfCities.get(i);*/
   	
     	}
     	finalString.add(a);
@@ -114,7 +98,6 @@ public class DQMenuController {
     	finalString.add(d);
 		return finalString;
 	}
-	
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
 	{
@@ -176,22 +159,22 @@ public class DQMenuController {
     	}
     	else{
     		countOfCity = 10;
-    		for(int i = 0; i < countOfCity ; i ++){
-    			tempOfCities.add(listOfCities.get(i));
-    		}
+//    		for(int i = 0; i < countOfCity ; i ++){
+//    			tempOfCities.add(listOfCities.get(i));
+//    		}
     	}
-    	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
+    	//Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
-    		 a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
+    		/* a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
     		 b[i+1] = mapByStateCity.get(tempOfCities.get(i)).getNumberOfCompetitor();
     		 c[i+1]=  mapByStateCity.get(tempOfCities.get(i)).getNumberOfPartner();
     		 d[i] =tempOfCities.get(i);
-    		 
-    		// MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
-    		/* a[i+1]=mqvByStateCity.getNumberOfCustomer();
+    		 */
+    		 MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
+    		 a[i+1]=mqvByStateCity.getNumberOfCustomer();
     		 b[i+1] =mqvByStateCity.getNumberOfCompetitor();
     		 c[i+1]= mqvByStateCity.getNumberOfPartner();
-    		 d[i] =listOfCities.get(i);*/
+    		 d[i] =listOfCities.get(i);
   	
     	}
     	finalString.add(a);
@@ -200,4 +183,5 @@ public class DQMenuController {
     	finalString.add(d);
 		return finalString;
 	}
+	
 }
