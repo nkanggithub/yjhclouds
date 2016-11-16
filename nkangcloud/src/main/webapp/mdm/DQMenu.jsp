@@ -287,7 +287,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		}
 		
 		function hideAll(obj){
-			$(".sk-circle").hide();
 			 $("#chart3").hide();
 			 $("#chart2").hide();
 			 $("#chart4").hide();
@@ -295,7 +294,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			 $("#chart3Radar").hide();
 		}
 		function loadChart2(){
-			$(".sk-circle").hide();
 	 		$("#chart2").show();
 /* 	 		$("#openfooter_loadC2").append(chartobj); */
 			//$("#openfooter_loadC2").html(chartobj);
@@ -307,7 +305,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	     }
 		
 		function loadChartRadar(obj){
-			$(".sk-circle").hide();
 			var chartobj = $("#chart3Radar");
 			$("#americano_loadChart").html(chartobj);
 			$("#chart3").hide();
@@ -318,7 +315,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		}
 		
 		function loadChart4(obj){
-			$(".sk-circle").hide();
 			var chartobj = $("#chart4");
 			$("#conporlan_loadChart").html(chartobj);
 			$("#chart3").hide();
@@ -329,13 +325,11 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		}
 		function loadOpenMe(obj)
 		{
-			$(".sk-circle").hide();
 			$("#openMeDiv").show();
 			$("#chart3").hide();
 			 $("#chart2").hide();
 		}
 		function loadChart5(obj){
-			$(".sk-circle").hide();
 			var chartobj = $("#chart5");
 			$("#capuqino_loadChart").html(chartobj);
 			$("#chart3").hide();
