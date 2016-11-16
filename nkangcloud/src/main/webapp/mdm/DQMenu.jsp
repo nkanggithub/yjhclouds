@@ -509,7 +509,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="userInfo">
 	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="navbar-link">${ userInfo.nickname }</a><br />
 		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
-		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:217px;right:-30%; z-index: 8;"/>
+		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:223px;right:-20%; z-index: 8;"/>
 	</p>
 
 </div>
@@ -572,6 +572,19 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	                <img src="MetroStyleFiles//datalake.png" alt="">
 	                <span class="light-text"><strong>Data Lake</strong></span>
                 </a>
+            </div>      
+             <div id="conporlan" onclick="javascript:loadChart4(this);" class="tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
+                <a href="javascript:void(0);" target="_blank">
+					<img src="MetroStyleFiles//image/icon.png" alt="">
+					<span class="light-text">康宝蓝</span>
+                </a>
+            </div>
+			
+			<div id="espresso" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
+                <a href="javascript:void(0);">
+	                <img src="MetroStyleFiles//location.png" alt="">
+	                <span class="light-text">Geolocation</span>
+                </a>
             </div>
 			
 			<div id="openmes"   onclick="javascript:loadOpenMe(this);" class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
@@ -595,33 +608,21 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
                 </a>
             </div>
             
-            <div id="conporlan" onclick="javascript:loadChart4(this);" class="tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
-                <a href="javascript:void(0);" target="_blank">
-					<img src="MetroStyleFiles//image/icon.png" alt="">
-					<span class="light-text">康宝蓝</span>
-                </a>
-            </div>
-			
-			<div id="espresso" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
-                <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//location.png" alt="">
-	                <span class="light-text">Geolocation</span>
-                </a>
-            </div>
+     
 
 			
-			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt-long solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//industry.png" alt="">
 	                <span class="light-text">Industry</span>
                 </a>
             </div>
             
-            <div id="joinus" class="tile-bt-long solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
-		        <div class="tile-bt-long solid-green hovershadow-green">
+            <div id="joinus" class="tile-bt solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+		        <div class="tile-bt solid-green hovershadow-green">
 		            <a href="javascript:void(0);" onClick="Javascript:CommentMe();"  title="move together">
 		                <img src="MetroStyleFiles//image/documents.png" alt="MetroTab Docs">
-		                <span class="light-text" style="margin-left:5px; font-size:20px;">Join US</span>
+		                <span class="light-text" style="margin-left:5px; font-size:16px;">Join US</span>
 		            </a>
 		        </div>
     		</div>
