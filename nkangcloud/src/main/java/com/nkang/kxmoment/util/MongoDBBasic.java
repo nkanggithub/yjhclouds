@@ -171,16 +171,8 @@ public class MongoDBBasic {
 	    	query.put("OpenID", OpenID);
 	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
 	    	if(queryresult != null){
-    	    	DBObject update = new BasicDBObject();
-    	    	update.put("suppovisor", mdlUser.getSuppovisor());
-    	    	update.put("registerDate", mdlUser.getRegisterDate());
-    	    	update.put("role", mdlUser.getRole());
-    	    	update.put("selfIntro", mdlUser.getSelfIntro());
-    	    	update.put("email", mdlUser.getEmail());
-    	    	update.put("phone", mdlUser.getPhone());
-    	    	update.put("point", "");
-    	    	update.put("like", "");
-    	    	WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);    	    	
+    	    	queryresult.put("WeChatMDLUser", mdlUser);
+    	    	WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), queryresult);    	    	
     	    	ret = true;
 	    	}
 	    }
