@@ -608,17 +608,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
                 </a>
             </div>
             
-			<div id="openfooter"  class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
-                <a href="javascript:void(0);">
-	                <img src="MetroStyleFiles//visualview.png" alt="">
-	                <span class="light-text">Business Type</span>
-                </a>
-            </div>
-            
-     
-
-			
-			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+            			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//industry.png" alt="">
 	                <span class="light-text">Industry</span>
@@ -633,6 +623,18 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		            </a>
 		        </div>
     		</div>
+            
+			<div id="openfooter"  class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
+                <a href="javascript:void(0);">
+	                <img src="MetroStyleFiles//visualview.png" alt="">
+	                <span class="light-text">Business Type</span>
+                </a>
+            </div>
+            
+     
+
+			
+
 
         <div class="clearspace"></div>
         
