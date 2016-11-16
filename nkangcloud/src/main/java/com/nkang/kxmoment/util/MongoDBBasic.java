@@ -3,6 +3,7 @@ package com.nkang.kxmoment.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -684,16 +685,17 @@ public class MongoDBBasic {
 		
 		try{
 			BasicDBObject query_all = new BasicDBObject();
-			if(ListnonlatinCity != null){
-				
-			
-				query_all.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
+
 			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
 				query_all.put("state", stateProvince);
 			}
 			
+			if(ListnonlatinCity != null){
+				query_all.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
+			}
+			log.info("before----"+new Date());
 			DBCursor dBcu= mongoDB.getCollection(collectionMasterDataName).find(query_all);
+			log.info("after----"+new Date());
 			for(String str : ListnonlatinCity){
 				MdmDataQualityView tmpmqv = new MdmDataQualityView();
 				tmpmqv.setPercents("0.68");
@@ -721,6 +723,7 @@ public class MongoDBBasic {
 					mqv.setNumberOfOppt(mqv.getNumberOfOppt()+1);
 				}
 			}
+			log.info("after while----"+new Date());
 			
 		}
 		catch(Exception e){
