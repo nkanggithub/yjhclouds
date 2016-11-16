@@ -504,7 +504,9 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/CallRegisterUser")
-	public static boolean CallRegisterUser(@RequestParam(value="suppovisor", required=false) String suppovisor,
+	public static boolean CallRegisterUser(
+			@RequestParam(value="openid", required=false) String openid,
+			@RequestParam(value="suppovisor", required=false) String suppovisor,
 			@RequestParam(value="registerDate", required=false) String registerDate,
 			@RequestParam(value="role", required=false) String role,
 			@RequestParam(value="selfIntro", required=false) String selfIntro,
@@ -513,6 +515,7 @@ public class MasterDataRestController {
 			){
 		boolean ret = false;
 		WeChatMDLUser mdlUser = new WeChatMDLUser();
+		mdlUser.setOpenid(openid);
 		mdlUser.setSelfIntro(selfIntro);
 		mdlUser.setSuppovisor(suppovisor);
 		mdlUser.setRegisterDate(registerDate);
