@@ -75,6 +75,7 @@ public class DQMenuController {
 	public @ResponseBody List<Object[]> getChart2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
+		List<String> tempOfCities=new ArrayList<String>();    
 		List<Object[]> finalString=new ArrayList<Object[]>();
 		Object[] a = new Object[11];
 		a[0]="客户";
@@ -89,13 +90,23 @@ public class DQMenuController {
     	}
     	else{
     		countOfCity = 10;
+    		for(int i = 0; i < countOfCity ; i ++){
+    			tempOfCities.add(listOfCities.get(i));
+    		}
     	}
     	for(int i = 0; i < countOfCity ; i ++){
-    		 MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
-    		 a[i+1]=mqvByStateCity.getNumberOfCustomer();
+    		 Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
+    		
+    		 a[i+1]= mapByStateCity.get(listOfCities.get(i)).getNumberOfCustomer();
+    		 b[i+1] = mapByStateCity.get(listOfCities.get(i)).getNumberOfCompetitor();
+    		 c[i+1]=  mapByStateCity.get(listOfCities.get(i)).getNumberOfPartner();
+    		 d[i] =listOfCities.get(i);
+    		 
+    		// MdmDataQualityView mqvByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities.get(i),"");
+    		/* a[i+1]=mqvByStateCity.getNumberOfCustomer();
     		 b[i+1] =mqvByStateCity.getNumberOfCompetitor();
     		 c[i+1]= mqvByStateCity.getNumberOfPartner();
-    		 d[i] =listOfCities.get(i);
+    		 d[i] =listOfCities.get(i);*/
   	
     	}
     	finalString.add(a);
