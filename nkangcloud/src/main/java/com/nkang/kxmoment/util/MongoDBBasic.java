@@ -160,20 +160,15 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean registerUser(WeChatUser wcu){
+	public static boolean registerUser(WeChatMDLUser mdlUser){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		Boolean ret = false;
 	    try{
 	    	DBObject query = new BasicDBObject();
-	    	query.put("OpenID", wcu.getOpenid());
+	    	query.put("OpenID", mdlUser.getOpenid());
 	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
 	    	
-	    	
-	    	DBObject update = new BasicDBObject();
-	    	update.put("OpenID", wcu.getOpenid());
-	    	update.put("HeadUrl", wcu.getHeadimgurl());
-	    	update.put("NickName", wcu.getNickname());
 
 			ret = true;
 	    }
@@ -925,30 +920,18 @@ public class MongoDBBasic {
             		weChatMDLUser = new WeChatMDLUser();
             		DBObject o = queryresults.next();
             		if(o.get("OpenID") != null){
-            			weChatMDLUser.setOpenID(o.get("OpenID").toString());
-            			if(o.get("Created") != null){
-                			weChatMDLUser.setCreated(o.get("Created").toString());
-                		}
+            			weChatMDLUser.setOpenid(o.get("OpenID").toString());
                 		if(o.get("CurLAT").toString() != null){
-                			weChatMDLUser.setCurLAT(o.get("CurLAT").toString());
+                			weChatMDLUser.setLat(o.get("CurLAT").toString());
                 		}
                 		if(o.get("CurLNG") != null){
-                			weChatMDLUser.setCurLNG(o.get("CurLNG").toString());
-                		}
-                		if(o.get("FormatAddress") != null){
-                			weChatMDLUser.setFormatAddress(o.get("FormatAddress").toString());
+                			weChatMDLUser.setLng(o.get("CurLNG").toString());
                 		}
                 		if(o.get("HeadUrl") != null){
-                			weChatMDLUser.setHeadUrl(o.get("HeadUrl").toString());
+                			weChatMDLUser.setHeadimgurl(o.get("HeadUrl").toString());
                 		}
-                		if(o.get("LastUpdatedDate") != null){
-                			weChatMDLUser.setLastUpdatedDate(o.get("LastUpdatedDate").toString());
-                		}
-                		if(o.get("OpenID") != null){
-                			weChatMDLUser.setNickName(o.get("NickName").toString());
-                		}
-                		if(o.get("OpenID") != null){
-                			weChatMDLUser.setOpenID(o.get("OpenID").toString());
+                		if(o.get("NickName") != null){
+                			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
             		}
             		if(weChatMDLUser != null){

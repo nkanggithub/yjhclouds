@@ -1,14 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
-public class WeChatMDLUser {
-	public String OpenID;
-	public String HeadUrl;
-	public String NickName;
-	public String Created;
-	public String FormatAddress;
-	public String CurLAT;
-	public String CurLNG;
-	public String LastUpdatedDate;
+public class WeChatMDLUser extends WeChatUser {
+
 	public String suppovisor;
 	public String registerDate;
 	public String role;
@@ -17,9 +10,6 @@ public class WeChatMDLUser {
 	public String phone;
 	public String point;
 	public String like;
-	
-	
-	
 	public String getSuppovisor() {
 		return suppovisor;
 	}
@@ -68,53 +58,6 @@ public class WeChatMDLUser {
 	public void setLike(String like) {
 		this.like = like;
 	}
-	public String getOpenID() {
-		return OpenID;
-	}
-	public void setOpenID(String openID) {
-		OpenID = openID;
-	}
-	public String getHeadUrl() {
-		return HeadUrl;
-	}
-	public void setHeadUrl(String headUrl) {
-		HeadUrl = headUrl;
-	}
-	public String getNickName() {
-		return NickName;
-	}
-	public void setNickName(String nickName) {
-		NickName = nickName;
-	}
-	public String getCreated() {
-		return Created;
-	}
-	public void setCreated(String created) {
-		Created = created;
-	}
-	public String getFormatAddress() {
-		return FormatAddress;
-	}
-	public void setFormatAddress(String formatAddress) {
-		FormatAddress = formatAddress;
-	}
-	public String getCurLAT() {
-		return CurLAT;
-	}
-	public void setCurLAT(String curLAT) {
-		CurLAT = curLAT;
-	}
-	public String getCurLNG() {
-		return CurLNG;
-	}
-	public void setCurLNG(String curLNG) {
-		CurLNG = curLNG;
-	}
-	public String getLastUpdatedDate() {
-		return LastUpdatedDate;
-	}
-	public void setLastUpdatedDate(String lastUpdatedDate) {
-		LastUpdatedDate = lastUpdatedDate;
-	}
+	
 	
 }
