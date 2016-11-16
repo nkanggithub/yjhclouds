@@ -94,9 +94,8 @@ public class DQMenuController {
     			tempOfCities.add(listOfCities.get(i));
     		}
     	}
+    	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
-    		 Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
-    		
     		 a[i+1]= mapByStateCity.get(listOfCities.get(i)).getNumberOfCustomer();
     		 b[i+1] = mapByStateCity.get(listOfCities.get(i)).getNumberOfCompetitor();
     		 c[i+1]=  mapByStateCity.get(listOfCities.get(i)).getNumberOfPartner();
@@ -155,4 +154,6 @@ public class DQMenuController {
 		 Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
 		return mapByStateCity;
 	}
+	
+	
 }
