@@ -20,6 +20,7 @@ import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.DBUtils;
@@ -514,16 +515,16 @@ public class MasterDataRestController {
 			@RequestParam(value="phone", required=false) String phone
 			){
 		boolean ret = false;
-		WeChatMDLUser mdlUser = new WeChatMDLUser();
-		mdlUser.setOpenid(openid);
-		mdlUser.setSelfIntro(selfIntro);
-		mdlUser.setSuppovisor(suppovisor);
-		mdlUser.setRegisterDate(registerDate);
-		mdlUser.setRole(role);
-		mdlUser.setEmail(email);
-		mdlUser.setPhone(phone);
+		Teamer teamer = new Teamer();
+		teamer.setOpenid(openid);
+		teamer.setSelfIntro(selfIntro);
+		teamer.setSuppovisor(suppovisor);
+		teamer.setRegisterDate(registerDate);
+		teamer.setRole(role);
+		teamer.setEmail(email);
+		teamer.setPhone(phone);
 		try{
-			ret = MongoDBBasic.registerUser(mdlUser);
+			ret = MongoDBBasic.registerUser(teamer);
 		}		
 		catch(Exception e){
 			ret = false;

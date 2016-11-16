@@ -30,6 +30,7 @@ import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
@@ -161,20 +162,31 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean registerUser(WeChatMDLUser mdlUser){
+	public static boolean registerUser(Teamer teamer){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		Boolean ret = false;
-		String OpenID =  mdlUser.getOpenid();
+		String OpenID =  teamer.getOpenid();
 	    try{
-	    	DBObject query = new BasicDBObject();
-	    	query.put("OpenID", OpenID);
-	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
-	    	if(queryresult != null){
-    	    	queryresult.put("WeChatMDLUser", mdlUser);
-    	    	WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), queryresult);    	    	
-    	    	ret = true;
-	    	}
+	    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+            if (null != dbcur) {
+            	while(dbcur.hasNext()){
+            		DBObject o = dbcur.next();
+            		BasicDBObject dbo = (BasicDBObject) o.get("Teamer");
+            		if(dbo != null){
+            			dbo.put("email", teamer.getEmail());
+            			dbo.put("phone", teamer.getPhone());
+            			dbo.put("registerDate", teamer.getRegisterDate());
+            			dbo.put("role", teamer.getRole());
+            			dbo.put("selfIntro", teamer.getSelfIntro());
+            			dbo.put("suppovisor", teamer.getSuppovisor());            			
+            			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), dbo);
+            		}
+            		else{
+            			WriteResult wr = mongoDB.getCollection(wechat_user).insert(new BasicDBObject().append("OpenID", OpenID), dbo);
+            		}
+            	}
+            }
 	    }
 		catch(Exception e){
 			log.info("registerUser--" + e.getMessage());
@@ -767,17 +779,11 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 	    try{
 	    	DBObject insert = new BasicDBObject();
-	    	log.info("---1" + ClientID);
-	    	log.info("---2" + ClientIdentifier);
-	    	log.info("---3" + ClientDesc);
-	    	log.info("---4" + WebService);
-	    	
 	    	insert.put("ClientID", ClientID);
 	    	insert.put("ClientIdentifier",ClientIdentifier);
 	    	insert.put("ClientDesc", ClientDesc);
 	    	insert.put("WebService", WebService.split(","));
 			mongoDB.getCollection(client_pool).insert(insert);
-			log.info("---5--------------");
 			ret = "Loading Completed";
 	    }
 		catch(Exception e){
