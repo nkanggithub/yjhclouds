@@ -1,9 +1,12 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.List;
+
 public class ClientInformation {
 	private String ClientID;
 	private String ClientIdentifier;
 	private String ClientDescription;
+	private List<String> ConsumedWebService;
 	public String getClientID() {
 		return ClientID;
 	}
@@ -21,6 +24,12 @@ public class ClientInformation {
 	}
 	public void setClientDescription(String clientDescription) {
 		ClientDescription = clientDescription;
+	}
+	public List<String> getConsumedWebService() {
+		return ConsumedWebService;
+	}
+	public void setConsumedWebService(List<String> consumedWebService) {
+		ConsumedWebService = consumedWebService;
 	}
 	
 	
