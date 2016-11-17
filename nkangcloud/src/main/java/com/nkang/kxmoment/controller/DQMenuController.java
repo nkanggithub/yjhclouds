@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.RestUtils;
@@ -108,14 +109,12 @@ public class DQMenuController {
 		
 		String AccessKey =RestUtils.callGetValidAccessKey();
 		WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-		String totalOPSI=RestUtils.CallgetFilterTotalOPSIFromMongo("null","null","null");
-		List<String > addressInfo = RestUtils.getUserCurLocWithLatLngV2(wcu.getLat(),wcu.getLng());
-		
+		GeoLocation loc= RestUtils.callGetDBUserGeoInfo(uid);
+		List<String> addressInfo = RestUtils.getUserCurLocWithLatLngV2(loc.getLAT(), loc.getLNG());
 		if(addressInfo != null && addressInfo.size()>0){
 		wcu.setAddressInfo(addressInfo);
 		}
-		wcu.setProvince("上海市");
-		wcu.setCity("上海市");
+
 		List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo(wcu.getProvince());
 		if(wcu.getNickname() == null && wcu.getNickname() == ""){
 			wcu.setNickname("Vistitor");
@@ -124,10 +123,9 @@ public class DQMenuController {
 			wcu.setHeadimgurl("MetroStyleFiles/gallery.jpg");
 		}
 		request.getSession().setAttribute("userInfo", wcu);
-		request.getSession().setAttribute("userState", wcu.getProvince());
+		request.getSession().setAttribute("userState", addressInfo.get(0));
 		request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
-		request.getSession().setAttribute("totalOPSI", totalOPSI);
 		return "DQMenu";
 	}
 	
@@ -154,12 +152,7 @@ public class DQMenuController {
 	@RequestMapping("/getCitys")
 	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response)
 	{
-		List<String> citys=new ArrayList<String>();
-		citys.add("北京市");
-		citys.add("上海市");
-		citys.add("天津市");
-		citys.add("深圳市");
-		citys.add("重庆市");
-	return citys;
+		List<String> citys=RestUtils.getAllStates();
+		return citys;
 	}
 }
