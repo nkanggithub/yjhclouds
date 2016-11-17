@@ -11,11 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +24,7 @@ import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
 public class RestUtils {
@@ -1707,7 +1704,70 @@ public class RestUtils {
 			return StatusMessage;
 		}
 		//END
+public static String regist(WeChatMDLUser user) {
+			
+			String urlStr = "http://shenan.duapp.com/CallRegisterUser";
+			ArrayList<String> arr = new ArrayList<String>();
+			if(user.getOpenid()!=null&&!"".equals(user.getOpenid())){
+				arr.add("openid="+user.getOpenid());
+			}
+			if(user.getPhone()!=null&&!"".equals(user.getPhone())){
+				arr.add("phone="+user.getPhone());
+			}
+			if(user.getEmail()!=null&&!"".equals(user.getOpenid())){
+				arr.add("email="+user.getEmail());
+			}
+			if(user.getSuppovisor()!=null&&!"".equals(user.getSuppovisor())){
+				arr.add("suppovisor="+user.getSuppovisor());
+			}
+			if(user.getRegisterDate()!=null&&!"".equals(user.getRegisterDate())){
+				arr.add("registerDate="+user.getRegisterDate());
+			}
+			if(user.getRole()!=null&&!"".equals(user.getRole())){
+				arr.add("role="+user.getRole());
+			}
+			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
+				arr.add("selfIntro="+user.getSelfIntro());
+			}
+			
+			String temp="";
+			for(int i=0;i<arr.size();i++){
+				if(i==0)temp += "?";
+				else temp += "&";
+				temp += arr.get(i);
+			}
+			urlStr += temp;
+			System.out.println(urlStr);
+			String message = "error";
+			try {
+				
+			   URL urlGet = new URL(urlStr);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           System.out.println("============="+message);
+	           is.close();
 
+	       } catch (Exception e) {
+	    	   log.info("error callGetDataQualityReport ---------" + e.getMessage());
+	    	   message =  "failed with " + e.getMessage();
+	       }
+			return message;
+		}
 }
 
 

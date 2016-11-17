@@ -58,6 +58,7 @@
 <script src="../nkang/assets_athena/data-tables/jquery.dataTables.js"></script>
 <script src="../nkang/assets_athena/data-tables/DT_bootstrap.js"></script>
 <script src="../nkang/js_athena/common-scripts.js"></script>
+<script type="text/javascript" src="../Jsp/JS/regist.js"></script>
 
 <style>
 #weather {
@@ -564,6 +565,7 @@ a:hover,a:link {
 									data-toggle="tab">Recognition</a></li>
 								<li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work
 										Mates</a></li>
+								<li id="liRegister"><a href="#Register" data-toggle="tab">Register</a></li>
 							</ul>
 							<div class="tab-content" id="dvTabContent">
 								<div class="tab-pane" id="BoardContent">
@@ -638,6 +640,75 @@ a:hover,a:link {
 									<ul class="Work_Mates_div" id="Work_Mates_ul">
 									</ul>
 								</div>
+								<!-- register begin -->
+								 <div class="tab-pane" id="Register">
+                  	<form id="registForm">
+                  		<input id="uid" type="hidden" value="<%=uid%>"/>
+					    <table id="tableForm">
+					    	
+					      <tr>
+					        <td class="tdText">Telephone：</td>
+					        <td class="tdInput">
+					          <input class="inputClass" type="text" name="telephone" id="telephone" value="${form.telephone }"/><br/>
+					           <label class="errorClass" id="telephoneError">${errors.telephone }</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td class="tdText">Email：</td>
+					        <td>
+					          <input class="inputClass" type="text" name="email" id="email" value="${form.email }"/><br/>
+					          <label class="errorClass" id="emailError">${errors.email}</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td class="tdText">Suppovisor</td>
+					        <td class="tdInput">
+					          <input class="text-left" type="text" name="suppovisor" id="suppovisor" value="${form.suppovisor }"/><br/>
+					          <label class="errorClass" id="suppovisorError">${errors.suppovisor }</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td class="tdText">Role</td>
+					        <td class="tdInput">
+					          <input class="text-left" type="text" name="role" id="role" value="${form.role }"/><br/>
+					          <label class="errorClass" id="roleError">${errors.role }</label>
+					        </td>
+					      </tr>
+					      
+					      <tr>
+					        <td class="tdSelect">Group：</td>
+					        <td>
+					       		 <input class="text-left" type="text" name="group" id="group" value="${form.group }"/><br/>
+					          <label class="errorClass" id="groupError">${errors.group }</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td class="tdText">RegisterDate</td>
+					        <td class="tdInput">
+					          <input class="text-left" type="text" name="registerDate" id="registerDate" value="${form.registerDate }"/><br/>
+					          <label class="errorClass" id="registerDateError">${errors.registerDate }</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td class="tdText">SelfIntro</td>
+					        <td class="tdInput">
+					          <input class="text-left" type="text" name="selfIntro" id="selfIntro" value="${form.selfIntro }"/><br/>
+					          <label class="errorClass" id="selfIntroError">${errors.selfIntro }</label>
+					        </td>
+					      </tr>
+					      <tr>
+					        <td></td>
+					        <td>
+					          <label></label>
+					        </td>
+				      	</tr>
+					    </table>
+					    <div class="modal-footer">               
+		                        <button id="registBtn" class="btnAthenaSave" data-dismiss="modal" aria-hidden="true">Regist</button>
+				        </div>
+					</form>    
+                </div>
+                <!-- register end -->
 							</div>
 						</div>
 					</div>

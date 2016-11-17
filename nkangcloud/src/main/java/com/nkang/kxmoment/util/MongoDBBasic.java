@@ -138,7 +138,37 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	public static boolean queryWeChatUserTelephone(String telephone){
+		mongoDB = getMongoDB();
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("telephone", telephone);
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	if(queryresult != null){
+		    	return true;
+	    	}
+	    }
+		catch(Exception e){
+			log.info("queryTelephone--" + e.getMessage());
+		}
+		return false;
+	}
 	
+	public static boolean queryWeChatUserEmail(String email){
+		mongoDB = getMongoDB();
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("email", email);
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	if(queryresult != null){
+	    		return true;
+	    	}
+	    }
+		catch(Exception e){
+			log.info("queryEmail--" + e.getMessage());
+		}
+		return false;
+	}
 	public static boolean createUser(WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
