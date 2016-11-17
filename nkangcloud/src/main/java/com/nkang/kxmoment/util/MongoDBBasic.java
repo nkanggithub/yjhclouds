@@ -686,7 +686,6 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		for(String str : ListnonlatinCity){
 			MdmDataQualityView tmpmqv = new MdmDataQualityView();
-			tmpmqv=getDataQualityReport(stateProvince,str,cityRegion);
 			tmpmqv.setPercents("0.68");
 			tmpmqv.setNumberOfEmptyCityArea(1000);
 			tmpmqv.setNumberOfThreeGrade(2000);
@@ -759,13 +758,13 @@ public class MongoDBBasic {
 				tmpmqv.setNumberOfLeads(cnt_lead);
 				tmpmqv.setNumberOfOppt(cnt_lead);
 				
-
+				map.put(str, tmpmqv);
 			}
 			catch(Exception e){
 				log.info("getDataQualityReport--" + e.getMessage());
 			}
 			
-			 map.put(str, tmpmqv);
+			
 		}
 		return map;
 	}
