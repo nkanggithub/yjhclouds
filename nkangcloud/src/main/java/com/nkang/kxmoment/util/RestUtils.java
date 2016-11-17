@@ -808,7 +808,7 @@ public class RestUtils {
 		    	   message =  "failed with " + e.getMessage();
 		    }
 		}
-		return null;
+		return ret;
 		
 	}
 	/*
