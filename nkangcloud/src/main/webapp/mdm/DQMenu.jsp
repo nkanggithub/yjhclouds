@@ -254,33 +254,16 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 									animation: "slide-from-top"
 								}, 
 								function(inputValue){
-						 		/* 	inputVar = inputValue;
-									if (inputValue === false) return false;      
-									if (inputValue === "") {     
-										swal.showInputError("You need to write something!");     
-										return false;   
-									}  */
-								var city=$("#citySelect option:selected").val();
-									$.ajax(
-										{
-											type:"get",
-											url:"getGraphic?city="+city,
-											data:"",
-											success:function(data){}
-										}		
-									)
-									.done(function(data){
+									if (inputValue === false){ return false; }
+									else{
+										var city=$("#citySelect option:selected").val();
+										
 										$("#chart3").html("");
 										$("#chart2").html("");
 										$("#locationCity").text(city);
 										$("#userState").text(city);
-										swal("Thank You!", "your location saved", "success");
-									})
-									.error(function(data)
-									{
-										swal("Oops", "please try again later!", "error");
-									}		
-									);
+										swal("Success", "your location saved", "success");
+									}							
 									 
 								}
 							);
