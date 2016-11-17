@@ -250,26 +250,75 @@ a:hover,a:link {
 				+ '                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
 				+ '                			<br/>' + username
 				+ '                			<br/></td>' + '                		</tr>';
-		tbody += '                		<tr>'
-				+ '                			<td align="right" width="50%">'
-				+ '                			<b>Sex:</b>' + '                			</td>'
-				+ '                			<td align="left">'
-				+ '                			你猜' + '                			</td>'
-				+ '                		</tr>';
-		tbody += '                		<tr>'
-				+ '                			<td align="right" width="50%">'
-				+ '                			<b>phone:</b>' + '                			</td>'
-				+ '                			<td align="left">'
-				+ '                			你猜' + '                			</td>'
-				+ '                		</tr>';
-		tbody += '                		<tr>'
-				+ '                			<td align="right" width="50%">'
-				+ '                			<b>E-mail:</b>' + '                			</td>'
-				+ '                			<td align="left">'
-				+ '                			你猜' + '                			</td>'
-				+ '                		</tr>';
-		$j('#UserInfo_tab').html(tbody);
-		$j('#UserInfo').modal('show');
+		jQuery
+				.ajax({
+					type : "GET",
+					url : "../userProfile/getMDLUserLists",
+					data : {},
+					cache : false,
+					success : function(data) {
+						data = '{"results":' + data + '}';
+						var jsons = eval('(' + data + ')');
+						if (jsons.results.length > 0) {
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>phone:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].phone
+									+ '                			</td>'
+									+ '                		</tr>';
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>E-mail:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].email
+									+ '                			</td>'
+									+ '                		</tr>';
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>Role:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].role
+									+ '                			</td>'
+									+ '                		</tr>';
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>SelfIntro:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].selfIntro
+									+ '                			</td>'
+									+ '                		</tr>';
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>RegisterDate:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].registerDate
+									+ '                			</td>'
+									+ '                		</tr>';
+							tbody += '                		<tr>'
+									+ '                			<td align="right" width="50%">'
+									+ '                			<b>Suppovisor:</b>'
+									+ '                			</td>'
+									+ '                			<td align="left">'
+									+ '                			'
+									+ jsons.results[0].suppovisor
+									+ '                			</td>'
+									+ '                		</tr>';
+							$j('#UserInfo_tab').html(tbody);
+							$j('#UserInfo').modal('show');
+						}
+					}
+				});
 	}
 	function getMDLUserLists() {
 		jQuery
@@ -464,8 +513,8 @@ a:hover,a:link {
 							class="username colorBlue"> <%=wcu.getNickname()%>
 						</span>
 					</a> <span><a style="float: right;" href="baidu.com"> <img
-								src="<%=wcu.getHeadimgurl()%>" alt="userImage"
-								class="userImage" alt="no_username" /> <!-- <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="userImage" alt="no_username"/> -->
+								src="<%=wcu.getHeadimgurl()%>" alt="userImage" class="userImage"
+								alt="no_username" /> <!-- <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="userImage" alt="no_username"/> -->
 						</a></span></li>
 				</ul>
 			</div>
@@ -520,9 +569,10 @@ a:hover,a:link {
 								<div class="tab-pane" id="BoardContent">
 									<div>
 										<div class="panel-group" id="accordion">
-											<div id="DivLearnings" style="text-align:center;padding:50px 0px;">
-											
-											<img src="../MetroStyleFiles/image/Maintenace.gif"/>
+											<div id="DivLearnings"
+												style="text-align: center; padding: 50px 0px;">
+
+												<img src="../MetroStyleFiles/image/Maintenace.gif" />
 
 											</div>
 										</div>
