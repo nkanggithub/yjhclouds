@@ -239,7 +239,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			url : "getCitys",
 			success : function(data) {
 				  if (data) {
-					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='citySelect' style='height: 30px;width: 70px;border-radius: 8%;'>";
+					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='citySelect' style='height: 30px;width: 140px;border-radius: 8%;'>";
 					  for(var i=0;i<data.length;i++){
 						  text=text+"<option>"+data[i]+"</option>";
 						}
@@ -540,7 +540,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="username" style="display:none">${ userInfo.nickname } </div>
 <div id="radarSize" style="display:none">${ radarSize } </div>
 <div id="userState" style="display:none">${ userState } </div>
-<div id="totalOPSI" style="display:none">${ totalOPSI } </div>
 <div id="uid" style="display:none">${ uid }</div>
 <div id="addressInfo" style="display:none">
 <c:forEach items="${userInfo.addressInfo}" var="addressInfo">
