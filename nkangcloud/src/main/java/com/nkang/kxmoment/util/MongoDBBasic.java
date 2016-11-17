@@ -997,6 +997,26 @@ public class MongoDBBasic {
                 		if(o.get("NickName") != null){
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
+                		if(!StringUtils.isEmpty(OpenID)){
+                			if(o.get("email") != null){
+                    			weChatMDLUser.setNickname(o.get("email").toString());
+                    		}
+                			if(o.get("phone") != null){
+                    			weChatMDLUser.setNickname(o.get("phone").toString());
+                    		}
+                			if(o.get("registerDate") != null){
+                    			weChatMDLUser.setNickname(o.get("registerDate").toString());
+                    		}
+                			if(o.get("role") != null){
+                    			weChatMDLUser.setNickname(o.get("role").toString());
+                    		}
+                			if(o.get("selfIntro") != null){
+                    			weChatMDLUser.setNickname(o.get("selfIntro").toString());
+                    		}
+                			if(o.get("suppovisor") != null){
+                    			weChatMDLUser.setNickname(o.get("suppovisor").toString());
+                    		}
+                		}
             		}
             		if(weChatMDLUser != null){
             			ret.add(weChatMDLUser);
