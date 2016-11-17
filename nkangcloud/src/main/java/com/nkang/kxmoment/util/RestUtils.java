@@ -22,6 +22,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -743,6 +744,73 @@ public class RestUtils {
 	       }
 		return mdmDataQualityView;
 	}
+	
+	/*
+	 * author  chang-zheng
+	 */
+	public static  List<String> getAllStates(){
+		List<String> ret = new ArrayList<String>();
+		String message = "false";
+		if(localInd == "Y"){
+			String url = "http://"+Constants.baehost+"/dq";
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("GET"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           if(localInd == "Y"){
+			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+			           System.setProperty("http.proxyPort", "8080");  
+		           }  
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           //String a = message.substring(1, message.length()-1);
+		           String [] sp = message.split("\",\"");
+		           int cnt = 0;
+		           for(String i : sp){
+		        	   cnt = cnt + 1;
+		        	   
+		        	   if(cnt == 1){
+		        		   String a  = i.substring(2, i.length());
+		        		   if(!a.isEmpty()){
+		        			   ret.add(a);
+		        		   }
+		        	   }
+		        	   else if(cnt == sp.length){
+		        		   ret.add(i.substring(0, i.length()-1));
+		        	   }
+		        	   else{
+		        		   ret.add(i.trim());
+		        	   }
+		           }
+		           is.close();
+		           //ret.add(e;)
+
+		       } catch (Exception e) {
+		    	   log.info("error http CallGetFilterNonLatinCityFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		       }
+		}
+		else{
+			try{
+				ret =  MongoDBBasic.getAllStates();
+			}
+			catch (Exception e) {
+		    	   log.info("error DB CallGetFilterNonLatinCityFromMongo ---------" + e.getMessage());
+		    	   message =  "failed with " + e.getMessage();
+		    }
+		}
+		return null;
+		
+	}
 	/*
 	 * author  chang-zheng
 	 */
@@ -753,11 +821,6 @@ public class RestUtils {
 		List<MdmDataQualityView> ListMqv = new ArrayList<MdmDataQualityView>();
 		Map<String, MdmDataQualityView> map = null;
 		if(localInd == "Y"){
-//			MdmDataQualityView mq = new MdmDataQualityView();
-//			mq.setNumberOfCompetitor(12);
-//			mq.setNumberOfCustomer(23);
-//			mq.setNumberOfEmptyCityArea(33);
-//			ListMqv.add(mq);
 			try {
 					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
 					String url = "http://shenan.duapp.com/getDataQualityReportByParameterV2?";
@@ -769,8 +832,6 @@ public class RestUtils {
 						//city = URLEncoder.encode(city, "UTF-8");
 						url =  url + "&nonlatinCity="+city;
 					}
-				
-					
 
 				   //String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
 		           URL urlGet = new URL(url);

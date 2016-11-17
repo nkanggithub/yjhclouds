@@ -130,13 +130,12 @@ public class DQMenuController {
 	/*
 	 * author  chang-zheng
 	 */
-	@RequestMapping("/GetDataQualityReportByParameter")
-	public @ResponseBody  Map<String, MdmDataQualityView> getDataQualityReport(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "userState") String userState)
+	@RequestMapping("/dq")
+	public @ResponseBody List<String> getChart22(HttpServletRequest request, HttpServletResponse response)
 	{
-		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
-		 Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
-		return mapByStateCity;
+		return RestUtils.getAllStates();
 	}
+	
 	/*
 	 * author  chang-zheng
 	 */

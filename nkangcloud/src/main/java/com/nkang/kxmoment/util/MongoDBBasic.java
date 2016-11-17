@@ -680,6 +680,17 @@ public class MongoDBBasic {
 	
 	/*
 	 * author  chang-zheng
+	 * purpose to get userState list .eg 上海市，重庆市
+	 */
+	@SuppressWarnings("unchecked")
+	public static  List<String> getAllStates(){
+		mongoDB = getMongoDB();
+		List<String> stateList = mongoDB.getCollection(collectionMasterDataName).distinct("state");
+		return stateList;
+	}
+	
+	/*
+	 * author  chang-zheng
 	 */
 	public static  Map<String, MdmDataQualityView> getDataQualityReport(String stateProvince, List<String> ListnonlatinCity, String cityRegion){
 		Map<String, MdmDataQualityView> map = new HashMap<String, MdmDataQualityView>();
@@ -768,59 +779,6 @@ public class MongoDBBasic {
 		}
 		return map;
 	}
-	
-	/*public static Map<String, MdmDataQualityView> getDataQualityReport(String stateProvince, List<String> ListnonlatinCity, String cityRegion){
-		Map<String, MdmDataQualityView> map = new HashMap<String, MdmDataQualityView>();
-		mongoDB = getMongoDB();
-		
-		try{
-			BasicDBObject query_all = new BasicDBObject();
-
-			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-				query_all.put("state", stateProvince);
-			}
-			
-			if(ListnonlatinCity != null){
-				query_all.put("nonlatinCity", new BasicDBObject("$in", ListnonlatinCity));
-			}
-			log.info("before----"+new Date());
-			DBCursor dBcu= mongoDB.getCollection(collectionMasterDataName).find(query_all);
-			log.info("after----"+new Date());
-			for(String str : ListnonlatinCity){
-				MdmDataQualityView tmpmqv = new MdmDataQualityView();
-				tmpmqv.setPercents("0.68");
-				tmpmqv.setNumberOfEmptyCityArea(1000);
-				tmpmqv.setNumberOfThreeGrade(2000);
-				tmpmqv.setNumberOfNonGeo(2000);
-				map.put(str, tmpmqv);
-			}
-			
-			while(dBcu.hasNext()){
-				DBObject dbOject = dBcu.next();
-				String nonlatinCity = dbOject.get("nonlatinCity").toString();
-				MdmDataQualityView mqv = map.get(nonlatinCity);
-				if(dbOject.get("isCompetitor").equals("true")){
-					mqv.setNumberOfCompetitor(mqv.getNumberOfCompetitor()+1);
-				}
-				else if(dbOject.get("includePartnerOrgIndicator").equals("true")){
-					mqv.setNumberOfPartner(mqv.getNumberOfPartner()+1);
-				}
-				else if(dbOject.get("onlyPresaleCustomer").equals("true")){
-					mqv.setNumberOfCustomer(mqv.getNumberOfCustomer()+1);
-				}
-				else if(dbOject.get("onlyPresaleCustomer").equals("false")){
-					mqv.setNumberOfLeads(mqv.getNumberOfLeads()+1);
-					mqv.setNumberOfOppt(mqv.getNumberOfOppt()+1);
-				}
-			}
-			log.info("after while----"+new Date());
-			
-		}
-		catch(Exception e){
-			log.info("getDataQualityReport--" + e.getMessage());
-		}
-		return map;
-	}*/
 	
 	public static List<String> getFilterOnIndustryByAggregateFromMongo(){
 		List<String> ret = new ArrayList<String>();
