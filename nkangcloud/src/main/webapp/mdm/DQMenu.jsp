@@ -607,7 +607,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
     
 <section id="mainform">
- 		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:13px;right:2%; z-index: 8;" /><span id="locationCity" style="position:absolute;top:0px;right:8px;color:#00b287;z-index:8;font-size:12px">${ userState }</span>
+ 		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:10px;right:2%; z-index: 8;" /><span id="locationCity" style="position:absolute;top:-6px;right:5px;color:#00b287;z-index:8;font-size:16px">${ userState }</span>
 	<!-- START METROTAB -->
     <div class="metrotabs">
         <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-25px;left:5px" >
