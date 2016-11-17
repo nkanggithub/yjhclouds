@@ -585,7 +585,7 @@ a:hover,a:link {
 										aria-hidden="true" data-backdrop="static">
 										<div class="modal-header" style="text-align: center;">
 											<img src="../MetroStyleFiles/index.png" style="height: 55px;" />
-											<img src="../MetroStyleFiles/Close.png"  data-dismiss="modal" aria-hidden="true" style="float:right;height: 15px;cursor:pointer;" />
+											<img src="../MetroStyleFiles/Close.png"  data-dismiss="modal" aria-hidden="true" style="float:right;height: 20px;cursor:pointer;" />
 										</div>
 										<div class="modal-body readmoreHpop"
 											style="white-space: pre-line; padding: 0px;">
