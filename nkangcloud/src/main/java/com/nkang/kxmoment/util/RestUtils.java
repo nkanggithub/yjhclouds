@@ -1515,8 +1515,11 @@ public class RestUtils {
 		}
 		return ret;
 	}
-	public static  String getMDLUserLists(){
+	public static  String getMDLUserLists(String openid){
 		String urlStr = "http://shenan.duapp.com/CallGetWeChatUserFromMongoDB";
+		if(openid!=null&&!"".equals(openid)){
+			urlStr+="?openid="+openid;
+		}
 		StringBuffer strBuf =new StringBuffer("");
 		try {
 			 URL url = new URL(urlStr);  
