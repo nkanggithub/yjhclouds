@@ -131,7 +131,7 @@ public class DQMenuController {
 	 * author  chang-zheng
 	 */
 	@RequestMapping("/dq")
-	public @ResponseBody List<String> getChart22(HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response)
 	{
 		return RestUtils.getAllStates();
 	}
