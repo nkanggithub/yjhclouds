@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
+import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.RestUtils;
 
 
@@ -45,8 +46,7 @@ public class UserProfileController {
 	@RequestMapping(value="/getMDLUserLists",produces="text/html;charset=UTF-8")
 	@ResponseBody  
 	public  String  getMDLUserLists(HttpServletRequest request, HttpServletResponse response){
-		return RestUtils.getMDLUserLists();
-
+		String openid = request.getParameter("UID");
+		return RestUtils.getMDLUserLists(openid);
 	}
-	
 }
