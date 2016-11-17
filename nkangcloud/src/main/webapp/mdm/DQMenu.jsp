@@ -270,6 +270,8 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 										}		
 									)
 									.done(function(data){
+										$("#chart3").html("");
+										$("#chart2").html("");
 										$("#locationCity").text(city);
 										$("#userState").text(city);
 										swal("Thank You!", "your location saved", "success");
