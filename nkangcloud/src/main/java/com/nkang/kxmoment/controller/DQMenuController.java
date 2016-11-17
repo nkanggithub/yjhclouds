@@ -2,12 +2,15 @@ package com.nkang.kxmoment.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -110,12 +113,13 @@ public class DQMenuController {
 		String AccessKey =RestUtils.callGetValidAccessKey();
 		WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 		GeoLocation loc= RestUtils.callGetDBUserGeoInfo(uid);
-		List<String> addressInfo = RestUtils.getUserCurLocWithLatLngV2(loc.getLAT(), loc.getLNG());
+		String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
+		List<String > addressInfo =RestUtils.getUserCurLocWithLatLngV2(loc.getLAT() , loc.getLNG()); 
 		if(addressInfo != null && addressInfo.size()>0){
 		wcu.setAddressInfo(addressInfo);
 		}
 
-		List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo(wcu.getProvince());
+	//	List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo("上海市");
 		if(wcu.getNickname() == null && wcu.getNickname() == ""){
 			wcu.setNickname("Vistitor");
 		}
@@ -124,8 +128,9 @@ public class DQMenuController {
 		}
 		request.getSession().setAttribute("userInfo", wcu);
 		request.getSession().setAttribute("userState", addressInfo.get(0));
-		request.getSession().setAttribute("radarSize", lst.size());
+	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
+		request.getSession().setAttribute("curLoc", curLoc);
 		return "DQMenu";
 	}
 	

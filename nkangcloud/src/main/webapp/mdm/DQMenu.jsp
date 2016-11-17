@@ -521,9 +521,10 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 </head>
 <body>
 <div id="username" style="display:none">${ userInfo.nickname } </div>
-<div id="radarSize" style="display:none">${ radarSize } </div>
+<%-- <div id="radarSize" style="display:none">${ radarSize } </div> --%>
 <div id="userState" style="display:none">${ userState } </div>
 <div id="uid" style="display:none">${ uid }</div>
+<div id="address" style="display:none">${ curLoc }</div>
 <div id="addressInfo" style="display:none">
 <c:forEach items="${userInfo.addressInfo}" var="addressInfo">
  ${addressInfo} |
