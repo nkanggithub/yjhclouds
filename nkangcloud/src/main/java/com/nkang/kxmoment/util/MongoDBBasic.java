@@ -998,23 +998,31 @@ public class MongoDBBasic {
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
                 		if(!StringUtils.isEmpty(OpenID)){
-                			if(o.get("email") != null){
-                    			weChatMDLUser.setNickname(o.get("email").toString());
-                    		}
-                			if(o.get("phone") != null){
-                    			weChatMDLUser.setNickname(o.get("phone").toString());
-                    		}
-                			if(o.get("registerDate") != null){
-                    			weChatMDLUser.setNickname(o.get("registerDate").toString());
-                    		}
-                			if(o.get("role") != null){
-                    			weChatMDLUser.setNickname(o.get("role").toString());
-                    		}
-                			if(o.get("selfIntro") != null){
-                    			weChatMDLUser.setNickname(o.get("selfIntro").toString());
-                    		}
-                			if(o.get("suppovisor") != null){
-                    			weChatMDLUser.setNickname(o.get("suppovisor").toString());
+                			BasicDBList teamer = (BasicDBList) o.get("Teamer");
+                			if(teamer != null){
+                        		Object[] teamer_arr = teamer.toArray();
+                        		for(Object dbobj : teamer_arr){
+                        			if(dbobj instanceof DBObject){
+                        				if(((DBObject)dbobj).get("email") != null){
+                                			weChatMDLUser.setEmail(((DBObject)dbobj).get("email").toString());
+                                		}
+                        				if(((DBObject)dbobj).get("phone") != null){
+                                			weChatMDLUser.setPhone(((DBObject)dbobj).get("phone").toString());
+                                		}
+                            			if(((DBObject)dbobj).get("registerDate") != null){
+                                			weChatMDLUser.setRegisterDate(((DBObject)dbobj).get("registerDate").toString());
+                                		}
+                            			if(((DBObject)dbobj).get("role") != null){
+                                			weChatMDLUser.setRole(((DBObject)dbobj).get("role").toString());
+                                		}
+                            			if(((DBObject)dbobj).get("selfIntro") != null){
+                                			weChatMDLUser.setSelfIntro(((DBObject)dbobj).get("selfIntro").toString());
+                                		}
+                            			if(((DBObject)dbobj).get("suppovisor") != null){
+                                			weChatMDLUser.setSuppovisor(((DBObject)dbobj).get("suppovisor").toString());
+                                		}
+                        			}
+                        		}
                     		}
                 		}
             		}
