@@ -232,42 +232,67 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	
 	
 	function userlocationsave(obj){
-		swal(
-				{
-					title: "Dear "+document.getElementById("username").innerHTML+"!",   
-					text: "Drop you city name",   
-					type: "input",   
-					showCancelButton: true,   
-					closeOnConfirm: false,   
-					animation: "slide-from-top",   
-					inputPlaceholder: document.getElementById("addressInfo").innerHTML
-				}, 
-				function(inputValue){
-					inputVar = inputValue;
-					if (inputValue === false) return false;      
-					if (inputValue === "") {     
-						swal.showInputError("You need to write something!");     
-						return false;   
-					}
-					$.ajax(
-						{
-							type:"get",
-							url:"http://shenan.duapp.com/InsertCommentsFromVisitor?OpenID=sadjasdhasjdasdasasd&comments="+inputValue,
-							data:"",
-							success:function(data){}
-						}		
-					)
-					.done(function(data){
-						swal("Thank You!", "your location saved", "success");
-					})
-					.error(function(data)
-					{
-						swal("Oops", "please try again later!", "error");
-					}		
-					);
+		
+		$.ajax({
+			type : "POST",
+			dataType : "json",
+			url : "getCitys",
+			success : function(data) {
+				  if (data) {
+					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='citySelect' style='height: 30px;width: 70px;border-radius: 8%;'>";
+					  for(var i=0;i<data.length;i++){
+						  text=text+"<option>"+data[i]+"</option>";
+						}
+					  text=text+"</select>";
+						swal(
+								{
+									title: "Dear "+document.getElementById("username").innerHTML+"!",   
+									text: text,     
+									showCancelButton: true,   
+									closeOnConfirm: false,  
+									html:true,
+									animation: "slide-from-top"
+								}, 
+								function(inputValue){
+						 		/* 	inputVar = inputValue;
+									if (inputValue === false) return false;      
+									if (inputValue === "") {     
+										swal.showInputError("You need to write something!");     
+										return false;   
+									}  */
+								var city=$("#citySelect option:selected").val();
+									$.ajax(
+										{
+											type:"get",
+											url:"getGraphic?city="+city,
+											data:"",
+											success:function(data){}
+										}		
+									)
+									.done(function(data){
+										$("#locationCity").text(city);
+										$("#userState").text(city);
+										swal("Thank You!", "your location saved", "success");
+									})
+									.error(function(data)
+									{
+										swal("Oops", "please try again later!", "error");
+									}		
+									);
+									 
+								}
+							);
 					 
-				}
-			);
+						
+				  }
+			},
+			error:function(data)
+			{
+				console.log("failed..."+data.toString());
+			}
+		
+	});
+
 
 	}
 		$(window).load(function() {
@@ -528,7 +553,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <div id="userInfo">
 	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="navbar-link">${ userInfo.nickname }</a><br />
 		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
-		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:223px;right:-20%; z-index: 8;"/>
 	</p>
 
 </div>
@@ -582,7 +606,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
     
 <section id="mainform">
- 
+ 		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:13px;right:2%; z-index: 8;" /><span id="locationCity" style="position:absolute;top:0px;right:8px;color:#00b287;z-index:8;font-size:12px">${ userState }</span>
 	<!-- START METROTAB -->
     <div class="metrotabs">
         <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-25px;left:5px" >

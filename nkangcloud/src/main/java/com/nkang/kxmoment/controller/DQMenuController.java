@@ -131,11 +131,33 @@ public class DQMenuController {
 	 * author  chang-zheng
 	 */
 	@RequestMapping("/dq")
-	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody List<String> getCity(HttpServletRequest request, HttpServletResponse response)
 	{
 		return RestUtils.getAllStates();
 	}
+	@RequestMapping("/getGraphic")
+	public @ResponseBody List<String> getGraphic(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "city") String city)
+	{
+		List<String> citys=new ArrayList<String>();
+		citys.add("北京市");
+		citys.add("上海市");
+		citys.add("天津市");
+		citys.add("深圳市");
+		citys.add("重庆市");
+	return citys;
+	}
 	
+	@RequestMapping("/getCitys")
+	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response)
+	{
+		List<String> citys=new ArrayList<String>();
+		citys.add("北京市");
+		citys.add("上海市");
+		citys.add("天津市");
+		citys.add("深圳市");
+		citys.add("重庆市");
+	return citys;
+	}
 	/*
 	 * author  chang-zheng
 	 */
