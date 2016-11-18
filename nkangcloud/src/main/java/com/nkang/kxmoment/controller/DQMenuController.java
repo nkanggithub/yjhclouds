@@ -114,11 +114,12 @@ public class DQMenuController {
 		WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 		GeoLocation loc= RestUtils.callGetDBUserGeoInfo(uid);
 		String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
-		List<String > addressInfo =RestUtils.getUserCurLocWithLatLngV2(loc.getLAT() , loc.getLNG()); 
+	//	List<String > addressInfo =RestUtils.getUserCurLocWithLatLngV2(loc.getLAT() , loc.getLNG()); 
+		List<String > addressInfo = new ArrayList<String>();
 		if(addressInfo != null && addressInfo.size()>0){
 		wcu.setAddressInfo(addressInfo);
 		}
-
+		String state=curLoc.substring(0, 3);
 	//	List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo("上海市");
 		if(wcu.getNickname() == null && wcu.getNickname() == ""){
 			wcu.setNickname("Vistitor");
@@ -127,7 +128,7 @@ public class DQMenuController {
 			wcu.setHeadimgurl("MetroStyleFiles/gallery.jpg");
 		}
 		request.getSession().setAttribute("userInfo", wcu);
-		request.getSession().setAttribute("userState", addressInfo.get(0));
+		request.getSession().setAttribute("userState", state);
 	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
 		request.getSession().setAttribute("curLoc", curLoc);
