@@ -507,6 +507,9 @@ public class MongoDBBasic {
 		List<String> listOfNonLatinCities = new ArrayList<String>();
 		@SuppressWarnings("rawtypes")
 		List results;
+
+
+        
 	    try{
 	    	DBObject dbquery = new BasicDBObject();  
 			if(state != "" && state != null && state != "null" ){
@@ -521,7 +524,14 @@ public class MongoDBBasic {
 	    	or.add(query2);
 	    	DBObject query = new BasicDBObject("$or", or);*/
 
-	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
+	    	//results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
+	        if (StringUtils.isLatinString(state)) {
+	        	results = mongoDB.getCollection(collectionMasterDataName).distinct("latinCity", dbquery);
+	        }else{
+	        	results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
+	        }
+	        
+	        
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
 	    			String tmpStr = (String) results.get(i);
@@ -741,7 +751,12 @@ public class MongoDBBasic {
 					query_competitor.put("state", stateProvince);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
-					query_competitor.put("nonlatinCity", str);
+					if(StringUtils.isLatinString(str)){
+						query_competitor.put("latinCity", str);
+					}
+					else{
+						query_competitor.put("nonlatinCity", str);
+					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
 					query_competitor.put("cityRegion", cityRegion);
@@ -755,7 +770,12 @@ public class MongoDBBasic {
 					query_partner.put("state", stateProvince);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
-					query_partner.put("nonlatinCity", str);
+					if(StringUtils.isLatinString(str)){
+						query_partner.put("latinCity", str);
+					}
+					else{
+						query_partner.put("nonlatinCity", str);
+					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
 					query_partner.put("cityRegion", cityRegion);
@@ -769,7 +789,12 @@ public class MongoDBBasic {
 					query_customer.put("state", stateProvince);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
-					query_customer.put("nonlatinCity", str);
+					if(StringUtils.isLatinString(str)){
+						query_customer.put("latinCity", str);
+					}
+					else{
+						query_customer.put("nonlatinCity", str);
+					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
 					query_customer.put("cityRegion", cityRegion);
@@ -786,7 +811,12 @@ public class MongoDBBasic {
 					query_leads.put("state", stateProvince);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
-					query_leads.put("nonlatinCity", str);
+					if(StringUtils.isLatinString(str)){
+						query_leads.put("latinCity", str);
+					}
+					else{
+						query_leads.put("nonlatinCity", str);
+					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
 					query_leads.put("cityRegion", cityRegion);

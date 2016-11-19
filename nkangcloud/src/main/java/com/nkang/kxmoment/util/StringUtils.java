@@ -54,5 +54,20 @@ public final class StringUtils {
 		}
 		return "";
 	}
+    
+    public static Boolean isLatinString(String str){
+        if (!StringUtils.isEmpty(str)) {
+        	if(str.matches("\\p{ASCII}+")){
+        		// LATIN
+        		return true;
+        	}else{
+        		// NOLATIN
+        		return false;
+        	}
+        }
+        else{
+        	return false;
+        }
+    }
 	
 }
