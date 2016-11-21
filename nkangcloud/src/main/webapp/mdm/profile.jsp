@@ -249,17 +249,19 @@ a:hover,a:link {
 		getMDLUserLists();
 	});
 
-	function getUserInfo(username, headimgurl,openId) {
+	function getUserInfo(username, headimgurl, openId) {
 		var tbody = '                		<tr>'
 				+ '                			<td colspan="2" align="center">'
 				+ '                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
-				+ '                			<br/>' + username
-				+ '                			<br/></td>' + '                		</tr>';
+				+ '                			<br/><b>' + username
+				+ '                			</b><br/></td>' + '                		</tr>';
 		jQuery
 				.ajax({
 					type : "GET",
 					url : "../userProfile/getMDLUserLists",
-					data : {UID:openId},
+					data : {
+						UID : openId
+					},
 					cache : false,
 					success : function(data) {
 						data = '{"results":' + data + '}';
@@ -320,7 +322,13 @@ a:hover,a:link {
 									+ '                			</td>'
 									+ '                		</tr>';
 							$j('#UserInfo_tab').html(tbody);
-							$j('#UserInfo').modal('show');
+							//$j('#UserInfo').modal('show');
+
+							swal({
+								title : null,
+								text : "<table style='margin-left:auto;margin-right:auto;'>"+tbody+"</table>",
+								html : true
+							});
 						}
 					}
 				});
