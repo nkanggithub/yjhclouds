@@ -249,7 +249,6 @@ public class MongoDBBasic {
 					removeQuery.put("state", i);
 				}
 			}
-			removeQuery.put("state", "Guangdong");
 			mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
 			ret = true;
 	    }
