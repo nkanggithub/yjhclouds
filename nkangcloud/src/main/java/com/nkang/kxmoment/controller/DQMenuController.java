@@ -78,6 +78,7 @@ public class DQMenuController {
    	int countOfCity = 0;
     	if(listOfCities.size() <= 10){
     		countOfCity = listOfCities.size();
+    		tempOfCities = listOfCities;
     	}
     	else{
     		countOfCity = 10;
@@ -141,7 +142,9 @@ public class DQMenuController {
 	@RequestMapping("/dq")
 	public @ResponseBody List<String> getCity(HttpServletRequest request, HttpServletResponse response)
 	{
-		return RestUtils.getAllStates();
+		GeoLocation loc= RestUtils.callGetDBUserGeoInfo("oqPI_xHLkY6wSAJEmjnQPPazePE8");
+		List<String> addressInfo = RestUtils.getUserCurLocWithLatLngV2(loc.getLAT(), loc.getLNG());
+		return addressInfo;
 	}
 	@RequestMapping("/getGraphic")
 	public @ResponseBody List<String> getGraphic(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "city") String city)
