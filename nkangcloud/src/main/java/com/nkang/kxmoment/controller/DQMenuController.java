@@ -88,7 +88,7 @@ public class DQMenuController {
 		a[0]="客户";
 		Object[] b = new Object[countOfCity+1];
 		b[0]="竞争";
-		Object[] c = new Object[countOfCity];
+		Object[] c = new Object[countOfCity+1];
 		c[0]="伙伴";
     	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
