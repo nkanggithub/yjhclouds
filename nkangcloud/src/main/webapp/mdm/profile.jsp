@@ -59,6 +59,10 @@
 <script src="../nkang/assets_athena/data-tables/DT_bootstrap.js"></script>
 <script src="../nkang/js_athena/common-scripts.js"></script>
 <script type="text/javascript" src="../Jsp/JS/regist.js"></script>
+<script type="text/javascript"
+	src="../MetroStyleFiles/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../MetroStyleFiles/sweetalert.css" />
 
 <style>
 #weather {
@@ -245,7 +249,7 @@ a:hover,a:link {
 		getMDLUserLists();
 	});
 
-	function getUserInfo(username, headimgurl) {
+	function getUserInfo(username, headimgurl,openId) {
 		var tbody = '                		<tr>'
 				+ '                			<td colspan="2" align="center">'
 				+ '                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
@@ -255,7 +259,7 @@ a:hover,a:link {
 				.ajax({
 					type : "GET",
 					url : "../userProfile/getMDLUserLists",
-					data : {},
+					data : {UID:openId},
 					cache : false,
 					success : function(data) {
 						data = '{"results":' + data + '}';
@@ -343,6 +347,8 @@ a:hover,a:link {
 									+ temp.nickname
 									+ '\',\''
 									+ temp.headimgurl
+									+ '\',\''
+									+ temp.openid
 									+ '\');"/> '
 									+ '                                         		</div>'
 									+ '                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
@@ -587,7 +593,9 @@ a:hover,a:link {
 										aria-hidden="true" data-backdrop="static">
 										<div class="modal-header" style="text-align: center;">
 											<img src="../MetroStyleFiles/index.png" style="height: 55px;" />
-											<img src="../MetroStyleFiles/Close.png"  data-dismiss="modal" aria-hidden="true" style="float:right;height: 20px;cursor:pointer;" />
+											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+												aria-hidden="true"
+												style="float: right; height: 20px; cursor: pointer;" />
 										</div>
 										<div class="modal-body readmoreHpop"
 											style="white-space: pre-line; padding: 0px;">
@@ -641,74 +649,77 @@ a:hover,a:link {
 									</ul>
 								</div>
 								<!-- register begin -->
-								 <div class="tab-pane" id="Register">
-                  	<form id="registForm">
-                  		<input id="uid" type="hidden" value="<%=uid%>"/>
-					    <table id="tableForm">
-					    	
-					      <tr>
-					        <td class="tdText">Telephone：</td>
-					        <td class="tdInput">
-					          <input class="inputClass" type="text" name="telephone" id="telephone" value="${form.telephone }"/><br/>
-					           <label class="errorClass" id="telephoneError">${errors.telephone }</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td class="tdText">Email：</td>
-					        <td>
-					          <input class="inputClass" type="text" name="email" id="email" value="${form.email }"/><br/>
-					          <label class="errorClass" id="emailError">${errors.email}</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td class="tdText">Suppovisor</td>
-					        <td class="tdInput">
-					          <input class="text-left" type="text" name="suppovisor" id="suppovisor" value="${form.suppovisor }"/><br/>
-					          <label class="errorClass" id="suppovisorError">${errors.suppovisor }</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td class="tdText">Role</td>
-					        <td class="tdInput">
-					          <input class="text-left" type="text" name="role" id="role" value="${form.role }"/><br/>
-					          <label class="errorClass" id="roleError">${errors.role }</label>
-					        </td>
-					      </tr>
-					      
-					      <tr>
-					        <td class="tdSelect">Group：</td>
-					        <td>
-					       		 <input class="text-left" type="text" name="group" id="group" value="${form.group }"/><br/>
-					          <label class="errorClass" id="groupError">${errors.group }</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td class="tdText">RegisterDate</td>
-					        <td class="tdInput">
-					          <input class="text-left" type="text" name="registerDate" id="registerDate" value="${form.registerDate }"/><br/>
-					          <label class="errorClass" id="registerDateError">${errors.registerDate }</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td class="tdText">SelfIntro</td>
-					        <td class="tdInput">
-					          <input class="text-left" type="text" name="selfIntro" id="selfIntro" value="${form.selfIntro }"/><br/>
-					          <label class="errorClass" id="selfIntroError">${errors.selfIntro }</label>
-					        </td>
-					      </tr>
-					      <tr>
-					        <td></td>
-					        <td>
-					          <label></label>
-					        </td>
-				      	</tr>
-					    </table>
-					    <div class="modal-footer">               
-		                        <button id="registBtn" class="btnAthenaSave" data-dismiss="modal" aria-hidden="true">Regist</button>
-				        </div>
-					</form>    
-                </div>
-                <!-- register end -->
+								<div class="tab-pane" id="Register">
+									<form id="registForm">
+										<input id="uid" type="hidden" value="<%=uid%>" />
+										<table id="tableForm">
+
+											<tr>
+												<td class="tdText">Telephone：</td>
+												<td class="tdInput"><input class="inputClass"
+													type="text" name="telephone" id="telephone"
+													value="${form.telephone }" /><br /> <label
+													class="errorClass" id="telephoneError">${errors.telephone }</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="tdText">Email：</td>
+												<td><input class="inputClass" type="text" name="email"
+													id="email" value="${form.email }" /><br /> <label
+													class="errorClass" id="emailError">${errors.email}</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="tdText">Suppovisor</td>
+												<td class="tdInput"><input class="text-left"
+													type="text" name="suppovisor" id="suppovisor"
+													value="${form.suppovisor }" /><br /> <label
+													class="errorClass" id="suppovisorError">${errors.suppovisor }</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="tdText">Role</td>
+												<td class="tdInput"><input class="text-left"
+													type="text" name="role" id="role" value="${form.role }" /><br />
+													<label class="errorClass" id="roleError">${errors.role }</label>
+												</td>
+											</tr>
+
+											<tr>
+												<td class="tdSelect">Group：</td>
+												<td><input class="text-left" type="text" name="group"
+													id="group" value="${form.group }" /><br /> <label
+													class="errorClass" id="groupError">${errors.group }</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="tdText">RegisterDate</td>
+												<td class="tdInput"><input class="text-left"
+													type="text" name="registerDate" id="registerDate"
+													value="${form.registerDate }" /><br /> <label
+													class="errorClass" id="registerDateError">${errors.registerDate }</label>
+												</td>
+											</tr>
+											<tr>
+												<td class="tdText">SelfIntro</td>
+												<td class="tdInput"><input class="text-left"
+													type="text" name="selfIntro" id="selfIntro"
+													value="${form.selfIntro }" /><br /> <label
+													class="errorClass" id="selfIntroError">${errors.selfIntro }</label>
+												</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><label></label></td>
+											</tr>
+										</table>
+										<div class="modal-footer">
+											<button id="registBtn" class="btnAthenaSave"
+												data-dismiss="modal" aria-hidden="true">Regist</button>
+										</div>
+									</form>
+								</div>
+								<!-- register end -->
 							</div>
 						</div>
 					</div>
