@@ -154,7 +154,7 @@ public class DQMenuController {
 	}
 	
 	@RequestMapping("/getCitys")
-	public @ResponseBody Set<String> getCitys(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "countryCode") String countryCode)
+	public @ResponseBody Set<String> getCitys(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String countryCode)
 	{
 		//List<String> citys=RestUtils.getAllStates();
 		Set<String> citys = RestUtils.getAllStates(countryCode);
