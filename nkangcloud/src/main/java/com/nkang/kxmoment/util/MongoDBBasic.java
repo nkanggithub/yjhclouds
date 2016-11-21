@@ -238,6 +238,21 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static boolean removeOrgSiteInstance(){
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+	    try{
+			DBObject removeQuery = new BasicDBObject();
+			removeQuery.put("state", "Guangdong");
+			mongoDB.getCollection(wechat_user).remove(removeQuery);
+			ret = true;
+	    }
+		catch(Exception e){
+			log.info("removeUser--" + e.getMessage());
+		}
+		return ret;
+	}
+	
 	
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
