@@ -1078,31 +1078,29 @@ public class MongoDBBasic {
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
                 		if(!StringUtils.isEmpty(OpenID)){
-                			BasicDBList teamer = (BasicDBList) o.get("Teamer");
-                			if(teamer != null){
-                        		Object[] teamer_arr = teamer.toArray();
-                        		for(Object dbobj : teamer_arr){
-                        			if(dbobj instanceof DBObject){
-                        				if(((DBObject)dbobj).get("email") != null){
-                                			weChatMDLUser.setEmail(((DBObject)dbobj).get("email").toString());
-                                		}
-                        				if(((DBObject)dbobj).get("phone") != null){
-                                			weChatMDLUser.setPhone(((DBObject)dbobj).get("phone").toString());
-                                		}
-                            			if(((DBObject)dbobj).get("registerDate") != null){
-                                			weChatMDLUser.setRegisterDate(((DBObject)dbobj).get("registerDate").toString());
-                                		}
-                            			if(((DBObject)dbobj).get("role") != null){
-                                			weChatMDLUser.setRole(((DBObject)dbobj).get("role").toString());
-                                		}
-                            			if(((DBObject)dbobj).get("selfIntro") != null){
-                                			weChatMDLUser.setSelfIntro(((DBObject)dbobj).get("selfIntro").toString());
-                                		}
-                            			if(((DBObject)dbobj).get("suppovisor") != null){
-                                			weChatMDLUser.setSuppovisor(((DBObject)dbobj).get("suppovisor").toString());
-                                		}
-                        			}
-                        		}
+                			Object teamer = o.get("Teamer");
+                			DBObject teamobj = new BasicDBObject();
+                			teamobj = (DBObject)teamer;
+ 
+                			if(teamobj != null){
+                				if(teamobj.get("email") != null){
+                					weChatMDLUser.setEmail(teamobj.get("email").toString());
+                				}
+                				if(teamobj.get("phone") != null){
+                					weChatMDLUser.setEmail(teamobj.get("phone").toString());
+                				}
+                				if(teamobj.get("registerDate") != null){
+                					weChatMDLUser.setEmail(teamobj.get("registerDate").toString());
+                				}
+                				if(teamobj.get("role") != null){
+                					weChatMDLUser.setEmail(teamobj.get("role").toString());
+                				}
+                				if(teamobj.get("selfIntro") != null){
+                					weChatMDLUser.setEmail(teamobj.get("selfIntro").toString());
+                				}
+                				if(teamobj.get("suppovisor") != null){
+                					weChatMDLUser.setEmail(teamobj.get("suppovisor").toString());
+                				}
                     		}
                 		}
             		}
