@@ -162,6 +162,12 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			 
 		});
 		
+		$("#americano").on("click",function(){
+			
+			
+			loadChartRadar();
+		});
+		
 		$("#openfooter").on("click",function(){
 			var chart3HTML=$("#chart3").html();
 			  if(chart3HTML==""){
@@ -238,7 +244,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			};
 			if(cnName=="马来西亚")
 			{
-			country="MAL";		
+			country="MY";		
 			};
 			$.ajax({
 				type : "POST",
@@ -341,7 +347,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
 	     }
 		
-		function loadChartRadar(obj){
+		function loadChartRadar(){
 			var chartobj = $("#chart3Radar");
 			$("#americano_loadChart").html(chartobj);
 			$("#chart3").hide();
@@ -656,7 +662,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
                 </a>
             </div>
             
-            			<div id="americano" onclick="javascript:loadChartRadar(this);" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+            			<div id="americano" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//industry.png" alt="">
 	                <span class="light-text">Industry</span>
