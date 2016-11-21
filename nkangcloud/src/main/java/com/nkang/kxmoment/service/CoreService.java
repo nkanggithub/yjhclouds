@@ -61,11 +61,20 @@ public class CoreService
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
-				else if (textContent.contains("rm-")) {
-					if(textContent.length()>3){
-						textContent = textContent.substring(3);
+				else if (textContent.contains("rm-") || textContent.contains("mf-")) {
+					String cmd = "";
+					String source = "";
+					String target = "";
+					if(textContent.contains("rm-")){
+						cmd = "rm-";
 					}
-					boolean ret = MongoDBBasic.removeOrgSiteInstance(textContent);
+					if(textContent.contains("mf-")){
+						cmd = "mf-";
+						String a[] = textContent.split("-");
+						source = a[1];
+						target = a[2];
+					}
+					boolean ret = MongoDBBasic.removeOrgSiteInstance(source,target, cmd);
 					textMessage.setContent(String.valueOf(ret));
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}

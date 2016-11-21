@@ -239,14 +239,24 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean removeOrgSiteInstance(String ctys){
+	public static boolean removeOrgSiteInstance(String source,String target, String cmd){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
-	    try{
-			DBObject removeQuery = new BasicDBObject();
-			removeQuery.put("state", ctys);
-			mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
-			ret = true;
+		try{
+			if(StringUtils.isEqual(cmd, "rm-")){
+				DBObject removeQuery = new BasicDBObject();
+				removeQuery.put("state", source);
+				mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
+				ret = true;
+			}
+			else if(StringUtils.isEqual(cmd, "mf-")){
+				DBObject findQuery = new BasicDBObject();
+				findQuery.put("state", source);
+				DBObject updateQuery = new BasicDBObject();
+				updateQuery.put("state", target);
+				mongoDB.getCollection(collectionMasterDataName).findAndModify(findQuery, updateQuery);
+				ret = true;
+			}
 	    }
 		catch(Exception e){
 			log.info("removeOrgSiteInstance--" + e.getMessage());
