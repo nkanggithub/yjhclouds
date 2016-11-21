@@ -17,6 +17,7 @@ import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class DQMenuController {
@@ -154,10 +155,10 @@ public class DQMenuController {
 	}
 	
 	@RequestMapping("/getCitys")
-	public @ResponseBody Set<String> getCitys(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String countryCode)
+	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String countryCode)
 	{
 		//List<String> citys=RestUtils.getAllStates();
-		Set<String> citys = RestUtils.getAllStates(countryCode);
+		List<String> citys = MongoDBBasic.getAllStates(countryCode);
 		return citys;
 	}
 }

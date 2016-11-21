@@ -747,9 +747,9 @@ public class RestUtils {
 	/*
 	 * author  chang-zheng
 	 */
-	public static  Set<String> getAllStates(String countryCode){
-		//List<String> ret = new ArrayList<String>();
-		Set<String> ret = new HashSet<String>();
+	public static  List<String> getAllStates(String countryCode){
+		List<String> ret = new ArrayList<String>();
+		//Set<String> ret = new HashSet<String>();
 		String message = "false";
 		if(localInd == "Y"){
 			String url = "http://"+Constants.baehost+"/getCitys?country=";

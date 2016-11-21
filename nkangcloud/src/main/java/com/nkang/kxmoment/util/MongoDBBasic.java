@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.regex.Pattern;
+
 import org.apache.log4j.Logger;
+
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -733,20 +735,19 @@ public class MongoDBBasic {
 	 * author  chang-zheng
 	 * purpose to get userState list .eg 上海市，重庆市
 	 */
-	public static Set<String> getAllStates(String countryCode){
+	@SuppressWarnings("unchecked")
+	public static List<String> getAllStates(String countryCode){
 		mongoDB = getMongoDB();
 		BasicDBObject query_State = new BasicDBObject();
 		query_State.put("countryCode", countryCode);
-		DBCursor states = mongoDB.getCollection(collectionMasterDataName).find(query_State);
-		Set<String> statesets = new HashSet<String>();
-		while(states.hasNext()){
-			DBObject state = states.next();
-			Object sta = state.get("state");
-			if(sta != null && sta != "" ){
-				statesets.add(sta.toString());
+		List<String> lst = mongoDB.getCollection(collectionMasterDataName).distinct("state", query_State);
+		List<String> lstRet = new ArrayList<String>();
+		for(String i:lst ){
+			if(!StringUtils.isEmpty(i)){
+				lstRet.add(i);
 			}
 		}
-		return statesets;
+		return lstRet;
 	}
 	
 	/*
