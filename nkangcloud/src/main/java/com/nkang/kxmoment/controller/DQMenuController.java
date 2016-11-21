@@ -1,7 +1,9 @@
 package com.nkang.kxmoment.controller;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -138,16 +140,7 @@ public class DQMenuController {
 		return "DQMenu";
 	}
 	
-	/*
-	 * author  chang-zheng
-	 */
-	@RequestMapping("/dq")
-	public @ResponseBody List<String> getCity(HttpServletRequest request, HttpServletResponse response)
-	{
-		GeoLocation loc= RestUtils.callGetDBUserGeoInfo("oqPI_xHLkY6wSAJEmjnQPPazePE8");
-		List<String> addressInfo = RestUtils.getUserCurLocWithLatLngV2(loc.getLAT(), loc.getLNG());
-		return addressInfo;
-	}
+	
 	@RequestMapping("/getGraphic")
 	public @ResponseBody List<String> getGraphic(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "city") String city)
 	{
@@ -161,9 +154,10 @@ public class DQMenuController {
 	}
 	
 	@RequestMapping("/getCitys")
-	public @ResponseBody List<String> getCitys(HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody Set<String> getCitys(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "countryCode") String countryCode)
 	{
-		List<String> citys=RestUtils.getAllStates();
+		//List<String> citys=RestUtils.getAllStates();
+		Set<String> citys = RestUtils.getAllStates(countryCode);
 		return citys;
 	}
 }

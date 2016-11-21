@@ -3,15 +3,14 @@ package com.nkang.kxmoment.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.regex.Pattern;
-
 import org.apache.log4j.Logger;
-
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -734,18 +733,20 @@ public class MongoDBBasic {
 	 * author  chang-zheng
 	 * purpose to get userState list .eg 上海市，重庆市
 	 */
-	@SuppressWarnings("unchecked")
-	public static  List<String> getAllStates(){
+	public static Set<String> getAllStates(String countryCode){
 		mongoDB = getMongoDB();
-		List<String> stateList = mongoDB.getCollection(collectionMasterDataName).distinct("state");
-		//remove NULL State Records
-		List<String> stateListRet = new ArrayList<String>();
-		for(String s : stateList){
-			if(!StringUtils.isEmpty(s)){
-				stateListRet.add(s);
+		BasicDBObject query_State = new BasicDBObject();
+		query_State.put("countryCode", countryCode);
+		DBCursor states = mongoDB.getCollection(collectionMasterDataName).find(query_State);
+		Set<String> statesets = new HashSet<String>();
+		while(states.hasNext()){
+			DBObject state = states.next();
+			Object sta = state.get("state");
+			if(sta != null && sta != "" ){
+				statesets.add(sta.toString());
 			}
 		}
-		return stateListRet;
+		return statesets;
 	}
 	
 	/*

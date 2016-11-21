@@ -12,8 +12,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -745,13 +747,14 @@ public class RestUtils {
 	/*
 	 * author  chang-zheng
 	 */
-	public static  List<String> getAllStates(){
-		List<String> ret = new ArrayList<String>();
+	public static  Set<String> getAllStates(String countryCode){
+		//List<String> ret = new ArrayList<String>();
+		Set<String> ret = new HashSet<String>();
 		String message = "false";
 		if(localInd == "Y"){
-			String url = "http://"+Constants.baehost+"/dq";
+			String url = "http://"+Constants.baehost+"/getCitys?countryCode=";
 			try {
-		           URL urlGet = new URL(url);
+		           URL urlGet = new URL(url+countryCode);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
 		           http.setRequestMethod("GET"); //must be get request
 		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
@@ -798,7 +801,7 @@ public class RestUtils {
 		}
 		else{
 			try{
-				ret =  MongoDBBasic.getAllStates();
+				ret =  MongoDBBasic.getAllStates(countryCode);
 			}
 			catch (Exception e) {
 		    	   log.info("error DB CallGetFilterNonLatinCityFromMongo ---------" + e.getMessage());
