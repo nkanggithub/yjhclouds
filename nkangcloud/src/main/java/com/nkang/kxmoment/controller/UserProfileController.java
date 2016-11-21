@@ -50,11 +50,4 @@ public class UserProfileController {
 		String openid = request.getParameter("UID");
 		return RestUtils.getMDLUserLists(openid);
 	}
-	
-	@RequestMapping(value="/getUserInfo",produces="text/html;charset=UTF-8")
-	@ResponseBody  
-	public  List<WeChatMDLUser>  getUserInfo(HttpServletRequest request, HttpServletResponse response){
-		String openid = request.getParameter("UID");
-		return MongoDBBasic.getWeChatUserFromMongoDB(openid);
-	}
 }

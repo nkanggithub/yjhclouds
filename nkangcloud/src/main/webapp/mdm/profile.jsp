@@ -254,7 +254,7 @@ a:hover,a:link {
 		jQuery
 				.ajax({
 					type : "GET",
-					url : "../userProfile/getUserInfo",
+					url : "../userProfile/getMDLUserLists",
 					data : {},
 					cache : false,
 					success : function(data) {
