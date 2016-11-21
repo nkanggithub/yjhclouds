@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 
 
@@ -48,5 +49,12 @@ public class UserProfileController {
 	public  String  getMDLUserLists(HttpServletRequest request, HttpServletResponse response){
 		String openid = request.getParameter("UID");
 		return RestUtils.getMDLUserLists(openid);
+	}
+	
+	@RequestMapping(value="/getUserInfo",produces="text/html;charset=UTF-8")
+	@ResponseBody  
+	public  List<WeChatMDLUser>  getUserInfo(HttpServletRequest request, HttpServletResponse response){
+		String openid = request.getParameter("UID");
+		return MongoDBBasic.getWeChatUserFromMongoDB(openid);
 	}
 }
