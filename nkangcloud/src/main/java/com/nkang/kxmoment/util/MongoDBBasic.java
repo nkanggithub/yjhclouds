@@ -1088,19 +1088,19 @@ public class MongoDBBasic {
                 					weChatMDLUser.setEmail(teamobj.get("email").toString());
                 				}
                 				if(teamobj.get("phone") != null){
-                					weChatMDLUser.setEmail(teamobj.get("phone").toString());
+                					weChatMDLUser.setPhone(teamobj.get("phone").toString());
                 				}
                 				if(teamobj.get("registerDate") != null){
-                					weChatMDLUser.setEmail(teamobj.get("registerDate").toString());
+                					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
                 				}
                 				if(teamobj.get("role") != null){
-                					weChatMDLUser.setEmail(teamobj.get("role").toString());
+                					weChatMDLUser.setRole(teamobj.get("role").toString());
                 				}
                 				if(teamobj.get("selfIntro") != null){
-                					weChatMDLUser.setEmail(teamobj.get("selfIntro").toString());
+                					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
                 				}
                 				if(teamobj.get("suppovisor") != null){
-                					weChatMDLUser.setEmail(teamobj.get("suppovisor").toString());
+                					weChatMDLUser.setSuppovisor(teamobj.get("suppovisor").toString());
                 				}
                     		}
                 		}
