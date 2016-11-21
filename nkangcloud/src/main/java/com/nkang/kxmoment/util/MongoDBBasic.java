@@ -239,11 +239,16 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean removeOrgSiteInstance(){
+	public static boolean removeOrgSiteInstance(List<String> ctys){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 	    try{
 			DBObject removeQuery = new BasicDBObject();
+			if(ctys.size()>0){
+				for(String i:ctys){
+					removeQuery.put("state", i);
+				}
+			}
 			removeQuery.put("state", "Guangdong");
 			mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
 			ret = true;
