@@ -244,11 +244,11 @@ public class MongoDBBasic {
 	    try{
 			DBObject removeQuery = new BasicDBObject();
 			removeQuery.put("state", "Guangdong");
-			mongoDB.getCollection(wechat_user).remove(removeQuery);
+			mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
 			ret = true;
 	    }
 		catch(Exception e){
-			log.info("removeUser--" + e.getMessage());
+			log.info("removeOrgSiteInstance--" + e.getMessage());
 		}
 		return ret;
 	}
