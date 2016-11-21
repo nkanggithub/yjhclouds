@@ -56,9 +56,17 @@ public class CoreService
 
 			if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
 				String textContent = requestObject.element("Content").getText().trim();
-				if ("nkang".equals(textContent)) {
+				if ("cm".equals(textContent)) {
 					respContent = RestUtils.createMenu(AccessKey);
 					textMessage.setContent(respContent);
+					respXml = MessageUtil.textMessageToXml(textMessage);
+				}
+				else if (textContent.contains("rm-")) {
+					if(textContent.length()>3){
+						textContent = textContent.substring(3);
+					}
+					boolean ret = MongoDBBasic.removeOrgSiteInstance(textContent);
+					textMessage.setContent(String.valueOf(ret));
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 				else if ("SJOB".equals(textContent)) {
