@@ -752,7 +752,7 @@ public class RestUtils {
 		Set<String> ret = new HashSet<String>();
 		String message = "false";
 		if(localInd == "Y"){
-			String url = "http://"+Constants.baehost+"/getCitys?countryCode=";
+			String url = "http://"+Constants.baehost+"/getCitys?country=";
 			try {
 		           URL urlGet = new URL(url+countryCode);
 		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
