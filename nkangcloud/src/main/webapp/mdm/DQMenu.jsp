@@ -229,17 +229,44 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 				$("#radardetailid").show();
 			});
 	}
-	
-	
+	var country="CN";
+	function countrySelect(obj){
+		var cnName=$("#countrySelect option:selected").val();
+		if(cnName=="中国")
+			{
+			country="CN";
+			};
+			if(cnName=="马来西亚")
+			{
+			country="MAL";		
+			};
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "getCitys?country="+country,
+				success : function(data) {
+					var text="";
+					 for(var i=0;i<data.length;i++){
+						  text=text+"<option>"+data[i]+"</option>";
+						}
+					$("#citySelect").html(text);
+				},
+				error:function(data)
+				{
+					console.log("failed..."+data.toString());
+				}
+			}
+			);
+	};
 	function userlocationsave(obj){
 		
 		$.ajax({
 			type : "POST",
 			dataType : "json",
-			url : "getCitys",
+			url : "getCitys?country="+country,
 			success : function(data) {
 				  if (data) {
-					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='citySelect' style='height: 30px;width: 140px;border-radius: 8%;'>";
+					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='countrySelect' onchange='countrySelect(this)' style='height: 30px;width: 100px;border-radius: 8%;'><option>中国</option><option>马来西亚</option></select><select id='citySelect' style='height: 30px;margin-left:10px;width: 100px;border-radius: 8%;'>";
 					  for(var i=0;i<data.length;i++){
 						  text=text+"<option>"+data[i]+"</option>";
 						}
