@@ -260,7 +260,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 										
 										$("#chart3").html("");
 										$("#chart2").html("");
-										$("#locationCity").text(city);
+										$("#locationCity").text(city.toLocaleUpperCase());
 										$("#userState").text(city);
 										swal("Success", "your location saved", "success");
 									}							

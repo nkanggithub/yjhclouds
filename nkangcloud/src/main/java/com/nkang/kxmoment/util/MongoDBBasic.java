@@ -507,9 +507,6 @@ public class MongoDBBasic {
 		List<String> listOfNonLatinCities = new ArrayList<String>();
 		@SuppressWarnings("rawtypes")
 		List results;
-
-
-        
 	    try{
 	    	DBObject dbquery = new BasicDBObject();  
 			if(state != "" && state != null && state != "null" ){
@@ -524,13 +521,11 @@ public class MongoDBBasic {
 	    	or.add(query2);
 	    	DBObject query = new BasicDBObject("$or", or);*/
 
-	    	//results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
 	        if (StringUtils.isLatinString(state)) {
 	        	results = mongoDB.getCollection(collectionMasterDataName).distinct("latinCity", dbquery);
 	        }else{
 	        	results = mongoDB.getCollection(collectionMasterDataName).distinct("nonlatinCity", dbquery);
 	        }
-	        
 	        
 	    	for(int i = 0; i < results.size(); i ++){
 	    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
@@ -540,7 +535,9 @@ public class MongoDBBasic {
 	        		   tmpStr = tmpStr.replaceAll(state, "");
 	        	    }
 	        	    if(tmpStr != null && !tmpStr.isEmpty() && tmpStr!="."){
-	        	    	listOfNonLatinCities.add(tmpStr);
+	        	    	if(!listOfNonLatinCities.contains(tmpStr.toUpperCase())){
+	        	    		listOfNonLatinCities.add(tmpStr.toUpperCase());
+	        	    	}
 	        	    }
 	    		}
 	    	}
@@ -726,7 +723,14 @@ public class MongoDBBasic {
 	public static  List<String> getAllStates(){
 		mongoDB = getMongoDB();
 		List<String> stateList = mongoDB.getCollection(collectionMasterDataName).distinct("state");
-		return stateList;
+		//remove NULL State Records
+		List<String> stateListRet = new ArrayList<String>();
+		for(String s : stateList){
+			if(!StringUtils.isEmpty(s)){
+				stateListRet.add(s);
+			}
+		}
+		return stateListRet;
 	}
 	
 	/*
