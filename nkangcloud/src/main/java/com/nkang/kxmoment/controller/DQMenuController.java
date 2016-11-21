@@ -68,14 +68,9 @@ public class DQMenuController {
 		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
 		List<String> tempOfCities=new ArrayList<String>();    
 		List<Object[]> finalString=new ArrayList<Object[]>();
-		Object[] a = new Object[11];
-		a[0]="客户";
-		Object[] b = new Object[11];
-		b[0]="竞争";
-		Object[] c = new Object[11];
-		c[0]="伙伴";
-		Object[] d = new Object[10];
-   	int countOfCity = 0;
+	
+		
+   	    int countOfCity = 0;
     	if(listOfCities.size() <= 10){
     		countOfCity = listOfCities.size();
     		tempOfCities = listOfCities;
@@ -86,6 +81,13 @@ public class DQMenuController {
     			tempOfCities.add(listOfCities.get(i));
     		}
     	}
+    	Object[] d = new Object[countOfCity];
+    	Object[] a = new Object[countOfCity+1];
+		a[0]="客户";
+		Object[] b = new Object[countOfCity+1];
+		b[0]="竞争";
+		Object[] c = new Object[countOfCity];
+		c[0]="伙伴";
     	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,tempOfCities,"");
     	for(int i = 0; i < countOfCity ; i ++){
     		 a[i+1]= mapByStateCity.get(tempOfCities.get(i)).getNumberOfCustomer();
