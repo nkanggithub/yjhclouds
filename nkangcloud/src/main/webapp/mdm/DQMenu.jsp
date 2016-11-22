@@ -228,7 +228,19 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 											  .attr("fill", "#737373")
 											  .text(function(d) { return d; });	
 									
+							  
+							
+						
 							  }
+							  $("#americano_loadChart").append("<p id='showBtn' style='display:block;position:absolute;top:350px;color:#00b287;font-size:16px;width:100%;text-align:center' onclick='show_american_div()'>load more..</p>")
+							  var htmlcustli = "<div id='american_div' style='margin-top:40px;display:none'>";
+								if(data[0].length!=0){
+								for(var i=0;i<data[0].length;i++){
+									htmlcustli = htmlcustli + "<li style='list-style:none;margin-top: 2px;width:100%;' class=\"active\"><a style='position: relative;display: block;padding: 10px 15px;color: #fff;background-color: #428bca;' href=\"#\" \"><span style='color:#428bca;background-color: white;' class=\"badge pull-right\">" + data[0][i].value + "</span>"+ data[0][i].axis+"</a></li>";
+								}
+								}
+								htmlustli=htmlcustli+"</div>";
+								$("#americano_loadChart").append(htmlcustli);
 						},
 						error:function(data)
 						{
@@ -418,7 +430,13 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			 $("#chart3Radar").hide();
 
 	     }
-		
+		function show_american_div()
+		{
+			 $("#american_div").show();
+			 $("#showBtn").hide();
+			 
+			 
+		}
 		function loadChartRadar(){
 			var chartobj = $("#chart3Radar");
 			$("#americano_loadChart").html(chartobj);
