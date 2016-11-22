@@ -288,7 +288,7 @@ color: #c2c2c2;
 } 
 
 #UserInfo {
-            background: url(../MetroStyleFiles/image/bg.png);
+            background: url(../MetroStyleFiles/image/bg_NULL.png);
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -750,7 +750,7 @@ color: #c2c2c2;
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-body readmoreHpop"
 										style="white-space: pre-line; padding: 0px;">
-										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 20px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 <div id="userInfoDiv">
