@@ -481,8 +481,8 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/CallGetOPSIWithOutLatLngFromMongoDB")
-	public static int CallgetOPSIWithOutLatLngFromMongoDB(){
-		int ret = 0;
+	public static List<OrgOtherPartySiteInstance> CallgetOPSIWithOutLatLngFromMongoDB(){
+		List<OrgOtherPartySiteInstance> ret = new ArrayList<OrgOtherPartySiteInstance>();
 		try{
 			ret = MongoDBBasic.getOPSIWithOutLatLngFromMongoDB();
 		}		
@@ -535,7 +535,9 @@ public class MasterDataRestController {
 	}
 	
 	@RequestMapping("/CallUpdateOpptLatLngIntoMongoDB")
-	public static String CallUpdateOpptLatLngIntoMongoDB( @RequestParam(value="state", required=false) String state){
+	public static String CallUpdateOpptLatLngIntoMongoDB( 
+			@RequestParam(value="state", required=false) String state
+			){
 		String ret = "";
 		try{
 			ret = MongoDBBasic.updateOpptLatLngIntoMongoDB(state);

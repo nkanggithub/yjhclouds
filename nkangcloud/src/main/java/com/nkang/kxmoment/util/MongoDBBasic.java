@@ -967,21 +967,35 @@ public class MongoDBBasic {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static int getOPSIWithOutLatLngFromMongoDB() {
+	public static List<OrgOtherPartySiteInstance> getOPSIWithOutLatLngFromMongoDB() {
 		mongoDB = getMongoDB();
-		int ret = 0;
+		List<OrgOtherPartySiteInstance> opsiList= new ArrayList<OrgOtherPartySiteInstance>();
+		OrgOtherPartySiteInstance orgOtherPartySiteInstance = null;
 	    try{
 	    	DBObject dbquery = new BasicDBObject(); 
-	    	dbquery.put("lat", new BasicDBObject("$eq", null));
-	    	dbquery.put("lng", new BasicDBObject("$eq", null));
-	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery).limit(10);
+	    	dbquery.put("lat", null);
+	    	dbquery.put("lng", null);
+	    	DBCursor queryresults = mongoDB.getCollection(collectionMasterDataName).find(dbquery).limit(100);
             if (null != queryresults) {
             	while(queryresults.hasNext()){
-            		log.info("----1--");
+            		orgOtherPartySiteInstance = new OrgOtherPartySiteInstance();
             		DBObject o = queryresults.next();
-            		String opsi =  o.get("siteInstanceId").toString();
-            		log.info("----2--");
-            		if(!StringUtils.isEmpty(opsi)){
+            		if( o.get("siteInstanceId") != null){
+            			String opsi =  o.get("siteInstanceId").toString();
+            			orgOtherPartySiteInstance.setSiteInstanceId(opsi);
+            		}
+            		if( o.get("organizationNonLatinExtendedName") != null){
+            			String organizationNonLatinExtendedName =  o.get("organizationNonLatinExtendedName").toString();
+            			orgOtherPartySiteInstance.setOrganizationNonLatinExtendedName(organizationNonLatinExtendedName);
+            		}
+            		if( o.get("organizationExtendedName") != null){
+            			String organizationExtendedName =  o.get("organizationExtendedName").toString();
+            			orgOtherPartySiteInstance.setOrganizationExtendedName(organizationExtendedName);
+            		}
+            		if(orgOtherPartySiteInstance != null){
+            			opsiList.add(orgOtherPartySiteInstance);
+            		}
+/*            		if(!StringUtils.isEmpty(opsi)){
             			log.info("----3--");
             			DBObject update = new BasicDBObject();
             	    	update.put("lat", "111");
@@ -989,18 +1003,16 @@ public class MongoDBBasic {
             			WriteResult wr = mongoDB.getCollection(collectionMasterDataName).update(new BasicDBObject().append("siteInstanceId", opsi), update);
             			log.info("----4--");
             			ret = ret + 1;
-            		}
+            		}*/
             	}
             }
 	    }
 		catch(Exception e){
 			log.info("getOPSIWithOutLatLngFromMongoDB--" + e.getMessage());
 		}
-	    return ret;
-
+	    return opsiList;
 	}
 	
-
 	@SuppressWarnings("unchecked")
 	public static List<ExtendedOpportunity> getNearByOpptFromMongoDB(String StateProvince, String OpptCityName, String CityArea, String bizType, String lat, String lng){
 		List<ExtendedOpportunity> Oppts =  new ArrayList<ExtendedOpportunity>();
@@ -1165,19 +1177,27 @@ public class MongoDBBasic {
 		try {
 		    DBObject dbquery = new BasicDBObject();
 		    dbquery.put("state", state);
-		    dbquery.put("lat", new BasicDBObject("$eq", null));
-		    dbquery.put("lng", new BasicDBObject("$eq", null));
-		    DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);  
+		    dbquery.put("lat", null);
+		    dbquery.put("lng", null);
+		    log.info("-1--" + dbquery.toString());
+/*		    dbquery.put("lat", new BasicDBObject("$eq", null));
+		    dbquery.put("lng", new BasicDBObject("$eq", null));*/
+		    DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
+		    log.info("-2--" + queryresult.toString());
 		    if (queryresult != null) {
+		    	log.info("-2.1--");
 		    	String OPSIID = queryresult.get("siteInstanceId").toString();
+		    	log.info("-2.2--" + OPSIID);
 		    	String organizationNonLatinExtendedName = queryresult.get("organizationNonLatinExtendedName").toString();
 		    	String organizationExtendedName = queryresult.get("organizationExtendedName").toString();
+		    	log.info("-3--" + OPSIID+organizationNonLatinExtendedName+organizationExtendedName);
 		    	if(!StringUtils.isEmpty(organizationNonLatinExtendedName)){
 		    		queryOrg = organizationNonLatinExtendedName;
 		    	}
 		    	else{
 		    		queryOrg = organizationExtendedName;
 		    	}
+		    	log.info("-4--" + queryOrg);
 		    	GoogleLocationUtils gApi = new GoogleLocationUtils();
 				GeoLocation geo =  new GeoLocation();
 				geo = gApi.geocodeByAddressNoSSL(queryOrg);

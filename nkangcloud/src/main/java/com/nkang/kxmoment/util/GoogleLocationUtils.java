@@ -49,9 +49,9 @@ public class GoogleLocationUtils {
 			}
 			System.setProperty(
 					"sun.net.client.defaultConnectTimeout",
-					"30000");
+					"60000");
 			System.setProperty("sun.net.client.defaultReadTimeout",
-					"30000");
+					"60000");
 			is = http.getInputStream();
 			int size = is.available();
 			log.debug(size);
