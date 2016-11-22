@@ -2,7 +2,11 @@ package com.nkang.kxmoment.controller;
 
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.jdbc.StringUtils;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -20,13 +25,31 @@ import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class RegisterController {
 	
-	@RequestMapping("/register")
+	@RequestMapping("/checkUser")
 	@ResponseBody
-	public boolean registUser(HttpServletRequest request, HttpServletResponse response){
+	public String checkUser(HttpServletRequest request, HttpServletResponse response){
+		String openId = request.getParameter("uid");
+		List<WeChatMDLUser> wechatUserList = new ArrayList<WeChatMDLUser>();
+		wechatUserList = MongoDBBasic.getWeChatUserFromMongoDB(openId);
+		if(wechatUserList.size() > 0){
+			WeChatMDLUser wechatUser = wechatUserList.get(0);
+			if(!StringUtils.isNullOrEmpty(wechatUser.getPhone()) || !StringUtils.isNullOrEmpty(wechatUser.getEmail())){
+				return RestUtils.getMDLUserLists(wechatUser.getOpenid());
+			}
+		}
+		return null;
+		
+	}
+	
+	@RequestMapping("/regist")
+	@ResponseBody
+	public boolean regist(HttpServletRequest request, HttpServletResponse response){
 		String openId = request.getParameter("uid");
 		String suppovisor = request.getParameter("suppovisor");
 		String role = request.getParameter("role");
-		String registerDate = request.getParameter("registerDate");
+		Date now = new Date(); 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String registerDate = dateFormat.format(now);
 		String selfIntro = request.getParameter("selfIntro");
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
@@ -39,13 +62,7 @@ public class RegisterController {
 		user.setSelfIntro(selfIntro);
 		user.setPhone(telephone);
 		user.setEmail(email);
-		
-		request.setAttribute("form", user);
-		/*Map<String,String> errors = validateRegist(user, request.getSession());
-		if(errors.size() > 0) {
-			
-			return "redirect:/mdm/profile.jsp";
-		}*/
+		System.out.println(user.openid+"...."+user.getPhone()+":"+user.getRegisterDate());
 		return Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	
