@@ -639,7 +639,9 @@ public class MongoDBBasic {
 			String ret = "0";
 			DBObject query  = new BasicDBObject();
 			if(!StringUtils.isEmpty(area)){
-				query.put("industrySegmentNames", area);
+				Pattern pattern = Pattern.compile("^.*" + area + ".*$", Pattern.CASE_INSENSITIVE); 
+				query.put("industrySegmentNames", pattern);
+				//query.put("industrySegmentNames", area);
 				
 				if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity.toLowerCase() != "null" ){
 					Pattern pattern2 = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
