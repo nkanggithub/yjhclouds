@@ -525,10 +525,10 @@ a:hover,a:link {
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> Welcome <span
-							class="username colorBlue"> <%=wcu.getNickname()%>
+							class="username colorBlue"> <%=wcu.getNickname()==null?"member":wcu.getNickname()%>
 						</span>
-					</a> <span><a style="float: right;" href="baidu.com"> <img
-								src="<%=wcu.getHeadimgurl()%>" alt="userImage" class="userImage"
+					</a> <span><a style="float: right;" href="profile.jsp"> <img
+								src="<%=wcu.getHeadimgurl()==null?"../MetroStyleFiles/gallery.jpg":wcu.getHeadimgurl()%>" alt="userImage" class="userImage"
 								alt="no_username" /> <!-- <img src="../MetroStyleFiles/gallery.jpg" alt="userImage" class="userImage" alt="no_username"/> -->
 						</a></span></li>
 				</ul>
