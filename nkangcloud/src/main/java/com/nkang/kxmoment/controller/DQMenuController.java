@@ -129,8 +129,8 @@ public class DQMenuController {
 		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
 		radars[9]=new Radar(" Amusement and Recreation ",1.817);
 		radar.add(radars);*/
-		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
-		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo("重庆市","","");
+		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, "重庆市");
         double m = Double.valueOf(totalOPSI);
 		int upcnt = listOfSegmentArea.size();
 		if(upcnt >= 10){
@@ -139,7 +139,7 @@ public class DQMenuController {
 		Radar[] radars=new Radar[upcnt];
 			for (int i = 0; i < upcnt; i++) {
 			double num;
-			double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"",userState,""));
+			double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"","重庆市",""));
 
 			num = n/m;
 			radars[i]=new Radar(listOfSegmentArea.get(i),num);
