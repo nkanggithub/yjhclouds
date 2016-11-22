@@ -380,17 +380,17 @@ public class MasterDataRestController {
 	 * by chang-zheng
 	 */
 	@RequestMapping("/CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea")
-	public static  String CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(@RequestParam(value="industrySegmentNames", required=false) List<String> industrySegmentNames,
+	public static   Map<String,String> CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(@RequestParam(value="industrySegmentNames", required=false) List<String> industrySegmentNames,
 																@RequestParam(value="nonlatinCity", required=false) String nonlatinCity,
 																@RequestParam(value="state", required=false) String state,
 																@RequestParam(value="cityRegion", required=false) String cityRegion
 			){
-		String ret = "error";
+		Map<String,String> ret = null;
 		try{
-			ret = String.valueOf(MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(industrySegmentNames,nonlatinCity,state,cityRegion)) ;
+			ret = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(industrySegmentNames,nonlatinCity,state,cityRegion) ;
 		}		
 		catch(Exception e){
-			ret = e.getMessage().toString();
+			ret = null;
 		}
 		return ret;
 	}
