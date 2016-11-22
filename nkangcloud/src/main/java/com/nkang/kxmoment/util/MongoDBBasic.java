@@ -602,8 +602,8 @@ public class MongoDBBasic {
 		DBObject query  = new BasicDBObject();
 		if(industrySegmentNames != "" && industrySegmentNames != null && industrySegmentNames != "null" ){
 			Pattern pattern = Pattern.compile("^.*" + industrySegmentNames + ".*$", Pattern.CASE_INSENSITIVE); 
-			//query.put("industrySegmentNames", pattern);
-			query.put("industrySegmentNames", industrySegmentNames);
+			query.put("industrySegmentNames", pattern);
+			//query.put("industrySegmentNames", industrySegmentNames);
 		}
 		if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity.toLowerCase() != "null" ){
 			Pattern pattern2 = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
