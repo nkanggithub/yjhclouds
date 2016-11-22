@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -147,8 +148,39 @@ public class DQMenuController {
 			
 		return radar;
 	}
+	/*
+	 * author chang-zheng
+	*/
+	@RequestMapping("/getRadarda")
+	public @ResponseBody List<Radar[]> getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		Map<String,Radar[]> radarmap = new HashMap<String,Radar[]>();
+		List<Radar[]> radar=new ArrayList<Radar[]>();
+		
+		/*	radars[0]=new Radar(" Automotive ",3.6345);
+		radars[1]=new Radar(" Business Services ",15.367);
+		radars[2]=new Radar(" Discrete - Machinery ",3.6345);
+		radars[3]=new Radar(" Consumer Packaged Goods ",6.2055);
+		radars[4]=new Radar(" Construction ",3.1815);
+		radars[5]=new Radar(" Education: K-12 /School ",6.0675);
+		radars[6]=new Radar(" Wholesale Trade ",16.3635);
+		radars[7]=new Radar(" Retail ",10.1795);
+		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
+		radars[9]=new Radar(" Amusement and Recreation ",1.817);
+		radar.add(radars);*/
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
+		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
+		Radar[] radars=new Radar[listOfSegmentArea.size()];
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listOfSegmentArea,"",userState,"");
+		for(int i=0;i<listOfSegmentArea.size();i++){
+			radars[i]=new Radar(listOfSegmentArea.get(i), Double.valueOf(rdmap.get(listOfSegmentArea.get(i))));
+			
+		}
+		radar.add(radars);
+		return radar;
+	}
 	
-
+	
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
 	{

@@ -627,6 +627,47 @@ public class MongoDBBasic {
 	    return ret;
 	}
 	
+	/*
+	 * author chang-zheng
+	 */
+	
+	public static Map<String,String> CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(List<String> listOfSegmentArea, String nonlatinCity, String state, String cityRegion){
+		mongoDB = getMongoDB();
+		Map<String,String> radarmap = new  HashMap<String,String>();
+		
+		for(String area : listOfSegmentArea){
+			String ret = "0";
+			DBObject query  = new BasicDBObject();
+			if(!StringUtils.isEmpty(area)){
+				query.put("industrySegmentNames", area);
+				
+				if(nonlatinCity != "" && nonlatinCity != null && nonlatinCity.toLowerCase() != "null" ){
+					Pattern pattern2 = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+					query.put("nonlatinCity", pattern2);
+				}
+				if(state != "" && state != null && state.toLowerCase() != "null" ){
+					Pattern pattern3 = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
+					query.put("state", pattern3);
+				}
+				if(cityRegion != "" && cityRegion != null && cityRegion.toLowerCase() != "null" ){
+					Pattern pattern4 = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
+					query.put("cityRegion", pattern4);
+				}
+				 try{
+				    	//Pattern pattern = Pattern.compile("^.*name8.*$", Pattern.CASE_INSENSITIVE);
+				    	ret = String.valueOf( mongoDB.getCollection(collectionMasterDataName).count(query));
+				    }
+					catch(Exception e){
+						log.info("getFilterCountOnCriteriaFromMongo--" + e.getMessage());
+					}
+				
+			}
+			 radarmap.put(area, ret);
+		}
+		
+	    return radarmap;
+	}
+	
 	
 	@SuppressWarnings("unused")
 	public static String getFilterTotalOPSIFromMongo(String stateProvince, String nonlatinCity, String cityRegion){

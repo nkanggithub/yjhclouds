@@ -1356,6 +1356,7 @@ public class RestUtils {
 		return message;
 	}
 	
+	
 	public static List<String> CallGetFilterNonLatinCityFromMongo(String state){
 		List<String> ret = new ArrayList<String>();
 		String message = "false";
