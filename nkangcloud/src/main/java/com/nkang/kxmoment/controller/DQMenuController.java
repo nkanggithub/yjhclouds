@@ -116,7 +116,7 @@ public class DQMenuController {
 	public @ResponseBody List<Radar[]> getRadar(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
-/*		Radar[] radars=new Radar[10];
+	/*	Radar[] radars=new Radar[10];
 		radars[0]=new Radar(" Automotive ",3.6345);
 		radars[1]=new Radar(" Business Services ",15.367);
 		radars[2]=new Radar(" Discrete - Machinery ",3.6345);
@@ -128,8 +128,9 @@ public class DQMenuController {
 		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
 		radars[9]=new Radar(" Amusement and Recreation ",1.817);
 		radar.add(radars);*/
-		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo("200000", userState);
-        double m = Double.valueOf("200000");
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
+		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
+        double m = Double.valueOf(totalOPSI);
 		int upcnt = listOfSegmentArea.size();
 		if(upcnt >= 10){
 			upcnt = 10;
@@ -140,12 +141,14 @@ public class DQMenuController {
 			double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"",userState,""));
 
 			num = n/m;
-			radars[i]=new Radar("\""+listOfSegmentArea.get(i)+"\"",num);
+			radars[i]=new Radar(listOfSegmentArea.get(i),num);
 		}
 			radar.add(radars);
 			
 		return radar;
 	}
+	
+
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
 	{
