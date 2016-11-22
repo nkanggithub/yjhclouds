@@ -91,7 +91,6 @@ img.Wmates {
 }
 
 .HpLogo {
-	width: 200px;
 	height: 60px;
 }
 
