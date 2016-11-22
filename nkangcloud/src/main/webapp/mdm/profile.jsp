@@ -266,6 +266,7 @@ a:hover,a:link {
 					},
 					cache : false,
 					success : function(data) {
+						data=data.replace(/:null/g,':"未注册"');
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						if (jsons.results.length > 0) {
