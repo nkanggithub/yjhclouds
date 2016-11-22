@@ -55,7 +55,9 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<link rel="stylesheet" type="text/css" href="nkang/c3.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//sweetalert.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/pageLoad.css"/>
-
+	
+<!-- 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/bootstrap.css"/> -->
+	<link rel="stylesheet" type="text/css" href="Jsp/CSS/common.css"/>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.min.2.1.1.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.easing.min.13.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.mousewheel.min.js"></script>
@@ -72,6 +74,8 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
 	<script type="text/javascript" src="nkang/d3.v3.min.js"></script>
 	<script type="text/javascript" src="nkang/c3.min.js"></script>
+	
+	<script type="text/javascript" src="Jsp/JS/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
 	 $(document).ajaxStart(function () {
@@ -695,49 +699,49 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
  		<img id="user_location_save" onclick="javascript:userlocationsave(this);" src="MetroStyleFiles//setuplocation.png" alt="userImage" class="userImage pull-right" style="position:relative;top:10px;right:2%; z-index: 8;" /><span id="locationCity" style="position:absolute;top:-6px;right:5px;color:#00b287;z-index:8;font-size:16px">${ userState }</span>
 	<!-- START METROTAB -->
     <div class="metrotabs">
-        <div class="mt-blocksholder floatleft masonry" style="width: 100%; display: block; position: relative; height: 100%;top:-25px;left:5px" >
-            <div id="tileboxjs"  onclick="javascript:hideAll(this);" class="tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
+        <div class="mt-blocksholder floatleft masonry" style="width: 96%; display: block; position: relative; height: 100%;top:-25px;left:2%" >
+            <div id="tileboxjs"  onclick="javascript:hideAll(this);" class="a1 tile-bt-long img-purtywood mt-tab mt-active mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//datalake.png" alt="">
 	                <span class="light-text"><strong>Data Lake</strong></span>
                 </a>
             </div>      
-             <div id="conporlan" onclick="javascript:loadChart4(this);" class="tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
+             <div id="conporlan" onclick="javascript:loadChart4(this);" class="a2 tile-bt solid-red mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 200px;">
                 <a href="javascript:void(0);" target="_blank">
 					<img src="MetroStyleFiles//image/icon.png" alt="">
 					<span class="light-text">康宝蓝</span>
                 </a>
             </div>
 			
-			<div id="espresso" class="tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
+			<div id="espresso" class="a3 tile-bt solid-blue-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 200px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//location.png" alt="">
 	                <span class="light-text">Geolocation</span>
                 </a>
             </div>
 			
-			<div id="openmes"   onclick="javascript:loadOpenMe(this);" class="tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
+			<div id="openmes"   onclick="javascript:loadOpenMe(this);" class="a4 tile-bt-long solid-green-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 0px; left: 100px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//person.png" alt="">
 	                <span class="light-text">Show Case</span>
                 </a>
             </div>
             
-            <div id="capuqino" data-ext="html" onclick="javascript:loadChart5(this);" class="tile-bt-long solid-orange-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 0px;">
+            <div id="capuqino" data-ext="html" onclick="javascript:loadChart5(this);" class="a5 tile-bt-long solid-orange-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 200px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//image/icon.png" alt="">
 	                <span class="light-text">卡布奇诺</span>
                 </a>
             </div>
             
-            			<div id="americano" class="tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+            			<div id="americano" class="a6 tile-bt solid-red-2 mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 400px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//industry.png" alt="">
 	                <span class="light-text">Industry</span>
                 </a>
             </div>
             
-            <div id="joinus" class="tile-bt solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
+            <div id="joinus" class="a7 tile-bt solid-red-2 mt-tab  masonry-brick" style="position: absolute; top: 400px; left: 0px;">
 		        <div class="tile-bt solid-green hovershadow-green">
 		            <a href="javascript:void(0);" onClick="Javascript:CommentMe();"  title="move together">
 		                <img src="MetroStyleFiles//image/documents.png" alt="MetroTab Docs">
@@ -746,7 +750,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		        </div>
     		</div>
             
-			<div id="openfooter"  class="tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
+			<div id="openfooter"  class="a8 tile-bt-long img-wildoliva mt-tab mt-loadcontent masonry-brick" style="position: absolute; top: 300px; left: 0px;">
                 <a href="javascript:void(0);">
 	                <img src="MetroStyleFiles//visualview.png" alt="">
 	                <span class="light-text">Business Type</span>
