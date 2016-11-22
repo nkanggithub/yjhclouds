@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.Radar;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -111,7 +112,40 @@ public class DQMenuController {
     	finalString.add(d);
 		return finalString;
 	}
-	
+	@RequestMapping("/getRadar")
+	public @ResponseBody List<Radar[]> getRadar(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		List<Radar[]> radar=new ArrayList<Radar[]>();
+/*		Radar[] radars=new Radar[10];
+		radars[0]=new Radar(" Automotive ",3.6345);
+		radars[1]=new Radar(" Business Services ",15.367);
+		radars[2]=new Radar(" Discrete - Machinery ",3.6345);
+		radars[3]=new Radar(" Consumer Packaged Goods ",6.2055);
+		radars[4]=new Radar(" Construction ",3.1815);
+		radars[5]=new Radar(" Education: K-12 /School ",6.0675);
+		radars[6]=new Radar(" Wholesale Trade ",16.3635);
+		radars[7]=new Radar(" Retail ",10.1795);
+		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
+		radars[9]=new Radar(" Amusement and Recreation ",1.817);
+		radar.add(radars);*/
+		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo("200000", userState);
+        double m = Double.valueOf("200000");
+		int upcnt = listOfSegmentArea.size();
+		if(upcnt >= 10){
+			upcnt = 10;
+		}
+		Radar[] radars=new Radar[upcnt];
+			for (int i = 0; i < upcnt; i++) {
+			double num;
+			double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"",userState,""));
+
+			num = n/m;
+			radars[i]=new Radar("\""+listOfSegmentArea.get(i)+"\"",num);
+		}
+			radar.add(radars);
+			
+		return radar;
+	}
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
 	{
