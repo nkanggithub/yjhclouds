@@ -252,11 +252,14 @@ a:hover,a:link {
 	});
 
 	function getUserInfo(username, headimgurl, openId) {
-		var tbody = '                		<tr>'
+		var tbody_head = '                		<tr>'
 				+ '                			<td colspan="2" align="center">'
 				+ '                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
 				+ '                			<br/><b>' + username
 				+ '                			</b><br/></td>' + '                		</tr>';
+		var head=' <img src="'+headimgurl+'" alt="userImage" class="matesUserImage" alt="no_username"/>'
+			+'				<br/>						'
+			+'                 <b>' + username+'</b>';
 		jQuery
 				.ajax({
 					type : "GET",
@@ -270,7 +273,7 @@ a:hover,a:link {
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						if (jsons.results.length > 0) {
-							tbody += '                		<tr>'
+							var tbody = '                		<tr>'
 									+ '                			<td align="right" width="50%">'
 									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/telephone.png" alt="Telephone"/>:</b>'
 									+ '                			</td>'
@@ -325,11 +328,11 @@ a:hover,a:link {
 									+ '                			</td>'
 									+ '                		</tr>';
 							$j('#UserInfo_tab').html(tbody);
-							//$j('#UserInfo').modal('show');
-
+						    //$j('#UserInfo').modal('show');
+							//$j('#UserInfoHead').html(head);
 							swal({
 								title : null,
-								text : "<table style='margin-left:auto;margin-right:auto;'>"+tbody+"</table>",
+								text : "<table style='margin-left:auto;margin-right:auto;'>"+tbody_head+tbody+"</table>",
 								html : true
 							});
 						}
@@ -638,22 +641,26 @@ a:hover,a:link {
 								<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
-									<!-- 
-                <div class="modal-header">
-                 <b id="UserInfoHead"></b>
+                <div class="modal-header" style="text-align:center;">
+                 <div id="UserInfoHead"></div>
+                 <img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+												aria-hidden="true"
+												style="float: right; height: 20px; cursor: pointer;margin-top:-80px;" />
                 </div>
-                 -->
 									<div class="modal-body readmoreHpop"
 										style="white-space: pre-line; padding: 0px;">
-										<table width="95%" align="center" id="UserInfo_tab"
+										
+											<table width="95%" align="center" id="UserInfo_tab"
 											style="margin-top: -15px;">
 											<!--  -->
 										</table>
 									</div>
+									<!-- 
 									<div class="modal-footer">
 										<button class="btnAthena" data-dismiss="modal"
 											aria-hidden="true">Cancel</button>
 									</div>
+									 -->
 								</div>
 								<div class="tab-pane" id="WorkMates">
 									<ul class="Work_Mates_div" id="Work_Mates_ul">
