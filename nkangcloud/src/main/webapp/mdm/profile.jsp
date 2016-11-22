@@ -708,7 +708,7 @@ input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
 					alt="HP Logo" class="HpLogo" />
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> Welcome <span
+						data-toggle="dropdown" style="font-size:18px;"> Welcome <span
 							class="username colorBlue"> <%=wcu.getNickname()==null?"member":wcu.getNickname()%>
 						</span>
 					</a>
