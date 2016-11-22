@@ -154,7 +154,6 @@ public class DQMenuController {
 	@RequestMapping("/getRadarda")
 	public @ResponseBody List<Radar[]> getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
-		Map<String,Radar[]> radarmap = new HashMap<String,Radar[]>();
 		List<Radar[]> radar=new ArrayList<Radar[]>();
 		
 		/*	radars[0]=new Radar(" Automotive ",3.6345);
