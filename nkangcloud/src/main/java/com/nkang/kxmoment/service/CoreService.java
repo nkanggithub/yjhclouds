@@ -174,12 +174,12 @@ public class CoreService
 					article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 					article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
 					articleList.add(article2);
-					Article article3 = new Article();
+/*					Article article3 = new Article();
 					article3.setTitle("Data Dashboard");
 					article3.setDescription("Master Data Dashboard");
 					article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
 					article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
-					articleList.add(article3);
+					articleList.add(article3);*/
 					Article article4 = new Article();
 					article4.setTitle("Data Visualization");
 					article4.setDescription("Master Data Visualization");
@@ -214,12 +214,12 @@ public class CoreService
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 						article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
-						Article article3 = new Article();
+/*						Article article3 = new Article();
 						article3.setTitle("Data Dashboard");
 						article3.setDescription("Master Data Dashboard");
 						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
 						article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
-						articleList.add(article3);
+						articleList.add(article3);*/
 						Article article4 = new Article();
 						article4.setTitle("Data Visualization");
 						article4.setDescription("Master Data Visualization");
