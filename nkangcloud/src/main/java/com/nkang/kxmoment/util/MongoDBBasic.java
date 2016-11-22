@@ -1130,7 +1130,7 @@ public class MongoDBBasic {
 	}
 	
 	// Bit Add Start
-	    public static DBObject getOpptByOpsiFromMongoDB(String opsi) {
+	public static DBObject getOpptByOpsiFromMongoDB(String opsi) {
 		DBObject queryresults = null;
 		mongoDB = getMongoDB();
 		try {
@@ -1147,51 +1147,52 @@ public class MongoDBBasic {
 			queryresults = dbCursor.next();
 		    }
 
-		} catch (Exception e) {
-		    if (mongoDB.getMongo() != null) {
-			mongoDB.getMongo().close();
-		    }
-		} finally {
-		    if (mongoDB.getMongo() != null) {
-			mongoDB.getMongo().close();
-		    }
+		} 		
+		catch(Exception e){
+			log.info("getOpptByOpsiFromMongoDB--" + e.getMessage());
 		}
 		return queryresults;
-	    }
+	}
 	    
 	    /***
 	     * search mongodb with condition lng&lat=null. only return one record.
 	     * @param inputString 
 	     * @return
 	     */
-	    public static DBObject getOpptFromMongoDB(String inputString) {
-		DBObject queryresult = null;
+	public static String updateOpptLatLngIntoMongoDB(String state){
 		mongoDB = getMongoDB();
+		String queryOrg = "";
 		try {
 		    DBObject dbquery = new BasicDBObject();
+		    dbquery.put("state", state);
 		    dbquery.put("lat", new BasicDBObject("$eq", null));
 		    dbquery.put("lng", new BasicDBObject("$eq", null));
-
-		    log.info("[getOpptFromMongoDB] query mongodb filter :"+dbquery.toString());
-		    DBObject dbObject = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);
-			    
-		    if (null == dbObject) {
-			queryresult = null;
-		    }else {
-			queryresult = dbObject;
+		    DBObject queryresult = mongoDB.getCollection(collectionMasterDataName).findOne(dbquery);  
+		    if (queryresult != null) {
+		    	String OPSIID = queryresult.get("siteInstanceId").toString();
+		    	String organizationNonLatinExtendedName = queryresult.get("organizationNonLatinExtendedName").toString();
+		    	String organizationExtendedName = queryresult.get("organizationExtendedName").toString();
+		    	if(!StringUtils.isEmpty(organizationNonLatinExtendedName)){
+		    		queryOrg = organizationNonLatinExtendedName;
+		    	}
+		    	else{
+		    		queryOrg = organizationExtendedName;
+		    	}
+		    	GoogleLocationUtils gApi = new GoogleLocationUtils();
+				GeoLocation geo =  new GeoLocation();
+				geo = gApi.geocodeByAddressNoSSL(queryOrg);
+		    	DBObject update = new BasicDBObject();
+		    	update.put("lat",geo.getLAT());
+		    	update.put("lng",geo.getLNG());		    	
+		    	WriteResult wr = mongoDB.getCollection(collectionMasterDataName).update(new BasicDBObject().append("siteInstanceId", OPSIID), update);
+		    	queryOrg = queryOrg +"[" + geo.getLAT() + "," +geo.getLNG()+"]";
 		    }
-
 		} catch (Exception e) {
-		    if (mongoDB.getMongo() != null) {
-			mongoDB.getMongo().close();
-		    }
-		} finally {
-		    if (mongoDB.getMongo() != null) {
-			mongoDB.getMongo().close();
-		    }
-		}
-		return queryresult;
-	    }
+			log.info("updateOpptLatLngIntoMongoDB--" + e.getMessage());
+			queryOrg = e.getMessage().toString();
+		} 
+		return queryOrg;
+	}
 	    /***
 	     * search oppts from mongodb with lng=null&lat=null limit(limitSize)
 	     * @param limitSize integer of return row number.
@@ -1213,7 +1214,6 @@ public class MongoDBBasic {
 		    if (queryresults.size() == 0) {
 			queryresults = null;
 		    }
-
 		} catch (Exception e) {
 		    if (mongoDB.getMongo() != null) {
 			mongoDB.getMongo().close();

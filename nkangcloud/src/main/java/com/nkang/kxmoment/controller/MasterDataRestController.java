@@ -533,5 +533,16 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-
+	
+	@RequestMapping("/CallUpdateOpptLatLngIntoMongoDB")
+	public static String CallUpdateOpptLatLngIntoMongoDB( @RequestParam(value="state", required=false) String state){
+		String ret = "";
+		try{
+			ret = MongoDBBasic.updateOpptLatLngIntoMongoDB(state);
+		}		
+		catch(Exception e){
+			ret = e.getMessage().toString();
+		}
+		return ret;
+	}
 }

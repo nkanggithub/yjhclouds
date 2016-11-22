@@ -21,7 +21,7 @@ public class GoogleLocationUtils {
 	Logger log = Logger.getLogger(GoogleLocationUtils.class);
 	private final String uRLString = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&";
 
-	private static String localInd = "Y";
+	private static String localInd = "N";
 	public static final String proxyInfo = "web-proxy.austin.hpecorp.net";
 
 	public GoogleLocationUtils() {
