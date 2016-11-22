@@ -72,7 +72,9 @@
 #weather tr td {
 	height: 50px;
 }
-
+img.Wmates{
+	height:25px;
+}
 #weather_suggest tr td {
 	line-height: 20px;
 }
@@ -269,7 +271,7 @@ a:hover,a:link {
 						if (jsons.results.length > 0) {
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>phone:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/telephone.png" alt="Telephone"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
@@ -278,7 +280,7 @@ a:hover,a:link {
 									+ '                		</tr>';
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>E-mail:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/email.png" alt="E-mail"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
@@ -287,7 +289,7 @@ a:hover,a:link {
 									+ '                		</tr>';
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>Role:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/role.png" alt="Role"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
@@ -296,7 +298,7 @@ a:hover,a:link {
 									+ '                		</tr>';
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>SelfIntro:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/selfIntro.png" alt="SelfIntro"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
@@ -305,7 +307,7 @@ a:hover,a:link {
 									+ '                		</tr>';
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>RegisterDate:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/RegisterDate.png" alt="RegisterDate"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
@@ -314,7 +316,7 @@ a:hover,a:link {
 									+ '                		</tr>';
 							tbody += '                		<tr>'
 									+ '                			<td align="right" width="50%">'
-									+ '                			<b>Suppovisor:</b>'
+									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/suppovisor.png" alt="Suppovisor"/>:</b>'
 									+ '                			</td>'
 									+ '                			<td align="left">'
 									+ '                			'
