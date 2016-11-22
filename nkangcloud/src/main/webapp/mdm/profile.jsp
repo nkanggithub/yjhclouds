@@ -584,7 +584,7 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 									
 							$j("#info_role span").text( jsons.results[0].role);
 							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email);
-							$j("#info_selfIntro").text(jsons.results[0].selfIntro);
+							$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
 							//	$j('#UserInfo_tab').html(tbody_head + tbody);
 							//$j('#UserInfoHead').html(head);
 							$j('#UserInfo').modal('show');
