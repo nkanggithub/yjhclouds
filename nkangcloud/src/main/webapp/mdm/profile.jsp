@@ -255,45 +255,38 @@ a:hover,a:link {
 .ui-selectmenu-status {
 	line-height: 1.0em;
 }
-
-/*add for regist*/
-}
-.imgclass {
-	margin: 10px;
-	height: 20px;
-	cursor: pointer;
+.imgclass{
+	margin:10px;
+	height:20px;
+	cursor:pointer;
 }
 
-#tableForm tr td input {
-	height: 30px;
-	line-height: 20px;
-	display: block;
+#tableForm tr td input{
+	height:30px;
+	line-height:20px;
+	display:block;
+}
+#tableForm tr td{
+	font-size:14px;
+	padding:0px;
+	height:30px;
+}
+#tableForm tr{
+	padding:0px;
+}
+#tableForm tr td.tdText{
+	text-algin:right;
 }
 
-#tableForm tr td {
-	font-size: 14px;
-	padding: 0px;
-	height: 30px;
-}
+input::-webkit-input-placeholder { 
+color: #999; 
+-webkit-transition: color.5s; 
+} 
+input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
+color: #c2c2c2; 
+-webkit-transition: color.5s; 
+} 
 
-#tableForm tr {
-	padding: 0px;
-}
-
-#tableForm tr td.tdText {
-	text-algin: right;
-}
-
-input::-webkit-input-placeholder {
-	color: #999;
-	-webkit-transition: color.5s;
-}
-
-input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
-	{
-	color: #c2c2c2;
-	-webkit-transition: color.5s;
-}
 #UserInfo {
             background: url(../MetroStyleFiles/image/bg.png);
             background-repeat: no-repeat;
@@ -329,6 +322,8 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 	padding:10px 0px;
 	border-top:1px #fff solid;
 }
+
+
 </style>
 <script>
 	var $j = jQuery.noConflict();
@@ -338,180 +333,97 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 	});
 
 	function register() {
-		$j
-				.ajax({
-					url : "../checkUser",
-					data : {
-						uid : $j("#uid").val()
-					},
-					type : "GET",
-					dataType : "json",
-					cache : false,
-					success : function(result) {
-						if (result === null || result === undefined) {//need to regist
-							var text = "<div class='tab-pane' id='Register'>";
-							text += "<form id='registForm'>";
-							text += "<table id='tableForm'>";
-							text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
-							text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
-							text += "</td></tr>";
-							text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
-							text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
-							text += "</td></tr>";
-							text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
-							text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
-							text += "</td></tr>";
-							text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td><td class='tdInput'>";
-							text += "<input class='inputClass' type='text' placeholder='请输入角色' name='role' id='role' value='${form.role }'/>";
-							text += "</td></tr>";
-							text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
-							text += "<td>";
-							text += "<select id='groupSelect'>  ";
-							text += "<option>Garden</option> ";
-							text += "<option>Achi</option>";
-							text += "<option>NKang</option> ";
-							text += "<option>Channing</option>";
-							text += "<option>Other</option>";
-							text += "</select> </td></tr>";
-							text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>";
-							text += "<td class='tdInput'>";
-							text += "<input class='inputClass' type='text' placeholder='请输入个人简介' name='selfIntro' id='selfIntro'/>";
-							text += "</td></tr>";
-							text += "</table></form></div>";
-							swal(
-									{
-										title : "在一起吧",
-										text : text,
-										showCancelButton : true,
-										html : true,
-										closeOnConfirm : false,
-										animation : "slide-from-top"
-									},
-									function(inputValue) {
-										if (inputValue === false)
-											return false;
-										if (inputValue === "") { //validate user input  
-											swal
-													.showInputError("Input your information");
-											return false;
-										} else {
-											var phone = $j("#telephone").val();
-											var email = $j("#email").val();
-											var suppovisor = $j("#suppovisor")
-													.val();
-											var role = $j("#role").val();
-											var group = $j(
-													"#groupSelect option:selected")
-													.val();
-											;
-											var selfIntro = $j("#selfIntro")
-													.val();
-											$j
-													.ajax({
-														url : "../regist",
-														data : $j('#registForm')
-																.serialize(),
-														type : "GET",
-														dataType : "json",
-														cache : false,
-														success : function(
-																result) {
-															if (result) {
-																swal(
-																		"Registered successfully!",
-																		"Congratulations! You are a member of MDM.",
-																		"success");
-															} else {
-																swal(
-																		"Registered fail!",
-																		"Pls input your correct information.",
-																		"error");
-															}
-														}
-													});
+		$j.ajax({
+			url:"../checkUser",
+			data:{uid:$j("#uid").val()},
+			type:"GET",
+			dataType:"json",
+			cache:false,
+			success:function(result) {
+				if(result === null || result === undefined){//need to regist
+					var text = "<div class='tab-pane' id='Register'>";
+					text += "<form id='registForm'>";
+					text += "<table id='tableForm'>";
+					text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
+					text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
+					text += "</td></tr>";
+					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
+					text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
+					text += "</td></tr>";
+					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
+					text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
+					text += "</td></tr>";
+					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td><td class='tdInput'>";
+					text += "<input class='inputClass' type='text' placeholder='请输入角色' name='role' id='role' value='${form.role }'/>";
+					text += "</td></tr>";
+					text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
+					text += "<td>";
+					text += "<select id='groupSelect'>  ";
+					text += "<option>Garden</option> ";
+					text += "<option>Achi</option>";
+					text += "<option>NKang</option> ";
+					text += "<option>Channing</option>";
+					text += "<option>Other</option>";
+					text += "</select> </td></tr>";
+					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>";
+					text += "<td class='tdInput'>";
+					text += "<input class='inputClass' type='text' placeholder='请输入个人简介' name='selfIntro' id='selfIntro'/>";
+					text += "</td></tr>";
+					text += "</table></form></div>";
+					swal(
+						{   
+							title: "在一起吧",   
+							text: text, 
+							showCancelButton: true, 
+							html:true,
+							closeOnConfirm: false,   
+							animation: "slide-from-top"
+						},
+						function(inputValue){
+							if (inputValue === false) return false;     
+							if (inputValue === "") { //validate user input  
+								swal.showInputError("Input your information"); 
+								return false;  
+								} else {
+									var phone = $j("#telephone").val();
+									var email = $j("#email").val();
+									var suppovisor = $j("#suppovisor").val();
+									var role = $j("#role").val();
+									var group = $j("#groupSelect option:selected").val();;
+									var selfIntro = $j("#selfIntro").val();
+									$j.ajax({
+										url:"../regist",
+										data:$j('#registForm').serialize(),
+										type:"GET",
+										dataType:"json",
+										cache:false,
+										success:function(result) {
+											if(result){
+												swal("Registered successfully!", "Congratulations! You are a member of MDM.", "success"); 
+											} else {
+												swal("Registered fail!", "Pls input your correct information.", "error");
+											}
 										}
 									});
-
-						} else {//show user profile
-							data = '{"results":' + data + '}';
-							var jsons = eval('(' + data + ')');
-							if (jsons.results.length > 0) {
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>phone:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].phone
-										+ '                			</td>'
-										+ '                		</tr>';
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>E-mail:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].email
-										+ '                			</td>'
-										+ '                		</tr>';
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>Role:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].role
-										+ '                			</td>'
-										+ '                		</tr>';
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>SelfIntro:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].selfIntro
-										+ '                			</td>'
-										+ '                		</tr>';
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>RegisterDate:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].registerDate
-										+ '                			</td>'
-										+ '                		</tr>';
-								tbody += '                		<tr>'
-										+ '                			<td align="right" width="50%">'
-										+ '                			<b>Suppovisor:</b>'
-										+ '                			</td>'
-										+ '                			<td align="left">'
-										+ '                			'
-										+ jsons.results[0].suppovisor
-										+ '                			</td>'
-										+ '                		</tr>';
-								$j('#UserInfo_tab').html(tbody);
-								$j('#UserInfo').modal('show');
-							}
-						}
+								}
+							});
+				} else {//show user profile
+					data = '{"results":' + result + '}';
+					var jsons = eval('(' + data + ')');
+					if (jsons.results.length > 0) {
+						$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
+						$j("#info_username span").text($j('#username').text());
+						$j("#info_role span").text( jsons.results[0].role);
+						$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email);
+						$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
+						$j('#UserInfo').modal('show');
 					}
-				});
+				}
+			}
+		});
 	}
 
 	function getUserInfo(username, headimgurl, openId) {
-		var tbody_head = '                		<tr>'
-				+ '                			<td colspan="2" align="center">'
-				+ '                			<img src="'+headimgurl+'" alt="userImage" class="matesUserImage2" alt="no_username"/>'
-				+ '                			<br/><b>' + username
-				+ '                			</b><br/></td>'
-				+ '                		</tr>';
-		var head = ' <img src="'+headimgurl+'" alt="userImage" class="matesUserImage2" alt="no_username"/>'
-				+ '				<br/>						'
-				+ '                 <b>'
-				+ username
-				+ '</b>';
-				
-				
 				$j("#info_imgurl").attr("src",headimgurl);
 				$j("#info_username span").text(username);
 		jQuery
@@ -527,74 +439,10 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						if (jsons.results.length > 0) {
-							var tbody = '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/telephone.png" alt="Telephone"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].phone
-									+ '                			</td>'
-									+ '                		</tr>';
-							tbody += '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/email.png" alt="E-mail"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].email
-									+ '                			</td>'
-									+ '                		</tr>';
-							tbody += '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/role.png" alt="Role"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].role
-									+ '                			</td>'
-									+ '                		</tr>';
-							tbody += '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/selfIntro.png" alt="SelfIntro"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].selfIntro
-									+ '                			</td>'
-									+ '                		</tr>';
-							tbody += '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/RegisterDate.png" alt="RegisterDate"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].registerDate
-									+ '                			</td>'
-									+ '                		</tr>';
-							tbody += '                		<tr>'
-									+ '                			<td align="right" width="50%">'
-									+ '                			<b><img class="Wmates" src="../MetroStyleFiles/suppovisor.png" alt="Suppovisor"/>:</b>'
-									+ '                			</td>'
-									+ '                			<td align="left">'
-									+ '                			'
-									+ jsons.results[0].suppovisor
-									+ '                			</td>'
-									+ '                		</tr>';
-									
 							$j("#info_role span").text( jsons.results[0].role);
 							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email);
 							$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
-							//	$j('#UserInfo_tab').html(tbody_head + tbody);
-							//$j('#UserInfoHead').html(head);
 							$j('#UserInfo').modal('show');
-							/**
-							swal({
-								title : null,
-								text : "<table style='margin-left:auto;margin-right:auto;'>"+tbody_head+tbody+"</table>",
-								html : true
-							});
-							 */
 						}
 					}
 				});
@@ -791,9 +639,9 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" style="font-size: 18px;"> Welcome <span
-							class="username colorBlue"> <%=wcu.getNickname() == null ? "user" : wcu.getNickname()%>
+							class="username colorBlue" id="username"> <%=wcu.getNickname() == null ? "user" : wcu.getNickname()%>
 						</span>
-					</a> <span><a style="float: right;"> <img
+					</a> <span><a style="float: right;"> <img id="userImage"
 								src="<%=wcu.getHeadimgurl() == null ? "../MetroStyleFiles/gallery.jpg"
 					: wcu.getHeadimgurl()%>"
 								alt="userImage" class="userImage" alt="no_username"
@@ -847,7 +695,6 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 									data-toggle="tab">Recognition</a></li>
 								<li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work
 										Mates</a></li>
-								<li id="liRegister"><a href="#Register" data-toggle="tab">Register</a></li>
 							</ul>
 							<div class="tab-content" id="dvTabContent">
 								<div class="tab-pane" id="BoardContent">
@@ -923,78 +770,6 @@ I also play well with Photoshop</div>
 									<ul class="Work_Mates_div" id="Work_Mates_ul">
 									</ul>
 								</div>
-								<!-- register begin -->
-								<div class="tab-pane" id="Register">
-									<form id="registForm">
-										<input id="uid" type="hidden" value="<%=uid%>" />
-										<table id="tableForm">
-
-											<tr>
-												<td class="tdText">Telephone：</td>
-												<td class="tdInput"><input class="inputClass"
-													type="text" name="telephone" id="telephone"
-													value="${form.telephone }" /><br /> <label
-													class="errorClass" id="telephoneError">${errors.telephone }</label>
-												</td>
-											</tr>
-											<tr>
-												<td class="tdText">Email：</td>
-												<td><input class="inputClass" type="text" name="email"
-													id="email" value="${form.email }" /><br /> <label
-													class="errorClass" id="emailError">${errors.email}</label>
-												</td>
-											</tr>
-											<tr>
-												<td class="tdText">Suppovisor</td>
-												<td class="tdInput"><input class="text-left"
-													type="text" name="suppovisor" id="suppovisor"
-													value="${form.suppovisor }" /><br /> <label
-													class="errorClass" id="suppovisorError">${errors.suppovisor }</label>
-												</td>
-											</tr>
-											<tr>
-												<td class="tdText">Role</td>
-												<td class="tdInput"><input class="text-left"
-													type="text" name="role" id="role" value="${form.role }" /><br />
-													<label class="errorClass" id="roleError">${errors.role }</label>
-												</td>
-											</tr>
-
-											<tr>
-												<td class="tdSelect">Group：</td>
-												<td><input class="text-left" type="text" name="group"
-													id="group" value="${form.group }" /><br /> <label
-													class="errorClass" id="groupError">${errors.group }</label>
-												</td>
-											</tr>
-											<tr>
-												<td class="tdText">RegisterDate</td>
-												<td class="tdInput"><input class="text-left"
-													type="text" name="registerDate" id="registerDate"
-													value="${form.registerDate }" /><br /> <label
-													class="errorClass" id="registerDateError">${errors.registerDate }</label>
-												</td>
-											</tr>
-											<tr>
-												<td class="tdText">SelfIntro</td>
-												<td class="tdInput"><input class="text-left"
-													type="text" name="selfIntro" id="selfIntro"
-													value="${form.selfIntro }" /><br /> <label
-													class="errorClass" id="selfIntroError">${errors.selfIntro }</label>
-												</td>
-											</tr>
-											<tr>
-												<td></td>
-												<td><label></label></td>
-											</tr>
-										</table>
-										<div class="modal-footer">
-											<button id="registBtn" class="btnAthenaSave"
-												data-dismiss="modal" aria-hidden="true">Regist</button>
-										</div>
-									</form>
-								</div>
-								<!-- register end -->
 							</div>
 						</div>
 					</div>

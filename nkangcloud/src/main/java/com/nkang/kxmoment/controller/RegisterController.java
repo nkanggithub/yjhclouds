@@ -30,15 +30,17 @@ public class RegisterController {
 	public String checkUser(HttpServletRequest request, HttpServletResponse response){
 		String openId = request.getParameter("uid");
 		List<WeChatMDLUser> wechatUserList = new ArrayList<WeChatMDLUser>();
-		wechatUserList = MongoDBBasic.getWeChatUserFromMongoDB(openId);
-		if(wechatUserList.size() > 0){
-			WeChatMDLUser wechatUser = wechatUserList.get(0);
-			if(!StringUtils.isNullOrEmpty(wechatUser.getPhone()) || !StringUtils.isNullOrEmpty(wechatUser.getEmail())){
-				return RestUtils.getMDLUserLists(wechatUser.getOpenid());
+		if(StringUtils.isNullOrEmpty(openId)){
+			wechatUserList = MongoDBBasic.getWeChatUserFromMongoDB(openId);
+			if(wechatUserList.size() > 0){
+				WeChatMDLUser wechatUser = wechatUserList.get(0);
+				if(!StringUtils.isNullOrEmpty(wechatUser.getPhone()) || !StringUtils.isNullOrEmpty(wechatUser.getEmail())){
+					return RestUtils.getMDLUserLists(wechatUser.getOpenid());
+				}
 			}
+			return null;
 		}
 		return null;
-		
 	}
 	
 	@RequestMapping("/regist")
