@@ -19,7 +19,6 @@ import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
 import com.nkang.kxmoment.util.CronJob;
-import com.nkang.kxmoment.util.CronJobForMangoDB;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -109,11 +108,11 @@ public class CoreService
 					    date.set(Calendar.MILLISECOND, 0);
 					    // Schedule to run every Sunday in midnight
 					    //timer.schedule(new CronJob(),date.getTime(),1000 * 60 * 60 * 24 * 7);
-					    timer.schedule(new CronJobForMangoDB(), 0 , 5 * 60 * 1000);
-					    log.info("-----CronJobForMangoDB Started and running----" + timer.toString());
-					    respContent = "started " + timer.toString();
-						textMessage.setContent(respContent);
-						respXml = MessageUtil.textMessageToXml(textMessage);
+//					    timer.schedule(new CronJobForMangoDB(), 0 , 5 * 60 * 1000);
+//					    log.info("-----CronJobForMangoDB Started and running----" + timer.toString());
+//					    respContent = "started " + timer.toString();
+//						textMessage.setContent(respContent);
+//						respXml = MessageUtil.textMessageToXml(textMessage);
 					}
 					else if ("MTJOB".equals(textContent)) {
 						timer.purge();
