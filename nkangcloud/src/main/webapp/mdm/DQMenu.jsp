@@ -164,7 +164,75 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		
 		$("#americano").on("click",function(){
 			
-			
+			var chartRadarHTML=$("#chart3Radar").html();
+			  if(chartRadarHTML==""){
+
+					$.ajax({
+						type : "POST",
+						dataType : "json",
+						url : "getRadar?userState="+$("#userState").html(),
+						success : function(data) {
+							  if (data) {	
+								//  var temp=eval(data);
+								//var temp=[[{axis:" Automotive ",value:3.6345},{axis:" Business Services ",value:15.367},{axis:" Discrete - Machinery ",value:3.359},{axis:" Consumer Packaged Goods ",value:6.2055},{axis:" Construction ",value:3.1815},{axis:" Education: K-12 /School ",value:6.0675},{axis:" Wholesale Trade ",value:16.3635},{axis:" Retail ",value:10.1795},{axis:" Transportation&Trans Services ",value:3.1595},{axis:" Amusement and Recreation ",value:1.817}]];
+								  var w = 250, h = 250;
+									var colorscale = d3.scale.category10();
+									//Legend titles
+									var LegendOptions = ['A','B'];
+								  var mycfg = {
+										  w: w,
+										  h: h,
+										  maxValue: 0.6,
+										  levels: 6,
+										  ExtraWidthX: 170
+										};
+										//Call function to draw the Radar chart
+										//Will expect that data is in %'s
+										RadarChart.draw("#chart3Radar", data, mycfg);
+
+										var svg = d3.select('#americano_loadChart')
+											.selectAll('svg')
+											.append('svg')
+											.attr("width", w+10)
+											.attr("height", h);
+
+										//Initiate Legend	
+										var legend = svg.append("g")
+											.attr("class", "legend")
+											.attr("height", 100)
+											.attr("width", 150)
+											.attr('transform', 'translate(-220,40)') ;
+											//Create colour squares
+											legend.selectAll('rect')
+											  .data(LegendOptions)
+											  .enter()
+											  .append("rect")
+											  .attr("x", w - 65)
+											  .attr("y", function(d, i){ return i * 20;})
+											  .attr("width", 10)
+											  .attr("height", 10)
+											  .style("fill", function(d, i){ return colorscale(i);})
+											  ;
+											//Create text next to squares
+											legend.selectAll('text')
+											  .data(LegendOptions)
+											  .enter()
+											  .append("text")
+											  .attr("x", w - 52)
+											  .attr("y", function(d, i){ return i * 20 + 9;})
+											  .attr("font-size", "11px")
+											  .attr("fill", "#737373")
+											  .text(function(d) { return d; });	
+									
+							  }
+						},
+						error:function(data)
+						{
+							console.log("failed..."+data.toString());
+						}
+					
+				});
+				} 
 			loadChartRadar();
 		});
 		
@@ -728,83 +796,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<!-- END METROTAB -->
 </section>
 
- <div id="chart3Radar" onclick="javascript:loadChartRadarWithDetail(this);">
-	 <script>
-		var w = 250, h = 250;
-		var colorscale = d3.scale.category10();
-		//Legend titles
-		var LegendOptions = ['A','B'];
-		//Data
-<%--    		<% 
-			String Ret = "";
-			List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo("200000", userState);
-            double m = Double.valueOf("200000");
-			String RetStr = "";
-			int upcnt = listOfSegmentArea.size();
-			if(upcnt >= 10){
-				upcnt = 10;
-			}
- 			for (int i = 0; i < upcnt; i++) {
-				double num;
-				double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"",userState,""));
-
-				num = n/m;
-				RetStr = RetStr + "{axis:\" " + listOfSegmentArea.get(i) + " \",value:" + num + "},";
-			}
- 			Ret = Ret + "[[" + RetStr.substring(0, RetStr.length() - 1) + "]]"; 
-		%>
-		 var d = <%= Ret%>; --%>
-		 
-		 
- 		var d = [[{axis:" Automotive ",value:3.6345},{axis:" Business Services ",value:15.367},{axis:" Discrete - Machinery ",value:3.359},{axis:" Consumer Packaged Goods ",value:6.2055},{axis:" Construction ",value:3.1815},{axis:" Education: K-12 /School ",value:6.0675},{axis:" Wholesale Trade ",value:16.3635},{axis:" Retail ",value:10.1795},{axis:" Transportation&Trans Services ",value:3.1595},{axis:" Amusement and Recreation ",value:1.817}]];
-
-		var mycfg = {
-		  w: w,
-		  h: h,
-		  maxValue: 0.6,
-		  levels: 6,
-		  ExtraWidthX: 170
-		};
-		//Call function to draw the Radar chart
-		//Will expect that data is in %'s
-		RadarChart.draw("#chart3Radar", d, mycfg);
-
-		var svg = d3.select('#americano_loadChart')
-			.selectAll('svg')
-			.append('svg')
-			.attr("width", w+10)
-			.attr("height", h);
-
-		//Initiate Legend	
-		var legend = svg.append("g")
-			.attr("class", "legend")
-			.attr("height", 100)
-			.attr("width", 150)
-			.attr('transform', 'translate(-220,40)') ;
-			//Create colour squares
-			legend.selectAll('rect')
-			  .data(LegendOptions)
-			  .enter()
-			  .append("rect")
-			  .attr("x", w - 65)
-			  .attr("y", function(d, i){ return i * 20;})
-			  .attr("width", 10)
-			  .attr("height", 10)
-			  .style("fill", function(d, i){ return colorscale(i);})
-			  ;
-			//Create text next to squares
-			legend.selectAll('text')
-			  .data(LegendOptions)
-			  .enter()
-			  .append("text")
-			  .attr("x", w - 52)
-			  .attr("y", function(d, i){ return i * 20 + 9;})
-			  .attr("font-size", "11px")
-			  .attr("fill", "#737373")
-			  .text(function(d) { return d; });	
-			$("#chart3Radar").hide();
-	 </script>
- </div>
+ <div id="chart3Radar" onclick="javascript:loadChartRadarWithDetail(this);"></div>
 
  <div id="chart4" >
 		<script>
