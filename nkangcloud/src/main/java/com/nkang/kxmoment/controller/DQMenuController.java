@@ -209,7 +209,7 @@ public class DQMenuController {
 		List<String> listArea = new ArrayList<String>();
 		if(listOfSegmentArea!=null){
 			if(listOfSegmentArea.size()>10){
-				for(int i=0;i<5;i++){
+				for(int i=0;i<10;i++){
 					listArea.add(listOfSegmentArea.get(i));
 				}
 			}else{
