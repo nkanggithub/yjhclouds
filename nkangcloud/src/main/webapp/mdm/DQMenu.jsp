@@ -445,6 +445,8 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			 $("#chart5").hide();
 			 $("#chart2").hide();
 			chartobj.show();
+			$("#showBtn").show();
+			
 		}
 		
 		function loadChart4(obj){
