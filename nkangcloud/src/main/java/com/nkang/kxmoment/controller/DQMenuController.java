@@ -142,7 +142,7 @@ public class DQMenuController {
 			double n = Double.valueOf(RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(i).trim(),"","重庆市",""));
 
 			num = n/m;
-			radars[i]=new Radar(listOfSegmentArea.get(i),num);
+			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
 		}
 			radar.add(radars);
 			
@@ -176,7 +176,7 @@ public class DQMenuController {
 			double num;
 			double n =Double.valueOf(rdmap.get(listOfSegmentArea.get(i)));
 			num = n/m;
-			radars[i]=new Radar(listOfSegmentArea.get(i),num);
+			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
 			
 		}
 		radar.add(radars);
