@@ -173,11 +173,11 @@ public class DQMenuController {
 		 double m = Double.valueOf(totalOPSI);
 		Radar[] radars=new Radar[listArea.size()];
 		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
-		for(int i=0;i<listOfSegmentArea.size();i++){
+		for(int i=0;i<listArea.size();i++){
 			double num;
-			double n =Double.valueOf(rdmap.get(listOfSegmentArea.get(i)));
+			double n =Double.valueOf(rdmap.get(listArea.get(i)));
 			num = n/m;
-			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
+			radars[i]=new Radar(listArea.get(i),num,n);
 		}
 		radar.add(radars);
 		return radar.toString();
@@ -199,7 +199,7 @@ public class DQMenuController {
 	@RequestMapping("/getRadarda4")
 	public @ResponseBody Map<String,String> getRadarda4(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
-		
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
 		List<String> listOfSegmentArea = new ArrayList<String>();
 		listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
 		List<String> listArea = new ArrayList<String>();
@@ -213,6 +213,7 @@ public class DQMenuController {
 			}
 		}
 		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
+		rdmap.put("opsi", totalOPSI);
 		return rdmap;
 	}
 	@RequestMapping("/getRadarda5")
