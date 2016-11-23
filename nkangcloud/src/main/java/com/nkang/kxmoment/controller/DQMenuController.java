@@ -154,37 +154,32 @@ public class DQMenuController {
 	 * author chang-zheng
 	*/
 	@RequestMapping("/getRadarda")
-	public @ResponseBody Map<String,String>  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	public @ResponseBody List<Radar[]>  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
-		
-		/*	radars[0]=new Radar(" Automotive ",3.6345);
-		radars[1]=new Radar(" Business Services ",15.367);
-		radars[2]=new Radar(" Discrete - Machinery ",3.6345);
-		radars[3]=new Radar(" Consumer Packaged Goods ",6.2055);
-		radars[4]=new Radar(" Construction ",3.1815);
-		radars[5]=new Radar(" Education: K-12 /School ",6.0675);
-		radars[6]=new Radar(" Wholesale Trade ",16.3635);
-		radars[7]=new Radar(" Retail ",10.1795);
-		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
-		radars[9]=new Radar(" Amusement and Recreation ",1.817);
-		radar.add(radars);*/
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
-		//List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
 		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		List<String> listArea = new ArrayList<String>();
+		if(listOfSegmentArea!=null){
+			if(listOfSegmentArea.size()>5){
+				for(int i=0;i<5;i++){
+					listArea.add(listOfSegmentArea.get(i));
+				}
+			}else{
+				listArea = listOfSegmentArea;
+			}
+		}
 		 double m = Double.valueOf(totalOPSI);
-		Radar[] radars=new Radar[listOfSegmentArea.size()];
-		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listOfSegmentArea,"",userState,"");
-//		for(int i=0;i<listOfSegmentArea.size();i++){
-//			double num;
-//			double n =Double.valueOf(rdmap.get(listOfSegmentArea.get(i)));
-//			num = n/m;
-//			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
-//			
-//		}
-//		radar.add(radars);
-//		return radar;
-		return rdmap;
+		Radar[] radars=new Radar[listArea.size()];
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
+		for(int i=0;i<listOfSegmentArea.size();i++){
+			double num;
+			double n =Double.valueOf(rdmap.get(listOfSegmentArea.get(i)));
+			num = n/m;
+			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
+		}
+		radar.add(radars);
+		return radar;
 	}
 	@RequestMapping("/getRadarda2")
 	public @ResponseBody String  getRadarda2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
