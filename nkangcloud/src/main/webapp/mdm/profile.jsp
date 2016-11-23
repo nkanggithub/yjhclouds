@@ -815,18 +815,14 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
 												alt="userImage" class="matesUserImage2">
 											<div id="info_username">
-												<span>青青~笑</span>
+												<span></span>
 											</div>
 											<div id="info_role">
-												-<span>jiao she</span>-
+												-<span></span>-
 											</div>
-											<div id="info_phone">
-												TEL:1234567899<br />E-mail:1234567@qq.com
-											</div>
+											<div id="info_phone"></div>
 
-											<div id="info_selfIntro">I am a full stack web
-												developer. I mainly work with PHP, HTML, CSS, JS and
-												WordPress. I also play well with Photoshop</div>
+											<div id="info_selfIntro"></div>
 
 
 										</div>
