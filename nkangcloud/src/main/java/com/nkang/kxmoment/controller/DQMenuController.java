@@ -170,7 +170,8 @@ public class DQMenuController {
 		radars[9]=new Radar(" Amusement and Recreation ",1.817);
 		radar.add(radars);*/
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
-		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
+		//List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, userState);
+		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
 		 double m = Double.valueOf(totalOPSI);
 		Radar[] radars=new Radar[listOfSegmentArea.size()];
 		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listOfSegmentArea,"",userState,"");
