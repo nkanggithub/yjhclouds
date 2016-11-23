@@ -174,7 +174,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 					$.ajax({
 						type : "POST",
 						dataType : "json",
-						url : "getRadar?userState="+$("#userState").html(),
+						url : "getRadarda?userState="+$("#userState").html(),
 						success : function(data) {
 							  if (data) {	
 								//  var temp=eval(data);
