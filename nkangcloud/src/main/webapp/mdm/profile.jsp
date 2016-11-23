@@ -319,10 +319,6 @@ color: #c2c2c2;
 #userInfoDiv #info_role span{
 	font-weight:bold;
 	padding:10px 0px;
-	border-top:1px #fff solid;
-	*margin-top:-1px;
-	_margin-top:-1px;
-	margin-top:-1px;
 }
 #userInfoDiv #info_phone{
 	margin-top:-5px;
@@ -418,7 +414,7 @@ color: #c2c2c2;
 					var jsons = eval('(' + data + ')');
 					if (jsons.results.length > 0) {
 						$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
-						$j("#info_username span").text($j('#username').text());
+						$j("#info_username span").html($j('#username').text()+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 						$j("#info_role span").text( jsons.results[0].role);
 						if(jsons.results[0].role!="未注册"){
 							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
@@ -433,7 +429,8 @@ color: #c2c2c2;
 
 	function getUserInfo(username, headimgurl, openId) {
 				$j("#info_imgurl").attr("src",headimgurl);
-				$j("#info_username span").text(username);
+				$j("#info_username span").html(username);
+				//$j("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 		jQuery
 				.ajax({
 					type : "GET",
@@ -449,6 +446,8 @@ color: #c2c2c2;
 						if (jsons.results.length > 0) {
 							$j("#info_role span").text( jsons.results[0].role);
 							if(jsons.results[0].role!="未注册"){
+								data = data.replace(/:"未注册"/g, ':"未编辑"');
+								jsons = eval('(' + data + ')');
 								$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
 								$j("#info_selfIntro").text(jsons.results[0].selfIntro);
 							}
