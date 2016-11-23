@@ -42,7 +42,7 @@ public class DQMenuController {
 		return clientList;
 	}
 	@RequestMapping("/getOpenfooter")
-	public @ResponseBody List<Object[]>  getOpenfooter(HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody List<Object[]>  getOpenfooter(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Object[]> finalString=new ArrayList<Object[]>();
 		
@@ -54,10 +54,12 @@ public class DQMenuController {
 		c[0]="Competitor";
 		Object[] d = new Object[2];
 		d[0]="Lead";
-		a[1]=60;
-		b[1]=30;
-		c[1]=5;
-		d[1]=5;
+		
+		MdmDataQualityView dqv = RestUtils.callGetDataQualityReportByParameter(userState,"","");
+		a[1]=dqv.getNumberOfCustomer();
+		b[1]=dqv.getNumberOfPartner();
+		c[1]=dqv.getNumberOfCompetitor();
+		d[1]=dqv.getNumberOfLeads();
 		finalString.add(a);
     	finalString.add(b);
     	finalString.add(c);
@@ -129,12 +131,12 @@ public class DQMenuController {
 		radars[8]=new Radar(" Transportation&Trans Services ",3.1595);
 		radars[9]=new Radar(" Amusement and Recreation ",1.817);
 		radar.add(radars);*/
-		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo("重庆市","","");
-		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo(totalOPSI, "重庆市");
-        double m = Double.valueOf(totalOPSI);
+	//	String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo("重庆市","","");
+		List<String> listOfSegmentArea = RestUtils.CallGetJSFirstSegmentAreaFromMongo("120000", "重庆市");
+        double m = Double.valueOf("120000");
 		int upcnt = listOfSegmentArea.size();
-		if(upcnt >= 10){
-			upcnt = 10;
+		if(upcnt >= 1){
+			upcnt = 1;
 		}
 		Radar[] radars=new Radar[upcnt];
 			for (int i = 0; i < upcnt; i++) {
