@@ -418,8 +418,10 @@ color: #c2c2c2;
 						$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
 						$j("#info_username span").text($j('#username').text());
 						$j("#info_role span").text( jsons.results[0].role);
-						$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
-						$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
+						if(jsons.results[0].role!="未注册"){
+							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
+							$j("#info_selfIntro").text(jsons.results[0].selfIntro);
+						}
 						$j('#UserInfo').modal('show');
 					}
 				}
@@ -444,8 +446,10 @@ color: #c2c2c2;
 						var jsons = eval('(' + data + ')');
 						if (jsons.results.length > 0) {
 							$j("#info_role span").text( jsons.results[0].role);
-							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
-							$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
+							if(jsons.results[0].role!="未注册"){
+								$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
+								$j("#info_selfIntro").text(jsons.results[0].selfIntro);
+							}
 							$j('#UserInfo').modal('show');
 						}
 					}
@@ -759,12 +763,11 @@ color: #c2c2c2;
 											style="float: right; height: 20px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 <div id="userInfoDiv">
 <img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
-<div id="info_username"><span>青青~笑</span></div>
-<div id="info_role">-<span>jiao she</span>-</div>
-<div id="info_phone">TEL:1234567899<br/>E-mail:1234567@qq.com</div>
+<div id="info_username"><span></span></div>
+<div id="info_role">-<span></span>-</div>
+<div id="info_phone"></div>
 
-<div id="info_selfIntro">I am a full stack web developer. I mainly work with PHP, HTML, CSS, JS and WordPress. 
-I also play well with Photoshop</div>
+<div id="info_selfIntro"></div>
 
 
 </div>
