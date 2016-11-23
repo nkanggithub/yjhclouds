@@ -320,6 +320,7 @@ color: #c2c2c2;
 	font-weight:bold;
 	padding:10px 0px;
 	border-top:1px #fff solid;
+	margin-top:-1px;
 }
 
 
@@ -695,7 +696,7 @@ color: #c2c2c2;
 								<li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work
 										Mates</a></li>
 							</ul>
-							<div class="tab-content" id="dvTabContent">
+							<div class="tab-content" id="dvTabContent"  style="border:0px;">
 								<div class="tab-pane" id="BoardContent">
 									<div>
 										<div class="panel-group" id="accordion">
