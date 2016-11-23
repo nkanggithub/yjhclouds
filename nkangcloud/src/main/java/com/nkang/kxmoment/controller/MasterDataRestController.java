@@ -534,7 +534,8 @@ public class MasterDataRestController {
 			@RequestParam(value="selfIntro", required=false) String selfIntro,
 			@RequestParam(value="email", required=false) String email,
 			@RequestParam(value="phone", required=false) String phone,
-			@RequestParam(value="group", required=false) String groupid
+			@RequestParam(value="group", required=false) String groupid,
+			@RequestParam(value="name", required=false) String name
 			){
 		boolean ret = false;
 		Teamer teamer = new Teamer();
@@ -546,6 +547,7 @@ public class MasterDataRestController {
 		teamer.setEmail(email);
 		teamer.setPhone(phone);
 		teamer.setGroupid(groupid);
+		teamer.setRealName(name);
 		try{
 			ret = MongoDBBasic.registerUser(teamer);
 		}		
