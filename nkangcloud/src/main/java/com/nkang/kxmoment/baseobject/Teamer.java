@@ -10,7 +10,14 @@ public class Teamer{
 	public String phone;
 	public String point;
 	public String like;
+	public String groupid;
 	
+	public String getGroupid() {
+		return groupid;
+	}
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
+	}
 	public String getOpenid() {
 		return openid;
 	}
