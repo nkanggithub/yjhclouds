@@ -356,9 +356,13 @@ function register() {
 					$j("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$j('#UserInfo').modal('show');
 				}else{
+					$j("#info_phone").html('');
+					$j("#info_selfIntro").text('');
 					showRegister();
 				}
 			}else{
+				$j("#info_phone").html('');
+				$j("#info_selfIntro").text('');
 				showRegister();
 			}
 		}
@@ -458,6 +462,9 @@ function showRegister(){
 								jsons = eval('(' + data + ')');
 								$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
 								$j("#info_selfIntro").text(jsons.results[0].selfIntro);
+							}else{
+								$j("#info_phone").html('');
+								$j("#info_selfIntro").text('');
 							}
 							$j('#UserInfo').modal('show');
 						}
