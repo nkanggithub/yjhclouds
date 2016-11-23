@@ -348,10 +348,10 @@ function register() {
 			if (jsons.results.length > 0) {
 				if(jsons.results[0].role!="未注册"){
 					$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
-					$j("#info_username span").html($j('#username').text().replace(/\n/g, '')+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$j("#info_role span").text( jsons.results[0].role);
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
+					$j("#info_username span").html(jsons.results[0].realName+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
 					$j("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$j('#UserInfo').modal('show');
@@ -462,6 +462,7 @@ function showRegister(){
 						if (jsons.results.length > 0) {
 							$j("#info_role span").text( jsons.results[0].role);
 							if(jsons.results[0].role!="未注册"){
+								$j("#info_username span").html(jsons.results[0].realName);
 								data = data.replace(/:"未注册"/g, ':"未编辑"');
 								jsons = eval('(' + data + ')');
 								$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
