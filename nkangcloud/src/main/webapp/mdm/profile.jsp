@@ -440,7 +440,7 @@ color: #c2c2c2;
 						var jsons = eval('(' + data + ')');
 						if (jsons.results.length > 0) {
 							$j("#info_role span").text( jsons.results[0].role);
-							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email);
+							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
 							$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
 							$j('#UserInfo').modal('show');
 						}
