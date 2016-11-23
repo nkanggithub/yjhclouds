@@ -332,101 +332,109 @@ color: #c2c2c2;
 		getMDLUserLists();
 	});
 
-	function register() {
-		$j.ajax({
-			url:"../checkUser",
-			data:{uid:$j("#uid").val()},
-			type:"GET",
-			dataType:"json",
-			cache:false,
-			success:function(result) {
-				if(result === null || result === undefined){//need to regist
-					var text = "<div class='tab-pane' id='Register'>";
-					text += "<form id='registForm'>";
-					text += "<table id='tableForm'>";
-					text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
-					text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
-					text += "</td></tr>";
-					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
-					text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
-					text += "</td></tr>";
-					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
-					text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
-					text += "</td></tr>";
-					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>";
-					text += "<td>";
-					text += "<select id='roleSelect'>  ";
-					text += "<option selected='selected'>Contributor</option> ";
-					text += "<option>Team Lead</option>";
-					text += "<option>PM</option> ";
-					text += "<option>Other</option>";
-					text += "</select> </td></tr>";
-					text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
-					text += "<td>";
-					text += "<select id='groupSelect'>";
-					text += "<option selected='selected'>Garden</option> ";
-					text += "<option>Achi</option>";
-					text += "<option>NKang</option> ";
-					text += "<option>Channing</option>";
-					text += "<option>Other</option>";
-					text += "</select> </td></tr>";
-					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>";
-					text += "<td class='tdInput'>";
-					text += "<input class='inputClass' type='text' placeholder='请输入个人简介' name='selfIntro' id='selfIntro'/>";
-					text += "</td></tr>";
-					text += "</table></form></div>";
-					swal(
-						{   
-							title: "在一起吧",   
-							text: text, 
-							showCancelButton: true, 
-							html:true,
-							closeOnConfirm: false,   
-							animation: "slide-from-top"
-						},
-						function(inputValue){
-							if (inputValue === false) return false;     
-							var uid = $j("#uid").val();
-							var phone = $j("#telephone").val();
-							var email = $j("#email").val();
-							var suppovisor = $j("#suppovisor").val();
-							var role = $j("#roleSelect option:selected").val();
-							var group = $j("#groupSelect option:selected").val();
-							var selfIntro = $j("#selfIntro").val();
-							$j.ajax({
-								url:"../regist",
-								data:{uid:uid,telephone:phone,email:email,suppovisor:suppovisor,
-									role:role,group:group,selfIntro:selfIntro,},
-								type:"GET",
-								dataType:"json",
-								cache:false,
-								success:function(result) {
-									if(result){
-										swal("Registered successfully!", "Congratulations!", "success"); 
-									} else {
-										swal("Registered fail!", "Pls input your correct information.", "error");
-									}
-								}
-							});
-							});
-				} else {//show user profile
-					data = '{"results":' + result + '}';
-					var jsons = eval('(' + data + ')');
-					if (jsons.results.length > 0) {
-						$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
-						$j("#info_username span").html($j('#username').text()+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-						$j("#info_role span").text( jsons.results[0].role);
-						if(jsons.results[0].role!="未注册"){
-							$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
-							$j("#info_selfIntro").text(jsons.results[0].selfIntro);
-						}
-						$j('#UserInfo').modal('show');
+function register() {
+	jQuery
+	.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {
+			UID : $j('#uid').val()
+		},
+		cache : false,
+		success : function(data) {
+			data = data.replace(/:null/g, ':"未注册"');
+			data = '{"results":' + data + '}';
+			var jsons = eval('(' + data + ')');
+			if (jsons.results.length > 0) {
+				if(jsons.results[0].role!="未注册"){
+					$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
+					$j("#info_username span").html($j('#username').text().replace(/\n/g, '')+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$j("#info_role span").text( jsons.results[0].role);
+					data = data.replace(/:"未注册"/g, ':"未编辑"');
+					jsons = eval('(' + data + ')');
+					$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
+					$j("#info_selfIntro").text(jsons.results[0].selfIntro);
+					$j('#UserInfo').modal('show');
+				}else{
+					showRegister();
+				}
+			}else{
+				showRegister();
+			}
+		}
+	});
+	}
+function showRegister(){
+	$j('#UserInfo').modal('hide');
+	var text = "<div class='tab-pane' id='Register'>";
+	text += "<form id='registForm'>";
+	text += "<table id='tableForm'>";
+	text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
+	text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
+	text += "</td></tr>";
+	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
+	text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
+	text += "</td></tr>";
+	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
+	text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
+	text += "</td></tr>";
+	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>";
+	text += "<td>";
+	text += "<select id='roleSelect'>  ";
+	text += "<option selected='selected'>Contributor</option> ";
+	text += "<option>Team Lead</option>";
+	text += "<option>PM</option> ";
+	text += "<option>Other</option>";
+	text += "</select> </td></tr>";
+	text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
+	text += "<td>";
+	text += "<select id='groupSelect'>";
+	text += "<option selected='selected'>Garden</option> ";
+	text += "<option>Achi</option>";
+	text += "<option>NKang</option> ";
+	text += "<option>Channing</option>";
+	text += "<option>Other</option>";
+	text += "</select> </td></tr>";
+	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>";
+	text += "<td class='tdInput'>";
+	text += "<input class='inputClass' type='text' placeholder='请输入个人简介' name='selfIntro' id='selfIntro'/>";
+	text += "</td></tr>";
+	text += "</table></form></div>";
+	swal(
+		{   
+			title: "在一起吧",   
+			text: text, 
+			showCancelButton: true, 
+			html:true,
+			closeOnConfirm: false,   
+			animation: "slide-from-top"
+		},
+		function(inputValue){
+			if (inputValue === false) return false;     
+			var uid = $j("#uid").val();
+			var phone = $j("#telephone").val();
+			var email = $j("#email").val();
+			var suppovisor = $j("#suppovisor").val();
+			var role = $j("#roleSelect option:selected").val();
+			var group = $j("#groupSelect option:selected").val();
+			var selfIntro = $j("#selfIntro").val();
+			$j.ajax({
+				url:"../regist",
+				data:{uid:uid,telephone:phone,email:email,suppovisor:suppovisor,
+					role:role,group:group,selfIntro:selfIntro,},
+				type:"GET",
+				dataType:"json",
+				cache:false,
+				success:function(result) {
+					if(result){
+						swal("Registered successfully!", "Congratulations!", "success"); 
+					} else {
+						swal("Registered fail!", "Pls input your correct information.", "error");
 					}
 				}
-			}
-		});
-	}
-
+			});
+			});
+}
 	function getUserInfo(username, headimgurl, openId) {
 				$j("#info_imgurl").attr("src",headimgurl);
 				$j("#info_username span").html(username);
