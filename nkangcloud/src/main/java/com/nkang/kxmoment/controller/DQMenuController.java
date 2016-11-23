@@ -154,7 +154,7 @@ public class DQMenuController {
 	 * author chang-zheng
 	*/
 	@RequestMapping("/getRadarda7")
-	public @ResponseBody Map<String,String>  getRadarda7(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	public @ResponseBody List<Radar[]>  getRadarda7(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
@@ -173,14 +173,31 @@ public class DQMenuController {
 		 double m = Double.valueOf(totalOPSI);
 		Radar[] radars=new Radar[listArea.size()];
 		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
-//		for(int i=0;i<listArea.size();i++){
-//			double num;
-//			double n =Double.valueOf(rdmap.get(listArea.get(i)));
-//			num = n/m;
-//			radars[i]=new Radar(listArea.get(i),num,n);
-//		}
-//		radar.add(radars);
-		return rdmap;
+		for(int i=0;i<listArea.size();i++){
+			double num;
+			double n =Double.valueOf(rdmap.get(listArea.get(i)));
+			num = n/m;
+			radars[i]=new Radar(listArea.get(i),num,n);
+		}
+		//radar.add(radars);
+		if(radars!=null){
+			//Radar temprada = null;
+			  for (int i = 0; i < radars.length; i++)
+	            {
+	                for (int j = i; j < radars.length; j++)
+	                {
+	                    if (radars[i].count > radars[j].count)
+	                    {
+	                    	Radar temprada = radars[i];
+	                    	radars[i] = radars[j];
+	                    	radars[j] = temprada;
+	                    }
+	                }
+	                
+	            }
+			  radar.add(radars);
+		}
+		return radar;
 	}
 	@RequestMapping("/getRadarda")
 	public @ResponseBody List<Radar[]>  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
