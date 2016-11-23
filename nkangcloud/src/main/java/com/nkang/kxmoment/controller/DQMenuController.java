@@ -198,10 +198,24 @@ public class DQMenuController {
 	{
 		
 		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
-		
 		return listOfSegmentArea;
 	}
-	
+	@RequestMapping("/getRadarda4")
+	public @ResponseBody Map<String,String> getRadarda4(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		
+		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listOfSegmentArea,"",userState,"");
+		return rdmap;
+	}
+	@RequestMapping("/getRadarda5")
+	public @ResponseBody String getRadarda5(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		
+		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		String rdmap = RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(0),"",userState,"");
+		return rdmap;
+	}
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
 	{
