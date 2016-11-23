@@ -186,7 +186,21 @@ public class DQMenuController {
 //		return radar;
 		return rdmap;
 	}
-	
+	@RequestMapping("/getRadarda2")
+	public @ResponseBody String  getRadarda2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
+		
+		return totalOPSI;
+	}
+	@RequestMapping("/getRadarda3")
+	public @ResponseBody List<String>  getRadarda3(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		
+		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		
+		return listOfSegmentArea;
+	}
 	
 	@RequestMapping("/DQMenu")
 	public String DQMenu(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "UID") String uid)
