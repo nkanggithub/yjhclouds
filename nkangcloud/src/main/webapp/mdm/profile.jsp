@@ -320,6 +320,8 @@ color: #c2c2c2;
 	font-weight:bold;
 	padding:10px 0px;
 	border-top:1px #fff solid;
+	*margin-top:-1px;
+	_margin-top:-1px;
 	margin-top:-1px;
 }
 #userInfoDiv #info_phone{
