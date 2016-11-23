@@ -204,8 +204,19 @@ public class DQMenuController {
 	public @ResponseBody Map<String,String> getRadarda4(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		
-		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
-		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listOfSegmentArea,"",userState,"");
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		List<String> listArea = new ArrayList<String>();
+		if(listOfSegmentArea!=null){
+			if(listOfSegmentArea.size()>5){
+				for(int i=0;i<5;i++){
+					listArea.add(listOfSegmentArea.get(i));
+				}
+			}else{
+				listArea = listOfSegmentArea;
+			}
+		}
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
 		return rdmap;
 	}
 	@RequestMapping("/getRadarda5")
@@ -217,11 +228,12 @@ public class DQMenuController {
 		return rdmap;
 	}
 	@RequestMapping("/getRadarda6")
-	public @ResponseBody String getRadarda6(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	public @ResponseBody Map<String,String>  getRadarda6(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
-		
-		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
-		String rdmap = RestUtils.CallgetFilterCountOnCriteriaFromMongo(listOfSegmentArea.get(4).toString(),"",userState,"");
+		List<String> listArea = new ArrayList<String>();
+		listArea.add("Construction");
+		//List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
 		return rdmap;
 	}
 	@RequestMapping("/DQMenu")
