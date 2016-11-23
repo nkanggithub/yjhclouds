@@ -11,7 +11,14 @@ public class Teamer{
 	public String point;
 	public String like;
 	public String groupid;
+	public String realName;
 	
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
 	public String getGroupid() {
 		return groupid;
 	}
