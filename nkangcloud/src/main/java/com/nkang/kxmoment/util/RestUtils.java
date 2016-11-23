@@ -1641,6 +1641,9 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getRole()!=null&&!"".equals(user.getRole())){
 				arr.add("role="+user.getRole());
 			}
+			if(user.getGroupid()!=null&&!"".equals(user.getGroupid())){
+				arr.add("group="+user.getGroupid());
+			}
 			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
 				arr.add("selfIntro="+user.getSelfIntro());
 			}

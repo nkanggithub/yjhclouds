@@ -50,11 +50,12 @@ public class RegisterController {
 		String suppovisor = request.getParameter("suppovisor");
 		String role = request.getParameter("role");
 		Date now = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		String registerDate = dateFormat.format(now);
 		String selfIntro = request.getParameter("selfIntro");
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
+		String group = request.getParameter("group");
 		
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(openId);
@@ -64,7 +65,9 @@ public class RegisterController {
 		user.setSelfIntro(selfIntro);
 		user.setPhone(telephone);
 		user.setEmail(email);
+		user.setGroupid(group);;
 		System.out.println(user.openid+"...."+user.getPhone()+":"+user.getRegisterDate());
+		System.out.println(RestUtils.regist(user));
 		return Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	

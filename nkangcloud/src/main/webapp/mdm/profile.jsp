@@ -353,13 +353,18 @@ color: #c2c2c2;
 					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
 					text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
 					text += "</td></tr>";
-					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td><td class='tdInput'>";
-					text += "<input class='inputClass' type='text' placeholder='请输入角色' name='role' id='role' value='${form.role }'/>";
-					text += "</td></tr>";
+					text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>";
+					text += "<td>";
+					text += "<select id='roleSelect'>  ";
+					text += "<option selected='selected'>Contributor</option> ";
+					text += "<option>Team Lead</option>";
+					text += "<option>PM</option> ";
+					text += "<option>Other</option>";
+					text += "</select> </td></tr>";
 					text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
 					text += "<td>";
-					text += "<select id='groupSelect'>  ";
-					text += "<option>Garden</option> ";
+					text += "<select id='groupSelect'>";
+					text += "<option selected='selected'>Garden</option> ";
 					text += "<option>Achi</option>";
 					text += "<option>NKang</option> ";
 					text += "<option>Channing</option>";
@@ -381,31 +386,28 @@ color: #c2c2c2;
 						},
 						function(inputValue){
 							if (inputValue === false) return false;     
-							if (inputValue === "") { //validate user input  
-								swal.showInputError("Input your information"); 
-								return false;  
-								} else {
-									var phone = $j("#telephone").val();
-									var email = $j("#email").val();
-									var suppovisor = $j("#suppovisor").val();
-									var role = $j("#role").val();
-									var group = $j("#groupSelect option:selected").val();;
-									var selfIntro = $j("#selfIntro").val();
-									$j.ajax({
-										url:"../regist",
-										data:$j('#registForm').serialize(),
-										type:"GET",
-										dataType:"json",
-										cache:false,
-										success:function(result) {
-											if(result){
-												swal("Registered successfully!", "Congratulations! You are a member of MDM.", "success"); 
-											} else {
-												swal("Registered fail!", "Pls input your correct information.", "error");
-											}
-										}
-									});
+							var uid = $j("#uid").val();
+							var phone = $j("#telephone").val();
+							var email = $j("#email").val();
+							var suppovisor = $j("#suppovisor").val();
+							var role = $j("#roleSelect option:selected").val();
+							var group = $j("#groupSelect option:selected").val();
+							var selfIntro = $j("#selfIntro").val();
+							$j.ajax({
+								url:"../regist",
+								data:{uid:uid,telephone:phone,email:email,suppovisor:suppovisor,
+									role:role,group:group,selfIntro:selfIntro,},
+								type:"GET",
+								dataType:"json",
+								cache:false,
+								success:function(result) {
+									if(result){
+										swal("Registered successfully!", "Congratulations!", "success"); 
+									} else {
+										swal("Registered fail!", "Pls input your correct information.", "error");
+									}
 								}
+							});
 							});
 				} else {//show user profile
 					data = '{"results":' + result + '}';
