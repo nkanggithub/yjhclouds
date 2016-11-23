@@ -1626,6 +1626,9 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getOpenid()!=null&&!"".equals(user.getOpenid())){
 				arr.add("openid="+user.getOpenid());
 			}
+			if(user.getName()!=null&&!"".equals(user.getName())){
+				arr.add("name="+user.getName());
+			}
 			if(user.getPhone()!=null&&!"".equals(user.getPhone())){
 				arr.add("phone="+user.getPhone());
 			}

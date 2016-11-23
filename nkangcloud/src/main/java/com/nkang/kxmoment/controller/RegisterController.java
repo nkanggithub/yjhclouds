@@ -2,12 +2,11 @@ package com.nkang.kxmoment.controller;
 
 
 import java.io.IOException;
-import java.net.URLEncoder;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mysql.jdbc.StringUtils;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -28,14 +26,16 @@ public class RegisterController {
 	
 	@RequestMapping("/regist")
 	@ResponseBody
-	public boolean regist(HttpServletRequest request, HttpServletResponse response){
+	public boolean regist(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
 		String openId = request.getParameter("uid");
+		String name = request.getParameter("name");
 		String suppovisor = request.getParameter("suppovisor");
 		String role = request.getParameter("role");
 		Date now = new Date(); 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		String registerDate = dateFormat.format(now);
-		String selfIntro = URLEncoder.encode(request.getParameter("selfIntro")); ;
+		String selfIntro = URLDecoder.decode(request.getParameter("selfIntro"),"UTF-8");
+		System.out.println(request.getParameter("selfIntro"));
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
 		String group = request.getParameter("group");
@@ -43,6 +43,7 @@ public class RegisterController {
 		
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(openId);
+		user.setName(name);
 		user.setSuppovisor(suppovisor);
 		user.setRole(role);
 		user.setRegisterDate(registerDate);
