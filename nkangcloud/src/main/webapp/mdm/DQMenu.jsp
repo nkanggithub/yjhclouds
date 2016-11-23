@@ -241,6 +241,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 								}
 								htmlustli=htmlcustli+"</div>";
 								$("#americano_loadChart").append(htmlcustli);
+								
 						},
 						error:function(data)
 						{
@@ -403,11 +404,13 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		});
 		
 		function loadChart(){
+
 			 $("#chart3").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
+			 
 			 $("#chart3Radar").hide();
 			
 		}
@@ -438,13 +441,16 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		}
 		function loadChartRadar(){
 			var chartobj = $("#chart3Radar");
-			$("#americano_loadChart").html(chartobj);
+			var detailobj=$("#american_div");
+			$("#americano_loadChart").html("");
+			$("#americano_loadChart").append(chartobj);
+			$("#americano_loadChart").append(detailobj);
+			
 			$("#chart3").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart2").hide();
 			chartobj.show();
-			$("#showBtn").show();
 			
 		}
 		
