@@ -1170,6 +1170,9 @@ public class MongoDBBasic {
                 				if(teamobj.get("suppovisor") != null){
                 					weChatMDLUser.setSuppovisor(teamobj.get("suppovisor").toString());
                 				}
+                				if(teamobj.get("groupid") != null){
+                					weChatMDLUser.setGroupid(teamobj.get("groupid").toString());
+                				}
                     		}
                 		}
             		}
