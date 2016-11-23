@@ -208,7 +208,7 @@ public class DQMenuController {
 		listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
 		List<String> listArea = new ArrayList<String>();
 		if(listOfSegmentArea!=null){
-			if(listOfSegmentArea.size()>5){
+			if(listOfSegmentArea.size()>10){
 				for(int i=0;i<5;i++){
 					listArea.add(listOfSegmentArea.get(i));
 				}
@@ -225,7 +225,23 @@ public class DQMenuController {
 			num = n/m;
 			radars[i]=new Radar(listArea.get(i),num,n);
 		}
-		radar.add(radars);
+		//radar.add(radars);
+		if(radars!=null){
+			  for (int i = 0; i < radars.length; i++)
+	            {
+	                for (int j = i; j < radars.length; j++)
+	                {
+	                    if (radars[i].count > radars[j].count)
+	                    {
+	                    	Radar temprada = radars[i];
+	                    	radars[i] = radars[j];
+	                    	radars[j] = temprada;
+	                    }
+	                }
+	                
+	            }
+			  radar.add(radars);
+		}
 		return radar;
 	}
 	@RequestMapping("/getRadarda2")
