@@ -735,7 +735,7 @@ function showRegister(){
 											<img src="../MetroStyleFiles/index.png" style="height: 55px;" />
 											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
 												aria-hidden="true"
-												style="float: right; height: 20px; cursor: pointer;" />
+												style="float: right; height: 25px; cursor: pointer;" />
 										</div>
 										<div class="modal-body readmoreHpop"
 											style="white-space: pre-line; padding: 0px;">
@@ -769,7 +769,7 @@ function showRegister(){
 										style="white-space: pre-line; padding: 0px;">
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
-											style="float: right; height: 20px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+											style="float: right; height: 30px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 <div id="userInfoDiv">
 <img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
 <div id="info_username"><span></span></div>
