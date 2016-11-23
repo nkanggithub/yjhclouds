@@ -154,7 +154,7 @@ public class DQMenuController {
 	 * author chang-zheng
 	*/
 	@RequestMapping("/getRadarda")
-	public @ResponseBody List<Radar[]>  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	public @ResponseBody String  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
@@ -179,7 +179,7 @@ public class DQMenuController {
 			radars[i]=new Radar(listOfSegmentArea.get(i),num,n);
 		}
 		radar.add(radars);
-		return radar;
+		return radar.toString();
 	}
 	@RequestMapping("/getRadarda2")
 	public @ResponseBody String  getRadarda2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
