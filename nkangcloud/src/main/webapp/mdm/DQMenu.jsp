@@ -258,7 +258,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "getOpenfooter",
+				url : "getOpenfooter?userState="+$("#userState").html(),
 				success : function(data) {
 					  if (data) {
 						  var chart = c3.generate({
