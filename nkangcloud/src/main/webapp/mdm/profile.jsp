@@ -322,7 +322,9 @@ color: #c2c2c2;
 	border-top:1px #fff solid;
 	margin-top:-1px;
 }
-
+#userInfoDiv #info_phone{
+	margin-top:-5px;
+}
 
 </style>
 <script>
@@ -416,7 +418,7 @@ color: #c2c2c2;
 						$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
 						$j("#info_username span").text($j('#username').text());
 						$j("#info_role span").text( jsons.results[0].role);
-						$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email);
+						$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
 						$j("#info_selfIntro").text(jsons.results[0].selfIntro=="未注册"?"":jsons.results[0].selfIntro);
 						$j('#UserInfo').modal('show');
 					}
