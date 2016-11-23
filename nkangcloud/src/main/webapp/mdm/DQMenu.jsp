@@ -403,7 +403,6 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 		});
 		
 		function loadChart(){
-			$(".sk-circle").hide();
 			 $("#chart3").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
