@@ -153,8 +153,37 @@ public class DQMenuController {
 	/*
 	 * author chang-zheng
 	*/
+	@RequestMapping("/getRadarda7")
+	public @ResponseBody Map<String,String>  getRadarda7(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		List<Radar[]> radar=new ArrayList<Radar[]>();
+		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		List<String> listArea = new ArrayList<String>();
+		if(listOfSegmentArea!=null){
+			if(listOfSegmentArea.size()>5){
+				for(int i=0;i<5;i++){
+					listArea.add(listOfSegmentArea.get(i));
+				}
+			}else{
+				listArea = listOfSegmentArea;
+			}
+		}
+		 double m = Double.valueOf(totalOPSI);
+		Radar[] radars=new Radar[listArea.size()];
+		Map<String,String> rdmap = MongoDBBasic.CallgetFilterCountOnCriteriaFromMongoBylistOfSegmentArea(listArea,"",userState,"");
+//		for(int i=0;i<listArea.size();i++){
+//			double num;
+//			double n =Double.valueOf(rdmap.get(listArea.get(i)));
+//			num = n/m;
+//			radars[i]=new Radar(listArea.get(i),num,n);
+//		}
+//		radar.add(radars);
+		return rdmap;
+	}
 	@RequestMapping("/getRadarda")
-	public @ResponseBody String  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	public @ResponseBody List<Radar[]>  getRadarda(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
@@ -180,7 +209,7 @@ public class DQMenuController {
 			radars[i]=new Radar(listArea.get(i),num,n);
 		}
 		radar.add(radars);
-		return radar.toString();
+		return radar;
 	}
 	@RequestMapping("/getRadarda2")
 	public @ResponseBody String  getRadarda2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
