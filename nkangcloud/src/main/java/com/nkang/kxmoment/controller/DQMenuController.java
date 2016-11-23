@@ -158,7 +158,8 @@ public class DQMenuController {
 	{
 		List<Radar[]> radar=new ArrayList<Radar[]>();
 		String totalOPSI=MongoDBBasic.getFilterTotalOPSIFromMongo(userState,"","");
-		List<String> listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
+		List<String> listOfSegmentArea = new ArrayList<String>();
+		listOfSegmentArea = MongoDBBasic.getFilterSegmentArea(userState);
 		List<String> listArea = new ArrayList<String>();
 		if(listOfSegmentArea!=null){
 			if(listOfSegmentArea.size()>5){
