@@ -376,7 +376,7 @@ function showRegister(){
 	text += "<form id='registForm'>";
 	text += "<table id='tableForm'>";
 	text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/username.png'/></td><td class='tdInput'>";
-	text += "<input class='inputClass' type='text' placeholder='请输入真实姓名' name='username' id='username'/>";
+	text += "<input class='inputClass' type='text' placeholder='请输入真实姓名' name='name' id='name'/>";
 	text += "</td></tr>";
 	text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
 	text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
@@ -384,9 +384,9 @@ function showRegister(){
 	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
 	text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
 	text += "</td></tr>";
-	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
+	/* text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
 	text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
-	text += "</td></tr>";
+	text += "</td></tr>"; */
 	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>";
 	text += "<td>";
 	text += "<select id='roleSelect'>  ";
@@ -421,19 +421,20 @@ function showRegister(){
 		function(inputValue){
 			if (inputValue === false) return false;     
 			var uid = $j("#uid").val();
-			var name = $j("#username").val();
+			var name = $j("#name").val();
 			var phone = $j("#telephone").val();
 			var email = $j("#email").val();
-			var suppovisor = $j("#suppovisor").val();
+			//var suppovisor = $j("#suppovisor").val();
 			var role = $j("#roleSelect option:selected").val();
 			var group = $j("#groupSelect option:selected").val();
-			var selfIntro = encodeURI($j("#selfIntro").val());
+			var selfIntro = $j("#selfIntro").val();
 			$j.ajax({
 				url:"../regist",
-				data:{uid:uid,name:name,telephone:phone,email:email,suppovisor:suppovisor,
+				data:{uid:uid,name:name,telephone:phone,email:email,
 					role:role,group:group,selfIntro:selfIntro,},
-				type:"GET",
+				type:"POST",
 				dataType:"json",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				cache:false,
 				success:function(result) {
 					if(result){
@@ -443,7 +444,7 @@ function showRegister(){
 					}
 				}
 			});
-			});
+		});
 }
 	function getUserInfo(username, headimgurl, openId) {
 				$j("#info_imgurl").attr("src",headimgurl);

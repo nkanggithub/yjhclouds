@@ -12,16 +12,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -1634,9 +1631,6 @@ public static String regist(WeChatMDLUser user) {
 			}
 			if(user.getEmail()!=null&&!"".equals(user.getOpenid())){
 				arr.add("email="+user.getEmail());
-			}
-			if(user.getSuppovisor()!=null&&!"".equals(user.getSuppovisor())){
-				arr.add("suppovisor="+user.getSuppovisor());
 			}
 			if(user.getRegisterDate()!=null&&!"".equals(user.getRegisterDate())){
 				arr.add("registerDate="+user.getRegisterDate());

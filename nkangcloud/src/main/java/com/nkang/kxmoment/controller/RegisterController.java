@@ -3,7 +3,7 @@ package com.nkang.kxmoment.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,35 +24,33 @@ import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class RegisterController {
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/regist")
 	@ResponseBody
 	public boolean regist(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8"); 
 		String openId = request.getParameter("uid");
 		String name = request.getParameter("name");
-		String suppovisor = request.getParameter("suppovisor");
 		String role = request.getParameter("role");
 		Date now = new Date(); 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		String registerDate = dateFormat.format(now);
-		String selfIntro = URLDecoder.decode(request.getParameter("selfIntro"),"UTF-8");
-		System.out.println(request.getParameter("selfIntro"));
+		//String selfIntro = URLDecoder.decode(request.getParameter("selfIntro"),"UTF-8");
+		String selfIntro = request.getParameter("selfIntro");
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
 		String group = request.getParameter("group");
 		
 		
 		WeChatMDLUser user = new WeChatMDLUser();
-		user.setOpenid(openId);
-		user.setName(name);
-		user.setSuppovisor(suppovisor);
-		user.setRole(role);
+		user.setOpenid(URLEncoder.encode(openId));
+		user.setName(URLEncoder.encode(name));
+		user.setRole(URLEncoder.encode(role));
 		user.setRegisterDate(registerDate);
-		user.setSelfIntro(selfIntro);
-		user.setPhone(telephone);
-		user.setEmail(email);
-		user.setGroupid(group);;
-		System.out.println(user.openid+"...."+user.getPhone()+":"+user.getRegisterDate());
-		System.out.println(RestUtils.regist(user));
+		user.setSelfIntro(URLEncoder.encode(selfIntro));
+		user.setPhone(URLEncoder.encode(telephone));
+		user.setEmail(URLEncoder.encode(email));
+		user.setGroupid(URLEncoder.encode(group));;
 		return Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	
@@ -98,17 +96,5 @@ public class RegisterController {
 		}
 		return errors;
 	}
-
-//	private boolean validateWehcatUser(String openId) {
-//		WeChatUser user = MongoDBBasic.queryWeChatUser(openId);
-//		if(user != null){
-//			String telephone = user.getPhone();
-//			String email = user.getEmail();
-//			if(!StringUtils.isNullOrEmpty(telephone) || StringUtils.isNullOrEmpty(email)){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 	
 }
