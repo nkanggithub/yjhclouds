@@ -44,7 +44,7 @@ public class RegisterController {
 		
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId));
-		user.setName(URLEncoder.encode(name));
+		user.setRealName(URLEncoder.encode(name));
 		user.setRole(URLEncoder.encode(role));
 		user.setRegisterDate(registerDate);
 		user.setSelfIntro(URLEncoder.encode(selfIntro));
