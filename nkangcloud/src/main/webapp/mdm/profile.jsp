@@ -323,7 +323,9 @@ color: #c2c2c2;
 #userInfoDiv #info_phone{
 	margin-top:-5px;
 }
-
+#userInfoDiv #info_phone img{
+	height:20px;
+}
 </style>
 <script>
 	var $j = jQuery.noConflict();
@@ -352,7 +354,7 @@ function register() {
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
 					$j("#info_username span").html(jsons.results[0].realName+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-					$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
+					$j("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
 					$j("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$j('#UserInfo').modal('show');
 				}else{
@@ -465,7 +467,7 @@ function showRegister(){
 								$j("#info_username span").html(jsons.results[0].realName);
 								data = data.replace(/:"未注册"/g, ':"未编辑"');
 								jsons = eval('(' + data + ')');
-								$j("#info_phone").html('TEL:'+jsons.results[0].phone+'<br/>E-mail:'+jsons.results[0].email+'<br/>Group:'+jsons.results[0].groupid+'<br/>Leader:'+jsons.results[0].suppovisor);
+								$j("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
 								$j("#info_selfIntro").text(jsons.results[0].selfIntro);
 							}else{
 								$j("#info_phone").html('');
