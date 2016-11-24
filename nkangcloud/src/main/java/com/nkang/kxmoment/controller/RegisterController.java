@@ -43,14 +43,14 @@ public class RegisterController {
 		
 		
 		WeChatMDLUser user = new WeChatMDLUser();
-		user.setOpenid(URLEncoder.encode(openId));
-		user.setRealName(URLEncoder.encode(name));
-		user.setRole(URLEncoder.encode(role));
+		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
+		user.setRealName(URLEncoder.encode(name, "UTF-8"));
+		user.setRole(URLEncoder.encode(role, "UTF-8"));
 		user.setRegisterDate(registerDate);
-		user.setSelfIntro(URLEncoder.encode(selfIntro));
-		user.setPhone(URLEncoder.encode(telephone));
-		user.setEmail(URLEncoder.encode(email));
-		user.setGroupid(URLEncoder.encode(group));;
+		user.setSelfIntro(URLEncoder.encode(selfIntro, "UTF-8"));
+		user.setPhone(URLEncoder.encode(telephone, "UTF-8"));
+		user.setEmail(URLEncoder.encode(email, "UTF-8"));
+		user.setGroupid(URLEncoder.encode(group, "UTF-8"));;
 		return Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	
