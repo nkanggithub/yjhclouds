@@ -570,4 +570,34 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
+	
+	/*
+	 * author  chang-zheng
+	 */
+	@RequestMapping("/getCountrycount")
+	public @ResponseBody List<Object[]> getCountrycount(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String country)
+	{
+		List<MdmDataQualityView> listOfCountry = MongoDBBasic.getDataQualityReportOSfCountry(country);
+		List<Object[]> finalString=new ArrayList<Object[]>();
+		
+		Object[] a = new Object[2];
+		a[0]="Customer";
+		Object[] b = new Object[2];
+		b[0]="Partner";
+		Object[] c = new Object[2];
+		c[0]="Competitor";
+		Object[] d = new Object[2];
+		d[0]="Lead";
+		
+		MdmDataQualityView dqv = listOfCountry.get(0);
+		a[1]=dqv.getNumberOfCustomer();
+		b[1]=dqv.getNumberOfPartner();
+		c[1]=dqv.getNumberOfCompetitor();
+		d[1]=dqv.getNumberOfLeads();
+		finalString.add(a);
+    	finalString.add(b);
+    	finalString.add(c);
+    	finalString.add(d);
+		return finalString;
+	}
 }

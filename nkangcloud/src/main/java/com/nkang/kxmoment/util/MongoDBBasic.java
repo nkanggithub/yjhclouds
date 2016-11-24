@@ -757,8 +757,8 @@ public class MongoDBBasic {
 			int cnt_lead = 0;
 			BasicDBObject query_leads = new BasicDBObject();
 			query_leads.put("onlyPresaleCustomer", "false");
-			query_partner.put("includePartnerOrgIndicator", "false");
-			query_competitor.put("isCompetitor", "false");
+			query_leads.put("includePartnerOrgIndicator", "false");
+			query_leads.put("isCompetitor", "false");
 			if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
 				query_leads.put("state", stateProvince);
 			}
@@ -1335,5 +1335,69 @@ public class MongoDBBasic {
 			}
 			return Ret;
 	    }
+	    
+	    /*
+		 * author  chang-zheng
+		 */
+		public static  List<MdmDataQualityView> getDataQualityReportOSfCountry(String Country){
+			List< MdmDataQualityView> listDdm = new ArrayList< MdmDataQualityView>();
+			mongoDB = getMongoDB();
+			MdmDataQualityView tmpmqv = new MdmDataQualityView();
+			int cnt_competitor = 0;
+			int cnt_partner = 0;
+			int cnt_customer = 0;
+			int cnt_lead = 0;
+			try{
+				
+				BasicDBObject query_competitor = new BasicDBObject();
+				query_competitor.put("isCompetitor", "true");
+				BasicDBObject query_partner = new BasicDBObject();
+				query_partner.put("includePartnerOrgIndicator", "true");
+				BasicDBObject query_customer = new BasicDBObject();
+				query_customer.put("onlyPresaleCustomer", "true");
+				BasicDBObject query_leads = new BasicDBObject();
+				query_leads.put("onlyPresaleCustomer", "false");
+				query_leads.put("includePartnerOrgIndicator", "false");
+				query_leads.put("isCompetitor", "false");
+				
+				if(!StringUtils.isEmpty(Country)){
+					query_competitor.put("countryCode", Country);
+					query_partner.put("countryCode", Country);
+					query_customer.put("countryCode", Country);
+					query_leads.put("countryCode", Country);
+					
+					// competitor
+					
+					cnt_competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor).count();
+					
+					// partner
+					
+					cnt_partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner).count();
+					
+					// customer
+					
+					cnt_customer = mongoDB.getCollection(collectionMasterDataName).find(query_customer).count();
+					
+					// potential leads
+					
+					cnt_lead = mongoDB.getCollection(collectionMasterDataName).find(query_leads).count();
+				}
+				
+				tmpmqv.setNumberOfCompetitor(cnt_competitor);
+				tmpmqv.setNumberOfPartner(cnt_partner);
+				tmpmqv.setNumberOfCustomer(cnt_customer);
+				tmpmqv.setNumberOfLeads(cnt_lead);
+				tmpmqv.setNumberOfOppt(cnt_lead);
+				
+				listDdm.add(tmpmqv);
+			}
+			catch(Exception e){
+				log.info("getDataQualityReport--" + e.getMessage());
+			}
+			
+		
+			return listDdm;
+		}
+		
 	    // END
 }
