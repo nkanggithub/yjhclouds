@@ -292,10 +292,10 @@ public class MongoDBBasic {
             	String faddr = RestUtils.getUserCurLocWithLatLng(Lat, Lng);
                 BasicDBObject doc = new BasicDBObject();  
     	    	DBObject update = new BasicDBObject();
-    	    	update.put("OpenID", wcu.getOpenid());
-    	    	update.put("HeadUrl", wcu.getHeadimgurl());
-    	    	update.put("NickName", wcu.getNickname());
-    	    	update.put("Created", DateUtil.timestamp2Str(cursqlTS));
+//    	    	update.put("OpenID", wcu.getOpenid());
+//    	    	update.put("HeadUrl", wcu.getHeadimgurl());
+//    	    	update.put("NickName", wcu.getNickname());
+//    	    	update.put("Created", DateUtil.timestamp2Str(cursqlTS));
     	    	update.put("FormatAddress", faddr);
     	    	update.put("CurLAT", Lat);
     	    	update.put("CurLNG", Lng);
