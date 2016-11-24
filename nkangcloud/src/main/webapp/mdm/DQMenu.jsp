@@ -18,10 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="nkang/c3.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//sweetalert.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/pageLoad.css"/>
-	
-	<script type="text/javascript" src="Jsp/JS/loader.js"></script>
-<script type="text/javascript" src="Jsp/JS/jsapi.js"></script>
-	
+
 	
 <!-- 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/bootstrap.css"/> -->
 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/common.css"/>
@@ -49,23 +46,7 @@
 	    }).ajaxStop(function () {
 	    	$(".sk-circle").hide();
 	    });
-	    google.charts.load('upcoming', {'packages':['geochart']});
-        google.charts.setOnLoadCallback(drawRegionsMap);
-        function drawRegionsMap() {
-          var data = google.visualization.arrayToDataTable([
-            ['Country', 'Popularity'],
-            ['Germany', 200],
-            ['United States', 300],
-            ['Brazil', 400],
-            ['Canada', 500],
-            ['France', 600],
-            ['RU', 700],
-            ['China',700]
-          ]);
-          var options = {};
-          var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-          chart.draw(data, options);
-        }
+	  
 	$(document).ready(function() {
 		$('.metrotabs').metrotabs({
 				outeffect : 'swing',
@@ -144,7 +125,7 @@
 		} 
 
 				   loadChart2();
-				   $(".tick text tspan").attr("onclick","hello(this)");
+				   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
 					
 
 			
@@ -1017,8 +998,23 @@
 
 <!-- Start MetroTab Content 拿铁-->
 <div data-mtid="tileboxjs">
-	 <div id="regions_div" style="width: 360px; height: 300px;position:relative;top:30px;"></div>
-	
+	 <div>
+			<p>
+				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }"
+					target="_blank" class="resimg"><img class="imagesize"
+					src="MetroStyleFiles//image/datalakedashboard.jpg"
+					alt="TileBox jQuery"></a>
+			</p>
+			<p>
+				If you think of a datamart as a store of bottled water – cleansed
+				and packaged and structured for easy consumption – the data lake is
+				a large body of water in a more natural state. The contents of the
+				data lake stream in from a source to fill the lake, and various
+				users of the lake can come to examine, dive in, or take samples <br />
+				--Pentaho CTO James Dixon
+			</p>
+
+		</div>
 </div>
 <!-- End MetroTab Content 拿铁-->
 </div>
