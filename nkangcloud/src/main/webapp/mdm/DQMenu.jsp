@@ -144,6 +144,8 @@
 		} 
 
 				   loadChart2();
+				   $(".tick text tspan").attr("onclick","hello(this)");
+					
 
 			
 			 
@@ -242,7 +244,7 @@
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "getOpenfooter?userState="+$("#userState").html(),
+				url : "getOpenfooterByCountry?country=CN",
 				success : function(data) {
 					  if (data) {
 						  var chart = c3.generate({
@@ -304,6 +306,11 @@
 			});
 	}
 	var country="CN";
+	
+	function hello(obj)
+	{
+		console.log($(obj).text());
+	}
 	function countrySelect(obj){
 		var cnName=$("#countrySelect option:selected").val();
 		if(cnName=="中国")
@@ -413,6 +420,7 @@
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
+			 
 
 	     }
 		function show_american_div()
@@ -1009,8 +1017,7 @@
 
 <!-- Start MetroTab Content 拿铁-->
 <div data-mtid="tileboxjs">
-	
-                                         <div id="regions_div" style="width: 360px; height: 300px;position:relative;top:30px;"></div>
+	 <div id="regions_div" style="width: 360px; height: 300px;position:relative;top:30px;"></div>
 	
 </div>
 <!-- End MetroTab Content 拿铁-->
