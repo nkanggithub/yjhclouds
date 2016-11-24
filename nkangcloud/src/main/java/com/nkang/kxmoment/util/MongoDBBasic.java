@@ -1410,20 +1410,28 @@ public class MongoDBBasic {
 				
 				BasicDBObject query = new BasicDBObject();
 				if(!StringUtils.isEmpty(state)){
-					query.put("state", state);
+					Pattern patternst = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
+					query.put("state", patternst);
+					//query.put("state", state);
 				}
 				if (!StringUtils.isEmpty(City)) {
 					if(StringUtils.isLatinString(City)){
-						query.put("latinCity", City);
+						Pattern patternst = Pattern.compile("^.*" + City + ".*$", Pattern.CASE_INSENSITIVE);
+						query.put("latinCity", patternst);
+						//query.put("latinCity", City);
 					}
 					else{
-						query.put("nonlatinCity", City);
+						Pattern patternst = Pattern.compile("^.*" + City + ".*$", Pattern.CASE_INSENSITIVE);
+						query.put("nonlatinCity", patternst);
+						//query.put("nonlatinCity", City);
 						
 					}
 				}
 				
 				if(!StringUtils.isEmpty(cityRegion)){
-					query.put("cityRegion", cityRegion);
+					Pattern patternst = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
+					query.put("cityRegion", patternst);
+					//query.put("cityRegion", cityRegion);
 				}
 				
 				DBCursor dbOpsi = mongoDB.getCollection(collectionMasterDataName).find(query);
