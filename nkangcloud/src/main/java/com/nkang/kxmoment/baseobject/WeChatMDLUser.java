@@ -2,14 +2,7 @@ package com.nkang.kxmoment.baseobject;
 
 public class WeChatMDLUser extends WeChatUser {
 
-	public String name;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String suppovisor;
+	public String realName;
 	public String registerDate;
 	public String role;
 	public String selfIntro;
@@ -17,11 +10,11 @@ public class WeChatMDLUser extends WeChatUser {
 	public String phone;
 	public String point;
 	public String like;
-	public String getSuppovisor() {
-		return suppovisor;
+	public String getRealName() {
+		return realName;
 	}
-	public void setSuppovisor(String suppovisor) {
-		this.suppovisor = suppovisor;
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 	public String getRegisterDate() {
 		return registerDate;
