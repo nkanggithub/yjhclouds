@@ -1,43 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<%-- <%@ page import="java.util.*" %>
-<%@ page import="com.nkang.kxmoment.baseobject.MdmDataQualityView" %>
-<%@ page import="com.nkang.kxmoment.baseobject.GeoLocation" %>
-<%@ page import="com.nkang.kxmoment.baseobject.ClientInformation" %>    
-<%@ page import="com.nkang.kxmoment.util.RestUtils"%>
-<%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
-<%@ page import="com.nkang.kxmoment.util.Constants"%>
-<%@ page import="java.net.URLEncoder"%>
-
-<%	
-String AccessKey =RestUtils.callGetValidAccessKey();
-String uid = request.getParameter("UID");
-WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-List<String > addressInfo = RestUtils.getUserCurLocWithLatLngV2(wcu.getLat(),wcu.getLng());
-String userCity="上海市";
-String userState="上海市";
-if(addressInfo != null && addressInfo.size()>0){
-	if(!addressInfo.get(0).trim().isEmpty() && addressInfo.get(0)!= null){
-		userState = addressInfo.get(0);
-	}
-	if(!addressInfo.get(1).trim().isEmpty() && addressInfo.get(1)!= null){
-		userCity = addressInfo.get(1);
-	}
-}
-userCity="上海市";
-userState="上海市";
-List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo(userState);
-String userName = "Visitor";
-if(wcu.getNickname() != null && wcu.getNickname() != ""){
-	userName = wcu.getNickname();
-}
-String userImage = "MetroStyleFiles//gallery.jpg";
-if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
-	userImage = wcu.getHeadimgurl();
-}
-
-%> --%>
 <html class=" js csstransitions">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,6 +18,10 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<link rel="stylesheet" type="text/css" href="nkang/c3.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//sweetalert.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/pageLoad.css"/>
+	
+	<script type="text/javascript" src="Jsp/JS/loader.js"></script>
+<script type="text/javascript" src="Jsp/JS/jsapi.js"></script>
+	
 	
 <!-- 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/bootstrap.css"/> -->
 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/common.css"/>
@@ -76,13 +43,29 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 	<script type="text/javascript" src="nkang/c3.min.js"></script>
 	
 	<script type="text/javascript" src="Jsp/JS/bootstrap.min.js"></script>
-
 	<script type="text/javascript">
 	 $(document).ajaxStart(function () {
 		$(".sk-circle").show();
 	    }).ajaxStop(function () {
 	    	$(".sk-circle").hide();
 	    });
+	    google.charts.load('upcoming', {'packages':['geochart']});
+        google.charts.setOnLoadCallback(drawRegionsMap);
+        function drawRegionsMap() {
+          var data = google.visualization.arrayToDataTable([
+            ['Country', 'Popularity'],
+            ['Germany', 200],
+            ['United States', 300],
+            ['Brazil', 400],
+            ['Canada', 500],
+            ['France', 600],
+            ['RU', 700],
+            ['China',700]
+          ]);
+          var options = {};
+          var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+          chart.draw(data, options);
+        }
 	$(document).ready(function() {
 		$('.metrotabs').metrotabs({
 				outeffect : 'swing',
@@ -794,30 +777,7 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 <!-- START CONTENT -->
         <div id="openMeDiv" class="mt-contentblock  floatleft" style="padding: 5px; height: 100%; width:100%; display: block;">
 	        <div class="mt-content jspScrollable" style="height: 100%; top: 0px; overflow: hidden; padding: 0px; width: 100%;" tabindex="0">
-				<div class="jspContainer" style="width: 100%; height: 100%;">
-					<div class="jspPane" style="padding: 0px; top: 0px; width: 100%;">
-						<div>
-							<h3><a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="dark-text">Master Data Lake</a></h3>
-							<p>
-								<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }" target="_blank" class="resimg"><img class="imagesize" src="MetroStyleFiles//image/datalakedashboard.jpg" alt="TileBox jQuery"></a>
-							</p>
-							<p>
-								 If you think of a datamart as a store of bottled water – cleansed and packaged and structured for easy consumption – the data lake is a large body of water in a more natural state. The contents of the data lake stream in from a source to fill the lake, and various users of the lake can come to examine, dive in, or take samples
-						  		 <br /> --Pentaho CTO James Dixon
-						  	</p>    
-						</div>
-					</div>
-					<div class="jspVerticalBar">
-						<div class="jspCap jspCapTop"></div>
-						<div class="jspTrack" style="height: 100%;">
-							<div class="jspDrag" style="height: 100%;">
-								<div class="jspDragTop"></div>
-								<div class="jspDragBottom"></div>
-							</div>
-						</div>
-						<div class="jspCap jspCapBottom"></div>
-					</div>
-					</div>
+	
 			</div>
 		</div>
 <!-- END CONTENT -->
@@ -1049,23 +1009,9 @@ if(wcu.getHeadimgurl() !=null && wcu.getHeadimgurl() != ""){
 
 <!-- Start MetroTab Content 拿铁-->
 <div data-mtid="tileboxjs">
-	<div>
-			<p>
-				<a href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=${ uid }"
-					target="_blank" class="resimg"><img class="imagesize"
-					src="MetroStyleFiles//image/datalakedashboard.jpg"
-					alt="TileBox jQuery"></a>
-			</p>
-			<p>
-				If you think of a datamart as a store of bottled water – cleansed
-				and packaged and structured for easy consumption – the data lake is
-				a large body of water in a more natural state. The contents of the
-				data lake stream in from a source to fill the lake, and various
-				users of the lake can come to examine, dive in, or take samples <br />
-				--Pentaho CTO James Dixon
-			</p>
-
-		</div>
+	
+                                         <div id="regions_div" style="width: 360px; height: 300px;position:relative;top:30px;"></div>
+	
 </div>
 <!-- End MetroTab Content 拿铁-->
 </div>
