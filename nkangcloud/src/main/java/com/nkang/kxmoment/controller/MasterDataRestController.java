@@ -573,13 +573,14 @@ public class MasterDataRestController {
 	
 	/*
 	 * author  chang-zheng
+	 * get opsi by country
 	 */
 	@RequestMapping("/getCountrycount")
-	public @ResponseBody List<Object[]> getCountrycount(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String country)
+	public @ResponseBody List<Object[]> getDataQualityDetailReport(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "country") String country
+			)
 	{
 		List<MdmDataQualityView> listOfCountry = MongoDBBasic.getDataQualityReportOSfCountry(country);
 		List<Object[]> finalString=new ArrayList<Object[]>();
-		
 		Object[] a = new Object[2];
 		a[0]="Customer";
 		Object[] b = new Object[2];
@@ -599,5 +600,19 @@ public class MasterDataRestController {
     	finalString.add(c);
     	finalString.add(d);
 		return finalString;
+	}
+	
+	/*
+	 * chang-zheng
+	 *  get opsi by city
+	 */
+	@RequestMapping("/getCitydatial")
+	public @ResponseBody List<OrgOtherPartySiteInstance> getCountrycount(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "userstate") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion") String cityRegion)
+	{
+		List<OrgOtherPartySiteInstance> opsilistOfCountry = MongoDBBasic.getDataQualityReportOSfCity(state,City,cityRegion);
+		
+		return opsilistOfCountry;
+		
 	}
 }

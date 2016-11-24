@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
-
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -1340,7 +1339,7 @@ public class MongoDBBasic {
 		 * author  chang-zheng
 		 */
 		public static  List<MdmDataQualityView> getDataQualityReportOSfCountry(String Country){
-			List< MdmDataQualityView> listDdm = new ArrayList< MdmDataQualityView>();
+			List<MdmDataQualityView> listDdm = new ArrayList< MdmDataQualityView>();
 			mongoDB = getMongoDB();
 			MdmDataQualityView tmpmqv = new MdmDataQualityView();
 			int cnt_competitor = 0;
@@ -1398,6 +1397,52 @@ public class MongoDBBasic {
 		
 			return listDdm;
 		}
+		/*
+		 * chang-zheng
+		 *  get opsi
+		 */
 		
+		public static  List<OrgOtherPartySiteInstance> getDataQualityReportOSfCity(String state, String City, String cityRegion){
+			List<OrgOtherPartySiteInstance> listDdm = new ArrayList< OrgOtherPartySiteInstance>();
+			
+			mongoDB = getMongoDB();
+			try{
+				
+				BasicDBObject query = new BasicDBObject();
+				if(!StringUtils.isEmpty(state)){
+					query.put("state", state);
+				}
+				if (!StringUtils.isEmpty(City)) {
+					if(StringUtils.isLatinString(City)){
+						query.put("latinCity", City);
+					}
+					else{
+						query.put("nonlatinCity", City);
+						
+					}
+				}
+				
+				if(!StringUtils.isEmpty(cityRegion)){
+					query.put("cityRegion", cityRegion);
+				}
+				
+				DBCursor dbOpsi = mongoDB.getCollection(collectionMasterDataName).find(query);
+				while(dbOpsi.hasNext()){
+					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+					DBObject objOpsi = dbOpsi.next();
+					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					listDdm.add(opsi);
+				}
+			}
+			catch(Exception e){
+				log.info("getDataQualityReport--" + e.getMessage());
+			}
+			
+			return listDdm;
+		}
 	    // END
 }
