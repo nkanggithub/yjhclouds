@@ -668,11 +668,10 @@ function showRegister(){
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" style="font-size: 18px;"> Welcome <span
-							class="username colorBlue" id="username"> <%=wcu.getNickname() == null ? "user" : wcu.getNickname()%>
+							class="username colorBlue" id="username"> <%=wcu.getNickname() %>
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
-								src="<%=wcu.getHeadimgurl() == null ? "../MetroStyleFiles/gallery.jpg"
-					: wcu.getHeadimgurl()%>"
+								src="<%=wcu.getHeadimgurl() %>"
 								alt="userImage" class="userImage" alt="no_username"
 								onclick="register()" />
 						</a></span></li>
