@@ -290,6 +290,7 @@ public class MongoDBBasic {
             	}
 
             	String faddr = RestUtils.getUserCurLocWithLatLng(Lat, Lng);
+                BasicDBObject doc = new BasicDBObject();  
     	    	DBObject update = new BasicDBObject();
     	    	update.put("OpenID", wcu.getOpenid());
     	    	update.put("HeadUrl", wcu.getHeadimgurl());
@@ -306,7 +307,8 @@ public class MongoDBBasic {
     	    	innerInsert.put("FAddr", faddr);
     	    	arrayHistdbo.add(innerInsert);
     	    	update.put("VisitHistory", arrayHistdbo);
-    			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), update);
+    	    	doc.put("$set", update);  
+    			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
             }
             ret = true;
 	    }
