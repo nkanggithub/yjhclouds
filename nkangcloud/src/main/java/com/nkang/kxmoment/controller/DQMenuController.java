@@ -231,7 +231,7 @@ public class DQMenuController {
 	            {
 	                for (int j = i; j < radars.length; j++)
 	                {
-	                    if (radars[i].count > radars[j].count)
+	                    if (radars[i].count < radars[j].count)
 	                    {
 	                    	Radar temprada = radars[i];
 	                    	radars[i] = radars[j];
