@@ -548,7 +548,12 @@ p {
 }
 #chart3{
 	position:relative;
-	top:-120px;
+	top:-90px;
+	left:-5px;
+}
+#chartCity{
+	position:relative;
+	top:-90px;
 	left:-5px;
 }
 #chart3Radar{
