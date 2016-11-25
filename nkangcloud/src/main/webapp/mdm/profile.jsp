@@ -319,7 +319,6 @@ a:hover,a:link {
 }
 
 .imgclass{
-	background-color: #eeeeee;
 	margin:10px;
 	height:20px;
 	cursor:pointer;
@@ -772,30 +771,29 @@ function register() {
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 											<div id="userInfoDiv">
-											<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
 											<div>
 												<form id="registerFormSubmit" autocomplete="on">
 												    <table id="tableForm">
 												    <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
 												        <td class="tdInput">
 												          <input type="text" placeholder="请输入真实姓名" id="realname" value="${user.realName }" pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
 												        <td class="tdInput">
 												          <input type="text" placeholder="请输入电话号码" id="phone" value="${user.phone }" pattern="^1[34578]\d{9}$" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
 												        <td>
 												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" value="${user.email }" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
 												        <td>
 												          <select id="roleSelect">
 															<option selected='selected'>Contributor</option> 
@@ -806,7 +804,7 @@ function register() {
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/group2.png'/></td>
 												        <td>
 												         <select id='groupSelect'>
 															<option selected='selected'>Garden</option>
@@ -818,13 +816,13 @@ function register() {
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/selfIntro2.png'/></td>
 												        <td>
 												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" value="${user.selfIntro }" required/>
 												        </td>
 												      </tr>
 												 </table>
-											    <button class="btnAthena EbtnLess" id="registerBtn">Register</button>
+											    <button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
 											</form> 
 											</div>
 										</div>
