@@ -58,7 +58,6 @@
 <script src="../nkang/assets_athena/data-tables/jquery.dataTables.js"></script>
 <script src="../nkang/assets_athena/data-tables/DT_bootstrap.js"></script>
 <script src="../nkang/js_athena/common-scripts.js"></script>
-<script type="text/javascript" src="../Jsp/JS/regist.js"></script>
 <script type="text/javascript"
 	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -254,37 +253,7 @@ a:hover,a:link {
 .ui-selectmenu-status {
 	line-height: 1.0em;
 }
-.imgclass{
-	margin:10px;
-	height:20px;
-	cursor:pointer;
-}
 
-#tableForm tr td input{
-	height:30px;
-	line-height:20px;
-	display:block;
-}
-#tableForm tr td{
-	font-size:14px;
-	padding:0px;
-	height:30px;
-}
-#tableForm tr{
-	padding:0px;
-}
-#tableForm tr td.tdText{
-	text-algin:right;
-}
-
-input::-webkit-input-placeholder { 
-color: #999; 
--webkit-transition: color.5s; 
-} 
-input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
-color: #c2c2c2; 
--webkit-transition: color.5s; 
-} 
 
 #UserInfo {
             background: url(../MetroStyleFiles/image/bg_NULL.png);
@@ -326,6 +295,45 @@ color: #c2c2c2;
 #userInfoDiv #info_phone img{
 	height:20px;
 }
+
+
+#registerform {
+            background: url(../MetroStyleFiles/image/bg_NULL.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+}
+#registerform table{
+	magain:auto;
+	color:#ffffff;
+	font-size:20px;
+}
+#registerform Div{
+	color:#ffffff;
+	text-align:center;
+	width:100%;
+} 
+
+#tableForm {
+	 margin: auto;
+}
+
+.imgclass{
+	background-color: #eeeeee;
+	margin:10px;
+	height:20px;
+	cursor:pointer;
+	
+}
+
+input::-webkit-input-placeholder { 
+color: #999; 
+-webkit-transition: color.5s; 
+} 
+input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
+color: #c2c2c2; 
+-webkit-transition: color.5s; 
+} 
 </style>
 <script>
 	var $j = jQuery.noConflict();
@@ -370,59 +378,15 @@ function register() {
 		}
 	});
 	}
-function showRegister(){
-	$j('#UserInfo').modal('hide');
-	var text = "<div class='tab-pane' id='Register'>";
-	text += "<form id='registForm'>";
-	text += "<table id='tableForm'>";
-	text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/username.png'/></td><td class='tdInput'>";
-	text += "<input class='inputClass' type='text' placeholder='请输入真实姓名' name='name' id='name'/>";
-	text += "</td></tr>";
-	text += "<tr class='table-tr1'><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td><td class='tdInput'>";
-	text += "<input class='inputClass' type='text' placeholder='请输入电话号码' name='telephone' id='telephone'/>";
-	text += "</td></tr>";
-	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/email.png'/></td><td>";
-	text += "<input  type='text' name='email' placeholder='请输入邮箱地址' id='email' value='${form.email }'/>";
-	text += "</td></tr>";
-	/* text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/suppovisor.png'/></td><td class='tdInput'>";
-	text += "<input class='inputClass' type='text'placeholder='请输入您的管理者' name='suppovisor' id='suppovisor' value='${form.suppovisor }'/>";
-	text += "</td></tr>"; */
-	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>";
-	text += "<td>";
-	text += "<select id='roleSelect'>  ";
-	text += "<option selected='selected'>Contributor</option> ";
-	text += "<option>Team Lead</option>";
-	text += "<option>PM</option> ";
-	text += "<option>Other</option>";
-	text += "</select> </td></tr>";
-	text += "<tr><td class='tdSelect'><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>";
-	text += "<td>";
-	text += "<select id='groupSelect'>";
-	text += "<option selected='selected'>Garden</option> ";
-	text += "<option>Achi</option>";
-	text += "<option>NKang</option> ";
-	text += "<option>Channing</option>";
-	text += "<option>Other</option>";
-	text += "</select> </td></tr>";
-	text += "<tr><td class='tdText'><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>";
-	text += "<td class='tdInput'>";
-	text += "<input class='inputClass' type='text' placeholder='请输入个人简介' name='selfIntro' id='selfIntro'/>";
-	text += "</td></tr>";
-	text += "</table></form></div>";
-	swal(
-		{   
-			title: "在一起吧",   
-			text: text, 
-			showCancelButton: true, 
-			html:true,
-			closeOnConfirm: false,   
-			animation: "slide-from-top"
-		},
-		function(inputValue){
-			if (inputValue === false) return false;     
+	
+	function showRegister(){
+		$j('#UserInfo').modal('hide');
+		$j('#registerform').modal('show');
+		$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
+		$j("#registerFormSubmit").submit(function(){
 			var uid = $j("#uid").val();
-			var name = $j("#name").val();
-			var phone = $j("#telephone").val();
+			var name = $j("#realname").val();
+			var phone = $j("#phone").val();
 			var email = $j("#email").val();
 			//var suppovisor = $j("#suppovisor").val();
 			var role = $j("#roleSelect option:selected").val();
@@ -436,6 +400,7 @@ function showRegister(){
 				dataType:"json",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				cache:false,
+				async:false,
 				success:function(result) {
 					if(result){
 						swal("Registered successfully!", "Congratulations!", "success"); 
@@ -445,7 +410,8 @@ function showRegister(){
 				}
 			});
 		});
-}
+		
+	}
 	function getUserInfo(username, headimgurl, openId) {
 				$j("#info_imgurl").attr("src",headimgurl);
 				$j("#info_username span").html(username);
@@ -784,18 +750,87 @@ function showRegister(){
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-<div id="userInfoDiv">
-<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
-<div id="info_username"><span></span></div>
-<div id="info_role">-<span></span>-</div>
-<div id="info_phone"></div>
-
-<div id="info_selfIntro"></div>
+											<div id="userInfoDiv">
+											<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
+											<div id="info_username"><span></span></div>
+											<div id="info_role">-<span></span>-</div>
+											<div id="info_phone"></div>
+											<div id="info_selfIntro"></div>
 
 
 </div>
 									</div>
 								</div>
+								
+								
+								<div id="registerform" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px;">
+										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+											<div id="userInfoDiv">
+											<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
+											<div>
+												<form id="registerFormSubmit" autocomplete="on">
+												    <table id="tableForm">
+												    <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入真实姓名" id="realname" value="${user.realName }" pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入电话号码" id="phone" value="${user.phone }" pattern="^1[34578]\d{9}$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email.png'/></td>
+												        <td>
+												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" value="${user.email }" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role.png'/></td>
+												        <td>
+												          <select id="roleSelect">
+															<option selected='selected'>Contributor</option> 
+															<option>Team Lead</option>
+															<option>PM</option> 
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/group.png'/></td>
+												        <td>
+												         <select id='groupSelect'>
+															<option selected='selected'>Garden</option>
+															<option>Achi</option>
+															<option>NKang</option>
+															<option>Channing</option>
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/selfIntro.png'/></td>
+												        <td>
+												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" value="${user.selfIntro }" required/>
+												        </td>
+												      </tr>
+												 </table>
+											    <button class="btnAthena EbtnLess" id="registerBtn">Register</button>
+											</form> 
+											</div>
+										</div>
+									</div>
+								</div>
+								
 								<div class="tab-pane" id="WorkMates">
 									<ul class="Work_Mates_div" id="Work_Mates_ul">
 									</ul>
@@ -839,7 +874,7 @@ function showRegister(){
 		<div class="modal-footer">
 			<button class="btnAthena EbtnLess" data-dismiss="modal"
 				aria-hidden="true">Cancel</button>
-			<button class="btnAthena EbtnLess" id="myConfirmSubmit">Submit</button>
+			<button class="btnAthena EbtnLess" id="registerBtn">Submit</button>
 		</div>
 	</div>
 	<!-- Modal PAGE End-->
