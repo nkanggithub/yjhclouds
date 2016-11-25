@@ -58,7 +58,36 @@
 				minibartitle: 'Master Data Lake Quality Grade',
 				mtEffect : 'vertical' // vertical | horizontal | fade
 			});
-		
+		  $("#testa").click(function(){ 
+			  if($(this).css("opacity")==1){ 
+				  $(this).css("opacity",0.3);
+				  $("#chart3").css("display","none");
+				  $("#testb").css("opacity",1);
+				  $("#chartCity").css("display","block");
+				}else{ 
+					 $(this).css("opacity",1);
+					  $("#testb").css("opacity",0.3);
+					  $("#chart3").css("top","-90px");
+					  $("#chart3").css("display","block");
+					  $("#chartCity").css("display","none");
+				} 
+			
+				}); 
+		  $("#testb").click(function(){ 
+			  if($(this).css("opacity")==1){ 
+				  $(this).css("opacity",0.3);
+				  $("#chart3").css("top","-90px");
+				  $("#chart3").css("display","block");
+				  $("#testa").css("opacity",1);
+				  $("#chartCity").css("display","none");
+				}else{ 
+					 $(this).css("opacity",1);
+					  $("#testa").css("opacity",0.3);
+					  $("#chart3").css("display","none");
+					  $("#chartCity").css("display","block");
+				} 
+			
+				}); 
 		$("#openmes").on("click",function(){
 			
 			$.ajax({
@@ -220,7 +249,9 @@
 		});
 		
 		$("#openfooter").on("click",function(){
+			
 			var chart3HTML=$("#chart3").html();
+			var chartCityHTML=$("#chartCity").html();
 			  if(chart3HTML==""){
 			$.ajax({
 				type : "POST",
@@ -259,6 +290,43 @@
 		});
 		} 
 			  
+			  if(chartCityHTML==""){
+					$.ajax({
+						type : "POST",
+						dataType : "json",
+						url : "getOpenfooter?userState="+$("#userState").html(),
+						success : function(data) {
+							  if (data) {
+								  var chart = c3.generate({
+										data : {
+											columns : [
+												          data[0],
+												          data[1],
+												         data[2],
+												         data[3]
+										    		  ],
+											type : 'pie'
+										},
+										pie : {
+											label : {
+												format : function(value, ratio, id) {
+													return d3.format('#')(value);
+												}
+											}
+										},
+										bindto : '#chartCity'
+									});
+								 
+									
+							  }
+						},
+						error:function(data)
+						{
+							console.log("failed..."+data.toString());
+						}
+					
+				});
+				} 
 				   loadChart();
 			   
 			  
@@ -375,8 +443,11 @@
 		});
 		
 		function loadChart(){
-
+		
 			 $("#chart3").show();
+			 $("#chartCity").show();
+			
+			 $("#cityRound").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
 			 $("#chart4").hide();
@@ -387,7 +458,10 @@
 		}
 		
 		function hideAll(obj){
+			
 			 $("#chart3").hide();
+			 $("#chartCity").hide();	
+			 $("#cityRound").hide();
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
@@ -395,6 +469,8 @@
 		}
 		function loadChart2(){
 	 		$("#chart2").show();
+	 		$("#chartCity").hide();	
+			 $("#cityRound").hide();
 /* 	 		$("#openfooter_loadC2").append(chartobj); */
 			//$("#openfooter_loadC2").html(chartobj);
 			 $("#chart3").hide();
@@ -419,6 +495,8 @@
 			$("#americano_loadChart").append(detailobj);
 			
 			$("#chart3").hide();
+			$("#chartCity").hide();	
+			 $("#cityRound").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart2").hide();
@@ -430,6 +508,8 @@
 			var chartobj = $("#chart4");
 			$("#conporlan_loadChart").html(chartobj);
 			$("#chart3").hide();
+			$("#chartCity").hide();	
+			 $("#cityRound").hide();
 			 $("#chart2").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
@@ -439,12 +519,16 @@
 		{
 			$("#openMeDiv").show();
 			$("#chart3").hide();
+			$("#chartCity").hide();	
+			 $("#cityRound").hide();
 			 $("#chart2").hide();
 		}
 		function loadChart5(obj){
 			var chartobj = $("#chart5");
 //			$("#capuqino_loadChart").html(chartobj);
 			$("#chart3").hide();
+			$("#chartCity").hide();	
+			 $("#cityRound").hide();
 			 $("#chart4").hide();
 			 $("#chart2").hide();
 			 $("#chart3Radar").hide();
@@ -497,7 +581,14 @@
 		}
 	</script>
 	  <style type="text/css">
-
+.showup{
+opacity:1;
+visibility:visible;}
+.showdown
+{
+opacity:0.3;
+visibility:visible;
+}
 .sk-circle {
   margin: 40px auto;
   width: 40px;
@@ -797,7 +888,7 @@
 	</div>
 	
 	<div id="chart5">
-	<svg class="chart"></svg>
+<!-- 	<svg class="chart"></svg>
 	
 	<script>
 		var data = {
@@ -926,7 +1017,7 @@
 		    .text(function (d) { return d.label; });
 		
 		$("#chart5").hide();
-		</script>
+		</script> -->
 	</div>
  <!-- -------------------------------------------------------------------------------------------------------------- -->
  <!-- -------------------------------------------------------------------------------------------------------------- -->
@@ -1098,10 +1189,16 @@
 			$("#chart6").hide();
 		</script>
 </div> -->
-<!-- END MESSAGE STATION -->
 
+<!-- END MESSAGE STATION -->
+<div id="chartCity" style="display:none"></div>
 	<div id="chart3" style="display:none"></div>
+	
 	<div id="chart2" style="display:none"></div>
+	    <div id="cityRound" style="position:absolute;width:200px;height:40px;top:320px;left:30%;display:none;">
+<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#71587E;margin-top:3px;"></p><p style="float:left;font-size:15px;line-height:0px;padding-left:3px;">Country<p></div>
+<div id="testb" style=" opacity:0.3;cursor: pointer;position: absolute;top: 0px;left:110px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p style="float:left;font-size:15px;line-height:0px;padding-left:3px;">City<p></div>
+</div>
 <div class="panel-footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
   <div class="sk-circle">
       <div class="sk-circle1 sk-child"></div>
@@ -1117,4 +1214,5 @@
       <div class="sk-circle11 sk-child"></div>
       <div class="sk-circle12 sk-child"></div>
     </div>
+
 </body></html>
