@@ -283,12 +283,21 @@
 		$("#openfooter").on("click",function(){
 			
 			var chart3HTML=$("#chart3").html();
-
+				var cnName=$("#countrys").text();
+				var country="";
+		if(cnName=="中国")
+			{
+			country="CN";
+			};
+			if(cnName=="马来西亚")
+			{
+			country="MY";		
+			};
 			  if(chart3HTML==""){
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "getOpenfooterByCountry?country=CN",
+				url : "getOpenfooterByCountry?country="+country,
 				success : function(data) {
 					  if (data) {
 						  var chart = c3.generate({
@@ -410,11 +419,13 @@
 									if (inputValue === false){ return false; }
 									else{
 										var city=$("#citySelect option:selected").val();
-										
+										var countrys=$("#countrySelect option:selected").val();
 										$("#chart3").html("");
+										$("#chartCity").html("");
 										$("#chart2").html("");
 										$("#locationCity").text(city.toLocaleUpperCase());
 										$("#userState").text(city);
+										$("#countrys").text(countrys);
 										swal("Success", "your location saved", "success");
 									}							
 									 
@@ -726,6 +737,7 @@ visibility:visible;
 <div id="username" style="display:none">${ userInfo.nickname } </div>
 <%-- <div id="radarSize" style="display:none">${ radarSize } </div> --%>
 <div id="userState" style="display:none">${ userState } </div>
+<div id="countrys" style="display:none"> </div>
 <div id="uid" style="display:none">${ uid }</div>
 <div id="address" style="display:none">${ curLoc }</div>
 <div id="addressInfo" style="display:none">
