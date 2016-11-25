@@ -48,11 +48,6 @@ public class UserProfileController {
 	@ResponseBody  
 	public  String  getMDLUserLists(HttpServletRequest request, HttpServletResponse response){
 		String openid = request.getParameter("UID");
-		List<WeChatMDLUser> userList = MongoDBBasic.getWeChatUserFromMongoDB(openid);
-		if(userList.size()>0){
-			request.setAttribute("user",userList.get(0));
-			return RestUtils.getMDLUserLists(openid);
-		}
-		return null;
+		return RestUtils.getMDLUserLists(openid);
 	}
 }
