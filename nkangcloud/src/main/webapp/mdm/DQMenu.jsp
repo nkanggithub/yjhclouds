@@ -454,14 +454,20 @@
 		}
 		
 		function hideAll(obj){
-			
+			if($(".container").css("display")=="block")
+			{
+			 $(".container").css("display","none");
+			}
+		else
+			{
+			 $(".container").css("display","block");
+			}
 			 $("#chart3").hide();
 			 $("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
-			 $("#chart3Radar").hide();
 			 $(".map-preview").show();
 		}
 		function loadChart2(){
@@ -1202,7 +1208,7 @@ visibility:visible;
       <div class="sk-circle11 sk-child"></div>
       <div class="sk-circle12 sk-child"></div>
     </div>
-	<div class="map-preview">
+	<div class="map-preview" style="display:block">
   <div class="container">
     <div class="prev">
       <div id="mapwrapper">
@@ -1405,544 +1411,544 @@ visibility:visible;
 	var map_config = {
 		'default':{'borderColor':'#9CA8B6','mapShadow':'#fff','shadowOpacity':'35','hoverShadow':'#666666','lakesColor':'#66CCFF','namesColor':'#919191',},
 	'map_1':{
-		'hover': 'AFGHANISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'AFGHANISTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_2':{
-		'hover': 'ALBANIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ALBANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_3':{
-		'hover': 'ALGERIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ALGERIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_4':{
-		'hover': 'ANDORRA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ANDORRA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_5':{
-		'hover': 'ANGOLA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ANGOLA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_6':{
-		'hover': 'ARGENTINA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ARGENTINA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_7':{
-		'hover': 'ARMENIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ARMENIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_8':{
-		'hover': 'AUSTRALIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'AUSTRALIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_9':{
-		'hover': 'AUSTRIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'AUSTRIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_10':{
-		'hover': 'AZERBAIJAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'AZERBAIJAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_11':{
-		'hover': 'BAHAMAS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BAHAMAS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_12':{
-		'hover': 'BAHRAIN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BAHRAIN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_13':{
-		'hover': 'BANGLADESH','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BANGLADESH','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_14':{
-		'hover': 'BELARUS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BELARUS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_15':{
-		'hover': 'BELGIUM','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BELGIUM','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_16':{
-		'hover': 'BELIZE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BELIZE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_17':{
-		'hover': 'BENIN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BENIN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_18':{
-		'hover': 'BHUTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BHUTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_19':{
-		'hover': 'BOLIVIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BOLIVIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_20':{
-		'hover': 'BOSNIA AND HERZEGOVINA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BOSNIA AND HERZEGOVINA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_21':{
-		'hover': 'BOTSWANA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BOTSWANA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_22':{
-		'hover': 'BRAZIL','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BRAZIL','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_23':{
-		'hover': 'BRUNEI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BRUNEI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_24':{
-		'hover': 'BULGARIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BULGARIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_25':{
-		'hover': 'BURKINA FASO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BURKINA FASO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_26':{
-		'hover': 'BURUNDI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'BURUNDI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_27':{
-		'hover': 'CAMBODIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CAMBODIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_28':{
-		'hover': 'CAMEROON','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CAMEROON','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_29':{
-		'hover': 'CANADA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CANADA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_30':{
-		'hover': 'CENTRAL AFRICAN REPUBLIC','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CENTRAL AFRICAN REPUBLIC','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_31':{
-		'hover': 'CHAD','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHAD','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_32':{
-		'hover': 'CHILE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHILE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_33':{
-		'hover': 'CHINA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHINA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_34':{
-		'hover': 'COLOMBIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'COLOMBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_35':{
-		'hover': 'COMOROS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'COMOROS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_36':{
-		'hover': 'CONGO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CONGO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_37':{
-		'hover': 'COSTA RICA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'COSTA RICA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_38':{
-		'hover': 'CROATIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CROATIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_39':{
-		'hover': 'CUBA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CUBA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_40':{
-		'hover': 'CYPRUS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CYPRUS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_41':{
-		'hover': 'CZECH REPUBLIC','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CZECH REPUBLIC','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_42':{
-		'hover': 'CÔTE D&#39;IVOIRE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CÔTE D&#39;IVOIRE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_43':{
-		'hover': 'DEMOCRATIC REPUBLIC OF THE CONGO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'DEMOCRATIC REPUBLIC OF THE CONGO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_44':{
-		'hover': 'DENMARK','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'DENMARK','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_45':{
-		'hover': 'DJIBOUTI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'DJIBOUTI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_46':{
-		'hover': 'DOMINICAN REPUBLIC','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'DOMINICAN REPUBLIC','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_47':{
-		'hover': 'ECUADOR','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ECUADOR','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_48':{
-		'hover': 'EGYPT','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'EGYPT','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_49':{
-		'hover': 'EL SALVADOR','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'EL SALVADOR','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_50':{
-		'hover': 'EQUATORIAL GUINEA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'EQUATORIAL GUINEA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_51':{
-		'hover': 'ERITREA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ERITREA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_52':{
-		'hover': 'ESTONIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ESTONIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_53':{
-		'hover': 'ETHIOPIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ETHIOPIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_54':{
-		'hover': 'FIJI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'FIJI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_55':{
-		'hover': 'FINLAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'FINLAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_56':{
-		'hover': 'FRANCE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'FRANCE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_57':{
-		'hover': 'FRENCH GUIANA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'FRENCH GUIANA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_58':{
-		'hover': 'GABON','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GABON','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_59':{
-		'hover': 'GEORGIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GEORGIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_60':{
-		'hover': 'GERMANY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GERMANY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_61':{
-		'hover': 'GHANA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GHANA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_62':{
-		'hover': 'GREECE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GREECE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_63':{
-		'hover': 'GREENLAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GREENLAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_64':{
-		'hover': 'GUATEMALA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GUATEMALA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_65':{
-		'hover': 'GUINEA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GUINEA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_66':{
-		'hover': 'GUINEA-BISSAU','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GUINEA-BISSAU','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_67':{
-		'hover': 'GUYANA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'GUYANA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_68':{
-		'hover': 'HAITI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'HAITI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_69':{
-		'hover': 'HONDURAS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'HONDURAS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_70':{
-		'hover': 'HUNGARY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'HUNGARY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_71':{
-		'hover': 'ICELAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ICELAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_72':{
-		'hover': 'INDIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'INDIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_73':{
-		'hover': 'INDONESIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'INDONESIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_74':{
-		'hover': 'IRAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'IRAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_75':{
-		'hover': 'IRAQ','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'IRAQ','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_76':{
-		'hover': 'IRELAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'IRELAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_77':{
-		'hover': 'ISREAL','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ISREAL','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_78':{
-		'hover': 'ITALY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ITALY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_79':{
-		'hover': 'JAMAICA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'JAMAICA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_80':{
-		'hover': 'JAPAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'JAPAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_81':{
-		'hover': 'JORDAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'JORDAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_82':{
-		'hover': 'KAZAKHSTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'KAZAKHSTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_83':{
-		'hover': 'KENYA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'KENYA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_84':{
-		'hover': 'KOSOVO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'KOSOVO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_85':{
-		'hover': 'KUWAIT','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'KUWAIT','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_86':{
-		'hover': 'KYRGYZSTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'KYRGYZSTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_87':{
-		'hover': 'LAOS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LAOS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_88':{
-		'hover': 'LATVIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LATVIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_89':{
-		'hover': 'LEBANON','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LEBANON','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_90':{
-		'hover': 'LESOTHO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LESOTHO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_91':{
-		'hover': 'LIBERIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LIBERIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_92':{
-		'hover': 'LIBYA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LIBYA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_93':{
-		'hover': 'LIECHTENSTEIN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LIECHTENSTEIN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_94':{
-		'hover': 'LITHUANIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LITHUANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_95':{
-		'hover': 'LUXEMBOURG','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'LUXEMBOURG','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_96':{
-		'hover': 'MACEDONIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MACEDONIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_97':{
-		'hover': 'MADAGASCAR','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MADAGASCAR','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_98':{
-		'hover': 'MALAWI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALAWI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_99':{
-		'hover': 'MALAYSIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALAYSIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_100':{
-		'hover': 'MALDIVES','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALDIVES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_101':{
-		'hover': 'MALI','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_102':{
-		'hover': 'MALTA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALTA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_103':{
-		'hover': 'MAURITANIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MAURITANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_104':{
-		'hover': 'MAURITIUS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MAURITIUS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_105':{
-		'hover': 'MEXICO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MEXICO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_106':{
-		'hover': 'MOLDOVA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MOLDOVA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_107':{
-		'hover': 'MONGOLIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MONGOLIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_108':{
-		'hover': 'MONTENEGRO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MONTENEGRO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_109':{
-		'hover': 'MOROCCO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MOROCCO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_110':{
-		'hover': 'MOZAMBIQUE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MOZAMBIQUE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_111':{
-		'hover': 'MYANMAR','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MYANMAR','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_112':{
-		'hover': 'NAMIBIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NAMIBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_113':{
-		'hover': 'NEPAL','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NEPAL','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_114':{
-		'hover': 'NETHERLANDS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NETHERLANDS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_115':{
-		'hover': 'NEW ZEALAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NEW ZEALAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_116':{
-		'hover': 'NICARAGUA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NICARAGUA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_117':{
-		'hover': 'NIGER','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NIGER','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_118':{
-		'hover': 'NIGERIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NIGERIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_119':{
-		'hover': 'NORTH KOREA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NORTH KOREA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_120':{
-		'hover': 'NORWAY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NORWAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_121':{
-		'hover': 'OMAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'OMAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_122':{
-		'hover': 'PAKISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PAKISTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_123':{
-		'hover': 'PALESTINE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PALESTINE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_124':{
-		'hover': 'PANAMA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PANAMA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_125':{
-		'hover': 'PAPUA NEW GUINEA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PAPUA NEW GUINEA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_126':{
-		'hover': 'PARAGUAY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PARAGUAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_127':{
-		'hover': 'PERU','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PERU','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_128':{
-		'hover': 'PHILIPPINES','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PHILIPPINES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_129':{
-		'hover': 'POLAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'POLAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_130':{
-		'hover': 'PORTUGAL','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PORTUGAL','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_131':{
-		'hover': 'PUETRO RICO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'PUETRO RICO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_132':{
-		'hover': 'QATAR','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'QATAR','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_133':{
-		'hover': 'ROMANIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ROMANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_134':{
-		'hover': 'RUSSIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'RUSSIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_135':{
-		'hover': 'RWANDA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'RWANDA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_136':{
-		'hover': 'SAUDI ARABIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SAUDI ARABIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_137':{
-		'hover': 'SENEGAL','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SENEGAL','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_138':{
-		'hover': 'SERBIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SERBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_139':{
-		'hover': 'SEYCHELLES','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SEYCHELLES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_140':{
-		'hover': 'SIERRA LEONE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SIERRA LEONE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_141':{
-		'hover': 'SINGAPORE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SINGAPORE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_142':{
-		'hover': 'SLOVAKIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SLOVAKIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_143':{
-		'hover': 'SLOVENIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SLOVENIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_144':{
-		'hover': 'SOLOMON ISLANDS','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SOLOMON ISLANDS','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_145':{
-		'hover': 'SOMALIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SOMALIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_146':{
-		'hover': 'SOUTH AFRICA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SOUTH AFRICA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_147':{
-		'hover': 'SOUTH KOREA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SOUTH KOREA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_148':{
-		'hover': 'SOUTH SUDAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SOUTH SUDAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_149':{
-		'hover': 'SPAIN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SPAIN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_150':{
-		'hover': 'SRI LANKA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SRI LANKA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_151':{
-		'hover': 'SUDAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SUDAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_152':{
-		'hover': 'SURINAME','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SURINAME','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_153':{
-		'hover': 'SWAZILAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SWAZILAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_154':{
-		'hover': 'SWEDEN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SWEDEN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_155':{
-		'hover': 'SWITZERLAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SWITZERLAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_156':{
-		'hover': 'SYRIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SYRIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_157':{
-		'hover': 'SÃO TOMÉ AND PRÍNCIPE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SÃO TOMÉ AND PRÍNCIPE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_158':{
-		'hover': 'CHINA TAIWAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHINA TAIWAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_159':{
-		'hover': 'TAJIKISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TAJIKISTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_160':{
-		'hover': 'TANZANIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TANZANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_161':{
-		'hover': 'THAILAND','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'THAILAND','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_162':{
-		'hover': 'THE GAMBIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'THE GAMBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_163':{
-		'hover': 'TIMOR-LESTE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TIMOR-LESTE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_164':{
-		'hover': 'TOGO','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TOGO','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_165':{
-		'hover': 'TUNISIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TUNISIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_166':{
-		'hover': 'TURKEY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TURKEY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_167':{
-		'hover': 'TURKMENISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'TURKMENISTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_168':{
-		'hover': 'UGANDA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UGANDA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_169':{
-		'hover': 'UKRAINE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UKRAINE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_170':{
-		'hover': 'UNITED ARAB EMIRATES','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UNITED ARAB EMIRATES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_171':{
-		'hover': 'UNITED KINGDOM','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UNITED KINGDOM','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_172':{
-		'hover': 'UNITED STATES<br><span style="color: yellow;">*Link each country to any webpage*</span>','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UNITED STATES<br><span style="color: yellow;">*Link each country to any webpage*</span>','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_173':{
-		'hover': 'URUGUAY','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'URUGUAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_174':{
-		'hover': 'UZBEKISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UZBEKISTAN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_175':{
-		'hover': 'VENEZUELA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'VENEZUELA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_176':{
-		'hover': 'VIETNAM','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'VIETNAM','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_177':{
-		'hover': 'WESTERN SAHARA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'WESTERN SAHARA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_178':{
-		'hover': 'YEMEN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'YEMEN','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_179':{
-		'hover': 'ZAMBIA','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ZAMBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_180':{
-		'hover': 'ZIMBABWE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'ZIMBABWE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 }
 
