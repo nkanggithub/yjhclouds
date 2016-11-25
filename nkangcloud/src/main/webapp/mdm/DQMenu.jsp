@@ -1876,7 +1876,7 @@ visibility:visible;
 		'hover': 'SÃO TOMÉ AND PRÍNCIPE','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_158':{
-		'hover': 'TAIWAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHINA TAIWAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_159':{
 		'hover': 'TAJIKISTAN','upColor':'#eff9ff','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
