@@ -60,14 +60,10 @@
 			});
 		  $("#testa").click(function(){ 
 			  if($(this).css("opacity")==1){ 
-				  $(this).css("opacity",0.3);
-				  $("#chart3").css("display","none");
-				  $("#testb").css("opacity",1);
-				  $("#chartCity").css("display","block");
+				  
 				}else{ 
 					 $(this).css("opacity",1);
 					  $("#testb").css("opacity",0.3);
-					  $("#chart3").css("top","-90px");
 					  $("#chart3").css("display","block");
 					  $("#chartCity").css("display","none");
 				} 
@@ -75,12 +71,46 @@
 				}); 
 		  $("#testb").click(function(){ 
 			  if($(this).css("opacity")==1){ 
-				  $(this).css("opacity",0.3);
-				  $("#chart3").css("top","-90px");
-				  $("#chart3").css("display","block");
-				  $("#testa").css("opacity",1);
-				  $("#chartCity").css("display","none");
+				  
 				}else{ 
+					var chartCityHTML=$("#chartCity").html();
+					  if(chartCityHTML==""){
+							$.ajax({
+								type : "POST",
+								dataType : "json",
+								url : "getOpenfooter?userState="+$("#userState").html(),
+								success : function(data) {
+									  if (data) {
+										  var chart = c3.generate({
+												data : {
+													columns : [
+														          data[0],
+														          data[1],
+														         data[2],
+														         data[3]
+												    		  ],
+													type : 'pie'
+												},
+												pie : {
+													label : {
+														format : function(value, ratio, id) {
+															return d3.format('#')(value);
+														}
+													}
+												},
+												bindto : '#chartCity'
+											});
+										 
+											
+									  }
+								},
+								error:function(data)
+								{
+									console.log("failed..."+data.toString());
+								}
+							
+						});
+						} 
 					 $(this).css("opacity",1);
 					  $("#testa").css("opacity",0.3);
 					  $("#chart3").css("display","none");
@@ -251,7 +281,7 @@
 		$("#openfooter").on("click",function(){
 			
 			var chart3HTML=$("#chart3").html();
-			var chartCityHTML=$("#chartCity").html();
+
 			  if(chart3HTML==""){
 			$.ajax({
 				type : "POST",
@@ -290,43 +320,7 @@
 		});
 		} 
 			  
-			  if(chartCityHTML==""){
-					$.ajax({
-						type : "POST",
-						dataType : "json",
-						url : "getOpenfooter?userState="+$("#userState").html(),
-						success : function(data) {
-							  if (data) {
-								  var chart = c3.generate({
-										data : {
-											columns : [
-												          data[0],
-												          data[1],
-												         data[2],
-												         data[3]
-										    		  ],
-											type : 'pie'
-										},
-										pie : {
-											label : {
-												format : function(value, ratio, id) {
-													return d3.format('#')(value);
-												}
-											}
-										},
-										bindto : '#chartCity'
-									});
-								 
-									
-							  }
-						},
-						error:function(data)
-						{
-							console.log("failed..."+data.toString());
-						}
-					
-				});
-				} 
+			
 				   loadChart();
 			   
 			  
@@ -445,8 +439,8 @@
 		function loadChart(){
 		
 			 $("#chart3").show();
-			 $("#chartCity").show();
-			
+			 $("#testa").css("opacity",1);
+			 $("#testb").css("opacity",0.3);
 			 $("#cityRound").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
@@ -1191,9 +1185,9 @@ visibility:visible;
 </div> -->
 
 <!-- END MESSAGE STATION -->
-<div id="chartCity" style="display:none"></div>
+
 	<div id="chart3" style="display:none"></div>
-	
+	<div id="chartCity" style="display:none"></div>
 	<div id="chart2" style="display:none"></div>
 	    <div id="cityRound" style="position:absolute;width:200px;height:40px;top:320px;left:30%;display:none;">
 <div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#71587E;margin-top:3px;"></p><p style="float:left;font-size:15px;line-height:0px;padding-left:3px;">Country<p></div>
