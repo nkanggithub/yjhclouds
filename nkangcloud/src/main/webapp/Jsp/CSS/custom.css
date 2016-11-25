@@ -499,9 +499,8 @@ hr {
 	padding: 0 20px
 }
 .map-preview {
-	padding-top: 10px;
     position: relative;
-    top: -150px;
+    top: -170px;
 }
 }
 #left-content {
