@@ -402,7 +402,7 @@ function register() {
 				}
 			}
 		});
-		$j("#registerFormSubmit").submit(function(){
+		$j("#registerBtn").click(function(){
 			var uid = $j("#uid").val();
 			var name = $j("#realname").val();
 			var phone = $j("#phone").val();
@@ -422,6 +422,7 @@ function register() {
 				async:false,
 				success:function(result) {
 					if(result){
+						$j('#registerform').modal('hide');
 						swal("Registered successfully!", "Congratulations!", "success"); 
 					} else {
 						swal("Registered fail!", "Pls input your correct information.", "error");
@@ -790,7 +791,7 @@ function register() {
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-												<form id="registerFormSubmit" autocomplete="on">
+												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
 												    <table id="tableForm" style="margin-top:-20px;">
 												    <tr>
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
@@ -841,7 +842,7 @@ function register() {
 												      </tr>
 												 </table>
 											    <button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
-											</form> 
+										<!-- 	</form>  -->
 									</div>
 								</div>
 								
@@ -877,6 +878,7 @@ function register() {
 				aria-hidden="true">OK</button>
 		</div>
 	</div>
+		<!--
 	<div id="DivMyConfirm" class="modal hide fade" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 		<div class="modal-header">
@@ -891,7 +893,7 @@ function register() {
 			<button class="btnAthena EbtnLess" id="registerBtn">Submit</button>
 		</div>
 	</div>
-	<!-- Modal PAGE End-->
+ Modal PAGE End-->
 
 	<!-- BEGIN FOOTER -->
 	<div id="footer">
