@@ -338,4 +338,32 @@ public class DQMenuController {
 		return opsilistOfCountry;
 		
 	}
+	
+
+	@RequestMapping("/getCitydetial")
+	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getCountrycountdetial(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
+	{
+		List<OrgOtherPartySiteInstance> opsilistOfCountry = MongoDBBasic.getDataQualityReportOSfCity(state,City,cityRegion);
+		List<List<OrgOtherPartySiteInstance>> lilist = new ArrayList<List<OrgOtherPartySiteInstance>>();
+		List<OrgOtherPartySiteInstance> opsilistOfCompetitor = new  ArrayList<OrgOtherPartySiteInstance>();
+		List<OrgOtherPartySiteInstance> opsilistOfCustomer = new  ArrayList<OrgOtherPartySiteInstance>();
+		List<OrgOtherPartySiteInstance> opsilistOfPartner = new  ArrayList<OrgOtherPartySiteInstance>();
+		for(int i=0; i<opsilistOfCountry.size(); i++){
+			if(opsilistOfCountry.get(i).getIsCompetitor().equals("true")){
+				opsilistOfCompetitor.add(opsilistOfCountry.get(i));
+			}
+			if(opsilistOfCountry.get(i).getOnlyPresaleCustomer().equals("true")){
+				opsilistOfCustomer.add(opsilistOfCountry.get(i));
+			}
+			if(opsilistOfCountry.get(i).getIncludePartnerOrgIndicator().equals("true")){
+				opsilistOfPartner.add(opsilistOfCountry.get(i));
+			}
+		}
+		lilist.add(opsilistOfCompetitor); 
+		lilist.add(opsilistOfCustomer); 
+		lilist.add(opsilistOfPartner); 
+		return lilist;
+		
+	}
 }
