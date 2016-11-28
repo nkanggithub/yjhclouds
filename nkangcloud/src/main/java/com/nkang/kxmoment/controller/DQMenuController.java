@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Radar;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -326,5 +327,15 @@ public class DQMenuController {
 		//List<String> citys=RestUtils.getAllStates();
 		List<String> citys = MongoDBBasic.getAllStates(countryCode);
 		return citys;
+	}
+	
+	@RequestMapping("/getCitydatial")
+	public @ResponseBody List<OrgOtherPartySiteInstance> getCountrycount(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
+	{
+		List<OrgOtherPartySiteInstance> opsilistOfCountry = MongoDBBasic.getDataQualityReportOSfCity(state,City,cityRegion);
+		
+		return opsilistOfCountry;
+		
 	}
 }
