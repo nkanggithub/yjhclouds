@@ -135,6 +135,7 @@
 							}
 							}
 							$("#openmesChart").html(htmlcustli);
+							$("#openmesChart").show();
 					  }
 				},
 				error:function(data)
@@ -451,6 +452,7 @@
 			$(".mes-openbt").openmes({ext: 'php'});
 		});
 		
+		var flag=1;
 		function loadChart(){
 		
 			 $("#chart3").show();
@@ -467,27 +469,32 @@
 		}
 		
 		function hideAll(obj){
-			if($(".container").css("display")=="block")
+			if(flag==1||flag==3)
 			{
 			 $(".container").css("display","none");
 			}
-		else
+		else if(flag==2)
 			{
 			 $(".container").css("display","block");
 			}
+			if(flag==1||flag==3){
+				flag=2;
+				}
+			else if(flag==2){
+				flag=1;
+				}
 			 $("#chart3").hide();
 			 $("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
 			 $("#chart4").hide();
-			 $("#chart5").hide();
-			 $(".map-preview").show();
+			 $("#openmesChart").hide();
 		}
 		function loadChart2(){
 	 		$("#chart2").show();
 	 		$("#chartCity").hide();	
 			 $("#cityRound").hide();
-			 $(".map-preview").hide();
+			 flag=3;
 /* 	 		$("#openfooter_loadC2").append(chartobj); */
 			//$("#openfooter_loadC2").html(chartobj);
 			 $("#chart3").hide();
@@ -510,7 +517,7 @@
 			$("#americano_loadChart").html("");
 			$("#americano_loadChart").append(chartobj);
 			$("#americano_loadChart").append(detailobj);
-			 $(".map-preview").hide();
+			flag=3;
 			$("#chart3").hide();
 			$("#chartCity").hide();	
 			 $("#cityRound").hide();
@@ -524,7 +531,7 @@
 		function loadChart4(obj){
 			var chartobj = $("#chart4");
 			$("#conporlan_loadChart").html(chartobj);
-			 $(".map-preview").hide();
+			flag=3;
 			$("#chart3").hide();
 			$("#chartCity").hide();	
 			 $("#cityRound").hide();
@@ -538,7 +545,7 @@
 			$("#openMeDiv").show();
 			$("#chart3").hide();
 			$("#chartCity").hide();
-			 $(".map-preview").hide();
+			flag=3;
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
 		}
@@ -546,7 +553,7 @@
 			var chartobj = $("#chart5");
 //			$("#capuqino_loadChart").html(chartobj);
 			$("#chart3").hide();
-			 $(".map-preview").hide();
+			flag=3;
 			$("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 $("#chart4").hide();
@@ -763,14 +770,14 @@ visibility:visible;
 		<svg id="fillgauge4" width="0%" height="0" onclick="gauge4.update(NewValue());"></svg>
 		<svg id="fillgauge5" width="50%" height="220" onclick="Javascript:OrganizationInformation();"></svg>
 		<script>
-		var percent ="0.66";
+		var percent ="0.86";
 		var percent2 = 100*percent;
 		  var gauge4 = loadLiquidFillGauge("fillgauge4", 50);
 		    var config4 = liquidFillGaugeDefaultSettings();
 		    config4.circleThickness = 0.15;
 		   config4.circleColor = "#FFFFFF";
 		    config4.textColor = "#00b287";
-		    config4.waveTextColor = "#00b287";
+		    config4.waveTextColor = "#FCFCFC";
 		    config4.waveColor = "#00b287";
 		    config4.textVertPosition = 0.8;
 		    config4.waveAnimateTime = 1000;
