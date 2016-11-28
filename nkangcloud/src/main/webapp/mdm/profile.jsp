@@ -790,10 +790,8 @@ function register() {
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-											<div id="userInfoDiv">
-											<div>
 												<form id="registerFormSubmit" autocomplete="on">
-												    <table id="tableForm">
+												    <table id="tableForm" style="margin-top:-20px;">
 												    <tr>
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
 												        <td class="tdInput">
@@ -844,8 +842,6 @@ function register() {
 												 </table>
 											    <button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
 											</form> 
-											</div>
-										</div>
 									</div>
 								</div>
 								
