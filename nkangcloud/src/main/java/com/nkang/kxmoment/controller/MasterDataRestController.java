@@ -602,17 +602,5 @@ public class MasterDataRestController {
 		return finalString;
 	}
 	
-	/*
-	 * chang-zheng
-	 *  get opsi by city
-	 */
-	@RequestMapping("/getCitydatial")
-	public @ResponseBody List<OrgOtherPartySiteInstance> getCountrycount(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam(value = "userstate") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion") String cityRegion)
-	{
-		List<OrgOtherPartySiteInstance> opsilistOfCountry = MongoDBBasic.getDataQualityReportOSfCity(state,City,cityRegion);
-		
-		return opsilistOfCountry;
-		
-	}
+
 }
