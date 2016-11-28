@@ -494,13 +494,14 @@ hr {
 .carousel-inner .title {
 	left: 0
 }
-.map-preview, .description, .faq, footer, .tail {
+ .description, .faq, footer, .tail {
 	margin-left: -20px;
 	padding: 0 20px
 }
 .map-preview {
     position: relative;
-    top: -170px;
+    top: -200px;
+    z-index:-200;
 }
 }
 #left-content {
