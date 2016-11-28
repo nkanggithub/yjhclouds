@@ -194,7 +194,7 @@
 						$.ajax({
 							type : "POST",
 							dataType : "json",
-							url : "getCitydatial?userState="+$("#userState").text()+"&nonlatinCity="+$(this).text(),
+							url : "getCitydatial?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
 							success : function(data) {
 								  if (data) {
 									  var text="";
