@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/common.css"/>
 		<link rel="stylesheet" type="text/css" href="Jsp/CSS/custom.css"/>
 		
- 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.min.2.1.1.js"></script> 
+ 	<script type="text/javascript" src="Jsp/JS/jquery-1.8.0.js"></script> 
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.easing.min.13.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.mousewheel.min.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.jscrollpane.min.js"></script>
@@ -187,7 +187,43 @@
 		} 
 
 				   loadChart2();
-				   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
+			//	   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
+				   $("#chart2 .tick text tspan").live("click",function(){
+					   console.log($(this).text());
+					   var title=$(this).text();
+						$.ajax({
+							type : "POST",
+							dataType : "json",
+							url : "getCitydatial?userState="+$("#userState").text()+"&nonlatinCity="+$(this).text(),
+							success : function(data) {
+								  if (data) {
+									  var text="";
+									  	if(data.length!=0){
+							for(var i=0;i<data.length;i++){
+								text=text+data[i].amid2;
+							}
+							}
+									  swal({  
+								          title:title,  
+								          text:text,
+								          type:"success",  
+										  html:"true",
+								          showCancelButton:false,  
+								          showConfirmButton:"true",  
+								          confirmButtonText:"OK",  
+								          animation:"slide-from-top"  
+								        });
+									 
+										
+								  }
+							},
+							error:function(data)
+							{
+								console.log("failed..."+data.toString());
+							}
+						
+					});
+				   });
 					
 
 			
@@ -365,6 +401,7 @@
 	function hello(obj)
 	{
 		console.log($(obj).text());
+		swal("Thank You!", "We will contact you soon in"+$(obj).text(), "success"); 
 	}
 	function countrySelect(obj){
 		var cnName=$("#countrySelect option:selected").val();
