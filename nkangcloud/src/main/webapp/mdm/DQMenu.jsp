@@ -200,7 +200,7 @@
 									  var text="";
 									  	if(data.length!=0){
 							for(var i=0;i<data.length;i++){
-								text=text+data[i].amid2;
+								text=text+"<p style='width:100%;text-align:center;'>"+data[i].organizationExtendedName+"</p>";
 							}
 							}
 									  swal({  
