@@ -49,8 +49,6 @@
 	type="text/css" />
 <link href="../nkang/assets_athena/data-tables/DT_bootstrap.css"
 	rel="stylesheet" type="text/css" />
-<link href="../nkang/css_athena/circle.css" rel="stylesheet"
-	type="text/css" />
 <script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
@@ -93,6 +91,7 @@ img.Wmates {
 
 .HpLogo {
 	height: 60px;
+	margin-left: -10px !important;
 }
 
 #navlist li {
@@ -356,6 +355,7 @@ color: #c2c2c2;
 }
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2{
 	margin-bottom:10px;
+	font-size:16px;
 }
 .clear{
 	clear:both;
@@ -528,6 +528,15 @@ function register() {
 									+ '                                          </div>'
 									+ '                                        </li>';
 							ul += li;
+							
+							var selfIntro=temp.selfIntro;
+							if(selfIntro==null||selfIntro=='null'){
+								selfIntro="nothing";
+							}else{
+								if(selfIntro.length>10){
+									selfIntro=(selfIntro.substr(0,12)+'...');
+								}
+							}
 							var li2='	<div class="Work_Mates_div_list_div2">'
 								+'                                           	 	<div class="Work_Mates_img_div2">'
 								+'                                        			 <img src="'
@@ -545,7 +554,7 @@ function register() {
 								+ temp.nickname
 								+ '</h2>'
 								+'                                                     <span>'
-								+ temp.selfIntro
+								+ selfIntro
 								+ '</span>'
 								+'                                        		</div>'
 								+'                                                <div class="clear"></div>'
@@ -699,9 +708,9 @@ function register() {
 	}
 </script>
 </head>
-<body>
+<body  style="margin:0px;padding:0px !important;">
 	<input id="uid" type="hidden" value="<%=uid%>" />
-	<div class="navbar">
+	<div class="navbar" style="width:100%;">
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<img
@@ -709,7 +718,7 @@ function register() {
 					alt="HP Logo" class="HpLogo" />
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" style="font-size: 18px;"> Welcome <span
+						data-toggle="dropdown" style="font-size: 18px;margin:0px;padding:5px 0px;"> Welcome <span
 							class="username colorBlue" id="username"> <%=wcu.getNickname() %>
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
@@ -723,9 +732,9 @@ function register() {
 	</div>
 
 	<!-- BEGIN CONTAINER -->
-	<div id="container" class="row-fluid">
+	<div id="container" class="row-fluid" >
 		<!-- BEGIN PAGE -->
-		<div id="main-content">
+		<div id="main-content" >
 			<div class="BDbg">
 				<div class="BDheading">
 					<div class="span12">
@@ -743,7 +752,6 @@ function register() {
 						</h2>
 					</div>
 				</div>
-				<div class="container-fluid" style="margin-top: -10px;">
 					<div class="row-fluid mtop10">
 						<div class="span12">
 							<div class="PositionR">
@@ -752,7 +760,6 @@ function register() {
 							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
