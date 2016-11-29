@@ -1445,6 +1445,8 @@ public class MongoDBBasic {
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listDdm.add(opsi);
 				}
 			}
@@ -1453,6 +1455,104 @@ public class MongoDBBasic {
 			}
 			
 			return listDdm;
+		}
+		/*
+		 * chang-zheng
+		 * 	get opsi	 
+		 * */
+		public static List<List<OrgOtherPartySiteInstance>> getDataQualityReportbynonatinCity(String stateProvince, String nonlatinCity, String cityRegion){
+			List<List<OrgOtherPartySiteInstance>> lilist = new ArrayList<List<OrgOtherPartySiteInstance>>();
+			List<OrgOtherPartySiteInstance> listcompetitor = new ArrayList<OrgOtherPartySiteInstance>();
+			List<OrgOtherPartySiteInstance> listpartner = new ArrayList<OrgOtherPartySiteInstance>();
+			List<OrgOtherPartySiteInstance> listcustomer = new ArrayList<OrgOtherPartySiteInstance>();
+			mongoDB = getMongoDB();
+			
+			try{
+				// competitor
+				BasicDBObject query_competitor = new BasicDBObject();
+				query_competitor.put("isCompetitor", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_competitor.put("state", stateProvince);
+				}
+				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+					query_competitor.put("nonlatinCity", nonlatinCity);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_competitor.put("cityRegion", cityRegion);
+				}
+				DBCursor competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
+				// partner
+				BasicDBObject query_partner = new BasicDBObject();
+				query_partner.put("includePartnerOrgIndicator", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_partner.put("state", stateProvince);
+				}
+				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+					query_partner.put("nonlatinCity", nonlatinCity);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_partner.put("cityRegion", cityRegion);
+				}
+				DBCursor partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
+				// customer
+				BasicDBObject query_customer = new BasicDBObject();
+				query_customer.put("onlyPresaleCustomer", "true");
+				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_customer.put("state", stateProvince);
+				}
+				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
+					query_customer.put("nonlatinCity", nonlatinCity);
+				}
+				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_customer.put("cityRegion", cityRegion);
+				}
+				DBCursor customer  = mongoDB.getCollection(collectionMasterDataName).find(query_customer);
+				
+				while(competitor.hasNext()){
+					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+					DBObject objOpsi = competitor.next();
+					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					listcompetitor.add(opsi);
+				}
+				while(partner.hasNext()){
+					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+					DBObject objOpsi = partner.next();
+					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					listpartner.add(opsi);
+				}
+				while(customer.hasNext()){
+					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+					DBObject objOpsi = customer.next();
+					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					listcustomer.add(opsi);
+				}
+				lilist.add(listcustomer);
+				lilist.add(listpartner);
+				lilist.add(listcompetitor);
+			}
+			catch(Exception e){
+				log.info("getDataQualityReport--" + e.getMessage());
+			}
+			
+			return lilist;
 		}
 	    // END
 }
