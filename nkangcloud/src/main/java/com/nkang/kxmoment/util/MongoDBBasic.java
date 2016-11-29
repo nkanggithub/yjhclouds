@@ -1405,7 +1405,7 @@ public class MongoDBBasic {
 		 */
 		
 		public static  List<OrgOtherPartySiteInstance> getDataQualityReportOSfCity(String state, String City, String cityRegion){
-			List<OrgOtherPartySiteInstance> listDdm = new ArrayList< OrgOtherPartySiteInstance>();
+			List<OrgOtherPartySiteInstance> listDdm = new ArrayList<OrgOtherPartySiteInstance>();
 			
 			mongoDB = getMongoDB();
 			try{
@@ -1416,7 +1416,7 @@ public class MongoDBBasic {
 					query.put("state", patternst);
 					//query.put("state", state);
 				}
-				if (!StringUtils.isEmpty(City)) {
+				if (!StringUtils.isEmpty(City) && City.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(City)){
 						Pattern patternst = Pattern.compile("^.*" + City + ".*$", Pattern.CASE_INSENSITIVE);
 						query.put("latinCity", patternst);
