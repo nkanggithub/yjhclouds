@@ -305,12 +305,12 @@ public class DQMenuController {
 	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
 		request.getSession().setAttribute("curLoc", curLoc);
-		request.getSession().setAttribute("cn", "Organizations:19714519<br/>Customer:260793<br/>Partner:49335<br/>Competitor:443");
-		request.getSession().setAttribute("my", "Organizations:224994<br/>Customer:18964<br/>Partner:11872<br/>Competitor:83");
-		request.getSession().setAttribute("us", "Organizations:69628720<br/>Customer:384650<br/>Partner:300034<br/>Competitor:318913");
-		request.getSession().setAttribute("ru", "Organizations:34274518<br/>Customer:18569<br/>Partner:54359<br/>Competitor:62");
-		request.getSession().setAttribute("kr", "Organizations:4028894<br/>Customer:16167<br/>Partner:11624<br/>Competitor:166");
-		request.getSession().setAttribute("sg", "Organizations:600514<br/>Customer:16856<br/>Partner:6045<br/>Competitor:119");
+		request.getSession().setAttribute("cn", "机遇:19714519<br/>客户:260793<br/>伙伴:49335<br/>竞争:443");
+		request.getSession().setAttribute("my", "机遇:224994<br/>客户:18964<br/>伙伴:11872<br/>竞争:83");
+		request.getSession().setAttribute("us", "机遇:69628720<br/>客户:384650<br/>伙伴:300034<br/>竞争:318913");
+		request.getSession().setAttribute("ru", "机遇:34274518<br/>客户:18569<br/>伙伴:54359<br/>竞争:62");
+		request.getSession().setAttribute("kr", "机遇:4028894<br/>客户:16167<br/>伙伴:11624<br/>竞争:166");
+		request.getSession().setAttribute("sg", "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119");
 		return "DQMenu";
 	}
 	

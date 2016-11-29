@@ -795,6 +795,10 @@ visibility:visible;
     -webkit-transform: scale(1);
             transform: scale(1); } }
 
+	.worldflag{
+		width:25px;
+		height:16px;
+	}
   </style>
 	
 
@@ -1602,7 +1606,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'CHILE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_33':{
-		'hover': 'CHINA<br/>'+cnt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CHINA <img src="http://www.geonames.org/flags/x/cn.gif" class="worldflag"/><br/>'+cnt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_34':{
 		'hover': 'COLOMBIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -1800,7 +1804,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'MALAWI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_99':{
-		'hover': 'MALAYSIA<br/>'+myt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALAYSIA <img src="http://www.geonames.org/flags/x/my.gif" class="worldflag"/><br/>'+myt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_100':{
 		'hover': 'MALDIVES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -1860,7 +1864,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'NIGERIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_119':{
-		'hover': 'NORTH KOREA<br/>'+krt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NORTH KOREA <img src="http://www.geonames.org/flags/x/kr.gif" class="worldflag"/><br/>'+krt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_120':{
 		'hover': 'NORWAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -2019,7 +2023,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'UNITED KINGDOM','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_172':{
-		'hover': 'UNITED STATES<br/>'+ust,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'UNITED STATES <img src="http://www.geonames.org/flags/x/us.gif" class="worldflag"/><br/>'+ust,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_173':{
 		'hover': 'URUGUAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
