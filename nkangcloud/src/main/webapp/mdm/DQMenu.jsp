@@ -1785,7 +1785,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'MALAWI','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_99':{
-		'hover': 'MALAYSIA<br/>'+myt,'upColor':'#FFCC5F','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'MALAYSIA<br/>'+myt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_100':{
 		'hover': 'MALDIVES','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -1845,7 +1845,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'NIGERIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_119':{
-		'hover': 'NORTH KOREA<br/>'+krt,'upColor':'#FFCC5F','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'NORTH KOREA<br/>'+krt,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_120':{
 		'hover': 'NORWAY','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
