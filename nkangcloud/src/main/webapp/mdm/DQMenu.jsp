@@ -194,23 +194,23 @@
 						$.ajax({
 							type : "POST",
 							dataType : "json",
-							url : "getCitydetail?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
+							url : "getCitydetial?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
 							success : function(data) {
 								  if (data) {
 									  var text="<div style='height:215px;overflow:scroll;'>";
 									  	if(data[0].length!=0){
 							for(var i=0;i<data[0].length;i++){
-								text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[0][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[0][i].industrySegmentNames+"</p></div></div></div>";
+								text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[0][i].industrySegmentNames+"</p></div></div></div>";
 							}
 							}
 									  	if(data[1].length!=0){
 											for(var i=0;i<data[1].length;i++){
-												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[1][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[1][i].industrySegmentNames+"</p></div></div></div>";
+												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;text-align:left;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[1][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[1][i].industrySegmentNames+"</p></div></div></div>";
 											}
 											}
 									  	if(data[2].length!=0){
 											for(var i=0;i<data[2].length;i++){
-											text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[2][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[2][i].industrySegmentNames+"</p></div></div></div>";
+											text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[2][i].industrySegmentNames+"</p></div></div></div>";
 											}
 											
 											text=text+"</div>";
@@ -475,6 +475,14 @@
 										$("#chart2").html("");
 										$("#locationCity").text(city.toLocaleUpperCase());
 										$("#userState").text(city);
+										if(countrys=="中国"){
+											$("#cityRound img").attr("src","Jsp/PIC/cn.gif");
+											};
+											if(countrys=="马来西亚")
+											{
+												$("#cityRound img").attr("src","Jsp/PIC/my.gif");
+												};
+										
 										$("#labelCity").text(city);
 										$("#labelCountry").text(countrys);
 										$("#countrys").text(countrys);
@@ -1266,7 +1274,8 @@ visibility:visible;
 	<div id="chartCity" style="display:none"></div>
 	<div id="chart2" style="display:none"></div>
 	    <div id="cityRound" style="position:absolute;width:200px;height:40px;top:320px;left:30%;display:none;">
-<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#71587E;margin-top:3px;"></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">中国<p></div>
+		
+<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;"><img src="Jsp/PIC/cn.gif" alt="" style="width: 30px;height: 15px;position:relative;top:-15px;"/></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">中国<p></div>
 <div id="testb" style=" opacity:0.3;cursor: pointer;position: absolute;top: 0px;left:110px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ userState }<p></div>
 </div>
 
