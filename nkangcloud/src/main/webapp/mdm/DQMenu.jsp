@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="Jsp/CSS/common.css"/>
 		<link rel="stylesheet" type="text/css" href="Jsp/CSS/custom.css"/>
 		
- 	<script type="text/javascript" src="Jsp/JS/jquery-1.8.0.js"></script> 
+ 	<!-- <script type="text/javascript" src="Jsp/JS/jquery-1.8.0.js"></script>  -->
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.easing.min.13.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.mousewheel.min.js"></script>
 	<script type="text/javascript" src="MetroStyleFiles//JS/jquery.jscrollpane.min.js"></script>
@@ -188,7 +188,7 @@
 
 				   loadChart2();
 			//	   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
-				   $("#chart2 .tick").live("click",function(){
+				   $(document).on("click","#chart2 .tick",function(){
 					   console.log($(this).text());
 					   var title=$(this).text();
 						$.ajax({
