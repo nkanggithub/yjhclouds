@@ -234,7 +234,7 @@ p {
 }
 .review:before {
 	display: block;
-	content: "“";
+	content: "鈥�;
 	font-size: 70px;
 	position: absolute;
 	left: -8px;
@@ -500,8 +500,7 @@ hr {
 }
 .map-preview {
     position: relative;
-    top: -200px;
-    z-index:-200;
+    top: -160px;
 }
 }
 #left-content {
@@ -557,7 +556,7 @@ hr {
 
 @media screen and (max-width: 400px) and (min-width: 321px) {
 #map_base svg {
-	height: 330px;
+	height: 230px;
 }
 }
 
