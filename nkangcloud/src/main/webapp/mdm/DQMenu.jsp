@@ -1909,7 +1909,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'ROMANIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_134':{
-		'hover': 'RUSSIA<br/>'+rut,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'RUSSIA <img src="http://www.geonames.org/flags/x/ru.gif" class="worldflag"/><br/>'+rut,'upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_135':{
 		'hover': 'RWANDA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -1930,7 +1930,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'SIERRA LEONE','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_141':{
-		'hover': 'SINGAPORE<br/>'+sgt,'upColor':'#FFCC5F','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'SINGAPORE <img src="http://www.geonames.org/flags/x/sg.gif" class="worldflag"/><br/>'+sgt,'upColor':'#FFCC5F','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_142':{
 		'hover': 'SLOVAKIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
