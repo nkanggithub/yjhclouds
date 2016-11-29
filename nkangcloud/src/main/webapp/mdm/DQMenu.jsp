@@ -188,7 +188,7 @@
 
 				   loadChart2();
 			//	   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
-				   $("#chart2 .tick text tspan").live("click",function(){
+				   $("#chart2 .tick").live("click",function(){
 					   console.log($(this).text());
 					   var title=$(this).text();
 						$.ajax({
