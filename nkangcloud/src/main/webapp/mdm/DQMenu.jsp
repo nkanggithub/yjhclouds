@@ -194,7 +194,7 @@
 						$.ajax({
 							type : "POST",
 							dataType : "json",
-							url : "getCitydetial?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
+							url : "getCitydetail?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
 							success : function(data) {
 								  if (data) {
 									  var text="<div style='height:215px;overflow:scroll;'>";
