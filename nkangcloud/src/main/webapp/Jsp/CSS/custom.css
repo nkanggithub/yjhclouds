@@ -562,7 +562,7 @@ hr {
 
 @media screen and (max-width: 480px) and (min-width: 401px) {
 #map_base svg {
-	height: 400px;
+	height: 250px;
 }
 }
 
