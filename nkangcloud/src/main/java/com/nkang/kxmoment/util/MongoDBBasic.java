@@ -1471,41 +1471,40 @@ public class MongoDBBasic {
 				// competitor
 				BasicDBObject query_competitor = new BasicDBObject();
 				query_competitor.put("isCompetitor", "true");
-				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-					query_competitor.put("state", stateProvince);
-				}
-				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
-					query_competitor.put("nonlatinCity", nonlatinCity);
-				}
-				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-					query_competitor.put("cityRegion", cityRegion);
-				}
-				DBCursor competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
 				// partner
 				BasicDBObject query_partner = new BasicDBObject();
 				query_partner.put("includePartnerOrgIndicator", "true");
-				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-					query_partner.put("state", stateProvince);
-				}
-				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
-					query_partner.put("nonlatinCity", nonlatinCity);
-				}
-				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-					query_partner.put("cityRegion", cityRegion);
-				}
-				DBCursor partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
 				// customer
 				BasicDBObject query_customer = new BasicDBObject();
 				query_customer.put("onlyPresaleCustomer", "true");
 				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
+					query_competitor.put("state", stateProvince);
+					query_partner.put("state", stateProvince);
 					query_customer.put("state", stateProvince);
+					
 				}
-				if(nonlatinCity != "" && nonlatinCity!= null && nonlatinCity.toUpperCase()!= "NULL"){
-					query_customer.put("nonlatinCity", nonlatinCity);
+				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
+					if(StringUtils.isLatinString(nonlatinCity)){
+						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("latinCity", patternst);
+						query_partner.put("latinCity", patternst);
+						query_customer.put("latinCity", patternst);
+					}
+					else{
+						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("nonlatinCity", patternst);
+						query_partner.put("nonlatinCity", patternst);
+						query_customer.put("nonlatinCity", patternst);
+						
+					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
+					query_competitor.put("cityRegion", cityRegion);
+					query_partner.put("cityRegion", cityRegion);
 					query_customer.put("cityRegion", cityRegion);
 				}
+				DBCursor competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
+				DBCursor partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
 				DBCursor customer  = mongoDB.getCollection(collectionMasterDataName).find(query_customer);
 				
 				while(competitor.hasNext()){
