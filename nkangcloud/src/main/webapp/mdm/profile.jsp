@@ -550,9 +550,15 @@ function register() {
 								+ '\');"/> '
 								+'                                         		</div>'
 								+'                                         		<div class="Work_Mates_text_div">'
-								+'                                        			 <h2>'
+								+'                                        			 <h2><span  onclick="getUserInfo(\''
 								+ temp.nickname
-								+ '</h2>'
+								+ '\',\''
+								+ temp.headimgurl
+								+ '\',\''
+								+ temp.openid
+								+ '\');">'
+								+ temp.nickname
+								+ '</span></h2>'
 								+'                                                     <span>'
 								+ selfIntro
 								+ '</span>'
