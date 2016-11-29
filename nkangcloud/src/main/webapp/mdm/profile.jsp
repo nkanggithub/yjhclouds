@@ -49,6 +49,8 @@
 	type="text/css" />
 <link href="../nkang/assets_athena/data-tables/DT_bootstrap.css"
 	rel="stylesheet" type="text/css" />
+<link href="../nkang/css_athena/circle.css" rel="stylesheet"
+	type="text/css" />
 <script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
@@ -333,6 +335,32 @@ input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
 color: #c2c2c2; 
 -webkit-transition: color.5s; 
 } 
+<!-- start userLists style-->
+.Work_Mates_div2{
+	margin:0px;
+	padding:0px;	
+}
+#Work_Mates_div{	
+	margin-top:-30px;
+}
+.Work_Mates_div2  .Work_Mates_div_list_div2{
+	border-bottom:#ccc 1px solid;
+	padding:10px 0px;
+}
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_img_div2{
+	float:left;
+	margin-right:10px;
+}
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div{
+	color:#333;
+}
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2{
+	margin-bottom:10px;
+}
+.clear{
+	clear:both;
+}
+<!-- end userLists style-->
 </style>
 <script>
 	var $j = jQuery.noConflict();
@@ -476,6 +504,7 @@ function register() {
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						var ul = "";
+						var ul2 = "";
 						for (var i = 0; i < jsons.results.length; i++) {
 							var temp = jsons.results[i];
 							var li = '	<li class="Work_Mates_div_li">'
@@ -499,8 +528,32 @@ function register() {
 									+ '                                          </div>'
 									+ '                                        </li>';
 							ul += li;
+							var li2='	<div class="Work_Mates_div_list_div2">'
+								+'                                           	 	<div class="Work_Mates_img_div2">'
+								+'                                        			 <img src="'
+								+ temp.headimgurl
+								+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
+								+ temp.nickname
+								+ '\',\''
+								+ temp.headimgurl
+								+ '\',\''
+								+ temp.openid
+								+ '\');"/> '
+								+'                                         		</div>'
+								+'                                         		<div class="Work_Mates_text_div">'
+								+'                                        			 <h2>'
+								+ temp.nickname
+								+ '</h2>'
+								+'                                                     <span>'
+								+ temp.selfIntro
+								+ '</span>'
+								+'                                        		</div>'
+								+'                                                <div class="clear"></div>'
+								+'                                          </div>';
+							ul2 += li2;
 						}
-						$j("#Work_Mates_ul").html(ul);
+						//$j("#Work_Mates_ul").html(ul);
+						$j("#Work_Mates_div").html(ul2);
 					}
 				});
 	}
@@ -771,14 +824,12 @@ function register() {
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 											<div id="userInfoDiv">
-											<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
-											<div id="info_username"><span></span></div>
-											<div id="info_role">-<span></span>-</div>
-											<div id="info_phone"></div>
-											<div id="info_selfIntro"></div>
-
-
-</div>
+												<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
+												<div id="info_username"><span></span></div>
+												<div id="info_role">-<span></span>-</div>
+												<div id="info_phone"></div>
+												<div id="info_selfIntro"></div>
+											</div>
 									</div>
 								</div>
 								
@@ -849,6 +900,9 @@ function register() {
 								<div class="tab-pane" id="WorkMates">
 									<ul class="Work_Mates_div" id="Work_Mates_ul">
 									</ul>
+									<div class="clear"></div>
+									 <div class="Work_Mates_div2" id="Work_Mates_div">
+                                      </div>
 								</div>
 							</div>
 						</div>
