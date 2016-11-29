@@ -884,8 +884,8 @@ public class MongoDBBasic {
 				int cnt_lead = 0;
 				BasicDBObject query_leads = new BasicDBObject();
 				query_leads.put("onlyPresaleCustomer", "false");
-				query_partner.put("includePartnerOrgIndicator", "false");
-				query_competitor.put("isCompetitor", "false");
+				query_leads.put("includePartnerOrgIndicator", "false");
+				query_leads.put("isCompetitor", "false");
 				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
 					query_leads.put("state", stateProvince);
 				}
