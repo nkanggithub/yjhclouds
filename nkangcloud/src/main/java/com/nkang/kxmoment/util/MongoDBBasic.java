@@ -1155,6 +1155,9 @@ public class MongoDBBasic {
             				if(teamobj.get("selfIntro") != null){
             					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
             				}
+            				if(teamobj.get("realName") != null){
+            					weChatMDLUser.setNickname(teamobj.get("realName").toString());
+            				}
             			}
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
