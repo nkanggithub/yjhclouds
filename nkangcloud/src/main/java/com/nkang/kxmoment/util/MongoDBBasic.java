@@ -1148,11 +1148,15 @@ public class MongoDBBasic {
                 		if(o.get("NickName") != null){
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
+                		Object teamer = o.get("Teamer");
+            			DBObject teamobj = new BasicDBObject();
+            			teamobj = (DBObject)teamer;
+            			if(teamobj != null){
+            				if(teamobj.get("selfIntro") != null){
+            					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
+            				}
+            			}
                 		if(!StringUtils.isEmpty(OpenID)){
-                			Object teamer = o.get("Teamer");
-                			DBObject teamobj = new BasicDBObject();
-                			teamobj = (DBObject)teamer;
- 
                 			if(teamobj != null){
                 				if(teamobj.get("email") != null){
                 					weChatMDLUser.setEmail(teamobj.get("email").toString());
@@ -1165,9 +1169,6 @@ public class MongoDBBasic {
                 				}
                 				if(teamobj.get("role") != null){
                 					weChatMDLUser.setRole(teamobj.get("role").toString());
-                				}
-                				if(teamobj.get("selfIntro") != null){
-                					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
                 				}
                 				if(teamobj.get("realName") != null){
                 					weChatMDLUser.setRealName(teamobj.get("realName").toString());
