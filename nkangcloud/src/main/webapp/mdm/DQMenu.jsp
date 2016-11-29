@@ -194,15 +194,25 @@
 						$.ajax({
 							type : "POST",
 							dataType : "json",
-							url : "getCitydatial?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
+							url : "getCitydetial?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
 							success : function(data) {
 								  if (data) {
 									  var text="";
-									  	if(data.length!=0){
-							for(var i=0;i<data.length;i++){
-								text=text+"<p style='width:100%;text-align:center;'>"+data[i].organizationExtendedName+"</p>";
+									  	if(data[0].length!=0){
+							for(var i=0;i<data[0].length;i++){
+								text=text+"<p style='width:100%;text-align:center;color:orange;'>"+data[0][i].organizationNonLatinExtendedName+"</p>";
 							}
 							}
+									  	if(data[1].length!=0){
+											for(var i=0;i<data[1].length;i++){
+												text=text+"<p style='width:100%;text-align:center;color:blue;'>"+data[1][i].organizationNonLatinExtendedName+"</p>";
+											}
+											}
+									  	if(data[2].length!=0){
+											for(var i=0;i<data[2].length;i++){
+												text=text+"<p style='width:100%;text-align:center;color:green;'>"+data[2][i].organizationNonLatinExtendedName+"</p>";
+											}
+											}
 									  swal({  
 								          title:title,  
 								          text:text,
@@ -500,19 +510,18 @@
 			 $("#chart2").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
-			 $(".map-preview").hide();
 			 $("#chart3Radar").hide();
-			
+			flag=3;
 		}
 		
 		function hideAll(obj){
 			if(flag==1||flag==3)
 			{
-			 $(".container").css("display","none");
+			 $(".map-preview").css("display","none");
 			}
 		else if(flag==2)
 			{
-			 $(".container").css("display","block");
+			 $(".map-preview").css("display","block");
 			}
 			if(flag==1||flag==3){
 				flag=2;
