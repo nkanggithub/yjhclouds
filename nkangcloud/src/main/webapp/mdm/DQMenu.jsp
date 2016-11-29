@@ -200,17 +200,17 @@
 									  var text="<div style='height:215px;overflow:scroll;'>";
 									  	if(data[0].length!=0){
 							for(var i=0;i<data[0].length;i++){
-								text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[0][i].industrySegmentNames+"</p></div></div></div>";
+								text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[0][i].industrySegmentNames+"</p></div></div></div>";
 							}
 							}
 									  	if(data[1].length!=0){
 											for(var i=0;i<data[1].length;i++){
-												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;text-align:left;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[1][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[1][i].industrySegmentNames+"</p></div></div></div>";
+												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;text-align:left;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[1][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[1][i].industrySegmentNames+"</p></div></div></div>";
 											}
 											}
 									  	if(data[2].length!=0){
 											for(var i=0;i<data[2].length;i++){
-											text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[2][i].industrySegmentNames+"</p></div></div></div>";
+											text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[2][i].industrySegmentNames+"</p></div></div></div>";
 											}
 											
 											text=text+"</div>";
@@ -990,139 +990,9 @@ visibility:visible;
 	</div>
 	
 	<div id="chart5">
-<!-- 	<svg class="chart"></svg>
-	
-	<script>
-		var data = {
-		  labels: [
-		    'resilience', 'maintainability', 'accessibility',
-		    'uptime', 'functionality', 'impact'
-		  ],
-		  series: [
-		    {
-		      label: 'Customer',
-		      values: [4, 8, 15, 16, 23, 42]
-		    },
-		    {
-		      label: 'Partner',
-		      values: [12, 43, 22, 11, 73, 25]
-		    },
-		    {
-		      label: 'Competitor',
-		      values: [31, 28, 14, 8, 15, 21]
-		    },]
-		};
-		
-		var chartWidth       = 200,
-		    barHeight        = 15,
-		    groupHeight      = barHeight * data.series.length,
-		    gapBetweenGroups = 10,
-		    spaceForLabels   = 100,
-		    spaceForLegend   = 100;
-		
-		// Zip the series data together (first values, second values, etc.)
-		var zippedData = [];
-		for (var i=0; i<data.labels.length; i++) {
-		  for (var j=0; j<data.series.length; j++) {
-		    zippedData.push(data.series[j].values[i]);
-		  }
-		}
-		
-		// Color scale
-		var color = d3.scale.category20();
-		var chartHeight = barHeight * zippedData.length + gapBetweenGroups * data.labels.length;
-		
-		var x = d3.scale.linear()
-		    .domain([0, d3.max(zippedData)])
-		    .range([0, chartWidth]);
-		
-		var y = d3.scale.linear()
-		    .range([chartHeight + gapBetweenGroups, 0]);
-		
-		var yAxis = d3.svg.axis()
-		    .scale(y)
-		    .tickFormat('')
-		    .tickSize(0)
-		    .orient("left");
-		
-		// Specify the chart area and dimensions
-		var chart = d3.select(".chart")
-		    .attr("width", spaceForLabels + chartWidth + spaceForLegend)
-		    .attr("height", chartHeight);
-		
-		// Create bars
-		var bar = chart.selectAll("g")
-		    .data(zippedData)
-		    .enter().append("g")
-		    .attr("transform", function(d, i) {
-		      return "translate(" + spaceForLabels + "," + (i * barHeight + gapBetweenGroups * (0.5 + Math.floor(i/data.series.length))) + ")";
-		    });
-		
-		// Create rectangles of the correct width
-		bar.append("rect")
-		    .attr("fill", function(d,i) { return color(i % data.series.length); })
-		    .attr("class", "bar")
-		    .attr("width", x)
-		    .attr("height", barHeight - 1);
-		
-		// Add text label in bar
-		bar.append("text")
-		    .attr("x", function(d) { return x(d) - 3; })
-		    .attr("y", barHeight / 2)
-		    .attr("fill", "red")
-		    .attr("dy", ".35em")
-		    .text(function(d) { return d; });
-		
-		// Draw labels
-		bar.append("text")
-		    .attr("class", "label")
-		    .attr("x", function(d) { return - 10; })
-		    .attr("y", groupHeight / 2)
-		    .attr("dy", ".35em")
-		    .text(function(d,i) {
-		      if (i % data.series.length === 0)
-		        return data.labels[Math.floor(i/data.series.length)];
-		      else
-		        return ""});
-		
-		chart.append("g")
-		      .attr("class", "y axis")
-		      .attr("transform", "translate(" + spaceForLabels + ", " + -gapBetweenGroups/2 + ")")
-		      .call(yAxis);
-		
-		// Draw legend
-		var legendRectSize = 18,
-		    legendSpacing  = 4;
-		
-		var legend = chart.selectAll('.legend')
-		    .data(data.series)
-		    .enter()
-		    .append('g')
-		    .attr('transform', function (d, i) {
-		        var height = legendRectSize + legendSpacing;
-		        var offset = -gapBetweenGroups/2;
-		        var horz = spaceForLabels + chartWidth + 40 - legendRectSize;
-		        var vert = i * height - offset;
-		        return 'translate(' + horz + ',' + vert + ')';
-		    });
-		
-		legend.append('rect')
-		    .attr('width', legendRectSize)
-		    .attr('height', legendRectSize)
-		    .style('fill', function (d, i) { return color(i); })
-		    .style('stroke', function (d, i) { return color(i); });
-		
-		legend.append('text')
-		    .attr('class', 'legend')
-		    .attr('x', legendRectSize + legendSpacing)
-		    .attr('y', legendRectSize - legendSpacing)
-		    .text(function (d) { return d.label; });
-		
-		$("#chart5").hide();
-		</script> -->
+
 	</div>
- <!-- -------------------------------------------------------------------------------------------------------------- -->
- <!-- -------------------------------------------------------------------------------------------------------------- -->
+
 <div id="mt-station">
 
 <!-- MetroTab Content 卡布奇诺-->
@@ -1134,20 +1004,7 @@ visibility:visible;
 <!-- MetroTab Content 美式咖啡 Industry-->
 <div data-mtid="americano"> 
 	<div id="americano_loadChart"></div>
-	<div id="radardetailid">
-<%--    		<%
-			for(String i : lst){
-				String cnt =  RestUtils.CallgetFilterCountOnCriteriaFromMongo(i,"","重庆","");
-				i = i.replaceAll("\\s+","");
-				i = i.replaceAll("-", "");
-				double n = Double.valueOf(cnt);
-				double m = Double.valueOf(totalcntwithRegion);
-				double percent = n/m;
-				String mywidth = percent*100 + "%";
-				out.print("<div class=\"progress\"><div class=\"progress-bar progress-bar-success\" role=\"progressbar\" aria-valuenow=\""+ cnt +"\" aria-valuemin=\"0\" aria-valuemax=\""+ totalcntwithRegion +"\" style=\"width: "+ mywidth +";\"><span style=\"text-align:center; color:#000; \"> "+ i +" </span></div><span style=\"float:right;\">"+ cnt +"</span></div>");
-			}
-		%> --%>
-</div>
+	<div id="radardetailid"></div>
 
 </div>
 <!-- End MetroTab Content  美式咖啡-->
@@ -1253,28 +1110,7 @@ visibility:visible;
 		<!-- End Content Holder -->
 	</div>
 	
-	
-	
-	
-<!--  <div id="chart6" >
-		<script>
-			var chart = c3.generate({
-			    data: {
-			        columns: [
-			            ['data1', 30, 200, 100, 400, 150, 250, 50, 100, 250]
-			        ]
-			    },
-			    axis: {
-			        x: {
-			            type: 'category',
-			            categories: ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8', 'cat9']
-			        }
-			    },
-			    bindto : '#chart6'
-			});
-			$("#chart6").hide();
-		</script>
-</div> -->
+
 
 <!-- END MESSAGE STATION -->
 
@@ -1531,7 +1367,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'ARMENIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_8':{
-		'hover': 'AUSTRALIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'AUSTRALIA <img src="http://www.geonames.org/flags/x/au.gif" class="worldflag"/><br/>','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_9':{
 		'hover': 'AUSTRIA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
@@ -1594,7 +1430,7 @@ var myt=document.getElementById("my").innerHTML;
 		'hover': 'CAMEROON','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_29':{
-		'hover': 'CANADA','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
+		'hover': 'CANADA <img src="http://www.geonames.org/flags/x/ca.gif" class="worldflag"/><br/>','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
 	},
 	'map_30':{
 		'hover': 'CENTRAL AFRICAN REPUBLIC','upColor':'#00B287','overColor':'#ffcc5f','downColor':'#477cb2','enable':true,
