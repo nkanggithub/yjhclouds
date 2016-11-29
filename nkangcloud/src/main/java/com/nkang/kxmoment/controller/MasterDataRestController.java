@@ -607,8 +607,8 @@ public class MasterDataRestController {
  * chang-zheng
  */
 	
-	@RequestMapping("/getCitydetail")
-	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getDataQualityReportbynonatinCity(HttpServletRequest request,
+	@RequestMapping("/getCitydetailxx")
+	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getDataQualityReportbynonatinCityxx(HttpServletRequest request,
 			HttpServletResponse response,@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
 	{
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
