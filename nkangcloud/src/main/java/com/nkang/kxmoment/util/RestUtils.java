@@ -1714,13 +1714,13 @@ public static String regist(WeChatMDLUser user) {
 					try {
 						demoJson = new JSONObject(line);
 						orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
-						orgCountryCode.setCountryName(demoJson.getString("countryName").toUpperCase());
+						orgCountryCode.setCountryName(demoJson.getString("countryName"));
 						orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
 						orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
 						orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
 						orgCountryCode.setCompetitorCount(demoJson.getString("competitorCount"));
 						//listorgcode.add(orgCountryCode);
-						OrgCountryCodeMap.put(demoJson.getString("countryName"), orgCountryCode);
+						OrgCountryCodeMap.put(demoJson.getString("countryName").toUpperCase(), orgCountryCode);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -1758,11 +1758,11 @@ public static String regist(WeChatMDLUser user) {
 	public static OrgCountryCode ReadOrgCountryCodeByName(String readPath,String countryName) {
 		OrgCountryCode orgCountryCode = new OrgCountryCode();
 		if(OrgCountryCodeMap!=null){
-			orgCountryCode = OrgCountryCodeMap.get(countryName);
+			orgCountryCode = OrgCountryCodeMap.get(countryName.toUpperCase());
 		}
 		else{
 			OrgCountryCodeMap = ReadCountryCode(readPath);
-			orgCountryCode = OrgCountryCodeMap.get(countryName);
+			orgCountryCode = OrgCountryCodeMap.get(countryName.toUpperCase());
 		}
 		return orgCountryCode;
 	}
