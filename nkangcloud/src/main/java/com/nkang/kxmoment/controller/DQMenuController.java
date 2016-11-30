@@ -375,19 +375,19 @@ public class DQMenuController {
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
 	}
 	@RequestMapping("/ReadOrgCountryCodeByName")
-	public @ResponseBody Map<String,String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
-		OrgCountryCode orgcode = new OrgCountryCode();
-		Map<String,String> codeMap = new HashMap<String,String>();
-		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
-		String path = xmlpath.toString();
-		path=path.substring(5);  
-		System.out.println(xmlpath);
-		String url = path;
-		orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
-		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode().toLowerCase()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
-			/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
-		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
-		codeMap.put(orgcode.getCountryCode(), orgcountrycode);
-		return codeMap;
-	}
+public @ResponseBody List<String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
+	OrgCountryCode orgcode = new OrgCountryCode();
+	List<String> countrySet=new ArrayList<String>();
+	URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
+	String path = xmlpath.toString();
+	path=path.substring(5);  
+	System.out.println(xmlpath);
+	String url = path;
+	orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
+	String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode().toLowerCase()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
+		/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
+	//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
+	countrySet.add(orgcountrycode);
+	return countrySet;
+}
 }
