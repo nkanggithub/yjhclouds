@@ -640,7 +640,7 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * 
 	 */
-	@RequestMapping("/ReadCountryCodeByCountryCode")
+	/*@RequestMapping("/ReadCountryCodeByCountryCode")
 	public @ResponseBody Map<String,String> ReadCountryCodeByCountryCode(@RequestParam(value = "countryCode") String countryCode){
 		OrgCountryCode orgcode = new OrgCountryCode();
 		Map<String,String> codeMap = new HashMap<String,String>();
@@ -651,21 +651,11 @@ public class MasterDataRestController {
 		String url = path;
 		orgcode = RestUtils.ReadCountryCodeByCountryCode(url,countryCode);
 		String orgcountrycode = "机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
-			/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
+				"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();
 		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
 		codeMap.put(countryCode, orgcountrycode);
 		return codeMap;
-	}
-	/*@RequestMapping("/ReadOrgCountryCodeAll")
-	public @ResponseBody  Map<String,String> ReadOrgCountryCodeAll(){
-		Map<String,String> codeMaps = new HashMap<String,String>();
-		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
-		String path = xmlpath.toString();
-		path=path.substring(5);  
-		System.out.println(xmlpath);
-		String url = path;
-		codeMaps = RestUtils.ReadOrgCountryCodeAll(url);
-		return codeMaps;
 	}*/
+
 	
 }
