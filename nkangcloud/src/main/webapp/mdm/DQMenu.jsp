@@ -197,28 +197,27 @@
 							url : "getCitydetail?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
 							success : function(data) {
 								  if (data) {
-									  var text="<div style='height:215px;overflow:scroll;'>";
+									  var text="<div style='height:400px;overflow:scroll;'>";
 									  	if(data[0].length!=0){
-							for(var i=0;i<data[0].length;i++){
-								text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[0][i].industrySegmentNames+"</p></div></div></div>";
-							}
-							}
-									  	if(data[1].length!=0){
-											for(var i=0;i<data[1].length;i++){
-												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;text-align:left;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;'>"+data[1][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[1][i].industrySegmentNames+"</p></div></div></div>";
+											for(var i=0;i<data[0].length;i++){
+												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 100%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div></div></div>";
 											}
 											}
-									  	if(data[2].length!=0){
-											for(var i=0;i<data[2].length;i++){
-											text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 70px;margin-top:5px;border-radius:5px;'><div style='width:21%;height:100%;margin:0;margin-left: 0%;float:left;'><img src='mdm/images/People.png' width='60px' height='60px'></div><div style='width: 52%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:40px;line-height: 30px;margin:0;font-weight:bolder;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:40px;line-height: 15px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div><div style='width: 24%;height:100%;margin:0;float:left;/* margin-right:4%; */'><p style='width:100%;height:50px;line-height: 30px;margin:0;text-align:right;'>"+data[2][i].industrySegmentNames+"</p></div></div></div>";
-											}
-											
-											text=text+"</div>";
-											}
+													  	if(data[1].length!=0){
+															for(var i=0;i<data[1].length;i++){
+																text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 100%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].streetAddress1+"</p></div></div></div>";
+															}
+															}
+													  	if(data[2].length!=0){
+															for(var i=0;i<data[2].length;i++){
+															text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 100%;height:100%;margin:0;margin-left:2%;float:left;'><p style='width:100%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div></div></div>";
+															}
+															
+															text=text+"</div>";
+															}
 									  swal({  
 								          title:title,  
-								          text:text,
-								          type:"success",  
+								          text:text,  
 										  html:"true",
 								          showCancelButton:false,  
 								          showConfirmButton:"true",  
