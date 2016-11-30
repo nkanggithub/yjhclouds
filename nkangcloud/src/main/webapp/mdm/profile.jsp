@@ -340,11 +340,20 @@ color: #c2c2c2;
 	padding:0px;	
 }
 #Work_Mates_div{	
-	margin-top:-30px;
+	margin-top:-32px;
 }
 .Work_Mates_div2  .Work_Mates_div_list_div2{
 	border-bottom:#ccc 1px solid;
 	padding:10px 0px;
+}
+.Work_Mates_div2 .total_num{
+	float:right;
+	margin-bottom:-6px;
+	vertical-align:bottom;
+}
+.Work_Mates_div2 .total_num img{
+	height:16px;
+	margin-right:5px;
 }
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_img_div2{
 	float:left;
@@ -541,6 +550,9 @@ function register() {
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						var ul = "";
+						ul='<div class="Work_Mates_div_list_div2">'
+						+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>'+ jsons.results.length
+						+'</span><div class="clear"></div></div>';
 						for (var i = 0; i < jsons.results.length; i++) {
 							var temp = jsons.results[i];
 							var selfIntro=temp.selfIntro;
