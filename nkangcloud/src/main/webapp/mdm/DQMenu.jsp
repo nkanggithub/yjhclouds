@@ -63,12 +63,10 @@
 		
 		$("#map_base svg g path").on("click",function(){
 			console.log("react....."+$("#map-tip").text());
-			var country1=$("#map-tip").text();
-			var country2=country1.substring(0,1).toUpperCase()+country1.substring(1).toLowerCase();
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "ReadOrgCountryCodeByName?countryName="+country2,
+				url : "ReadOrgCountryCodeByName?countryName="+$("#map-tip").text(),
 				success : function(data) {
 					  if (data) {
 						  $("#map-tip").html(data[0]);
