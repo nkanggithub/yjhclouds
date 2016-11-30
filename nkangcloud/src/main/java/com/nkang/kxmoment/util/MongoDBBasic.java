@@ -1134,7 +1134,11 @@ public class MongoDBBasic {
 				queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
 			}
 			else{
-				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(new BasicDBObject("Teamer.registerDate",1));
+				BasicDBObject sort=new BasicDBObject();
+				sort.put("Teamer.openid", -1);
+				sort.put("Teamer.registerDate", 1);
+				sort.put("Created", 1);
+				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
 			}
             if (null != queryresults) {
             	while(queryresults.hasNext()){
