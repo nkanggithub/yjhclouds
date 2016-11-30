@@ -86,7 +86,7 @@ img.Wmates {
 }
 
 #main-content {
-	margin-bottom: 0px !important;
+	margin: 0px !important;
 }
 
 .HpLogo {
