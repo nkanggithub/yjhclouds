@@ -562,6 +562,7 @@ function register() {
 							var temp = jsons.results[i];
 							var selfIntro=temp.selfIntro;
 							var role=temp.role;
+							var workDay=temp.workDay;
 							if(selfIntro==null||selfIntro=='null'){
 								selfIntro="nothing";
 							}else{
@@ -571,6 +572,11 @@ function register() {
 							}
 							if(role==null||role=='null'){
 								role="";
+							}
+							if(workDay==null||workDay=='null'||workDay==0){
+								workDay="";
+							}else{
+								workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
 							}
 							var li='	<div class="Work_Mates_div_list_div2">'
 								+'                                           	 	<div class="Work_Mates_img_div2">'
@@ -599,6 +605,7 @@ function register() {
 								+ selfIntro
 								+ '</span>'
 								+'                                        		</div>'
+								+workDay
 								+'                                                <div class="clear"></div>'
 								+'                                          </div>';
 							ul += li;
