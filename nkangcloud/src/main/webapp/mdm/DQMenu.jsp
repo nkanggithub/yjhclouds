@@ -120,6 +120,97 @@
 				} 
 			
 				}); 
+		  $("#testc").click(function(){ 
+				var chart2HTML=$("#chart2").html();
+				  if(chart2HTML==""){
+				
+				$.ajax({
+					type : "POST",
+					dataType : "json",
+					url : "getChart2?userState="+$("#userState").html(),
+					success : function(data) {
+						  if (data) {
+							  var chart = c3.generate({
+									data: {
+										columns: [
+										          data[0],
+										          data[1],
+										         data[2]
+										         ]
+									},
+									axis: {
+										x: {
+											type: 'category',
+											categories: data[3]
+										}
+									},
+									zoom: {
+								        enabled: true
+								    },
+								    bindto : '#chart2'
+								});
+							 
+								console.log("pass by....");
+						  }
+					},
+					error:function(data)
+					{
+						console.log("failed..."+data.toString());
+					}
+				
+			});
+			} 
+
+					   loadChart2();
+				//	   $("#chart2 .tick text tspan").attr("onclick","hello(this)");
+					   $(document).on("click","#chart2 .tick",function(){
+						   console.log($(this).text());
+						   var title=$(this).text();
+							$.ajax({
+								type : "POST",
+								dataType : "json",
+								url : "getCitydetail?userState="+$("#userState").text().trim()+"&nonlatinCity="+$(this).text(),
+								success : function(data) {
+									  if (data) {
+										  var text="<div style='height:400px;overflow:scroll;'>";
+										  	if(data[0].length!=0){
+												for(var i=0;i<data[0].length;i++){
+													text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #1F77B4;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;    margin-right: 4px;border-radius: 3px;'>客户</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].industrySegmentNames+"</p><p style='width:100%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div></div></div>";
+												}
+												}
+														  	if(data[1].length!=0){
+																for(var i=0;i<data[1].length;i++){
+																	text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #FF7F0E;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;    margin-right: 4px;border-radius: 3px;'>伙伴</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].streetAddress1+"</p></div></div></div>";
+																}
+																}
+														  	if(data[2].length!=0){
+																for(var i=0;i<data[2].length;i++){
+																text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #2CA02C;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;margin-right: 4px;border-radius: 3px;'>竞争</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div></div></div>";
+																}
+																
+																text=text+"</div>";
+																}
+										  swal({  
+									          title:title,  
+									          text:text,  
+											  html:"true",
+									          showCancelButton:false,  
+									          showConfirmButton:"true",  
+									          confirmButtonText:"OK",  
+									          animation:"slide-from-top"  
+									        });
+										 
+											
+									  }
+								},
+								error:function(data)
+								{
+									console.log("failed..."+data.toString());
+								}
+							
+						});
+					   });
+				}); 
 		$("#openmes").on("click",function(){
 			
 			$.ajax({
@@ -1116,10 +1207,11 @@ visibility:visible;
 	<div id="chart3" style="display:none"></div>
 	<div id="chartCity" style="display:none"></div>
 	<div id="chart2" style="display:none"></div>
-	    <div id="cityRound" style="position:absolute;width:200px;height:40px;top:320px;left:30%;display:none;">
+<div id="cityRound" style="position: absolute;width: 200px;height: 40px;top: 320px;left: 20%;display:none;">
 		
-<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;"><img src="Jsp/PIC/cn.gif" alt="" style="width: 30px;height: 15px;position:relative;top:-15px;"/></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">中国<p></div>
-<div id="testb" style=" opacity:0.3;cursor: pointer;position: absolute;top: 0px;left:110px;width: 100px;height: 40px;"><p style="float:left;width: 15px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ userState }<p></div>
+<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;"><img src="Jsp/PIC/cn.gif" alt="" style="width: 30px;height: 15px;position:relative;top:-15px;"></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">中国</p><p></p></div>
+<div id="testb" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 100px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ userState }</p><p></p></div>
+ <div id="testc" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 200px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#2CA02C;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">详情</p><p></p></div>
 </div>
 
   <div class="sk-circle">
