@@ -3,22 +3,20 @@ package com.nkang.kxmoment.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -612,5 +610,45 @@ public class MasterDataRestController {
 			HttpServletResponse response,@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
 	{
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
+	}
+	/*
+	 * 
+	 * chang-zheng
+	 */
+	/*@RequestMapping("/InsertOrgCountryCode")
+	public @ResponseBody boolean InsertOrgCountryCode(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "OrgCountryCode") OrgCountryCode octc)
+	{
+		return  MongoDBBasic.createcountryCodes(octc);
+		
+	}*/
+	/*
+	 * chang-zheng
+	 * 
+	 */
+	@RequestMapping("/ReadOrgCountryCode")
+	public @ResponseBody Map<String,OrgCountryCode> ReadOrgCountryCode(){
+		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
+		String path = xmlpath.toString();
+		path=path.substring(5);  
+		System.out.println(xmlpath);
+		String url = path;
+		Map<String,OrgCountryCode> map = RestUtils.ReadCountryCode(url);
+		return map;
+	}
+	
+	/*
+	 * chang-zheng
+	 * 
+	 */
+	@RequestMapping("/ReadCountryCodeByCountryCode")
+	public @ResponseBody OrgCountryCode ReadCountryCodeByCountryCode(@RequestParam(value = "countryCode") String countryCode){
+		OrgCountryCode orgcode = new OrgCountryCode();
+		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
+		String path = xmlpath.toString();
+		path=path.substring(5);  
+		System.out.println(xmlpath);
+		String url = path;
+		orgcode = RestUtils.ReadCountryCodeByCountryCode(url,countryCode);
+		return orgcode;
 	}
 }
