@@ -226,7 +226,7 @@
 {"countryCode":"TO","countryName":"Tonga","totalCount":258,"customerCount":6,"partnerCount":0,"competitorCount":0},
 {"countryCode":"TR","countryName":"Turkey","totalCount":1301216,"customerCount":11161,"partnerCount":8860,"competitorCount":378},
 {"countryCode":"TT","countryName":"Trinidad and Tobago","totalCount":5283,"customerCount":491,"partnerCount":106,"competitorCount":1},
-{"countryCode":"TU","totalCount":0,"customerCount":0,"partnerCount":0,"competitorCount":0},
+{"countryCode":"TU","countryName":"","totalCount":0,"customerCount":0,"partnerCount":0,"competitorCount":0},
 {"countryCode":"TV","countryName":"Tuvalu","totalCount":27,"customerCount":1,"partnerCount":0,"competitorCount":0},
 {"countryCode":"TW","countryName":"Taiwan","totalCount":657354,"customerCount":9781,"partnerCount":12434,"competitorCount":93},
 {"countryCode":"TZ","countryName":"Tanzania","totalCount":8708,"customerCount":495,"partnerCount":434,"competitorCount":0},
