@@ -439,24 +439,37 @@ function register() {
 			var role = $j("#roleSelect option:selected").val();
 			var group = $j("#groupSelect option:selected").val();
 			var selfIntro = $j("#selfIntro").val();
-			$j.ajax({
-				url:"../regist",
-				data:{uid:uid,name:name,telephone:phone,email:email,
-					role:role,group:group,selfIntro:selfIntro,},
-				type:"POST",
-				dataType:"json",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				cache:false,
-				async:false,
-				success:function(result) {
-					if(result){
-						$j('#registerform').modal('hide');
-						swal("Registered successfully!", "Congratulations!", "success"); 
-					} else {
-						swal("Registered fail!", "Pls input your correct information.", "error");
+			
+			 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			 var phoneFilter = /^1[0-9]{10}/;
+			 if (name.replace(/(^ *)|( *$)/g,'')==''){
+				 swal("Registered fail!", "Pls input your correct name information.", "error");
+			 }else if (!phoneFilter.test(phone)){
+				 swal("Registered fail!", "Pls input your correct phone information.", "error");
+			 }else if (!emailFilter.test(email)){
+				 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
+			 }else if (selfIntro==''){
+				 swal("Registered fail!", "Pls input your correct self-introduction information.", "error");
+			 }else{
+				$j.ajax({
+					url:"../regist",
+					data:{uid:uid,name:name,telephone:phone,email:email,
+						role:role,group:group,selfIntro:selfIntro,},
+					type:"POST",
+					dataType:"json",
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					cache:false,
+					async:false,
+					success:function(result) {
+						if(result){
+							$j('#registerform').modal('hide');
+							swal("Registered successfully!", "Congratulations!", "success"); 
+						} else {
+							swal("Registered fail!", "Pls input your correct information.", "error");
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		
 	}
