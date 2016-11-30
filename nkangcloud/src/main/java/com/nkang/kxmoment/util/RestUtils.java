@@ -1714,19 +1714,13 @@ public static String regist(WeChatMDLUser user) {
 					try {
 						demoJson = new JSONObject(line);
 						orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
-						orgCountryCode.setCountryCode(demoJson.getString("countryName"));
+						orgCountryCode.setCountryName(demoJson.getString("countryName"));
 						orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
 						orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
 						orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
 						orgCountryCode.setCompetitorCount(demoJson.getString("competitorCount"));
 						//listorgcode.add(orgCountryCode);
-						OrgCountryCodeMap.put(demoJson.getString("countryCode"), orgCountryCode);
-//						System.out.println("countryCode : " + demoJson.getString("countryCode"));
-//						//System.out.println("countryName : " + demoJson.getString("countryName"));
-//						System.out.println("totalCount : " + demoJson.getString("totalCount"));
-//						System.out.println("customerCount : " + demoJson.getString("customerCount"));
-//						System.out.println("partnerCount : " + demoJson.getString("partnerCount"));
-//						System.out.println("competitorCount : " + demoJson.getString("competitorCount"));
+						OrgCountryCodeMap.put(demoJson.getString("countryName"), orgCountryCode);
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -1744,9 +1738,8 @@ public static String regist(WeChatMDLUser user) {
 	/*
 	 * 
 	 * chang-zheng get CountryCody json file
-	 */
+	 
 	public static OrgCountryCode ReadCountryCodeByCountryCode(String readPath,String countryCode) {
-		JSONObject demoJson = null;
 		OrgCountryCode orgCountryCode = new OrgCountryCode();
 		if(OrgCountryCodeMap!=null){
 			orgCountryCode = OrgCountryCodeMap.get(countryCode);
@@ -1755,42 +1748,24 @@ public static String regist(WeChatMDLUser user) {
 			OrgCountryCodeMap = ReadCountryCode(readPath);
 			orgCountryCode = OrgCountryCodeMap.get(countryCode);
 		}
-//		try {
-//			File f = new File(readPath);
-//			if (f.isFile() && f.exists()) {
-//				InputStreamReader read = new InputStreamReader(
-//						new FileInputStream(f), "UTF-8");
-//				BufferedReader reader = new BufferedReader(read);
-//				String line;
-//				while((line = reader.readLine()) != null){
-//					String CountryCode="";
-//						try {
-//							demoJson = new JSONObject(line);
-//							CountryCode = demoJson.getString("countryCode").toString();
-//							if(countryCode.equals(CountryCode)){
-//								orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
-//								orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
-//								orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
-//								orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
-//								orgCountryCode.setCompetitorCount(demoJson.getString("competitorCount"));
-//								break;
-//							}
-//							
-//						} catch (JSONException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//				}
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 		return orgCountryCode;
-
+	}*/
+	
+	/*
+	 * 
+	 * chang-zheng get CountryCody json file by name
+	 */
+	public static OrgCountryCode ReadOrgCountryCodeByName(String readPath,String countryName) {
+		OrgCountryCode orgCountryCode = new OrgCountryCode();
+		if(OrgCountryCodeMap!=null){
+			orgCountryCode = OrgCountryCodeMap.get(countryName);
+		}
+		else{
+			OrgCountryCodeMap = ReadCountryCode(readPath);
+			orgCountryCode = OrgCountryCodeMap.get(countryName);
+		}
+		return orgCountryCode;
 	}
-
 }
 
 
