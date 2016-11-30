@@ -362,6 +362,11 @@ color: #c2c2c2;
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div{
 	color:#333;
 }
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div span.selfIntro{
+	white-space:nowrap; 
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2{
 	margin-bottom:10px;
 	font-size:16px;
@@ -590,7 +595,7 @@ function register() {
 								+ temp.nickname
 								+ '</span><span class="role">'
 								+role+'</span></h2>'
-								+'                                                     <span>'
+								+'                                                     <span class="selfIntro">'
 								+ selfIntro
 								+ '</span>'
 								+'                                        		</div>'
