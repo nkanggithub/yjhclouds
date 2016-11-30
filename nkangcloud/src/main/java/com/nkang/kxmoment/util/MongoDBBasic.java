@@ -1128,7 +1128,7 @@ public class MongoDBBasic {
 				queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
 			}
 			else{
-				queryresults = mongoDB.getCollection(wechat_user).find().limit(500);
+				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(new BasicDBObject("Teamer.registerDate",-1));
 			}
             if (null != queryresults) {
             	while(queryresults.hasNext()){
