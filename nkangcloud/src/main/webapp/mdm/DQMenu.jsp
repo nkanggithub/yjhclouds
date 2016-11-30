@@ -66,7 +66,7 @@
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "ReadCountryCodeByCountryCode?countryCode="+$("#map-tip").text(),
+				url : "ReadOrgCountryCodeByName?countryName="+$("#map-tip").text(),
 				success : function(data) {
 					  if (data) {
 						  $("#map-tip").html(data[0]);
