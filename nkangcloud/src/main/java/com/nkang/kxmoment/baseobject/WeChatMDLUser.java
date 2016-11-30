@@ -4,6 +4,7 @@ public class WeChatMDLUser extends WeChatUser {
 
 	public String realName;
 	public String registerDate;
+	public int workDay;
 	public String role;
 	public String selfIntro;
 	public String email;
@@ -12,6 +13,12 @@ public class WeChatMDLUser extends WeChatUser {
 	public String like;
 	public String getRealName() {
 		return realName;
+	}
+	public int getWorkDay() {
+		return workDay;
+	}
+	public void setWorkDay(int workDay) {
+		this.workDay = workDay;
 	}
 	public void setRealName(String realName) {
 		this.realName = realName;
