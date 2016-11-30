@@ -307,12 +307,6 @@ public class DQMenuController {
 	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
 		request.getSession().setAttribute("curLoc", curLoc);
-		request.getSession().setAttribute("cn", "机遇:19714519<br/>客户:260793<br/>伙伴:49335<br/>竞争:443");
-		request.getSession().setAttribute("my", "机遇:224994<br/>客户:18964<br/>伙伴:11872<br/>竞争:83");
-		request.getSession().setAttribute("us", "机遇:69628720<br/>客户:384650<br/>伙伴:300034<br/>竞争:318913");
-		request.getSession().setAttribute("ru", "机遇:34274518<br/>客户:18569<br/>伙伴:54359<br/>竞争:62");
-		request.getSession().setAttribute("kr", "机遇:4028894<br/>客户:16167<br/>伙伴:11624<br/>竞争:166");
-		request.getSession().setAttribute("sg", "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119");
 		return "DQMenu";
 	}
 	
@@ -390,7 +384,7 @@ public class DQMenuController {
 		System.out.println(xmlpath);
 		String url = path;
 		orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
-		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/au.gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
+		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
 			/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
 		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
 		codeMap.put(orgcode.getCountryCode(), orgcountrycode);
