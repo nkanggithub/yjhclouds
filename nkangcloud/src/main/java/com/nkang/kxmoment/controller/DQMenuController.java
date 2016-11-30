@@ -1,4 +1,5 @@
 package com.nkang.kxmoment.controller;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Radar;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -377,5 +379,21 @@ public class DQMenuController {
 			HttpServletResponse response,@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
 	{
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
+	}
+	@RequestMapping("/ReadOrgCountryCodeByName")
+	public @ResponseBody Map<String,String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
+		OrgCountryCode orgcode = new OrgCountryCode();
+		Map<String,String> codeMap = new HashMap<String,String>();
+		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
+		String path = xmlpath.toString();
+		path=path.substring(5);  
+		System.out.println(xmlpath);
+		String url = path;
+		orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
+		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/au.gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
+			/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
+		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
+		codeMap.put(orgcode.getCountryCode(), orgcountrycode);
+		return codeMap;
 	}
 }
