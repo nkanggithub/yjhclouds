@@ -1714,7 +1714,7 @@ public static String regist(WeChatMDLUser user) {
 					try {
 						demoJson = new JSONObject(line);
 						orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
-						orgCountryCode.setCountryName(demoJson.getString("countryName"));
+						orgCountryCode.setCountryName(demoJson.getString("countryName").toUpperCase());
 						orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
 						orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
 						orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
