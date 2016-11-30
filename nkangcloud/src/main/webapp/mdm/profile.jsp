@@ -357,6 +357,12 @@ color: #c2c2c2;
 	margin-bottom:10px;
 	font-size:16px;
 }
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 .role{
+	font-size:10px;
+	color:#666;
+	padding-left:5px;
+	font-weight:normal;
+}
 .clear{
 	clear:both;
 }
@@ -424,8 +430,26 @@ function register() {
 					$j("#realname").val(jsons.results[0].realName);
 					$j("#phone").val(jsons.results[0].phone);
 					$j("#email").val(jsons.results[0].email);
-					//$j("#roleSelect option:selected").val(jsons.results[0].role);
-					//$j("#groupSelect option:selected").val(jsons.results[0].groupid);
+					$j("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
+				    var count=$j("#roleSelect option").length;
+				    for(var i=0;i<count;i++)  
+				       {           if($j("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
+				          {  
+				              $j("#roleSelect").get(0).options[i].selected = true;  
+				            
+				              break;  
+				          }  
+				      }
+				    count=$j("#groupSelect option").length;
+				    for(var i=0;i<count;i++)  
+				       {           if($j("#groupSelect").get(0).options[i].text == jsons.results[0].groupid)  
+				          {  
+				              $j("#groupSelect").get(0).options[i].selected = true;  
+				            
+				              break;  
+				          }  
+				      }
+						    
 					$j("#selfIntro").val(jsons.results[0].selfIntro);
 				}
 			}
@@ -517,32 +541,10 @@ function register() {
 						data = '{"results":' + data + '}';
 						var jsons = eval('(' + data + ')');
 						var ul = "";
-						var ul2 = "";
 						for (var i = 0; i < jsons.results.length; i++) {
 							var temp = jsons.results[i];
-							var li = '	<li class="Work_Mates_div_li">'
-									+ '                                        	<div class="Work_Mates_div_list_div">'
-									+ '                                           	 	<div class="Work_Mates_img_div">'
-									+ '                                        			<img src="'
-									+ temp.headimgurl
-									+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
-									+ temp.nickname
-									+ '\',\''
-									+ temp.headimgurl
-									+ '\',\''
-									+ temp.openid
-									+ '\');"/> '
-									+ '                                         		</div>'
-									+ '                                         		<div class="Work_Mates_img_div" style="text-align:center;">'
-									+ '                                        			 <span>'
-									+ temp.nickname
-									+ '</span>'
-									+ '                                        		 </div>'
-									+ '                                          </div>'
-									+ '                                        </li>';
-							ul += li;
-							
 							var selfIntro=temp.selfIntro;
+							var role=temp.role;
 							if(selfIntro==null||selfIntro=='null'){
 								selfIntro="nothing";
 							}else{
@@ -550,7 +552,10 @@ function register() {
 									selfIntro=(selfIntro.substr(0,12)+'...');
 								}
 							}
-							var li2='	<div class="Work_Mates_div_list_div2">'
+							if(role==null||role=='null'){
+								role="";
+							}
+							var li='	<div class="Work_Mates_div_list_div2">'
 								+'                                           	 	<div class="Work_Mates_img_div2">'
 								+'                                        			 <img src="'
 								+ temp.headimgurl
@@ -571,17 +576,17 @@ function register() {
 								+ temp.openid
 								+ '\');">'
 								+ temp.nickname
-								+ '</span></h2>'
+								+ '</span><span class="role">'
+								+role+'</span></h2>'
 								+'                                                     <span>'
 								+ selfIntro
 								+ '</span>'
 								+'                                        		</div>'
 								+'                                                <div class="clear"></div>'
 								+'                                          </div>';
-							ul2 += li2;
+							ul += li;
 						}
-						//$j("#Work_Mates_ul").html(ul);
-						$j("#Work_Mates_div").html(ul2);
+						$j("#Work_Mates_div").html(ul);
 					}
 				});
 	}
