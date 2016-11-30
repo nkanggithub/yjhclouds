@@ -1158,6 +1158,9 @@ public class MongoDBBasic {
             				if(teamobj.get("realName") != null){
             					weChatMDLUser.setNickname(teamobj.get("realName").toString());
             				}
+            				if(teamobj.get("role") != null){
+            					weChatMDLUser.setRole(teamobj.get("role").toString());
+            				}
             			}
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
@@ -1169,9 +1172,6 @@ public class MongoDBBasic {
                 				}
                 				if(teamobj.get("registerDate") != null){
                 					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
-                				}
-                				if(teamobj.get("role") != null){
-                					weChatMDLUser.setRole(teamobj.get("role").toString());
                 				}
                 				if(teamobj.get("realName") != null){
                 					weChatMDLUser.setRealName(teamobj.get("realName").toString());
