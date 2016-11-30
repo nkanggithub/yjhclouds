@@ -384,7 +384,7 @@ public class DQMenuController {
 		System.out.println(xmlpath);
 		String url = path;
 		orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
-		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
+		String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode().toLowerCase()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
 			/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
 		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
 		codeMap.put(orgcode.getCountryCode(), orgcountrycode);
