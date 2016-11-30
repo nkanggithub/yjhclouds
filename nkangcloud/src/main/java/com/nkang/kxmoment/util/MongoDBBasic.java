@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.util;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -203,17 +205,21 @@ public class MongoDBBasic {
             	while(dbcur.hasNext()){
             		DBObject o = dbcur.next();
             		DBObject dbo = new BasicDBObject();
-            		dbo.put("openid", teamer.getOpenid()); 
-            		dbo.put("groupid", teamer.getGroupid()); 
-            		dbo.put("realName", teamer.getRealName()); 
-        			dbo.put("email", teamer.getEmail());
-        			dbo.put("phone", teamer.getPhone());
-        			dbo.put("registerDate", teamer.getRegisterDate());
-        			dbo.put("role", teamer.getRole());
-        			dbo.put("selfIntro", teamer.getSelfIntro());
-        			dbo.put("suppovisor", teamer.getSuppovisor()); 
-        			o.put("Teamer", dbo);
-        			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), o);
+            		dbo.put("Teamer.openid", teamer.getOpenid()); 
+            		dbo.put("Teamer.groupid", teamer.getGroupid()); 
+            		dbo.put("Teamer.realName", teamer.getRealName()); 
+        			dbo.put("Teamer.email", teamer.getEmail());
+        			dbo.put("Teamer.phone", teamer.getPhone());
+        			dbo.put("Teamer.role", teamer.getRole());
+        			dbo.put("Teamer.selfIntro", teamer.getSelfIntro());
+        			dbo.put("Teamer.suppovisor", teamer.getSuppovisor()); 
+        			Object teamer2 = o.get("Teamer");
+        			if(teamer2 == null){
+            			dbo.put("Teamer.registerDate", teamer.getRegisterDate());
+        			}
+        			BasicDBObject doc = new BasicDBObject();  
+        			doc.put("$set", dbo);  
+        			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID),doc);
             		ret = true;
             	}
             }
@@ -1128,7 +1134,7 @@ public class MongoDBBasic {
 				queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
 			}
 			else{
-				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(new BasicDBObject("Teamer.registerDate",-1));
+				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(new BasicDBObject("Teamer.registerDate",1));
 			}
             if (null != queryresults) {
             	while(queryresults.hasNext()){
@@ -1161,6 +1167,16 @@ public class MongoDBBasic {
             				if(teamobj.get("role") != null){
             					weChatMDLUser.setRole(teamobj.get("role").toString());
             				}
+            				if(teamobj.get("registerDate") != null){
+            					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
+            					SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+                				String dstr=teamobj.get("registerDate").toString();
+                				java.util.Date date=sdf.parse(dstr);
+                				long  s1=date.getTime();//将时间转为毫秒
+                				long s2=System.currentTimeMillis();//得到当前的毫秒
+                				int  day=(int) ((s2-s1)/1000/60/60/24)+1;
+                				weChatMDLUser.setWorkDay(day);
+            				}
             			}
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
@@ -1169,9 +1185,6 @@ public class MongoDBBasic {
                 				}
                 				if(teamobj.get("phone") != null){
                 					weChatMDLUser.setPhone(teamobj.get("phone").toString());
-                				}
-                				if(teamobj.get("registerDate") != null){
-                					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
                 				}
                 				if(teamobj.get("realName") != null){
                 					weChatMDLUser.setRealName(teamobj.get("realName").toString());
