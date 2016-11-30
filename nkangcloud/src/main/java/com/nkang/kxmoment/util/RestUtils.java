@@ -1,6 +1,9 @@
 package com.nkang.kxmoment.util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,16 +15,19 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -30,6 +36,7 @@ public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "N";
+	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
 			String accessToken = null;
@@ -1683,6 +1690,106 @@ public static String regist(WeChatMDLUser user) {
 	       }
 			return message;
 		}
+
+	/*
+	 * 
+	 * chang-zheng get CountryCody json file
+	 */
+	public static Map<String,OrgCountryCode> ReadCountryCode(String readPath) {
+		JSONObject demoJson = null;
+		// List<OrgCountryCode> listorgcode = new ArrayList<OrgCountryCode>();
+		if(OrgCountryCodeMap!=null){
+			return OrgCountryCodeMap;
+		}
+		OrgCountryCodeMap = new HashMap<String,OrgCountryCode>();
+		try {
+			File f = new File(readPath);
+			if (f.isFile() && f.exists()) {
+				InputStreamReader read = new InputStreamReader(
+						new FileInputStream(f), "UTF-8");
+				BufferedReader reader = new BufferedReader(read);
+				String line;
+				while((line = reader.readLine()) != null){
+					OrgCountryCode orgCountryCode = new OrgCountryCode();
+					try {
+						demoJson = new JSONObject(line);
+						orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
+						orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
+						orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
+						orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
+						orgCountryCode.setCompetitorCount(demoJson.getString("competitorCount"));
+						//listorgcode.add(orgCountryCode);
+						OrgCountryCodeMap.put(demoJson.getString("countryCode"), orgCountryCode);
+//						System.out.println("countryCode : " + demoJson.getString("countryCode"));
+//						//System.out.println("countryName : " + demoJson.getString("countryName"));
+//						System.out.println("totalCount : " + demoJson.getString("totalCount"));
+//						System.out.println("customerCount : " + demoJson.getString("customerCount"));
+//						System.out.println("partnerCount : " + demoJson.getString("partnerCount"));
+//						System.out.println("competitorCount : " + demoJson.getString("competitorCount"));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return OrgCountryCodeMap;
+
+	}
+	/*
+	 * 
+	 * chang-zheng get CountryCody json file
+	 */
+	public static OrgCountryCode ReadCountryCodeByCountryCode(String readPath,String countryCode) {
+		JSONObject demoJson = null;
+		OrgCountryCode orgCountryCode = new OrgCountryCode();
+		if(OrgCountryCodeMap!=null){
+			orgCountryCode = OrgCountryCodeMap.get(countryCode);
+		}
+		else{
+			OrgCountryCodeMap = ReadCountryCode(readPath);
+			orgCountryCode = OrgCountryCodeMap.get(countryCode);
+		}
+//		try {
+//			File f = new File(readPath);
+//			if (f.isFile() && f.exists()) {
+//				InputStreamReader read = new InputStreamReader(
+//						new FileInputStream(f), "UTF-8");
+//				BufferedReader reader = new BufferedReader(read);
+//				String line;
+//				while((line = reader.readLine()) != null){
+//					String CountryCode="";
+//						try {
+//							demoJson = new JSONObject(line);
+//							CountryCode = demoJson.getString("countryCode").toString();
+//							if(countryCode.equals(CountryCode)){
+//								orgCountryCode.setCountryCode(demoJson.getString("countryCode"));
+//								orgCountryCode.setTotalCount(demoJson.getString("totalCount"));
+//								orgCountryCode.setCustomerCount(demoJson.getString("customerCount"));
+//								orgCountryCode.setPartnerCount(demoJson.getString("partnerCount"));
+//								orgCountryCode.setCompetitorCount(demoJson.getString("competitorCount"));
+//								break;
+//							}
+//							
+//						} catch (JSONException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//				}
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		return orgCountryCode;
+
+	}
+
 }
 
 
