@@ -1574,5 +1574,34 @@ public class MongoDBBasic {
 			
 			return lilist;
 		}
+		/*
+		 * chang-zheng
+		 * get NonLatinCity
+		 */
+		public static List<String> getAllDistrict(String state){
+			mongoDB = getMongoDB();
+			List<String> listOfRegion = new ArrayList<String>();
+			@SuppressWarnings("rawtypes")
+			List results;
+		    try{
+		    	DBObject dbquery = new BasicDBObject();  
+				if(state != "" && state != null && state != "null" ){
+					Pattern pattern = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE); 
+					dbquery.put("state", pattern);
+				}
+						
+		    	results = mongoDB.getCollection(collectionMasterDataName).distinct("cityRegion", dbquery);
+		    	for(int i = 10; i < results.size(); i ++){
+		    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
+		    			listOfRegion.add((String) results.get(i));
+		    		}
+		    	}
+		    }
+			catch(Exception e){
+				log.info("getFilterRegionFromMongo--" + e.getMessage());
+			}
+		    return listOfRegion;
+		}
+
 	    // END
 }
