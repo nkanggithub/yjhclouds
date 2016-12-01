@@ -84,7 +84,37 @@ img.Wmates {
 #weather_div_loading {
 	text-align: center;
 }
-
+#weather_div  .Socialization_menu img{
+	width:50%;
+}
+#weather_div .Socialization_menu{
+	text-align: center;
+}
+#weather_div .Socialization_menu tr td{
+	width:25%;
+	padding:6px 0px;
+}
+#weather_div .Socialization_menu tr td h4{
+	color:#000;
+	font-size:13px;
+}
+#weather_div .Socialization_menu tr td:hover{
+	background-color: #eee;
+}
+#tax_main_div table tr td input{
+	width:90px;
+	padding:2px 5px;
+}
+#tax_main_div table tr td{
+	line-height:30px;
+	vertical-align:middle;
+}
+#tax_main_div table tr td:nth-child(odd){
+	text-align:right;
+}
+#tax_main_div table tr td:nth-child(even){
+	text-align:left;
+}
 #main-content {
 	margin: 0px !important;
 }
@@ -383,12 +413,29 @@ color: #c2c2c2;
 <!-- end userLists style-->
 </style>
 <script>
-	var $j = jQuery.noConflict();
-	$j(window).load(function() {
+var $j = jQuery.noConflict();
+$j(window).load(function() {
 		getWeather();
 		getMDLUserLists();
-	});
-
+		$j("#tax_submit_button").click(function(){
+			jQuery.ajax({
+				type : "GET",
+				url : "../userProfile/getTax",
+				data : {
+					taxIncome : $j("#taxIncome").val(),
+					taxstart : $j("#taxstart").val(),
+					payment : $j("#payment").val()
+				},
+				cache : false,
+				success : function(data) {
+					var jsons = eval('(' + data + ')');
+					$j("#levelcalc").text(jsons.levelcalc);
+					$j("#nolevelcalc").text(jsons.nolevelcalc);
+					swal("Calculate successfully!", "Congratulations!", "success"); 
+				}
+			});
+		});
+});
 function register() {
 	jQuery
 	.ajax({
@@ -656,7 +703,7 @@ function register() {
 									dateT = dateT.substring(start + 1, end);
 									tr += '<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img id="refreshImg" src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'
 											+ dateT
-											+ '</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
+											+ '</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"  data-dismiss="modal" aria-hidden="true"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
 									//tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b> <img src="../MetroStyleFiles/refresh.png" style="height:30px;cursor:pointer;" onclick="getWeather();"/></td></tr><tr>';
 									tr += '<td width="20%" align="left">今天</td>';
 								} else {
@@ -866,9 +913,86 @@ function register() {
                		   </div> style="display:none"
                		    -->
 									<div id="weather_div">
-										<table width="100%" id="weather" style="margin-bottom: -20px;">
+										<table class="Socialization_menu">
+											<tr>
+												<td> 
+													<a class="" data-toggle="modal" href="#weather_main_div">
+														<img  src="../MetroStyleFiles/menu-weather.png" />
+														<h4>天气</h4>
+													</a>
+												</td>											
+												<td>
+													<a class="" data-toggle="modal" href="#tax_main_div">
+														<img  src="../MetroStyleFiles/menu-tax.png" />
+														<h4>税费计算</h4>
+													</a>
+												</td>
+												<td>
+													<img  src="../MetroStyleFiles/develop.png" />
+													<h4>开发中</h4>
+												</td>
+												<td>
+													<img  src="../MetroStyleFiles/develop.png" />
+													<h4>开发中</h4>
+												</td>
+											</tr>
 										</table>
 									</div>
+								</div>
+								<div id="weather_main_div" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="weather_main_div"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-header" style="text-align: center;">
+											<h3><b>天气</b></h3>
+											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+												aria-hidden="true"
+												style="float: right; height: 25px; cursor: pointer;margin-top:-40px;" />
+										</div>
+										<div class="modal-body readmoreHpop"
+											style="white-space: pre-line; padding:0px 10px;">
+											<table width="100%" id="weather" style="margin-bottom: -20px;">
+											</table>
+										</div>
+								</div>
+								<div id="tax_main_div" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="weather_main_div"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-header" style="text-align: center;">
+											<h3><b>税费计算</b></h3>
+											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+												aria-hidden="true"
+												style="float: right; height: 25px; cursor: pointer;margin-top:-40px;" />
+										</div>
+										<div class="modal-body readmoreHpop"
+											style="white-space: pre-line; padding:0px 10px;">
+											<table width="100%" style="margin-bottom: -20px;">
+												<tr>
+													<td>起征点：</td>
+													<td><input type="text" id="taxstart" value="3500"/></td>
+												</tr>
+												<tr>
+													<td>总工资：</td>
+													<td><input type="text" id="taxIncome"/></td>
+												</tr>
+												<tr>
+													<td>五险一金：</td>
+													<td><input type="text" id="payment"/></td>
+												</tr>
+												<tr>
+													<td colspan="2" style="text-align:center;padding:0px;">
+														<button class="btnAthena EbtnLess" style="margin-top:-30px;padding:0px;" id="tax_submit_button">计算</button>
+													</td>
+												</tr>
+												<tr>
+													<td>含税级距计算：</td>
+													<td><span id="levelcalc"></span></td>
+												</tr>
+												<tr>
+													<td>不含税级距计算：</td>
+													<td><span id="nolevelcalc"></span></td>
+												</tr>
+											</table>
+										</div>
 								</div>
 								<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
