@@ -395,6 +395,7 @@ public class DQMenuController {
 	public @ResponseBody List<String> getAllDistrict(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
 	{
 		List<String> listOfCities = MongoDBBasic.getAllDistrict(userState);
+		Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
 		return listOfCities;
 	}
 	
