@@ -768,6 +768,7 @@
 			 $("#cityRound").show();
 /* 	 		$("#openfooter_loadC3").html(chartobj);  */
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
@@ -793,11 +794,13 @@
 			 $("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 			 $("#chart4").hide();
 			 $("#openmesChart").hide();
 		}
 		function loadChart2(){
 	 		$("#chart2").show();
+			$("#districtSelect").show();
 	 		$("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 flag=3;
@@ -830,6 +833,7 @@
 			 $("#chart4").hide();
 			 $("#chart5").hide();
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 			chartobj.show();
 			
 		}
@@ -842,6 +846,7 @@
 			$("#chartCity").hide();	
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 			 $("#chart5").hide();
 			 $("#chart3Radar").hide();
 			chartobj.show();
@@ -854,6 +859,7 @@
 			flag=3;
 			 $("#cityRound").hide();
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 		}
 		function loadChart5(obj){
 			var chartobj = $("#chart5");
@@ -864,6 +870,7 @@
 			 $("#cityRound").hide();
 			 $("#chart4").hide();
 			 $("#chart2").hide();
+			 $("#districtSelect").hide();
 			 $("#chart3Radar").hide();
 			chartobj.show();
 		}
@@ -1365,7 +1372,7 @@ visibility:visible;
 <div id="testb" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 100px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ userState }</p><p></p></div>
  <div id="testc" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 200px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#2CA02C;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">详情</p><p></p></div>
 </div>
-<div id="districtSelect" style="position: absolute;width: 20px;height: 20px;background:red;top: 330px;right: 10%;">
+<div id="districtSelect" style="position: absolute;width: 20px;height: 20px;background:#00B287;top: 330px;right: 10%;display:none;">
 
 </div>
   <div class="sk-circle">
