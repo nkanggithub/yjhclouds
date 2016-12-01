@@ -375,7 +375,7 @@ public class DQMenuController {
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
 	}
 	@RequestMapping("/ReadOrgCountryCodeByName")
-public @ResponseBody List<String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
+	public @ResponseBody List<String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
 	OrgCountryCode orgcode = new OrgCountryCode();
 	List<String> countrySet=new ArrayList<String>();
 	URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
@@ -384,10 +384,18 @@ public @ResponseBody List<String>  ReadOrgCountryCodeByName(@RequestParam(value 
 	System.out.println(xmlpath);
 	String url = path;
 	orgcode = RestUtils.ReadOrgCountryCodeByName(url,countryName);
-	String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode().toLowerCase()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
+	String orgcountrycode = countryName+"<img src='http://www.geonames.org/flags/x/"+orgcode.getCountryCode().toLowerCase()+".gif' class='worldflag'/><br/>机遇:"+orgcode.getTotalCount()+"<br/>客户:"+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
 		/*	"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();*/
 	//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
 	countrySet.add(orgcountrycode);
 	return countrySet;
 }
+	
+	@RequestMapping("/getAllDistrict")
+	public @ResponseBody List<String> getAllDistrict(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
+	{
+		List<String> listOfCities = MongoDBBasic.getAllDistrict(userState);
+		return listOfCities;
+	}
+	
 }
