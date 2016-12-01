@@ -3,6 +3,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -392,11 +393,47 @@ public class DQMenuController {
 }
 	
 	@RequestMapping("/getAllDistrict")
-	public @ResponseBody List<String> getAllDistrict(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState)
-	{
-		List<String> listOfCities = MongoDBBasic.getAllDistrict(userState);
-		Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,listOfCities,"");
+public @ResponseBody List<String>  getAllDistrict(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState){
+		List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
 		return listOfCities;
-	}
+}	
+	@RequestMapping("/getNewChart2")
+public @ResponseBody List<Object[]> getNewChart2(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "userState") String userState){
+	//	List<String> listOfCities = RestUtils.CallGetFilterNonLatinCityFromMongo(userState);
+		Map<String, String[]> map=request.getParameterMap();
+		
+		List<String> keyList = new ArrayList<String>();
+		List<Object[]> finalString=new ArrayList<Object[]>();
+		Set set = map.keySet();  
+		Iterator iter = set.iterator();  
+		while (iter.hasNext()) {  
+		String key = (String) iter.next();  
+		keyList.add(key);
+		}  
+		keyList.remove(0);
+
+		Object[] d = new Object[keyList.size()];
+    	Object[] a = new Object[keyList.size()+1];
+		a[0]="客户";
+		Object[] b = new Object[keyList.size()+1];
+		b[0]="竞争";
+		Object[] c = new Object[keyList.size()+1];
+		c[0]="伙伴";
+    	Map<String, MdmDataQualityView> mapByStateCity = RestUtils.callGetDataQualityReportByParameter(userState,keyList,"");
+    	for(int i = 0; i < keyList.size() ; i ++){
+    		 a[i+1]= mapByStateCity.get(keyList.get(i)).getNumberOfCustomer();
+    		 b[i+1] = mapByStateCity.get(keyList.get(i)).getNumberOfCompetitor();
+    		 c[i+1]=  mapByStateCity.get(keyList.get(i)).getNumberOfPartner();
+    		 d[i] =keyList.get(i);
+    		 
+  	
+    	}
+    	finalString.add(a);
+    	finalString.add(b);
+    	finalString.add(c);
+    	finalString.add(d);
+		return finalString;
+
+}
 	
 }
