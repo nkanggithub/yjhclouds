@@ -1517,6 +1517,14 @@ public class MongoDBBasic {
 				}
 				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(nonlatinCity)){
+						String tempstr="";
+						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
+						 if(nonlatinCity.length()>0)
+						 for (int i = 0; i < arr.length; i++) {
+						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
+						 tempstr = tempstr + arr[i]+" ";
+						 }
+						 nonlatinCity = tempstr.trim();
 						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", patternst);
 						query_partner.put("latinCity", patternst);
