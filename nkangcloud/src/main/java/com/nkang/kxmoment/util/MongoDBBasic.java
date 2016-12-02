@@ -826,24 +826,28 @@ public class MongoDBBasic {
 			tmpmqv.setNumberOfEmptyCityArea(1000);
 			tmpmqv.setNumberOfThreeGrade(2000);
 			tmpmqv.setNumberOfNonGeo(2000);
-			
+			String tempstr="";
+			 String arr[]=str.trim().split("\\s+");
+			 if(str.length()>0)
+			 for (int i = 0; i < arr.length; i++) {
+			 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
+			 tempstr = tempstr + arr[i]+" ";
+			 }
+			 str = tempstr.trim();
 			try{
 				// competitor
 				int cnt_competitor = 0;
 				BasicDBObject query_competitor = new BasicDBObject();
 				query_competitor.put("isCompetitor", "true");
 				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-					Pattern patternst = Pattern.compile("^.*" + stateProvince + ".*$", Pattern.CASE_INSENSITIVE);
-					query_competitor.put("state", patternst);
+					query_competitor.put("state", stateProvince);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
-					Pattern patternst1 = Pattern.compile("^.*" + str + ".*$", Pattern.CASE_INSENSITIVE);
 					if(StringUtils.isLatinString(str)){
-						query_competitor.put("latinCity", patternst1);
+						query_competitor.put("latinCity", str);
 					}
 					else{
-						Pattern patternst2 = Pattern.compile("^.*" + str + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("nonlatinCity", patternst2);
+						query_competitor.put("nonlatinCity", str);
 					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
