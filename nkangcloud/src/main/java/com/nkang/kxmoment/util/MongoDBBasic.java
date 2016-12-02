@@ -1551,36 +1551,51 @@ public class MongoDBBasic {
 				while(competitor.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = competitor.next();
-					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					if(StringUtils.isLatinString(stateProvince)){
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+					}else{
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					}
+					
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listcompetitor.add(opsi);
 				}
 				while(partner.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = partner.next();
-					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					if(StringUtils.isLatinString(stateProvince)){
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+					}else{
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					}
+					
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listpartner.add(opsi);
 				}
 				while(customer.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = customer.next();
-					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					if(StringUtils.isLatinString(stateProvince)){
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+					}else{
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					}
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listcustomer.add(opsi);
 				}
@@ -1624,14 +1639,14 @@ public class MongoDBBasic {
 				}
 				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(nonlatinCity)){
-						/*String tempstr="";
+						String tempstr="";
 						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
 						 if(nonlatinCity.length()>0)
 						 for (int i = 0; i < arr.length; i++) {
 						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
 						 tempstr = tempstr + arr[i]+" ";
 						 }
-						 nonlatinCity = tempstr.trim();*/
+						 nonlatinCity = tempstr.trim();
 						//Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", nonlatinCity);
 						query_partner.put("latinCity", nonlatinCity);
