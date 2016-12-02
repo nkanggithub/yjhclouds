@@ -1554,51 +1554,74 @@ public class MongoDBBasic {
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = competitor.next();
 					if(StringUtils.isLatinString(stateProvince)){
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+						if(objOpsi.get("organizationExtendedName")==null){
+							opsi.setOrganizationNonLatinExtendedName("");
+						}else{
+							opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+						}
+						
 					}else{
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+						if(objOpsi.get("organizationNonLatinExtendedName")==null){
+							opsi.setOrganizationNonLatinExtendedName("");
+						}else{
+							opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+						}
+					}
+					if(objOpsi.get("industrySegmentNames")==null){
+						opsi.setIndustrySegmentNames("");
+					}else{
 						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					}
+					//opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName") == null ? "" : objOpsi.get("organizationExtendedName").toString() );
 					
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					//opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor") == null ? "" : objOpsi.get("isCompetitor").toString());
+					//opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator") == null ? "" : objOpsi.get("includePartnerOrgIndicator").toString() );
+					//opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer")== null ? "" : objOpsi.get("onlyPresaleCustomer").toString());
+					//opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1")== null ? "" : objOpsi.get("streetAddress1").toString());
 					listcompetitor.add(opsi);
 				}
 				while(partner.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = partner.next();
 					if(StringUtils.isLatinString(stateProvince)){
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName")== null ? "" : objOpsi.get("organizationExtendedName").toString());
 					}else{
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName") == null ? "" : objOpsi.get("organizationNonLatinExtendedName").toString());
 					}
 					
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName") == null ? "" : objOpsi.get("organizationExtendedName").toString() );
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor") == null ? "" : objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator") == null ? "" : objOpsi.get("includePartnerOrgIndicator").toString() );
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer")== null ? "" : objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1")== null ? "" : objOpsi.get("streetAddress1").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames")== null ? "" : objOpsi.get("industrySegmentNames").toString());
+					/*opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());*/
 					listpartner.add(opsi);
 				}
 				while(customer.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = customer.next();
 					if(StringUtils.isLatinString(stateProvince)){
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName").toString());
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationExtendedName")== null ? "" : objOpsi.get("organizationExtendedName").toString());
 					}else{
-						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-						opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+						opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName") == null ? "" : objOpsi.get("organizationNonLatinExtendedName").toString());
 					}
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName") == null ? "" : objOpsi.get("organizationExtendedName").toString() );
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor") == null ? "" : objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator") == null ? "" : objOpsi.get("includePartnerOrgIndicator").toString() );
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer")== null ? "" : objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1")== null ? "" : objOpsi.get("streetAddress1").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames")== null ? "" : objOpsi.get("industrySegmentNames").toString());
 					listcustomer.add(opsi);
 				}
 				lilist.add(listcustomer);
