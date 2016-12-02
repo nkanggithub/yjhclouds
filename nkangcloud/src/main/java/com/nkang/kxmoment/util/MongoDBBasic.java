@@ -1556,7 +1556,7 @@ public class MongoDBBasic {
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listcompetitor.add(opsi);
 				}
@@ -1568,7 +1568,7 @@ public class MongoDBBasic {
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listpartner.add(opsi);
 				}
@@ -1580,7 +1580,7 @@ public class MongoDBBasic {
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
+					//opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
 					listcustomer.add(opsi);
 				}
