@@ -572,8 +572,10 @@ public class MongoDBBasic {
 	        		   tmpStr = tmpStr.replaceAll(state, "");
 	        	    }
 	        	    if(tmpStr != null && !tmpStr.isEmpty() && tmpStr!="."){
-	        	    	if(!listOfNonLatinCities.contains(tmpStr.toUpperCase())){
-	        	    		listOfNonLatinCities.add(tmpStr.toUpperCase());
+	        	    //	if(!listOfNonLatinCities.contains(tmpStr.toUpperCase())){
+	        	    	if(!listOfNonLatinCities.contains(tmpStr)){	
+	        	    	//	listOfNonLatinCities.add(tmpStr.toUpperCase());
+	        	    		listOfNonLatinCities.add(tmpStr);
 	        	    	}
 	        	    }
 	    		}
@@ -1498,7 +1500,7 @@ public class MongoDBBasic {
 			List<OrgOtherPartySiteInstance> listpartner = new ArrayList<OrgOtherPartySiteInstance>();
 			List<OrgOtherPartySiteInstance> listcustomer = new ArrayList<OrgOtherPartySiteInstance>();
 			mongoDB = getMongoDB();
-			
+
 			try{
 				// competitor
 				BasicDBObject query_competitor = new BasicDBObject();
@@ -1517,14 +1519,14 @@ public class MongoDBBasic {
 				}
 				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(nonlatinCity)){
-						String tempstr="";
+						/*String tempstr="";
 						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
 						 if(nonlatinCity.length()>0)
 						 for (int i = 0; i < arr.length; i++) {
 						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
 						 tempstr = tempstr + arr[i]+" ";
 						 }
-						 nonlatinCity = tempstr.trim();
+						 nonlatinCity = tempstr.trim();*/
 						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", patternst);
 						query_partner.put("latinCity", patternst);
@@ -1543,6 +1545,7 @@ public class MongoDBBasic {
 					query_partner.put("cityRegion", cityRegion);
 					query_customer.put("cityRegion", cityRegion);
 				}
+
 				DBCursor competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
 				DBCursor partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
 				DBCursor customer  = mongoDB.getCollection(collectionMasterDataName).find(query_customer);
@@ -1623,24 +1626,24 @@ public class MongoDBBasic {
 				}
 				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(nonlatinCity)){
-						String tempstr="";
+						/*String tempstr="";
 						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
 						 if(nonlatinCity.length()>0)
 						 for (int i = 0; i < arr.length; i++) {
 						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
 						 tempstr = tempstr + arr[i]+" ";
 						 }
-						 nonlatinCity = tempstr.trim();
-						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("latinCity", patternst);
-						query_partner.put("latinCity", patternst);
-						query_customer.put("latinCity", patternst);
+						 nonlatinCity = tempstr.trim();*/
+						//Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("latinCity", nonlatinCity);
+						query_partner.put("latinCity", nonlatinCity);
+						query_customer.put("latinCity", nonlatinCity);
 					}
 					else{
-						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("nonlatinCity", patternst);
-						query_partner.put("nonlatinCity", patternst);
-						query_customer.put("nonlatinCity", patternst);
+						//Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("nonlatinCity", nonlatinCity);
+						query_partner.put("nonlatinCity", nonlatinCity);
+						query_customer.put("nonlatinCity", nonlatinCity);
 						
 					}
 				}
