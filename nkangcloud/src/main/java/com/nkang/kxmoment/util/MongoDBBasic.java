@@ -572,9 +572,8 @@ public class MongoDBBasic {
 	        		   tmpStr = tmpStr.replaceAll(state, "");
 	        	    }
 	        	    if(tmpStr != null && !tmpStr.isEmpty() && tmpStr!="."){
-	        	    //	if(!listOfNonLatinCities.contains(tmpStr.toUpperCase())){
-	        	    	if(!listOfNonLatinCities.contains(tmpStr)){	
-	        	    	//	listOfNonLatinCities.add(tmpStr.toUpperCase());
+	        	    	if(!listOfNonLatinCities.contains(tmpStr.toUpperCase())){
+	        	    		listOfNonLatinCities.add(tmpStr.toUpperCase());
 	        	    		listOfNonLatinCities.add(tmpStr);
 	        	    	}
 	        	    }
