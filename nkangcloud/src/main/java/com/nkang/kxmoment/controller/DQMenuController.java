@@ -291,7 +291,7 @@ public class DQMenuController {
 		
 	}
 	
-
+/*
 	@RequestMapping("/getCitydetial")
 	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getCountrycountdetial(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
@@ -317,13 +317,21 @@ public class DQMenuController {
 		lilist.add(opsilistOfPartner); 
 		return lilist;
 		
-	}
+	}*/
 	@RequestMapping("/getCitydetail")
 	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getDataQualityReportbynonatinCity(HttpServletRequest request,
 			HttpServletResponse response,@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City,@RequestParam(value = "cityRegion",required=false) String cityRegion)
 	{
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
 	}
+	
+	@RequestMapping("/getCitydetailToTest")
+	public @ResponseBody List<List<OrgOtherPartySiteInstance>> getCitydetailToTest(HttpServletRequest request,
+			HttpServletResponse response,@RequestParam(value = "userState") String state,@RequestParam(value = "nonlatinCity") String City)
+	{
+		return  MongoDBBasic.getDataQualityReportbynonatinCityToTest(state, City);
+	}
+	
 	@RequestMapping("/ReadOrgCountryCodeByName")
 	public @ResponseBody List<String>  ReadOrgCountryCodeByName(@RequestParam(value = "countryName") String countryName){
 	OrgCountryCode orgcode = new OrgCountryCode();
