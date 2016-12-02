@@ -833,18 +833,22 @@ public class MongoDBBasic {
 				BasicDBObject query_competitor = new BasicDBObject();
 				query_competitor.put("isCompetitor", "true");
 				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-					query_competitor.put("state", stateProvince);
+					Pattern patternst = Pattern.compile("^.*" + stateProvince + ".*$", Pattern.CASE_INSENSITIVE);
+					query_competitor.put("state", patternst);
 				}
 				if(str != "" && str!= null && str.toUpperCase()!= "NULL"){
+					Pattern patternst1 = Pattern.compile("^.*" + str + ".*$", Pattern.CASE_INSENSITIVE);
 					if(StringUtils.isLatinString(str)){
-						query_competitor.put("latinCity", str);
+						query_competitor.put("latinCity", patternst1);
 					}
 					else{
-						query_competitor.put("nonlatinCity", str);
+						Pattern patternst2 = Pattern.compile("^.*" + str + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("nonlatinCity", patternst2);
 					}
 				}
 				if(cityRegion != "" && cityRegion!= null && cityRegion.toUpperCase()!= "NULL"){
-					query_competitor.put("cityRegion", cityRegion);
+					Pattern patternst = Pattern.compile("^.*" + cityRegion + ".*$", Pattern.CASE_INSENSITIVE);
+					query_competitor.put("cityRegion", patternst);
 				}
 				cnt_competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor).count();
 				// partner
