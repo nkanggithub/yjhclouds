@@ -1551,7 +1551,7 @@ public class MongoDBBasic {
 				while(competitor.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = competitor.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
@@ -1563,7 +1563,7 @@ public class MongoDBBasic {
 				while(partner.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = partner.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
@@ -1575,7 +1575,7 @@ public class MongoDBBasic {
 				while(customer.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = customer.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
+					//opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
 					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
 					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
 					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
