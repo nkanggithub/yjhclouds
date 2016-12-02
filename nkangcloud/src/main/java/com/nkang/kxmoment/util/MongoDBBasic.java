@@ -1525,6 +1525,8 @@ public class MongoDBBasic {
 						 tempstr = tempstr + arr[i]+" ";
 						 }
 						 nonlatinCity = tempstr.trim();*/
+						nonlatinCity=nonlatinCity.substring(0,4)+" "+nonlatinCity.substring(4);
+						
 						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", patternst);
 						query_partner.put("latinCity", patternst);
