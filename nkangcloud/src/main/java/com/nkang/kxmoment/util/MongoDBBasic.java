@@ -826,14 +826,7 @@ public class MongoDBBasic {
 			tmpmqv.setNumberOfEmptyCityArea(1000);
 			tmpmqv.setNumberOfThreeGrade(2000);
 			tmpmqv.setNumberOfNonGeo(2000);
-			String tempstr="";
-			 String arr[]=str.trim().split("\\s+");
-			 if(str.length()>0)
-			 for (int i = 0; i < arr.length; i++) {
-			 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
-			 tempstr = tempstr + arr[i]+" ";
-			 }
-			 str = tempstr.trim();
+			
 			try{
 				// competitor
 				int cnt_competitor = 0;
