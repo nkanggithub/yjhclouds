@@ -1638,10 +1638,10 @@ public class MongoDBBasic {
 						query_customer.put("latinCity", nonlatinCity);
 					}
 					else{
-						//Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("nonlatinCity", nonlatinCity);
-						query_partner.put("nonlatinCity", nonlatinCity);
-						query_customer.put("nonlatinCity", nonlatinCity);
+						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
+						query_competitor.put("nonlatinCity", patternst);
+						query_partner.put("nonlatinCity", patternst);
+						query_customer.put("nonlatinCity", patternst);
 						
 					}
 				}
