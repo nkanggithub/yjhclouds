@@ -1439,6 +1439,15 @@ public class MongoDBBasic {
 					//query.put("state", state);
 				}
 				if (!StringUtils.isEmpty(City) && City.toUpperCase()!="NULL") {
+					String tempstr="";
+					 String arr[]=City.trim().toLowerCase().split("\\s+");
+					 if(City.length()>0)
+					 for (int i = 0; i < arr.length; i++) {
+					 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
+					 tempstr = tempstr + arr[i]+" ";
+					 }
+					 City = tempstr.trim();
+					 
 					if(StringUtils.isLatinString(City)){
 						Pattern patternst = Pattern.compile("^.*" + City + ".*$", Pattern.CASE_INSENSITIVE);
 						query.put("latinCity", patternst);
