@@ -808,9 +808,11 @@ function register() {
 	<div class="navbar" style="width:100%;">
 		<div class="navbar-inner">
 			<div class="container-fluid">
+			<a href="../DQMenu?UID=<%=uid%>">
 				<img
 					src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000"
 					alt="HP Logo" class="HpLogo" />
+					</a>
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" style="font-size: 18px;margin:0px;padding:5px 0px;"> Welcome <span
