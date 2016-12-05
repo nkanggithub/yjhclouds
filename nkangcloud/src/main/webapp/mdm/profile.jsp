@@ -1054,8 +1054,7 @@ function register() {
 											<div id="info_username">
 												<span></span>
 											</div>
-											<div id="info_role">
-												-<span></span>-
+											<div id="info_role">-<span></span>-
 											</div>
 											<div id="info_phone"></div>
 											<div id="info_selfIntro"></div>
