@@ -84,37 +84,47 @@ img.Wmates {
 #weather_div_loading {
 	text-align: center;
 }
-#weather_div  .Socialization_menu img{
-	width:50%;
+
+#weather_div  .Socialization_menu img {
+	width: 50%;
 }
-#weather_div .Socialization_menu{
+
+#weather_div .Socialization_menu {
 	text-align: center;
 }
-#weather_div .Socialization_menu tr td{
-	width:25%;
-	padding:6px 0px;
+
+#weather_div .Socialization_menu tr td {
+	width: 25%;
+	padding: 6px 0px;
 }
-#weather_div .Socialization_menu tr td h4{
-	color:#000;
-	font-size:13px;
+
+#weather_div .Socialization_menu tr td h4 {
+	color: #000;
+	font-size: 13px;
 }
-#weather_div .Socialization_menu tr td:hover{
+
+#weather_div .Socialization_menu tr td:hover {
 	background-color: #eee;
 }
-#tax_main_div table tr td input{
-	width:90px;
-	padding:2px 5px;
+
+#tax_main_div table tr td input {
+	width: 90px;
+	padding: 2px 5px;
 }
-#tax_main_div table tr td{
-	line-height:30px;
-	vertical-align:middle;
+
+#tax_main_div table tr td {
+	line-height: 30px;
+	vertical-align: middle;
 }
-#tax_main_div table tr td:nth-child(odd){
-	text-align:right;
+
+#tax_main_div table tr td:nth-child(odd) {
+	text-align: right;
 }
-#tax_main_div table tr td:nth-child(even){
-	text-align:left;
+
+#tax_main_div table tr td:nth-child(even) {
+	text-align: left;
 }
+
 #main-content {
 	margin: 0px !important;
 }
@@ -153,18 +163,19 @@ a:hover,a:link {
 }
 
 .matesUserImage {
-	border-radius: 30px;
-	height: 60px;
-	width: 60px;
+	border-radius: 35px;
+	height: 70px;
+	width: 70px;
+	margin:5px 0px;
 }
 
 .matesUserImage2 {
 	border-radius: 75px;
 	height: 150px;
 	width: 150px;
-	border:3px #fff solid;
-	margin-top:-30px;
-	margin-bottom:15px;
+	border: 3px #fff solid;
+	margin-top: -30px;
+	margin-bottom: 15px;
 }
 
 .Work_Mates_div {
@@ -285,132 +296,159 @@ a:hover,a:link {
 	line-height: 1.0em;
 }
 
-
 #UserInfo {
-            background: url(../MetroStyleFiles/image/bg_NULL.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-}
-#UserInfo table{
-	color:#ffffff;
-	font-size:20px;
-}
-#userInfoDiv{
-	color:#ffffff;
-	text-align:center;
-	width:100%;
-} 
-#userInfoDiv #info_username span{
-	border-bottom:1px #fff solid;
-	font-size:22px;
-	font-weight:bold;
-	padding:10px 0px;
-}  
-#userInfoDiv #info_selfIntro{
-	text-align:left;
-	width:90%;
-	margin:0 auto;
-}   
-#userInfoDiv #info_role{
-	width:90%;
-	margin:0 auto;
-}   
-#userInfoDiv #info_role span{
-	font-weight:bold;
-	padding:10px 0px;
-}
-#userInfoDiv #info_phone{
-	margin-top:-5px;
-}
-#userInfoDiv #info_phone img{
-	height:20px;
+	background: url(../MetroStyleFiles/image/bg_NULL.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
 
+#UserInfo table {
+	color: #ffffff;
+	font-size: 20px;
+}
+
+#userInfoDiv {
+	color: #ffffff;
+	text-align: center;
+	width: 100%;
+}
+
+#userInfoDiv #info_username span {
+	border-bottom: 1px #fff solid;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 10px 0px;
+}
+
+#userInfoDiv #info_selfIntro {
+	text-align: left;
+	width: 90%;
+	margin: 0 auto;
+}
+
+#userInfoDiv #info_role {
+	width: 90%;
+	margin: 0 auto;
+}
+
+#userInfoDiv #info_role span {
+	font-weight: bold;
+	padding: 10px 0px;
+}
+
+#userInfoDiv #info_phone {
+	margin-top: -5px;
+}
+
+#userInfoDiv #info_phone img {
+	height: 20px;
+}
 
 #registerform {
-            background: url(../MetroStyleFiles/image/bg_NULL.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
+	background: url(../MetroStyleFiles/image/bg_NULL.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
-#registerform table{
-	magain:auto;
-	color:#ffffff;
-	font-size:20px;
+
+#registerform table {
+	magain: auto;
+	color: #ffffff;
+	font-size: 20px;
 }
-#registerform Div{
-	color:#ffffff;
-	text-align:center;
-	width:100%;
-} 
+
+#registerform Div {
+	color: #ffffff;
+	text-align: center;
+	width: 100%;
+}
 
 #tableForm {
-	 margin: auto;
+	margin: auto;
 }
 
-.imgclass{
-	margin:10px;
-	height:20px;
-	cursor:pointer;
-	
+.imgclass {
+	margin: 10px;
+	height: 20px;
+	cursor: pointer;
 }
 
-input::-webkit-input-placeholder { 
-color: #999; 
--webkit-transition: color.5s; 
-} 
-input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
-color: #c2c2c2; 
--webkit-transition: color.5s; 
-} 
-<!-- start userLists style-->
-.Work_Mates_div2{
-	margin:0px;
-	padding:0px;	
+input::-webkit-input-placeholder {
+	color: #999;
+	-webkit-transition: color.5s;
 }
-#Work_Mates_div{	
-	margin-top:-32px;
+
+input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
+	{
+	color: #c2c2c2;
+	-webkit-transition: color.5s;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2{
-	border-bottom:#ccc 1px solid;
-	padding:10px 0px;
+
+<!--
+start userLists style-->.Work_Mates_div2 {
+	margin: 0px;
+	padding: 0px;
 }
-.Work_Mates_div2 .total_num{
-	float:right;
-	margin-bottom:-6px;
-	vertical-align:bottom;
+
+#Work_Mates_div {
+	margin-top: -32px;
 }
-.Work_Mates_div2 .total_num img{
-	height:16px;
-	margin-right:5px;
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 {
+	border-bottom: #ccc 1px solid;
+	padding: 10px 0px;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_img_div2{
-	float:left;
-	margin-right:10px;
+
+.Work_Mates_div2 .total_num {
+	float: right;
+	margin-bottom: -6px;
+	vertical-align: bottom;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div{
-	color:#333;
+
+.Work_Mates_div2 .total_num img {
+	height: 16px;
+	margin-right: 5px;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div span.selfIntro{
-	white-space:nowrap; 
-	overflow:hidden;
-	text-overflow:ellipsis;
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_img_div2 {
+	float: left;
+	margin-right: 10px;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2{
-	margin-bottom:10px;
-	font-size:16px;
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div {
+	color: #333;
 }
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 .role{
-	font-size:10px;
-	color:#666;
-	padding-left:5px;
-	font-weight:normal;
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div span.selfIntro
+	{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-.clear{
-	clear:both;
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 {
+	font-size: 16px;
 }
-<!-- end userLists style-->
+
+.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 .role
+	{
+	font-size: 10px;
+	color: #666;
+	padding-left: 5px;
+	font-weight: normal;
+}
+
+.clear {
+	clear: both;
+}
+<!--
+end
+ 
+userLists
+ 
+style--
+>
 </style>
 <script>
 var $j = jQuery.noConflict();
@@ -648,9 +686,15 @@ function register() {
 								+ temp.nickname
 								+ '</span><span class="role">'
 								+role+'</span></h2>'
-								+'                                                     <span class="selfIntro">'
-								+ selfIntro
-								+ '</span>'
+								+ '<div>'
+								+'													<div class="tag">'
+								+'														<span>HTML</span>'
+								+'													</div>'
+								+'													<div class="tag">'
+								+'														CSS3'
+								+'													</div><br/>'
+								+'													<span class="selfIntro">'+selfIntro+'</span>'
+								+'												</div>'
 								+'                                        		</div>'
 								+workDay
 								+'                                                <div class="clear"></div>'
@@ -803,25 +847,24 @@ function register() {
 	}
 </script>
 </head>
-<body  style="margin:0px;padding:0px !important;">
+<body style="margin: 0px; padding: 0px !important;">
 	<input id="uid" type="hidden" value="<%=uid%>" />
-	<div class="navbar" style="width:100%;">
+	<div class="navbar" style="width: 100%;">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-			<a href="../DQMenu?UID=<%=uid%>">
-				<img
+				<a href="../DQMenu?UID=<%=uid%>"> <img
 					src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000"
 					alt="HP Logo" class="HpLogo" />
-					</a>
+				</a>
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" style="font-size: 18px;margin:0px;padding:5px 0px;"> Welcome <span
-							class="username colorBlue" id="username"> <%=wcu.getNickname() %>
+						data-toggle="dropdown"
+						style="font-size: 18px; margin: 0px; padding: 5px 0px;">
+							Welcome <span class="username colorBlue" id="username"> <%=wcu.getNickname() %>
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
-								src="<%=wcu.getHeadimgurl() %>"
-								alt="userImage" class="userImage" alt="no_username"
-								onclick="register()" />
+								src="<%=wcu.getHeadimgurl() %>" alt="userImage"
+								class="userImage" alt="no_username" onclick="register()" />
 						</a></span></li>
 				</ul>
 			</div>
@@ -829,9 +872,9 @@ function register() {
 	</div>
 
 	<!-- BEGIN CONTAINER -->
-	<div id="container" class="row-fluid" >
+	<div id="container" class="row-fluid">
 		<!-- BEGIN PAGE -->
-		<div id="main-content" >
+		<div id="main-content">
 			<div class="BDbg">
 				<div class="BDheading">
 					<div class="span12">
@@ -849,14 +892,14 @@ function register() {
 						</h2>
 					</div>
 				</div>
-					<div class="row-fluid mtop10">
-						<div class="span12">
-							<div class="PositionR">
-								<img src="../MetroStyleFiles/image/socialHPE.png"
-									class="BoardDetailImage" />
-							</div>
+				<div class="row-fluid mtop10">
+					<div class="span12">
+						<div class="PositionR">
+							<img src="../MetroStyleFiles/image/socialHPE.png"
+								class="BoardDetailImage" />
 						</div>
 					</div>
+				</div>
 			</div>
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
@@ -870,7 +913,7 @@ function register() {
 								<li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work
 										Mates</a></li>
 							</ul>
-							<div class="tab-content" id="dvTabContent"  style="border:0px;">
+							<div class="tab-content" id="dvTabContent" style="border: 0px;">
 								<div class="tab-pane" id="BoardContent">
 									<div>
 										<div class="panel-group" id="accordion">
@@ -917,26 +960,20 @@ function register() {
 									<div id="weather_div">
 										<table class="Socialization_menu">
 											<tr>
-												<td> 
-													<a class="" data-toggle="modal" href="#weather_main_div">
-														<img  src="../MetroStyleFiles/menu-weather.png" />
+												<td><a class="" data-toggle="modal"
+													href="#weather_main_div"> <img
+														src="../MetroStyleFiles/menu-weather.png" />
 														<h4>天气</h4>
-													</a>
-												</td>											
-												<td>
-													<a class="" data-toggle="modal" href="#tax_main_div">
-														<img  src="../MetroStyleFiles/menu-tax.png" />
+												</a></td>
+												<td><a class="" data-toggle="modal"
+													href="#tax_main_div"> <img
+														src="../MetroStyleFiles/menu-tax.png" />
 														<h4>税费计算</h4>
-													</a>
-												</td>
-												<td>
-													<img  src="../MetroStyleFiles/develop.png" />
-													<h4>开发中</h4>
-												</td>
-												<td>
-													<img  src="../MetroStyleFiles/develop.png" />
-													<h4>开发中</h4>
-												</td>
+												</a></td>
+												<td><img src="../MetroStyleFiles/stock.png" />
+													<h4>股票</h4></td>
+												<td><img src="../MetroStyleFiles/develop.png" />
+													<h4>开发中</h4></td>
 											</tr>
 										</table>
 									</div>
@@ -945,56 +982,62 @@ function register() {
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
-											<h3><b>天气</b></h3>
-											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
-												aria-hidden="true"
-												style="float: right; height: 25px; cursor: pointer;margin-top:-40px;" />
-										</div>
-										<div class="modal-body readmoreHpop"
-											style="white-space: pre-line; padding:0px 10px;">
-											<table width="100%" id="weather" style="margin-bottom: -20px;">
-											</table>
-										</div>
+										<h3>
+											<b>天气</b>
+										</h3>
+										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 25px; cursor: pointer; margin-top: -40px;" />
+									</div>
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px 10px;">
+										<table width="100%" id="weather" style="margin-bottom: -20px;">
+										</table>
+									</div>
 								</div>
 								<div id="tax_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
-											<h3><b>税费计算</b></h3>
-											<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
-												aria-hidden="true"
-												style="float: right; height: 25px; cursor: pointer;margin-top:-40px;" />
-										</div>
-										<div class="modal-body readmoreHpop"
-											style="white-space: pre-line; padding:0px 10px;">
-											<table width="100%" style="margin-bottom: -20px;">
-												<tr>
-													<td>起征点：</td>
-													<td><input type="text" id="taxstart" value="3500"/></td>
-												</tr>
-												<tr>
-													<td>总工资：</td>
-													<td><input type="text" id="taxIncome"/></td>
-												</tr>
-												<tr>
-													<td>五险一金：</td>
-													<td><input type="text" id="payment"/></td>
-												</tr>
-												<tr>
-													<td colspan="2" style="text-align:center;padding:0px;">
-														<button class="btnAthena EbtnLess" style="margin-top:-30px;padding:0px;" id="tax_submit_button">计算</button>
-													</td>
-												</tr>
-												<tr>
-													<td>含税级距计算：</td>
-													<td><span id="levelcalc"></span></td>
-												</tr>
-												<tr>
-													<td>不含税级距计算：</td>
-													<td><span id="nolevelcalc"></span></td>
-												</tr>
-											</table>
-										</div>
+										<h3>
+											<b>税费计算</b>
+										</h3>
+										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 25px; cursor: pointer; margin-top: -40px;" />
+									</div>
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px 10px;">
+										<table width="100%" style="margin-bottom: -20px;">
+											<tr>
+												<td>起征点：</td>
+												<td><input type="text" id="taxstart" value="3500" /></td>
+											</tr>
+											<tr>
+												<td>总工资：</td>
+												<td><input type="text" id="taxIncome" /></td>
+											</tr>
+											<tr>
+												<td>五险一金：</td>
+												<td><input type="text" id="payment" /></td>
+											</tr>
+											<tr>
+												<td colspan="2" style="text-align: center; padding: 0px;">
+													<button class="btnAthena EbtnLess"
+														style="margin-top: -30px; padding: 0px;"
+														id="tax_submit_button">计算</button>
+												</td>
+											</tr>
+											<tr>
+												<td>含税级距计算：</td>
+												<td><span id="levelcalc"></span></td>
+											</tr>
+											<tr>
+												<td>不含税级距计算：</td>
+												<td><span id="nolevelcalc"></span></td>
+											</tr>
+										</table>
+									</div>
 								</div>
 								<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
@@ -1004,17 +1047,23 @@ function register() {
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-											<div id="userInfoDiv">
-												<img id="info_imgurl" src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0" alt="userImage" class="matesUserImage2">
-												<div id="info_username"><span></span></div>
-												<div id="info_role">-<span></span>-</div>
-												<div id="info_phone"></div>
-												<div id="info_selfIntro"></div>
+										<div id="userInfoDiv">
+											<img id="info_imgurl"
+												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
+												alt="userImage" class="matesUserImage2">
+											<div id="info_username">
+												<span></span>
 											</div>
+											<div id="info_role">
+												-<span></span>-
+											</div>
+											<div id="info_phone"></div>
+											<div id="info_selfIntro"></div>
+										</div>
 									</div>
 								</div>
-								
-								
+
+
 								<div id="registerform" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
@@ -1023,67 +1072,64 @@ function register() {
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
-												    <table id="tableForm" style="margin-top:-20px;">
-												    <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
-												        <td class="tdInput">
-												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
-												        <td class="tdInput">
-												          <input type="text" placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$" required/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
-												        <td>
-												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
-												        <td>
-												          <select id="roleSelect">
-															<option selected="selected">Contributor</option> 
-															<option>Team Lead</option>
-															<option>PM</option> 
-															<option>Other</option>
-														</select>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
-												        <td>
-												         <select id='groupSelect'>
-															<option selected="selected">Garden</option>
-															<option>Achi</option>
-															<option>NKang</option>
-															<option>Channing</option>
-															<option>Other</option>
-														</select>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
-												        <td>
-												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
-												        </td>
-												      </tr>
-												 </table>
-											    <button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
+										<!-- <form id="registerFormSubmit" autocomplete="on"> -->
+										<table id="tableForm" style="margin-top: -20px;">
+											<tr>
+												<td class="tdText"><img class='imgclass'
+													src='../MetroStyleFiles/username2.png' /></td>
+												<td class="tdInput"><input type="text"
+													placeholder="请输入真实姓名" id="realname"
+													pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required /></td>
+											</tr>
+											<tr>
+												<td class="tdText"><img class='imgclass'
+													src='../MetroStyleFiles/telephone2.png' /></td>
+												<td class="tdInput"><input type="text"
+													placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$"
+													required /></td>
+											</tr>
+											<tr>
+												<td class="tdText"><img class='imgclass'
+													src='../MetroStyleFiles/email2.png' /></td>
+												<td><input class="inputClass" placeholder="请输入邮箱地址"
+													type="email" id="email" required /></td>
+											</tr>
+											<tr>
+												<td class="tdText"><img class='imgclass'
+													src='../MetroStyleFiles/role2.png' /></td>
+												<td><select id="roleSelect">
+														<option selected="selected">Contributor</option>
+														<option>Team Lead</option>
+														<option>PM</option>
+														<option>Other</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td class="tdText"><img class="imgclass"
+													src="../MetroStyleFiles/group2.png" /></td>
+												<td><select id='groupSelect'>
+														<option selected="selected">Garden</option>
+														<option>Achi</option>
+														<option>NKang</option>
+														<option>Channing</option>
+														<option>Other</option>
+												</select></td>
+											</tr>
+											<tr>
+												<td class="tdText"><img class="imgclass"
+													src="../MetroStyleFiles/selfIntro2.png" /></td>
+												<td><input class="inputClass" type="text"
+													placeholder="请输入个人简介" id="selfIntro" required /></td>
+											</tr>
+										</table>
+										<button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
 										<!-- 	</form>  -->
 									</div>
 								</div>
-								
+
 								<div class="tab-pane" id="WorkMates">
-									<ul class="Work_Mates_div" id="Work_Mates_ul">
-									</ul>
-									<div class="clear"></div>
-									 <div class="Work_Mates_div2" id="Work_Mates_div">
-                                      </div>
+									<div class="Work_Mates_div2" id="Work_Mates_div">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1113,7 +1159,7 @@ function register() {
 				aria-hidden="true">OK</button>
 		</div>
 	</div>
-		<!--
+	<!--
 	<div id="DivMyConfirm" class="modal hide fade" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 		<div class="modal-header">
