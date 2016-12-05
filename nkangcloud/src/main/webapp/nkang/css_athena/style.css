@@ -2190,7 +2190,7 @@ div.tagsinput .not_valid {
     line-height: 26px;*/
 	padding: 0 4px 0 11px;
 	position: relative;
-	margin: 0 0px 0px 0;
+	margin: 0 0px 4px 0;
 	text-decoration: none;
 	font-size: 10px;
 	-webkit-transition: color 0.2s;
