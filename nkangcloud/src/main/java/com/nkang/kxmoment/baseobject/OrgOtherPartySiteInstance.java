@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.List;
+
 public class OrgOtherPartySiteInstance {
 
 	private String siteInstanceId;
@@ -79,6 +81,7 @@ public class OrgOtherPartySiteInstance {
 	private String lat;
 	private String lng;
 	private String qualityGrade;
+	private List<String> allCity;
 	
 	public String getLat() {
 		return lat;
@@ -547,6 +550,12 @@ public class OrgOtherPartySiteInstance {
 	}
 	public void setAddressType(String addressType) {
 		this.addressType = addressType;
+	}
+	public List<String> getAllCity() {
+		return allCity;
+	}
+	public void setAllCity(List<String> allCity) {
+		this.allCity = allCity;
 	}
 
 	
