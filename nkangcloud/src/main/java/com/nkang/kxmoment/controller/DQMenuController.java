@@ -390,6 +390,8 @@ public @ResponseBody List<Object[]> getNewChart2(HttpServletRequest request, Htt
 @RequestMapping("/getAllCountryName")
 public @ResponseBody List<OrgOtherPartySiteInstance>  getALLCountryName(HttpServletRequest request, HttpServletResponse response){
 	List<OrgOtherPartySiteInstance> listOfCities = MongoDBBasic.getAllCountryName();
+	List<String> citys = MongoDBBasic.getAllStates(listOfCities.get(0).getCountryCode());
+	listOfCities.get(0).setAllCity(citys);
 	return listOfCities;
 }	
 	
