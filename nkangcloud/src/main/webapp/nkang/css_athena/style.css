@@ -2208,9 +2208,9 @@ div.tagsinput .not_valid {
 }
 .tag::after {
 	background: #F5F5F5;
-	border-bottom: 8px solid transparent;
+	border-bottom: 8px solid #FFF;
 	border-left: 13px solid #0197D6;
-	border-top: 12px solid transparent;
+	border-top: 12px solid #FFF;
 	content: '';
 	position: absolute;
 	right: 0;
