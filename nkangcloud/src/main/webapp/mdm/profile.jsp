@@ -358,12 +358,9 @@ a:hover,a:link {
 }
 
 .imgclass {
+	magain:20px;
 	height: 20px;
 	cursor: pointer;
-}
-
-.reminderText{
-	font-size:1px;
 }
 
 input::-webkit-input-placeholder {
@@ -963,7 +960,7 @@ function register() {
 														src="../MetroStyleFiles/menu-tax.png" />
 														<h4>税费计算</h4>
 												</a></td>
-												<td><img src="../MetroStyleFiles/stock.png" />
+												<td><img src="../MetroStyleFiles/menu-stock.png" />
 													<h4>股票</h4></td>
 												<td><img src="../MetroStyleFiles/time_zone.png" />
 													<h4>开发中</h4></td>
@@ -1068,29 +1065,25 @@ function register() {
 												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
 												    <table id="tableForm" style="margin-top:-20px;">
 												    <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/>
-												        <span class='reminderText'>姓名</span></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
 												        <td class="tdInput">
 												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/>
-												        <span class='reminderText'>电话</span></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
 												        <td class="tdInput">
 												          <input type="text" placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/>
-												        <span class='reminderText'>邮件</span></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
 												        <td>
 												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/>
-												        <span class='reminderText'>角色</span></td>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
 												        <td>
 												          <select id="roleSelect">
 															<option selected="selected">Contributor</option> 
@@ -1102,8 +1095,7 @@ function register() {
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/>
-												        <span class='reminderText'>组织</span></td>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
 												        <td>
 												         <select id='groupSelect'>
 															<option selected="selected">Garden</option>
@@ -1115,8 +1107,7 @@ function register() {
 												        </td>
 												      </tr>
 												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/>
-												        <span class='reminderText'>简介</span></td>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
 												        <td>
 												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
 												        </td>
