@@ -416,7 +416,7 @@ form input[type="text"] {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
-	background: #00B287 url(../images/scroll-top.png) no-repeat 50% 48%;
+	/* background: #00B287 url(../images/scroll-top.png) no-repeat 50% 48%; */
 	position: fixed;
 	bottom: 30px;
 	right: 32px;
@@ -426,7 +426,7 @@ form input[type="text"] {
 	opacity: .85
 }
 #scroll-top a:hover {
-	background-color: orange;
+	/* background-color: orange; */
 	cursor: pointer
 }
 
