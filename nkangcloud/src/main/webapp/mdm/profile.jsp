@@ -177,17 +177,6 @@ a:hover,a:link {
 	margin-top: -30px;
 	margin-bottom: 15px;
 }
-
-.Work_Mates_div {
-	width: 100%;
-	padding: 0px;
-}
-
-.Work_Mates_div .Work_Mates_div_li {
-	float: left;
-	margin: 20px;
-}
-
 .myButtons {
 	background: none !important;
 	border: 0px !important;
@@ -386,13 +375,14 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 }
 
 <!--
-start userLists style-->.Work_Mates_div2 {
+start userLists style-->
+.Work_Mates_div2 {
 	margin: 0px;
 	padding: 0px;
 }
 
 #Work_Mates_div {
-	margin-top: -32px;
+	margin-top: -12px;
 }
 
 .Work_Mates_div2  .Work_Mates_div_list_div2 {
