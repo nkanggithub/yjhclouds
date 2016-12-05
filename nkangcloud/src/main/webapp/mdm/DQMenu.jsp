@@ -582,21 +582,12 @@
 		$("#openfooter").on("click",function(){
 			
 			var chart3HTML=$("#chart3").html();
-				var cnName=$("#countrys").text();
-				var country="";
-		if(cnName=="中国")
-			{
-			country="CN";
-			};
-			if(cnName=="马来西亚")
-			{
-			country="MY";		
-			};
+				var countryCode=$("#countryCode").text();
 			  if(chart3HTML==""){
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "getOpenfooterByCountry?country="+country,
+				url : "getOpenfooterByCountry?country="+countryCode,
 				success : function(data) {
 					  if (data) {
 						  var chart = c3.generate({
@@ -666,19 +657,11 @@
 		swal("Thank You!", "We will contact you soon in"+$(obj).text(), "success"); 
 	}
 	function countrySelect(obj){
-		var cnName=$("#countrySelect option:selected").val();
-		if(cnName=="中国")
-			{
-			country="CN";
-			};
-			if(cnName=="马来西亚")
-			{
-			country="MY";		
-			};
+		var cnCode=$("#countrySelect option:selected").val();
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "getCitys?country="+country,
+				url : "getCitys?country="+cnCode,
 				success : function(data) {
 					var text="";
 					 for(var i=0;i<data.length;i++){
@@ -693,18 +676,30 @@
 			}
 			);
 	};
+	var firstCounrty="CN";
+	var text="";
 	function userlocationsave(obj){
+		 text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='countrySelect' onchange='countrySelect(this)' style='height: 30px;width: 100px;border-radius: 8%;'>";
 		
-		$.ajax({
+		 $.ajax({
 			type : "POST",
 			dataType : "json",
-			url : "getCitys?country="+country,
+			url : "getAllCountry",
 			success : function(data) {
-				  if (data) {
-					  var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='countrySelect' onchange='countrySelect(this)' style='height: 30px;width: 100px;border-radius: 8%;'><option>中国</option><option>马来西亚</option></select><select id='citySelect' style='height: 30px;margin-left:10px;width: 100px;border-radius: 8%;'>";
-					  for(var i=0;i<data.length;i++){
-						  text=text+"<option>"+data[i]+"</option>";
+				 if (data) {
+					 for(var i=0;i<data.length;i++){
+						  text=text+"<option value='"+data[i].countryCode+"'>"+data[i].countryName+"</option>";
 						}
+					 
+					 firstCounrty=data[0].countryCode;
+				 }
+				 text=text+"</select>";
+				 if (data[0].allCity) {
+					  text=text+"<select id='citySelect' style='height: 30px;margin-left:10px;width: 100px;border-radius: 8%;'>";
+					  for(var i=0;i<data[0].allCity.length;i++){
+						  text=text+"<option>"+data[0].allCity[i]+"</option>";
+						}
+				  }
 					  text=text+"</select>";
 						swal(
 								{
@@ -718,23 +713,18 @@
 								function(inputValue){
 									if (inputValue === false){ return false; }
 									else{
-										var city=$("#citySelect option:selected").val();
-										var countrys=$("#countrySelect option:selected").val();
+										var city=$("#citySelect option:selected").text();
+										var countrys=$("#countrySelect option:selected").text();
+										var countryCode=$("#countrySelect option:selected").val();
 										$("#chart3").html("");
 										$("#chartCity").html("");
 										$("#chart2").html("");
 										$("#locationCity").text(city.toLocaleUpperCase());
 										$("#userState").text(city);
-										if(countrys=="中国"){
-											$("#cityRound img").attr("src","Jsp/PIC/cn.gif");
-											};
-											if(countrys=="马来西亚")
-											{
-												$("#cityRound img").attr("src","Jsp/PIC/my.gif");
-												};
-										
+										$("#cityRound img").attr("src","http://www.geonames.org/flags/x/"+countryCode.toLowerCase()+".gif");
 										$("#labelCity").text(city);
 										$("#labelCountry").text(countrys);
+										$("#countryCode").text(countryCode);
 										$("#countrys").text(countrys);
 										swal("Success", "your location saved", "success");
 									}							
@@ -742,15 +732,13 @@
 								}
 							);
 					 
-						
-				  }
 			},
 			error:function(data)
 			{
 				console.log("failed..."+data.toString());
 			}
-		
-	});
+		}
+		);
 
 
 	}
@@ -1068,6 +1056,7 @@ visibility:visible;
 <div id="countrys" style="display:none">中国</div>
 <div id="uid" style="display:none">${ uid }</div>
 <div id="address" style="display:none">${ curLoc }</div>
+<div id="countryCode" style="display:none">${ countryCode }</div>
 
 <div id="addressInfo" style="display:none">
 <c:forEach items="${userInfo.addressInfo}" var="addressInfo">
