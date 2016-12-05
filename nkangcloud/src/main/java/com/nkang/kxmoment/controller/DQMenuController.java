@@ -257,6 +257,7 @@ public class DQMenuController {
 	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
 		request.getSession().setAttribute("curLoc", curLoc);
+		request.getSession().setAttribute("countryCode", "CN");
 		return "DQMenu";
 	}
 	
