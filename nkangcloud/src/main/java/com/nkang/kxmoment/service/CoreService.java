@@ -60,23 +60,6 @@ public class CoreService
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
-				else if (textContent.contains("rm-") || textContent.contains("mf-")) {
-					String cmd = "";
-					String source = "";
-					String target = "";
-					if(textContent.contains("rm-")){
-						cmd = "rm-";
-					}
-					if(textContent.contains("mf-")){
-						cmd = "mf-";
-						String a[] = textContent.split("-");
-						source = a[1];
-						target = a[2];
-					}
-					boolean ret = MongoDBBasic.removeOrgSiteInstance(source,target, cmd);
-					textMessage.setContent(String.valueOf(ret));
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}
 				else if ("SJOB".equals(textContent)) {
 					Calendar date = Calendar.getInstance();
 				    //date.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
