@@ -965,7 +965,7 @@ function register() {
 												</a></td>
 												<td><img src="../MetroStyleFiles/stock.png" />
 													<h4>股票</h4></td>
-												<td><img src="../MetroStyleFiles/develop.png" />
+												<td><img src="../MetroStyleFiles/time_zone.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
