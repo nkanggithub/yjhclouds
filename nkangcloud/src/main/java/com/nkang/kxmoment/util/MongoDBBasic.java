@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -1635,106 +1636,7 @@ public class MongoDBBasic {
 			return lilist;
 		}
 		
-		/*
-		 * chang-zheng
-		 * 	get opsi	test-------- 
-		 * */
-		public static List<List<OrgOtherPartySiteInstance>> getDataQualityReportbynonatinCityToTest(String stateProvince, String nonlatinCity){
-			List<List<OrgOtherPartySiteInstance>> lilist = new ArrayList<List<OrgOtherPartySiteInstance>>();
-			List<OrgOtherPartySiteInstance> listcompetitor = new ArrayList<OrgOtherPartySiteInstance>();
-			List<OrgOtherPartySiteInstance> listpartner = new ArrayList<OrgOtherPartySiteInstance>();
-			List<OrgOtherPartySiteInstance> listcustomer = new ArrayList<OrgOtherPartySiteInstance>();
-			mongoDB = getMongoDB();
-			
-			try{
-				// competitor
-				BasicDBObject query_competitor = new BasicDBObject();
-				query_competitor.put("isCompetitor", "true");
-				// partner
-				BasicDBObject query_partner = new BasicDBObject();
-				query_partner.put("includePartnerOrgIndicator", "true");
-				// customer
-				BasicDBObject query_customer = new BasicDBObject();
-				query_customer.put("onlyPresaleCustomer", "true");
-				if(stateProvince != "" && stateProvince!= null && stateProvince.toUpperCase()!= "NULL"){
-					query_competitor.put("state", stateProvince);
-					query_partner.put("state", stateProvince);
-					query_customer.put("state", stateProvince);
-					
-				}
-				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
-					if(StringUtils.isLatinString(nonlatinCity)){
-						String tempstr="";
-						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
-						 if(nonlatinCity.length()>0)
-						 for (int i = 0; i < arr.length; i++) {
-						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
-						 tempstr = tempstr + arr[i]+" ";
-						 }
-						 nonlatinCity = tempstr.trim();
-						//Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("latinCity", nonlatinCity);
-						query_partner.put("latinCity", nonlatinCity);
-						query_customer.put("latinCity", nonlatinCity);
-					}
-					else{
-						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
-						query_competitor.put("nonlatinCity", patternst);
-						query_partner.put("nonlatinCity", patternst);
-						query_customer.put("nonlatinCity", patternst);
-						
-					}
-				}
-				DBCursor competitor = mongoDB.getCollection(collectionMasterDataName).find(query_competitor);
-				DBCursor partner = mongoDB.getCollection(collectionMasterDataName).find(query_partner);
-				DBCursor customer  = mongoDB.getCollection(collectionMasterDataName).find(query_customer);
-				
-				while(competitor.hasNext()){
-					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
-					DBObject objOpsi = competitor.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
-					listcompetitor.add(opsi);
-				}
-				while(partner.hasNext()){
-					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
-					DBObject objOpsi = partner.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
-					listpartner.add(opsi);
-				}
-				while(customer.hasNext()){
-					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
-					DBObject objOpsi = customer.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
-					listcustomer.add(opsi);
-				}
-				lilist.add(listcustomer);
-				lilist.add(listpartner);
-				lilist.add(listcompetitor);
-			}
-			catch(Exception e){
-				log.info("getDataQualityReport--" + e.getMessage());
-			}
-			
-			return lilist;
-		}
+		
 		/*
 		 * chang-zheng
 		 * get NonLatinCity
@@ -1752,7 +1654,7 @@ public class MongoDBBasic {
 				}
 						
 		    	results = mongoDB.getCollection(collectionMasterDataName).distinct("cityRegion", dbquery);
-		    	for(int i = 10; i < results.size(); i ++){
+		    	for(int i = 0; i < results.size(); i ++){
 		    		if(results.get(i) != "null" && results.get(i) != "NULL" && results.get(i) != null){
 		    			listOfRegion.add((String) results.get(i));
 		    		}
@@ -1764,5 +1666,32 @@ public class MongoDBBasic {
 		    return listOfRegion;
 		}
 
+		/*
+		 * chang-zheng
+		 *  getCountryName
+		 */
+		public static List<OrgOtherPartySiteInstance> getAllCountryName(){
+			mongoDB = getMongoDB();
+			List<OrgOtherPartySiteInstance> listOfRegion = new ArrayList<OrgOtherPartySiteInstance>();
+			List results;
+		    try{
+		    	DBObject dbquery = new BasicDBObject();  
+		    	results = mongoDB.getCollection(collectionMasterDataName).distinct("countryCode", dbquery);
+
+		    	String[] locales = (String[]) results.toArray();
+		    	for (String countryCode : locales) {
+		    		Locale obj = new Locale("", countryCode);
+		    		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
+		    		opsi.setCountryCode(obj.getCountry());
+		    		opsi.setCountryName(obj.getDisplayCountry());
+		    		//System.out.println("Country Code = " + obj.getCountry()+ ", Country Name = " + obj.getDisplayCountry());
+		    		listOfRegion.add(opsi);
+		    	}
+		    }
+			catch(Exception e){
+				log.info("getFilterRegionFromMongo--" + e.getMessage());
+			}
+		    return listOfRegion;
+		}
 	    // END
 }
