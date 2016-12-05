@@ -1063,6 +1063,7 @@ function register() {
 								</div>
 
 
+							
 								<div id="registerform" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
@@ -1071,57 +1072,57 @@ function register() {
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-										<!-- <form id="registerFormSubmit" autocomplete="on"> -->
-										<table id="tableForm" style="margin-top: -20px;">
-											<tr>
-												<td class="tdText"><img class='imgclass'
-													src='../MetroStyleFiles/username2.png' /></td>
-												<td class="tdInput"><input type="text"
-													placeholder="请输入真实姓名" id="realname"
-													pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required /></td>
-											</tr>
-											<tr>
-												<td class="tdText"><img class='imgclass'
-													src='../MetroStyleFiles/telephone2.png' /></td>
-												<td class="tdInput"><input type="text"
-													placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$"
-													required /></td>
-											</tr>
-											<tr>
-												<td class="tdText"><img class='imgclass'
-													src='../MetroStyleFiles/email2.png' /></td>
-												<td><input class="inputClass" placeholder="请输入邮箱地址"
-													type="email" id="email" required /></td>
-											</tr>
-											<tr>
-												<td class="tdText"><img class='imgclass'
-													src='../MetroStyleFiles/role2.png' /></td>
-												<td><select id="roleSelect">
-														<option selected="selected">Contributor</option>
-														<option>Team Lead</option>
-														<option>PM</option>
-														<option>Other</option>
-												</select></td>
-											</tr>
-											<tr>
-												<td class="tdText"><img class="imgclass"
-													src="../MetroStyleFiles/group2.png" /></td>
-												<td><select id='groupSelect'>
-														<option selected="selected">Garden</option>
-														<option>Achi</option>
-														<option>NKang</option>
-														<option>Channing</option>
-														<option>Other</option>
-												</select></td>
-											</tr>
-											<tr>
-												<td class="tdText"><img class="imgclass"
-													src="../MetroStyleFiles/selfIntro2.png" /></td>
-												<td><input class="inputClass" type="text"
-													placeholder="请输入个人简介" id="selfIntro" required /></td>
-											</tr>
-										</table>
-										<button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
+												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
+												    <table id="tableForm" style="margin-top:-20px;">
+												    <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
+												        <td>
+												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
+												        <td>
+												          <select id="roleSelect">
+															<option selected="selected">Contributor</option> 
+															<option>Team Lead</option>
+															<option>PM</option> 
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
+												        <td>
+												         <select id='groupSelect'>
+															<option selected="selected">Garden</option>
+															<option>Achi</option>
+															<option>NKang</option>
+															<option>Channing</option>
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
+												        <td>
+												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
+												        </td>
+												      </tr>
+												 </table>
+											    <button class="btnAthena EbtnLess" id="registerBtn">在一起吧</button>
 										<!-- 	</form>  -->
 									</div>
 								</div>
