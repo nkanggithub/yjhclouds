@@ -1477,13 +1477,12 @@ public class MongoDBBasic {
 				while(dbOpsi.hasNext()){
 					OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 					DBObject objOpsi = dbOpsi.next();
-					opsi.setOrganizationNonLatinExtendedName(objOpsi.get("organizationNonLatinExtendedName").toString());
-					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());
+					opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName") == null ? "" : objOpsi.get("organizationExtendedName").toString() );
+					opsi.setIsCompetitor(objOpsi.get("isCompetitor") == null ? "" : objOpsi.get("isCompetitor").toString());
+					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator") == null ? "" : objOpsi.get("includePartnerOrgIndicator").toString() );
+					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer")== null ? "" : objOpsi.get("onlyPresaleCustomer").toString());
+					opsi.setStreetAddress1(objOpsi.get("streetAddress1")== null ? "" : objOpsi.get("streetAddress1").toString());
+					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames")== null ? "" : objOpsi.get("industrySegmentNames").toString());
 					listDdm.add(opsi);
 				}
 			}
@@ -1530,7 +1529,7 @@ public class MongoDBBasic {
 						 tempstr = tempstr + arr[i]+" ";
 						 }
 						 nonlatinCity = tempstr.trim();*/
-						nonlatinCity=nonlatinCity.substring(0,4)+" "+nonlatinCity.substring(4);
+						//nonlatinCity=nonlatinCity.substring(0,4)+" "+nonlatinCity.substring(4);
 						
 						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", patternst);
