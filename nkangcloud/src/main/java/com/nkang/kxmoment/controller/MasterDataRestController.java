@@ -657,5 +657,20 @@ public class MasterDataRestController {
 		return codeMap;
 	}*/
 
-	
+	@RequestMapping("/CallCommandOPSIIntoMongoDB")
+	public static Boolean CallUpdateOpptLatLngIntoMongoDB( 
+			@RequestParam(value="field", required=false) String field,
+			@RequestParam(value="src", required=false) String src,
+			@RequestParam(value="tgt", required=false) String tgt,
+			@RequestParam(value="cmd", required=false) String cmd
+			){
+		Boolean ret = false;
+		try{
+			ret = MongoDBBasic.modifyOrgSiteInstance(field,src,tgt,cmd);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
 }
