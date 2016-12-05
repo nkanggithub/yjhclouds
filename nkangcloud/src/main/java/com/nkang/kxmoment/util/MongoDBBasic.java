@@ -247,32 +247,36 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean removeOrgSiteInstance(String source,String target, String cmd){
+	public static boolean modifyOrgSiteInstance(String field, String source,String target, String cmd){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 		try{
-			if(StringUtils.isEqual(cmd, "rm-")){
+			if(StringUtils.isEqual(cmd, "remove")){
 				DBObject removeQuery = new BasicDBObject();
-				removeQuery.put("state", source);
+				removeQuery.put(field, source);
 				mongoDB.getCollection(collectionMasterDataName).remove(removeQuery);
 				ret = true;
 			}
-			else if(StringUtils.isEqual(cmd, "mf-")){
-				for(int i = 0; i < 1000 ; i++){
+			else if(StringUtils.isEqual(cmd, "modify")){
+				for(int i = 0; i < 100 ; i++){
 					DBObject findQuery = new BasicDBObject();
-					findQuery.put("state", source);
+					findQuery.put(field, source);
 					DBObject updateQuery = new BasicDBObject();
-					updateQuery.put("state", target);
-					mongoDB.getCollection(collectionMasterDataName).findAndModify(findQuery, updateQuery);
+					updateQuery.put(field, target);
+					BasicDBObject doc = new BasicDBObject();  
+					doc.put("$set", updateQuery);
+					mongoDB.getCollection(collectionMasterDataName).update(findQuery, doc);
 				}
 				ret = true;
 			}
 	    }
 		catch(Exception e){
-			log.info("removeOrgSiteInstance--" + e.getMessage());
+			log.info("modifyOrgSiteInstance--" + e.getMessage());
+			ret = false;
 		}
 		return ret;
 	}
+	
 	
 	
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
