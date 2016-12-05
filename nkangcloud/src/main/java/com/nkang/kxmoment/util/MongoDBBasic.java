@@ -1681,13 +1681,11 @@ public class MongoDBBasic {
 		    	DBObject dbquery = new BasicDBObject();  
 		    	results = mongoDB.getCollection(collectionMasterDataName).distinct("countryCode", dbquery);
 
-		    	String[] locales = (String[]) results.toArray();
-		    	for (String countryCode : locales) {
-		    		Locale obj = new Locale("", countryCode);
+		    	for(int i=0; i<results.size();i++){
+		    		Locale obj = new Locale("", results.get(i).toString());
 		    		OrgOtherPartySiteInstance opsi = new OrgOtherPartySiteInstance();
 		    		opsi.setCountryCode(obj.getCountry());
 		    		opsi.setCountryName(obj.getDisplayCountry());
-		    		//System.out.println("Country Code = " + obj.getCountry()+ ", Country Name = " + obj.getDisplayCountry());
 		    		listOfRegion.add(opsi);
 		    	}
 		    }
