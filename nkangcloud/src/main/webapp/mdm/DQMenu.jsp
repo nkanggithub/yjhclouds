@@ -210,22 +210,23 @@
 											for(var i=0;i<data[0].length;i++){
 												text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #1F77B4;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;    margin-right: 4px;border-radius: 3px;'>客户</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[0][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].industrySegmentNames+"</p><p style='width:100%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[0][i].streetAddress1+"</p></div></div></div>";
 											}
-											title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 60px;background:#1F77B4;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 85px;top: 45px;'>"+data[0].length+"</p>";
 											}
+									  	title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 60px;background:#1F77B4;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 85px;top: 45px;'>"+data[0].length+"</p>";
 													  	if(data[1].length!=0){
 															for(var i=0;i<data[1].length;i++){
 																text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #FF7F0E;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;    margin-right: 4px;border-radius: 3px;'>伙伴</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[1][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[1][i].streetAddress1+"</p></div></div></div>";
 															}
-															title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 130px;background:#FF7F0E;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 155px;top: 45px;'>"+data[1].length+"</p>";
 															}
+													  	title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 130px;background:#FF7F0E;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 155px;top: 45px;'>"+data[1].length+"</p>";
 													  	if(data[2].length!=0){
 															for(var i=0;i<data[2].length;i++){
 															text=text+"<div style='width:100%;margin:0 auto;border-bottom:1px solid gray;margin-top:10px;'><div style='width:100%;height: 80px;margin-top:5px;border-radius:5px;'><div style='width: 98%;height:100%;margin:0;margin-left:2%;float:left;'><p style='float:left;width: 10%;padding: 1px;background: #2CA02C;text-align:center;font-size: 12px;position: relative;top: 6px;margin: 0px;color: white;margin-right: 4px;border-radius: 3px;'>竞争</p><p style='float:left;width:88%;height:30px;line-height: 30px;margin:0;font-weight: bold;text-align:left;font-size: 18px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;'>"+data[2][i].organizationNonLatinExtendedName+"</p><p style='width:100%;height:20px;line-height: 20px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].industrySegmentNames+"</p><p style='width:90%;height:30px;line-height: 30px;margin:0;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-size: 14px;text-align:left;'>"+data[2][i].streetAddress1+"</p></div></div></div>";
 															}
-															title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 200px;background:#2CA02C;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 225px;top: 45px;'>"+data[2].length+"</p>";
+															
 															
 															text=text+"</div>";
 															}
+													  	title=title+"<div style='width: 20px;height: 20px;position:absolute;left: 200px;background:#2CA02C;border-radius: 15px;margin-top:5px'></div><p style='position: absolute;left: 225px;top: 45px;'>"+data[2].length+"</p>";
 									  swal({  
 								          title:title,  
 								          text:text,  
