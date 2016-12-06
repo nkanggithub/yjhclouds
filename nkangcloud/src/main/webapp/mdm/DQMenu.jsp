@@ -597,9 +597,8 @@
 			);
 	};
 	var firstCounrty="CN";
-	var text="";
 	function userlocationsave(obj){
-		 text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='countrySelect' onchange='countrySelect(this)' style='height: 30px;width: 100px;border-radius: 8%;'>";
+		var text="<p style='position:relative;top:-10px;line-height:30px;height:30px;'>Please select a city</p><select id='countrySelect' onchange='countrySelect(this)' style='height: 30px;width: 100px;border-radius: 8%;'>";
 		
 		 $.ajax({
 			type : "POST",
