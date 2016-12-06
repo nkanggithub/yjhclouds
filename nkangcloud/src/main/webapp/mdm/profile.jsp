@@ -807,34 +807,6 @@ function register() {
 		//  + seperator2 + date.getSeconds();
 		return currentdate;
 	}
-	//  $j = jQuery.noConflict();
-	function myAlter(err) {
-		$('#myAlterMessage').html(err);
-		$('#DivMyAlter').modal('show');
-	}
-	function myConfirm(msg, actionId) {
-		$('#myConfirmMessage').html(msg);
-		$('#DivMyConfirm').modal('show');
-		$('#myConfirmSubmit').unbind();
-		$('#myConfirmSubmit').click(function() {
-			$('#DivMyConfirm').hide();
-			$('[id$=' + actionId + ']').click();
-		});
-	}
-	function myConfirmWithParm(msg, actionId, parm) {
-		$('#myConfirmMessage').html(msg);
-		$('#DivMyConfirm').modal('show');
-		$('#myConfirmSubmit').unbind();
-		$('#myConfirmSubmit').click(function() {
-			$('#DivMyConfirm').hide();
-			$('[id$=' + actionId + ']').each(function(k) {
-				if ($(this).text() == parm) {
-					$(this).click();
-					return;
-				}
-			});
-		});
-	}
 </script>
 </head>
 <body style="margin: 0px; padding: 0px !important;">
