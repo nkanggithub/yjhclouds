@@ -32,434 +32,53 @@
 <meta content="" name="description" />
 <meta content="" name="hpe" />
 
-<link href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="../nkang/assets_athena/font-awesome/css/font-awesome.css"
-	rel="stylesheet" type="text/css" />
-<link href="../nkang/css_athena/style.css" rel="stylesheet"
-	type="text/css" />
-<link href="../nkang/assets_athena/icomoon/iconMoon.css"
-	rel="stylesheet" type="text/css" />
-<link href="../nkang/css_athena/style-responsive.css" rel="stylesheet"
-	type="text/css" />
-<link href="../nkang/css_athena/style-default.css" rel="stylesheet"
-	type="text/css" />
-<link href="../nkang/assets_athena/data-tables/DT_bootstrap.css"
-	rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/font-awesome/css/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/profile.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/icomoon/iconMoon.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-responsive.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-default.css"/>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/sonhlab-base.css"/>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/openmes.css"/>
+	
 <script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
-<script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
-<script src="../nkang/js_athena/typeahead.js"></script>
-<script src="../nkang/js_athena/jquery.feedback_me.js"></script>
+<script	src="../MetroStyleFiles/sweetalert.min.js"></script>
+
+<!-- 
+<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/data-tables/DT_bootstrap.css"/>
+
+<script src="../nkang/js_athena/common-scripts.js"></script>
 <script src="../nkang/assets_athena/raty/ratyViewJs.js"></script>
+<script src="../nkang/js_athena/jquery.feedback_me.js"></script>
 <script src="../nkang/assets_athena/data-tables/jquery.dataTables.js"></script>
 <script src="../nkang/assets_athena/data-tables/DT_bootstrap.js"></script>
-<script src="../nkang/js_athena/common-scripts.js"></script>
-<script type="text/javascript"
-	src="../MetroStyleFiles/sweetalert.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="../MetroStyleFiles/sweetalert.css" />
-
-
-<style>
-#weather {
-	margin-bottom: 20px;
-}
-
-#weather tr td {
-	height: 50px;
-}
-
-img.Wmates {
-	height: 25px;
-}
-
-#weather_suggest tr td {
-	line-height: 20px;
-}
-
-#weather_div_loading {
-	text-align: center;
-}
-
-#weather_div  .Socialization_menu img {
-	width: 50%;
-}
-
-#weather_div .Socialization_menu {
-	text-align: center;
-}
-
-#weather_div .Socialization_menu tr td {
-	width: 25%;
-	padding: 6px 0px;
-}
-
-#weather_div .Socialization_menu tr td h4 {
-	color: #000;
-	font-size: 13px;
-}
-
-#weather_div .Socialization_menu tr td:hover {
-	background-color: #eee;
-}
-
-#tax_main_div table tr td input {
-	width: 90px;
-	padding: 2px 5px;
-}
-
-#tax_main_div table tr td {
-	line-height: 30px;
-	vertical-align: middle;
-}
-
-#tax_main_div table tr td:nth-child(odd) {
-	text-align: right;
-}
-
-#tax_main_div table tr td:nth-child(even) {
-	text-align: left;
-}
-
-#main-content {
-	margin: 0px !important;
-}
-
-.HpLogo {
-	height: 60px;
-	margin-left: -10px !important;
-}
-
-#navlist li {
-	display: inline;
-	list-style-type: none;
-	padding-right: 30px;
-	white-space: nowrap;
-}
-
-.mainTitle {
-	font-size: 15px;
-}
-
-a:hover,a:link {
-	text-decoration: none;
-}
-
-.loading {
-	display: none;
-	opacity: 0.7;
-	filter: alpha(opacity = 70);
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 1000px;
-	height: 100%;
-	background-color: #FFFFFF;
-	z-index: 1000;
-}
-
-.matesUserImage {
-	border-radius: 35px;
-	height: 70px;
-	width: 70px;
-	margin:5px 0px;
-}
-
-.matesUserImage2 {
-	border-radius: 75px;
-	height: 150px;
-	width: 150px;
-	border: 3px #fff solid;
-	margin-top: -30px;
-	margin-bottom: 15px;
-}
-.myButtons {
-	background: none !important;
-	border: 0px !important;
-	background-color: #007DBA !important;
-	color: #fff !important;
-	font-size: 13px !important;
-	border-radius: 0px !important;
-	padding: 6px 6px 6px 6px !important;
-	border-bottom-left-radius: 6px !important;
-	border-top-right-radius: 6px !important;
-}
-
-.myButtons:hover {
-	background-color: #D7410B !important;
-}
-
-.myDisabledButtons {
-	background: none !important;
-	border: 0px !important;
-	background-color: gray !important;
-	color: #fff !important;
-	font-size: 13px !important;
-	border-radius: 0px !important;
-	padding: 6px 6px 6px 6px !important;
-	border-bottom-left-radius: 6px !important;
-	border-top-right-radius: 6px !important;
-}
-
-.parentDisable {
-	overflow: hidden;
-	width: 100%; //
-	height: 550px;
-	clear: both;
-}
-
-/* upload button */
-::-webkit-file-upload-button {
-	background: none;
-	border: 0px;
-	background-color: #007DBA;
-	color: #fff !important;
-	font-size: 14px;
-	border-radius: 0px;
-	padding: 8px 8px 8px 8px;
-	border-bottom-left-radius: 6px;
-	border-top-right-radius: 6px;
-}
-
-.linkBtn {
-	background: none !important;
-	border: 0px !important;
-	background-color: #007DBA !important;
-	color: #fff !important;
-	font-size: 14px !important;
-	border-radius: 0px !important;
-	padding: 8px 8px 8px 8px !important;
-	border-bottom-left-radius: 6px !important;
-	border-top-right-radius: 6px !important;
-}
-
-.clear {
-	clear: both
-}
-
-#positionToggle {
-	position: absolute;
-	top: 9px;
-	left: 9px;
-}
-
-#showHideList {
-	display: none;
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	border-radius: 5px;
-	border: 1px solid #cccccc;
-	background-color: #eeeeee;
-}
-
-#ListInner {
-	padding: 10px 10px 10px 10px;
-}
-
-.clearfix {
-	*zoom: 1;
-}
-
-.clearfix:before,.clearfix:after {
-	display: table;
-	line-height: 0;
-	content: "";
-}
-
-.clearfix:after {
-	clear: both;
-}
-
-/*label,select,.ui-select-menu { float: left; margin-right: 10px; }
-	.wrap ul.ui-selectmenu-menu-popup li a { font-weight: bold; }*/
-.ui-selectmenu {
-	height: 1.5em;
-}
-
-.ui-selectmenu-status {
-	line-height: 1.0em;
-}
-
-#UserInfo {
-	background: url(../MetroStyleFiles/image/bg_NULL.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-}
-
-#UserInfo table {
-	color: #ffffff;
-	font-size: 20px;
-}
-
-#userInfoDiv {
-	color: #ffffff;
-	text-align: center;
-	width: 100%;
-}
-
-#userInfoDiv #info_username span {
-	border-bottom: 1px #fff solid;
-	font-size: 22px;
-	font-weight: bold;
-	padding: 10px 0px;
-}
-
-#userInfoDiv #info_selfIntro {
-	text-align: left;
-	width: 90%;
-	margin: 0 auto;
-}
-
-#userInfoDiv #info_role {
-	width: 90%;
-	margin: 0 auto;
-}
-
-#userInfoDiv #info_role span {
-	font-weight: bold;
-	padding: 10px 0px;
-}
-
-#userInfoDiv #info_phone {
-	margin-top: -5px;
-}
-
-#userInfoDiv #info_phone img {
-	height: 20px;
-}
-
-#registerform {
-	background: url(../MetroStyleFiles/image/bg_NULL.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-}
-
-#registerform table {
-	magain: auto;
-	color: #ffffff;
-	font-size: 20px;
-}
-
-#registerform Div {
-	color: #ffffff;
-	text-align: center;
-	width: 100%;
-}
-
-#tableForm {
-	margin: auto;
-}
-
-.imgclass {
-	magain:20px;
-	height: 20px;
-	cursor: pointer;
-}
-
-input::-webkit-input-placeholder {
-	color: #999;
-	-webkit-transition: color.5s;
-}
-
-input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
-	{
-	color: #c2c2c2;
-	-webkit-transition: color.5s;
-}
-
-<!--
-start userLists style-->
-.Work_Mates_div2 {
-	margin: 0px;
-	padding: 0px;
-}
-
-#Work_Mates_div {
-	margin-top: -12px;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 {
-	border-bottom: #ccc 1px solid;
-	padding: 10px 0px;
-}
-
-.Work_Mates_div2 .total_num {
-	float: right;
-	margin-bottom: -6px;
-	vertical-align: bottom;
-}
-
-.Work_Mates_div2 .total_num img {
-	height: 16px;
-	margin-right: 5px;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_img_div2 {
-	float: left;
-	margin-right: 10px;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div {
-	color: #333;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div span.selfIntro
-	{
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 {
-	font-size: 16px;
-}
-
-.Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 .role
-	{
-	font-size: 10px;
-	color: #666;
-	padding-left: 5px;
-	font-weight: normal;
-}
-
-.clear {
-	clear: both;
-}
-<!--
-end
- 
-userLists
- 
-style--
->
-</style>
+<script src="../nkang/js_athena/typeahead.js"></script>
+<script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
+ -->
 <script>
-var $j = jQuery.noConflict();
-$j(window).load(function() {
+$(window).load(function() {
 		getWeather();
 		getStockData();
 		getMDLUserLists();
-		$j("#tax_submit_button").click(function(){
+		$("#tax_submit_button").click(function(){
 			jQuery.ajax({
 				type : "GET",
 				url : "../userProfile/getTax",
 				data : {
-					taxIncome : $j("#taxIncome").val(),
-					taxstart : $j("#taxstart").val(),
-					payment : $j("#payment").val()
+					taxIncome : $("#taxIncome").val(),
+					taxstart : $("#taxstart").val(),
+					payment : $("#payment").val()
 				},
 				cache : false,
 				success : function(data) {
 					var jsons = eval('(' + data + ')');
-					$j("#levelcalc").text(jsons.levelcalc);
-					$j("#nolevelcalc").text(jsons.nolevelcalc);
+					$("#levelcalc").text(jsons.levelcalc);
+					$("#nolevelcalc").text(jsons.nolevelcalc);
 					swal("Calculate successfully!", "Congratulations!", "success"); 
 				}
 			});
@@ -471,7 +90,7 @@ function register() {
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
 		data : {
-			UID : $j('#uid').val()
+			UID : $('#uid').val()
 		},
 		cache : false,
 		success : function(data) {
@@ -480,371 +99,366 @@ function register() {
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
 				if(jsons.results[0].role!="未注册"){
-					$j("#info_imgurl").attr("src",$j('#userImage').attr('src'));
-					$j("#info_role span").text( jsons.results[0].role);
+					$("#info_imgurl").attr("src",$('#userImage').attr('src'));
+					$("#info_role span").text( jsons.results[0].role);
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
-					$j("#info_username span").html(jsons.results[0].realName+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-					$j("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
-					$j("#info_selfIntro").text(jsons.results[0].selfIntro);
-					$j('#UserInfo').modal('show');
+					$("#info_username span").html(jsons.results[0].realName+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
+					$("#info_selfIntro").text(jsons.results[0].selfIntro);
+					$('#UserInfo').modal('show');
 				}else{
-					$j("#info_phone").html('');
-					$j("#info_selfIntro").text('');
+					$("#info_phone").html('');
+					$("#info_selfIntro").text('');
 					showRegister();
 				}
 			}else{
-				$j("#info_phone").html('');
-				$j("#info_selfIntro").text('');
+				$("#info_phone").html('');
+				$("#info_selfIntro").text('');
 				showRegister();
 			}
 		}
 	});
 	}
 	
-	function showRegister(){
-		$j('#UserInfo').modal('hide');
-		$j('#registerform').modal('show');
-		$j.ajax({
-			type : "GET",
-			url : "../userProfile/getMDLUserLists",
-			data : {
-				UID : $j('#uid').val()
-			},
-			cache : false,
-			success : function(data) {
-				data = data.replace(/:null/g, ':"未注册"');
-				data = '{"results":' + data + '}';
-				var jsons = eval('(' + data + ')');
-				if (jsons.results.length > 0) {
-					$j("#realname").val(jsons.results[0].realName);
-					$j("#phone").val(jsons.results[0].phone);
-					$j("#email").val(jsons.results[0].email);
-					$j("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
-				    var count=$j("#roleSelect option").length;
-				    for(var i=0;i<count;i++)  
-				       {           if($j("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
-				          {  
-				              $j("#roleSelect").get(0).options[i].selected = true;  
-				            
-				              break;  
-				          }  
-				      }
-				    count=$j("#groupSelect option").length;
-				    for(var i=0;i<count;i++)  
-				       {           if($j("#groupSelect").get(0).options[i].text == jsons.results[0].groupid)  
-				          {  
-				              $j("#groupSelect").get(0).options[i].selected = true;  
-				            
-				              break;  
-				          }  
-				      }
-						    
-					$j("#selfIntro").val(jsons.results[0].selfIntro);
-				}
+function showRegister(){
+	$('#UserInfo').modal('hide');
+	$('#registerform').modal('show');
+	$.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {
+			UID : $('#uid').val()
+		},
+		cache : false,
+		success : function(data) {
+			data = data.replace(/:null/g, ':"未注册"');
+			data = '{"results":' + data + '}';
+			var jsons = eval('(' + data + ')');
+			if (jsons.results.length > 0) {
+				$("#realname").val(jsons.results[0].realName);
+				$("#phone").val(jsons.results[0].phone);
+				$("#email").val(jsons.results[0].email);
+				$("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
+			    var count=$("#roleSelect option").length;
+			    for(var i=0;i<count;i++)  
+			       {           if($("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
+			          {  
+			              $("#roleSelect").get(0).options[i].selected = true;  
+			            
+			              break;  
+			          }  
+			      }
+			    count=$("#groupSelect option").length;
+			    for(var i=0;i<count;i++)  
+			       {           if($("#groupSelect").get(0).options[i].text == jsons.results[0].groupid)  
+			          {  
+			              $("#groupSelect").get(0).options[i].selected = true;  
+			            
+			              break;  
+			          }  
+			      }
+					    
+				$("#selfIntro").val(jsons.results[0].selfIntro);
 			}
-		});
-		$j("#registerBtn").click(function(){
-			var uid = $j("#uid").val();
-			var name = $j("#realname").val();
-			var phone = $j("#phone").val();
-			var email = $j("#email").val();
-			//var suppovisor = $j("#suppovisor").val();
-			var role = $j("#roleSelect option:selected").val();
-			var group = $j("#groupSelect option:selected").val();
-			var selfIntro = $j("#selfIntro").val();
-			
-			 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			 var phoneFilter = /^1[0-9]{10}/;
-			 if (name.replace(/(^ *)|( *$)/g,'')==''){
-				 swal("Registered fail!", "Pls input your correct name information.", "error");
-			 }else if (!phoneFilter.test(phone)){
-				 swal("Registered fail!", "Pls input your correct phone information.", "error");
-			 }else if (!emailFilter.test(email)){
-				 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
-			 }else if (selfIntro==''){
-				 swal("Registered fail!", "Pls input your correct self-introduction information.", "error");
-			 }else{
-				$j.ajax({
-					url:"../regist",
-					data:{uid:uid,name:name,telephone:phone,email:email,
-						role:role,group:group,selfIntro:selfIntro,},
-					type:"POST",
-					dataType:"json",
-					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-					cache:false,
-					async:false,
-					success:function(result) {
-						if(result){
-							$j('#registerform').modal('hide');
-							swal("Registered successfully!", "Congratulations!", "success"); 
-						} else {
-							swal("Registered fail!", "Pls input your correct information.", "error");
-						}
-					}
-				});
-			}
-		});
+		}
+	});
+	$("#registerBtn").click(function(){
+		var uid = $("#uid").val();
+		var name = $("#realname").val();
+		var phone = $("#phone").val();
+		var email = $("#email").val();
+		//var suppovisor = $("#suppovisor").val();
+		var role = $("#roleSelect option:selected").val();
+		var group = $("#groupSelect option:selected").val();
+		var selfIntro = $("#selfIntro").val();
 		
-	}
-	function getUserInfo(username, headimgurl, openId) {
-				$j("#info_imgurl").attr("src",headimgurl);
-				$j("#info_username span").html(username);
-				//$j("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-		jQuery
-				.ajax({
-					type : "GET",
-					url : "../userProfile/getMDLUserLists",
-					data : {
-						UID : openId
-					},
-					cache : false,
-					success : function(data) {
-						data = data.replace(/:null/g, ':"未注册"');
-						data = '{"results":' + data + '}';
-						var jsons = eval('(' + data + ')');
-						if (jsons.results.length > 0) {
-							$j("#info_role span").text( jsons.results[0].role);
-							if(jsons.results[0].role!="未注册"){
-								$j("#info_username span").html(jsons.results[0].realName);
-								data = data.replace(/:"未注册"/g, ':"未编辑"');
-								jsons = eval('(' + data + ')');
-								$j("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
-								$j("#info_selfIntro").text(jsons.results[0].selfIntro);
-							}else{
-								$j("#info_phone").html('');
-								$j("#info_selfIntro").text('');
-							}
-							$j('#UserInfo').modal('show');
-						}
+		 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		 var phoneFilter = /^1[0-9]{10}/;
+		 if (name.replace(/(^ *)|( *$)/g,'')==''){
+			 swal("Registered fail!", "Pls input your correct name information.", "error");
+		 }else if (!phoneFilter.test(phone)){
+			 swal("Registered fail!", "Pls input your correct phone information.", "error");
+		 }else if (!emailFilter.test(email)){
+			 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
+		 }else if (selfIntro==''){
+			 swal("Registered fail!", "Pls input your correct self-introduction information.", "error");
+		 }else{
+			$.ajax({
+				url:"../regist",
+				data:{uid:uid,name:name,telephone:phone,email:email,
+					role:role,group:group,selfIntro:selfIntro,},
+				type:"POST",
+				dataType:"json",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				cache:false,
+				async:false,
+				success:function(result) {
+					if(result){
+						$('#registerform').modal('hide');
+						swal("Registered successfully!", "Congratulations!", "success"); 
+					} else {
+						swal("Registered fail!", "Pls input your correct information.", "error");
 					}
-				});
-	}
-	function getMDLUserLists() {
-		jQuery
-				.ajax({
-					type : "GET",
-					url : "../userProfile/getMDLUserLists",
-					data : {},
-					cache : false,
-					success : function(data) {
-						data = '{"results":' + data + '}';
-						var jsons = eval('(' + data + ')');
-						var ul = "";
-						ul='<div class="Work_Mates_div_list_div2">'
-						+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>'+ jsons.results.length
-						+'</span><div class="clear"></div></div>';
-						for (var i = 0; i < jsons.results.length; i++) {
-							var temp = jsons.results[i];
-							var selfIntro=temp.selfIntro;
-							var role=temp.role;
-							var workDay=temp.workDay;
-							if(selfIntro==null||selfIntro=='null'){
-								selfIntro="nothing";
-							}else{
-								if(selfIntro.length>10){
-									selfIntro=(selfIntro.substr(0,12)+'...');
-								}
-							}
-							if(role==null||role=='null'){
-								role="";
-							}
-							if(workDay==null||workDay=='null'||workDay==0){
-								workDay="";
-							}else{
-								workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
-							}
-							var li='	<div class="Work_Mates_div_list_div2">'
-								+'                                           	 	<div class="Work_Mates_img_div2">'
-								+'                                        			 <img src="'
-								+ temp.headimgurl
-								+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
-								+ temp.nickname
-								+ '\',\''
-								+ temp.headimgurl
-								+ '\',\''
-								+ temp.openid
-								+ '\');"/> '
-								+'                                         		</div>'
-								+'                                         		<div class="Work_Mates_text_div">'
-								+'                                        			 <h2><span  onclick="getUserInfo(\''
-								+ temp.nickname
-								+ '\',\''
-								+ temp.headimgurl
-								+ '\',\''
-								+ temp.openid
-								+ '\');">'
-								+ temp.nickname
-								+ '</span><span class="role">'
-								+role+'</span></h2>'
-								+ '<div>'
-								+'													<div class="tag">'
-								+'														<span>HTML</span>'
-								+'													</div>'
-								+'													<div class="tag">'
-								+'														CSS3'
-								+'													</div><br/>'
-								+'													<span class="selfIntro">'+selfIntro+'</span>'
-								+'												</div>'
-								+'                                        		</div>'
-								+workDay
-								+'                                                <div class="clear"></div>'
-								+'                                          </div>';
-							ul += li;
-						}
-						$j("#Work_Mates_div").html(ul);
-					}
-				});
-	}
-	function getLocation() {
-		//$j("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
-		$j("#locationImg").attr("src", "../MetroStyleFiles/loading.gif");
-		jQuery.ajax({
-			type : "GET",
-			url : "../userProfile/getLocation",
-			data : {
-				uid : $j("#uid").val()
-			},
-			cache : false,
-			success : function(data) {
-				if (data != "")
-					$j("#location").text(data);
-				$j("#locationImg").attr("src",
-						"../MetroStyleFiles/setuplocation.png");
-			}
-		});
-	}
-	function getWeather() {
-		if ($j("#refreshImg") != null && $j("#refreshImg") != undefined)
-			$j("#refreshImg").attr("src", "../MetroStyleFiles/loading.gif");
-		jQuery
-				.ajax({
-					type : "GET",
-					url : "../userProfile/getWeather",
-					data : {},
-					cache : false,
-					success : function(data) {
-						var jsons = eval('(' + data + ')');
-						if (jsons.status == 'success'
-								&& jsons.results.length > 0) {
-							var tbody;
-							for (var i = 0; i < jsons.results[0].weather_data.length; i++) {
-								var temp = jsons.results[0].weather_data[i];
-								var tr = "<tr>";
-								if (i == 0) {
-									var dateT = temp.date;
-									var start = dateT.lastIndexOf("：");
-									var end = dateT.lastIndexOf(")");
-									dateT = dateT.substring(start + 1, end);
-									tr += '<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img id="refreshImg" src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'
-											+ dateT
-											+ '</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"  data-dismiss="modal" aria-hidden="true"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
-									//tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b> <img src="../MetroStyleFiles/refresh.png" style="height:30px;cursor:pointer;" onclick="getWeather();"/></td></tr><tr>';
-									tr += '<td width="20%" align="left">今天</td>';
-								} else {
-									tr += '<td width="20%" align="left">'
-											+ temp.date + '</td>';
-								}
-								tr += '<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-										+ temp.weather + '</td>';
-								tr += '<td width="25%" align="right">'
-										+ temp.temperature + ' </td>';
-								tr += "</tr>";
-								tbody += tr;
-							}
-							tbody += '<tr><td colspan="3" align="center">'
-									+ getNowFormatDate() + '</td></tr>';
-							$j('#weather').html(tbody);
-							//	$j('weather_div_loading').css({'display':'none'});
-							//	$j('weather_div').css({'display':'block'});
-							tbody = "";
-							for (var i = 0; i < jsons.results[0].index.length; i++) {
-								var temp = jsons.results[0].index[i];
-								var tr = "<tr>";
-								var tipt;
-								if (temp.tipt.length > 4) {
-									tipt = "紫外线";
-								} else {
-									tipt = temp.tipt;
-								}
-								tr += '<td width="15%" align="right" valign="top" ><nobr><b>'
-										+ tipt + '：</b></nobr></td>';
-								tr += '<td width="85%" align="left">'
-										+ temp.des + '</td>';
-								tr += "</tr>";
-								tbody += tr;
-							}
-							$j('#weather_suggest').html(tbody);
-							if ($j("#refreshImg") != null
-									&& $j("#refreshImg") != undefined)
-								$j("#refreshImg").attr("src",
-										"../MetroStyleFiles/refresh.png");
-						}
-					}
-				});
-	}
+				}
+			});
+		}
+	});
 	
-	function getStockData(){
-		var url = "http://hq.sinajs.cn/list=gb_hpe,gb_hpq,gb_csc";
-		getNewData(url);
-		var refreshData = self.setInterval("getNewData('"+url+"')",2000);
+}
+function getUserInfo(username, headimgurl, openId) {
+			$("#info_imgurl").attr("src",headimgurl);
+			$("#info_username span").html(username);
+			//$("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+	jQuery
+			.ajax({
+				type : "GET",
+				url : "../userProfile/getMDLUserLists",
+				data : {
+					UID : openId
+				},
+				cache : false,
+				success : function(data) {
+					data = data.replace(/:null/g, ':"未注册"');
+					data = '{"results":' + data + '}';
+					var jsons = eval('(' + data + ')');
+					if (jsons.results.length > 0) {
+						$("#info_role span").text( jsons.results[0].role);
+						if(jsons.results[0].role!="未注册"){
+							$("#info_username span").html(jsons.results[0].realName);
+							data = data.replace(/:"未注册"/g, ':"未编辑"');
+							jsons = eval('(' + data + ')');
+							$("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
+							$("#info_selfIntro").text(jsons.results[0].selfIntro);
+						}else{
+							$("#info_phone").html('');
+							$("#info_selfIntro").text('');
+						}
+						$('#UserInfo').modal('show');
+					}
+				}
+			});
+}
+function getMDLUserLists() {
+	jQuery
+			.ajax({
+				type : "GET",
+				url : "../userProfile/getMDLUserLists",
+				data : {},
+				cache : false,
+				success : function(data) {
+					data = '{"results":' + data + '}';
+					var jsons = eval('(' + data + ')');
+					var ul = "";
+					ul='<div class="Work_Mates_div_list_div2">'
+					+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>'+ jsons.results.length
+					+'</span><div class="clear"></div></div>';
+					for (var i = 0; i < jsons.results.length; i++) {
+						var temp = jsons.results[i];
+						var selfIntro=temp.selfIntro;
+						var role=temp.role;
+						var workDay=temp.workDay;
+						if(selfIntro==null||selfIntro=='null'){
+							selfIntro="nothing";
+						}else{
+							if(selfIntro.length>10){
+								selfIntro=(selfIntro.substr(0,12)+'...');
+							}
+						}
+						if(role==null||role=='null'){
+							role="";
+						}
+						if(workDay==null||workDay=='null'||workDay==0){
+							workDay="";
+						}else{
+							workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
+						}
+						var li='	<div class="Work_Mates_div_list_div2">'
+							+'                                           	 	<div class="Work_Mates_img_div2">'
+							+'                                        			 <img src="'
+							+ temp.headimgurl
+							+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
+							+ temp.nickname
+							+ '\',\''
+							+ temp.headimgurl
+							+ '\',\''
+							+ temp.openid
+							+ '\');"/> '
+							+'                                         		</div>'
+							+'                                         		<div class="Work_Mates_text_div">'
+							+'                                        			 <h2><span  onclick="getUserInfo(\''
+							+ temp.nickname
+							+ '\',\''
+							+ temp.headimgurl
+							+ '\',\''
+							+ temp.openid
+							+ '\');">'
+							+ temp.nickname
+							+ '</span><span class="role">'
+							+role+'</span></h2>'
+							+ '<div>'
+							+'													<div class="tag">'
+							+'														<span>HTML</span>'
+							+'													</div>'
+							+'													<div class="tag">'
+							+'														CSS3'
+							+'													</div><br/>'
+							+'													<span class="selfIntro">'+selfIntro+'</span>'
+							+'												</div>'
+							+'                                        		</div>'
+							+workDay
+							+'                                                <div class="clear"></div>'
+							+'                                          </div>';
+						ul += li;
+					}
+					$("#Work_Mates_div").html(ul);
+				}
+			});
+}
+function getLocation() {
+	//$("#locationImg").attr("src","../MetroStyleFiles/setuplocation.png" );
+	$("#locationImg").attr("src", "../MetroStyleFiles/loading.gif");
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getLocation",
+		data : {
+			uid : $("#uid").val()
+		},
+		cache : false,
+		success : function(data) {
+			if (data != "")
+				$("#location").text(data);
+			$("#locationImg").attr("src",
+					"../MetroStyleFiles/setuplocation.png");
+		}
+	});
+}
+function getWeather() {
+	if ($("#refreshImg") != null && $("#refreshImg") != undefined)
+		$("#refreshImg").attr("src", "../MetroStyleFiles/loading.gif");
+	jQuery.ajax({
+				type : "GET",
+				url : "../userProfile/getWeather",
+				data : {},
+				cache : false,
+				success : function(data) {
+					var jsons = eval('(' + data + ')');
+					if (jsons.status == 'success'
+							&& jsons.results.length > 0) {
+						var tbody;
+						for (var i = 0; i < jsons.results[0].weather_data.length; i++) {
+							var temp = jsons.results[0].weather_data[i];
+							var tr = "<tr>";
+							if (i == 0) {
+								var dateT = temp.date;
+								var start = dateT.lastIndexOf("：");
+								var end = dateT.lastIndexOf(")");
+								dateT = dateT.substring(start + 1, end);
+								tr += '<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img id="refreshImg" src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'
+										+ dateT
+										+ '</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"  data-dismiss="modal" aria-hidden="true"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
+								//tr+='<td colspan="3" align="center"><b>'+jsons.results[0].currentCity+'&nbsp;&nbsp;'+temp.date+'</b> <img src="../MetroStyleFiles/refresh.png" style="height:30px;cursor:pointer;" onclick="getWeather();"/></td></tr><tr>';
+								tr += '<td width="20%" align="left">今天</td>';
+							} else {
+								tr += '<td width="20%" align="left">'
+										+ temp.date + '</td>';
+							}
+							tr += '<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+									+ temp.weather + '</td>';
+							tr += '<td width="25%" align="right">'
+									+ temp.temperature + ' </td>';
+							tr += "</tr>";
+							tbody += tr;
+						}
+						tbody += '<tr><td colspan="3" align="center">'
+								+ getNowFormatDate() + '</td></tr>';
+						$('#weather').html(tbody);
+						//	$('weather_div_loading').css({'display':'none'});
+						//	$('weather_div').css({'display':'block'});
+						tbody = "";
+						for (var i = 0; i < jsons.results[0].index.length; i++) {
+							var temp = jsons.results[0].index[i];
+							var tr = "<tr>";
+							var tipt;
+							if (temp.tipt.length > 4) {
+								tipt = "紫外线";
+							} else {
+								tipt = temp.tipt;
+							}
+							tr += '<td width="15%" align="right" valign="top" ><nobr><b>'
+									+ tipt + '：</b></nobr></td>';
+							tr += '<td width="85%" align="left">'
+									+ temp.des + '</td>';
+							tr += "</tr>";
+							tbody += tr;
+						}
+						$('#weather_suggest').html(tbody);
+						if ($("#refreshImg") != null
+								&& $("#refreshImg") != undefined)
+							$("#refreshImg").attr("src",
+									"../MetroStyleFiles/refresh.png");
+					}
+				}
+			});
+}
+function getStockData(){
+	var url = "http://hq.sinajs.cn/list=gb_hpe,gb_hpq,gb_csc";
+	getNewData(url);
+	var refreshData = self.setInterval("getNewData('"+url+"')",2000);
+}
+   function getNewData(url){
+   	var parameters = url.split('=')[1].split(',');
+   	var length = url.split('=')[1].split(',').length;
+   	var list = new Array();
+   	for(var i=0; i<length; i++){
+   		list.push("hq_str_"+parameters[i]);
+   	}
+   	$.ajax({  
+           cache : true,  
+           url:url,
+           type: 'GET', 
+           dataType: 'script', 
+           timeout: 2000, 
+           success: function(data, textStatus, jqXHR){
+           	if(textStatus=='success'){
+           		var tbody;
+                   var tr = "<tr>";
+   				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
+           		for(var i=0;i<list.length;i++){
+           			var stockData = eval(list[i]).split(',');
+           			tr+="<tr>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td>"+parseFloat(stockData[1])+"</td>"+"<td>"+parseFloat(stockData[2])+"%"+"</td>"+"<td>"+parseFloat(stockData[4])+"</td></tr>";
+           		}
+           	}
+			tbody += tr;
+			$('#stock').html(tbody); 
+           }
+       });
+   }
+function getNowFormatDate() {
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	if (month >= 1 && month <= 9) {
+		month = "0" + month;
 	}
-   
-
-    function getNewData(url){
-    	var parameters = url.split('=')[1].split(',');
-    	var length = url.split('=')[1].split(',').length;
-    	var list = new Array();
-    	for(var i=0; i<length; i++){
-    		list.push("hq_str_"+parameters[i]);
-    	}
-    	$j.ajax({  
-            cache : true,  
-            url:url,
-            type: 'GET', 
-            dataType: 'script', 
-            timeout: 2000, 
-            success: function(data, textStatus, jqXHR){
-            	if(textStatus=='success'){
-            		var tbody;
-                    var tr = "<tr>";
-    				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
-            		for(var i=0;i<list.length;i++){
-            			var stockData = eval(list[i]).split(',');
-            			tr+="<tr>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td>"+parseFloat(stockData[1])+"</td>"+"<td>"+parseFloat(stockData[2])+"%"+"</td>"+"<td>"+parseFloat(stockData[4])+"</td></tr>";
-            		}
-            	}
-				tbody += tr;
-				$j('#stock').html(tbody); 
-            }
-        });
-    }
-	
-	function getNowFormatDate() {
-		var date = new Date();
-		var seperator1 = "-";
-		var seperator2 = ":";
-		var month = date.getMonth() + 1;
-		var strDate = date.getDate();
-		var hour = date.getHours();
-		var minute = date.getMinutes();
-		if (month >= 1 && month <= 9) {
-			month = "0" + month;
-		}
-		if (strDate >= 0 && strDate <= 9) {
-			strDate = "0" + strDate;
-		}
-		if (hour >= 0 && hour <= 9) {
-			hour = "0" + hour;
-		}
-		if (minute >= 0 && minute <= 9) {
-			minute = "0" + minute;
-		}
-		var currentdate = date.getFullYear() + seperator1 + month + seperator1
-				+ strDate + " " + hour + seperator2 + minute;
-		//  + seperator2 + date.getSeconds();
-		return currentdate;
+	if (strDate >= 0 && strDate <= 9) {
+		strDate = "0" + strDate;
 	}
+	if (hour >= 0 && hour <= 9) {
+		hour = "0" + hour;
+	}
+	if (minute >= 0 && minute <= 9) {
+		minute = "0" + minute;
+	}
+	var currentdate = date.getFullYear() + seperator1 + month + seperator1
+			+ strDate + " " + hour + seperator2 + minute;
+	//  + seperator2 + date.getSeconds();
+	return currentdate;
+}
 </script>
 </head>
 <body style="margin: 0px; padding: 0px !important;">
