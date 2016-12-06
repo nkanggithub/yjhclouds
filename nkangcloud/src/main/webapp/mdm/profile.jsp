@@ -444,6 +444,7 @@ style--
 var $j = jQuery.noConflict();
 $j(window).load(function() {
 		getWeather();
+		getStockData();
 		getMDLUserLists();
 		$j("#tax_submit_button").click(function(){
 			jQuery.ajax({
@@ -782,6 +783,43 @@ function register() {
 					}
 				});
 	}
+	
+	function getStockData(){
+		var url = "http://hq.sinajs.cn/list=gb_hpe,gb_hpq,gb_csc";
+		getNewData(url);
+		var refreshData = self.setInterval("getNewData('"+url+"')",2000);
+	}
+   
+
+    function getNewData(url){
+    	var parameters = url.split('=')[1].split(',');
+    	var length = url.split('=')[1].split(',').length;
+    	var list = new Array();
+    	for(var i=0; i<length; i++){
+    		list.push("hq_str_"+parameters[i]);
+    	}
+    	$j.ajax({  
+            cache : true,  
+            url:url,
+            type: 'GET', 
+            dataType: 'script', 
+            timeout: 2000, 
+            success: function(data, textStatus, jqXHR){
+            	if(textStatus=='success'){
+            		var tbody;
+                    var tr = "<tr>";
+    				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
+            		for(var i=0;i<list.length;i++){
+            			var stockData = eval(list[i]).split(',');
+            			tr+="<tr>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td>"+parseFloat(stockData[1])+"</td>"+"<td>"+parseFloat(stockData[2])+"%"+"</td>"+"<td>"+parseFloat(stockData[4])+"</td></tr>";
+            		}
+            	}
+				tbody += tr;
+				$j('#stock').html(tbody); 
+            }
+        });
+    }
+	
 	function getNowFormatDate() {
 		var date = new Date();
 		var seperator1 = "-";
@@ -932,8 +970,11 @@ function register() {
 														src="../MetroStyleFiles/menu-tax.png" />
 														<h4>税费计算</h4>
 												</a></td>
-												<td><img src="../MetroStyleFiles/menu-stock.png" />
-													<h4>股票</h4></td>
+												<td><a class="" data-toggle="modal"
+													href="#stock_main_div"> <img
+														src="../MetroStyleFiles/menu-stock.png" />
+														<h4>股票</h4>
+												</a></td>
 												<td><img src="../MetroStyleFiles/time_zone.png" />
 													<h4>开发中</h4></td>
 											</tr>
@@ -998,6 +1039,25 @@ function register() {
 												<td>不含税级距计算：</td>
 												<td><span id="nolevelcalc"></span></td>
 											</tr>
+										</table>
+									</div>
+								</div>
+								<div id="stock_main_div" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="stock_main_div"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-header" style="text-align: center;">
+										<h3>
+											<b>股票行情</b>
+										</h3>
+										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 25px; cursor: pointer; margin-top: -40px;" />
+											
+									</div>
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px 10px;">
+										<table width="100%" id="stock" style="margin-bottom: -20px;">
+											
 										</table>
 									</div>
 								</div>
