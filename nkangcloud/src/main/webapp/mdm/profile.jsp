@@ -401,11 +401,13 @@ function getWeather() {
 				}
 			});
 }
-function getStockData(){
-	var url = "http://hq.sinajs.cn/list=gb_hpe,gb_hpq,gb_csc";
-	getNewData(url);
-	var refreshData = self.setInterval("getNewData('"+url+"')",2000);
-}
+
+	function getStockData(){
+		var url = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
+		getNewData(url);
+		var refreshData = self.setInterval("getNewData('"+url+"')",2000);
+	}
+
    function getNewData(url){
    	var parameters = url.split('=')[1].split(',');
    	var length = url.split('=')[1].split(',').length;
@@ -422,15 +424,27 @@ function getStockData(){
            success: function(data, textStatus, jqXHR){
            	if(textStatus=='success'){
            		var tbody;
-                   var tr = "<tr>";
+                var tr = "<tr>";
    				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
            		for(var i=0;i<list.length;i++){
            			var stockData = eval(list[i]).split(',');
-           			tr+="<tr>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td>"+parseFloat(stockData[1])+"</td>"+"<td>"+parseFloat(stockData[2])+"%"+"</td>"+"<td>"+parseFloat(stockData[4])+"</td></tr>";
+           			tr+="<tr class='stockline'>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td class='stockcolor'>"+stockData[1]+"</td>"+"<td id='increase' class='stockcolor'>"+parseFloat(stockData[2])+"%"+"</td>"+"<td class='stockcolor'>"+stockData[4]+"</td></tr>";
            		}
-           	}
+           	} 
 			tbody += tr;
 			$('#stock').html(tbody); 
+			$(".stockline").each(function(){
+				if(parseFloat($(this).find('td').eq(2).text())>0){
+		             $(this).find('td').eq(1).css("color","red");
+		             $(this).find('td').eq(2).css("color","red");
+		             $(this).find('td').eq(3).css("color","red");
+				} else if(parseFloat($(this).find('td').eq(2).text())<0){
+					$(this).find('td').eq(1).css("color","green");
+		            $(this).find('td').eq(2).css("color","green");
+		            $(this).find('td').eq(3).css("color","green");
+				}
+			})
+			
            }
        });
    }
@@ -660,6 +674,9 @@ function getNowFormatDate() {
 									role="dialog" aria-labelledby="stock_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
+										<!-- <img src="../MetroStyleFiles/Add1.png" data-dismiss="modal"
+											aria-hidden="false"
+											style="float: left; height: 25px; cursor: pointer; margin-top: 0px;" /> -->
 										<h3>
 											<b>股票行情</b>
 										</h3>
