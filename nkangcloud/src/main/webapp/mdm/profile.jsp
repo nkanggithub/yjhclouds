@@ -1,24 +1,31 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
+<%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
-<%
-	String AccessKey = RestUtils.callGetValidAccessKey();
-	String uid = request.getParameter("UID");
-	String curLoc;
-	WeChatUser wcu;
-	if (session.getAttribute("location") == null) {
-		GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
-		wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-		curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT(),
-				loc.getLNG());
-		session.setAttribute("location", curLoc);
-		session.setAttribute("wcu", wcu);
-	} else {
-		wcu = (WeChatUser) session.getAttribute("wcu");
-		curLoc = (String) session.getAttribute("location");
-	}
+<%	
+String AccessKey = RestUtils.callGetValidAccessKey();
+String uid = request.getParameter("UID");
+String curLoc=null;
+String city=null;
+WeChatUser wcu;
+if (session.getAttribute("location") == null) {
+	GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
+	wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+	String message = RestUtils.getUserCurLocStrWithLatLng(loc.getLAT(),loc.getLNG());
+	 JSONObject demoJson = new JSONObject(message);
+     if(demoJson.has("result")){
+  	    JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
+  	 	curLoc = JsonFormatedLocation.getString("formatted_address");
+  	 	city = JsonFormatedLocation.getJSONObject("addressComponent").getString("city");
+     }
+	session.setAttribute("location", curLoc);
+	session.setAttribute("city", city);
+	session.setAttribute("wcu", wcu);
+} else {
+	wcu = (WeChatUser) session.getAttribute("wcu");
+	curLoc = (String) session.getAttribute("location");
+}
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
