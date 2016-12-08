@@ -1273,7 +1273,7 @@ visibility:visible;
 	<div id="chart2" style="display:none"></div>
 <div id="cityRound" style="position: absolute;width: 200px;height: 40px;top: 320px;left: 20%;display:none;">
 		
-<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;"><img src="Jsp/PIC/cn.gif" alt="" style="width: 30px;height: 15px;position:relative;top:-15px;"></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ countryName }</p><p></p></div>
+<div id="testa" style=" opacity:1;cursor: pointer;position: absolute;top: 0px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;"><img src="Jsp/PIC/${ countryCode.toLowerCase() }.gif" alt="" style="width: 30px;height: 15px;position:relative;top:-15px;"></p><p id="labelCountry" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ countryName }</p><p></p></div>
 <div id="testb" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 100px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#4B8BF5;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">${ userState }</p><p></p></div>
  <div id="testc" style="opacity:0.3;cursor: pointer;position: absolute;top: 0px;left: 200px;width: 100px;height: 40px;"><p style="float:left;width: 30px;height: 15px;background-color:#2CA02C;margin-top:3px;"></p><p id="labelCity" style="float:left;font-size:15px;line-height:0px;padding-left:3px;">详情</p><p></p></div>
 </div>
