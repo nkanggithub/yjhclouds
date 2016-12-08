@@ -163,7 +163,40 @@ public class RestUtils {
 
          return strBuf.toString();  
      }  
-    
+    public static String getUserCurLocStrWithLatLng(String lat, String lng){
+    	String ret = "";
+    	String url =  "http://"+Constants.baiduapihost+"/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+    	String message="";
+    	try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/json");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           JSONObject demoJson = new JSONObject(message);
+	           if(demoJson.has("result")){
+	        	   JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
+		           ret = JsonFormatedLocation.getString("formatted_address");
+	           }
+	           is.close();
+	       } catch (Exception e) {
+	    	   e.printStackTrace();
+	       }
+		return message;
+    }    
     public static String getUserCurLocWithLatLng(String lat, String lng){
     	String ret = "";
     	String url =  "http://"+Constants.baiduapihost+"/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
