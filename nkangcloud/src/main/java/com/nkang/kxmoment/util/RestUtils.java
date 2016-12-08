@@ -233,7 +233,7 @@ public class RestUtils {
     
     public static List<String> getUserCurLocWithLatLngV2(String lat, String lng){
     	List<String> ret = new ArrayList<String>();
-    	String url =  "http://"+Constants.baiduapihost+"/geocoder?key=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
+    	String url = "http://"+Constants.baiduapihost+"/geocoder/v2/?ak=" + Constants.BAIDU_APPKEY + "&location=" + lat + "," + lng +"&output=json";
 		try {
 	           URL urlGet = new URL(url);
 	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
@@ -259,6 +259,18 @@ public class RestUtils {
 	        	   
 	        	   if(JsonResult.has("addressComponent")){
 	        		   JSONObject addressComponent = JsonResult.getJSONObject("addressComponent");
+	        		   if(addressComponent.has("country")){
+	        			   ret.add(addressComponent.getString("country"));
+	        		   }
+	        		   else{
+	        			   ret.add("country");
+	        		   }
+	        		   if(addressComponent.has("country_code")){
+	        			   ret.add(addressComponent.getString("country_code"));
+	        		   }
+	        		   else{
+	        			   ret.add("country_code");
+	        		   }
 	        		   if(addressComponent.has("province")){
 	        			   ret.add(addressComponent.getString("province"));
 	        		   }
