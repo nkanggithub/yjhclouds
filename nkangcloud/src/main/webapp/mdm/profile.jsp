@@ -107,9 +107,9 @@ function register() {
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
+				$("#info_tag tr").html("");
 				if(jsons.results[0].role!="未注册"){
 					$("#info_imgurl").attr("src",$('#userImage').attr('src'));
-					$("#info_tag tr").html("");
 					if(jsons.results[0].tag!="未注册"){
 						for(var j=0;j<jsons.results[0].tag.length;j++){
 							var tag=jsons.results[0].tag[j];
@@ -253,10 +253,10 @@ function getUserInfo(username, headimgurl, openId) {
 					data = '{"results":' + data + '}';
 					var jsons = eval('(' + data + ')');
 					if (jsons.results.length > 0) {
+						$("#info_tag tr").html("");
 						$("#info_role span").text( jsons.results[0].role);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
-  						    $("#info_tag tr").html("");
 							if(jsons.results[0].tag!="未注册"){
 								for(var j=0;j<jsons.results[0].tag.length;j++){
 									var tag=jsons.results[0].tag[j];
@@ -769,7 +769,7 @@ function getNowFormatDate() {
 											</div>
 											<div id="info_phone"></div>
 											<div id="info_selfIntro"></div>
-											<div style="width:100%; overflow-x: scroll;padding:0px;">
+											<div style="width:100%; overflow-x: auto;padding:0px;">
 												<table id="info_tag">
 													<tr>
 													</tr>
