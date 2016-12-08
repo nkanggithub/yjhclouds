@@ -1187,6 +1187,19 @@ public class MongoDBBasic {
                 				int  day=(int) ((s2-s1)/1000/60/60/24)+1;
                 				weChatMDLUser.setWorkDay(day);
             				}
+            				BasicDBList hist = (BasicDBList) teamobj.get("tag");
+                    		if(hist != null){
+                    			ArrayList list=new ArrayList();
+                        		Object[] tagObjects = hist.toArray();
+                        		for(Object dbobj : tagObjects){
+                        			if(dbobj instanceof DBObject){
+                        				HashMap<String, String> temp=new HashMap<String, String>();
+                        				temp.put(((DBObject)dbobj).get("key").toString(), ((DBObject)dbobj).get("value").toString());
+                        				list.add(temp);
+                        			}
+                        		}
+                        		weChatMDLUser.setTag(list);
+                    		}
             			}
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
