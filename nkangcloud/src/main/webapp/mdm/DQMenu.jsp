@@ -969,7 +969,7 @@ visibility:visible;
 <div id="username" style="display:none">${ userInfo.nickname } </div>
 <%-- <div id="radarSize" style="display:none">${ radarSize } </div> --%>
 <div id="userState" style="display:none">${ userState } </div>
-<div id="countrys" style="display:none">中国</div>
+<div id="countrys" style="display:none">${ countryName }</div>
 <div id="uid" style="display:none">${ uid }</div>
 <div id="address" style="display:none">${ curLoc }</div>
 <div id="countryCode" style="display:none">${ countryCode }</div>
