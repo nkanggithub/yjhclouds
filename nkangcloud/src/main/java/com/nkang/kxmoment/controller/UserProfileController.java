@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,29 +26,32 @@ public class UserProfileController {
 	@ResponseBody
 	public String getWeather(HttpServletRequest request,
 			HttpServletResponse response) {
-		String location = (String) request.getSession()
-				.getAttribute("location");
+		String city = (String) request.getSession()
+				.getAttribute("city");
 		// String location=request.getParameter("location");
-		if (location == null || "".equals(location)) {
-			location = "重庆市";
-		} else {
-			location = location.substring(0, 3);
+		if (city == null || "".equals(city)) {
+			city = "重庆市";
 		}
-		String weather = RestUtils.getWeatherInform(location);
+		String weather = RestUtils.getWeatherInform(city);
 		return weather;
 	}
 
 	@RequestMapping(value = "/getLocation", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getLocation(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws JSONException {
 		String uid = request.getParameter("uid");
 		GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
-		String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT(),
-				loc.getLNG());
-		if (curLoc != null && !"".equals(curLoc)) {
-			request.getSession().setAttribute("location", curLoc);
-		}
+		String message = RestUtils.getUserCurLocStrWithLatLng(loc.getLAT(),loc.getLNG());
+		JSONObject demoJson = new JSONObject(message);
+		String curLoc="";
+        if(demoJson.has("result")){
+     	    JSONObject JsonFormatedLocation = demoJson.getJSONObject("result");
+     	 	curLoc = JsonFormatedLocation.getString("formatted_address");
+     	 	String city = JsonFormatedLocation.getJSONObject("addressComponent").getString("city");
+     	 	request.getSession().setAttribute("location", curLoc);
+     	 	request.getSession().setAttribute("city", city);
+        }
 		return curLoc;
 	}
 
