@@ -53,6 +53,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/openmes.css"/>
 	
 <script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
+<script src="../nkang/js_athena/jquery.circliful.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 
@@ -68,6 +69,19 @@ if (session.getAttribute("location") == null) {
 <script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
  -->
 <script>
+$(function(){
+	$('#myStat').circliful();
+	$('#myStat1').circliful();
+	$('#myStat2').circliful();
+	$('#myStat3').circliful();
+	$('#myStat4').circliful();
+	$('#myStat5').circliful();
+	$('#myStat6').circliful();
+	$('#myStat7').circliful();
+	$('#mySta1').circliful();
+	$('#mySta2').circliful();
+	$('#mySta3').circliful();
+});
 $(window).load(function() {
 		getWeather();
 		getStockData();
@@ -718,6 +732,39 @@ function getNowFormatDate() {
 											</div>
 											<div id="info_phone"></div>
 											<div id="info_selfIntro"></div>
+																						<div style="width:100%; overflow-x: scroll;padding:0px;">
+												<table>
+													<tr>
+														<td>
+				<div style="margin-bottom:-20px;" id="myStat" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat1" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#333" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat2" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#666" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat3" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat4" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat5" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat6" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td><td>
+				<div style="margin-bottom:-20px;"  id="myStat7" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
+				<span>html</span>
+														</td>
+													</tr>
+												</table>											
+												
+											</div>
+											
 										</div>
 									</div>
 								</div>
