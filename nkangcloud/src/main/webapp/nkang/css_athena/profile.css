@@ -366,3 +366,31 @@ start userLists style-->
 	clear: both;
 }
 <!--end userLists style-->
+<!--start jquery.circliful.css style-->
+.circliful {
+	position: relative;
+}
+.circle-text{
+	position: absolute;
+	z-index:1000;
+}
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+.circle-info, .circle-info-half {
+	color: #999;
+	margin-top:-20px;
+}
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
+canvas{
+	position: relative;
+	margin-top:-20px;
+	z-index:1;
+}
+<!--end jquery.circliful.css style-->
