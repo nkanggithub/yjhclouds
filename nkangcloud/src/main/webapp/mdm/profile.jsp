@@ -70,19 +70,6 @@ if (session.getAttribute("location") == null) {
 <script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
  -->
 <script>
-$(function(){
-	$('#myStat').circliful();
-	$('#myStat1').circliful();
-	$('#myStat2').circliful();
-	$('#myStat3').circliful();
-	$('#myStat4').circliful();
-	$('#myStat5').circliful();
-	$('#myStat6').circliful();
-	$('#myStat7').circliful();
-	$('#mySta1').circliful();
-	$('#mySta2').circliful();
-	$('#mySta3').circliful();
-});
 $(window).load(function() {
 		getWeather();
 		getStockData();
@@ -122,6 +109,27 @@ function register() {
 			if (jsons.results.length > 0) {
 				if(jsons.results[0].role!="未注册"){
 					$("#info_imgurl").attr("src",$('#userImage').attr('src'));
+					$("#info_tag tr").html("");
+					if(jsons.results[0].tag!="未注册"){
+						for(var j=0;j<jsons.results[0].tag.length;j++){
+							var tag=jsons.results[0].tag[j];
+							for (var key in tag) { 
+								var td='<td>'
+									+'				<div id="'+key+'" data-dimension="70" data-text="'
+									+tag[key]
+									+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
+									+tag[key]
+									+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
+									+'				<span>'
+									+key
+									+'</span>'
+									+'														</td>';
+
+								$("#info_tag tr").append(td);
+								$('#'+key).circliful();
+							}
+						}
+					}
 					$("#info_role span").text( jsons.results[0].role);
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
@@ -248,6 +256,27 @@ function getUserInfo(username, headimgurl, openId) {
 						$("#info_role span").text( jsons.results[0].role);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
+  						    $("#info_tag tr").html("");
+							if(jsons.results[0].tag!="未注册"){
+								for(var j=0;j<jsons.results[0].tag.length;j++){
+									var tag=jsons.results[0].tag[j];
+									for (var key in tag) { 
+										var td='<td>'
+											+'				<div id="'+key+'" data-dimension="70" data-text="'
+											+tag[key]
+											+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
+											+tag[key]
+											+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
+											+'				<span>'
+											+key
+											+'</span>'
+											+'														</td>';
+
+										$("#info_tag tr").append(td);
+										$('#'+key).circliful();
+									}
+								}
+							}
 							data = data.replace(/:"未注册"/g, ':"未编辑"');
 							jsons = eval('(' + data + ')');
 							$("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
@@ -280,6 +309,8 @@ function getMDLUserLists() {
 						var selfIntro=temp.selfIntro;
 						var role=temp.role;
 						var workDay=temp.workDay;
+						var tag=temp.tag;
+						var tagHtml="";
 						if(selfIntro==null||selfIntro=='null'){
 							selfIntro="nothing";
 						}else{
@@ -289,6 +320,15 @@ function getMDLUserLists() {
 						}
 						if(role==null||role=='null'){
 							role="";
+						}
+						if(tag!=null&&tag!='null'){
+							for(var j=0;j<tag.length;j++){
+								for (var key in tag[j]) { 
+									tagHtml+='													<div class="tag">'
+									+key
+									+'													</div>';
+								}
+							}
 						}
 						if(workDay==null||workDay=='null'||workDay==0){
 							workDay="";
@@ -319,12 +359,8 @@ function getMDLUserLists() {
 							+ '</span><span class="role">'
 							+role+'</span></h2>'
 							+ '<div>'
-							+'													<div class="tag">'
-							+'														<span>HTML</span>'
-							+'													</div>'
-							+'													<div class="tag">'
-							+'														CSS3'
-							+'													</div><br/>'
+							+tagHtml
+							+'<br/>'
 							+'													<span class="selfIntro">'+selfIntro+'</span>'
 							+'												</div>'
 							+'                                        		</div>'
@@ -733,37 +769,11 @@ function getNowFormatDate() {
 											</div>
 											<div id="info_phone"></div>
 											<div id="info_selfIntro"></div>
-																						<div style="width:100%; overflow-x: scroll;padding:0px;">
-												<table>
+											<div style="width:100%; overflow-x: scroll;padding:0px;">
+												<table id="info_tag">
 													<tr>
-														<td>
-				<div style="margin-bottom:-20px;" id="myStat" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat1" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#333" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat2" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#666" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat3" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat4" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat5" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat6" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td><td>
-				<div style="margin-bottom:-20px;"  id="myStat7" data-dimension="70" data-text="35%" data-info="" data-width="8" data-fontsize="18" data-percent="35" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>
-				<span>html</span>
-														</td>
 													</tr>
 												</table>											
-												
 											</div>
 											
 										</div>
