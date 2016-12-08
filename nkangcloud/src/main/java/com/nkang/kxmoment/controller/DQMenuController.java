@@ -239,12 +239,31 @@ public class DQMenuController {
 		WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 		GeoLocation loc= RestUtils.callGetDBUserGeoInfo(uid);
 		String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
-	//	List<String > addressInfo =RestUtils.getUserCurLocWithLatLngV2(loc.getLAT() , loc.getLNG()); 
-		List<String > addressInfo = new ArrayList<String>();
+		String countryCode="CN";
+		String countryName="China";
+		String state="重庆市";
+		List<String > addressInfo =RestUtils.getUserCurLocWithLatLngV2(loc.getLAT() , loc.getLNG()); 
 		if(addressInfo != null && addressInfo.size()>0){
+			countryName=addressInfo.get(0);
+			state=addressInfo.get(2);
+			if(addressInfo.get(1).equals("31190"))
+					{
+				countryCode="MY";
+					}
+			else if(addressInfo.get(1).equals("0"))
+			{
+				countryCode="CN";
+			}
+			else if (addressInfo.get(1).equals("54003")){
+				countryCode="US";
+			}
+			else
+			{
+				countryCode=addressInfo.get(1);
+			}
 		wcu.setAddressInfo(addressInfo);
 		}
-		String state=curLoc.substring(0, 3);
+		
 	//	List<String> lst = RestUtils.CallGetJSFirstSegmentAreaListFromMongo("上海市");
 		if(wcu.getNickname() == null && wcu.getNickname() == ""){
 			wcu.setNickname("Vistitor");
@@ -254,10 +273,11 @@ public class DQMenuController {
 		}
 		request.getSession().setAttribute("userInfo", wcu);
 		request.getSession().setAttribute("userState", state);
-	//	request.getSession().setAttribute("radarSize", lst.size());
 		request.getSession().setAttribute("uid", uid);
 		request.getSession().setAttribute("curLoc", curLoc);
-		request.getSession().setAttribute("countryCode", "CN");
+		request.getSession().setAttribute("countryName",countryName);
+		request.getSession().setAttribute("countryCode",countryCode);
+		request.getSession().setAttribute("addressInfo",addressInfo);
 		return "DQMenu";
 	}
 	
