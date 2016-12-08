@@ -45,6 +45,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/font-awesome/css/font-awesome.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/profile.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/jquery.circliful.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/icomoon/iconMoon.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-responsive.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-default.css"/>
