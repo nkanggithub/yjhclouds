@@ -1,5 +1,9 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class WeChatMDLUser extends WeChatUser {
 
 	public String realName;
@@ -11,6 +15,13 @@ public class WeChatMDLUser extends WeChatUser {
 	public String phone;
 	public String point;
 	public String like;
+	public ArrayList tag;
+	public ArrayList getTag() {
+		return tag;
+	}
+	public void setTag(ArrayList list) {
+		this.tag = list;
+	}
 	public String getRealName() {
 		return realName;
 	}
