@@ -120,7 +120,7 @@ function register() {
 									+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
 									+tag[key]
 									+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
-									+'				<span>'
+									+'				<span style="font-size:12px;">'
 									+key
 									+'</span>'
 									+'														</td>';
@@ -267,7 +267,7 @@ function getUserInfo(username, headimgurl, openId) {
 											+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
 											+tag[key]
 											+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
-											+'				<span>'
+											+'				<span style="font-size:12px;">'
 											+key
 											+'</span>'
 											+'														</td>';
