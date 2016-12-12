@@ -45,7 +45,6 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/font-awesome/css/font-awesome.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/profile.css"/>
-<link rel="stylesheet" type="text/css" href="../nkang/css_athena/jquery.circliful.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/icomoon/iconMoon.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-responsive.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style-default.css"/>
@@ -109,6 +108,7 @@ function register() {
 			if (jsons.results.length > 0) {
 				$("#info_tag tr").html("");
 				if(jsons.results[0].role!="未注册"){
+					$("#info_interact").css("display","none");
 					$("#info_imgurl").attr("src",$('#userImage').attr('src'));
 					if(jsons.results[0].tag!="未注册"){
 						for(var j=0;j<jsons.results[0].tag.length;j++){
@@ -237,6 +237,7 @@ function showRegister(){
 	
 }
 function getUserInfo(username, headimgurl, openId) {
+			$("#info_interact").css("display","block");
 			$("#info_imgurl").attr("src",headimgurl);
 			$("#info_username span").html(username);
 			//$("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
@@ -759,9 +760,13 @@ function getNowFormatDate() {
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 										<div id="userInfoDiv">
+											<div id="info_interact"  style="position: absolute;width:100%;">
+												<img class="like" src="../MetroStyleFiles/like.png"/>
+												<img class="zan"  src="../MetroStyleFiles/zan.png"/>
+											</div>
 											<img id="info_imgurl"
 												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
-												alt="userImage" class="matesUserImage2">
+												alt="userImage" class="matesUserImage2" style="position: relative;">
 											<div id="info_username">
 												<span></span>
 											</div>
