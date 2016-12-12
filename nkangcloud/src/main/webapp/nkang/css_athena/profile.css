@@ -306,9 +306,6 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 	color: #c2c2c2;
 	-webkit-transition: color.5s;
 }
-
-<!--
-start userLists style-->
 .Work_Mates_div2 {
 	margin: 0px;
 	padding: 0px;
@@ -365,4 +362,52 @@ start userLists style-->
 .clear {
 	clear: both;
 }
-<!--end userLists style-->
+.circliful {
+	position: relative;
+}
+.circle-text{
+	position: absolute;
+	z-index:1000;
+}
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+}
+.circle-info, .circle-info-half {
+	color: #999;
+	margin-top:-20px;
+}
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
+canvas{
+	position: relative;
+	margin-top:-20px;
+	z-index:1;
+}
+#info_interact img{
+	cursor:pointer;
+	width:30px;
+}
+#info_interact img.like{
+	float:left;
+	margin:35px 0px 0px 28px;
+}
+#info_interact img.like:hover{
+	width:35px;
+	margin-top:33px;
+	margin-left:25px;
+}
+#info_interact img.zan{
+	float:right;
+	margin:8px 29px 0px 0px;
+	width:35px;
+}
+#info_interact img.zan:hover{
+	width:38px;
+	margin-top:6px;
+	margin-right:28px;
+}
