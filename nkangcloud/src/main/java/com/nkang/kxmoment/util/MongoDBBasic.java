@@ -214,6 +214,7 @@ public class MongoDBBasic {
         			dbo.put("Teamer.role", teamer.getRole());
         			dbo.put("Teamer.selfIntro", teamer.getSelfIntro());
         			dbo.put("Teamer.suppovisor", teamer.getSuppovisor()); 
+        			dbo.put("Teamer.tag", teamer.getTag()); 
         			Object teamer2 = o.get("Teamer");
         			if(teamer2 == null){
             			dbo.put("Teamer.registerDate", teamer.getRegisterDate());
