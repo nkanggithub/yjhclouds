@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.ArrayList;
+
 public class Teamer{
 	public String openid;
 	public String suppovisor;
@@ -12,6 +14,13 @@ public class Teamer{
 	public String like;
 	public String groupid;
 	public String realName;
+	public ArrayList tag;
+	public ArrayList getTag() {
+		return tag;
+	}
+	public void setTag(ArrayList list) {
+		this.tag = list;
+	}
 	
 	public String getRealName() {
 		return realName;
