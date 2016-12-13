@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
@@ -533,7 +535,8 @@ public class MasterDataRestController {
 			@RequestParam(value="email", required=false) String email,
 			@RequestParam(value="phone", required=false) String phone,
 			@RequestParam(value="group", required=false) String groupid,
-			@RequestParam(value="name", required=false) String name
+			@RequestParam(value="name", required=false) String name,
+			@RequestParam(value="skill", required=false) String skill
 			){
 		boolean ret = false;
 		Teamer teamer = new Teamer();
@@ -546,6 +549,19 @@ public class MasterDataRestController {
 		teamer.setPhone(phone);
 		teamer.setGroupid(groupid);
 		teamer.setRealName(name);
+		
+		ArrayList taglist=new ArrayList();
+		String[] tagArr = skill.split(",");
+		for(int i=0;i<tagArr.length;i++){
+			String[] tag=tagArr[i].split(":");
+			if(tag.length==2){
+				HashMap<String, String> temp=new HashMap<String, String>();
+				temp.put("key", tag[0]);
+				temp.put("value", tag[1]);
+				taglist.add(temp);
+			}
+		}
+		teamer.setTag(taglist);
 		try{
 			ret = MongoDBBasic.registerUser(teamer);
 		}		
