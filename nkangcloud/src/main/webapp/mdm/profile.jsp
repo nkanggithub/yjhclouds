@@ -678,7 +678,23 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-stock.png" />
 														<h4>股票</h4>
 												</a></td>
-												<td><img src="../MetroStyleFiles/time_zone.png" />
+												<td><img src="../MetroStyleFiles/menu-technology.png" />
+													<h4>技术快车</h4></td>
+											</tr>
+											<tr>
+												<td><img
+														src="../MetroStyleFiles/menu-recognition.png" />
+														<h4>recogntion</h4>
+												</td>
+												<td><img
+														src="../MetroStyleFiles/menu-time.png" />
+														<h4>世界时间</h4>
+												</td>
+												<td><img
+														src="../MetroStyleFiles/menu-develop.png" />
+														<h4>开发中</h4>
+												</td>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
