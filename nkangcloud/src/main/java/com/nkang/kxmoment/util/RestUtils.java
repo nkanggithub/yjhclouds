@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -35,7 +36,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
-	private static String localInd = "Y";
+	private static String localInd = "N";
 	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
@@ -1698,18 +1699,43 @@ public static String regist(WeChatMDLUser user) {
 			}
 			//Skill = html:45,java:50
 			ArrayList list = user.getTag();
-			String skill = null;
+			String skill = "";
 			Map map = null;
 			if(user.getTag().size()>0){
 				for (int i = 0; i < list.size(); i++) {
 					map = (HashMap)list.get(i);
+					ArrayList<String> arrList = new ArrayList<String>();
+						
 					String java = (String)map.get("java");
+					if(java!=null&&!"".equals(java)){
+						arrList.add("java:"+java);
+					}
+					
 					String html = (String)map.get("html");
+					if(html!=null&&!"".equals(html)){
+						arrList.add("html:"+html);
+					}
+					
 					String webservice = (String)map.get("webservice");
+					if(webservice!=null&&!"".equals(webservice)){
+						arrList.add("webservice:"+webservice);
+					}
+					
 					String etl = (String)map.get("etl");
-					skill = "java:"+java+",html:"+html+",webservice:"+webservice+",etl:"+etl;
+					if(etl!=null&&!"".equals(etl)){
+						arrList.add("etl:"+etl);
+					}
+					System.err.println(arrList);
+					String skillTemp = "";
+					for(int j=0;j<arrList.size();j++){
+						if(j==0) skillTemp += "";
+						else skillTemp += ",";
+						skillTemp += arrList.get(j);
+					}
+					skill += skillTemp;
 				}
 			}
+			System.out.println(skill);
 			if(user.getTag().size()>0){
 				arr.add("skill="+skill);
 			}
