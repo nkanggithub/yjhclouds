@@ -5,18 +5,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mysql.jdbc.StringUtils;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -24,7 +25,6 @@ import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class RegisterController {
 	
-	@SuppressWarnings("deprecation")
 	@RequestMapping("/regist")
 	@ResponseBody
 	public boolean regist(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
@@ -40,8 +40,30 @@ public class RegisterController {
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
 		String group = request.getParameter("group");
+		String java = request.getParameter("javatag");
+		String html = request.getParameter("htmltag");
+		String webservice = request.getParameter("webservicetag");
+		String etl = request.getParameter("etltag");
+		ArrayList list = new ArrayList();
+		Map map = new HashMap();
 		
+		if(!StringUtils.isNullOrEmpty(java) && Integer.parseInt(java)>0 && Integer.parseInt(java)<=100){
+			map.put("java", java);
+		}
 		
+		if(!StringUtils.isNullOrEmpty(html) && Integer.parseInt(html)>0 && Integer.parseInt(html)<=100){
+			map.put("html", html);
+		}
+		
+		if(!StringUtils.isNullOrEmpty(webservice) && Integer.parseInt(webservice)>0 && Integer.parseInt(webservice)<=100){
+			map.put("webservice", webservice);
+		}
+		
+		if(!StringUtils.isNullOrEmpty(etl) && Integer.parseInt(etl)>0 && Integer.parseInt(etl)<=100){
+			map.put("etl", etl);
+		}
+		list.add(map);
+		System.out.println(list);
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setRealName(URLEncoder.encode(name, "UTF-8"));
@@ -50,8 +72,12 @@ public class RegisterController {
 		user.setSelfIntro(URLEncoder.encode(selfIntro, "UTF-8"));
 		user.setPhone(URLEncoder.encode(telephone, "UTF-8"));
 		user.setEmail(URLEncoder.encode(email, "UTF-8"));
-		user.setGroupid(URLEncoder.encode(group, "UTF-8"));;
-		return Boolean.parseBoolean(RestUtils.regist(user));
+		user.setGroupid(URLEncoder.encode(group, "UTF-8"));
+		user.setTag(list);
+		//if(validateRegist(user)){
+			return Boolean.parseBoolean(RestUtils.regist(user));
+//		}
+//		return false;
 	}
 	
 	@RequestMapping("/ajaxValidateTelephone")
@@ -68,33 +94,40 @@ public class RegisterController {
 		return MongoDBBasic.queryWeChatUserEmail(email);
 	}
 	
-	private Map<String,String> validateRegist(WeChatMDLUser formUser, HttpSession session) {
-		Map<String,String> errors = new HashMap<String,String>();
-//		String openId = formUser.getOpenid();
-//		if(openId == null){
-//			errors.put("uid", "uid is null");
-//		} else if(validateWehcatUser(openId)){
-//			errors.put("uid", "user was registed");
-//		}
+	private boolean validateRegist(WeChatMDLUser formUser) {
+		String openId = formUser.getOpenid();
+		if(StringUtils.isNullOrEmpty(openId)){
+			return false;
+		} 
 		
 		String telephone = formUser.getPhone();
 		if(telephone == null || telephone.trim().isEmpty()){
-			errors.put("telephone", "Telephone can't be empty!");
+			return false;
 		} else if(!telephone.matches("^1[34578]\\d{9}$")){
-			errors.put("telephone", "Telephone format is wrong!");
+			return false;
 		} else if(!MongoDBBasic.queryWeChatUserTelephone(telephone)){
-			errors.put("telephone", "Telephone was existed!");
+			return false;
 		}
 		
 		String email = formUser.getEmail();
 		if(email == null || email.trim().isEmpty()) {
-			errors.put("email", "Email can't be empty!");
+			return false;
 		} else if(!email.matches("^(\\w-*\\.*)+@(\\w-?)+(\\.\\w{2,})+$")) {
-			errors.put("email", "Email format is wrong!");
+			return false;
 		} else if(!MongoDBBasic.queryWeChatUserEmail(email)) {
-			errors.put("email", "Email was existed!");
+			return false;
 		}
-		return errors;
+		
+		String role = formUser.getRole();
+		if(StringUtils.isNullOrEmpty(role)){
+			return false;
+		} 
+		
+		String groupid = formUser.getGroupid();
+		if(StringUtils.isNullOrEmpty(groupid)){
+			return false;
+		} 
+		return true;
 	}
 	
 }

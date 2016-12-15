@@ -35,7 +35,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
-	private static String localInd = "N";
+	private static String localInd = "Y";
 	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
@@ -1695,6 +1695,23 @@ public static String regist(WeChatMDLUser user) {
 			}
 			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
 				arr.add("selfIntro="+user.getSelfIntro());
+			}
+			//Skill = html:45,java:50
+			ArrayList list = user.getTag();
+			String skill = null;
+			Map map = null;
+			if(user.getTag().size()>0){
+				for (int i = 0; i < list.size(); i++) {
+					map = (HashMap)list.get(i);
+					String java = (String)map.get("java");
+					String html = (String)map.get("html");
+					String webservice = (String)map.get("webservice");
+					String etl = (String)map.get("etl");
+					skill = "java:"+java+",html:"+html+",webservice:"+webservice+",etl:"+etl;
+				}
+			}
+			if(user.getTag().size()>0){
+				arr.add("skill="+skill);
 			}
 			
 			String temp="";

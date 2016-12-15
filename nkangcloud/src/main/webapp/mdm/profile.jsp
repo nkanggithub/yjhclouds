@@ -51,7 +51,13 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/sonhlab-base.css"/>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/CSS/openmes.css"/>
-	
+<link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../nkang/demo.css">
+
+
+<script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
+<script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
 <script src="../nkang/js_athena/jquery.circliful.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
@@ -201,6 +207,10 @@ function showRegister(){
 		//var suppovisor = $("#suppovisor").val();
 		var role = $("#roleSelect option:selected").val();
 		var group = $("#groupSelect option:selected").val();
+		var javatag = $("#javatag").val();
+		var htmltag = $("#htmltag").val();
+		var webservicetag = $("#webservicetag").val();
+		var etltag = $("#etltag").val();
 		var selfIntro = $("#selfIntro").val();
 		
 		 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -217,7 +227,8 @@ function showRegister(){
 			$.ajax({
 				url:"../regist",
 				data:{uid:uid,name:name,telephone:phone,email:email,
-					role:role,group:group,selfIntro:selfIntro,},
+					role:role,group:group,javatag:javatag,htmltag:htmltag,
+					webservicetag:webservicetag,etltag:etltag,selfIntro:selfIntro},
 				type:"POST",
 				dataType:"json",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -507,6 +518,11 @@ function getWeather() {
            }
        });
    }
+   
+   function addStock(){
+	   $('#addStock').modal('show');
+	}
+   
 function getNowFormatDate() {
 	var date = new Date();
 	var seperator1 = "-";
@@ -733,9 +749,8 @@ function getNowFormatDate() {
 									role="dialog" aria-labelledby="stock_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
-										<!-- <img src="../MetroStyleFiles/Add1.png" data-dismiss="modal"
-											aria-hidden="false"
-											style="float: left; height: 25px; cursor: pointer; margin-top: 0px;" /> -->
+										<img src="../MetroStyleFiles/Add1.png" 
+											style="float: left; height: 25px; cursor: pointer; margin-top: 0px;" onclick="addStock()"/>
 										<h3>
 											<b>股票行情</b>
 										</h3>
@@ -837,6 +852,42 @@ function getNowFormatDate() {
 															<option>Channing</option>
 															<option>Other</option>
 														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px" >Java</td>
+												        <td>
+															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true,
+																		rule: [0,25,50,75,100]
+																	">
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">H5</td>
+												        <td>
+															<input id="htmltag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true,
+																		rule: [0,25,50,75,100]
+																	">
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">WS</td>
+												        <td>
+															<input id="webservicetag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true,
+																		rule: [0,25,50,75,100]
+																	">
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">ETL</td>
+												        <td>
+															<input id="etltag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true,
+																		rule: [0,25,50,75,100]
+																	">
 												        </td>
 												      </tr>
 												      <tr>

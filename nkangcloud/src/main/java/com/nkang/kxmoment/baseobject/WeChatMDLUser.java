@@ -1,8 +1,6 @@
 package com.nkang.kxmoment.baseobject;
 
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class WeChatMDLUser extends WeChatUser {
 
