@@ -236,13 +236,12 @@ a:hover,a:link {
 	width: 100%;
 }
 
-#userInfoDiv #info_username span {
+#userInfoDiv #info_username>span {
 	border-bottom: 1px #fff solid;
 	font-size: 22px;
 	font-weight: bold;
 	padding: 10px 0px;
 }
-
 #userInfoDiv #info_selfIntro {
 	text-align: left;
 	width: 90%;
@@ -258,13 +257,16 @@ a:hover,a:link {
 	font-weight: bold;
 	padding: 10px 0px;
 }
-
-#userInfoDiv #info_phone {
-	margin-top: -5px;
+#userInfoDiv #info_all{
+	margin-left:auto;
+	margin-right:auto;
 }
-
-#userInfoDiv #info_phone img {
+#userInfoDiv #info_all img {
 	height: 20px;
+}
+#userInfoDiv #info_all tr td {
+	text-align:left;
+	font-size:15px;
 }
 
 #registerform {
@@ -349,6 +351,7 @@ input:focus::-webkit-input-placeholder,input:hover::-webkit-input-placeholder
 
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 {
 	font-size: 16px;
+	margin-bottom:0px;
 }
 
 .Work_Mates_div2  .Work_Mates_div_list_div2 .Work_Mates_text_div h2 .role
