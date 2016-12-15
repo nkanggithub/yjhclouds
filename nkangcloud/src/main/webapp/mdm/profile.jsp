@@ -136,20 +136,22 @@ function register() {
 							}
 						}
 					}
-					$("#info_role span").text( jsons.results[0].role);
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
-					$("#info_username span").html(jsons.results[0].realName+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-					$("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
+					$("#info_username span").html(jsons.results[0].realName+'<span style="font-size:13px;">&nbsp;['+jsons.results[0].role+']&nbsp;</span>'+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$("#info_all").css('display','table');
+					$("#info_phone").html("&nbsp;"+jsons.results[0].phone);
+					$("#info_group").html("&nbsp;"+jsons.results[0].groupid);
+					$("#info_email").html("&nbsp;"+jsons.results[0].email);
 					$("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$('#UserInfo').modal('show');
 				}else{
-					$("#info_phone").html('');
+					$("#info_all").css('display','none');
 					$("#info_selfIntro").text('');
 					showRegister();
 				}
 			}else{
-				$("#info_phone").html('');
+				$("#info_all").css('display','none');
 				$("#info_selfIntro").text('');
 				showRegister();
 			}
@@ -250,7 +252,6 @@ function showRegister(){
 function getUserInfo(username, headimgurl, openId) {
 			$("#info_interact").css("display","block");
 			$("#info_imgurl").attr("src",headimgurl);
-			$("#info_username span").html(username);
 			//$("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 	jQuery
 			.ajax({
@@ -266,7 +267,6 @@ function getUserInfo(username, headimgurl, openId) {
 					var jsons = eval('(' + data + ')');
 					if (jsons.results.length > 0) {
 						$("#info_tag tr").html("");
-						$("#info_role span").text( jsons.results[0].role);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
 							if(jsons.results[0].tag!="未注册"){
@@ -291,10 +291,14 @@ function getUserInfo(username, headimgurl, openId) {
 							}
 							data = data.replace(/:"未注册"/g, ':"未编辑"');
 							jsons = eval('(' + data + ')');
-							$("#info_phone").html('<img src="../MetroStyleFiles/group2.png"/>&nbsp;'+jsons.results[0].groupid+'<br/><img src="../MetroStyleFiles/telephone2.png"/>&nbsp;'+jsons.results[0].phone+'<br/><img src="../MetroStyleFiles/email2.png"/>&nbsp;'+jsons.results[0].email);
+							$("#info_all").css('display','table');
+							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;['+jsons.results[0].role+']</span>');
+							$("#info_phone").html("&nbsp;"+jsons.results[0].phone);
+							$("#info_group").html("&nbsp;"+jsons.results[0].groupid);
+							$("#info_email").html("&nbsp;"+jsons.results[0].email);
 							$("#info_selfIntro").text(jsons.results[0].selfIntro);
 						}else{
-							$("#info_phone").html('');
+							$("#info_all").css('display','none');
 							$("#info_selfIntro").text('');
 						}
 						$('#UserInfo').modal('show');
@@ -798,20 +802,30 @@ function getNowFormatDate() {
 											<img id="info_imgurl"
 												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
 												alt="userImage" class="matesUserImage2" style="position: relative;">
-											<div id="info_username">
+											<div id="info_username" style="margin-top:-20px;">
 												<span></span>
 											</div>
-											<div id="info_role">-<span></span>-
-											</div>
-											<div id="info_phone"></div>
-											<div id="info_selfIntro"></div>
-											<div style="width:100%; overflow-x: auto;padding:0px;">
+											<table id="info_all">
+												<tr>
+													<td><img src="../MetroStyleFiles/group2.png"/></td>
+													<td><div id="info_group"></div></td>
+												</tr>
+												<tr>
+													<td><img src="../MetroStyleFiles/telephone2.png"/></td>
+													<td><div id="info_phone"></div></td>
+												</tr>
+												<tr>
+													<td><img src="../MetroStyleFiles/email2.png"/></td>
+													<td><div id="info_email"></div></td>
+												</tr>
+											</table>
+											<div id="info_selfIntro" style="margin-top:-10px;"></div>
+											<div style="width:100%; overflow-x: auto;padding:0px;margin-top:-35px;">
 												<table id="info_tag">
 													<tr>
 													</tr>
 												</table>											
 											</div>
-											
 										</div>
 									</div>
 								</div>
