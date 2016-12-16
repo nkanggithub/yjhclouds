@@ -54,14 +54,16 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
+ <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 
-
+	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
-<script src="../nkang/js_athena/jquery-1.8.2.min.js"></script>
+  
 <script src="../nkang/js_athena/jquery.circliful.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
+<script type="text/javascript" src="../MetroStyleFiles//JS/openmes.min.js"></script>
 
 <!-- 
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/data-tables/DT_bootstrap.css"/>
@@ -76,6 +78,7 @@ if (session.getAttribute("location") == null) {
  -->
 <script>
 $(window).load(function() {
+	$(".mes-openbt").openmes({ext: 'php'});
 		getWeather();
 		getStockData();
 		getMDLUserLists();
@@ -98,20 +101,7 @@ $(window).load(function() {
 			});
 		});
 });
-function getDataModel(){
-	$("#data_model_div").removeClass("panelHideAnmitation");
-	$("#data_model_div").addClass("panelShowAnmitation");
-	$("#data_model").removeClass("modelHideAnmitation");
-	$("#data_model").addClass("modelShowAnmitation");
-	$("#data_model_div").css("display","block");
-	$("#data_model").css("display","block");
-}
-function closeModel(){
-	$("#data_model_div").removeClass("panelShowAnmitation");
-	$("#data_model_div").addClass("panelHideAnmitation");
-	$("#data_model").removeClass("modelShowAnmitation");
-	$("#data_model").addClass("modelHideAnmitation");
-}
+
 function register() {
 	jQuery
 	.ajax({
@@ -739,9 +729,11 @@ function getNowFormatDate() {
 													<h4>技术快车</h4></td>
 											</tr>
 											<tr>
-												<td ><img onclick="getDataModel()"
+												<td>	<div class="demo-content">
+														<img  class="mes-openbt" data-mesid="message-5" 
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>recogntion</h4>
+														</div>
 												</td>
 												<td><img
 														src="../MetroStyleFiles/menu-time.png" />
@@ -757,23 +749,6 @@ function getNowFormatDate() {
 										</table>
 									</div>
 								</div>
-								
-															<div  id="data_model_div" class="dataModelPanel panelShowAnmitation">
-					</div>
-									<div id="data_model" class="modal dataModel modelShowAnmitation " style="height:300px;" > 
-									<div class="modal-header" style="text-align: center;">
-										<h3>
-											<b>Data Model</b>
-										</h3>
-										<img onclick="closeModel()" src="../MetroStyleFiles/Close.png" 
-											style="float: right; height: 25px; cursor: pointer; margin-top: -35px;" />
-									</div>
-									<div class="modal-body readmoreHpop"
-										style="white-space: pre-line; padding: 0px 10px;">
-											<img style="width:100%;height:200px;"
-							src="../MetroStyleFiles/reallake.jpg" alt="demo-headphoto">
-									</div>
-									</div>
 								<div id="weather_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
@@ -1050,6 +1025,52 @@ function getNowFormatDate() {
 		</div>
 	</div>
  Modal PAGE End-->
+
+
+
+<!-- START MESSAGE STATION -->
+	<div id="mes-station">
+		<div class="mes-container item-profileview transparent-black"
+			data-mesid="message-5">
+			<!-- Start Content Holder -->
+			<div class="mes-contentholder">
+				<div class="item-profilebody">
+					<!-- Start Background -->
+					<div class="mes-content item-profilebg solid-smoke"
+						data-show="hmove" data-start="-100" data-showdura="400"></div>
+					<!-- End Background -->
+
+					<!-- Start Control Bar -->
+					<div class="mes-content item-ctrlbar-5" data-show="fade"
+						data-showdura="200">
+						<div class="mes-closebt light-text floatleft">
+							<img src="../MetroStyleFiles//exit.png"
+								style="width: 40px; height: 40px;" />
+						</div>
+						<div class="clearspace"></div>
+					</div>
+					<!-- End Control Bar -->
+
+					<!-- Start Header Photo -->
+					<div class="mes-content item-headerphoto" data-show="bounceInDown">
+						<img style="width: 100%; height: 200px;"
+							src="../MetroStyleFiles//reallake.jpg" alt="demo-headphoto">
+					</div>
+					<!-- End Header Photo -->
+
+					
+	
+
+				</div>
+				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+			</div>
+		</div>
+		<!-- End Content Holder -->
+	</div>
+	
+
+
+<!-- END MESSAGE STATION -->
 
 	<!-- BEGIN FOOTER -->
 	<div id="footer">
