@@ -22,3 +22,123 @@ h2 {
     line-height: 22px;
     vertical-align: middle;
 }
+.dataModelPanel
+{
+position: fixed;
+display:none;
+opacity:0.8;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1040;
+background-color: #000;
+transition: opacity .15s linear;
+
+}
+.panelShowAnmitation
+{
+	animation:showPanel .4s;
+-moz-animation:showPanel .4s; /* Firefox */
+-webkit-animation:showPanel .4s; /* Safari and Chrome */
+-o-animation:showPanel .4s; /* Opera */
+width:100%;
+}
+
+.panelHideAnmitation
+{
+	animation:hidePanel .4s;
+-moz-animation:hidePanel .4s; /* Firefox */
+-webkit-animation:hidePanel .4s; /* Safari and Chrome */
+-o-animation:hidePanel .4s; /* Opera */
+width:0px;
+}
+@keyframes showPanel
+{
+from {width:0px;}
+to {width:100%;}
+}
+
+@-moz-keyframes showPanel /* Firefox */
+{
+from {width:0px;}
+to {width:100%;}
+}
+
+@-webkit-keyframes showPanel /* Safari and Chrome */
+{
+from {width:0px;}
+to {width:100%;}
+}
+
+@-o-keyframes showPanel /* Opera */
+{
+from {width:0px;}
+to {width:100%;}
+}
+@keyframes hidePanel
+{
+from {width:100%;}
+to {width:0px;}
+}
+
+@-moz-keyframes hidePanel /* Firefox */
+{
+from {width:100%;}
+to {width:0px;}
+}
+
+@-webkit-keyframes hidePanel /* Safari and Chrome */
+{
+from {width:100%;}
+to {width:0px;}
+}
+
+@-o-keyframes hidePanel /* Opera */
+{
+from {width:100%;}
+to {width:0px;}
+}
+.dataModel
+{
+	position:absolute;
+	display:none;
+	-webkit-animation-delay:4s;
+	-o-animation-delay: 4s;
+	-moz-animation-delay: 4s;
+	animation-delay:100s;
+	z-index:9999;
+	width: 96%;
+	left:2%;
+	top:20px;
+	animation:showModel 1s;
+	height: 200px;
+}
+.modelShowAnmitation
+{
+	animation:showModel .4s;
+-moz-animation:showModel .4s; /* Firefox */
+-webkit-animation:showModel .4s; /* Safari and Chrome */
+-o-animation:showModel .4s; /* Opera */
+top:20px;
+}
+
+.modelHideAnmitation
+{
+	animation:hideModel .4s;
+-moz-animation:hideModel .4s; /* Firefox */
+-webkit-animation:hideModel .4s; /* Safari and Chrome */
+-o-animation:hideModel .4s; /* Opera */
+top:-400px;
+display:none;
+}
+@-webkit-keyframes showModel/* Safari and Chrome */
+{
+from {top:-220px;}
+to {top:20px;}
+}
+@-webkit-keyframes hideModel/* Safari and Chrome */
+{
+from {top:20px;display:block;}
+to {top:-400px;display:none;}
+}
