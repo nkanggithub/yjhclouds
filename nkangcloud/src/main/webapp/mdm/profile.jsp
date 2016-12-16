@@ -98,7 +98,20 @@ $(window).load(function() {
 			});
 		});
 });
-
+function getDataModel(){
+	$("#data_model_div").removeClass("panelHideAnmitation");
+	$("#data_model_div").addClass("panelShowAnmitation");
+	$("#data_model").removeClass("modelHideAnmitation");
+	$("#data_model").addClass("modelShowAnmitation");
+	$("#data_model_div").css("display","block");
+	$("#data_model").css("display","block");
+}
+function closeModel(){
+	$("#data_model_div").removeClass("panelShowAnmitation");
+	$("#data_model_div").addClass("panelHideAnmitation");
+	$("#data_model").removeClass("modelShowAnmitation");
+	$("#data_model").addClass("modelHideAnmitation");
+}
 function register() {
 	jQuery
 	.ajax({
@@ -726,7 +739,7 @@ function getNowFormatDate() {
 													<h4>技术快车</h4></td>
 											</tr>
 											<tr>
-												<td><img
+												<td ><img onclick="getDataModel()"
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>recogntion</h4>
 												</td>
@@ -744,6 +757,23 @@ function getNowFormatDate() {
 										</table>
 									</div>
 								</div>
+								
+															<div  id="data_model_div" class="dataModelPanel panelShowAnmitation">
+					</div>
+									<div id="data_model" class="modal dataModel modelShowAnmitation " style="height:300px;" > 
+									<div class="modal-header" style="text-align: center;">
+										<h3>
+											<b>Data Model</b>
+										</h3>
+										<img onclick="closeModel()" src="../MetroStyleFiles/Close.png" 
+											style="float: right; height: 25px; cursor: pointer; margin-top: -35px;" />
+									</div>
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px 10px;">
+											<img style="width:100%;height:200px;"
+							src="../MetroStyleFiles/reallake.jpg" alt="demo-headphoto">
+									</div>
+									</div>
 								<div id="weather_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
