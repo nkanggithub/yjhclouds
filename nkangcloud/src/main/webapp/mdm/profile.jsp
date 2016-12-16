@@ -203,10 +203,34 @@ function showRegister(){
 			              break;  
 			          }  
 			      }
-			   /*  $("#javatag").val(jsons.results[0].tag[0].java);
-			    $("#htmltag").val(jsons.results[0].tag[1].html);
-			    $("#webservicetag").val(jsons.results[0].tag[2].webservice);
-			    $("#etltag").val(jsons.results[0].tag[3].etl); */
+			    
+			    if(jsons.results[0].tag!="未注册"){
+					for(var j=0;j<jsons.results[0].tag.length;j++){
+						var tag=jsons.results[0].tag[j];
+						for (var key in tag) { 
+							if(key=="java"){
+								$("#javatag").attr("value",tag[key]);
+								console.log(tag[key]);
+							} 
+							
+							if(key =="html"){
+								$("#htmltag").attr("value",tag[key]);
+								console.log(tag[key]);
+							} 
+							
+							if(key =="webservice"){
+								$("#webservicetag").attr("value",tag[key]);
+								console.log(tag[key]);
+							} 
+							
+							if(key =="etl"){
+								$("#etltag").attr("value",tag[key]);
+								console.log(tag[key]);
+							}
+						}
+					}
+				}
+			    
 			    if(jsons.results[0].selfIntro !="未注册"){
 					$("#selfIntro").val(jsons.results[0].selfIntro);
 			    }
@@ -906,7 +930,7 @@ function getNowFormatDate() {
 															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
 																		showTip:true,
 																		rule: [0,25,50,75,100]
-																	">
+																	"/>
 												        </td>
 												      </tr>
 												      <tr>
@@ -915,7 +939,7 @@ function getNowFormatDate() {
 															<input id="htmltag" class="easyui-slider" style="width:220px" data-options="
 																		showTip:true,
 																		rule: [0,25,50,75,100]
-																	">
+																	"/>
 												        </td>
 												      </tr>
 												      <tr>
@@ -924,7 +948,7 @@ function getNowFormatDate() {
 															<input id="webservicetag" class="easyui-slider" style="width:220px" data-options="
 																		showTip:true,
 																		rule: [0,25,50,75,100]
-																	">
+																	"/>
 												        </td>
 												      </tr>
 												      <tr>
@@ -933,7 +957,7 @@ function getNowFormatDate() {
 															<input id="etltag" class="easyui-slider" style="width:220px" data-options="
 																		showTip:true,
 																		rule: [0,25,50,75,100]
-																	">
+																	"/>
 												        </td>
 												      </tr>
 												      <tr>
