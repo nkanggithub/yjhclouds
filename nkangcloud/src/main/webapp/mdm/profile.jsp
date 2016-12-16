@@ -98,6 +98,7 @@ $(window).load(function() {
 			});
 		});
 });
+
 function register() {
 	jQuery
 	.ajax({
@@ -174,9 +175,15 @@ function showRegister(){
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
-				$("#realname").val(jsons.results[0].realName);
-				$("#phone").val(jsons.results[0].phone);
-				$("#email").val(jsons.results[0].email);
+				if(jsons.results[0].realName !="未注册"){
+					$("#realname").val(jsons.results[0].realName);
+				}
+				if(jsons.results[0].phone !="未注册"){
+					$("#phone").val(jsons.results[0].phone);
+				}
+				if(jsons.results[0].email !="未注册"){
+					$("#email").val(jsons.results[0].email);
+				}
 				$("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
 			    var count=$("#roleSelect option").length;
 			    for(var i=0;i<count;i++)  
@@ -196,8 +203,13 @@ function showRegister(){
 			              break;  
 			          }  
 			      }
-					    
-				$("#selfIntro").val(jsons.results[0].selfIntro);
+			   /*  $("#javatag").val(jsons.results[0].tag[0].java);
+			    $("#htmltag").val(jsons.results[0].tag[1].html);
+			    $("#webservicetag").val(jsons.results[0].tag[2].webservice);
+			    $("#etltag").val(jsons.results[0].tag[3].etl); */
+			    if(jsons.results[0].selfIntro !="未注册"){
+					$("#selfIntro").val(jsons.results[0].selfIntro);
+			    }
 			}
 		}
 	});
@@ -259,9 +271,11 @@ function getUserInfo(username, headimgurl, openId) {
 				url : "../userProfile/getMDLUserLists",
 				data : {
 					UID : openId
+					
 				},
 				cache : false,
 				success : function(data) {
+					console.log(data);
 					data = data.replace(/:null/g, ':"未注册"');
 					data = '{"results":' + data + '}';
 					var jsons = eval('(' + data + ')');
@@ -298,6 +312,7 @@ function getUserInfo(username, headimgurl, openId) {
 							$("#info_email").html("&nbsp;"+jsons.results[0].email);
 							$("#info_selfIntro").text(jsons.results[0].selfIntro);
 						}else{
+							$("#info_username span").text("");
 							$("#info_all").css('display','none');
 							$("#info_selfIntro").text('');
 						}
@@ -327,6 +342,7 @@ function getMDLUserLists() {
 						var workDay=temp.workDay;
 						var tag=temp.tag;
 						var tagHtml="";
+						
 						if(selfIntro==null||selfIntro=='null'){
 							selfIntro="nothing";
 						}else{
