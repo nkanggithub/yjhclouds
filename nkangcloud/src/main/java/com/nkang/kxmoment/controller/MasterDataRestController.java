@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
@@ -688,5 +689,17 @@ public class MasterDataRestController {
 			ret = false;
 		}
 		return ret;
+	}
+	
+	@RequestMapping("/QueryClientMeta")
+	public static ClientMeta CallQueryClientMeta(){
+		ClientMeta cm = new ClientMeta();
+		try{
+			cm = MongoDBBasic.QueryClientMeta();
+		}		
+		catch(Exception e){
+			cm = null;
+		}
+		return cm;
 	}
 }
