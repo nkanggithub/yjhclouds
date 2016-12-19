@@ -492,6 +492,7 @@ function getWeather() {
 						tbody += '<tr><td colspan="3" align="center">'
 								+ getNowFormatDate() + '</td></tr>';
 						$('#weather').html(tbody);
+						$('#weather2').html(tbody);
 						//	$('weather_div_loading').css({'display':'none'});
 						//	$('weather_div').css({'display':'block'});
 						tbody = "";
@@ -737,7 +738,7 @@ function getNowFormatDate() {
 														<h4>奖项管理</h4>
 														</div>
 												</td>
-												<td><img class="mes-openbt" data-mesid="message-6" 
+												<td><img class="mes-openbt" data-mesid="message-weather" 
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
@@ -764,7 +765,7 @@ function getNowFormatDate() {
 									</div>
 									<div class="modal-body readmoreHpop"
 										style="white-space: pre-line; padding: 0px 10px;">
-										<table width="100%" id="weather" style="margin-bottom: -20px;">
+										<table width="100%" id="weather" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
 										</table>
 									</div>
 								</div>
@@ -1069,7 +1070,7 @@ function getNowFormatDate() {
 		</div>
 		<!-- End Content Holder -->
 		<div class="mes-container item-profileview transparent-black"
-			data-mesid="message-6">
+			data-mesid="message-weather">
 			<!-- Start Content Holder -->
 			<div class="mes-contentholder">
 				<div class="item-profilebody">
@@ -1091,8 +1092,9 @@ function getNowFormatDate() {
 
 					<!-- Start Header Photo -->
 					<div class="mes-content item-headerphoto" data-show="bounceInDown">
-						<img style="width: 100%; height: 200px;"
-							src="../MetroStyleFiles//reallake.jpg" alt="demo-headphoto">
+							<h2 style="background-color:#fff;text-align:center;width:100%;margin-bottom:0px;padding:15px;">天气</h2>
+							<table width="100%" id="weather2" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
+										</table>
 					</div>
 					<!-- End Header Photo -->
 
