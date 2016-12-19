@@ -333,13 +333,15 @@ function getUserInfo(username, headimgurl, openId) {
 							data = data.replace(/:"未注册"/g, ':"未编辑"');
 							jsons = eval('(' + data + ')');
 							$("#info_all").css('display','table');
+							$("img.zan").css('display','block');
 							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>');
 							$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
 							$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
 							$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].email);
 							$("#info_selfIntro").text(jsons.results[0].selfIntro);
 						}else{
-							$("#info_username span").text("");
+							$("#info_username span").html('未注册');
+							$("img.zan").css('display','none');
 							$("#info_all").css('display','none');
 							$("#info_selfIntro").text('');
 						}
@@ -732,10 +734,10 @@ function getNowFormatDate() {
 												<td>	<div class="demo-content">
 														<img  class="mes-openbt" data-mesid="message-5" 
 														src="../MetroStyleFiles/menu-recognition.png" />
-														<h4>recogntion</h4>
+														<h4>奖项管理</h4>
 														</div>
 												</td>
-												<td><img
+												<td><img class="mes-openbt" data-mesid="message-6" 
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
@@ -1032,6 +1034,42 @@ function getNowFormatDate() {
 	<div id="mes-station">
 		<div class="mes-container item-profileview transparent-black"
 			data-mesid="message-5">
+			<!-- Start Content Holder -->
+			<div class="mes-contentholder">
+				<div class="item-profilebody">
+					<!-- Start Background -->
+					<div class="mes-content item-profilebg solid-smoke"
+						data-show="hmove" data-start="-100" data-showdura="400"></div>
+					<!-- End Background -->
+
+					<!-- Start Control Bar -->
+					<div class="mes-content item-ctrlbar-5" data-show="fade"
+						data-showdura="200">
+						<div class="mes-closebt light-text floatleft">
+							<img src="../MetroStyleFiles//exit.png"
+								style="width: 40px; height: 40px;" />
+						</div>
+						<div class="clearspace"></div>
+					</div>
+					<!-- End Control Bar -->
+
+					<!-- Start Header Photo -->
+					<div class="mes-content item-headerphoto" data-show="bounceInDown">
+						<img style="width: 100%; height: 200px;"
+							src="../MetroStyleFiles//reallake.jpg" alt="demo-headphoto">
+					</div>
+					<!-- End Header Photo -->
+
+					
+	
+
+				</div>
+				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+			</div>
+		</div>
+		<!-- End Content Holder -->
+		<div class="mes-container item-profileview transparent-black"
+			data-mesid="message-6">
 			<!-- Start Content Holder -->
 			<div class="mes-contentholder">
 				<div class="item-profilebody">
