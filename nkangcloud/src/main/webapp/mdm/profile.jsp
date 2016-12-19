@@ -54,9 +54,8 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
- <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
   
@@ -129,7 +128,7 @@ function register() {
 									+tag[key]
 									+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
 									+tag[key]
-									+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
+									+'" data-fgcolor="#FFF" data-bgcolor="#aaa" data-fill=""></div>'
 									+'				<span style="font-size:12px;">'
 									+key
 									+'</span>'
@@ -142,11 +141,11 @@ function register() {
 					}
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
-					$("#info_username span").html(jsons.results[0].realName+'<span style="font-size:13px;">&nbsp;['+jsons.results[0].role+']&nbsp;</span>'+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$("#info_username span").html(jsons.results[0].realName+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']&nbsp;</span>'+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$("#info_all").css('display','table');
-					$("#info_phone").html("&nbsp;"+jsons.results[0].phone);
-					$("#info_group").html("&nbsp;"+jsons.results[0].groupid);
-					$("#info_email").html("&nbsp;"+jsons.results[0].email);
+					$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
+					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
+					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].email);
 					$("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$('#UserInfo').modal('show');
 				}else{
@@ -319,7 +318,8 @@ function getUserInfo(username, headimgurl, openId) {
 											+tag[key]
 											+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
 											+tag[key]
-											+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
+											+'" data-fgcolor="#FFF" data-bgcolor="#aaa" data-fill=""></div>'
+											//+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
 											+'				<span style="font-size:12px;">'
 											+key
 											+'</span>'
@@ -333,10 +333,10 @@ function getUserInfo(username, headimgurl, openId) {
 							data = data.replace(/:"未注册"/g, ':"未编辑"');
 							jsons = eval('(' + data + ')');
 							$("#info_all").css('display','table');
-							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;['+jsons.results[0].role+']</span>');
-							$("#info_phone").html("&nbsp;"+jsons.results[0].phone);
-							$("#info_group").html("&nbsp;"+jsons.results[0].groupid);
-							$("#info_email").html("&nbsp;"+jsons.results[0].email);
+							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>');
+							$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
+							$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
+							$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].email);
 							$("#info_selfIntro").text(jsons.results[0].selfIntro);
 						}else{
 							$("#info_username span").text("");
@@ -381,7 +381,7 @@ function getMDLUserLists() {
 							role="";
 						}
 						if(tag!=null&&tag!='null'){
-							for(var j=0;j<tag.length;j++){
+							for(var j=0;j<tag.length&&j<4;j++){
 								for (var key in tag[j]) { 
 									tagHtml+='													<div class="tag">'
 									+key
@@ -864,9 +864,9 @@ function getNowFormatDate() {
 													<td><div id="info_email"></div></td>
 												</tr>
 											</table>
-											<div id="info_selfIntro" style="margin-top:-10px;"></div>
-											<div style="width:100%; overflow-x: auto;padding:0px;margin-top:-35px;">
-												<table id="info_tag">
+											<div id="info_selfIntro" style="margin-top:-10px;width:100%;text-align:center;"></div>
+											<div style="width:100%; padding:0px;margin-top:-35px;margin-bottom:-40px;overflow-x: auto;">
+												<table id="info_tag" style="margin-left:auto;margin-right:auto;">
 													<tr>
 													</tr>
 												</table>											
