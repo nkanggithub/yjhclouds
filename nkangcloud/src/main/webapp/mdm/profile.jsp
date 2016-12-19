@@ -1110,7 +1110,7 @@ function getNowFormatDate() {
 <div class="control-group">
   <label class="control-label bsLabel" for="textinput-3">Date</label>
   <div class="controls">
-    <label id="textinput-3"  class="input-xlarge bsLabel" style="width:60%;" name="recognizeDate"><%= new Date().toLocaleString().substring(0, 11) %></label>
+    <label id="textinput-3"  class="input-xlarge bsLabel" style="width:60%!important;" name="recognizeDate"><%= new Date().toLocaleString().substring(0, 11) %></label>
   </div>
 </div>
 
