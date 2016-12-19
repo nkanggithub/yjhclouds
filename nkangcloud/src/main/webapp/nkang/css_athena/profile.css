@@ -5,6 +5,13 @@
 #weather tr td {
 	height: 50px;
 }
+#weather2 {
+	margin-bottom: 20px;
+}
+
+#weather2 tr td {
+	height: 50px;
+}
 
 img.Wmates {
 	height: 25px;
@@ -56,6 +63,20 @@ img.Wmates {
 
 #tax_main_div table tr td:nth-child(even) {
 	text-align: left;
+}
+table.tax tr td {
+	line-height: 30px;
+	vertical-align: middle;
+}
+table.tax tr td:nth-child(odd) {
+	text-align: right;
+}
+table.tax tr td:nth-child(even) {
+	text-align: left;
+}
+table.tax tr td:nth-child(even) input {
+	width: 90px;
+	padding: 2px 5px;
 }
 
 #main-content {
