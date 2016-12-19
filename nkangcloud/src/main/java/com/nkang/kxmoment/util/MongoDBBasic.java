@@ -28,6 +28,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -1707,6 +1708,53 @@ public class MongoDBBasic {
 				log.info("getFilterRegionFromMongo--" + e.getMessage());
 			}
 		    return listOfRegion;
+		}
+		
+		/*
+		 * chang-zheng
+		 * to update user CongratulateHistory
+		 */
+		public static boolean updateUserCongratulateHistory(String OpenID,CongratulateHistory conhis){
+			mongoDB = getMongoDB();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			Boolean ret = false;
+		    try{
+		    	List<DBObject> arrayHistdbo = new ArrayList<DBObject>();
+		    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+	            if (null != dbcur) {
+	            	while(dbcur.hasNext()){
+	            		DBObject o = dbcur.next();
+	            		BasicDBList hist = (BasicDBList) o.get("CongratulateHistory");
+	            		if(hist != null){
+	                		Object[] CongratulateHistory = hist.toArray();
+	                		for(Object dbobj : CongratulateHistory){
+	                			if(dbobj instanceof DBObject){
+	                				arrayHistdbo.add((DBObject)dbobj);
+	                			}
+	                		}
+	            		}
+	            	}
+
+	                BasicDBObject doc = new BasicDBObject();  
+	    	    	DBObject update = new BasicDBObject();
+	    	    	DBObject innerInsert = new BasicDBObject();
+	    	    	innerInsert.put("from", conhis.getFrom());
+	    	    	innerInsert.put("to", conhis.getTo());
+	    	    	innerInsert.put("comments", conhis.getComments());
+	    	    	innerInsert.put("type", conhis.getType());
+	    	    	innerInsert.put("point", conhis.getPoint());
+	    	    	innerInsert.put("congratulateDate", DateUtil.timestamp2Str(cursqlTS));
+	    	    	arrayHistdbo.add(innerInsert);
+	    	    	update.put("CongratulateHistory", arrayHistdbo);
+	    	    	doc.put("$set", update);  
+	    			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
+	            }
+	            ret = true;
+		    }
+			catch(Exception e){
+				log.info("updateUser--" + e.getMessage());
+			}
+			return ret;
 		}
 	    // END
 }
