@@ -1061,7 +1061,7 @@ function getNowFormatDate() {
 					<!-- Start Header Photo -->
 				<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
 						<form class="form-horizontal" id="recognizeForm" >
-<fieldset>
+<fieldset style="height:600px">
 
 <!-- Form Name -->
 <legend>Recognition</legend>
