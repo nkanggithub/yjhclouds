@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
+import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
@@ -701,5 +702,21 @@ public class MasterDataRestController {
 			cm = null;
 		}
 		return cm;
+	}
+	
+	/*
+	 * chang-zheng
+	 * 
+	 */
+	@RequestMapping("/updateUserCongratulateHistory")
+	public @ResponseBody String updateUserCongratulateHistory(){
+		CongratulateHistory con = new CongratulateHistory();
+		con.setComments("hello");
+		con.setFrom("me");
+		con.setPoint("22");
+		con.setTo("you");
+		con.setType("hh");
+		MongoDBBasic.updateUserCongratulateHistory("oqPI_xACjXB7pVPGi5KH9Nzqonj4",con);
+		return "ok";
 	}
 }
