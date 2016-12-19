@@ -743,8 +743,8 @@ function getNowFormatDate() {
 														<h4>世界时间</h4>
 												</td>
 												<td><img  class="mes-openbt" data-mesid="message-tax" 
-														src="../MetroStyleFiles/menu-develop.png" />
-														<h4>开发中</h4>
+														src="../MetroStyleFiles/menu-signature.png" />
+														<h4>电子签名</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
@@ -798,7 +798,7 @@ function getNowFormatDate() {
 											<tr>
 												<td colspan="2" style="text-align: center; padding: 0px;">
 													<button class="btnAthena EbtnLess"
-														style="margin-top: -30px; padding: 0px;"
+														style="margin-top: -30px; padding: 0px;background-color:#00B287;"
 														id="tax_submit_button">计算</button>
 												</td>
 											</tr>
@@ -1149,6 +1149,118 @@ function getNowFormatDate() {
 			</div>
 		</div>
 		<!-- End Content Holder -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="mes-container item-profileview transparent-black"
+			data-mesid="message-weather">
+			<!-- Start Content Holder -->
+			<div class="mes-contentholder">
+				<div class="item-profilebody">
+					<!-- Start Background -->
+					<div class="mes-content item-profilebg solid-smoke"
+						data-show="hmove" data-start="-100" data-showdura="400"></div>
+					<!-- End Background -->
+
+					<!-- Start Control Bar -->
+					<div class="mes-content item-ctrlbar-5" data-show="fade"
+						data-showdura="200">
+						<div class="mes-closebt light-text floatleft">
+							<img src="../MetroStyleFiles//exit.png"
+								style="width: 40px; height: 40px;" />
+						</div>
+						<div class="clearspace"></div>
+					</div>
+					<!-- End Control Bar -->
+
+					<!-- Start Header Photo -->
+					<div class="mes-content item-headerphoto" data-show="bounceInDown">
+							<h2 style="background-color:#fff;text-align:center;width:100%;margin-bottom:0px;padding:15px 0px;">天气</h2>
+							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
+								<table width="90%" id="weather2" style="margin-left:auto;margin-right:auto;">
+								</table>
+							</div>
+					</div>
+					<!-- End Header Photo -->
+				</div>
+				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+			</div>
+		</div>
+		<!-- End Content Holder -->
+		<div class="mes-container item-profileview transparent-black"
+			data-mesid="message-tax">
+			<!-- Start Content Holder -->
+			<div class="mes-contentholder">
+				<div class="item-profilebody">
+					<!-- Start Background -->
+					<div class="mes-content item-profilebg solid-smoke"
+						data-show="hmove" data-start="-100" data-showdura="400"></div>
+					<!-- End Background -->
+
+					<!-- Start Control Bar -->
+					<div class="mes-content item-ctrlbar-5" data-show="fade"
+						data-showdura="200">
+						<div class="mes-closebt light-text floatleft">
+							<img src="../MetroStyleFiles//exit.png"
+								style="width: 40px; height: 40px;" />
+						</div>
+						<div class="clearspace"></div>
+					</div>
+					<!-- End Control Bar -->
+
+					<!-- Start Header Photo -->
+					<div class="mes-content item-headerphoto" data-show="bounceInDown">
+						<h2 style="background-color:#fff;text-align:center;width:100%;margin-bottom:0px;padding:15px 0px;">税费计算</h2>
+						<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
+							<table class="tax" width="90%"  style="margin-right:auto;margin-left:auto;">
+											<tr>
+												<td>起征点：</td>
+												<td><input type="text" id="taxstart" value="3500" /></td>
+											</tr>
+											<tr>
+												<td>总工资：</td>
+												<td><input type="text" id="taxIncome" value=""/></td>
+											</tr>
+											<tr>
+												<td>五险一金：</td>
+												<td><input type="text" id="payment" value=""/></td>
+											</tr>
+											<tr>
+												<td colspan="2" style="text-align: center; padding: 0px;">
+													<button class="btnAthena EbtnLess"
+														style="padding: 0px;background-color:#00B287;"
+														id="tax_submit_button" onclick="getTax()">计算</button>
+												</td>
+											</tr>
+											<tr>
+												<td>含税级距计算：</td>
+												<td><span id="levelcalc"></span></td>
+											</tr>
+											<tr>
+												<td>不含税级距计算：</td>
+												<td><span id="nolevelcalc"></span></td>
+											</tr>
+										</table>
+									</div>
+					</div>
+					<!-- End Header Photo -->
+				</div>
+				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
+			</div>
+		</div>
+		<!-- End Content Holder -->
+		
+		
+		
+		
+		
 	</div>
 	
 
