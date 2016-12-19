@@ -28,6 +28,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -46,6 +47,7 @@ public class MongoDBBasic {
 	private static String wechat_user = "Wechat_User";
 	private static String client_pool = "ClientPool";
 	private static String wechat_comments = "Wechat_Comments";
+	private static String ClientMeta = "Client_Meta";
 
 	private static DB getMongoDB(){
 		if(mongoDB != null){
@@ -121,6 +123,26 @@ public class MongoDBBasic {
 			log.info("QueryAccessKey--" + e.getMessage());
 		}
 	    return validKey;
+	}
+	public static ClientMeta QueryClientMeta(){
+		ClientMeta cm = new ClientMeta();
+		mongoDB = getMongoDB();
+	    try{
+			DBObject query = new BasicDBObject();
+			query.put("ID", "1");
+			String clientCopyRight =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientCopyRight").toString();
+			String clientLogo =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientLogo").toString();
+			String clientName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientName").toString();
+			String clientSubName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
+			cm.setClientCopyRight(clientCopyRight);
+			cm.setClientLogo(clientLogo);
+			cm.setClientName(clientName);
+			cm.setClientSubName(clientSubName);
+	    }
+		catch(Exception e){
+			log.info("QueryAccessKey--" + e.getMessage());
+		}
+	    return cm;
 	}
 	
 	@SuppressWarnings("null")
