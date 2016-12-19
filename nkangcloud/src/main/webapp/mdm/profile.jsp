@@ -54,6 +54,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
+<link rel="stylesheet" href="../Jsp/CSS/signature-pad.css">
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
@@ -63,18 +64,17 @@ if (session.getAttribute("location") == null) {
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script type="text/javascript" src="../MetroStyleFiles//JS/openmes.min.js"></script>
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39365077-1']);
+    _gaq.push(['_trackPageview']);
 
-<!-- 
-<link rel="stylesheet" type="text/css" href="../nkang/assets_athena/data-tables/DT_bootstrap.css"/>
-
-<script src="../nkang/js_athena/common-scripts.js"></script>
-<script src="../nkang/assets_athena/raty/ratyViewJs.js"></script>
-<script src="../nkang/js_athena/jquery.feedback_me.js"></script>
-<script src="../nkang/assets_athena/data-tables/jquery.dataTables.js"></script>
-<script src="../nkang/assets_athena/data-tables/DT_bootstrap.js"></script>
-<script src="../nkang/js_athena/typeahead.js"></script>
-<script src="../nkang/assets_athena/jquery-ui/jQuery_UI_1_10_3.js"></script>
- -->
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script> 
 <script>
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
