@@ -10,8 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -78,4 +80,18 @@ public class UserProfileController {
 		double nolevelcalc= ToolUtils.getnolevelcalc(taxIncome - taxstart-payment);
 		return "{\"levelcalc\":"+levelcalc+",\"nolevelcalc\":"+nolevelcalc+"}";
 	}
+	
+
+	/*
+	 * chang-zheng
+	 *  Congratulate
+	 */
+	@RequestMapping("/getRegisterUsers")
+	public @ResponseBody List<String> getRegisterUsers(HttpServletRequest request,
+			HttpServletResponse response){
+		
+		
+		return MongoDBBasic.getAllRegisterUsers();
+	}
+	
 }
