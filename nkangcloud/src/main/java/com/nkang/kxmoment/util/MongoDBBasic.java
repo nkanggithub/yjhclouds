@@ -1778,5 +1778,21 @@ public class MongoDBBasic {
 			}
 			return ret;
 		}
+		
+		/*
+		 * chang-zheng
+		 */
+		public static List<String> getAllRegisterUsers(){
+			mongoDB = getMongoDB();
+			@SuppressWarnings("unchecked")
+			List<String> lst = mongoDB.getCollection(wechat_user).distinct("Teamer.realName");
+//			List<String> lstRet = new ArrayList<String>();
+//			for(String i:lst ){
+//				if(!StringUtils.isEmpty(i)){
+//					lstRet.add(i);
+//				}
+//			}
+			return lst;
+		}
 	    // END
 }
