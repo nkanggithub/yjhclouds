@@ -89,9 +89,18 @@ public class UserProfileController {
 	@RequestMapping("/getRegisterUsers")
 	public @ResponseBody List<String> getRegisterUsers(HttpServletRequest request,
 			HttpServletResponse response){
-		
-		
 		return MongoDBBasic.getAllRegisterUsers();
 	}
 	
+
+	/*
+	 * chang-zheng
+	 *  Congratulate
+	 */
+	@RequestMapping("/getRegisterUserByOpenID")
+	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
+			HttpServletResponse response){
+		
+		return MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+	}
 }
