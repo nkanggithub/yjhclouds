@@ -13,6 +13,7 @@ String uid = request.getParameter("UID");
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
+session.setAttribute("UID", uid);
 if (session.getAttribute("location") == null) {
 	GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 	wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
