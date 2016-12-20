@@ -2,8 +2,12 @@
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
+<%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
+
+ClientMeta cm=MongoDBBasic.QueryClientMeta();
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 String curLoc=null;
@@ -1031,7 +1035,7 @@ function getNowFormatDate() {
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="<%=cm.getClientLogo() %>>" alt="HP Logo" class="HpLogo">
 						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
@@ -1108,14 +1112,13 @@ function getNowFormatDate() {
 <div class="control-group" style="margin-top:40px">
   <div class="controls" style="text-align:center">
     <button id="doublebutton-0" type="submit" name="doublebutton-0" class="btn btn-success">Submit</button>
-    <button id="doublebutton2-0" name="doublebutton2-0" class="btn btn-danger" style="margin-left:10px">Cancel</button>
+    
   </div>
 </div>
 
 
 	<div id="footer">
-		<span><nobr>© Hewlett-Packard Enterprise Development
-				Company, L.P. | HP Restricted </nobr></span>
+		<span><nobr><%=cm.getClientCopyRight() %></nobr></span>
 	</div>
 </fieldset>
 </form>
