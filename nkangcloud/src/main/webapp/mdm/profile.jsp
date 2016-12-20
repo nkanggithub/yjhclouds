@@ -59,7 +59,6 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
-<link rel="stylesheet" href="../Jsp/CSS/signature-pad.css">
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
