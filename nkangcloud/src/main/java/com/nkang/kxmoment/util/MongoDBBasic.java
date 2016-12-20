@@ -353,6 +353,24 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	
+	public static boolean updateUserWithSignature(String openid, String svg){
+		mongoDB = getMongoDB();
+		boolean ret = false;
+		try{
+			BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("Signature", svg);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
+			ret = true;
+		}
+		catch(Exception e){
+			log.info("updateUserWithSignature--" + e.getMessage());
+		}
+		return ret;
+	}
+	
 	public static String mongoDBInsert(OrgOtherPartySiteInstance opsi){
 		String ret = "error";
 		mongoDB = getMongoDB();
