@@ -1035,7 +1035,7 @@ function getNowFormatDate() {
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="<%=cm.getClientLogo() %>>" alt="HP Logo" class="HpLogo">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="<%=cm.getClientLogo() %>" alt="HP Logo" class="HpLogo">
 						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
