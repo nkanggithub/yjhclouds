@@ -59,22 +59,10 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
-  
 <script src="../nkang/js_athena/jquery.circliful.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script type="text/javascript" src="../MetroStyleFiles//JS/openmes.min.js"></script>
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39365077-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-</script> 
 <script>
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
@@ -681,7 +669,7 @@ function getNowFormatDate() {
 								</div>
 								<div class="tab-pane active" id="SocialElements">
 									<!-- start -->
-									<div id="WeatherDetails" class="modal hide fade" tabindex="-1"
+									<div id="WeatherDetails"  style="z-index: 10000;" class="modal hide fade" tabindex="-1"
 										role="dialog" aria-labelledby="myModalLabel1"
 										aria-hidden="true" data-backdrop="static">
 										<div class="modal-header" style="text-align: center;">
@@ -713,11 +701,12 @@ function getNowFormatDate() {
 									<div id="weather_div">
 										<table class="Socialization_menu">
 											<tr>
-												<td><a class="" data-toggle="modal"
-													href="#weather_main_div"> <img
+												<td>
+											<!-- 	<a class="" data-toggle="modal"	href="#weather_main_div"></a> -->
+													 <img  class="mes-openbt" data-mesid="message-weather" 
 														src="../MetroStyleFiles/menu-weather.png" />
 														<h4>天气</h4>
-												</a></td>
+												</td>
 												<td><a class="" data-toggle="modal"
 													href="#tax_main_div"> <img
 														src="../MetroStyleFiles/menu-tax.png" />
@@ -738,21 +727,21 @@ function getNowFormatDate() {
 														<h4>奖项管理</h4>
 														</div>
 												</td>
-												<td><img class="mes-openbt" data-mesid="message-weather" 
+												<td><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
-												<td><img  class="mes-openbt" data-mesid="message-tax" 
-														src="../MetroStyleFiles/menu-signature.png" />
+												<td><a href="http://shenan.duapp.com/mdm/RecognitionCenter.jsp"><img
+														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td><a href="http://shenan.duapp.com/mdm/RecognitionCenter.jsp"><img src="../MetroStyleFiles/menu-develop.png" /></a>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
 									</div>
 								</div>
-								<div id="weather_main_div" class="modal hide fade" tabindex="-1"
+							<!-- 	<div id="weather_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
@@ -768,7 +757,7 @@ function getNowFormatDate() {
 										<table width="100%" id="weather" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
 										</table>
 									</div>
-								</div>
+								</div> -->
 								<div id="tax_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="weather_main_div"
 									aria-hidden="true" data-backdrop="static">
@@ -1158,7 +1147,7 @@ function getNowFormatDate() {
 		
 		
 		
-		
+<!--  Start Weather Page  -->			
 		<div class="mes-container item-profileview transparent-black"
 			data-mesid="message-weather">
 			<!-- Start Content Holder -->
@@ -1166,34 +1155,38 @@ function getNowFormatDate() {
 				<div class="item-profilebody">
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
-						data-show="hmove" data-start="-100" data-showdura="400"></div>
+						data-show="hmove" data-start="-100" data-showdura="400">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
+						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
+						</div>
 					<!-- End Background -->
-
 					<!-- Start Control Bar -->
 					<div class="mes-content item-ctrlbar-5" data-show="fade"
 						data-showdura="200">
 						<div class="mes-closebt light-text floatleft">
-							<img src="../MetroStyleFiles//exit.png"
-								style="width: 40px; height: 40px;" />
+							<img src="../MetroStyleFiles//EXIT1.png"
+								style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 						</div>
 						<div class="clearspace"></div>
 					</div>
 					<!-- End Control Bar -->
-
 					<!-- Start Header Photo -->
-					<div class="mes-content item-headerphoto" data-show="bounceInDown">
-							<h2 style="background-color:#fff;text-align:center;width:100%;margin-bottom:0px;padding:15px 0px;">天气</h2>
+					<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
+							<legend>天气</legend>
 							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
-								<table width="90%" id="weather2" style="margin-left:auto;margin-right:auto;">
+								<table width="100%" id="weather2" style="margin-left:auto;margin-right:auto;">
 								</table>
 							</div>
-					</div>
+					</div> 
 					<!-- End Header Photo -->
 				</div>
 				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
 			</div>
 		</div>
 		<!-- End Content Holder -->
+<!--  End Weather Page  -->		
+
+<!--  Start Tax Page  -->	
 		<div class="mes-container item-profileview transparent-black"
 			data-mesid="message-tax">
 			<!-- Start Content Holder -->
@@ -1256,15 +1249,11 @@ function getNowFormatDate() {
 			</div>
 		</div>
 		<!-- End Content Holder -->
+<!--  End Tax Page  -->			
 		
 		
 		
-		
-		
-	</div>
-	
-
-
+</div>
 <!-- END MESSAGE STATION -->
 
 	<!-- BEGIN FOOTER -->
