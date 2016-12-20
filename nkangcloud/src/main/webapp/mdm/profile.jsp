@@ -735,7 +735,7 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
-												<td><a href="http://shenan.duapp.com/mdm/RecognitionCenter.jsp"><img
+												<td><a href="RecognitionCenter.jsp"><img
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>电子签名</h4>
 												</td>
