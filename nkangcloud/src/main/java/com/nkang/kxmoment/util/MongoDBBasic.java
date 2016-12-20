@@ -1809,6 +1809,22 @@ public class MongoDBBasic {
 			}
 			return ret;
 		}
+
+		/*
+		 * chang-zheng
+		 */
+		public static String getRegisterUserByOpenID(String openID){
+			mongoDB = getMongoDB();
+			Object User="";
+			DBObject query = new BasicDBObject();
+			query.put("openid", openID);
+			DBObject dbuser = mongoDB.getCollection(wechat_user).findOne(query);
+			if(dbuser!=null){
+				User=dbuser.get("Teamer.realName");
+			}
+			return User.toString();
+		}
+		
 		
 		/*
 		 * chang-zheng
@@ -1817,12 +1833,6 @@ public class MongoDBBasic {
 			mongoDB = getMongoDB();
 			@SuppressWarnings("unchecked")
 			List<String> lst = mongoDB.getCollection(wechat_user).distinct("Teamer.realName");
-//			List<String> lstRet = new ArrayList<String>();
-//			for(String i:lst ){
-//				if(!StringUtils.isEmpty(i)){
-//					lstRet.add(i);
-//				}
-//			}
 			return lst;
 		}
 	    // END
