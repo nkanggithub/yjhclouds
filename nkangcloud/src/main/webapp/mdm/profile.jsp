@@ -10,6 +10,7 @@
 ClientMeta cm=MongoDBBasic.QueryClientMeta();
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
+String mySignature =  MongoDBBasic.getUserWithSignature(uid);
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
@@ -905,6 +906,9 @@ function getNowFormatDate() {
 													</tr>
 												</table>											
 											</div>
+											
+											<%= mySignature %>
+											
 										</div>
 									</div>
 								</div>
