@@ -1041,7 +1041,7 @@ function getNowFormatDate() {
 						data-showdura="200">
 						<div class="mes-closebt light-text floatleft">
 							<img src="../MetroStyleFiles//EXIT1.png"
-								style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
+								style="width: 30px; height: 30px;position:absolute;top:20px;left:40px;" />
 						</div>
 						<div class="clearspace"></div>
 					</div>
@@ -1053,7 +1053,7 @@ function getNowFormatDate() {
 <fieldset style="height:600px">
 
 <!-- Form Name -->
-<legend>Recognition</legend>
+<legend>Recognize Someone</legend>
 
 <!-- Text input-->
 <div class="control-group">
@@ -1093,13 +1093,6 @@ function getNowFormatDate() {
   <label class="control-label bsLabel" for="textinput-5">Points</label>
   <div class="controls">
     <input id="textinput-5" name="points" type="text" placeholder="please provide number" class="input-xlarge bsBtn">
-  </div>
-</div>
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label bsLabel" for="textinput-3">Date</label>
-  <div class="controls">
-    <label id="textinput-3"  class="input-xlarge bsLabel" style="width:60%!important;" name="recognizeDate"><%= new Date().toLocaleString().substring(0, 11) %></label>
   </div>
 </div>
 
