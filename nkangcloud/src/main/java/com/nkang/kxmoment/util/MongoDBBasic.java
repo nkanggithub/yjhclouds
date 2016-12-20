@@ -1817,7 +1817,7 @@ public class MongoDBBasic {
 			mongoDB = getMongoDB();
 			String User="hhh";
 			DBObject query = new BasicDBObject();
-			query.put("openid", openID);
+			query.put("Teamer.openid", openID);
 			DBObject dbuser = mongoDB.getCollection(wechat_user).findOne(query);
 			if(dbuser!=null){
 				User=User+dbuser.get("Teamer.realName").toString();
