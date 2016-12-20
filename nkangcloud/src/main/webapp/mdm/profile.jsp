@@ -1194,24 +1194,25 @@ function getNowFormatDate() {
 				<div class="item-profilebody">
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
-						data-show="hmove" data-start="-100" data-showdura="400"></div>
+						data-show="hmove" data-start="-100" data-showdura="400">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
+						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
+						</div>
 					<!-- End Background -->
-
 					<!-- Start Control Bar -->
 					<div class="mes-content item-ctrlbar-5" data-show="fade"
 						data-showdura="200">
 						<div class="mes-closebt light-text floatleft">
-							<img src="../MetroStyleFiles//exit.png"
-								style="width: 40px; height: 40px;" />
+							<img src="../MetroStyleFiles//EXIT1.png"
+								style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 						</div>
 						<div class="clearspace"></div>
 					</div>
 					<!-- End Control Bar -->
-
 					<!-- Start Header Photo -->
-					<div class="mes-content item-headerphoto" data-show="bounceInDown">
-						<h2 style="background-color:#fff;text-align:center;width:100%;margin-bottom:0px;padding:15px 0px;">税费计算</h2>
-						<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
+					<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
+							<legend>税费计算</legend>
+							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
 							<table class="tax" width="90%"  style="margin-right:auto;margin-left:auto;">
 											<tr>
 												<td>起征点：</td>
@@ -1242,7 +1243,7 @@ function getNowFormatDate() {
 											</tr>
 										</table>
 									</div>
-					</div>
+					</div> 
 					<!-- End Header Photo -->
 				</div>
 				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
