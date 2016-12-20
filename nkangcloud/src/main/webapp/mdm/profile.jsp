@@ -59,6 +59,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
+<link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
@@ -93,6 +94,45 @@ function getTax(){
 		}
 	});
 }
+
+function postRecognition(){
+	console.log("start....");
+	var data =$('#rf').serialize();
+	$.ajax({
+        cache: false,
+        type: "POST",
+        url:"../userProfile/userCongratulate",
+        data:$('#recognizationForm').serialize(),// 你的formid
+        async: true,
+        error: function(request) {
+            alert("Connection error");
+        },
+        success: function(data) {
+            console.log("success!!!!");
+        }
+    });
+	return false;
+
+}
+function recognizationPanel(){
+	showCommonPanel();
+	$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >Panda</label></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option>Option one</option><option>Option two</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div><div id='footer'><span><nobr><%-- <%=cm.getClientCopyRight() %> --%></nobr></span></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn btn-success'>Submit</button></div></div></div>");
+	$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+}
+
+function showCommonPanel()
+{
+	$("body").append("<div  id='data_model_div' class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
+	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass();
+	    }); }
+function hideBouncePanel()
+{
+	$("body").find(".bouncePart").remove();
+	$("body").find("#data_model_div").remove();
+	}
 function register() {
 	jQuery
 	.ajax({
@@ -725,11 +765,9 @@ function getNowFormatDate() {
 													<h4>技术快车</h4></td>
 											</tr>
 											<tr>
-												<td>	<div class="demo-content">
-														<img  class="mes-openbt" data-mesid="message-5" 
+												<td>		<img  onclick="recognizationPanel()"
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>奖项管理</h4>
-														</div>
 												</td>
 												<td><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-time.png" />
@@ -1023,125 +1061,6 @@ function getNowFormatDate() {
  Modal PAGE End-->
 
 
-
-
-<!-- START MESSAGE STATION -->
-	<div id="mes-station">
-		<div class="mes-container item-profileview transparent-black"
-			data-mesid="message-5">
-			<!-- Start Content Holder -->
-			<div class="mes-contentholder">
-				<div class="item-profilebody">
-					<!-- Start Background -->
-					<div class="mes-content item-profilebg solid-smoke"
-						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="<%=cm.getClientLogo() %>" alt="HP Logo" class="HpLogo">
-						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
-						</div>
-					<!-- End Background -->
-
-					<!-- Start Control Bar -->
-					<div class="mes-content item-ctrlbar-5" data-show="fade"
-						data-showdura="200">
-						<div class="mes-closebt light-text floatleft">
-							<img src="../MetroStyleFiles//EXIT1.png"
-								style="width: 30px; height: 30px;position:absolute;top:20px;left:40px;" />
-						</div>
-						<div class="clearspace"></div>
-					</div>
-					<!-- End Control Bar -->
-
-					<!-- Start Header Photo -->
-				<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
-						<form class="form-horizontal" id="recognizeForm" >
-<fieldset style="height:600px">
-
-<!-- Form Name -->
-<legend>Recognize Someone</legend>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label bsLabel" for="textinput-0">From</label>
-  <div class="controls">
-    <label id="from" class="input-xlarge bsLabel" >Panda</label>
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="control-group">
-  <label class="control-label bsLabel" for="selectbasic-1">To</label>
-  <div class="controls">
-    <select id="selectbasic-1" name="to" class="input-xlarge bsBtn">
-      <option>Option one</option>
-      <option>Option two</option>
-    </select>
-  </div>
-</div>
-
-
-<!-- Select Basic -->
-<div class="control-group">
-  <label class="control-label bsLabel" for="selectbasic-2">Type</label>
-  <div class="controls">
-    <select id="selectbasic-2" name="type" class="input-xlarge bsBtn">
-      <option>Bais For Action</option>
-      <option>Innovators at Heart</option>
-     <option>Partnership First</option>
-
-    </select>
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label bsLabel" for="textinput-5">Points</label>
-  <div class="controls">
-    <input id="textinput-5" name="points" type="text" placeholder="please provide number" class="input-xlarge bsBtn">
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label bsLabel" for="textinput-2">Comment</label>
-  <div class="controls">
-    <textarea id="textinput-2" name="comments" style="height:90px" placeholder="please enter your comment" class="input-xlarge bsBtn"></textarea>
-  </div>
-</div>
-
-<!-- Button (Double) -->
-<div class="control-group" style="margin-top:40px">
-  <div class="controls" style="text-align:center">
-    <button id="doublebutton-0" type="submit" name="doublebutton-0" class="btn btn-success">Submit</button>
-    
-  </div>
-</div>
-
-
-	<div id="footer">
-		<span><nobr><%=cm.getClientCopyRight() %></nobr></span>
-	</div>
-</fieldset>
-</form>
-
-					</div> 
-					<!-- End Header Photo -->
-
-					
-	
-
-				</div>
-				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
-			</div>
-		</div>
-		<!-- End Content Holder -->
-		
-		
-		
-		
-		
-		
-		
-		
 		
 <!--  Start Weather Page  -->			
 		<div class="mes-container item-profileview transparent-black"
