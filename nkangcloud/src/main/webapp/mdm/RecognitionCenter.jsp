@@ -9,7 +9,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
 <script src="../Jsp/JS/modernizr.js"></script>
-
+<style>
+#signature canvas{
+	border:3px #56B39D solid;
+}
+</style>
 </head>
 <body style="padding:0px;margin:0px;">
 <a href="profile.jsp">
@@ -24,7 +28,7 @@
 	<div id="signatureparent">
 		<div id="signature"></div></div>
 
-	<div id="tools"></div>
+	<div id="tools" style="text-align:center;"></div>
 	
 </div>
 
@@ -81,9 +85,10 @@ $(document).ready(function() {
 	// All the code below is just code driving the demo. 
 	var $tools = $('#tools')
 
-	$('<input type="button" name="svg" value="svg">').bind('click', function(e){
+	$('<input type="button" name="svg" value="保存签名"  style="margin-right:auto;maring-left:auto;color:#fff;background-color:#56B39D;border:none;padding:10px;font-size:18px;margin-top:10px;">').bind('click', function(e){
 		if (e.target.value !== ''){
-			var data = $sigdiv.jSignature('getData', e.target.value)
+			//var data = $sigdiv.jSignature('getData', e.target.value)
+			var data = $sigdiv.jSignature('getData', 'svg')
 			if($.isArray(data) && data.length === 2){
 				alert(data[1]);
 			}
