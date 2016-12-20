@@ -371,6 +371,19 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static String getUserWithSignature(String openid){
+		mongoDB = getMongoDB();
+		String ret = "";
+		try{
+			ret = mongoDB.getCollection(wechat_user).findOne(new BasicDBObject().append("OpenID", openid)).get("Signature").toString();
+		}
+		catch(Exception e){
+			log.info("getUserWithSignature--" + e.getMessage());
+			ret = e.getMessage();
+		}
+		return ret;
+	}
+	
 	public static String mongoDBInsert(OrgOtherPartySiteInstance opsi){
 		String ret = "error";
 		mongoDB = getMongoDB();
