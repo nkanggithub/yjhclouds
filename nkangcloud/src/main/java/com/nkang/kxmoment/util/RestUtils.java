@@ -1593,6 +1593,34 @@ public class RestUtils {
          }     
          return strBuf.toString();  
 	}
+	public static  String getCallUpdateUserWithSignature(String openid,String svg){
+		String urlStr = "http://shenan.duapp.com/CallUpdateUserWithSignature";
+		try {
+			urlStr+="?openid="+openid+"&svg="+URLEncoder.encode(svg, "utf-8");
+		} catch (UnsupportedEncodingException e1) {
+		}
+		StringBuffer strBuf =new StringBuffer("");
+		try {
+			URL url = new URL(urlStr);  
+			if(localInd == "Y"){
+				System.setProperty("http.proxyHost", Constants.proxyInfo);  
+				System.setProperty("http.proxyPort", "8080");  
+			} 
+			System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+			System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+			URLConnection conn = url.openConnection();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));//???  
+			String line = null;  
+			while ((line = reader.readLine()) != null)  
+				strBuf.append(line + " ");  
+			reader.close();  
+		}catch(MalformedURLException e) {  
+			e.printStackTrace();   
+		}catch(IOException e){  
+			e.printStackTrace();   
+		}     
+		return strBuf.toString();  
+	}
 	
 	//Bit Add Start
 		public static String getLocationDetailsforOppt(String Query, String Region, String OpptID, String OpptAddr, String OpsiId, String CityRegion) throws Exception{
