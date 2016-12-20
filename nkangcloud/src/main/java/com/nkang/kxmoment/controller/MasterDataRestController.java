@@ -732,6 +732,19 @@ public class MasterDataRestController {
 		return ret;
 	}
 	
+	@RequestMapping("/CallGetUserWithESignature")
+	public static String CallGetUserWithESignature(@RequestParam(value="openid", required=false) String openid){
+		String ret = "";
+		try{
+			ret = MongoDBBasic.getUserWithSignature(openid);
+
+		}		
+		catch(Exception e){
+			ret = e.getMessage();
+		}
+		return ret;
+	}
+	
 	
 	/*
 	 * chang-zheng
