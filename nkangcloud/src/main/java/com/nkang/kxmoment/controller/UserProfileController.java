@@ -81,6 +81,15 @@ public class UserProfileController {
 		return "{\"levelcalc\":"+levelcalc+",\"nolevelcalc\":"+nolevelcalc+"}";
 	}
 	
+	@RequestMapping(value = "/setSignature", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String setSignature(HttpServletRequest request,
+			HttpServletResponse response) {
+		String svg = request.getParameter("svg");
+		String openid = (String) request.getSession()
+				.getAttribute("UID");
+		return RestUtils.getCallUpdateUserWithSignature(openid,svg);
+	}
 
 	/*
 	 * chang-zheng
