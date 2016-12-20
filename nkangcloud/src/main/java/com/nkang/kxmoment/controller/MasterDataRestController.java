@@ -704,6 +704,21 @@ public class MasterDataRestController {
 		return cm;
 	}
 	
+	@RequestMapping("/CallUpdateUserWithSignature")
+	public static boolean CallUpdateUserWithSignature(
+			@RequestParam(value="openid", required=false) String openid,
+			@RequestParam(value="svg", required=false) String svg
+			){
+		boolean ret = false;
+		try{
+			ret = MongoDBBasic.updateUserWithSignature(openid, svg);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
+	
 	/*
 	 * chang-zheng
 	 * 
