@@ -8,6 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <script src="../Jsp/JS/modernizr.js"></script>
 <style>
 #signature canvas{
@@ -33,6 +34,7 @@
 </div>
 
 <script src="../Jsp/JS/jquery-1.8.0.js"></script>
+<script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script type="text/javascript">
 	jQuery.noConflict()
 </script>
@@ -90,20 +92,21 @@ $(document).ready(function() {
 			//var data = $sigdiv.jSignature('getData', e.target.value)
 			var data = $sigdiv.jSignature('getData', 'svg')
 			if($.isArray(data) && data.length === 2){
-				alert(data[1]);
+				var start=data[1].indexOf("<svg ");
+				var svg=data[1].substring(start,data[1].length);
 				jQuery.ajax({
 					type : "GET",
-					url : "../userProfile/setRecognition",
+					url : "../userProfile/setSignature",
 					data : {
-						UID : "11111111",
-						svg : "2222222"
+						svg : svg
 					},
 					cache : false,
 					success : function(data) {
-						var jsons = eval('(' + data + ')');
-						$("#levelcalc").text(jsons.levelcalc);
-						$("#nolevelcalc").text(jsons.nolevelcalc);
-						swal("Calculate successfully!", "Congratulations!", "success"); 
+						if(data.indexOf("true")==0){
+							swal("签名保存成功!", "", "success"); 
+						}else{
+							swal("签名保存失败!", "", "error"); 
+						}
 					}
 				});
 			}
