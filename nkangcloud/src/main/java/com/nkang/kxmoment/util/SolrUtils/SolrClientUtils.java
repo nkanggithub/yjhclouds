@@ -30,8 +30,8 @@ public class SolrClientUtils{
 	public static QueryResponse queryOrgInformations(OrganizationSearch4Solr orgCriteria, int section) {
 		QueryResponse queryResponse = null;
         try {
-        	int start = section*20000;
-        	int end = (section*20000) + 20000;
+        	int start = section*1000;
+        	int end = (section*1000) + 1000;
         	SolrQuery query = getSolrQuery(orgCriteria, start, end);
 			queryResponse = solrServer.query(query);
 		} catch (SolrServerException e) {
@@ -150,9 +150,9 @@ public class SolrClientUtils{
 		List<OrgOtherPartySiteInstance> opsiList  = new ArrayList<OrgOtherPartySiteInstance>();
 		OrgOtherPartySiteInstance opsi;
 		OrganizationSearch4Solr solrSearchParams = new OrganizationSearch4Solr();
-		solrSearchParams.setCountryCode("CN");
-		solrSearchParams.setCharScriptCode("HANS");
-		solrSearchParams.setStateProvinceName("上海");
+		solrSearchParams.setCountryCode("KR");
+		solrSearchParams.setCharScriptCode("LATN");
+		solrSearchParams.setStateProvinceName("Jeju");
 		//solrSearchParams.setOrgId("23074049");
 /*		solrSearchParams.setSiteinstanceId("36742221");*/
 		QueryResponse queryResponse = SolrClientUtils.queryOrgInformations(solrSearchParams, section);
