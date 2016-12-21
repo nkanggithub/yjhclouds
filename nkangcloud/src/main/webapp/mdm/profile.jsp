@@ -8,7 +8,6 @@
 <%	
 
 ClientMeta cm=MongoDBBasic.QueryClientMeta();
-
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 String mySignature =  MongoDBBasic.getUserWithSignature(uid);
@@ -99,6 +98,7 @@ function getTax(){
 
 function postRecognition(){
 	console.log("start....");
+	var data =$('#rf').serialize();
 	$.ajax({
         cache: false,
         type: "POST",
@@ -118,7 +118,6 @@ function postRecognition(){
         error: function(request) {
             alert("Connection error");
         }
-       
     });
 	return false;
 
