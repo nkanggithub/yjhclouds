@@ -194,7 +194,6 @@ function recognizationPanelByPerson(personName){
 		    });}else
 			{swal("Sorry", "you have no access to this page,please register", "error");}
 	}
-}
 function showCommonPanel()
 {
 	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
