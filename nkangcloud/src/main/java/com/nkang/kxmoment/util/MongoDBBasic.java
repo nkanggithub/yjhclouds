@@ -1815,14 +1815,17 @@ public class MongoDBBasic {
 		 */
 		public static String getRegisterUserByOpenID(String openID){
 			mongoDB = getMongoDB();
-			String User="";
+			String User;
 			DBObject query = new BasicDBObject();
-			query.put("Teamer.openid", openID);
+			query.put("OpenID", openID);
 			DBObject dbuser = mongoDB.getCollection(wechat_user).findOne(query);
 			if(dbuser!=null){
-				User=dbuser.get("Teamer.realName").toString();
+				if(dbuser.get("Teamer.realName")!=null){
+					User=dbuser.get("Teamer.realName").toString();
+					return User;
+				}
 			}
-			return User;
+			return "hehe";
 		}
 		
 		
