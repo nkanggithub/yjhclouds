@@ -110,7 +110,7 @@ public class UserProfileController {
 	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
 			HttpServletResponse response){
 		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
-		if(str!=null){
+		if(str!=null&&str!=""){
 			return str;
 		}
 		return "oqPI_xACjXB7pVPGi5KH9Nzqonj4";
