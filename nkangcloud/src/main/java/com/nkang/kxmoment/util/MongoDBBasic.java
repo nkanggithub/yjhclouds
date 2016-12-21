@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -1820,7 +1822,13 @@ public class MongoDBBasic {
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
 			if(dbuser!=null && dbuser.size()>0){
-				return dbuser.get(0);
+				//return dbuser.get(0);
+				try {
+					return URLEncoder.encode(dbuser.get(0).toString(), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			return "";
 		}
