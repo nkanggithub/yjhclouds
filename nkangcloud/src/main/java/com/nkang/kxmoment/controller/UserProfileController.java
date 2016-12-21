@@ -148,4 +148,11 @@ public class UserProfileController {
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
 		return "ok";
 	} 
+	@RequestMapping("/getUserOpenid")
+	public @ResponseBody String getUserOpenid(HttpServletRequest request,
+			HttpServletResponse response ){
+		
+		return MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).get(0).toString();
+	} 
+	
 }
