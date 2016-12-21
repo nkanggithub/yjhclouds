@@ -1824,6 +1824,14 @@ public class MongoDBBasic {
 				return dbuser;
 		}
 		
+		public static String getRegisterUserByrealName(String realName){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("Teamer.realName", realName);
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID",query);
+			return dbuser.get(0);
+		}
 		
 		/*
 		 * chang-zheng
