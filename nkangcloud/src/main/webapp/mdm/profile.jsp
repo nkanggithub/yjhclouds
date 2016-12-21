@@ -11,7 +11,6 @@ ClientMeta cm=MongoDBBasic.QueryClientMeta();
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 String realName = MongoDBBasic.getRegisterUserByOpenID(uid);
-String mySignature =  MongoDBBasic.getUserWithSignature(uid);
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
