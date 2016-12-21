@@ -82,7 +82,7 @@
 	        type: 'GET', 
 	        timeout: 2000, 
 	        success: function(data){
-	        	if(data!=""||data!="null"){
+	        	if(data!=null&&data!=""&&data!="null"){
 	       		 	$('#old').html(data.substring(1,data.length-1));
 	        	}else{
 	        		$('#old').html("你还未保存个性签名！");
