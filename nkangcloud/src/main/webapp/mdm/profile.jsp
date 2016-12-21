@@ -117,8 +117,7 @@ function postRecognition(){
         },
         success: function(data) {
         	swal("Congratulations!", "Recognization to "+to+" already sent successful!", "success");
-        	$("#points").val("");
-        	$("#comments").val("");
+        	hideBouncePanel();
         }
     });
 
