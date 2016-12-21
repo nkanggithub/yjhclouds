@@ -1,5 +1,8 @@
 package com.nkang.kxmoment.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -112,9 +115,14 @@ public class UserProfileController {
 			HttpServletResponse response){
 		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
 		if(str!=null&&str!=""){
-			return str;
+			try {
+				return URLDecoder.decode(str,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		return "hehe";
+		return "";
 	}
 	
 	@RequestMapping("/getRegisterUserByOpenID")
