@@ -125,6 +125,50 @@ function postRecognition(){
     });
 
 }
+
+function testPanel(){
+	var realName=$("#realName").val();
+	var selectContent=$("#hiddenSelect").html();
+	if(realName!="")
+		{
+		showCommonPanel();
+		
+		$("body").append('<div class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
+				+'											<tr>'
+				+'												<td>起征点：</td>'
+				+'												<td><input type="text" id="taxstart" value="3500" /></td>'
+				+'											</tr>'
+				+'											<tr>'
+				+'												<td>总工资：</td>'
+				+'												<td><input type="text" id="taxIncome" value=""/></td>'
+				+'											</tr>'
+				+'											<tr>'
+				+'												<td>五险一金：</td>'
+				+'												<td><input type="text" id="payment" value=""/></td>'
+				+'											</tr>'
+				+'											<tr>'
+				+'												<td colspan="2" style="text-align: center; padding: 0px;">'
+				+'													<button class="btnAthena EbtnLess"'
+				+'														style="padding: 0px;background-color:#00B287;"'
+				+'														id="tax_submit_button" onclick="getTax()">计算</button>'
+				+'												</td>'
+				+'											</tr>'
+				+'											<tr>'
+				+'												<td>含税级距计算：</td>'
+				+'												<td><span id="levelcalc"></span></td>'
+				+'											</tr>'
+				+'											<tr>'
+				+'												<td>不含税级距计算：</td>'
+				+'												<td><span id="nolevelcalc"></span></td>'
+				+'											</tr>'
+				+'										</table></div>');
+		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		      $(this).removeClass("bounceInDown animated");
+		    });
+		}else
+			{swal("Sorry", "you have no access to this page,please register", "error");}
+
+}
 function recognizationPanel(){
 	var realName=$("#realName").val();
 	var selectContent=$("#hiddenSelect").html();
@@ -808,7 +852,7 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td><img src="../MetroStyleFiles/menu-develop.png" />
+												<td><img  onclick="testPanel()" src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
