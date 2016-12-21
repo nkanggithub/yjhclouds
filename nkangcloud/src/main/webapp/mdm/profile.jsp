@@ -897,7 +897,7 @@ function getNowFormatDate() {
 										<div id="userInfoDiv">
 											<div id="info_interact"  style="position: absolute;width:100%;">
 												<img class="like" src="../MetroStyleFiles/like.png"/>
-												<img class="zan"  src="../MetroStyleFiles/zan.png"/>
+												<img class="zan"  onclick="recognizationPanel()" src="../MetroStyleFiles/zan.png"/>
 											</div>
 											<img id="info_imgurl"
 												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
