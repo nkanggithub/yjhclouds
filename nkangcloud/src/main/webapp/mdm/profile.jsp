@@ -10,6 +10,7 @@
 ClientMeta cm=MongoDBBasic.QueryClientMeta();
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
+String realName = MongoDBBasic.getRegisterUserByOpenID(uid);
 String mySignature =  MongoDBBasic.getUserWithSignature(uid);
 String curLoc=null;
 String city=null;
@@ -126,12 +127,18 @@ function postRecognition(){
 
 }
 function recognizationPanel(){
-	showCommonPanel();
-	var uid=$("#uid").val();
-	$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >Panda</label><input type='hidden' id='openID' value='"+uid+"'/></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option>潘路月</option><option>康宁</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div><div id='footer'><span><nobr><%-- <%=cm.getClientCopyRight() %> --%></nobr></span></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn btn-success'>Submit</button></div></div></div>");
-	$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-	      $(this).removeClass("bounceInDown animated");
-	    });
+	var realName=$("#realName").val();
+	if(realName!="")
+		{
+		showCommonPanel();
+		
+		$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >"+realName+"</label><input type='hidden' id='openID' value='"+uid+"'/></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option>潘路月</option><option>康宁</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div><div id='footer'><span><nobr><%-- <%=cm.getClientCopyRight() %> --%></nobr></span></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn btn-success'>Submit</button></div></div></div>");
+		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		      $(this).removeClass("bounceInDown animated");
+		    });
+		}else
+			{swal("Sorry", "you have no access to this page,please register", "error");}
+
 }
 
 function showCommonPanel()
@@ -322,6 +329,7 @@ function showRegister(){
 					if(result){
 						$('#registerform').modal('hide');
 						swal("Registered successfully!", "Congratulations!", "success"); 
+						$("realName").val(name);
 					} else {
 						swal("Registered fail!", "Pls input your correct information.", "error");
 					}
@@ -646,6 +654,7 @@ function getNowFormatDate() {
 </head>
 <body style="margin: 0px; padding: 0px !important;">
 	<input id="uid" type="hidden" value="<%=uid%>" />
+	<input id="realName" type="hidden" value="<%=realName%>" />
 	<div class="navbar" style="width: 100%;">
 		<div class="navbar-inner">
 			<div class="container-fluid">
