@@ -183,7 +183,18 @@ function recognizationPanel(){
 			{swal("Sorry", "you have no access to this page,please register", "error");}
 
 }
-
+function recognizationPanelByPerson(personName){
+	var realName=$("#realName").val();
+	if(realName!=""){
+		showCommonPanel();
+		
+		$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >"+realName+"</label></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option selected>"+personName+"</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div></div></div>");
+		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		      $(this).removeClass("bounceInDown animated");
+		    });}else
+			{swal("Sorry", "you have no access to this page,please register", "error");}
+	}
+}
 function showCommonPanel()
 {
 	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
