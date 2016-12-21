@@ -1823,9 +1823,11 @@ public class MongoDBBasic {
 				if(dbuser.get("Teamer.realName")!=null){
 					User=dbuser.get("Teamer.realName").toString();
 					return User;
+				}else{
+					return "realName-null"+dbuser.get("OpenID").toString();
 				}
 			}
-			return "hehe";
+			return "he";
 		}
 		
 		
