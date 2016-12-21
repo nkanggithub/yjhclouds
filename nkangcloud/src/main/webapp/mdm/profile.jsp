@@ -991,9 +991,6 @@ function getNowFormatDate() {
 													</tr>
 												</table>											
 											</div>
-											
-											<%= mySignature %>
-											
 										</div>
 									</div>
 								</div>
