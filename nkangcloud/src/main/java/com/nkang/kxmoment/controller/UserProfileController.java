@@ -111,25 +111,27 @@ public class UserProfileController {
 	 *  Congratulate
 	 */
 	@RequestMapping("/getRegisterUserByOpenID1")
-	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
+	public @ResponseBody List<String> getRegisterUserByOpenID1(HttpServletRequest request,
 			HttpServletResponse response){
-		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
-		if(str!=null&&str!=""){
-			try {
-				return URLDecoder.decode(str,"UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return "";
+		List<String> str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+//		if(str!=null){
+//			return str;
+//			try {
+//				return URLDecoder.decode(str,"UTF-8");
+//			} catch (UnsupportedEncodingException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+	//	}
+		return str;
+		
 	}
 	
 	@RequestMapping("/getRegisterUserByOpenID")
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
 		String openid=request.getParameter("openID");
-		return MongoDBBasic.getRegisterUserByOpenID(openid);
+		return MongoDBBasic.getRegisterUserByOpenID(openid).get(0).toString();
 	}
 	
 	@RequestMapping("/userCongratulate")
