@@ -81,11 +81,15 @@
 	        url:url,
 	        type: 'GET', 
 	        timeout: 2000, 
-	        success: function(data){
-	        	if(data!=null&&data!=""&&data!="null"){
-	       		 	$('#old').html(data.substring(1,data.length-1));
+	        success: function(data,textStatus){
+	        	if(textStatus=='success'){
+		        	if(data!=null&&data!=""&&data!="null"){
+		       		 	$('#old').html(data.substring(1,data.length-1));
+		        	}else{
+		        		$('#old').html("你还未保存个性签名！");
+		        	}
 	        	}else{
-	        		$('#old').html("你还未保存个性签名！");
+	        		$('#old').html("服务器繁忙！");
 	        	}
 	        }
 	  	});
