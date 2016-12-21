@@ -24,15 +24,15 @@ h2 {
 }
 #data_model_div
 {
-position: fixed;
-
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-z-index: 90;
-background-color: white;
-transition: opacity .15s linear;
+    position: absolute;
+    top: 0;
+    height: 130%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 90;
+    background-color: white;
+    transition: opacity .15s linear;
 
 }
 
@@ -71,11 +71,11 @@ to {width:100%;}
 }
 
 #recognizeForm
-{position: fixed;
+{    position: absolute;
     width: 80%;
-    top: 120px;
-    left:10%;
-    z-index:100;}
+    top: 100px;
+    left: 10%;
+    z-index: 100;}
     
 #recognizationx
 {width:100%;
