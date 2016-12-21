@@ -137,7 +137,9 @@ public class UserProfileController {
 	@RequestMapping("/userCongratulate")
 	public @ResponseBody String updateUserCongratulateHistory(HttpServletRequest request,
 			HttpServletResponse response ){
-		String openid=request.getParameter("openID");
+		
+		//String openid=request.getParameter("openID");
+		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).get(0).toString();
 		CongratulateHistory conhis=new CongratulateHistory();
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
