@@ -78,7 +78,6 @@ $(window).load(function() {
 		getMDLUserLists();
 });
 function getTax(){
-		alert($("#taxIncome").text()+"==="+$("#taxstart").val()+"====="+$("#payment").val());
 	jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getTax",
@@ -895,11 +894,11 @@ function getNowFormatDate() {
 											</tr>
 											<tr>
 												<td>总工资：</td>
-												<td><input type="text" id="taxIncome" /></td>
+												<td><input type="text" id="taxIncome2" /></td>
 											</tr>
 											<tr>
 												<td>五险一金：</td>
-												<td><input type="text" id="payment" /></td>
+												<td><input type="text" id="payment2" /></td>
 											</tr>
 											<tr>
 												<td colspan="2" style="text-align: center; padding: 0px;">
@@ -910,11 +909,11 @@ function getNowFormatDate() {
 											</tr>
 											<tr>
 												<td>含税级距计算：</td>
-												<td><span id="levelcalc"></span></td>
+												<td><span id="levelcalc2"></span></td>
 											</tr>
 											<tr>
 												<td>不含税级距计算：</td>
-												<td><span id="nolevelcalc"></span></td>
+												<td><span id="nolevelcalc2"></span></td>
 											</tr>
 										</table>
 									</div>
@@ -1210,35 +1209,7 @@ function getNowFormatDate() {
 					<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
 							<legend>税费计算</legend>
 							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
-							<table class="tax" width="90%"  style="margin-right:auto;margin-left:auto;">
-											<tr>
-												<td>起征点：</td>
-												<td><input type="text" id="taxstart" value="3500" /></td>
-											</tr>
-											<tr>
-												<td>总工资：</td>
-												<td><input type="text" id="taxIncome" value=""/></td>
-											</tr>
-											<tr>
-												<td>五险一金：</td>
-												<td><input type="text" id="payment" value=""/></td>
-											</tr>
-											<tr>
-												<td colspan="2" style="text-align: center; padding: 0px;">
-													<button class="btnAthena EbtnLess"
-														style="padding: 0px;background-color:#00B287;"
-														id="tax_submit_button" onclick="getTax()">计算</button>
-												</td>
-											</tr>
-											<tr>
-												<td>含税级距计算：</td>
-												<td><span id="levelcalc"></span></td>
-											</tr>
-											<tr>
-												<td>不含税级距计算：</td>
-												<td><span id="nolevelcalc"></span></td>
-											</tr>
-										</table>
+							
 									</div>
 					</div> 
 					<!-- End Header Photo -->
