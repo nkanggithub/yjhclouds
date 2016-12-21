@@ -114,7 +114,7 @@ public class UserProfileController {
 		if(str!=null&&str!=""){
 			return str;
 		}
-		return "oqPI_xACjXB7pVPGi5KH9Nzqonj4";
+		return "hehe";
 	}
 	
 	@RequestMapping("/getRegisterUserByOpenID")
