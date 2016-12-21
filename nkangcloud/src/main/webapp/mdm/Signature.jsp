@@ -104,7 +104,7 @@ $(document).ready(function() {
 			if($.isArray(data) && data.length === 2){
 				var start=data[1].indexOf("<svg ");
 				var svg=data[1].substring(start,data[1].length);
-				if(svg!="")
+				if(svg!='<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0"></svg>')
 				jQuery.ajax({
 					type : "GET",
 					url : "../userProfile/setSignature",
