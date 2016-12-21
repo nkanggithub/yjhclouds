@@ -10,11 +10,6 @@
 
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <script src="../Jsp/JS/modernizr.js"></script>
-<style>
-#signature canvas{
-	border:3px #56B39D solid;
-}
-</style>
 </head>
 <body style="padding:0px;margin:0px;">
 <a href="profile.jsp">
@@ -23,12 +18,11 @@
 <img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
 <div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 <div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">电子签名</div>
-						
-											
-<div id="content">		<br /><br /><br /><br /><br /><br />
+<input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
+<div id="old" style="margin-top:150px;margin-bottom:-90px;padding-top:5px;height:170px;border:2px #56B39D solid;width:80%;margin-left:auto;margin-right:auto;text-align:center;"></div>
+<div id="content">		
 	<div id="signatureparent">
 		<div id="signature"></div></div>
-
 	<div id="tools"></div>
 	
 </div>
@@ -80,14 +74,30 @@
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script>
 (function($){
-
+	var url="../CallGetUserWithSignature?openid="+$('#uid').val();
+	function getOld(){
+	  	$.ajax({  
+	        cache : true,  
+	        url:url,
+	        type: 'GET', 
+	        timeout: 2000, 
+	        success: function(data){
+	        	if(data!=""&&data!="null"){
+	       		 	$('#old').html(data.substring(1,data.length-1));
+	        	}else{
+	        		$('#old').html("你还未保存个性签名！");
+	        	}
+	        }
+	  	});
+	}
 $(document).ready(function() {
+	getOld();
 	// This is the part where jSignature is initialized.
 	var $sigdiv = $("#signature").jSignature({'UndoButton':true})
 	// All the code below is just code driving the demo. 
 	var $tools = $('#tools')
 
-	$('<input type="button" name="svg" value="保存签名"  style="float:right;margin-right:10%;color:#fff;background-color:#56B39D;border:none;padding:10px;font-size:18px;margin-top:10px;">').bind('click', function(e){
+	$('<input type="button" name="svg" value="保存签名"  style="float:right;margin-right:10%;color:#fff;background-color:#56B39D;border:none;padding:10px;font-size:18px;margin-top:0px;">').bind('click', function(e){
 		if (e.target.value !== ''){
 			//var data = $sigdiv.jSignature('getData', e.target.value)
 			var data = $sigdiv.jSignature('getData', 'svg')
@@ -104,6 +114,12 @@ $(document).ready(function() {
 					success : function(data) {
 						if(data.indexOf("true")==0){
 							swal("签名保存成功!", "", "success"); 
+							getOld();
+							/*var canvas = document.getElementsByClassName('jSignature')[0];
+						  	var context = canvas.getContext('2d');
+						  	context.clearRect(0, 0, canvas.width, canvas.height); */
+						  	var $sigdiv = $("#signature")
+						  	$sigdiv.jSignature("reset"); //重置画布，可以进行重新作画.
 						}else{
 							swal("签名保存失败!", "", "error"); 
 						}
