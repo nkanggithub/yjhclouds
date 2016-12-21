@@ -133,7 +133,7 @@ function testPanel(){
 		{
 		showCommonPanel();
 		
-		$("body").append('<div class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
+		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
 				+'											<tr>'
 				+'												<td>起征点：</td>'
 				+'												<td><input type="text" id="taxstart" value="3500" /></td>'
@@ -162,7 +162,7 @@ function testPanel(){
 				+'												<td><span id="nolevelcalc"></span></td>'
 				+'											</tr>'
 				+'										</table></div>');
-		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+		$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
 		}else
