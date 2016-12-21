@@ -111,9 +111,9 @@ public class UserProfileController {
 	 *  Congratulate
 	 */
 	@RequestMapping("/getRegisterUserByOpenID1")
-	public @ResponseBody List<String> getRegisterUserByOpenID1(HttpServletRequest request,
+	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
 			HttpServletResponse response){
-		List<String> str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
 //		if(str!=null){
 //			return str;
 //			try {
@@ -131,7 +131,7 @@ public class UserProfileController {
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
 		String openid=request.getParameter("openID");
-		return MongoDBBasic.getRegisterUserByOpenID(openid).get(0).toString();
+		return MongoDBBasic.getRegisterUserByOpenID(openid).toString();
 	}
 	
 	@RequestMapping("/userCongratulate")
@@ -139,7 +139,7 @@ public class UserProfileController {
 			HttpServletResponse response ){
 		
 		//String openid=request.getParameter("openID");
-		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).get(0).toString();
+		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).toString();
 		CongratulateHistory conhis=new CongratulateHistory();
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
@@ -154,7 +154,7 @@ public class UserProfileController {
 	public @ResponseBody String getUserOpenid(HttpServletRequest request,
 			HttpServletResponse response ){
 		
-		return MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).get(0).toString();
+		return MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).toString();
 	} 
 	
 }
