@@ -120,8 +120,8 @@ public class UserProfileController {
 	@RequestMapping("/getRegisterUserByOpenID")
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
-		
-		return MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+		String openid=request.getParameter("openID");
+		return MongoDBBasic.getRegisterUserByOpenID(openid);
 	}
 	
 	@RequestMapping("/userCongratulate")
