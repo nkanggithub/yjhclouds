@@ -125,7 +125,7 @@ function postRecognition(){
 
 }
 
-function testPanel(){
+function taxPanel(){
 	var realName=$("#realName").val();
 	var selectContent=$("#hiddenSelect").html();
 	if(realName!="")
@@ -825,11 +825,12 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-weather.png" />
 														<h4>天气</h4>
 												</td>
-												<td><a class="" data-toggle="modal"
-													href="#tax_main_div"> <img
+												<td>
+												<!-- <a class="" data-toggle="modal" href="#tax_main_div"> </a> -->
+												<img   onclick="taxPanel()" 
 														src="../MetroStyleFiles/menu-tax.png" />
 														<h4>税费计算</h4>
-												</a></td>
+												</td>
 												<td><a class="" data-toggle="modal"
 													href="#stock_main_div"> <img
 														src="../MetroStyleFiles/menu-stock.png" />
@@ -851,7 +852,7 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td><img  onclick="testPanel()" src="../MetroStyleFiles/menu-develop.png" />
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
@@ -1207,7 +1208,7 @@ function getNowFormatDate() {
 					<!-- End Control Bar -->
 					<!-- Start Header Photo -->
 					<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
-							<legend>税费计算</legend>
+							<legend>世界时间</legend>
 							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
 							
 									</div>
