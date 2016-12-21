@@ -414,6 +414,7 @@ function getUserInfo(username, headimgurl, openId) {
 						$("#info_tag tr").html("");
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
+							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
 							if(jsons.results[0].tag!="未注册"){
 								for(var j=0;j<jsons.results[0].tag.length;j++){
 									var tag=jsons.results[0].tag[j];
