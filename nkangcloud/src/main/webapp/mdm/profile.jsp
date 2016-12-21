@@ -8,8 +8,10 @@
 <%	
 
 ClientMeta cm=MongoDBBasic.QueryClientMeta();
+
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
+String registerName=MongoDBBasic.getRegisterUserByOpenID(uid);
 String mySignature =  MongoDBBasic.getUserWithSignature(uid);
 String curLoc=null;
 String city=null;
@@ -98,26 +100,33 @@ function getTax(){
 
 function postRecognition(){
 	console.log("start....");
-	var data =$('#rf').serialize();
 	$.ajax({
         cache: false,
         type: "POST",
         url:"../userProfile/userCongratulate",
-        data:$('#recognizationForm').serialize(),// 你的formid
+        data:{
+        	from:$("#from").text(),
+        	points:$("#points").val(),
+        	to:$("#to option:selected").val(),
+        	type:$("#type option:selected").val(),
+        	comments:$("#comments").val()
+        	
+        },
         async: true,
+        success: function(data) {
+           $("#recognizeForm").html("<img style='width:100%;height:auto' src='../Jsp/PIC/success.png' />");
+        },
         error: function(request) {
             alert("Connection error");
-        },
-        success: function(data) {
-            console.log("success!!!!");
         }
+       
     });
 	return false;
 
 }
 function recognizationPanel(){
 	showCommonPanel();
-	$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >Panda</label></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option>Option one</option><option>Option two</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div><div id='footer'><span><nobr><%-- <%=cm.getClientCopyRight() %> --%></nobr></span></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn btn-success'>Submit</button></div></div></div>");
+	$("body").append("<div id='recognizeForm' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel'  for='from'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' ><%= registerName %></label><input type='hidden' name='from' value='<%= registerName %>'/></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option>潘路月</option><option>康宁</option><option>彭长征</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='<%= uid %>'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div><div id='footer'><span><nobr><%-- <%=cm.getClientCopyRight() %> --%></nobr></span></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn btn-success'>Submit</button></div></div></div>");
 	$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
