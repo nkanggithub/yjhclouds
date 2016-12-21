@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -122,4 +123,19 @@ public class UserProfileController {
 		
 		return MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
 	}
+	
+	@RequestMapping("/userCongratulate")
+	public @ResponseBody String updateUserCongratulateHistory(HttpServletRequest request,
+			HttpServletResponse response ){
+		String openid=request.getParameter("openID");
+		CongratulateHistory conhis=new CongratulateHistory();
+		conhis.setFrom(request.getParameter("from"));
+		conhis.setTo(request.getParameter("to"));
+		conhis.setType(request.getParameter("type"));
+		conhis.setPoint(request.getParameter("points"));
+		conhis.setComments(request.getParameter("comments"));
+		conhis.setCongratulateDate(new Date().toLocaleString());
+		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
+		return "ok";
+	} 
 }
