@@ -106,6 +106,16 @@ public class UserProfileController {
 	 * chang-zheng
 	 *  Congratulate
 	 */
+	@RequestMapping("/getRegisterUserByOpenID1")
+	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
+			HttpServletResponse response){
+		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+		if(str!=null){
+			return str;
+		}
+		return "oqPI_xACjXB7pVPGi5KH9Nzqonj4";
+	}
+	
 	@RequestMapping("/getRegisterUserByOpenID")
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
