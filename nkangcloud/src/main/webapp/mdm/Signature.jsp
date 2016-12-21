@@ -82,7 +82,7 @@
 	        type: 'GET', 
 	        timeout: 2000, 
 	        success: function(data){
-	        	if(data!=""&&data!="null"){
+	        	if(data!=""||data!="null"){
 	       		 	$('#old').html(data.substring(1,data.length-1));
 	        	}else{
 	        		$('#old').html("你还未保存个性签名！");
@@ -104,6 +104,7 @@ $(document).ready(function() {
 			if($.isArray(data) && data.length === 2){
 				var start=data[1].indexOf("<svg ");
 				var svg=data[1].substring(start,data[1].length);
+				if(svg!="")
 				jQuery.ajax({
 					type : "GET",
 					url : "../userProfile/setSignature",
