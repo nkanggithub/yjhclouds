@@ -329,7 +329,7 @@ function showRegister(){
 					if(result){
 						$('#registerform').modal('hide');
 						swal("Registered successfully!", "Congratulations!", "success"); 
-						$("realName").val(name);
+						$("#realName").val(name);
 					} else {
 						swal("Registered fail!", "Pls input your correct information.", "error");
 					}
