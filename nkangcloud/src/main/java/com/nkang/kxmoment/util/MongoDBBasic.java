@@ -1815,22 +1815,13 @@ public class MongoDBBasic {
 		/*
 		 * chang-zheng
 		 */
-		public static String getRegisterUserByOpenID(String openID){
+		public static List<String> getRegisterUserByOpenID(String openID){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
 			query.put("OpenID", openID);
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
-			if(dbuser!=null && dbuser.size()>0){
-				//return dbuser.get(0);
-				try {
-					return URLEncoder.encode(dbuser.get(0).toString(), "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			return "hello";
+				return dbuser;
 		}
 		
 		
