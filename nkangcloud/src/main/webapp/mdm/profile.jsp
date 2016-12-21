@@ -1065,6 +1065,10 @@ function getNowFormatDate() {
  Modal PAGE End-->
 
 
+				
+		
+		<!-- START MESSAGE STATION -->
+	<div id="mes-station">
 		
 <!--  Start Weather Page  -->			
 		<div class="mes-container item-profileview transparent-black"
