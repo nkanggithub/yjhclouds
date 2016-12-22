@@ -1,29 +1,29 @@
 package com.nkang.kxmoment.controller;
 
-import java.io.BufferedReader;  
-import java.io.BufferedWriter;  
-import java.io.File;  
-import java.io.FileReader;  
-import java.io.FileWriter;  
-import java.io.IOException;  
-import java.io.InputStreamReader;  
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URL;  
-import java.net.URLConnection;  
-import java.util.ArrayList;  
-import java.util.Arrays;  
-import java.util.List;  
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.nkang.kxmoment.util.Constants;
   
 public class GetAllStock {  
-    private static String db  = "sina_stock_codes.txt" ;  
+    private static URL db  = GetAllStock.class.getClassLoader().getResource("sina_stock_codes.txt");  
     private static final int COLUMNS = 47;
     public static List<String> codes = new ArrayList<String>() ; 
     private static String localInd = "Y";
       
     static{  
-        File in = new File(db) ;  
+        File in = new File(db.getFile()) ;  
         if(! in.exists()){  
             // 从网络获取  
             if(codes.size() < 1 )  
@@ -107,7 +107,7 @@ public class GetAllStock {
              String code = getBatchStackCodes(url) ;  
              codes.addAll(handleStockCode(code)) ;  
         }  
-        if(! ( new File(db) ).exists() )  
+        if(! ( new File(db.getFile()) ).exists() )  
             saveStockCodes(codes) ;  
         return codes ;  
     }  
@@ -115,7 +115,7 @@ public class GetAllStock {
     //把新浪38页的所有股票代码存入本地文件  
     private static void saveStockCodes(List<String> codes ) throws IOException{  
         //将所有股票代码存入文件中  
-        File out = new File(db) ;  
+        File out = new File(db.getFile()) ;  
         if(! out.exists())  
             out.createNewFile() ;  
         BufferedWriter bw = new BufferedWriter(new FileWriter(out)) ;  
@@ -131,7 +131,7 @@ public class GetAllStock {
       
     public static List<String> getAllStockCodesFromLocal() throws IOException{  
         List<String> codes = new ArrayList<String>() ;  
-        File in = new File(db) ;  
+        File in = new File(db.getFile()) ;  
         if(! in.exists())  
             throw new IOException("指定数据文件不存在!");  
         BufferedReader br = new BufferedReader(new FileReader(in)) ;  
@@ -218,7 +218,7 @@ public class GetAllStock {
     public static List<String> getStockCodes(){  
         return codes ;  
     }  
-   /* public static void main(String[] args) {  
+    /*public static void main(String[] args) {  
         try {  
             getAllStockInfo() ;  
         } catch (IOException e) {  
