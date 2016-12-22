@@ -1,5 +1,8 @@
 package com.nkang.kxmoment.service;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
+import org.json.JSONObject;
 
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
@@ -18,6 +22,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CronJob;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -30,6 +35,7 @@ public class CoreService
 	private static Timer timer= new Timer();
 	public static String processRequest(HttpServletRequest request)
 	{
+		
 		String respXml = null;
 		String respContent = "unknown request type.";
 		String AccessKey = MongoDBBasic.getValidAccessKey();
@@ -38,6 +44,7 @@ public class CoreService
 			String fromUserName 	= 	requestObject.element("FromUserName").getText();
 			String toUserName 		= 	requestObject.element("ToUserName").getText();
 			String msgType 			= 	requestObject.element("MsgType").getText();
+			
 			
 			TextMessage textMessage = new TextMessage();
 			textMessage.setToUserName(fromUserName);
@@ -112,7 +119,8 @@ public class CoreService
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-				respContent = "IMAGE" + "\n";
+				String mediaId = requestObject.element("MediaId").getText();
+				respContent = "IMAGE's id : "+mediaId + "\n";
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -380,4 +388,5 @@ public class CoreService
 		}
 		return respXml;
 	}
+	
 }
