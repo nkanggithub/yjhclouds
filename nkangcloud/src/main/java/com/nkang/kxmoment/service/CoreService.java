@@ -120,7 +120,8 @@ public class CoreService
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				String mediaId = requestObject.element("MediaId").getText();
-				respContent = "IMAGE's id : "+mediaId + "\n";
+				String picUrl = requestObject.element("PicUrl").getText();
+				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
