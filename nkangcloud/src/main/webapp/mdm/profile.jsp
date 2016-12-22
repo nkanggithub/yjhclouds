@@ -312,7 +312,25 @@ function recognizationPanel(){
 		{
 		showCommonPanel();
 		
-		$("body").append("<div id='recognizeForm' style='z-index:1000' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >"+realName+"</label></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'>"+selectContent+"</select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div></div></div>");
+		$("body").append("<div class='TAB2class bouncePart' id='recognizeForm'>"
+				+"	<ul class='nav nav-tabs' id='myTabs'>"
+				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>Send Recognition</a></li>"
+				+"	<li id='bbElements'><a href='#bElements' data-toggle='tab'>Recieved Recognition</a></li></ul>"
+				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
+				+"	<div class='tab-pane active' id='aElements'>"
+				+"	<div id='sendR'>"
+				+"	<div class='rcommon'><p class='bsLabel'>From</p><p class='bsBtn' id='from'>"+realName+"</p></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>To</p><select class='bsBtn' id='to'>"+selectContent+"</select></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Points</p><input id='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Comments</p><textarea id='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div>"
+				+"	<div class='rcommon' style='text-align:center;'><button onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div>"
+				+"	</div>"
+				+"	</div>"
+				+"  <div class='tab-pane' id='bElements'>"
+				+"		</div>"
+				+"	</div>"
+				+"</div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
@@ -325,7 +343,25 @@ function recognizationPanelByPerson(personName){
 	if(realName!=""){
 		showCommonPanel();
 		
-		$("body").append("<div id='recognizeForm' style='z-index:1000' class='bouncePart'><form id='rf'><fieldset><legend>Recognize Someone</legend><div class='control-group'><label class='control-label bsLabel' for='textinput-0'>From</label><div class='controls'><label id='from' class='input-xlarge bsLabel' >"+realName+"</label></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-1'>To</label><div class='controls'><select id='to' name='to' class='input-xlarge bsBtn'><option selected>"+personName+"</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='selectbasic-2'>Type</label><div class='controls'><select id='type' name='type' class='input-xlarge bsBtn'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div></div><div class='control-group'><label class='control-label bsLabel' for='textinput-5'>Points</label><div class='controls'><input id='points' name='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div></div><input type='hidden' name='openID' value='123456'/><div class='control-group'><label class='control-label bsLabel' for='textinput-2'>Comment</label><div class='controls'><textarea id='comments' name='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div></div></fieldset></form><div  style='position: absolute;z-index: 150;width: 100%;bottom: -20px;'><div class='controls' style='text-align:center'><button id='doublebutton-0' onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div></div></div>");
+		$("body").append("	<div class='TAB2class bouncePart' id='recognizeForm'>"
+				+"	<ul class='nav nav-tabs' id='myTabs'>"
+				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>Send Recognition</a></li>"
+				+"	<li id='bbElements'><a href='#bElements' data-toggle='tab'>Recieved Recognition</a></li></ul>"
+				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
+				+"	<div class='tab-pane active' id='aElements'>"
+				+"	<div id='sendR'>"
+				+"	<div class='rcommon'><p class='bsLabel'>From</p><p class='bsBtn' id='from'>"+realName+"</p></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>To</p><select class='bsBtn' id='to'>"+selectContent+"</select></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Points</p><input id='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>Comments</p><textarea id='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div>"
+				+"	<div class='rcommon' style='text-align:center;'><button onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div>"
+				+"	</div>"
+				+"	</div>"
+				+"  <div class='tab-pane' id='bElements'>"
+				+"		</div>"
+				+"	</div>"
+				+"</div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });}else
