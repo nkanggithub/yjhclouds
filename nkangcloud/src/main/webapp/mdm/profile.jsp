@@ -80,6 +80,22 @@ $(window).load(function() {
 		getRealName();
 		getAllRegisterUsers();
 });
+function startDictation() {
+    if (window.hasOwnProperty('webkitSpeechRecognition')) 
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "cmn-Hans-CN";
+      recognition.start();
+      recognition.onresult = function(e) {
+        document.getElementById('transcript').value = e.results[0][0].transcript;
+        recognition.stop();
+        document.getElementById('labnol').submit();
+      };
+      recognition.onerror = function(e) {
+        recognition.stop();
+      }
+}
 function getOld(){
 	var url="../CallGetUserWithSignature?openid="+$('#uid').val();
 	  	$.ajax({  
@@ -184,7 +200,18 @@ function postRecognition(){
     });
 
 }
-
+function SpeechPanel(){
+	showCommonPanel();
+	$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>智能语音</legend><form id="labnol" method="get" action="https://www.bing.com/search">'
+			+'         <div class="speech">'
+			+'           <input type="text" name="q" id="transcript" placeholder="Speak" />'
+			+'           <img onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif" />'
+			+'         </div>'
+			+'       </form></div>');
+	$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+}
 function taxPanel(){
 		showCommonPanel();
 		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
@@ -973,7 +1000,7 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-signature.png" />
 														<h4>电子签名</h4>
 												</td>
-												<td><img src="../MetroStyleFiles/menu-develop.png" />
+												<td><img onclick="SpeechPanel()" src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
