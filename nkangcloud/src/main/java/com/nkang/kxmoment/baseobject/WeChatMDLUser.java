@@ -7,6 +7,7 @@ public class WeChatMDLUser extends WeChatUser {
 	public String realName;
 	public String registerDate;
 	public int workDay;
+	public int CongratulateNum;
 	public String role;
 	public String selfIntro;
 	public String email;
@@ -14,6 +15,12 @@ public class WeChatMDLUser extends WeChatUser {
 	public String point;
 	public String like;
 	public ArrayList tag;
+	public int getCongratulateNum() {
+		return CongratulateNum;
+	}
+	public void setCongratulateNum(int congratulateNum) {
+		CongratulateNum = congratulateNum;
+	}
 	public ArrayList getTag() {
 		return tag;
 	}
