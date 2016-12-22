@@ -60,6 +60,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../nkang/autocomplete/jquery-ui.css">
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
@@ -70,11 +71,13 @@ if (session.getAttribute("location") == null) {
 <script type="text/javascript" src="../MetroStyleFiles//JS/openmes.min.js"></script>
 <script src="../Jsp/JS/modernizr.js"></script>
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
+<script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script>
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
 		getWeather();
-		getStockData();
+		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
+		getStockData(stockUrl);
 		getMDLUserLists();
 		getCompanyInfo();
 		getRealName();
@@ -771,56 +774,129 @@ function getWeather() {
 			});
 }
 
-	function getStockData(){
-		var url = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
-		getNewData(url);
-		var refreshData = self.setInterval("getNewData('"+url+"')",2000);
-	}
+function getStockData(url){
+	getNewData(url);
+	var refreshDataDefault = self.setInterval("getNewData('"+url+"')",2000);
+	$("#timer").val(refreshDataDefault);
+	
+}
 
-   function getNewData(url){
-   	var parameters = url.split('=')[1].split(',');
-   	var length = url.split('=')[1].split(',').length;
-   	var list = new Array();
-   	for(var i=0; i<length; i++){
-   		list.push("hq_str_"+parameters[i]);
-   	}
-   	$.ajax({  
-           cache : true,  
-           url:url,
-           type: 'GET', 
-           dataType: 'script', 
-           timeout: 2000, 
-           success: function(data, textStatus, jqXHR){
-           	if(textStatus=='success'){
-           		var tbody;
-                var tr = "<tr>";
-   				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
-           		for(var i=0;i<list.length;i++){
-           			var stockData = eval(list[i]).split(',');
-           			tr+="<tr class='stockline'>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td class='stockcolor'>"+stockData[1]+"</td>"+"<td id='increase' class='stockcolor'>"+parseFloat(stockData[2])+"%"+"</td>"+"<td class='stockcolor'>"+stockData[4]+"</td></tr>";
-           		}
-           	} 
-			tbody += tr;
-			$('#stock').html(tbody); 
-			$(".stockline").each(function(){
-				if(parseFloat($(this).find('td').eq(2).text())>0){
-		             $(this).find('td').eq(1).css("color","red");
-		             $(this).find('td').eq(2).css("color","red");
-		             $(this).find('td').eq(3).css("color","red");
-				} else if(parseFloat($(this).find('td').eq(2).text())<0){
-					$(this).find('td').eq(1).css("color","green");
-		            $(this).find('td').eq(2).css("color","green");
-		            $(this).find('td').eq(3).css("color","green");
-				}
-			})
-			
-           }
-       });
-   }
-   
-   function addStock(){
-	   $('#addStock').modal('show');
+function getNewData(url){
+	var parameters = url.split('=')[1].split(',');
+	var length = url.split('=')[1].split(',').length;
+	var list = new Array();
+	for(var i=0; i<length; i++){
+		list.push("hq_str_"+parameters[i]);
 	}
+	$.ajax({  
+       cache : true,  
+       url:url,
+       type: 'GET', 
+       dataType: 'script', 
+       timeout: 2000, 
+       success: function(data, textStatus, jqXHR){
+       	if(textStatus=='success'){
+       		var tbody="";
+            var tr = "<tr>";
+				tr+="<td>证券名称</td><td>现价</td><td>涨幅</td><td>涨跌</td></tr>";
+       		for(var i=0;i<list.length;i++){
+       			var stockData = eval(list[i]).split(',');
+       			var stockType = list[i].substring(7,stockData.length);
+       			if(stockType.indexOf("gb")==0){
+       				tr+="<tr class='stockline'>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td class='stockcolor'>"+stockData[1]+"</td>"+"<td id='increase' class='stockcolor'>"+parseFloat(stockData[2])+"%"+"</td>"+"<td class='stockcolor'>"+stockData[4]+"</td></tr>";
+       			} else {
+       				tr+="<tr class='stockline'>"+"<td>"+stockData[0].substring(0,26)+"</td>"+"<td class='stockcolor'>"+stockData[1]+"</td>"+"<td id='increase' class='stockcolor'>"+parseFloat(stockData[2])+"%"+"</td>"+"<td class='stockcolor'>"+stockData[3]+"</td></tr>";
+       			}
+       		}
+       	} 
+		tbody += tr;
+		$('#stock').html(tbody); 
+		$(".stockline").each(function(){
+			if(parseFloat($(this).find('td').eq(2).text())>0){
+	             $(this).find('td').eq(1).css("color","red");
+	             $(this).find('td').eq(2).css("color","red");
+	             $(this).find('td').eq(3).css("color","red");
+			} else if(parseFloat($(this).find('td').eq(2).text())<0){
+				$(this).find('td').eq(1).css("color","green");
+	            $(this).find('td').eq(2).css("color","green");
+	            $(this).find('td').eq(3).css("color","green");
+			}
+		})
+		
+       }
+   });
+}
+
+	var allAddStockCodes = new Array();
+function addStock() {
+	$('#addStock').modal('show');
+	$('#stockListHeader').css("display", "none");
+	$('#stockListBody').css("display", "none");
+	$('#addStock').css("display","block");
+	$('#stockcodeKey').val("");
+	$.ajax({
+		url : "../getCodes",
+		dataType : "json",
+		success : function(data) {
+			var jsonData = new Array();
+			jsonData = data;
+			if(jsonData!=null || jsonData.length>0){
+				for(var x=0;x<jsonData.length;x++){
+					jsonData[x] = jsonData[x].substring(2,jsonData.length);
+				}
+			}
+			$("#stockcodeKey").autocomplete({
+				source:jsonData,
+				autoFocus: true,
+				delay: 500,
+				max:10,
+				minLength:3,
+				response: function( event, ui ) {
+			    },
+				select: function( event, ui ) {
+					var stockCode = ui.item.label;
+					
+					$("#addStockBtn").click(function(){
+						self.clearInterval($("#timer").val());
+						$('#stockListHeader').css("display","block");
+						$('#stockListBody').css("display","block");
+						$('#addStock').css("display","none");
+						var url = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
+						
+						console.log(stockCode);
+						
+					    if(stockCode!=null || stockCode!="undefined"){
+					    	if(allAddStockCodes.length==0){
+					    		if(stockCode.indexOf("6")==0){
+									   allAddStockCodes.push("s_sh"+stockCode);
+								   }else if(stockCode.indexOf("0")==0 || stockCode.indexOf("3")==0){
+									   allAddStockCodes.push("s_sz"+stockCode);
+								   }
+					    	} else{
+					    		if($.inArray(stockCode, allAddStockCodes)==-1){
+					    			if(stockCode.indexOf("6")==0){
+										   allAddStockCodes.push("s_sh"+stockCode);
+									  }else if(stockCode.indexOf("0")==0 || stockCode.indexOf("3")==0){
+										   allAddStockCodes.push("s_sz"+stockCode);
+									  }
+					    		}
+					    	}
+					   }
+					    console.log(allAddStockCodes);
+					   var temp = "";
+					   for(var i=0;i<allAddStockCodes.length;i++){
+						   temp +=",";
+						   temp +=allAddStockCodes[i];
+					   }
+					   url += temp;
+					   getStockData(url);
+					   stockCode="";
+					});
+			    }
+			});
+		}
+	});
+}
    
 function getNowFormatDate() {
 	var date = new Date();
@@ -851,6 +927,7 @@ function getNowFormatDate() {
 </head>
 <body style="margin: 0px; padding: 0px !important;">
 	<input id="uid" type="hidden" value="<%=uid%>" />
+	<input id="timer" type="hidden" value="" />
 	<input id="realName" type="hidden" value="" />
 	<select id="hiddenSelect" style="display:none">
 	</select>
@@ -1070,23 +1147,38 @@ function getNowFormatDate() {
 								<div id="stock_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="stock_main_div"
 									aria-hidden="true" data-backdrop="static">
-									<div class="modal-header" style="text-align: center;">
+									<div id="stockListHeader" class="modal-header" style="text-align: center;">
 										<img src="../MetroStyleFiles/Add1.png" 
 											style="float: left; height: 25px; cursor: pointer; margin-top: 0px;" onclick="addStock()"/>
 										<h3>
 											<b>股票行情</b>
 										</h3>
-										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
+										<img id="stockClose" src="../MetroStyleFiles/Close.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 25px; cursor: pointer; margin-top: -40px;" />
 											
 									</div>
-									<div class="modal-body readmoreHpop"
+									<div id="stockListBody" class="modal-body readmoreHpop"
 										style="white-space: pre-line; padding: 0px 10px;">
 										<table width="100%" id="stock" style="margin-bottom: -20px;">
 											
 										</table>
 									</div>
+									<div id="addStock" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px; ">
+												    <table id="stockTableForm">
+												    <tr>
+												        <td>
+												        	<span>请输入股票代码：</span><input type="text" placeholder="股票代码" id="stockcodeKey"  required style="width:100px;"/><input id="addStockBtn" type="button" value="添加" />
+												        </td>
+												      </tr>
+												 </table>
+									</div>
+									
+								</div>
 								</div>
 								<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
