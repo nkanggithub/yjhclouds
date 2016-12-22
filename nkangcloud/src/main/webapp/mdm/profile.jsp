@@ -252,7 +252,7 @@ function taxPanel(){
 }
 function signaturePanel(){
 	showCommonPanel();
-	$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>电子签名</legend><div id="old" style="vertical-align:middle;margin-bottom:-90px;padding-top:5px;height:170px;border:2px #56B39D solid;width:100%;margin-left:auto;margin-right:auto;text-align:center;"></div>'
+	$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>电子签名</legend><div id="old" style="vertical-align:middle;margin-bottom:-90px;padding-top:5px;height:170px;border:2px #56B39D solid;width:100%;margin-left:auto;margin-right:auto;text-align:center;margin-top:-10px;"></div>'
 			+'<div id="content">		'
 			+'	<div id="signatureparent">'
 			+'		<div id="signature"></div></div>'
