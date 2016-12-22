@@ -500,12 +500,9 @@ function getMDLUserLists() {
 							workDay="";
 						}else{
 							workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
-						}
-						if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined){
-							
-						}else{
 							congratulate='<img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
 								+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span>';
+						
 						}
 						var li='	<div class="Work_Mates_div_list_div2">'
 							+'                                           	 	<div class="Work_Mates_img_div2">'
