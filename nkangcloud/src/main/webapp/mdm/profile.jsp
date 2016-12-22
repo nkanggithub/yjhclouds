@@ -68,6 +68,8 @@ if (session.getAttribute("location") == null) {
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script type="text/javascript" src="../MetroStyleFiles//JS/openmes.min.js"></script>
+<script src="../Jsp/JS/modernizr.js"></script>
+<script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script>
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
@@ -78,6 +80,26 @@ $(window).load(function() {
 		getRealName();
 		getAllRegisterUsers();
 });
+function getOld(){
+	var url="../CallGetUserWithSignature?openid="+$('#uid').val();
+	  	$.ajax({  
+	        cache : true,  
+	        url:url,
+	        type: 'GET', 
+	        timeout: 2000, 
+	        success: function(data,textStatus){
+	        	if(textStatus=='success'){
+		        	if(data!=null&&data!=""&&data!="null"){
+		       		 	$('#old').html(data.substring(1,data.length-1));
+		        	}else{
+		        		$('#old').html("你还未保存个性签名！");
+		        	}
+	        	}else{
+	        		$('#old').html("服务器繁忙！");
+	        	}
+	        }
+	  	});
+	}
 function getTax(){
 	jQuery.ajax({
 		type : "GET",
@@ -164,11 +186,7 @@ function postRecognition(){
 }
 
 function taxPanel(){
-	var realName=$("#realName").val();
-	if(realName!="")
-		{
 		showCommonPanel();
-		
 		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
 				+'											<tr>'
 				+'												<td>起征点：</td>'
@@ -201,9 +219,61 @@ function taxPanel(){
 		$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
-		}else
-			{swal("Sorry", "you have no access to this page,please register", "error");}
+}
+function signaturePanel(){
+	showCommonPanel();
+	$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>电子签名</legend><div id="old" style="vertical-align:middle;margin-bottom:-90px;padding-top:5px;height:170px;border:2px #56B39D solid;width:100%;margin-left:auto;margin-right:auto;text-align:center;"></div>'
+			+'<div id="content">		'
+			+'	<div id="signatureparent">'
+			+'		<div id="signature"></div></div>'
+			+'	<div id="tools"></div>'
+			+'	'
+			+'</div></div>');
+	$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+	getOld();
+	// This is the part where jSignature is initialized.
+	var $sigdiv = $("#signature").jSignature({'UndoButton':true})
+	// All the code below is just code driving the demo. 
+	var $tools = $('#tools')
 
+	$('<input type="button" name="svg" value="保存签名"  style="float:right;color:#fff !important;background-color:#56B39D;border:none;padding:10px;font-size:18px;margin-top:0px;">').bind('click', function(e){
+		if (e.target.value !== ''){
+			//var data = $sigdiv.jSignature('getData', e.target.value)
+			var data = $sigdiv.jSignature('getData', 'svg')
+			if($.isArray(data) && data.length === 2){
+				var start=data[1].indexOf("<svg ");
+				var svg=data[1].substring(start,data[1].length);
+				if(svg!='<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0"></svg>')
+				jQuery.ajax({
+					type : "GET",
+					url : "../userProfile/setSignature",
+					data : {
+						svg : svg
+					},
+					cache : false,
+					success : function(data) {
+						if(data.indexOf("true")==0){
+							swal("签名保存成功!", "", "success"); 
+							getOld();
+							/*var canvas = document.getElementsByClassName('jSignature')[0];
+						  	var context = canvas.getContext('2d');
+						  	context.clearRect(0, 0, canvas.width, canvas.height); */
+						  	var $sigdiv = $("#signature")
+						  	$sigdiv.jSignature("reset"); //重置画布，可以进行重新作画.
+						}else{
+							swal("签名保存失败!", "", "error"); 
+						}
+					}
+				});
+			}
+		}
+	}).appendTo($tools)
+	
+	if (Modernizr.touch){
+		$('#scrollgrabber').height($('#content').height())		
+	}
 }
 function recognizationPanel(){
 	var realName=$("#realName").val();
@@ -897,8 +967,10 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
-												<td><a href="Signature.jsp"><img
-														src="../MetroStyleFiles/menu-signature.png" /></a>
+												<td>
+												<!-- <a href="Signature.jsp"></a> -->
+												<img   onclick="signaturePanel()" 
+														src="../MetroStyleFiles/menu-signature.png" />
 														<h4>电子签名</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
