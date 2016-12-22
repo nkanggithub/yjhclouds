@@ -1,8 +1,6 @@
 package com.nkang.kxmoment.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -114,32 +113,23 @@ public class UserProfileController {
 	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
 			HttpServletResponse response){
 		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
-//		if(str!=null){
-//			return str;
-//			try {
-//				return URLDecoder.decode(str,"UTF-8");
-//			} catch (UnsupportedEncodingException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-	//	}
-		return str;
-		
+		if(str!=null&&str!=""){
+			return str;
+		}
+		return "oqPI_xACjXB7pVPGi5KH9Nzqonj4";
 	}
 	
 	@RequestMapping("/getRegisterUserByOpenID")
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
 		String openid=request.getParameter("openID");
-		return MongoDBBasic.getRegisterUserByOpenID(openid).toString();
+		return MongoDBBasic.getRegisterUserByOpenID(openid);
 	}
 	
 	@RequestMapping("/userCongratulate")
 	public @ResponseBody String updateUserCongratulateHistory(HttpServletRequest request,
 			HttpServletResponse response ){
-		
-		//String openid=request.getParameter("openID");
-		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).toString();
+		String openid=request.getParameter("openID");
 		CongratulateHistory conhis=new CongratulateHistory();
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
@@ -150,11 +140,28 @@ public class UserProfileController {
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
 		return "ok";
 	} 
-	@RequestMapping("/getUserOpenid")
-	public @ResponseBody String getUserOpenid(HttpServletRequest request,
+	@RequestMapping("/getCompanyInfo")
+	public @ResponseBody List<String> getCompanyInfo(HttpServletRequest request,
 			HttpServletResponse response ){
+		ClientMeta cm=MongoDBBasic.QueryClientMeta();
+		List<String> companyInfo=new ArrayList<String>();
+		companyInfo.add(cm.getClientLogo());
+		companyInfo.add(cm.getClientCopyRight());
+		return companyInfo;
 		
-		return MongoDBBasic.getRegisterUserByrealName(request.getParameter("to")).toString();
 	} 
-	
+	@RequestMapping("/getRealName")
+	public @ResponseBody String getRealName(HttpServletRequest request,
+			HttpServletResponse response ){
+		String realName = MongoDBBasic.getRegisterUserByOpenID(request.getParameter("openID"));
+		return realName;
+		
+	} 
+	@RequestMapping("/getAllRegisterUsers")
+	public @ResponseBody List<String> getAllRegisterUsers(HttpServletRequest request,
+			HttpServletResponse response ){
+		List<String> str = MongoDBBasic.getAllRegisterUsers();
+		return str;
+		
+	} 
 }
