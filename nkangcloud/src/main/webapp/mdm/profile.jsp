@@ -176,7 +176,6 @@ function getRealName(){
 		$("#realName").val(data[0]);}
 		}else{
 			$("#realName").val("");}
-		}
 	});
 }
 function postRecognition(){
