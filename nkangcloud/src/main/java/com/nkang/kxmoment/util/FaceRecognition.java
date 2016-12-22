@@ -38,7 +38,7 @@ public class FaceRecognition {
 
 
          // Request body
-         StringEntity reqEntity = new StringEntity("{body}");
+         StringEntity reqEntity = new StringEntity("{\"url\":\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkLeM&oid=00D90000000pkXM&lastMod=1482386152000\"}");
          request.setEntity(reqEntity);
 
          HttpResponse response = httpclient.execute(request);
