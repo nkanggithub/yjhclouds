@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%	
+String uid = request.getParameter("UID");
+%>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
@@ -17,7 +20,7 @@
 <p style="width:100%;line-height:22px;font-size:16px;">Your award</p>
 <p style="line-height:22px;"><span id="points">300</span> Points have been added to your <a href="https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp">MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>
 <p style="width:100%;line-height:22px;font-size:16px;">Here’s what was said about you</p>
-<p style="line-height:22px;">Thanks <span id="to">Ning</span> for moving NoSQL and Solr match POC smoothly as part of our FY16 team goal. The progress you can your team made is promissing. </p>
+<p style="line-height:22px;">Thanks <span id="to">Ning</span> for <span id="comments">moving NoSQL and Solr match POC smoothly as part of our FY16 team goal. The progress you can your team made is promissing. </span></p>
 </div>
 </body>
 
