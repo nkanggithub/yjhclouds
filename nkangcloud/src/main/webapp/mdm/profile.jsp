@@ -504,8 +504,8 @@ function getMDLUserLists() {
 						if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
 							
 						}else{
-							congratulate='<img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
-								+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span>';
+							congratulate='<div style="float:right;"><img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
+								+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
 						}
 						var li='	<div class="Work_Mates_div_list_div2">'
 							+'                                           	 	<div class="Work_Mates_img_div2">'
