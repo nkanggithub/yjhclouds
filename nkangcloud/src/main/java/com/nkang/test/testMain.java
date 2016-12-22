@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +19,14 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Timer;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
@@ -30,14 +39,22 @@ import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.OrganizationSearch4Solr;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CsvFileWriter;
+import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.GoogleLocationUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.StopWatch;
 import com.nkang.kxmoment.util.StringUtils;
 import com.nkang.kxmoment.util.SolrUtils.SolrClientUtils;
+
 import java.util.Locale;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+import javax.security.cert.Certificate;
 
 
 public class testMain{
@@ -56,10 +73,10 @@ public class testMain{
 /*		String queryStr = "";
 		GoogleLocationUtils gApi = new GoogleLocationUtils();
 		GeoLocation geo =  new GeoLocation();
-		geo = gApi.geocodeByAddressNoSSL(queryStr);
+		geo = gApi.geocodeByAddressNoSSL("Sabah");
 		System.out.print(geo.getLAT() + "---------"+geo.getLNG());*/
 		
-/*	    StopWatch sw = new StopWatch();
+  /*  StopWatch sw = new StopWatch();
 		sw.start();
 		System.out.println("starting data load--please wait");
 		List<OrgOtherPartySiteInstance> opsiList = new ArrayList<OrgOtherPartySiteInstance>();
@@ -79,11 +96,14 @@ public class testMain{
 		System.out.println("Done");*/
 		
 		
-		double taxIncome = 10000;//勿对号入座
-		double taxstart = 3500;
-		System.out.println("含税级距计算\t" + getlevelcalc(taxIncome - taxstart));
-		System.out.println("不含税级距计算\t" + getnolevelcalc(taxIncome - taxstart));
-	}
+		FaceRecognition fr = new FaceRecognition();
+		fr.goface();
+  
+	
+}
+        
+
+	
 	
 
 	
