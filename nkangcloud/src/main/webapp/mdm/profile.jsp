@@ -7,10 +7,9 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
 
-ClientMeta cm=MongoDBBasic.QueryClientMeta();
+
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
-String realName = MongoDBBasic.getRegisterUserByOpenID(uid);
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
@@ -75,6 +74,9 @@ $(window).load(function() {
 		getWeather();
 		getStockData();
 		getMDLUserLists();
+		getCompanyInfo();
+		getRealName();
+		getAllRegisterUsers();
 });
 function getTax(){
 	jQuery.ajax({
@@ -94,7 +96,45 @@ function getTax(){
 		}
 	});
 }
-
+function getCompanyInfo(){
+	$.ajax({
+		type : "post",
+		url : "../userProfile/getCompanyInfo",
+		cache : false,
+		success : function(data) {
+		
+		}
+	});
+}
+function getAllRegisterUsers(){
+	$.ajax({
+		type : "post",
+		url : "../userProfile/getAllRegisterUsers",
+		cache : false,
+		success : function(data) {
+			var text="";
+		for(var i=0;i<data.length;i++)
+			{
+			text=text+"<option>"+data[i]+"</option>";
+			}
+		$("#hiddenSelect").html(text);
+		}
+	});
+}
+function getRealName(){
+	var uid=$("#uid").val();
+	$.ajax({
+		type : "post",
+		url : "../userProfile/getRealName",
+		data:{
+			openID:uid
+		},
+		cache : false,
+		success : function(data) {
+		$("#realName").val(data.toString());
+		}
+	});
+}
 function postRecognition(){
 	console.log("start....");
 	var to = $("#to option:selected").val();
@@ -125,7 +165,6 @@ function postRecognition(){
 
 function taxPanel(){
 	var realName=$("#realName").val();
-	var selectContent=$("#hiddenSelect").html();
 	if(realName!="")
 		{
 		showCommonPanel();
@@ -715,16 +754,8 @@ function getNowFormatDate() {
 </head>
 <body style="margin: 0px; padding: 0px !important;">
 	<input id="uid" type="hidden" value="<%=uid%>" />
-	<input id="realName" type="hidden" value="<%=realName%>" />
+	<input id="realName" type="hidden" value="" />
 	<select id="hiddenSelect" style="display:none">
-	<%
-	List<String> str = MongoDBBasic.getAllRegisterUsers();
-     %>
-     <%
-     for(int i = 0; i < str.size(); i++){
-     %>
-     <option><%=str.get(i) %></option>
-<%} %>
 	</select>
 	<div class="navbar" style="width: 100%;">
 		<div class="navbar-inner">
