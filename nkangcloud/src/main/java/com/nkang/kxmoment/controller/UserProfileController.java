@@ -112,9 +112,9 @@ public class UserProfileController {
 	@RequestMapping("/getRegisterUserByOpenID1")
 	public @ResponseBody String getRegisterUserByOpenID1(HttpServletRequest request,
 			HttpServletResponse response){
-		String str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4").get(0);
-		if(str!=null&&str!=""){
-			return str;
+		List<String> str = MongoDBBasic.getRegisterUserByOpenID("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+		if(str!=null){
+			return str.get(0);
 		}
 		return "oqPI_xACjXB7pVPGi5KH9Nzqonj4";
 	}
@@ -123,7 +123,11 @@ public class UserProfileController {
 	public @ResponseBody String getRegisterUserByOpenID(HttpServletRequest request,
 			HttpServletResponse response){
 		String openid=request.getParameter("openID");
-		return MongoDBBasic.getRegisterUserByOpenID(openid).get(0);
+		List<String> dbUser = MongoDBBasic.getRegisterUserByOpenID(openid);
+		if(dbUser!=null){
+			return dbUser.get(0).toString();
+		}
+		return "nullname";
 	}
 	
 	@RequestMapping("/userCongratulate")
@@ -153,9 +157,11 @@ public class UserProfileController {
 	@RequestMapping("/getRealName")
 	public @ResponseBody String getRealName(HttpServletRequest request,
 			HttpServletResponse response ){
-		String realName = MongoDBBasic.getRegisterUserByOpenID(request.getParameter("openID")).get(0);
-		return realName;
-		
+		List<String> dbUser =  MongoDBBasic.getRegisterUserByOpenID(request.getParameter("openID"));
+		if(dbUser!=null){
+			return dbUser.get(0).toString();
+		}
+		return "nullname";
 	} 
 	@RequestMapping("/getAllRegisterUsers")
 	public @ResponseBody List<String> getAllRegisterUsers(HttpServletRequest request,
