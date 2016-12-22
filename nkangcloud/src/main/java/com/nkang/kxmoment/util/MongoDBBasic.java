@@ -1221,6 +1221,13 @@ public class MongoDBBasic {
                 		if(o.get("NickName") != null){
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
+                		Object CongratulateHistory = o.get("CongratulateHistory");
+                		BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
+                		if(CongratulateHistoryObj != null){
+                			ArrayList conList=new ArrayList();
+                    		Object[] ConObjects = CongratulateHistoryObj.toArray();
+                    		weChatMDLUser.setCongratulateNum(ConObjects.length);
+                		}
                 		Object teamer = o.get("Teamer");
             			DBObject teamobj = new BasicDBObject();
             			teamobj = (DBObject)teamer;
