@@ -16,6 +16,11 @@ public class FaceRecognition {
 
  public void goface() 
  {
+	 
+	 /*
+	  * https://dev.projectoxford.ai/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+	  * https://dev.projectoxford.ai/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236/console
+	  */
      HttpClient httpclient = HttpClients.createDefault();
 
      try
