@@ -156,13 +156,10 @@ public class UserProfileController {
 		
 	} 
 	@RequestMapping("/getRealName")
-	public @ResponseBody String getRealName(HttpServletRequest request,
+	public @ResponseBody List<String> getRealName(HttpServletRequest request,
 			HttpServletResponse response ){
 		List<String> dbUser =  MongoDBBasic.getRegisterUserByOpenID(request.getParameter("openID"));
-		if(dbUser!=null){
-			return dbUser.get(0).toString();
-		}
-		return "nullname";
+			return dbUser;
 	} 
 	@RequestMapping("/getAllRegisterUsers")
 	public @ResponseBody List<String> getAllRegisterUsers(HttpServletRequest request,
