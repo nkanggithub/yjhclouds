@@ -1822,13 +1822,13 @@ public class MongoDBBasic {
 		/*
 		 * chang-zheng
 		 */
-		public static String getRegisterUserByOpenID(String openID){
+		public static List<String> getRegisterUserByOpenID(String openID){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
 			query.put("OpenID", openID);
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
-				return dbuser.get(0);
+				return dbuser;
 		}
 		
 		public static String getRegisterUserByrealName(String realName){
@@ -1837,7 +1837,10 @@ public class MongoDBBasic {
 			query.put("Teamer.realName", realName);
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID",query);
-			return dbuser.get(0);
+			if(dbuser!=null){
+				return dbuser.get(0);
+			}
+			return "null";
 		}
 		
 		/*
