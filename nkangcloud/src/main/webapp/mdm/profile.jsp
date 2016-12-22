@@ -207,8 +207,8 @@ function SpeechPanel(){
 	showCommonPanel();
 	$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>智能语音</legend><form id="labnol" method="get" action="https://www.bing.com/search">'
 			+'         <div class="speech">'
-			+'           <input type="text" name="q" id="transcript" placeholder="Speak" />'
-			+'           <img onclick="startDictation()" src="../MetroStyleFiles/cHidSVu.gif" />'
+			+'           <input type="text" name="q" id="transcript" placeholder="Speak"  style="width:100%" />'
+			+'          <div> <img onclick="startDictation()" src="../MetroStyleFiles/cHidSVu.gif" style="width:100%" /></div>'
 			+'         </div>'
 			+'       </form></div>');
 	$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
