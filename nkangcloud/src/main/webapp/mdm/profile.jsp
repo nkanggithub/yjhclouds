@@ -172,7 +172,10 @@ function getRealName(){
 		},
 		cache : false,
 		success : function(data) {
-		$("#realName").val(data.toString());
+			if(data){
+		$("#realName").val(data[0]);}
+		}else{
+			$("#realName").val("");}
 		}
 	});
 }
