@@ -327,7 +327,7 @@ function recognizationPanel(){
 				+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>Points</p><input id='points' type='text' placeholder='please provide number' class='input-xlarge bsBtn'></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>Comments</p><textarea id='comments' style='height:90px' placeholder='please enter your comment' class='input-xlarge bsBtn'></textarea></div>"
-				+"	<div class='rcommon' style='text-align:center;'><button onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div>"
+				+"	<div class='rcommon' style='text-align:center;margin-top:60px'><button onclick='postRecognition()' name='doublebutton-0' class='btn'>Submit</button></div>"
 				+"	</div>"
 				+"	</div>"
 				+"  <div class='tab-pane' id='bElements'>"
