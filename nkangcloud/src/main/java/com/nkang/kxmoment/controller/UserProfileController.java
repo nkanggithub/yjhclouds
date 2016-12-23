@@ -93,6 +93,21 @@ public class UserProfileController {
 				.getAttribute("UID");
 		return RestUtils.getCallUpdateUserWithSignature(openid,svg);
 	}
+	@RequestMapping("/updateUserWithLike")
+	public static boolean updateUserWithLike(
+			@RequestParam(value="openid", required=false) String openid,
+			@RequestParam(value="likeToName", required=false) String likeToName,
+			@RequestParam(value="ToOpenId", required=false) String ToOpenId
+			){
+		boolean ret = false;
+		try{
+			ret = MongoDBBasic.updateUserWithLike(openid, likeToName, ToOpenId);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
 
 	/*
 	 * chang-zheng
