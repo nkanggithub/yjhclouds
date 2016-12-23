@@ -1304,6 +1304,14 @@ public class MongoDBBasic {
                 					weChatMDLUser.setGroupid(teamobj.get("groupid").toString());
                 				}
                     		}
+                			DBObject like = (DBObject)o.get("Like");
+                			if(like != null){
+                				HashMap<String, String> likeMap=new HashMap<String, String>();
+                				likeMap.put("number", like.get("number").toString());
+                				likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
+                				likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
+                        		weChatMDLUser.setLike(likeMap);
+                			}
                 		}
             		}
             		if(weChatMDLUser != null){
