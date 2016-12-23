@@ -14,19 +14,17 @@ import org.apache.http.util.EntityUtils;
 
 public class FaceRecognition {
 
- public void goface() 
+ public String goface(String picurl) 
  {
-	 
 	 /*
 	  * https://dev.projectoxford.ai/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
 	  * https://dev.projectoxford.ai/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236/console
 	  */
      HttpClient httpclient = HttpClients.createDefault();
-
+     String ret = "";
      try
      {
          URIBuilder builder = new URIBuilder("https://api.projectoxford.ai/face/v1.0/detect");
-
          builder.setParameter("returnFaceId", "true");
          builder.setParameter("returnFaceLandmarks", "false");
          builder.setParameter("returnFaceAttributes", "age,gender,headPose,smile,facialHair,glasses");
@@ -35,24 +33,22 @@ public class FaceRecognition {
          HttpPost request = new HttpPost(uri);
          request.setHeader("Content-Type", "application/json");
          request.setHeader("Ocp-Apim-Subscription-Key", "850c8dc0fb914d6791f15d4a3e3ada99");
-
-
          // Request body
-         StringEntity reqEntity = new StringEntity("{\"url\":\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkLeM&oid=00D90000000pkXM&lastMod=1482386152000\"}");
+         StringEntity reqEntity = new StringEntity("{\"url\":\"" +picurl + "\"}");
          request.setEntity(reqEntity);
-
          HttpResponse response = httpclient.execute(request);
          HttpEntity entity = response.getEntity();
-
          if (entity != null) 
          {
-             System.out.println(EntityUtils.toString(entity));
+        	 ret = EntityUtils.toString(entity);
          }
      }
      catch (Exception e)
      {
          System.out.println(e.getMessage());
      }
+     return ret;
  }
+ 
 }
 
