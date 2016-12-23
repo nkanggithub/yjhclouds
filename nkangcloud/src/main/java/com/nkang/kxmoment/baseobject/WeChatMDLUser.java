@@ -1,6 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WeChatMDLUser extends WeChatUser {
 
@@ -13,8 +14,14 @@ public class WeChatMDLUser extends WeChatUser {
 	public String email;
 	public String phone;
 	public String point;
-	public String like;
 	public ArrayList tag;
+	public HashMap like;
+	public HashMap getLike() {
+		return like;
+	}
+	public void setLike(HashMap like) {
+		this.like = like;
+	}
 	public int getCongratulateNum() {
 		return CongratulateNum;
 	}
@@ -74,12 +81,6 @@ public class WeChatMDLUser extends WeChatUser {
 	}
 	public void setPoint(String point) {
 		this.point = point;
-	}
-	public String getLike() {
-		return like;
-	}
-	public void setLike(String like) {
-		this.like = like;
 	}
 	
 	
