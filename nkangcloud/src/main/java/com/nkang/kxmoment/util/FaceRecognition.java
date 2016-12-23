@@ -12,6 +12,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class FaceRecognition {
 
  public String goface(String picurl) 
@@ -40,7 +42,10 @@ public class FaceRecognition {
          HttpEntity entity = response.getEntity();
          if (entity != null) 
          {
-        	 ret = EntityUtils.toString(entity);
+        	 ObjectMapper mapper = new ObjectMapper();
+        	 
+        	 //ret = EntityUtils.toString(entity);
+        	 ret=mapper.writeValueAsString(EntityUtils.toString(entity));
          }
      }
      catch (Exception e)
