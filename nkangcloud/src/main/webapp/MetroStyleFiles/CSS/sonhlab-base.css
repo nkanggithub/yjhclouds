@@ -165,6 +165,65 @@ Website: http://sonhlab.com
 	float:left!important;
 	line-height:30px;
 }
+#myRecognitionList
+{
+	width:80%;
+	left:10%;
+	height:auto;
+	position:fixed;
+	z-index:1000;
+}
+#recognitionCenter
+{
+	position:absolute;
+	z-index:9999;
+	background:white;
+	top:0px;
+}
+.rs
+{
+	height:70px;
+	width:100%;
+	border-bottom:1px solid #33CC99;
+}
+/* .rs:hover
+{
+	background:#33CC99;
+} */
+.rfrom
+{
+	height:25px;
+	line-height:25px;
+	width:40%;
+	float:left;
+	text-align:left;
+}
+.rtype
+{
+	height:25px;
+	line-height:25px;
+	width:60%;
+	float:left;
+	text-align:right;
+}
+.rcomment
+{
+	height:30px;
+	line-height:30px;
+	width:60%;
+	float:left;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.rdate
+{
+	height:30px;
+	line-height:30px;
+	width:40%;
+	float:left;
+	text-align:right;
+}
 .btn {
     display: inline-block;
     padding: 4px 12px;
