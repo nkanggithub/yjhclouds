@@ -386,8 +386,8 @@ public class MongoDBBasic {
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc); 
 			
 			doc = new BasicDBObject();
-			DBObject update = new BasicDBObject();
-	    	update.put("Like.number",1);
+			BasicDBObject update = new BasicDBObject();
+	    	update.append("Like.number",1);
 			doc.put("$inc", update);
 			wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", ToOpenId), doc); 
 			ret = true;
