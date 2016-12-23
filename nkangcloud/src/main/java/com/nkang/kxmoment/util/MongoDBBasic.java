@@ -379,19 +379,15 @@ public class MongoDBBasic {
 		boolean ret = false;
 		try{
 			BasicDBObject doc = new BasicDBObject();
-			DBObject update = new BasicDBObject();
 			DBObject innerInsert = new BasicDBObject();
-	    	innerInsert.put("lastLikeTo", likeToName);
-	    	innerInsert.put("lastLikeDate", DateUtil.timestamp2Str(cursqlTS));
-	    	update.put("Like", innerInsert);
-			doc.put("$set", update); 
+	    	innerInsert.put("Like.lastLikeTo", likeToName);
+	    	innerInsert.put("Like.lastLikeDate", DateUtil.timestamp2Str(cursqlTS));
+			doc.put("$set", innerInsert); 
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc); 
 			
 			doc = new BasicDBObject();
-			update = new BasicDBObject();
-			innerInsert = new BasicDBObject();
-	    	innerInsert.put("number", 1);
-	    	update.put("Like", innerInsert);
+			DBObject update = new BasicDBObject();
+	    	update.put("Like.number",1);
 			doc.put("$inc", update);
 			wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", ToOpenId), doc); 
 			ret = true;
