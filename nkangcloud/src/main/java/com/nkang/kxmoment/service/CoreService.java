@@ -22,6 +22,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
+import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CronJob;
 import com.nkang.kxmoment.util.FaceRecognition;
@@ -124,7 +125,18 @@ public class CoreService
 				String picUrl = requestObject.element("PicUrl").getText();
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
 				FaceRecognition fr = new FaceRecognition();
-				respContent = respContent + "\n\n"+ fr.goface(picUrl);
+				String fro = fr.goface(picUrl);
+				String str = fro.substring(1, fro.length()-1);
+				JSONObject jsonData = CommenJsonUtil.jsonToObject(str);
+				
+				String smile = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("smile").toString();
+//				String gender=
+//				String moustache=
+//				String beard=
+//				String age=
+//				String glasses=
+				
+				respContent = respContent + "\n\n"+"smile : "+smile;// fr.goface(picUrl);
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
