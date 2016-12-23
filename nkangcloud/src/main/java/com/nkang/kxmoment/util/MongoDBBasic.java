@@ -1875,7 +1875,45 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
 				return dbuser;
 		}
-		
+		/*
+		 * Panda
+		 */
+		public static List<CongratulateHistory> getRecognitionInfoByOpenID(String OpenID) {
+			mongoDB = getMongoDB();
+			List<CongratulateHistory> chList = new ArrayList<CongratulateHistory>();
+			CongratulateHistory ch = null;
+			DBCursor queryresults;
+			try{
+					DBObject query = new BasicDBObject();
+					query.put("OpenID", OpenID);
+					queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+				if (null != queryresults) {
+	            	while(queryresults.hasNext()){
+					DBObject o = queryresults.next();
+	                Object CongratulateHistory = o.get("CongratulateHistory");
+	                BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
+	                if(CongratulateHistoryObj != null){
+	                    Object[] ConObjects = CongratulateHistoryObj.toArray();
+						for(Object co : ConObjects){
+	                        			if(co instanceof DBObject){
+	                        				ch=new CongratulateHistory();
+											ch.setComments(((DBObject)co).get("comments").toString());
+											ch.setCongratulateDate(((DBObject)co).get("congratulateDate").toString().substring(0,11));
+											ch.setFrom(((DBObject)co).get("from").toString());
+											ch.setTo(((DBObject)co).get("to").toString());
+											ch.setPoint(((DBObject)co).get("point").toString());
+											ch.setType(((DBObject)co).get("type").toString());
+											chList.add(ch);
+	                        			}
+	                        		}
+	                		}
+	            	}
+				}
+			}catch(Exception e){
+				log.info("getWeChatUserFromMongoDB--" + e.getMessage());
+			}
+			return chList;
+		}
 		public static String getRegisterUserByrealName(String realName){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
