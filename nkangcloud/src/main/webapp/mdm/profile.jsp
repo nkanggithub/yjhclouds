@@ -194,9 +194,9 @@ function getRecognitionInfoByOpenID(){
 			var text="";
 			for(var i=0;i<data.length;i++)
 				{
-				text=text+"<div class='rs' onclick='showRecognitionDetail('"+data[i].from+"','"+data[i].to+"','"+data[i].point+"','"
-						+"','"+data[i].type+"','"+data[i].comments+"')'><p class='rfrom'>From:"+data[i].from+"</p><p class='rtype'>"+data[i].type
-						+"</p><p class='rcomment'>"+data[i].comments+"</p><p class='rdate'>"+data[i].congratulateDate+"</p></div>";
+				text=text+"<div class='rs' onclick='showRecognitionDetail(\""+data[i].from+"\",\""+data[i].to+"\",\""+data[i].point+"\",\""
+				+data[i].type+"\",\""+data[i].comments+"\")'><p class='rfrom'>From:"+data[i].from+"</p><p class='rtype'>"+data[i].type
+				+"</p><p class='rcomment'>"+data[i].comments+"</p><p class='rdate'>"+data[i].congratulateDate+"</p></div>";
 				}
 			$("#myRecognitionList").html(text);
 			}
