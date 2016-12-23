@@ -1138,10 +1138,22 @@ function getNowFormatDate() {
 												<td>
 												<!-- <a href="Signature.jsp"></a> -->
 												<img   onclick="signaturePanel()" 
-														src="../MetroStyleFiles/menu-signature.png" />
+														src="../MetroStyleFiles/menu-pen.png" />
 														<h4>电子签名</h4>
 												</td>
-												<td><img onclick="SpeechPanel()" src="../MetroStyleFiles/menu-develop.png" />
+												<td><img src="../MetroStyleFiles/menu-face.png" />
+													<h4>人脸识别</h4></td>
+											</tr>
+											<tr>
+												<td><img  onclick="SpeechPanel()"
+														src="../MetroStyleFiles/menu-signature.png" />
+														<h4>声音识别</h4>
+												</td>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
+													<h4>开发中</h4></td>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
+													<h4>开发中</h4></td>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 											</tr>
 										</table>
