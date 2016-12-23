@@ -120,6 +120,7 @@ function toLike(likeToName,ToOpenId){
 	        success: function(data,textStatus){
 	        	if(textStatus=='success'){
 	        		swal("Congratulations！", "今天你成功Like了"+likeToName, "success"); 
+	        		getMDLUserLists();
 	        	}else{
 	        		swal("服务器繁忙！", "", "error"); 
 	        	}
