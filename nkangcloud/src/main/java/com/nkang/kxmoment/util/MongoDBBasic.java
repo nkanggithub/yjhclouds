@@ -1307,9 +1307,12 @@ public class MongoDBBasic {
                 			DBObject like = (DBObject)o.get("Like");
                 			if(like != null){
                 				HashMap<String, String> likeMap=new HashMap<String, String>();
-                				likeMap.put("number", like.get("number").toString());
-                				likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
-                				likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
+                				if(like.get("number") != null)
+                					likeMap.put("number", like.get("number").toString());
+                				if(like.get("lastLikeTo") != null)
+                					likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
+                				if(like.get("lastLikeDate") != null)
+                					likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
                         		weChatMDLUser.setLike(likeMap);
                 			}
                 		}
