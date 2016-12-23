@@ -133,10 +133,10 @@ public class CoreService
 //				String gender=
 //				String moustache=
 //				String beard=
-//				String age=
+				String age = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("smile").toString();
 //				String glasses=
 				
-				respContent = respContent + "\n\n"+"smile : "+smile;// fr.goface(picUrl);
+				respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age;// fr.goface(picUrl);
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
