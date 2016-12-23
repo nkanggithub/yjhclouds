@@ -122,6 +122,28 @@ public class UserProfileController {
 	
 
 	/*
+	 *Panda
+	 *  getRecognitionInfoByOpenID
+	 */
+	@RequestMapping("/getRecognitionInfoByOpenID")
+	public @ResponseBody List<CongratulateHistory>  getRecognitionInfoByOpenID(HttpServletRequest request,
+			HttpServletResponse response ){
+		List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(request.getParameter("openID"));
+/*		List<CongratulateHistory> chList=new ArrayList<CongratulateHistory>();
+		CongratulateHistory ch=new CongratulateHistory();
+		ch.setFrom("Panda");
+		ch.setTo("Ning");
+		ch.setComments("moving NoSQL and Solr match POC smoothly as part of our FY16 team goal. The progress you can your team made is promissing.");
+		ch.setPoint("300");
+		ch.setType("Innovators at Heart");
+		String date="2016-12-22 16:52:07";
+		ch.setCongratulateDate(date.substring(0,11));
+		chList.add(ch);*/
+		return chList;
+		
+	} 
+
+	/*
 	 * chang-zheng
 	 *  Congratulate
 	 */
