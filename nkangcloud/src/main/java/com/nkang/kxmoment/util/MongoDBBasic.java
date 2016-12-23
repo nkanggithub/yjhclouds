@@ -372,7 +372,35 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
-	
+
+	public static boolean updateUserWithLike(String openid,String likeToName,String ToOpenId){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		boolean ret = false;
+		try{
+			BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			DBObject innerInsert = new BasicDBObject();
+	    	innerInsert.put("lastLikeTo", likeToName);
+	    	innerInsert.put("lastLikeDate", DateUtil.timestamp2Str(cursqlTS));
+	    	update.put("Like", innerInsert);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc); 
+			
+			doc = new BasicDBObject();
+			update = new BasicDBObject();
+			innerInsert = new BasicDBObject();
+	    	innerInsert.put("number", 1);
+	    	update.put("Like", innerInsert);
+			doc.put("$inc", update);
+			wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", ToOpenId), doc); 
+			ret = true;
+		}
+		catch(Exception e){
+			log.info("updateUserWithSignature--" + e.getMessage());
+		}
+		return ret;
+	}
 	public static String getUserWithSignature(String openid){
 		mongoDB = getMongoDB();
 		String ret = "";
