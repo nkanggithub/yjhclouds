@@ -31,7 +31,10 @@ import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -39,6 +42,7 @@ import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.OrganizationSearch4Solr;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CsvFileWriter;
 import com.nkang.kxmoment.util.FaceRecognition;
@@ -96,11 +100,51 @@ public class testMain{
 		System.out.println("Done");*/
 		
 		
-		FaceRecognition fr = new FaceRecognition();
-		fr.goface();
-  
+//		FaceRecognition fr = new FaceRecognition();
+//		fr.goface();
+  String str= "[{'faceId':'3439910a-1eb7-4b93-8af0-2845cbfa605d','faceRectangle':{'top':206,'left':248,'width':356,'height':356},'faceAttributes':{'smile':0.006,'headPose':{'pitch':0.0,'roll':-0.3,'yaw':16.6},'gender':'female','age':19.8,'facialHair':{'moustache':0.0,'beard':0.0,'sideburns':0.0},'glasses':'NoGlasses'}}] ";
+  String[] ss = new String[20];
+  ObjectMapper mapper = new ObjectMapper();
+ // System.out.println(mapper.writeValueAsString(str));
 	
+ /* String json = "{\"deviceid\": \"12345\",\"cmd\": \"login\"}";
+	JSONObject obj = JsonUtil.jsonToObject(json);
+	System.out.println(obj.getString("deviceid"));*/
+	//-------------------------------------------------
+	String jsonArray = str.substring(1, str.length()-1);//"{'loves':[{'1':'read book','2':'swim','3':'kickball'}]}";
+	//JSONArray jsonArrayData = CommenJsonUtil.jsonToArray("faceAttributes",jsonArray);
+	JSONObject jsonArrayData = CommenJsonUtil.jsonToObject(jsonArray);
+	//CommenJsonUtil.jsonToObject((JSONObject)jsonArrayData.get("faceAttributes"));
+	//System.out.println((JSONObject)jsonArrayData.get("smile"));
+	 
+	System.out.println(CommenJsonUtil.jsonToObject(jsonArrayData.get("faceAttributes").toString()).get("age"));
+	
+	/*PushContentVo v = new PushContentVo("push", "0", "", "channel", 
+			"imgurl", "title", "{http://content}", "source", "time", "timestamp");
+	
+	String json = JsonUtil.objectToJson(v);
+	System.out.println(JsonUtil.getValueByKeyFromJson(json, "content"));
+	
+	BrandVo vo = null;
+	List<BrandVo> list = new ArrayList<BrandVo>();
+	for(int i=0; i<5; i++) {
+		vo = new BrandVo();
+		vo.setId("id_"+i);
+		vo.setName("name_"+i);
+		vo.setFirstLetter("A_"+i);
+		System.out.println(JsonUtil.objectToJson(vo));
+		list.add(vo);
+	}
+	System.out.println(collectionToJson(list));*/
 }
+
+	
+  
+ /* ss=str.split(",");
+  for (int i = 0; i < ss.length; i++)
+      System.out.println(ss[i]);
+	
+}*/
         
 
 	
