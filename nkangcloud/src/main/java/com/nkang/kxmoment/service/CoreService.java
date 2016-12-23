@@ -130,13 +130,13 @@ public class CoreService
 				JSONObject jsonData = CommenJsonUtil.jsonToObject(str);
 				
 				String smile = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("smile").toString();
-//				String gender=
-//				String moustache=
-//				String beard=
+				String gender = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("gender").toString();
+				String moustache = CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString();
+				String beard = CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString();
 				String age = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("age").toString();
 				String glasses = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("glasses").toString();
 				
-				respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses;// fr.goface(picUrl);
+				respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses +"\n"+"gender :"+gender +"\n"+"moustache :"+moustache +"\n"+"beard :"+beard;// fr.goface(picUrl);
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
