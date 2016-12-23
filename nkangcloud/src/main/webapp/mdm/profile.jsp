@@ -408,7 +408,7 @@ function recognizationPanel(){
 				+"  </div>"
 				+"		</div>"
 				+"	</div>"
-				+"</div>");
+				+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
@@ -424,7 +424,7 @@ function recognizationPanelByPerson(personName){
 		$("body").append("	<div class='TAB2class bouncePart' id='recognizeForm'>"
 				+"	<ul class='nav nav-tabs' id='myTabs'>"
 				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>Send Recognition</a></li>"
-				+"	<li id='bbElements'><a href='#bElements' data-toggle='tab'>Recieved Recognition</a></li></ul>"
+				+"	<li id='bbElements'><a href='#bElements' onclick='getRecognitionInfoByOpenID()'  data-toggle='tab'>Recieved Recognition</a></li></ul>"
 				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
 				+"	<div class='tab-pane active' id='aElements'>"
 				+"	<div id='sendR'>"
@@ -440,7 +440,7 @@ function recognizationPanelByPerson(personName){
 				+"  <div id='myRecognitionList'></div>"
 				+"		</div>"
 				+"	</div>"
-				+"</div>");
+				+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });}else
