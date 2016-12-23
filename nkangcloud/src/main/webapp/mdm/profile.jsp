@@ -99,6 +99,30 @@ function startDictation() {
         recognition.stop();
       }
 }
+function toLike(likeToName,ToOpenId){
+	if(ToOpenId==$('#uid').val()){
+		swal("不能Like自己哦!", "可别太自恋啦。。。", "error"); 
+	}else{
+		$.ajax({  
+	        cache : true,  
+	        url:"../userProfile/updateUserWithLike",
+	        type: 'GET', 
+			data : {
+				openid : $('#uid').val(),
+				likeToName : likeToName,
+				ToOpenId : ToOpenId
+			},
+	        timeout: 2000, 
+	        success: function(data,textStatus){
+	        	if(textStatus=='success'){
+	        		swal("Congratulations！", "今天你成功Like了"+likeToName, "success"); 
+	        	}else{
+	        		swal("服务器繁忙！", "", "error"); 
+	        	}
+	        }
+	  	});
+	}
+}
 function getOld(){
 	var url="../CallGetUserWithSignature?openid="+$('#uid').val();
 	  	$.ajax({  
@@ -590,6 +614,7 @@ function getUserInfo(username, headimgurl, openId) {
 						$("#info_tag tr").html("");
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
+							$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
 							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
 							if(jsons.results[0].tag!="未注册"){
 								for(var j=0;j<jsons.results[0].tag.length;j++){
