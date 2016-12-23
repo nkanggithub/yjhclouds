@@ -237,6 +237,7 @@ function getRealName(){
 }
 function showRecognitionDetail(from,to,point,type,coments)
 {
+	var text=coments.toString();
 	/* console.log("the openId is" + openId); */
 	$("body").append("<div id='recognitionCenter' style='width:100%;height:100%;'> <div style='height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D'><img style='position:absolute;top:20px;left:35px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'></div>"
 			+"<div style='position:absolute;top:140px;width:80%;left:10%;font-size:16px;'>"
@@ -246,7 +247,7 @@ function showRecognitionDetail(from,to,point,type,coments)
 			+"<p style='width:100%;line-height:22px;font-size:16px;'>Your award</p>"
 			+"<p style='line-height:22px;'>"+point+"Points have been added to your <a href='https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp'>MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>"
 			+"<p style='width:100%;line-height:22px;font-size:16px;'>Here’s what was said about you</p>"
-			+"<p style='line-height:22px;'>Thanks <span id='to'>Ning</span> for "+comments+"</p>"
+			+"<p style='line-height:22px;'>Thanks <span id='to'>Ning</span> for "+text+"</p>"
 			+"<img onclick='hideRecognitionCenter()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:relative;top:20px;left:250px;'></div></div>");
 	$('#recognitionCenter').addClass('bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
