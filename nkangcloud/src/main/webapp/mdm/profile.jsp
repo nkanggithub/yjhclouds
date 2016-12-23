@@ -110,6 +110,7 @@ function toLike(likeToName,ToOpenId){
 	        cache : false,  
 	        url:"../userProfile/updateUserWithLike",
 	        type: 'GET', 
+	        contentType:'application/x-www-form-urlencoded; charset=UTF-8',
 			data : {
 				openid : $('#uid').val(),
 				likeToName : likeToName,
