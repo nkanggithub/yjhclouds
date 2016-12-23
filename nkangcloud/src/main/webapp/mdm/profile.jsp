@@ -73,6 +73,7 @@ if (session.getAttribute("location") == null) {
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script>
+var LastToLikeDate="",lastLikeTo="";
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
 		getWeather();
@@ -102,6 +103,8 @@ function startDictation() {
 function toLike(likeToName,ToOpenId){
 	if(ToOpenId==$('#uid').val()){
 		swal("不能Like自己哦!", "可别太自恋啦。。。", "error"); 
+	}else if(getNowFormatDate().indexOf(LastToLikeDate.substring(0,10))==0){
+		swal("你今天已经Like了"+lastLikeTo+"!", "可不能太花心哦!", "error");
 	}else{
 		$.ajax({  
 	        cache : true,  
@@ -679,6 +682,13 @@ function getMDLUserLists() {
 						var tag=temp.tag;
 						var tagHtml="";
 						var congratulate="";
+						
+						if(temp.openid==$('#uid').val()){
+							LastToLikeDate=temp.like.lastLikeDate;
+							lastLikeTo=temp.like.lastLikeTo;
+						}
+
+						
 						
 						if(selfIntro==null||selfIntro=='null'){
 							selfIntro="nothing";
