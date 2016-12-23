@@ -674,7 +674,7 @@ a, a:focus, a:hover, a:active {
 	position: fixed;
 	text-align: center;
 	width: 100%;
-	z-index: 102;
+	z-index: 1002;
 	left:0;
 }
 /* general form */
