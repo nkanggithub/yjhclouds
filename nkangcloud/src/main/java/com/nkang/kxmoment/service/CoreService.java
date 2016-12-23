@@ -24,6 +24,7 @@ import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CronJob;
+import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -122,6 +123,8 @@ public class CoreService
 				String mediaId = requestObject.element("MediaId").getText();
 				String picUrl = requestObject.element("PicUrl").getText();
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
+				FaceRecognition fr = new FaceRecognition();
+				respContent = respContent + "\n\n"+ fr.goface(picUrl);
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
