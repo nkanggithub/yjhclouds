@@ -148,11 +148,7 @@
 			<version>2.5</version>
         </dependency>
 		<!-- MongoDB connection end-->
-		<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>1.2.11</version>
-	</dependency>
+		
 		
   </dependencies>
   <build>
