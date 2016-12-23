@@ -103,7 +103,7 @@ function startDictation() {
 function toLike(likeToName,ToOpenId){
 	if(ToOpenId==$('#uid').val()){
 		swal("不能Like自己哦!", "可别太自恋啦。。。", "error"); 
-	}else if(getNowFormatDate().indexOf(LastToLikeDate.substring(0,10))==0){
+	}else if(LastToLikeDate!=""&&getNowFormatDate().indexOf(LastToLikeDate.substring(0,10))==0){
 		swal("你今天已经Like了"+lastLikeTo+"!", "可不能太花心哦!", "error");
 	}else{
 		$.ajax({  
