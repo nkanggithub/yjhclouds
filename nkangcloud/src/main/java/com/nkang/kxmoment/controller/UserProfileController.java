@@ -93,8 +93,9 @@ public class UserProfileController {
 				.getAttribute("UID");
 		return RestUtils.getCallUpdateUserWithSignature(openid,svg);
 	}
-	@RequestMapping("/updateUserWithLike")
-	public static boolean updateUserWithLike(
+	@RequestMapping(value = "/updateUserWithLike", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String updateUserWithLike(
 			@RequestParam(value="openid", required=false) String openid,
 			@RequestParam(value="likeToName", required=false) String likeToName,
 			@RequestParam(value="ToOpenId", required=false) String ToOpenId
@@ -106,7 +107,7 @@ public class UserProfileController {
 		catch(Exception e){
 			ret = false;
 		}
-		return ret;
+		return ret==true?"true":"false";
 	}
 
 	/*
