@@ -42,10 +42,8 @@ public class FaceRecognition {
          HttpEntity entity = response.getEntity();
          if (entity != null) 
          {
-        	 ObjectMapper mapper = new ObjectMapper();
         	 
-        	 //ret = EntityUtils.toString(entity);
-        	 ret=mapper.writeValueAsString(EntityUtils.toString(entity));
+        	 ret = EntityUtils.toString(entity);
          }
      }
      catch (Exception e)
