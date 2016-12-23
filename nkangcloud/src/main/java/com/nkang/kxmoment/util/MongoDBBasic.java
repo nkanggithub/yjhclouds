@@ -1289,6 +1289,27 @@ public class MongoDBBasic {
                         		weChatMDLUser.setTag(list);
                     		}
             			}
+            			Object likeobj = o.get("Like");
+            			DBObject like= new BasicDBObject();
+            			like= (DBObject)likeobj;
+            			HashMap<String, String> likeMap=new HashMap<String, String>();
+            			likeMap.put("number","");
+            			likeMap.put("lastLikeTo","");
+            			likeMap.put("lastLikeDate","");
+            			if(like != null){
+            				if(like.get("number") != null){
+            					likeMap.put("number", like.get("number").toString());
+            				}
+            				if(like.get("lastLikeTo") != null)
+            				{
+            					likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
+            				}
+            				if(like.get("lastLikeDate") != null)
+            				{
+            					likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
+            				}
+            			}
+            			weChatMDLUser.setLike(likeMap);
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
                 				if(teamobj.get("email") != null){
@@ -1304,19 +1325,6 @@ public class MongoDBBasic {
                 					weChatMDLUser.setGroupid(teamobj.get("groupid").toString());
                 				}
                     		}
-                			Object likeobj = o.get("Like");
-                			DBObject like= new BasicDBObject();
-                			like= (DBObject)likeobj;
-                			if(like != null){
-                				HashMap<String, String> likeMap=new HashMap<String, String>();
-                				if(like.get("number") != null)
-                					likeMap.put("number", like.get("number").toString());
-                				if(like.get("lastLikeTo") != null)
-                					likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
-                				if(like.get("lastLikeDate") != null)
-                					likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
-                        		weChatMDLUser.setLike(likeMap);
-                			}
                 		}
             		}
             		if(weChatMDLUser != null){
