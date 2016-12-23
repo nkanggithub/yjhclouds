@@ -107,7 +107,7 @@ function toLike(likeToName,ToOpenId){
 		swal("你今天已经Like了"+lastLikeTo+"!", "可不能太花心哦!", "error");
 	}else{
 		$.ajax({  
-	        cache : true,  
+	        cache : false,  
 	        url:"../userProfile/updateUserWithLike",
 	        type: 'GET', 
 			data : {
