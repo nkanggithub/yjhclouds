@@ -76,7 +76,7 @@ if (session.getAttribute("location") == null) {
 var LastToLikeDate="",lastLikeTo="";
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
-		getWeather();
+        getWeather();
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		getStockData(stockUrl);
 		getMDLUserLists();
@@ -176,6 +176,30 @@ function getCompanyInfo(){
 		}
 	});
 }
+function getRecognitionInfoByOpenID(){
+	var uid=$("#uid").val();
+	$.ajax({
+		type : "post",
+		url : "../userProfile/getRecognitionInfoByOpenID",
+		data:{
+			openID:uid
+		},
+		cache : false,
+		success : function(data) {
+		if(data)
+			{
+			var text="";
+			for(var i=0;i<data.length;i++)
+				{
+				text=text+"<div class='rs' onclick='showRecognitionDetail('"+data[i].from+"',"+data[i].to+"',"+data[i].point+"',"
+						+"',"+data[i].type+"',"+data[i].comments+"')'><p class='rfrom'>From:"+data[i].from+"</p><p class='rtype'>"+data[i].type
+						+"</p><p class='rcomment'>"+data[i].comments+"</p><p class='rdate'>"+data[i].congratulateDate+"</p></div>";
+				}
+			$("#myRecognitionList").html(text);
+			}
+		}
+	});
+}
 function getAllRegisterUsers(){
 	$.ajax({
 		type : "post",
@@ -208,6 +232,23 @@ function getRealName(){
 		}
 	});
 }
+function showRecognitionDetail(from,to,point,type,coments)
+{
+	/* console.log("the openId is" + openId); */
+	$("body").append("<div id='recognitionCenter' style='width:100%;height:100%;'> <div style='height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D'><img style='position:absolute;top:20px;left:35px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'></div>"
+			+"<div style='position:absolute;top:140px;width:80%;left:10%;font-size:16px;'>"
+			+"<p style='float:left;width:110px;'>Congratulations</p><p id='to' style='float:left;'>"+to+"</p><p style='float:left;'>!</p></div>"
+			+"<div style='position:absolute;top:180px;width:80%;left:10%;height:auto;font-size:14px;font-family: HP Simplified, Arial, Sans-Serif;'>"
+			+"<p style='line-height:22px;'>You must have done something amazing! "+from+" has recognized you in the Manager-to-Employee FY16 program for M2E: "+type+". <p>"
+			+"<p style='width:100%;line-height:22px;font-size:16px;'>Your award</p>"
+			+"<p style='line-height:22px;'>"+point+"Points have been added to your <a href='https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp'>MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>"
+			+"<p style='width:100%;line-height:22px;font-size:16px;'>Here’s what was said about you</p>"
+			+"<p style='line-height:22px;'>Thanks <span id='to'>Ning</span> for "+comments+"</p>"
+			+"<img onclick='hideRecognitionCenter()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:relative;top:20px;left:250px;'></div></div>");
+	$('#recognitionCenter').addClass('bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+	}
 function postRecognition(){
 	console.log("start....");
 	var to = $("#to option:selected").val();
@@ -347,7 +388,7 @@ function recognizationPanel(){
 		$("body").append("<div class='TAB2class bouncePart' id='recognizeForm'>"
 				+"	<ul class='nav nav-tabs' id='myTabs'>"
 				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>Send Recognition</a></li>"
-				+"	<li id='bbElements'><a href='#bElements' data-toggle='tab'>Recieved Recognition</a></li></ul>"
+				+"	<li id='bbElements'><a href='#bElements' onclick='getRecognitionInfoByOpenID()' data-toggle='tab'>Recieved Recognition</a></li></ul>"
 				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
 				+"	<div class='tab-pane active' id='aElements'>"
 				+"	<div id='sendR'>"
@@ -360,6 +401,8 @@ function recognizationPanel(){
 				+"	</div>"
 				+"	</div>"
 				+"  <div class='tab-pane' id='bElements'>"
+				+"	<div id='myRecognitionList'>"
+				+"  </div>"
 				+"		</div>"
 				+"	</div>"
 				+"</div>");
@@ -391,6 +434,7 @@ function recognizationPanelByPerson(personName){
 				+"	</div>"
 				+"	</div>"
 				+"  <div class='tab-pane' id='bElements'>"
+				+"  <div id='myRecognitionList'></div>"
 				+"		</div>"
 				+"	</div>"
 				+"</div>");
@@ -409,6 +453,10 @@ function hideBouncePanel()
 {
 	$("body").find(".bouncePart").remove();
 	$("body").find("#data_model_div").remove();
+	}
+function hideRecognitionCenter()
+{
+	$("body").find("#recognitionCenter").remove();
 	}
 function register() {
 	jQuery
