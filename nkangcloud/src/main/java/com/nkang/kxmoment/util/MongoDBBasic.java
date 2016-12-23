@@ -1304,7 +1304,9 @@ public class MongoDBBasic {
                 					weChatMDLUser.setGroupid(teamobj.get("groupid").toString());
                 				}
                     		}
-                			DBObject like = (DBObject)o.get("Like");
+                			Object likeobj = o.get("Like");
+                			DBObject like= new BasicDBObject();
+                			like= (DBObject)likeobj;
                 			if(like != null){
                 				HashMap<String, String> likeMap=new HashMap<String, String>();
                 				if(like.get("number") != null)
