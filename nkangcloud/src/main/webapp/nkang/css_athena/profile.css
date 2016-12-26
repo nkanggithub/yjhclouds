@@ -427,11 +427,11 @@ canvas{
 }
 #info_interact img.zan{
 	float:right;
-	margin:8px 29px 0px 0px;
-	width:24px;
+	margin:8px 39px 0px 0px;
+	width:25px;
 }
 #info_interact img.zan:hover{
-	width:27px;
+	width:28px;
 	margin-top:6px;
-	margin-right:28px;
+	margin-right:38px;
 }
