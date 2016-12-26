@@ -1213,9 +1213,9 @@ function getNowFormatDate() {
 													<h4>测颜值</h4></td>
 											</tr>
 											<tr>
-												<td><img  onclick="SpeechPanel()"
-														src="../MetroStyleFiles/menu-signature.png" />
-														<h4>声音识别</h4>
+												<td> <a href="speak.jsp"><img <!--  onclick="SpeechPanel()" -->
+														src="../MetroStyleFiles/menu-signature.png" /></a>
+														<h4>智能语音</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
