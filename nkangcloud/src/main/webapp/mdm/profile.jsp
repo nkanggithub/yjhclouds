@@ -1209,7 +1209,9 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td><img src="../MetroStyleFiles/menu-face.png" />
+												<td>
+												 <a href="face.jsp">
+												 <img src="../MetroStyleFiles/menu-face.png" /></a>
 													<h4>测颜值</h4></td>
 											</tr>
 											<tr>
