@@ -1204,9 +1204,9 @@ function getNowFormatDate() {
 														<h4>世界时间</h4>
 												</td>
 												<td>
-												<!-- <a href="Signature.jsp"></a> -->
-												<img   onclick="signaturePanel()" 
-														src="../MetroStyleFiles/menu-pen.png" />
+												 <a href="Signature.jsp">
+												<img  <!-- onclick="signaturePanel()"  -->
+														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-face.png" />
