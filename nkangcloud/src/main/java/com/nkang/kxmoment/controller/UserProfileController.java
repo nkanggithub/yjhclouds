@@ -181,7 +181,19 @@ public class UserProfileController {
 		conhis.setComments(request.getParameter("comments"));
 		conhis.setCongratulateDate(new Date().toLocaleString());
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
-		RestUtils.sendNewsToUser(openid, conhis);
+		List<String> openIDs=new ArrayList<String>();
+		openIDs.add("oqPI_xDdGid-HlbeVKZjpoO5zoKw");
+		openIDs.add("oqPI_xHLkY6wSAJEmjnQPPazePE8");
+		openIDs.add("oqPI_xLq1YEJOczHi4DS2-1U0zqc");
+		openIDs.add("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
+		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");
+		if("true".equals(request.getParameter("to"))){
+			for(int i=0;i<openIDs.size();i++){
+				RestUtils.sendNewsToUser(openIDs.get(i), conhis);
+			}
+		}else{
+			RestUtils.sendNewsToUser(openid, conhis);
+		}
 		return "ok";
 	} 
 	@RequestMapping("/getCompanyInfo")
