@@ -175,7 +175,7 @@ Website: http://sonhlab.com
 }
 #recognitionCenter
 {
-	position:absolute;
+	position:fixed;
 	z-index:9999;
 	background:white;
 	top:0px;
@@ -210,8 +210,8 @@ Website: http://sonhlab.com
 }
 .rcomment
 {
-	height:30px;
-	line-height:40px;
+	height:40px;
+	line-height:60px;
 	width:60%;
 	float:left;
 	text-overflow: ellipsis;
@@ -221,8 +221,8 @@ Website: http://sonhlab.com
 }
 .rdate
 {
-	height:30px;
-	line-height:40px;
+	height:40px;
+	line-height:60px;
 	width:40%;
 	float:left;
 	text-align:right;
