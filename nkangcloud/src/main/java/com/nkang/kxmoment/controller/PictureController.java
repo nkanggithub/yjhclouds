@@ -84,7 +84,7 @@ public class PictureController{
 		 for(int i=0 ; i < ls.size() ;i++){
 			 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
 		 }
-		return str;
+		return str+ "\n\n"+faceRecognition.gofaceEmotion("http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0");
 	}
 }
  
