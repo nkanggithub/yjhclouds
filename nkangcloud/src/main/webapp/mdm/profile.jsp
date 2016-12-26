@@ -476,6 +476,7 @@ function register() {
 				$("#info_tag tr").html("");
 				if(jsons.results[0].role!="未注册"){
 					$("#info_interact").css("display","none");
+					$("#info_interact2").css("display","none");
 					$("#info_imgurl").attr("src",$('#userImage').attr('src'));
 					if(jsons.results[0].tag!="未注册"){
 						for(var j=0;j<jsons.results[0].tag.length;j++){
@@ -648,6 +649,7 @@ function showRegister(){
 }
 function getUserInfo(username, headimgurl, openId) {
 			$("#info_interact").css("display","block");
+			$("#info_interact2").css("display","block");
 			$("#info_imgurl").attr("src",headimgurl);
 			//$("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 	jQuery
@@ -670,6 +672,8 @@ function getUserInfo(username, headimgurl, openId) {
 							$("#info_username span").html(jsons.results[0].realName);
 							$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
 							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
+							$("#info_interact2 span.like").text(jsons.results[0].like.number);
+							$("#info_interact2 span.zan").text(jsons.results[0].CongratulateNum);
 							if(jsons.results[0].tag!="未注册"){
 								for(var j=0;j<jsons.results[0].tag.length;j++){
 									var tag=jsons.results[0].tag[j];
@@ -1329,6 +1333,13 @@ function getNowFormatDate() {
 											<div id="info_interact"  style="position: absolute;width:100%;">
 												<img class="like" src="../MetroStyleFiles/like.png"/>
 												<img class="zan"  data-dismiss="modal" aria-hidden="true" onclick="recognizationPanel()" src="../MetroStyleFiles/zan.png"/>
+											</div>
+											<div id="info_interact2"
+												style="position: absolute; width: 100%; display: block; margin-top: 60px;">
+												<span class="like"
+													style="float: left; margin-left: 25px; width: 40px; text-align: center;"></span>
+												<span class="zan"
+													style="float: right; margin-right: 30px; margin-top: -20px; width: 40px; text-align: center;"></span>
 											</div>
 											<img id="info_imgurl"
 												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
