@@ -1946,7 +1946,7 @@ public static String regist(WeChatMDLUser user) {
     	       String str = JsonUtil.getJsonStrFromList(articles);
     	*/
     			String str="{\"title\":\"Congratulations!! \",\"description\":\""+ch.getTo()+" has been recognized!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid="+openId+"\",\"picurl\":"
-    					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM\"}";
+    					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
     	                "{\"articles\":[" +str +"]}"+"}";
