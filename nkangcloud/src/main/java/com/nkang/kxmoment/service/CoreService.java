@@ -159,7 +159,7 @@ public class CoreService
 				
 				//respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses +"\n"+"gender :"+gender +"\n"+"moustache :"+moustache +"\n"+"beard :"+beard;// fr.goface(picUrl);
 				 for(int i=0 ; i < ls.size() ;i++){
-					 respContent = respContent + ls.get(i).Info()+ "\n\n";
+					 respContent = respContent+"\n\n" + ls.get(i).Info()+ "\n\n";
 				 }
 				 
 				 textMessage.setContent(respContent);
