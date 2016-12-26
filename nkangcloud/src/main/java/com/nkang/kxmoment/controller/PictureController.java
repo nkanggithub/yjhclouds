@@ -48,8 +48,12 @@ public class PictureController{
 		JSONArray jsonArraGoface;
 		JSONArray jsonArraEmotion;
 		try {
-			jsonArraGoface = new JSONArray(faceRecognition.goface("http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0").toString());
-			jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion("http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0").toString());
+			String URL = CoreService.picURL;
+			if(URL==null || URL ==""){
+				URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
+			}
+			jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
+			jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion(URL).toString());
 			for(int i=0 ; i < jsonArraGoface.length() ;i++)
 			  {
 			  FaceObj fo = new FaceObj();
