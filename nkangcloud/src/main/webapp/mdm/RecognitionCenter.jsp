@@ -8,7 +8,7 @@ String uid = request.getParameter("uid");
 List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid);
 CongratulateHistory ch=new CongratulateHistory();
 if(!chList.isEmpty()){
-	ch=chList.get(0);
+	ch=chList.get(chList.size()-1);
 }
 String openid=MongoDBBasic.getRegisterUserByrealName(ch.getFrom());
 String signature=MongoDBBasic.getUserWithSignature(openid);
