@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.dom4j.Element;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
+import com.nkang.kxmoment.baseobject.FaceObj;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.response.Article;
@@ -126,8 +128,26 @@ public class CoreService
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
 				FaceRecognition fr = new FaceRecognition();
 				String fro = fr.goface(picUrl);
-				String str = fro.substring(1, fro.length()-1);
-				JSONObject jsonData = CommenJsonUtil.jsonToObject(str);
+				JSONArray jsonArra = new JSONArray(fro);
+				//String str = fro.substring(1, fro.length()-1);
+				List<FaceObj> ls = new ArrayList<FaceObj>();
+				 for(int i=0 ; i < jsonArra.length() ;i++)
+				  {
+					 FaceObj fo = new FaceObj();
+				   //获取每一个JsonObject对象
+				  JSONObject myjObject = jsonArra.getJSONObject(i);
+				   
+				   //获取每一个对象中的值
+				//  System.out.println(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age"));
+				  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
+				  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
+				  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
+				  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
+				  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
+				  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
+				  ls.add(fo);
+				  }
+				/*JSONObject jsonData = CommenJsonUtil.jsonToObject(jsonArra);
 				
 				String smile = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("smile").toString();
 				String gender = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("gender").toString();
@@ -135,9 +155,14 @@ public class CoreService
 				String beard = CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString();
 				String age = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("age").toString();
 				String glasses = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("glasses").toString();
+				*/
 				
-				respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses +"\n"+"gender :"+gender +"\n"+"moustache :"+moustache +"\n"+"beard :"+beard;// fr.goface(picUrl);
-				textMessage.setContent(respContent);
+				//respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses +"\n"+"gender :"+gender +"\n"+"moustache :"+moustache +"\n"+"beard :"+beard;// fr.goface(picUrl);
+				 for(int i=0 ; i < ls.size() ;i++){
+					 respContent = respContent + ls.get(i).Info()+ "\n\n";
+				 }
+				 
+				 textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
 			
