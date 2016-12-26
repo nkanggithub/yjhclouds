@@ -120,6 +120,7 @@ function toLike(likeToName,ToOpenId){
 	        success: function(data,textStatus){
 	        	if(textStatus=='success'){
 	        		swal("Congratulations！", "今天你成功Like了"+likeToName, "success"); 
+	        		$("span.like").text($("span.like").text()+1);
 	        		getMDLUserLists();
 	        	}else{
 	        		swal("服务器繁忙！", "", "error"); 
@@ -668,10 +669,10 @@ function getUserInfo(username, headimgurl, openId) {
 					var jsons = eval('(' + data + ')');
 					if (jsons.results.length > 0) {
 						$("#info_tag tr").html("");
-						$("#info_interact2 span.like").text(jsons.results[0].like.number);
+						$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
+						$("#info_interact2 span.like").text(jsons.results[0].like.number-1);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
-							$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
 							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
 							$("#info_interact2 span.zan").text(jsons.results[0].CongratulateNum);
 							if(jsons.results[0].tag!="未注册"){
