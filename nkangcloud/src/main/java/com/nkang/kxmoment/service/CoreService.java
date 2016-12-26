@@ -1,8 +1,5 @@
 package com.nkang.kxmoment.service;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +22,6 @@ import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
 import com.nkang.kxmoment.util.CommenJsonUtil;
-import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CronJob;
 import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.MessageUtil;
@@ -34,7 +30,7 @@ import com.nkang.kxmoment.util.RestUtils;
 
 public class CoreService
 {
-
+	public static String picURL;
 	private static Logger log = Logger.getLogger(CoreService.class);
 	private static Timer timer= new Timer();
 	public static String processRequest(HttpServletRequest request)
@@ -123,6 +119,7 @@ public class CoreService
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
+				picURL = requestObject.element("PicUrl").getText();
 				String mediaId = requestObject.element("MediaId").getText();
 				String picUrl = requestObject.element("PicUrl").getText();
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
