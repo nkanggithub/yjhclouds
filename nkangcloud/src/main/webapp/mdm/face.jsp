@@ -12,7 +12,7 @@
   	$.ajax({  
 	        cache : false,  
 	        type : "GET",
-			url : "../userProfile/getWeather", 
+			url : "../uploadPicture", 
 			data : {},
 	        timeout: 2000, 
 	        success: function(data){
