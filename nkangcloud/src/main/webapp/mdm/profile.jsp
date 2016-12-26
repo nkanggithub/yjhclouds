@@ -1206,7 +1206,7 @@ function getNowFormatDate() {
 														<h4>电子签名</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-face.png" />
-													<h4>人脸识别</h4></td>
+													<h4>测颜值</h4></td>
 											</tr>
 											<tr>
 												<td><img  onclick="SpeechPanel()"
