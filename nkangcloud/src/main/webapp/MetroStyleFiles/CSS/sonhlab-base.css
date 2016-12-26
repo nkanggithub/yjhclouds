@@ -193,36 +193,40 @@ Website: http://sonhlab.com
 .rfrom
 {
 	height:25px;
-	line-height:25px;
+	line-height:40px;
 	width:40%;
 	float:left;
 	text-align:left;
+	margin:0;
 }
 .rtype
 {
 	height:25px;
-	line-height:25px;
+	line-height:40px;
 	width:60%;
 	float:left;
 	text-align:right;
+	margin:0;
 }
 .rcomment
 {
 	height:30px;
-	line-height:30px;
+	line-height:40px;
 	width:60%;
 	float:left;
 	text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    margin:0;
 }
 .rdate
 {
 	height:30px;
-	line-height:30px;
+	line-height:40px;
 	width:40%;
 	float:left;
 	text-align:right;
+	margin:0;
 }
 .btn {
     display: inline-block;
