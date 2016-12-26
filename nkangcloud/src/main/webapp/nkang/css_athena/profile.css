@@ -428,10 +428,10 @@ canvas{
 #info_interact img.zan{
 	float:right;
 	margin:8px 29px 0px 0px;
-	width:35px;
+	width:24px;
 }
 #info_interact img.zan:hover{
-	width:38px;
+	width:27px;
 	margin-top:6px;
 	margin-right:28px;
 }
