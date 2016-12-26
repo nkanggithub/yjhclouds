@@ -244,10 +244,10 @@ function showRecognitionDetail(from,to,point,type,coments)
 			+"<p style='float:left;width:110px;'>Congratulations</p><p id='to' style='float:left;'>"+to+"</p><p style='float:left;'>!</p></div>"
 			+"<div style='position:absolute;top:180px;width:80%;left:10%;height:auto;font-size:14px;font-family: HP Simplified, Arial, Sans-Serif;'>"
 			+"<p style='line-height:22px;'>You must have done something amazing! "+from+" has recognized you in the Manager-to-Employee FY16 program for M2E: "+type+". <p>"
-			+"<p style='width:100%;line-height:22px;font-size:16px;'>Your award</p>"
-			+"<p style='line-height:22px;'>"+point+"Points have been added to your <a href='https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp'>MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>"
-			+"<p style='width:100%;line-height:22px;font-size:16px;'>Here’s what was said about you</p>"
-			+"<p style='line-height:22px;'>Thanks <span id='to'>Ning</span> for "+text+"</p>"
+			+"<p style='width:100%;line-height:22px;font-size:16px;margin:15px 0px;'>Your award</p>"
+			+"<p style='line-height:22px;'>"+point+" Points have been added to your <a href='https://login.ext.hpe.com/idp/startSSO.ping?PartnerSpId=hpe_biw_sp'>MyRecognition@hpe</a> account. Enjoy surfing the catalogue and finding something that is perfect just for you: merchandise, travel, gift cards or vouchers. <p>"
+			+"<p style='width:100%;line-height:22px;font-size:16px;margin:15px 0px;'>Here’s what was said about you</p>"
+			+"<p style='line-height:22px;'>Thanks <span id='to'>"+to+"</span> for "+text+"</p>"
 			+"<img onclick='hideRecognitionCenter()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:relative;top:20px;left:250px;'></div></div>");
 	$('#recognitionCenter').addClass('bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
