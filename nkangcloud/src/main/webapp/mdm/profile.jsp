@@ -670,7 +670,7 @@ function getUserInfo(username, headimgurl, openId) {
 					if (jsons.results.length > 0) {
 						$("#info_tag tr").html("");
 						$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
-						$("#info_interact2 span.like").text(jsons.results[0].like.number-1);
+						$("#info_interact2 span.like").text(jsons.results[0].like.number);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
 							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
