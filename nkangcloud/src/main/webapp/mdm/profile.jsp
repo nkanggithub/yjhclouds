@@ -1203,9 +1203,9 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-time.png" />
 														<h4>世界时间</h4>
 												</td>
-												<td>
+												<td> <!-- onclick="signaturePanel()"  -->
 												 <a href="Signature.jsp">
-												<img  <!-- onclick="signaturePanel()"  -->
+												<img 
 														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
@@ -1213,7 +1213,9 @@ function getNowFormatDate() {
 													<h4>测颜值</h4></td>
 											</tr>
 											<tr>
-												<td> <a href="speak.jsp"><img <!--  onclick="SpeechPanel()" -->
+												<td>
+												<!--  onclick="SpeechPanel()" -->
+												 <a href="speak.jsp"><img 
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>智能语音</h4>
 												</td>
