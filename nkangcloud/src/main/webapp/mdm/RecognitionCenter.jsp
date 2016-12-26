@@ -4,12 +4,14 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="java.util.List"%>
 <%	
-String uid = request.getParameter("UID");
+String uid = request.getParameter("uid");
 List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid);
 CongratulateHistory ch=new CongratulateHistory();
 if(!chList.isEmpty()){
 	ch=chList.get(0);
 }
+String openid=MongoDBBasic.getRegisterUserByrealName(ch.getFrom());
+String signature=MongoDBBasic.getUserWithSignature(openid);
 
 
 %>
@@ -21,8 +23,15 @@ if(!chList.isEmpty()){
   <title>HPE - Recognition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<script>
+$(function(){
+	$("#sign").html($("#hiddenSign").html());
+})
+</script>
 </head>
 <body style="padding:0px;margin:0px;">
+<div style="display:none" id="hiddenSign"><%=signature %></div>
 <div id="recognitionCenter" style="position:fixed;width:100%;height:auto;"> 
 <div style="height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D"><img style='position:absolute;top:20px;left:20px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'></div>
 <div style="position:absolute;top:120px;width:80%;left:10%;height:100px;">
@@ -35,6 +44,7 @@ if(!chList.isEmpty()){
 <p style="line-height:22px;">Thanks <span id="to"><%=ch.getTo() %></span> for <span id="comments"><%=ch.getComments() %></span></p>
 </div>
 </div>
+<div id="sign" style="position:absolute;top:500px;right:50px;"></div>
 </body>
 
 
