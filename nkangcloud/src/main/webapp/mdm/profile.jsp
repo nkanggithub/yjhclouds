@@ -668,11 +668,11 @@ function getUserInfo(username, headimgurl, openId) {
 					var jsons = eval('(' + data + ')');
 					if (jsons.results.length > 0) {
 						$("#info_tag tr").html("");
+						$("#info_interact2 span.like").text(jsons.results[0].like.number);
 						if(jsons.results[0].role!="未注册"){
 							$("#info_username span").html(jsons.results[0].realName);
 							$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
 							$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
-							$("#info_interact2 span.like").text(jsons.results[0].like.number);
 							$("#info_interact2 span.zan").text(jsons.results[0].CongratulateNum);
 							if(jsons.results[0].tag!="未注册"){
 								for(var j=0;j<jsons.results[0].tag.length;j++){
@@ -699,6 +699,7 @@ function getUserInfo(username, headimgurl, openId) {
 							jsons = eval('(' + data + ')');
 							$("#info_all").css('display','table');
 							$("img.zan").css('display','block');
+							$("span.zan").css('display','block');
 							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>');
 							$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
 							$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
@@ -707,6 +708,7 @@ function getUserInfo(username, headimgurl, openId) {
 						}else{
 							$("#info_username span").html('未注册');
 							$("img.zan").css('display','none');
+							$("span.zan").css('display','none');
 							$("#info_all").css('display','none');
 							$("#info_selfIntro").text('');
 						}
@@ -1335,7 +1337,7 @@ function getNowFormatDate() {
 												<img class="zan"  data-dismiss="modal" aria-hidden="true" onclick="recognizationPanel()" src="../MetroStyleFiles/zan.png"/>
 											</div>
 											<div id="info_interact2"
-												style="position: absolute; width: 100%; display: block; margin-top: 60px;">
+												style="position: absolute; width: 100%; display: block; margin-top: 45px;">
 												<span class="like"
 													style="float: left; margin-left: 25px; width: 40px; text-align: center;"></span>
 												<span class="zan"
