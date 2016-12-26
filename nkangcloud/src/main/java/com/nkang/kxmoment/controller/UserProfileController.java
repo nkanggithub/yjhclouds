@@ -173,6 +173,7 @@ public class UserProfileController {
 			HttpServletResponse response ){
 		//String openid=request.getParameter("openID");
 		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to"));
+		String fromOpenid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("from"));
 		CongratulateHistory conhis=new CongratulateHistory();
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
@@ -189,10 +190,11 @@ public class UserProfileController {
 		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");
 		if("true".equals(request.getParameter("to"))){
 			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendNewsToUser(openIDs.get(i), conhis);
+				RestUtils.sendNewsToUser(openIDs.get(i),openid,conhis);
 			}
 		}else{
-			RestUtils.sendNewsToUser(openid, conhis);
+			RestUtils.sendNewsToUser(openid,openid, conhis);
+			RestUtils.sendNewsToUser(fromOpenid,openid, conhis);
 		}
 		return "ok";
 	} 
