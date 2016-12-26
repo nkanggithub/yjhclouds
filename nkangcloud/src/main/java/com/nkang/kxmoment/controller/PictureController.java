@@ -25,6 +25,7 @@ public class PictureController{
 	@RequestMapping("/uploadPicture")
 	@ResponseBody
    public String upload(HttpServletRequest request) {
+		String URL = CoreService.picURL;
 		String str="";
 		FaceRecognition faceRecognition = new FaceRecognition();
 		List<FaceObj> ls = new ArrayList<FaceObj>();
@@ -32,7 +33,7 @@ public class PictureController{
 		JSONArray jsonArraGoface;
 		JSONArray jsonArraEmotion;
 		try {
-			String URL = CoreService.picURL;// "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
+			//String URL = CoreService.picURL;// "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			if(URL==null || URL ==""){
 				URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			}
@@ -68,7 +69,7 @@ public class PictureController{
 		 for(int i=0 ; i < ls.size() ;i++){
 			 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
 		 }
-		return str;
+		return str+ "\n\n"+faceRecognition.gofaceEmotion(URL).toString();
 	}
 }
  
