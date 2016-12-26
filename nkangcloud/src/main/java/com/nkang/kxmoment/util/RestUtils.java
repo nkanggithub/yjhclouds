@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.ClientInformation;
+import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
@@ -1882,6 +1883,151 @@ public static String regist(WeChatMDLUser user) {
 		}
 		return orgCountryCode;
 	}
+	
+    public static String sendTextMessageToUser(String content,List<String> toUser){
+    	String result="";
+    	String text="";
+    	if(toUser.size()!=1){
+    	for(int i=0;i<toUser.size();i++)
+    	{
+    		
+    		if(i==toUser.size()-1)
+    		{
+    			text=text+toUser.get(i);
+    		}
+    		else
+    		{
+    			text=text+toUser.get(i)+"\",\"";
+    		}
+    	}
+
+    	}
+
+       //获取access_token
+
+
+        String json = "{\"touser\": [\""+text+"\"],\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
+        String accessToken = MongoDBBasic.getValidAccessKey();
+/*       String accessToken = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
+
+       //获取请求路径
+       String action =  "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token="+accessToken;
+       if(toUser.size()==1){
+    	   json= "{\"touser\": \""+toUser.get(0)+"\",\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
+    	  action =    "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+accessToken;}
+     
+       
+
+       System.out.println("json:"+json);
+
+       try {
+
+          result = connectWeiXinInterface(action,json);
+
+       } catch (Exception e) {
+
+           e.printStackTrace();
+
+       }
+       return result;
+
+   }
+    
+   
+    public static String sendNewsToUser(String openId,CongratulateHistory ch){
+    	String result ="";
+
+    	   /*     ArrayList<Object> articles = new ArrayList<Object>();
+
+    	       Article a = new Article();
+
+    	       articles.add(a);
+
+    	       String str = JsonUtil.getJsonStrFromList(articles);
+    	*/
+   
+    			String str="{\"title\":\"Congratulations!! \",\"description\":\""+ch.getTo()+"has been recognized!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid="+openId+"\",\"picurl\":"
+    					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM\"}";
+    	        String json = "{\"touser\":\""+openId+"\",\"msgtype\":\"news\",\"news\":" +
+
+    	                "{\"articles\":[" +str +"]}"+"}";
+
+
+    	        System.out.println(json);
+
+/*    	       String access_token = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
+    	        String access_token =  MongoDBBasic.getValidAccessKey();
+
+    	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+    	       try {
+
+    	    	 	result =  connectWeiXinInterface(action,json);
+
+    	       } catch (Exception e) {
+
+    	           e.printStackTrace();
+
+    	       }
+    	       return result;
+
+    	    }
+    public static String connectWeiXinInterface(String action,String json){
+
+        URL url;
+        String result="";
+
+       try {
+
+           url = new URL(action);
+
+           HttpURLConnection http = (HttpURLConnection) url.openConnection();
+
+           http.setRequestMethod("POST");
+
+           http.setRequestProperty("Content-Type",
+
+                   "application/x-www-form-urlencoded");
+
+           http.setDoOutput(true);
+
+           http.setDoInput(true);
+
+           System.setProperty("sun.NET.client.defaultConnectTimeout", "30000");
+
+           System.setProperty("sun.Net.client.defaultReadTimeout", "30000");
+
+           http.connect();
+
+           OutputStream os = http.getOutputStream();
+
+           os.write(json.getBytes("UTF-8"));// 传入参数
+
+           InputStream is = http.getInputStream();
+
+           int size = is.available();
+
+           byte[] jsonBytes = new byte[size];
+
+           is.read(jsonBytes);
+
+           result = new String(jsonBytes, "UTF-8");
+
+        //   System.out.println("请求返回结果:"+result);
+
+           os.flush();
+
+           os.close();
+          
+
+       } catch (Exception e) {
+
+           e.printStackTrace();
+
+       }
+       return "status:"+result;
+
+    }
 }
 
 
