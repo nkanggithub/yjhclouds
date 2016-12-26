@@ -280,7 +280,7 @@ function postRecognition(){
 }
 function SpeechPanel(){
 	showCommonPanel();
-	$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>智能语音</legend><form id="labnol" method="get" action="https://www.bing.com/search">'
+	$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>智能语音</legend><form id="labnol" method="get" action="https://www.bing.com/search">'
 			+'         <div class="speech">'
 			+'           <input type="text" name="q" id="transcript" placeholder="Speak" />'
 			+'           <img onclick="startDictation()" src="../MetroStyleFiles/cHidSVu.gif" />'
@@ -292,7 +292,7 @@ function SpeechPanel(){
 }
 function taxPanel(){
 		showCommonPanel();
-		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
+		$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
 				+'											<tr>'
 				+'												<td>起征点：</td>'
 				+'												<td><input type="text" id="taxstart" value="3500" /></td>'
