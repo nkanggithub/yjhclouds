@@ -181,6 +181,7 @@ public class UserProfileController {
 		conhis.setComments(request.getParameter("comments"));
 		conhis.setCongratulateDate(new Date().toLocaleString());
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
+		RestUtils.sendNewsToUser(openid, conhis);
 		return "ok";
 	} 
 	@RequestMapping("/getCompanyInfo")
