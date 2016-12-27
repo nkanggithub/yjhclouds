@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
+import com.nkang.kxmoment.util.NumberUtil;
+
 public class FaceObj {
 
 	String smile ;
@@ -60,7 +62,7 @@ public class FaceObj {
 		return anger;
 	}
 	public void setAnger(String anger) {
-		this.anger = anger;
+		this.anger = NumberUtil.scienceToNormal(anger);
 	}
 	public String getContempt() {
 		return contempt;
@@ -105,8 +107,9 @@ public class FaceObj {
 		this.surprise = surprise;
 	}
 	public String Info(){
-		return "smile : "+this.smile +"\n"+"age :"+this.age +"\n"+"glasses :"+this.glasses +"\n"+"gender :"+this.gender +"\n"+"moustache :"+this.moustache +
+		String a = "smile : "+this.smile +"\n"+"age :"+this.age +"\n"+"glasses :"+this.glasses +"\n"+"gender :"+this.gender +"\n"+"moustache :"+this.moustache +
 				"\n"+"beard :"+this.beard+"\n"+"anger :"+this.anger+"\n"+"contempt :"+this.contempt+"\n"+"disgust :"+this.disgust+"\n"+"fear :"+this.fear+
 				"\n"+"happiness :"+this.happiness+"\n"+"neutral :"+this.neutral+"\n"+"sadness :"+this.sadness+"\n"+"surprise :"+this.surprise;
+		return a;
 	}
 }
