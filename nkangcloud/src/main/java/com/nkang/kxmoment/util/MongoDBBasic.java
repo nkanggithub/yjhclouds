@@ -1924,9 +1924,7 @@ public class MongoDBBasic {
 			DBCursor queryresults;
 			try{
 					DBObject query = new BasicDBObject();
-					query.put("OpenID", OpenID);query.put("OpenID", OpenID);
-					if(!"".equals(num)){
-					query.put("num", num);}
+					query.put("OpenID", OpenID);
 					queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
 				if (null != queryresults) {
 	            	while(queryresults.hasNext()){
@@ -1937,14 +1935,20 @@ public class MongoDBBasic {
 	                    Object[] ConObjects = CongratulateHistoryObj.toArray();
 						for(Object co : ConObjects){
 	                        			if(co instanceof DBObject){
-	                        				ch=new CongratulateHistory();
-											ch.setComments(((DBObject)co).get("comments").toString());
-											ch.setCongratulateDate(((DBObject)co).get("congratulateDate").toString().substring(0,11));
-											ch.setFrom(((DBObject)co).get("from").toString());
-											ch.setTo(((DBObject)co).get("to").toString());
-											ch.setPoint(((DBObject)co).get("point").toString());
-											ch.setType(((DBObject)co).get("type").toString());
-											chList.add(ch);
+	                        				if(!StringUtils.isEmpty(num)&&null!=((DBObject)co).get("num")){
+	                    						if(num.equals(((DBObject)co).get("num").toString()))
+	                    						{
+	                    							ch=new CongratulateHistory();
+	    											ch.setComments(((DBObject)co).get("comments").toString());
+	    											ch.setCongratulateDate(((DBObject)co).get("congratulateDate").toString().substring(0,11));
+	    											ch.setFrom(((DBObject)co).get("from").toString());
+	    											ch.setTo(((DBObject)co).get("to").toString());
+	    											ch.setPoint(((DBObject)co).get("point").toString());
+	    											ch.setType(((DBObject)co).get("type").toString());
+	    											chList.add(ch);
+	                    						}
+	                    					}
+	                        				
 	                        			}
 	                        		}
 	                		}
@@ -1981,7 +1985,6 @@ public class MongoDBBasic {
 	                        				{
 	                        					num=Integer.parseInt(String.valueOf( ((DBObject)co).get("num")).trim());
 	                        					}
-										
 	                        			}
 	                        		}
 	                		}
