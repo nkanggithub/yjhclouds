@@ -1,6 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
 public class CongratulateHistory {
+	String num;
 	String from;
 	String to;
 	String comments;
@@ -8,6 +9,12 @@ public class CongratulateHistory {
 	String point;
 	String congratulateDate;
 	
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
 	public String getCongratulateDate() {
 		return congratulateDate;
 	}
