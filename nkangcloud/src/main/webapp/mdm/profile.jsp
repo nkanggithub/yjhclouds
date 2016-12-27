@@ -517,6 +517,7 @@ function recognizationPanel(){
 }
 function recognizationPanelByPerson(personName){
 	var realName=$("#realName").val();
+	var selectContent=$("#hiddenSelect").html();
 	if(realName!=""){
 		showCommonPanel();
 		
