@@ -328,6 +328,9 @@ function  WeatherPanel(){
 								+'<table width="100%" id="weather2" style="margin-left:auto;margin-right:auto;">'
 								+tbody+'							</table>'
 								+'							</div>');
+						$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+						      $(this).removeClass("bounceInDown animated");
+						    });
 						tbody = "";
 						for (var i = 0; i < jsons.results[0].index.length; i++) {
 							var temp = jsons.results[0].index[i];
@@ -353,9 +356,6 @@ function  WeatherPanel(){
 					}
 				}
 			});
-	$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-	      $(this).removeClass("bounceInDown animated");
-	    });
 }
 function SpeechPanel(){
 	showCommonPanel();
