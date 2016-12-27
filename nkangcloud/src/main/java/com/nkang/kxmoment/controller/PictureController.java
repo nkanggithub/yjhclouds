@@ -15,6 +15,7 @@ import com.nkang.kxmoment.baseobject.FaceObj;
 import com.nkang.kxmoment.service.CoreService;
 import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.FaceRecognition;
+import com.nkang.kxmoment.util.NumberUtil;
 
 @Controller
 public class PictureController{
@@ -46,14 +47,14 @@ public class PictureController{
 				  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
 				  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
 				
-				  fo.setAnger(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString());
-				  fo.setContempt(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString());
-				  fo.setDisgust(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString());
-				  fo.setFear(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString());
-				  fo.setHappiness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString());
-				  fo.setNeutral(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString());
-				  fo.setSadness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString());
-				  fo.setSurprise(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString());
+				  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
+				  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
+				  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));
+				  fo.setFear(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString()));
+				  fo.setHappiness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString()));
+				  fo.setNeutral(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString()));
+				  fo.setSadness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString()));
+				  fo.setSurprise(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString()));
 				  
 				  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
 				  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
