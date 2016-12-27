@@ -13,6 +13,7 @@ String uid = request.getParameter("UID");
   <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
   <script type="text/javascript" src="../Jsp/JS/gauge.min.js"></script>
    <script>
+   $(window).load(function() {
   	$.ajax({  
 	        cache : false,  
 	        type : "GET",
@@ -23,6 +24,7 @@ String uid = request.getParameter("UID");
 	        	$('#text').text(data);
 	        }
 	  	});
+   });
   	</script>
 <style>
 
