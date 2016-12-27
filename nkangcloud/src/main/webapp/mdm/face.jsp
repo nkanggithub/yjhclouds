@@ -21,9 +21,7 @@
 	        }
 	  	});
   	</script>
-  	
-  	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Gauge Test</title>
+
     <style>body {
         padding: 0;
         margin: 0;
