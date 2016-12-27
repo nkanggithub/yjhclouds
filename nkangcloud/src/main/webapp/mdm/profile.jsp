@@ -77,12 +77,33 @@ var LastToLikeDate="",lastLikeTo="";
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
+		checkReg();
 		getStockData(stockUrl);
 		getMDLUserLists();
 		getCompanyInfo();
 		getRealName();
 		getAllRegisterUsers();
 });
+function checkReg() {
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {
+			UID : $('#uid').val()
+		},
+		cache : false,
+		success : function(data) {
+			data = data.replace(/:null/g, ':"未注册"');
+			data = '{"results":' + data + '}';
+			var jsons = eval('(' + data + ')');
+			if (jsons.results.length > 0) {
+				if(jsons.results[0].role=="未注册"){
+					swal("你还未注册哦", "未注册用户很多功能不能使用,建议立即注册！", "error");
+				}
+			}
+		}
+	});
+}
 function startDictation() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) 
       var recognition = new webkitSpeechRecognition();
