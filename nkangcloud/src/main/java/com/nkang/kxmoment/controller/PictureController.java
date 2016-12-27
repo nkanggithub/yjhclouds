@@ -39,30 +39,34 @@ public class PictureController{
 			}
 			jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
 			jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion(URL).toString());
-			for(int i=0 ; i < jsonArraEmotion.length() ;i++)
-			  {
-			  FaceObj fo = new FaceObj();
-			  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
-			  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
+			if(jsonArraGoface!=null && jsonArraEmotion!=null){
+				for(int i=0 ; i < jsonArraEmotion.length() ;i++)
+				  {
+				  FaceObj fo = new FaceObj();
+				  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
+				  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
+				
+				  fo.setAnger(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString());
+				  fo.setContempt(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString());
+				  fo.setDisgust(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString());
+				  fo.setFear(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString());
+				  fo.setHappiness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString());
+				  fo.setNeutral(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString());
+				  fo.setSadness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString());
+				  fo.setSurprise(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString());
+				  
+				  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
+				  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
+				  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
+				  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
+				  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
+				  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
+				  ls.add(fo);
+				  }
+			}else{
+				str="服务器繁忙，请稍后再试！";
+			}
 			
-			  fo.setAnger(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString());
-			  fo.setContempt(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString());
-			  fo.setDisgust(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString());
-			  fo.setFear(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString());
-			  fo.setHappiness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString());
-			  fo.setNeutral(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString());
-			  fo.setSadness(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString());
-			  fo.setSurprise(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString());
-			  
-			  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
-			  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
-			  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
-			  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
-			  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
-			  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
-			  ls.add(fo);
-			  }
-		
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
