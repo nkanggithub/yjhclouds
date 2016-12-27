@@ -1945,7 +1945,7 @@ public static String regist(WeChatMDLUser user) {
 
     	       String str = JsonUtil.getJsonStrFromList(articles);
     	*/
-    			String str="{\"title\":\"Congratulations!! \",\"description\":\""+ch.getTo()+" has been recognized!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid="+openId+"\",\"picurl\":"
+    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
