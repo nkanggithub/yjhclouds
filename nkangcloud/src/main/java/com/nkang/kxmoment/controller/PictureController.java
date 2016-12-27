@@ -32,7 +32,7 @@ public class PictureController{
 		String openid = request.getParameter("openid");
 		
 		String URL = MongoDBBasic.getUserWithFaceUrl(openid);
-		String str="---";
+		String str="";
 		FaceRecognition faceRecognition = new FaceRecognition();
 		List<FaceObj> ls = new ArrayList<FaceObj>();
 		
