@@ -5,10 +5,11 @@
 <%@ page import="java.util.List"%>
 <%	
 String uid = request.getParameter("uid");
-List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid);
+String num = request.getParameter("num");
+List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid,num);
 CongratulateHistory ch=new CongratulateHistory();
 if(!chList.isEmpty()){
-	ch=chList.get(chList.size()-1);
+	ch=chList.get(0);
 }
 String openid=MongoDBBasic.getRegisterUserByrealName(ch.getFrom());
 String signature=MongoDBBasic.getUserWithSignature(openid);
@@ -35,7 +36,7 @@ $(function(){
 <div id="recognitionCenter" style="position:absolute;width:100%;height:auto;"> 
 <div style="height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D"><img style='position:absolute;top:20px;left:20px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'></div>
 <div style="position:absolute;top:120px;width:80%;left:10%;height:100px;">
-<p style="float:left;width:110px;font-weight:bold;">Congratulations</p><p id="to" style="float:left;"><%=ch.getTo() %></p><p style="float:left;">!</p></div>
+<p style="float:left;width:110px;font-weight:bold;">Congratulations</p><p id="to" style="float:left;"> <%=ch.getTo() %></p><p style="float:left;">!</p></div>
 <div style="position:absolute;top:160px;width:80%;left:10%;height:100px;font-size:14px;font-family: HP Simplified, Arial, Sans-Serif;">
 <p style="line-height:22px;">You must have done something amazing! <span id="from"><%=ch.getFrom() %></span> has recognized you: <span id="type"><%=ch.getType() %></span>. <p>
 <p style="width:100%;line-height:22px;font-size:16px;font-weight:bold;">Here’s what was said about you</p>
