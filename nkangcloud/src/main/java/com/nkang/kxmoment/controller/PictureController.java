@@ -44,6 +44,7 @@ public class PictureController{
 			  FaceObj fo = new FaceObj();
 			  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
 			  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
+			
 			  fo.setAnger(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString());
 			  fo.setContempt(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString());
 			  fo.setDisgust(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString());
