@@ -14,8 +14,29 @@ public class WeChatMDLUser extends WeChatUser {
 	public String email;
 	public String phone;
 	public String point;
+	public String IsActive;
+	public String IsAuthenticated;
+	public String IsRegistered;
 	public ArrayList tag;
 	public HashMap like;
+	public String getIsActive() {
+		return IsActive;
+	}
+	public void setIsActive(String isActive) {
+		IsActive = isActive;
+	}
+	public String getIsAuthenticated() {
+		return IsAuthenticated;
+	}
+	public void setIsAuthenticated(String isAuthenticated) {
+		IsAuthenticated = isAuthenticated;
+	}
+	public String getIsRegistered() {
+		return IsRegistered;
+	}
+	public void setIsRegistered(String isRegistered) {
+		IsRegistered = isRegistered;
+	}
 	public HashMap getLike() {
 		return like;
 	}
