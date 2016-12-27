@@ -2024,7 +2024,7 @@ public class MongoDBBasic {
 			query.put("OpenID", openID);
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("FaceUrl",query);
-				return dbuser.get(0);
+				return dbuser==null?"":dbuser.get(0);
 		}
 	    // END
 }
