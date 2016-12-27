@@ -1874,6 +1874,7 @@ public class MongoDBBasic {
 	                BasicDBObject doc = new BasicDBObject();  
 	    	    	DBObject update = new BasicDBObject();
 	    	    	DBObject innerInsert = new BasicDBObject();
+	    	    	innerInsert.put("num", conhis.getNum());
 	    	    	innerInsert.put("from", conhis.getFrom());
 	    	    	innerInsert.put("to", conhis.getTo());
 	    	    	innerInsert.put("comments", conhis.getComments());
@@ -1907,14 +1908,16 @@ public class MongoDBBasic {
 		/*
 		 * Panda
 		 */
-		public static List<CongratulateHistory> getRecognitionInfoByOpenID(String OpenID) {
+		public static List<CongratulateHistory> getRecognitionInfoByOpenID(String OpenID,String num) {
 			mongoDB = getMongoDB();
 			List<CongratulateHistory> chList = new ArrayList<CongratulateHistory>();
 			CongratulateHistory ch = null;
 			DBCursor queryresults;
 			try{
 					DBObject query = new BasicDBObject();
-					query.put("OpenID", OpenID);
+					query.put("OpenID", OpenID);query.put("OpenID", OpenID);
+					if(!"".equals(num)){
+					query.put("num", num);}
 					queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
 				if (null != queryresults) {
 	            	while(queryresults.hasNext()){
@@ -1942,6 +1945,43 @@ public class MongoDBBasic {
 				log.info("getWeChatUserFromMongoDB--" + e.getMessage());
 			}
 			return chList;
+		}
+		
+		/*
+		 * Panda
+		 */
+		public static int getRecognitionMaxNumByOpenID(String OpenID) {
+			int num=0;
+			mongoDB = getMongoDB();
+			DBCursor queryresults;
+			try{
+					DBObject query = new BasicDBObject();
+					query.put("OpenID", OpenID);
+					queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+				if (null != queryresults) {
+	            	while(queryresults.hasNext()){
+					DBObject o = queryresults.next();
+	                Object CongratulateHistory = o.get("CongratulateHistory");
+	                BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
+	                if(CongratulateHistoryObj != null){
+	                	
+	                    Object[] ConObjects = CongratulateHistoryObj.toArray();
+						for(Object co : ConObjects){
+	                        			if(co instanceof DBObject){
+	                        				if(null!=((DBObject)co).get("num"))
+	                        				{
+	                        					num=Integer.parseInt(String.valueOf( ((DBObject)co).get("num")).trim());
+	                        					}
+										
+	                        			}
+	                        		}
+	                		}
+	            	}
+				}
+			}catch(Exception e){
+				log.info("getWeChatUserFromMongoDB--" + e.getMessage());
+			}
+			return num;
 		}
 		public static String getRegisterUserByrealName(String realName){
 			mongoDB = getMongoDB();
