@@ -188,13 +188,13 @@ public class UserProfileController {
 		openIDs.add("oqPI_xLq1YEJOczHi4DS2-1U0zqc");
 		openIDs.add("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
 		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");
-		if("true".equals(request.getParameter("to"))){
+		if("true".equals(request.getParameter("isAll"))){
 			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendNewsToUser(openIDs.get(i),openid,conhis);
+				RestUtils.sendNewsToUser(openid,openIDs.get(i),conhis);
 			}
 		}else{
 			RestUtils.sendNewsToUser(openid,openid, conhis);
-			RestUtils.sendNewsToUser(fromOpenid,openid, conhis);
+			RestUtils.sendNewsToUser(openid,fromOpenid, conhis);
 		}
 		return "ok";
 	} 
