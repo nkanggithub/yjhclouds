@@ -745,6 +745,18 @@ public class MasterDataRestController {
 		return ret;
 	}
 	
+	@RequestMapping("/CallGetUserWithFaceUrl")
+	public static String CallGetUserWithFaceUrl(@RequestParam(value="openid", required=false) String openid){
+		String ret = "";
+		try{
+			ret = MongoDBBasic.getUserWithFaceUrl(openid);
+
+		}		
+		catch(Exception e){
+			ret = e.getMessage();
+		}
+		return ret;
+	}
 	
 	/*
 	 * chang-zheng
