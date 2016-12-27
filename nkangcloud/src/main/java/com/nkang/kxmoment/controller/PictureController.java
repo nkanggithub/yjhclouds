@@ -41,7 +41,7 @@ public class PictureController{
 		try {
 			//String URL = CoreService.picURL;// "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			if(	StringUtils.isEmpty(URL)){
-				str="你还没有上传头像，请先准备好你的照片。。。";
+				str="you don't have one photo..";
 				//URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			}else{
 				jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
@@ -71,6 +71,9 @@ public class PictureController{
 					  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
 					  ls.add(fo);
 					  }
+					for(int i=0 ; i < ls.size() ;i++){
+						 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
+					 }
 				}else{
 					str="服务器繁忙，请稍后再试！";
 				}
@@ -79,9 +82,7 @@ public class PictureController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 for(int i=0 ; i < ls.size() ;i++){
-			 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
-		 }
+		 
 		return str;
 	}
 }
