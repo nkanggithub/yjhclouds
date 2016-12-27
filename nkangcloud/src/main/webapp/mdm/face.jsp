@@ -14,7 +14,9 @@
 	        cache : false,  
 	        type : "GET",
 			url : "../uploadPicture", 
-			data : {},
+			data : {
+				openid : $('#uid').val()
+			},
 	        timeout: 2000, 
 	        success: function(data){
 	        	$('#text').text(data);
