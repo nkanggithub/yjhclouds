@@ -15,6 +15,7 @@ import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.FaceObj;
 import com.nkang.kxmoment.service.CoreService;
 import com.nkang.kxmoment.util.CommenJsonUtil;
+import com.nkang.kxmoment.util.FaceCalUtil;
 import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.NumberUtil;
@@ -69,6 +70,7 @@ public class PictureController{
 					  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
 					  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
 					  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
+					  fo=FaceCalUtil.toCal(fo);
 					  ls.add(fo);
 					  }
 					for(int i=0 ; i < ls.size() ;i++){
