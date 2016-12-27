@@ -30,7 +30,6 @@ import com.nkang.kxmoment.util.RestUtils;
 
 public class CoreService
 {
-	public static String picURL;
 	private static Logger log = Logger.getLogger(CoreService.class);
 	private static Timer timer= new Timer();
 	public static String processRequest(HttpServletRequest request)
@@ -119,7 +118,6 @@ public class CoreService
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-				picURL = requestObject.element("PicUrl").getText();
 				String mediaId = requestObject.element("MediaId").getText();
 				String picUrl = requestObject.element("PicUrl").getText();
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
@@ -131,7 +129,6 @@ public class CoreService
 				FaceRecognition fr = new FaceRecognition();
 				String fro = fr.goface(picUrl);
 				JSONArray jsonArra = new JSONArray(fro);
-				//String str = fro.substring(1, fro.length()-1);
 				List<FaceObj> ls = new ArrayList<FaceObj>();
 				 for(int i=0 ; i < jsonArra.length() ;i++)
 				  {
