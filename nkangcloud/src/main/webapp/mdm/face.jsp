@@ -89,7 +89,7 @@
 	Sadness: 0.003 <br />
 	Surprise:0.0004 <br />
 	</div>
-	<hr>
+
 </div>
 <div class ="DetectedPerson">
 	<canvas 
@@ -118,7 +118,7 @@
 	Sadness: 0.003 <br />
 	Surprise:0.0004 <br />
 	</div>
-	<hr>
+
 </div>
 
 <br /><br />
