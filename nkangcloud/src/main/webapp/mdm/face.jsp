@@ -21,27 +21,46 @@
 	        }
 	  	});
   	</script>
+<style>
+#myfacevalue{
+	position:relative;
+	top:40%;
+	left:20%;
+}
+</style>
 
-    <style>body {
-        padding: 0;
-        margin: 0;
-        background: #fff
-    }</style>
     
     
 </head>
 <body style="padding:0px;margin:0px;">
-<button onclick="animateGauges()">开始测试</button>
-<button onclick="stopGaugesAnimation()">停止测试</button>
-<hr>
-<canvas data-type="radial-gauge"
-        data-value="-20"
+
+
+
+
+
+<a href="profile.jsp?UID=<%=session.getAttribute("UID")%>">
+	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
+</a>	
+<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
+<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
+<div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">测颜值</div>
+<input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
+<div id="text" style="margin-top:150px;width:80%;margin-left:10%;text-align:center;">
+
+</div>
+
+
+<canvas 
+		id="myfacevalue"
+		data-type="radial-gauge"
+        data-value="80"
         data-width="400"
         data-height="400"
         data-bar-width="10"
         data-bar-shadow="5"
         data-color-bar-progress="rgba(50,200,50,.75)"
 ></canvas>
+
 <script>
 if (!Array.prototype.forEach) {
     Array.prototype.forEach = function(cb) {
@@ -61,42 +80,26 @@ document.fonts && document.fonts.forEach(function(font) {
         }
     });
 });
-
 var timers = [];
-
 function animateGauges() {
     document.gauges.forEach(function(gauge) {
         timers.push(setInterval(function() {
-            var min = gauge.options.minValue - 20;
+            var min = gauge.options.minValue;
             var max = gauge.options.maxValue + 20;
 
             gauge.value = min + Math.random() * (max - min);
         }, gauge.animation.duration + 50));
     });
 }
-
 function stopGaugesAnimation() {
     timers.forEach(function(timer) {
         clearInterval(timer);
     });
 }
 </script>
+<br /><br />
+<!-- <button onclick="animateGauges()">开始测试</button>
+<button onclick="stopGaugesAnimation()">停止测试</button> -->
 
-
-
-
-
-
-<a href="profile.jsp?UID=<%=session.getAttribute("UID")%>">
-	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
-</a>	
-<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
-<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
-<div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">测颜值</div>
-<input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
-<div id="text" style="margin-top:150px;width:80%;margin-left:10%;text-align:center;">
-
-
-</div>
 </body>
 </html>
