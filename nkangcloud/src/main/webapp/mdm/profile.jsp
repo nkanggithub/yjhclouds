@@ -76,7 +76,6 @@ if (session.getAttribute("location") == null) {
 var LastToLikeDate="",lastLikeTo="";
 $(window).load(function() {
 	$(".mes-openbt").openmes({ext: 'php'});
-        getWeather();
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		getStockData(stockUrl);
 		getMDLUserLists();
@@ -287,6 +286,76 @@ function postRecognition(){
         }
     });
 
+}
+function  WeatherPanel(){
+	showCommonPanel();
+	jQuery.ajax({
+				type : "GET",
+				url : "../userProfile/getWeather",
+				data : {},
+				cache : false,
+				success : function(data) {
+					var jsons = eval('(' + data + ')');
+					if (jsons.status == 'success'
+							&& jsons.results.length > 0) {
+						var tbody="";
+						for (var i = 0; i < jsons.results[0].weather_data.length; i++) {
+							var temp = jsons.results[0].weather_data[i];
+							var tr = "<tr>";
+							if (i == 0) {
+								var dateT = temp.date;
+								var start = dateT.lastIndexOf("：");
+								var end = dateT.lastIndexOf(")");
+								dateT = dateT.substring(start + 1, end);
+								tr += '<td colspan="3" align="center"><div  style="float:left;padding-bottom:10px;margin-bottom:-50px;"><img id="refreshImg" src="../MetroStyleFiles/refresh.png" style="height:25px;cursor:pointer;" onclick="getWeather();"/></div><b> <img src="../MetroStyleFiles/temperature.png" style="height:25px;"/>'
+										+ dateT
+										+ '</b> <div  style="float:right;padding-bottom:10px;margin-bottom:-50px;"><a class="" data-toggle="modal" href="#WeatherDetails"  data-dismiss="modal" aria-hidden="true"><img src="../MetroStyleFiles/details.png" style="height:25px;cursor:pointer;"/> </a></div></td></tr><tr>';
+								tr += '<td width="20%" align="left">今天</td>';
+							} else {
+								tr += '<td width="20%" align="left">'
+										+ temp.date + '</td>';
+							}
+							tr += '<td width="55%" align="left"><img src="'+temp.dayPictureUrl +'"/><img src="'+temp.nightPictureUrl +'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+									+ temp.weather + '</td>';
+							tr += '<td width="25%" align="right">'
+									+ temp.temperature + ' </td>';
+							tr += "</tr>";
+							tbody += tr;
+						}
+						tbody += '<tr><td colspan="3" align="center">'
+								+ getNowFormatDate() + '</td></tr>';
+						$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+								+'<table width="100%" id="weather2" style="margin-left:auto;margin-right:auto;">'
+								+tbody+'							</table>'
+								+'							</div>');
+						tbody = "";
+						for (var i = 0; i < jsons.results[0].index.length; i++) {
+							var temp = jsons.results[0].index[i];
+							var tr = "<tr>";
+							var tipt;
+							if (temp.tipt.length > 4) {
+								tipt = "紫外线";
+							} else {
+								tipt = temp.tipt;
+							}
+							tr += '<td width="15%" align="right" valign="top" ><nobr><b>'
+									+ tipt + '：</b></nobr></td>';
+							tr += '<td width="85%" align="left">'
+									+ temp.des + '</td>';
+							tr += "</tr>";
+							tbody += tr;
+						}
+						$('#weather_suggest').html(tbody);
+						if ($("#refreshImg") != null
+								&& $("#refreshImg") != undefined)
+							$("#refreshImg").attr("src",
+									"../MetroStyleFiles/refresh.png");
+					}
+				}
+			});
+	$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
 }
 function SpeechPanel(){
 	showCommonPanel();
@@ -1186,7 +1255,7 @@ function getNowFormatDate() {
 											<tr>
 												<td>
 											<!-- 	<a class="" data-toggle="modal"	href="#weather_main_div"></a> -->
-													 <img  class="mes-openbt" data-mesid="message-weather" 
+													 <img   onclick="WeatherPanel()"
 														src="../MetroStyleFiles/menu-weather.png" />
 														<h4>天气</h4>
 												</td>
@@ -1546,44 +1615,6 @@ function getNowFormatDate() {
 		<!-- START MESSAGE STATION -->
 	<div id="mes-station">
 		
-<!--  Start Weather Page  -->			
-		<div class="mes-container item-profileview transparent-black"
-			data-mesid="message-weather">
-			<!-- Start Content Holder -->
-			<div class="mes-contentholder">
-				<div class="item-profilebody">
-					<!-- Start Background -->
-					<div class="mes-content item-profilebg solid-smoke"
-						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
-						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
-						</div>
-					<!-- End Background -->
-					<!-- Start Control Bar -->
-					<div class="mes-content item-ctrlbar-5" data-show="fade"
-						data-showdura="200">
-						<div class="mes-closebt light-text floatleft">
-							<img src="../MetroStyleFiles//EXIT1.png"
-								style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
-						</div>
-						<div class="clearspace"></div>
-					</div>
-					<!-- End Control Bar -->
-					<!-- Start Header Photo -->
-					<div class="mes-content item-headerphoto" style="width:80%;position:absolute;top:100px;left:10%;" data-show="bounceInDown">
-							<legend>天气</legend>
-							<div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">
-								<table width="100%" id="weather2" style="margin-left:auto;margin-right:auto;">
-								</table>
-							</div>
-					</div> 
-					<!-- End Header Photo -->
-				</div>
-				<img  src="../MetroStyleFiles//image/sitemaintenance_robot_animation.gif" alt="demo-headphoto">
-			</div>
-		</div>
-		<!-- End Content Holder -->
-<!--  End Weather Page  -->		
 
 <!--  Start Tax Page  -->	
 		<div class="mes-container item-profileview transparent-black"
