@@ -1948,6 +1948,16 @@ public class MongoDBBasic {
 	    											chList.add(ch);
 	                    						}
 	                    					}
+	                        				else{
+	                        					ch=new CongratulateHistory();
+    											ch.setComments(((DBObject)co).get("comments").toString());
+    											ch.setCongratulateDate(((DBObject)co).get("congratulateDate").toString().substring(0,11));
+    											ch.setFrom(((DBObject)co).get("from").toString());
+    											ch.setTo(((DBObject)co).get("to").toString());
+    											ch.setPoint(((DBObject)co).get("point").toString());
+    											ch.setType(((DBObject)co).get("type").toString());
+    											chList.add(ch);
+	                        				}
 	                        				
 	                        			}
 	                        		}
