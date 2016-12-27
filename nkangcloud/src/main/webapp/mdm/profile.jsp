@@ -1304,20 +1304,20 @@ function getNowFormatDate() {
 														<h4>世界时间</h4>
 												</td>
 												<td> <!-- onclick="signaturePanel()"  -->
-												 <a href="Signature.jsp">
+												 <a href="Signature.jsp?UID=<%=uid%>">
 												<img 
 														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
 												<td>
-												 <a href="face.jsp">
+												 <a href="face.jsp?UID=<%=uid%>">
 												 <img src="../MetroStyleFiles/menu-face.png" /></a>
 													<h4>测颜值</h4></td>
 											</tr>
 											<tr>
 												<td>
 												<!--  onclick="SpeechPanel()" -->
-												 <a href="speak.jsp"><img 
+												 <a href="speak.jsp?UID=<%=uid%>"><img 
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>智能语音</h4>
 												</td>
