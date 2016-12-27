@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.FaceObj;
 import com.nkang.kxmoment.service.CoreService;
 import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.FaceRecognition;
+import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.NumberUtil;
+import com.nkang.kxmoment.util.StringUtils;
 
 @Controller
 public class PictureController{
@@ -26,7 +29,9 @@ public class PictureController{
 	@RequestMapping("/uploadPicture")
 	@ResponseBody
    public String upload(HttpServletRequest request) {
-		String URL = CoreService.picURL;
+		String openid = request.getParameter("openid");
+		
+		String URL = MongoDBBasic.getfaceURL(openid);
 		String str="";
 		FaceRecognition faceRecognition = new FaceRecognition();
 		List<FaceObj> ls = new ArrayList<FaceObj>();
@@ -35,39 +40,41 @@ public class PictureController{
 		JSONArray jsonArraEmotion;
 		try {
 			//String URL = CoreService.picURL;// "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
-			if(URL==null || URL ==""){
-				URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
-			}
-			jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
-			jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion(URL).toString());
-			if(jsonArraGoface!=null && jsonArraEmotion!=null){
-				for(int i=0 ; i < jsonArraEmotion.length() ;i++)
-				  {
-				  FaceObj fo = new FaceObj();
-				  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
-				  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
-				
-				  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
-				  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
-				  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));
-				  fo.setFear(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString()));
-				  fo.setHappiness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString()));
-				  fo.setNeutral(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString()));
-				  fo.setSadness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString()));
-				  fo.setSurprise(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString()));
-				  
-				  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
-				  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
-				  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
-				  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
-				  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
-				  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
-				  ls.add(fo);
-				  }
+			if(	StringUtils.isEmpty(URL)){
+				str="你还没有上传头像，请先准备好你的照片。。。";
+				//URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			}else{
-				str="服务器繁忙，请稍后再试！";
+				jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
+				jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion(URL).toString());
+				
+				if(jsonArraGoface!=null && jsonArraEmotion!=null){
+					for(int i=0 ; i < jsonArraEmotion.length() ;i++)
+					  {
+					  FaceObj fo = new FaceObj();
+					  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
+					  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
+					
+					  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
+					  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
+					  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));
+					  fo.setFear(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString()));
+					  fo.setHappiness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString()));
+					  fo.setNeutral(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString()));
+					  fo.setSadness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString()));
+					  fo.setSurprise(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString()));
+					  
+					  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
+					  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
+					  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
+					  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
+					  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
+					  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
+					  ls.add(fo);
+					  }
+				}else{
+					str="服务器繁忙，请稍后再试！";
+				}
 			}
-			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
