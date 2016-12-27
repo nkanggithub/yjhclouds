@@ -434,7 +434,7 @@ public class MongoDBBasic {
 		}
 		catch(Exception e){
 			log.info("getUserWithSignature--" + e.getMessage());
-			ret = e.getMessage();
+			e.getMessage();
 		}
 		return ret;
 	}
