@@ -372,6 +372,23 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	
+	public static boolean updateUserWithFaceUrl(String openid, String picurl){
+		mongoDB = getMongoDB();
+		boolean ret = false;
+		try{
+			BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("FaceUrl", picurl);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
+			ret = true;
+		}
+		catch(Exception e){
+			log.info("updateUserWithFaceUrl--" + e.getMessage());
+		}
+		return ret;
+	}
 
 	public static boolean updateUserWithLike(String openid,String likeToName,String ToOpenId){
 		mongoDB = getMongoDB();

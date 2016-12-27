@@ -123,6 +123,11 @@ public class CoreService
 				String mediaId = requestObject.element("MediaId").getText();
 				String picUrl = requestObject.element("PicUrl").getText();
 				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
+				
+				
+				MongoDBBasic.updateUserWithFaceUrl(fromUserName,picUrl);
+				
+				
 				FaceRecognition fr = new FaceRecognition();
 				String fro = fr.goface(picUrl);
 				JSONArray jsonArra = new JSONArray(fro);
