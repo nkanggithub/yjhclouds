@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%
+String uid = request.getParameter("UID");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,7 +56,7 @@
 
 
 
-<a href="profile.jsp?UID=<%=session.getAttribute("UID")%>">
+<a href="profile.jsp?UID=<%=uid%>">
 	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 </a>	
 <img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
