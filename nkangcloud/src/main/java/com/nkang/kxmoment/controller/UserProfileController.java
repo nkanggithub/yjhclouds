@@ -128,7 +128,7 @@ public class UserProfileController {
 	@RequestMapping("/getRecognitionInfoByOpenID")
 	public @ResponseBody List<CongratulateHistory>  getRecognitionInfoByOpenID(HttpServletRequest request,
 			HttpServletResponse response ){
-		List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(request.getParameter("openID"));
+		List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(request.getParameter("openID"),"");
 /*		List<CongratulateHistory> chList=new ArrayList<CongratulateHistory>();
 		CongratulateHistory ch=new CongratulateHistory();
 		ch.setFrom("Panda");
@@ -172,9 +172,12 @@ public class UserProfileController {
 	public @ResponseBody String updateUserCongratulateHistory(HttpServletRequest request,
 			HttpServletResponse response ){
 		//String openid=request.getParameter("openID");
+
 		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to"));
+		int num=MongoDBBasic.getRecognitionMaxNumByOpenID(openid)+1;
 		String fromOpenid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("from"));
 		CongratulateHistory conhis=new CongratulateHistory();
+		conhis.setNum(num+"");
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
 		conhis.setType(request.getParameter("type"));
