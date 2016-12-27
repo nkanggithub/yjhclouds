@@ -28,16 +28,18 @@
 	top:40%;
 	left:1%;
 	height:270px;
+	width:100%;
 }
 .myfacevalue{
 	position:relative;
-	top:80%;
+	top:25px;
 }
 .myfacevalueattribute{
 	position:relative;
 	top:-73%;
 	left:58%;
 	height:260px;
+	width:100%;
 }
 
 </style>
@@ -74,20 +76,20 @@
 	        data-color-bar-progress="rgba(50,200,50,.75)"
 	></canvas>
 	<div class="myfacevalueattribute">
-	Smile:0.515 <br />
-	Age:21.8 <br />
-	Glasses: NoGlasses <br />
-	Gender: Female <br />
-	MouStache: 0 <br />
-	Beard: 0 <br />
-	Anger:0.001 <br />
-	Contempt:0.0003 <br />
-	Disgust: 0.001 <br />
-	Fear: 0.001 <br />
-	Happiness:0.3 <br />
-	Neutral: 0.1 <br />
-	Sadness: 0.003 <br />
-	Surprise:0.0004 <br />
+		Smile:0.515 <br />
+		Age:21.8 <br />
+		Glasses: NoGlasses <br />
+		Gender: Female <br />
+		MouStache: 0 <br />
+		Beard: 0 <br />
+		Anger:0.001 <br />
+		Contempt:0.0003 <br />
+		Disgust: 0.001 <br />
+		Fear: 0.001 <br />
+		Happiness:0.3 <br />
+		Neutral: 0.1 <br />
+		Sadness: 0.003 <br />
+		Surprise:0.0004 <br />
 	</div>
 
 </div>
