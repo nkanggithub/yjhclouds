@@ -37,7 +37,7 @@ String uid = request.getParameter("UID");
 }
 .myfacevalue{
 	position:relative;
-	top:25px;
+	top:35px;
 }
 .myfacevalueattribute{
 	position:relative;
@@ -81,20 +81,21 @@ String uid = request.getParameter("UID");
 	        data-color-bar-progress="rgba(50,200,50,.75)"
 	></canvas>
 	<div class="myfacevalueattribute">
-		Smile:0.515 <br />
-		Age:21.8 <br />
-		Glasses: NoGlasses <br />
-		Gender: Female <br />
-		MouStache: 0 <br />
-		Beard: 0 <br />
-		Anger:0.001 <br />
-		Contempt:0.0003 <br />
-		Disgust: 0.001 <br />
-		Fear: 0.001 <br />
-		Happiness:0.3 <br />
-		Neutral: 0.1 <br />
-		Sadness: 0.003 <br />
-		Surprise:0.0004 <br />
+		<table>
+			<tr><td>Smile</td><td>0.515</td></tr>
+			<tr><td>Age</td><td>21.8</td></tr>
+			<tr><td>Glasses</td><td>NoGlasses</td></tr>
+			<tr><td>Gender</td><td>Female</td></tr>
+			<tr><td>MouStache</td><td>0</td></tr>
+			<tr><td>Beard</td><td>0</td></tr>
+			<tr><td>Anger</td><td>0.001</td></tr>
+			<tr><td>Contempt</td><td>0.0003</td></tr>
+			<tr><td>Disgust</td><td>0.001</td></tr>
+			<tr><td>Fear</td><td>0.001</td></tr>
+			<tr><td>Happiness</td><td>0.001</td></tr>
+			<tr><td>Sadness</td><td>0.3</td></tr>
+			<tr><td>Surprise</td><td>0.0004</td></tr>
+		</table>
 	</div>
 
 </div>
@@ -110,20 +111,21 @@ String uid = request.getParameter("UID");
 	        data-color-bar-progress="rgba(50,200,50,.75)"
 	></canvas>
 	<div class="myfacevalueattribute">
-	Smile:0.515 <br />
-	Age:21.8 <br />
-	Glasses: NoGlasses <br />
-	Gender: Female <br />
-	MouStache: 0 <br />
-	Beard: 0 <br />
-	Anger:0.001 <br />
-	Contempt:0.0003 <br />
-	Disgust: 0.001 <br />
-	Fear: 0.001 <br />
-	Happiness:0.3 <br />
-	Neutral: 0.1 <br />
-	Sadness: 0.003 <br />
-	Surprise:0.0004 <br />
+		<table>
+			<tr><td>Smile</td><td>0.515</td></tr>
+			<tr><td>Age</td><td>21.8</td></tr>
+			<tr><td>Glasses</td><td>NoGlasses</td></tr>
+			<tr><td>Gender</td><td>Female</td></tr>
+			<tr><td>MouStache</td><td>0</td></tr>
+			<tr><td>Beard</td><td>0</td></tr>
+			<tr><td>Anger</td><td>0.001</td></tr>
+			<tr><td>Contempt</td><td>0.0003</td></tr>
+			<tr><td>Disgust</td><td>0.001</td></tr>
+			<tr><td>Fear</td><td>0.001</td></tr>
+			<tr><td>Happiness</td><td>0.001</td></tr>
+			<tr><td>Sadness</td><td>0.3</td></tr>
+			<tr><td>Surprise</td><td>0.0004</td></tr>
+		</table>
 	</div>
 
 </div>
