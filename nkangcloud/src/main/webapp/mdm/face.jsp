@@ -96,7 +96,7 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
-		<hr/>
+
 	</div>
 
 </div>
@@ -127,7 +127,7 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
-		<hr/>
+
 	</div>
 
 </div>
