@@ -75,7 +75,7 @@ public class PictureController{
 		 for(int i=0 ; i < ls.size() ;i++){
 			 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
 		 }
-		return str+ "\n\n"+faceRecognition.gofaceEmotion(URL).toString();
+		return str;
 	}
 }
  
