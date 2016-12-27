@@ -1006,6 +1006,27 @@ function getWeather() {
 			});
 }
 
+function stockModule(){
+	showCommonPanel();
+
+	$("body").append("	<div class='TAB2class bouncePart' id='allstockcodes'>"
+			+"<div id='stockListHeader' class='modal-header' style='text-align: center;'>"
+			+"<img src='../MetroStyleFiles/Add1.png'"
+			+"style='float: right; height: 20px; cursor: pointer; margin-top: 10px;' onclick='addStock()'/>"
+			+"<h3><b>股票行情</b></h3>"
+			+"</div>"
+			+"<table width='100%' id='stock' style='margin-bottom: -20px;'>"
+			+"</table>"
+			+"<div id='addStock' style='display:none;margin: 5px;' >"
+			+"<div id='stockTableForm' >"
+			+"<span>请输入股票代码：</span><input type='text' placeholder='股票代码' id='stockcodeKey'  required style='width:100px;'/><input id='addStockBtn' type='button' value='添加' style='margin: 5px;' />"
+			+"</div></div>"
+			+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
+	$('#allstockcodes').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+}
+
 function getStockData(url){
 	getNewData(url);
 	var refreshDataDefault = self.setInterval("getNewData('"+url+"')",2000);
@@ -1061,10 +1082,10 @@ function getNewData(url){
 
 	var allAddStockCodes = new Array();
 function addStock() {
-	$('#addStock').modal('show');
-	$('#stockListHeader').css("display", "none");
-	$('#stockListBody').css("display", "none");
-	$('#addStock').css("display","block");
+	//$('#allstockcodes').css("display", "none");
+	$('#stock').hide();
+	$("#addStock").css("display","block");
+	$("#stockTableForm").css("display","block");
 	$('#stockcodeKey').val("");
 	$.ajax({
 		url : "../getCodes",
@@ -1080,7 +1101,7 @@ function addStock() {
 			$("#stockcodeKey").autocomplete({
 				source:jsonData,
 				autoFocus: true,
-				delay: 500,
+				delay: 200,
 				max:10,
 				minLength:3,
 				response: function( event, ui ) {
@@ -1091,7 +1112,7 @@ function addStock() {
 					$("#addStockBtn").click(function(){
 						self.clearInterval($("#timer").val());
 						$('#stockListHeader').css("display","block");
-						$('#stockListBody').css("display","block");
+						$('#stock').css("display","block");
 						$('#addStock').css("display","none");
 						var url = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 						
@@ -1286,11 +1307,10 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-tax.png" />
 														<h4>税费计算</h4>
 												</td>
-												<td><a class="" data-toggle="modal"
-													href="#stock_main_div"> <img
+												<td> <img onclick="stockModule()"
 														src="../MetroStyleFiles/menu-stock.png" />
 														<h4>股票</h4>
-												</a></td>
+												</td>
 												<td><img src="../MetroStyleFiles/menu-technology.png" />
 													<h4>技术快车</h4></td>
 											</tr>
@@ -1392,7 +1412,7 @@ function getNowFormatDate() {
 										</table>
 									</div>
 								</div>
-								<div id="stock_main_div" class="modal hide fade" tabindex="-1"
+								<!-- <div id="stock_main_div" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="stock_main_div"
 									aria-hidden="true" data-backdrop="static">
 									<div id="stockListHeader" class="modal-header" style="text-align: center;">
@@ -1427,7 +1447,7 @@ function getNowFormatDate() {
 									</div>
 									
 								</div>
-								</div>
+								</div> -->
 								<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
