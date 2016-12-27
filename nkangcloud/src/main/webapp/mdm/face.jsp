@@ -63,60 +63,62 @@
 </div>
 
 <div class ="DetectedPerson">
-<canvas 
-		class="myfacevalue" onclick="javascript:alert('okk');"
-		data-type="radial-gauge"
-        data-value="80"
-        data-width="350"
-        data-height="350"
-        data-bar-width="10"
-        data-bar-shadow="5"
-        data-color-bar-progress="rgba(50,200,50,.75)"
-></canvas>
-<div class="myfacevalueattribute">
-Smile:0.515 <br />
-Age:21.8 <br />
-Glasses: NoGlasses <br />
-Gender: Female <br />
-MouStache: 0 <br />
-Beard: 0 <br />
-Anger:0.001 <br />
-Contempt:0.0003 <br />
-Disgust: 0.001 <br />
-Fear: 0.001 <br />
-Happiness:0.3 <br />
-Neutral: 0.1 <br />
-Sadness: 0.003 <br />
-Surprise:0.0004 <br />
-</div>
+	<canvas 
+			class="myfacevalue" onclick="javascript:alert('okk');"
+			data-type="radial-gauge"
+	        data-value="80"
+	        data-width="350"
+	        data-height="350"
+	        data-bar-width="10"
+	        data-bar-shadow="5"
+	        data-color-bar-progress="rgba(50,200,50,.75)"
+	></canvas>
+	<div class="myfacevalueattribute">
+	Smile:0.515 <br />
+	Age:21.8 <br />
+	Glasses: NoGlasses <br />
+	Gender: Female <br />
+	MouStache: 0 <br />
+	Beard: 0 <br />
+	Anger:0.001 <br />
+	Contempt:0.0003 <br />
+	Disgust: 0.001 <br />
+	Fear: 0.001 <br />
+	Happiness:0.3 <br />
+	Neutral: 0.1 <br />
+	Sadness: 0.003 <br />
+	Surprise:0.0004 <br />
+	</div>
+	<hr>
 </div>
 <div class ="DetectedPerson">
-<canvas 
-		class="myfacevalue" onclick="javascript:alert('okk');"
-		data-type="radial-gauge"
-        data-value="80"
-        data-width="350"
-        data-height="350"
-        data-bar-width="10"
-        data-bar-shadow="5"
-        data-color-bar-progress="rgba(50,200,50,.75)"
-></canvas>
-<div class="myfacevalueattribute">
-Smile:0.515 <br />
-Age:21.8 <br />
-Glasses: NoGlasses <br />
-Gender: Female <br />
-MouStache: 0 <br />
-Beard: 0 <br />
-Anger:0.001 <br />
-Contempt:0.0003 <br />
-Disgust: 0.001 <br />
-Fear: 0.001 <br />
-Happiness:0.3 <br />
-Neutral: 0.1 <br />
-Sadness: 0.003 <br />
-Surprise:0.0004 <br />
-</div>
+	<canvas 
+			class="myfacevalue" onclick="javascript:alert('okk');"
+			data-type="radial-gauge"
+	        data-value="80"
+	        data-width="350"
+	        data-height="350"
+	        data-bar-width="10"
+	        data-bar-shadow="5"
+	        data-color-bar-progress="rgba(50,200,50,.75)"
+	></canvas>
+	<div class="myfacevalueattribute">
+	Smile:0.515 <br />
+	Age:21.8 <br />
+	Glasses: NoGlasses <br />
+	Gender: Female <br />
+	MouStache: 0 <br />
+	Beard: 0 <br />
+	Anger:0.001 <br />
+	Contempt:0.0003 <br />
+	Disgust: 0.001 <br />
+	Fear: 0.001 <br />
+	Happiness:0.3 <br />
+	Neutral: 0.1 <br />
+	Sadness: 0.003 <br />
+	Surprise:0.0004 <br />
+	</div>
+	<hr>
 </div>
 
 <br /><br />
