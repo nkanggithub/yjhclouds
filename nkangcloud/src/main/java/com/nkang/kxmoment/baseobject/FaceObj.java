@@ -10,7 +10,6 @@ public class FaceObj {
 	String beard;
 	String age ;
 	String glasses ;
-	
 	String anger;
 	String contempt;
 	String disgust;
@@ -20,6 +19,14 @@ public class FaceObj {
 	String sadness;
 	String surprise;
 	
+	String levelNum ;
+	
+	public String getLevelNum() {
+		return levelNum;
+	}
+	public void setLevelNum(String levelNum) {
+		this.levelNum = levelNum;
+	}
 	public String getSmile() {
 		return smile;
 	}
