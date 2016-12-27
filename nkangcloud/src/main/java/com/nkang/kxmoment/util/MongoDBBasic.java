@@ -2013,5 +2013,18 @@ public class MongoDBBasic {
 			List<String> lst = mongoDB.getCollection(wechat_user).distinct("Teamer.realName");
 			return lst;
 		}
+		
+
+		/*
+		 * chang-zheng
+		 */
+		public static String getfaceURL(String openID){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("OpenID", openID);
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("FaceUrl",query);
+				return dbuser.get(0);
+		}
 	    // END
 }
