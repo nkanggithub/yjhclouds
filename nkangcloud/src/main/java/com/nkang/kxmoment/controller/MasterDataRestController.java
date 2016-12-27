@@ -753,7 +753,7 @@ public class MasterDataRestController {
 
 		}		
 		catch(Exception e){
-			 e.getMessage();
+			ret = e.getMessage();
 		}
 		return ret;
 	}
