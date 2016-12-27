@@ -32,18 +32,18 @@ String uid = request.getParameter("UID");
 	position:relative;
 	top:40%;
 	left:1%;
-	height:270px;
+	height:300px;
 	width:100%;
 }
 .myfacevalue{
 	position:relative;
-	top:35px;
+	top:32px;
 }
 .myfacevalueattribute{
 	position:relative;
 	top:-73%;
 	left:58%;
-	height:260px;
+	height:280px;
 	width:100%;
 }
 
@@ -96,6 +96,7 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
+		<hr/>
 	</div>
 
 </div>
@@ -126,6 +127,7 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
+		<hr/>
 	</div>
 
 </div>
