@@ -1935,9 +1935,11 @@ public class MongoDBBasic {
 	                    Object[] ConObjects = CongratulateHistoryObj.toArray();
 						for(Object co : ConObjects){
 	                        			if(co instanceof DBObject){
-	                        				if(!StringUtils.isEmpty(num)&&null!=((DBObject)co).get("num")){
-	                    						if(num.equals(((DBObject)co).get("num").toString()))
-	                    						{
+	                        				if(!StringUtils.isEmpty(num)){
+	                        					if(null!=((DBObject)co).get("num"))
+	                        					{
+	                        						if(num.equals(((DBObject)co).get("num").toString()))
+	                        						{
 	                    							ch=new CongratulateHistory();
 	    											ch.setComments(((DBObject)co).get("comments").toString());
 	    											ch.setCongratulateDate(((DBObject)co).get("congratulateDate").toString().substring(0,11));
@@ -1947,6 +1949,7 @@ public class MongoDBBasic {
 	    											ch.setType(((DBObject)co).get("type").toString());
 	    											chList.add(ch);
 	                    						}
+	                        					}
 	                    					}
 	                        				else{
 	                        					ch=new CongratulateHistory();
