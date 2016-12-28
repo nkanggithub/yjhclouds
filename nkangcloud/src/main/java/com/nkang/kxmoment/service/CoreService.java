@@ -328,7 +328,11 @@ public class CoreService
 						Article article2 = new Article();
 						article2.setTitle("测我颜值");
 						article2.setDescription("测我颜值");
-						article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
+						String picurl = MongoDBBasic.getUserWithFaceUrl(fromUserName);
+						if(StringUtils.isEmpty(picurl)){
+							picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
+						}
+						article2.setPicUrl(picurl);
 						article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						
