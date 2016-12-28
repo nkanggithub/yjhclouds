@@ -323,8 +323,8 @@ public class CoreService
 						}
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("Master Data Quality Governace");
-						article.setDescription("Master Data Quality Governace Reporting");
+						article.setTitle("看我颜值如何爆表-发个照片到这个公众号");
+						article.setDescription("看我颜值如何爆表");
 						article.setPicUrl(picurl);
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
