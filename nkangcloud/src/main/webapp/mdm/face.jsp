@@ -29,24 +29,27 @@ String uid = request.getParameter("UID");
 <style>
 
 .DetectedPerson{
-	position:relative;
-	top:40%;
-	left:1%;
-	height:300px;
 	width:100%;
-}
-.myfacevalue{
-	position:relative;
-	top:32px;
-}
-.myfacevalueattribute{
-	position:relative;
-	top:-73%;
-	left:58%;
-	height:280px;
-	width:100%;
+	padding:10px;
+	border-bottom:1px dashed #999;
 }
 
+.myfacevalue{
+	float:left;
+	width:55%;
+	text-align:right;
+}
+.myfacevalue canvas{
+	margin-top:50px;
+	float:right;
+}
+.myfacevalueattribute{
+	float:right;
+	width:45%;
+}
+.clear{
+	clear:both;
+}
 </style>
 
     
@@ -70,16 +73,18 @@ String uid = request.getParameter("UID");
 </div>
 
 <div class ="DetectedPerson">
+	<div  class="myfacevalue">
 	<canvas 
 			class="myfacevalue" onclick="javascript:alert('okk');"
 			data-type="radial-gauge"
 	        data-value="80"
-	        data-width="350"
-	        data-height="350"
+	        data-width="200"
+	        data-height="200"
 	        data-bar-width="10"
 	        data-bar-shadow="5"
 	        data-color-bar-progress="rgba(50,200,50,.75)"
 	></canvas>
+	</div>
 	<div class="myfacevalueattribute">
 		<table>
 			<tr><td>Smile</td><td>0.515</td></tr>
@@ -96,21 +101,23 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
-
 	</div>
-
+	<div class="clear"></div>
 </div>
+
 <div class ="DetectedPerson">
+	<div  class="myfacevalue">
 	<canvas 
 			class="myfacevalue" onclick="javascript:alert('okk');"
 			data-type="radial-gauge"
 	        data-value="80"
-	        data-width="350"
-	        data-height="350"
+	        data-width="200"
+	        data-height="200"
 	        data-bar-width="10"
 	        data-bar-shadow="5"
 	        data-color-bar-progress="rgba(50,200,50,.75)"
 	></canvas>
+	</div>
 	<div class="myfacevalueattribute">
 		<table>
 			<tr><td>Smile</td><td>0.515</td></tr>
@@ -127,14 +134,8 @@ String uid = request.getParameter("UID");
 			<tr><td>Sadness</td><td>0.3</td></tr>
 			<tr><td>Surprise</td><td>0.0004</td></tr>
 		</table>
-
 	</div>
-
+	<div class="clear"></div>
 </div>
-
-<br /><br />
-<!-- <button onclick="animateGauges()">开始测试</button>
-<button onclick="stopGaugesAnimation()">停止测试</button> -->
-
 </body>
 </html>
