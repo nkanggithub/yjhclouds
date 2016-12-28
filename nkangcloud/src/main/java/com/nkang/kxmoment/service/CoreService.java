@@ -282,7 +282,7 @@ public class CoreService
 							myRecog = 6;
 						}
 						Article myarticle;
-						for(int i = 1; i <= myRecog; i++){
+						for(int i = myRecog; i >= 1; i--){
 							myarticle = new Article();
 							myarticle.setTitle("My Recognition");
 							myarticle.setDescription("My Recognition");
