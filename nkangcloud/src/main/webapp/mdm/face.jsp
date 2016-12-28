@@ -22,6 +22,14 @@ String uid = request.getParameter("UID");
 	        timeout: 2000, 
 	        success: function(data){
 	        	$('#text').text(data);
+	        	
+	      
+	        	
+	        	
+	        	
+	        	
+	        	
+	        	
 	        }
 	  	});
    });
