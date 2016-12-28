@@ -279,13 +279,27 @@ public class CoreService
 						}
 						Article myarticle;
 						CongratulateHistory congratulateHistory;
+						String icoURLPartnerFirst = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaRc&oid=00D90000000pkXM&lastMod=1482895139000";
+						String icoURLBaisForAction = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaS6&oid=00D90000000pkXM&lastMod=1482895206000";
+						String icoURLInnovator = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaSa&oid=00D90000000pkXM&lastMod=1482895283000";
+						String icoURL = "http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg";
 						for(int i = myRecog; i >= 1; i--){
 							myarticle = new Article();
 							congratulateHistory = new CongratulateHistory();
 							congratulateHistory = myrecoghistList.get(i-1);
-							myarticle.setTitle( congratulateHistory.getComments()  +"\n From " + congratulateHistory.getFrom() + "\n On " + congratulateHistory.getCongratulateDate() + "\n For " + congratulateHistory.getType());
+							String type = congratulateHistory.getType();
+							myarticle.setTitle(congratulateHistory.getComments()  +"\n" + congratulateHistory.getFrom() + " | " + congratulateHistory.getCongratulateDate() + " | " + type);
 							myarticle.setDescription("My Recognition");
-							myarticle.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
+							if(type == "Bais For Action"){
+								icoURL = icoURLBaisForAction;
+							}
+							else if(type == "Innovators at Heart"){
+									icoURL = icoURLInnovator;
+							}
+							else{ 
+								icoURL = icoURLPartnerFirst;
+							}
+							myarticle.setPicUrl(icoURL);
 							myarticle.setUrl("http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
 							articleList.add(myarticle);
 						}						
