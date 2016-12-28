@@ -4,9 +4,9 @@ import com.nkang.kxmoment.baseobject.FaceObj;
 
 public class FaceCalUtil {
 	public static FaceObj toCal(FaceObj fo){
-		int smile=Integer.parseInt(fo.getSmile());
-		int age=Integer.parseInt(fo.getAge());
-		int result =0;
+		float smile=Float.parseFloat(fo.getSmile());
+		float age=Float.parseFloat(fo.getAge());
+		float result =0;
 		if(age<=18){
 			result += 0.8*40 ;
 		}else if(age>18&&age<=30){
