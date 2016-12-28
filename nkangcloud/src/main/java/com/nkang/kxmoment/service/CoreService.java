@@ -292,15 +292,16 @@ public class CoreService
 							if(StringUtils.isEmpty(comments)){
 								comments = "You must done something amazaing";
 							}
-							else{
+							else if(comments.length() >= 30){
 								comments =  comments.trim();
+								comments = comments.substring(0, 30) + "...";
 							}
-							myarticle.setTitle(congratulateHistory.getComments()  +"\n" + congratulateHistory.getFrom() + " | " + congratulateHistory.getCongratulateDate() + "\n" + type);
+							myarticle.setTitle(congratulateHistory.getComments()  +"\n" + congratulateHistory.getCongratulateDate() + " | " + congratulateHistory.getFrom() + "\n" + type);
 							myarticle.setDescription("My Recognition");
-							if(type == "Bais For Action"){
+							if(type.equalsIgnoreCase("Bais For Action")){
 								icoURL = icoURLBaisForAction;
 							}
-							else if(type == "Innovators at Heart"){
+							else if(type.equalsIgnoreCase("Innovators at Heart")){
 									icoURL = icoURLInnovator;
 							}
 							else{ 
