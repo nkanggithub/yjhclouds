@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.mongodb.DBObject;
+import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.FaceObj;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -277,14 +278,18 @@ public class CoreService
 						articleList.add(article);
 						
 						// add article here
-						int myRecog = MongoDBBasic.getRecognitionMaxNumByOpenID(fromUserName);
+						List<CongratulateHistory> myrecoghistList = MongoDBBasic.getRecognitionInfoByOpenID(fromUserName, "");
+						int myRecog = myrecoghistList.size();
 						if(myRecog > 6){
 							myRecog = 6;
 						}
 						Article myarticle;
+						CongratulateHistory congratulateHistory;
 						for(int i = myRecog; i >= 1; i--){
 							myarticle = new Article();
-							myarticle.setTitle("My Recognition");
+							congratulateHistory = new CongratulateHistory();
+							congratulateHistory = myrecoghistList.get(i-1);
+							myarticle.setTitle(congratulateHistory.getFrom() + " on " + congratulateHistory.getCongratulateDate() + " for " + congratulateHistory.getType());
 							myarticle.setDescription("My Recognition");
 							myarticle.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
 							myarticle.setUrl("http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
