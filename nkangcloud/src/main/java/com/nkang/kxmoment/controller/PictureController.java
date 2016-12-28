@@ -52,27 +52,42 @@ public class PictureController{
 				if(jsonArraGoface!=null && jsonArraEmotion!=null){
 					for(int i=0 ; i < jsonArraEmotion.length() ;i++)
 					  {
-					  FaceObj fo = new FaceObj();
-					  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
-					  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
-					
-					  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
-					  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
-					  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));
-					  fo.setFear(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString()));
-					  fo.setHappiness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString()));
-					  fo.setNeutral(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString()));
-					  fo.setSadness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString()));
-					  fo.setSurprise(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString()));
-					  
-					  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
-					  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
-					  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
-					  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
-					  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
-					  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
-					  fo=FaceCalUtil.toCal(fo);
-					  ls.add(fo);
+						  FaceObj fo = new FaceObj();
+						  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
+						  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
+						
+						  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
+						  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
+						  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));
+						  fo.setFear(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("fear").toString()));
+						  fo.setHappiness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("happiness").toString()));
+						  fo.setNeutral(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("neutral").toString()));
+						  fo.setSadness(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("sadness").toString()));
+						  fo.setSurprise(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("surprise").toString()));
+						  //convert
+						  fo.setAnger(String.valueOf(Float.parseFloat(fo.getAnger()) * 100)); 
+						  fo.setContempt(String.valueOf(Float.parseFloat(fo.getContempt()) * 100));
+						  fo.setDisgust(String.valueOf(Float.parseFloat(fo.getDisgust()) * 100));
+						  fo.setFear(String.valueOf(Float.parseFloat(fo.getFear()) * 100));
+						  fo.setHappiness(String.valueOf(Float.parseFloat(fo.getHappiness()) * 100));
+						  fo.setNeutral(String.valueOf(Float.parseFloat(fo.getNeutral()) * 100));
+						  fo.setSadness(String.valueOf(Float.parseFloat(fo.getSadness()) * 100));
+						  fo.setSurprise(String.valueOf(Float.parseFloat(fo.getSurprise()) * 100));
+						  
+						  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
+						  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
+						  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
+						  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
+						  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
+						  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
+						  //convert
+						  fo.setBeard(String.valueOf(Float.parseFloat(fo.getBeard()) * 100));
+						  fo.setMoustache(String.valueOf(Float.parseFloat(fo.getMoustache()) * 100));
+						  fo.setSmile(String.valueOf(Float.parseFloat(fo.getSmile()) * 100));
+						  
+						  
+						  fo=FaceCalUtil.toCal(fo);
+						  ls.add(fo);
 					  }
 					for(int i=0 ; i < ls.size() ;i++){
 						 str = str+"\n\n" + ls.get(i).Info()+ "\n\n";
