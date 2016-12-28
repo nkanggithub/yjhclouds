@@ -30,7 +30,7 @@ String uid = request.getParameter("UID");
 
 .DetectedPerson{
 	width:100%;
-	padding:10px;
+	padding:10px 0px;
 	border-bottom:1px dashed #999;
 }
 
