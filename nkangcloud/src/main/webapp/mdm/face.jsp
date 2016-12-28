@@ -36,7 +36,7 @@ String uid = request.getParameter("UID");
 	clear:both;
 }
 table tr td:nth-child(odd) {
-	text-align: right;
+	text-align: left;
 }
 table tr td:nth-child(even) {
 	text-align: left;
