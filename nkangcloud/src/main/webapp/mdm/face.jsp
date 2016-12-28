@@ -67,13 +67,11 @@ String uid = request.getParameter("UID");
 			data : {openid:$('#uid').val()},
 	        timeout: 2000, 
 	        success: function(data){
-	        	data = '{"results":' + data + '}';
-				var jsons = eval('(' + data + ')');
 				$("#text").html("");
 				var div="";
-				if (jsons.results.length > 0) {
-					for(var i=0;i<jsons.results.length;i++){
-						var temp =  jsons.results[i];
+				if (data.length > 0) {
+					for(var i=0;i<data.length;i++){
+						var temp =  data[i];
 						div+='<div class ="DetectedPerson">'
 							+'	<div  class="myfacevalue">'
 							+'	<canvas '
