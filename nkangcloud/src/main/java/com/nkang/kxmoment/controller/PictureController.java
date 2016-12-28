@@ -29,13 +29,14 @@ public class PictureController{
     * @param request
     */
 	@RequestMapping("/uploadPicture")
-    public List<FaceObj>  upload(HttpServletRequest request) {
+	@ResponseBody
+    public ArrayList<FaceObj>  upload(HttpServletRequest request) {
 		String openid = request.getParameter("openid");
 		
 		String URL = MongoDBBasic.getUserWithFaceUrl(openid);
 		String str="";
 		FaceRecognition faceRecognition = new FaceRecognition();
-		List<FaceObj> ls = new ArrayList<FaceObj>();
+		ArrayList<FaceObj> ls = new ArrayList<FaceObj>();
 		
 		JSONArray jsonArraGoface;
 		JSONArray jsonArraEmotion;
