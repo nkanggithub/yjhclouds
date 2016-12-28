@@ -52,7 +52,7 @@ table tr td:nth-child(even) {
 </a>	
 <img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
 <div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
-<div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">看我颜值如何爆表 <img id="imgCurrentpic" alt="userImage" class="userImage pull-right"/></div>
+<div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;"><a id="imgCurrentpic">看我颜值如何爆表</a></div>
 <input id="uid" type="hidden" value="<%=uid%>" />											
 <div id="text" style="margin-top:150px;width:80%;margin-left:10%;text-align:center;">
 </div>
@@ -70,7 +70,7 @@ table tr td:nth-child(even) {
 				if (data.length > 0) {
 					for(var i=0;i<data.length;i++){
 						var temp =  data[i];
-						$("#imgCurrentpic").attr("src",temp.currentUrl);
+						$("#imgCurrentpic").attr("href",temp.currentUrl);
 						div+='<div class ="DetectedPerson">'
 							+'	<div  class="myfacevalue">'
 							+'	<canvas '
