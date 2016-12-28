@@ -317,22 +317,22 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if(eventKey.equals("MYFACE")){
+						String picurl = MongoDBBasic.getUserWithFaceUrl(fromUserName);
+						if(StringUtils.isEmpty(picurl)){
+							picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
+						}
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("Master Data Quality Governace");
 						article.setDescription("Master Data Quality Governace Reporting");
-						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+						article.setPicUrl(picurl);
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
 						Article article2 = new Article();
 						article2.setTitle("测我颜值");
 						article2.setDescription("测我颜值");
-						String picurl = MongoDBBasic.getUserWithFaceUrl(fromUserName);
-						if(StringUtils.isEmpty(picurl)){
-							picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
-						}
-						article2.setPicUrl(picurl);
+						article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
 						article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						
