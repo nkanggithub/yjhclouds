@@ -325,6 +325,13 @@ public class CoreService
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
+						Article article2 = new Article();
+						article2.setTitle("测我颜值");
+						article2.setDescription("测我颜值");
+						article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
+						article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
+						articleList.add(article2);
+						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
