@@ -206,12 +206,6 @@ public class CoreService
 					article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 					article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
 					articleList.add(article2);
-/*					Article article3 = new Article();
-					article3.setTitle("Data Dashboard");
-					article3.setDescription("Master Data Dashboard");
-					article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-					article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
-					articleList.add(article3);*/
 					Article article4 = new Article();
 					article4.setTitle("Data Visualization");
 					article4.setDescription("Master Data Visualization");
@@ -271,8 +265,8 @@ public class CoreService
 					else if(eventKey.equals("MYRECOG")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("My Recognitions");
-						article.setDescription("My Recognition");
+						article.setTitle("My Lasted Recognitions");
+						article.setDescription("My Lasted Recognition");
 						article.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
@@ -289,7 +283,7 @@ public class CoreService
 							myarticle = new Article();
 							congratulateHistory = new CongratulateHistory();
 							congratulateHistory = myrecoghistList.get(i-1);
-							myarticle.setTitle(congratulateHistory.getFrom() + " on " + congratulateHistory.getCongratulateDate() + " for " + congratulateHistory.getType());
+							myarticle.setTitle( congratulateHistory.getComments()  +"\n From " + congratulateHistory.getFrom() + "\n On " + congratulateHistory.getCongratulateDate() + "\n For " + congratulateHistory.getType());
 							myarticle.setDescription("My Recognition");
 							myarticle.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
 							myarticle.setUrl("http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
