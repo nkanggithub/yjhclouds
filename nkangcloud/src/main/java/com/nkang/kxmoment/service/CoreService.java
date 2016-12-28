@@ -231,7 +231,25 @@ public class CoreService
 
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
 					String eventKey = requestObject.element("EventKey").getText();
-					if(eventKey.equals("MDLAKE")){
+					if(eventKey.equals("MDLAKE")){ // Data Lake
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("Master Data Quality Governace");
+						article.setDescription("Master Data Quality Governace Reporting");
+						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						articleList.add(article);
+						Article article4 = new Article();
+						article4.setTitle("Data Visualization");
+						article4.setDescription("Master Data Visualization");
+						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+						article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
+						articleList.add(article4);
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}
+					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("Master Data Quality Governace");
@@ -241,22 +259,51 @@ public class CoreService
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("User Profile");
-						article2.setDescription("Master Data Quality Governace Reporting");
+						article2.setDescription("My Personal Applications");
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 						article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
-/*						Article article3 = new Article();
-						article3.setTitle("Data Dashboard");
-						article3.setDescription("Master Data Dashboard");
-						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-						article3.setUrl("http://shenan.duapp.com/mdm/DQDashBoard.jsp?UID=" + fromUserName);
-						articleList.add(article3);*/
-						Article article4 = new Article();
-						article4.setTitle("Data Visualization");
-						article4.setDescription("Master Data Visualization");
-						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-						article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
-						articleList.add(article4);
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}
+					else if(eventKey.equals("MYRECOG")){
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("My Recognitions");
+						article.setDescription("My Recognition");
+						article.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
+						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						articleList.add(article);
+						
+						// add article here
+						int myRecog = MongoDBBasic.getRecognitionMaxNumByOpenID(fromUserName);
+						if(myRecog > 6){
+							myRecog = 6;
+						}
+						Article myarticle;
+						for(int i = 1; i <= myRecog; i++){
+							myarticle = new Article();
+							myarticle.setTitle("My Recognition");
+							myarticle.setDescription("My Recognition");
+							myarticle.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
+							myarticle.setUrl("http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
+							articleList.add(myarticle);
+						}						
+
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}
+					else if(eventKey.equals("MYFACE")){
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("Master Data Quality Governace");
+						article.setDescription("Master Data Quality Governace Reporting");
+						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						articleList.add(article);
+						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
