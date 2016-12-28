@@ -35,6 +35,12 @@ String uid = request.getParameter("UID");
 .clear{
 	clear:both;
 }
+table tr td:nth-child(odd) {
+	text-align: right;
+}
+table tr td:nth-child(even) {
+	text-align: left;
+}
 </style>
 
     
@@ -85,13 +91,13 @@ String uid = request.getParameter("UID");
 							+'			<tr><td>Gender</td><td>'+temp.gender+'</td></tr>'
 							+'			<tr><td>MouStache</td><td>'+temp.moustache+'</td></tr>'
 							+'			<tr><td>Beard</td><td>'+temp.beard+'</td></tr>'
-							+'			<tr><td>Anger</td><td>'+temp.anger+'</td></tr>'
-							+'			<tr><td>Contempt</td><td>'+temp.contempt+'</td></tr>'
-							+'			<tr><td>Disgust</td><td>'+temp.disgust+'</td></tr>'
-							+'			<tr><td>Fear</td><td>'+temp.fear+'</td></tr>'
-							+'			<tr><td>Happiness</td><td>'+temp.happiness+'</td></tr>'
-							+'			<tr><td>Sadness</td><td>'+temp.sadness+'</td></tr>'
-							+'			<tr><td>Surprise</td><td>'+temp.surprise+'</td></tr>'
+							+'			<tr><td>Anger</td><td>'+temp.anger.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Contempt</td><td>'+temp.contempt.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Disgust</td><td>'+temp.disgust.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Fear</td><td>'+temp.fear.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Happiness</td><td>'+temp.happiness.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Sadness</td><td>'+temp.sadness.substr(0,9)+'</td></tr>'
+							+'			<tr><td>Surprise</td><td>'+temp.surprise.substr(0,9)+'</td></tr>'
 							+'		</table>'
 							+'	</div>'
 							+'	<div class="clear"></div>'
