@@ -2042,5 +2042,20 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("FaceUrl",query);
 				return dbuser==null?"":dbuser.get(0);
 		}
+		
+
+		/*
+		 * chang-zheng
+		 */
+		public static List<String> getAllOpenIDByIsActivewithIsRegistered(){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("IsActive", "true");
+			query.put("IsRegistered", "true");
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID",query);
+				
+			return dbuser;
+		}
 	    // END
 }
