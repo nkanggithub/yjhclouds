@@ -224,4 +224,12 @@ public class UserProfileController {
 		return str;
 		
 	} 
+	
+	@RequestMapping("/getSendAllUsers")
+	public @ResponseBody List<String> getSendAllUsers(HttpServletRequest request,
+			HttpServletResponse response ){
+		List<String> str = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+		return str;
+		
+	} 
 }
