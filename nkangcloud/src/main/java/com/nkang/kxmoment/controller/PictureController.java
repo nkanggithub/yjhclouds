@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.FaceObj;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.service.CoreService;
 import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.FaceCalUtil;
@@ -28,8 +29,7 @@ public class PictureController{
     * @param request
     */
 	@RequestMapping("/uploadPicture")
-	@ResponseBody
-   public String upload(HttpServletRequest request) {
+    public List<FaceObj>  upload(HttpServletRequest request) {
 		String openid = request.getParameter("openid");
 		
 		String URL = MongoDBBasic.getUserWithFaceUrl(openid);
@@ -85,7 +85,7 @@ public class PictureController{
 			e.printStackTrace();
 		}
 		 
-		return str;
+		return ls;
 	}
 }
  
