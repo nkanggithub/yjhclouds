@@ -11,7 +11,6 @@ String uid = request.getParameter("UID");
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
   <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-  <script type="text/javascript" src="../Jsp/JS/gauge.min.js"></script>
 <style>
 
 .DetectedPerson{
@@ -42,11 +41,6 @@ String uid = request.getParameter("UID");
     
 </head>
 <body style="padding:0px;margin:0px;">
-
-
-
-
-
 <a href="profile.jsp?UID=<%=uid%>">
 	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 </a>	
@@ -55,15 +49,13 @@ String uid = request.getParameter("UID");
 <div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">看我颜值如何爆表</div>
 <input id="uid" type="hidden" value="<%=uid%>" />											
 <div id="text" style="margin-top:150px;width:80%;margin-left:10%;text-align:center;">
-
 </div>
-
 <script>
-   $(document).ready(function () {
   	$.ajax({  
 	        cache : false,  
 	        type : "GET",
 			url : "../uploadPicture", 
+			async: false,  
 			data : {openid:$('#uid').val()},
 	        timeout: 2000, 
 	        success: function(data){
@@ -111,7 +103,7 @@ String uid = request.getParameter("UID");
 				$("#text").html(div);
 	        }
 	  	});
-   });
   	</script>
+  <script type="text/javascript" src="../Jsp/JS/gauge.min.js"></script>
 </body>
 </html>
