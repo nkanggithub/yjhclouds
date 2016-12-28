@@ -19,12 +19,12 @@ public class FaceObj {
 	String sadness;
 	String surprise;
 	
-	int levelNum ;
+	float levelNum ;
 	
-	public int getLevelNum() {
+	public float getLevelNum() {
 		return levelNum;
 	}
-	public void setLevelNum(int levelNum) {
+	public void setLevelNum(float levelNum) {
 		this.levelNum = levelNum;
 	}
 	public String getSmile() {
