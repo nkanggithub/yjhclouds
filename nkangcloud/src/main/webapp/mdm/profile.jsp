@@ -61,10 +61,12 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/demo.css">
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../nkang/autocomplete/jquery-ui.css">
-<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
-<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
+
+
 <script src="../nkang/js_athena/jquery.circliful.min.js"></script>
 <script src="../nkang/assets_athena/bootstrap/js/bootstrap.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
@@ -72,10 +74,11 @@ if (session.getAttribute("location") == null) {
 <script src="../Jsp/JS/modernizr.js"></script>
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
+
 <script>
 var LastToLikeDate="",lastLikeTo="";
 $(window).load(function() {
-	$(".mes-openbt").openmes({ext: 'php'});
+	//$(".mes-openbt").openmes({ext: 'php'});
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		checkReg();
 		getStockData(stockUrl);
