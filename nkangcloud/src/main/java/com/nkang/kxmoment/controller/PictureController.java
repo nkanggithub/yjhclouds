@@ -46,6 +46,7 @@ public class PictureController{
 				str="you don't have one photo..";
 				//URL = "http://mmbiz.qpic.cn/mmbiz_jpg/WB6qdHS5xfEEO8tSzLHxG7nvFB0yQzqPdm8iafdluCIq6EOt4sDRyItQJVvQFbb785C3ic3Bbz468ibOS0ibSFBJIg/0";
 			}else{
+				
 				jsonArraGoface = new JSONArray(faceRecognition.goface(URL).toString());
 				jsonArraEmotion = new JSONArray(faceRecognition.gofaceEmotion(URL).toString());
 				
@@ -55,7 +56,7 @@ public class PictureController{
 						  FaceObj fo = new FaceObj();
 						  JSONObject myjObject = jsonArraGoface.getJSONObject(i);
 						  JSONObject myjObjectEmotion = jsonArraEmotion.getJSONObject(i);
-						
+						  fo.setCurrentUrl(URL);
 						  fo.setAnger(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("anger").toString()));
 						  fo.setContempt(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("contempt").toString()));
 						  fo.setDisgust(NumberUtil.scienceToNormal(CommenJsonUtil.jsonToObject(myjObjectEmotion.get("scores").toString()).get("disgust").toString()));

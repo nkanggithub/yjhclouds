@@ -18,7 +18,14 @@ public class FaceObj {
 	String neutral;
 	String sadness;
 	String surprise;
+	String currentUrl;
 	
+	public String getCurrentUrl() {
+		return currentUrl;
+	}
+	public void setCurrentUrl(String currentUrl) {
+		this.currentUrl = currentUrl;
+	}
 	float levelNum ;
 	
 	public float getLevelNum() {
