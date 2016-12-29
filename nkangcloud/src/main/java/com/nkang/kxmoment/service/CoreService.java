@@ -120,50 +120,29 @@ public class CoreService
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
 				String mediaId = requestObject.element("MediaId").getText();
-				String picUrl = requestObject.element("PicUrl").getText();
-				respContent = "IMAGE's id : "+mediaId + "\n" +" picUrl is: "+picUrl;
+				String picurl = requestObject.element("PicUrl").getText();
+				MongoDBBasic.updateUserWithFaceUrl(fromUserName,picurl);
+				if(StringUtils.isEmpty(picurl)){
+					picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
+				}
+				articleList.clear();
+				Article article = new Article();
+				article.setTitle("看我颜值如何爆表-发个照片到这个公众号");
+				article.setDescription("看我颜值如何爆表");
+				article.setPicUrl(picurl);
+				article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+				articleList.add(article);
 				
+				Article article2 = new Article();
+				article2.setTitle("点我测颜值");
+				article2.setDescription("点我测颜值");
+				article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
+				article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
+				articleList.add(article2);
 				
-				MongoDBBasic.updateUserWithFaceUrl(fromUserName,picUrl);
-				
-				
-				FaceRecognition fr = new FaceRecognition();
-				String fro = fr.goface(picUrl);
-				JSONArray jsonArra = new JSONArray(fro);
-				List<FaceObj> ls = new ArrayList<FaceObj>();
-				 for(int i=0 ; i < jsonArra.length() ;i++)
-				  {
-					 FaceObj fo = new FaceObj();
-				   //获取每一个JsonObject对象
-				  JSONObject myjObject = jsonArra.getJSONObject(i);
-				   
-				   //获取每一个对象中的值
-				//  System.out.println(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age"));
-				  fo.setAge(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("age").toString());
-				  fo.setBeard(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString());
-				  fo.setGender(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("gender").toString());
-				  fo.setGlasses(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("glasses").toString());
-				  fo.setMoustache(CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString());
-				  fo.setSmile(CommenJsonUtil.jsonToObject(myjObject.get("faceAttributes").toString()).get("smile").toString());
-				  ls.add(fo);
-				  }
-				/*JSONObject jsonData = CommenJsonUtil.jsonToObject(jsonArra);
-				
-				String smile = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("smile").toString();
-				String gender = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("gender").toString();
-				String moustache = CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).getString("facialHair").toString()).get("moustache").toString();
-				String beard = CommenJsonUtil.jsonToObject(CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).getString("facialHair").toString()).get("beard").toString();
-				String age = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("age").toString();
-				String glasses = CommenJsonUtil.jsonToObject(jsonData.get("faceAttributes").toString()).get("glasses").toString();
-				*/
-				
-				//respContent = respContent + "\n\n"+"smile : "+smile +"\n"+"age :"+age +"\n"+"glasses :"+glasses +"\n"+"gender :"+gender +"\n"+"moustache :"+moustache +"\n"+"beard :"+beard;// fr.goface(picUrl);
-				 for(int i=0 ; i < ls.size() ;i++){
-					 respContent = respContent+"\n\n" + ls.get(i).Info()+ "\n\n";
-				 }
-				 
-				 textMessage.setContent(respContent);
-				respXml = MessageUtil.textMessageToXml(textMessage);
+				newsMessage.setArticleCount(articleList.size());
+				newsMessage.setArticles(articleList);
+				respXml = MessageUtil.newsMessageToXml(newsMessage);
 			}
 			
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
