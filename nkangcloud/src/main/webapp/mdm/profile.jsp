@@ -559,7 +559,7 @@ function recognizationPanelByPerson(personName){
 				+"  <div id='myRecognitionList'></div>"
 				+"		</div>"
 				+"	</div>"
-				+"</div><div id='footer'><span  class='clientCopyRight'><nobr>""+copyRight+"</nobr></span></div>");
+				+"</div><div id='footer'><span  class='clientCopyRight'><nobr>"+copyRight+"</nobr></span></div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });}else
