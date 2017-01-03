@@ -62,9 +62,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../nkang/autocomplete/jquery-ui.css">
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
-<script type="text/javascript">
-        var $113 = $;
-        console.log($.fn.jquery);</script>
+<script type="text/javascript">var $113 = $;</script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
@@ -263,7 +261,6 @@ function getRealName(){
 function showRecognitionDetail(from,to,point,type,coments)
 {
 	var text=coments.toString();
-	/* console.log("the openId is" + openId); */
 	$("body").append("<div id='recognitionCenter' style='width:100%;height:100%;'> <div style='height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D'><img style='position:absolute;top:20px;left:35px;width:130px;height:auto' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000' alt='HP Logo' class='HpLogo'></div>"
 			+"<div style='position:absolute;top:140px;width:80%;left:10%;font-size:16px;'>"
 			+"<p style='float:left;width:110px;'>Congratulations</p><p id='to' style='float:left;'>"+to+"</p><p style='float:left;'>!</p></div>"
@@ -288,7 +285,6 @@ function postRecognition(){
 		{
 		isAll="false";
 		}
-	console.log("start....");
 	var to = $("#to option:selected").val();
 	$.ajax({
         cache: false,
@@ -631,7 +627,6 @@ function register() {
 	}
 	
 function showRegister(){
-	console.log($113.fn.jquery);
 	$('#UserInfo').modal('hide');
 	$('#registerform').modal('show');
 	$.ajax({
@@ -680,22 +675,18 @@ function showRegister(){
 						for (var key in tag) { 
 							if(key=="java"){
 								$113("#javatag").slider("setValue",tag[key]);
-								console.log(tag[key]);
 							} 
 							
 							if(key =="html"){
 								$113("#htmltag").slider("setValue",tag[key]);
-								console.log(tag[key]);
 							} 
 							
 							if(key =="webservice"){
 								$113("#webservicetag").slider("setValue",tag[key]);
-								console.log(tag[key]);
 							} 
 							
 							if(key =="etl"){
 								$113("#etltag").slider("setValue",tag[key]);
-								console.log(tag[key]);
 							}
 						}
 					}
@@ -772,7 +763,6 @@ function getUserInfo(username, headimgurl, openId) {
 				},
 				cache : false,
 				success : function(data) {
-					console.log(data);
 					data = data.replace(/:null/g, ':"未注册"');
 					data = '{"results":' + data + '}';
 					var jsons = eval('(' + data + ')');
