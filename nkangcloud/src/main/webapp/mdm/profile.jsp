@@ -78,7 +78,7 @@ if (session.getAttribute("location") == null) {
 
 <script>
 var LastToLikeDate="",lastLikeTo="";
-var HpLogoSrc="";
+var HpLogoSrc="",copyRight="";
 $(window).load(function() {
 	//$(".mes-openbt").openmes({ext: 'php'});
 		getLogo();
@@ -99,7 +99,9 @@ function getLogo(){
 		success : function(data) {
 			var jsons = eval(data);
 			HpLogoSrc=jsons.clientLogo;
-			$('img.HpLogo').attr('src',jsons.clientLogo);
+			copyRight=jsons.clientCopyRight;
+			$('img.HpLogo').attr('src',HpLogoSrc);
+			$('span.clientCopyRight').text(copyRight);
 		}
 	});
 }
@@ -524,7 +526,7 @@ function recognizationPanel(){
 				+"  </div>"
 				+"		</div>"
 				+"	</div>"
-				+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
+				+"</div><div id='footer'><span class='clientCopyRight'><nobr>"+copyRight+"</nobr></span></div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
@@ -557,7 +559,7 @@ function recognizationPanelByPerson(personName){
 				+"  <div id='myRecognitionList'></div>"
 				+"		</div>"
 				+"	</div>"
-				+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
+				+"</div><div id='footer'><span  class='clientCopyRight'><nobr>""+copyRight+"</nobr></span></div>");
 		$('#recognizeForm').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });}else
@@ -1034,7 +1036,7 @@ function stockModule(){
 			+"<div id='stockTableForm' >"
 			+"<span>请输入股票代码：</span><input type='text' placeholder='股票代码' id='stockcodeKey'  required style='width:100px;'/><input id='addStockBtn' type='button' value='添加' style='margin: 5px;' />"
 			+"</div></div>"
-			+"</div><div id='footer'><span><nobr>© Hewlett-Packard Enterprise Development Company, L.P. | HP Restricted </nobr></span></div>");
+			+"</div><div id='footer'><span  class='clientCopyRight'><nobr>'"+copyRight+"</nobr></span></div>");
 	$('#allstockcodes').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
@@ -1198,7 +1200,7 @@ function getNowFormatDate() {
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<a href="../DQMenu?UID=<%=uid%>"> <img
-					src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000"
+					src=""
 					alt="HP Logo" class="HpLogo" />
 				</a>
 				<ul class="nav pull-right top-menu">
@@ -1677,7 +1679,7 @@ function getNowFormatDate() {
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM&amp;lastMod=1438220916000" alt="HP Logo" class="HpLogo">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="" alt="HP Logo" class="HpLogo">
 						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
@@ -1713,8 +1715,7 @@ function getNowFormatDate() {
 
 	<!-- BEGIN FOOTER -->
 	<div id="footer">
-		<span><nobr>© Hewlett-Packard Enterprise Development
-				Company, L.P. | HP Restricted </nobr></span>
+		<span class="clientCopyRight"><nobr></nobr></span>
 	</div>
 	<!-- END FOOTER -->
 </body>
