@@ -62,6 +62,9 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
 <link rel="stylesheet" type="text/css" href="../nkang/autocomplete/jquery-ui.css">
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
+<script type="text/javascript">
+        var $113 = $;
+        console.log($.fn.jquery);</script>
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
@@ -77,6 +80,7 @@ if (session.getAttribute("location") == null) {
 
 <script>
 var LastToLikeDate="",lastLikeTo="";
+
 $(window).load(function() {
 	//$(".mes-openbt").openmes({ext: 'php'});
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
@@ -627,6 +631,7 @@ function register() {
 	}
 	
 function showRegister(){
+	console.log($113.fn.jquery);
 	$('#UserInfo').modal('hide');
 	$('#registerform').modal('show');
 	$.ajax({
@@ -669,28 +674,27 @@ function showRegister(){
 			              break;  
 			          }  
 			      }
-			    
 			    if(jsons.results[0].tag!="未注册"){
 					for(var j=0;j<jsons.results[0].tag.length;j++){
 						var tag=jsons.results[0].tag[j];
 						for (var key in tag) { 
 							if(key=="java"){
-								$("#javatag").attr("value",tag[key]);
+								$113("#javatag").slider("setValue",tag[key]);
 								console.log(tag[key]);
 							} 
 							
 							if(key =="html"){
-								$("#htmltag").attr("value",tag[key]);
+								$113("#htmltag").slider("setValue",tag[key]);
 								console.log(tag[key]);
 							} 
 							
 							if(key =="webservice"){
-								$("#webservicetag").attr("value",tag[key]);
+								$113("#webservicetag").slider("setValue",tag[key]);
 								console.log(tag[key]);
 							} 
 							
 							if(key =="etl"){
-								$("#etltag").attr("value",tag[key]);
+								$113("#etltag").slider("setValue",tag[key]);
 								console.log(tag[key]);
 							}
 						}
@@ -752,6 +756,7 @@ function showRegister(){
 	});
 	
 }
+
 function getUserInfo(username, headimgurl, openId) {
 			$("#info_interact").css("display","block");
 			$("#info_interact2").css("display","block");
@@ -1120,8 +1125,6 @@ function addStock() {
 						$('#addStock').css("display","none");
 						var url = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 						
-						console.log(stockCode);
-						
 					    if(stockCode!=null || stockCode!="undefined"){
 					    	if(allAddStockCodes.length==0){
 					    		if(stockCode.indexOf("6")==0){
@@ -1139,7 +1142,6 @@ function addStock() {
 					    		}
 					    	}
 					   }
-					    console.log(allAddStockCodes);
 					   var temp = "";
 					   for(var i=0;i<allAddStockCodes.length;i++){
 						   temp +=",";
@@ -1537,10 +1539,9 @@ function getNowFormatDate() {
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
 												        <td>
 												          <select id="roleSelect">
-															<option selected="selected">Contributor</option> 
+															<option selected="selected">Individual Contributor</option> 
 															<option>Team Lead</option>
 															<option>Technical Lead</option>
-															<option>Project Mananger</option> 
 															<option>Other</option>
 														</select>
 												        </td>
@@ -1549,12 +1550,19 @@ function getNowFormatDate() {
 												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
 												        <td>
 												         <select id='groupSelect'>
-															<option selected="selected">Garden</option>
-															<option>Achi</option>
-															<option>NKang</option>
-															<option>Channing</option>
+															<option selected="selected">Chen, Hua-Quan</option>
+															<option>Kang, Ning</option>
+															<option>Zeng, Qiang</option>
+															<option>Li, Jian-Jun</option>
+															<option>Wu, Sha</option>
 															<option>Other</option>
 														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
+												        <td>
+												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
 												        </td>
 												      </tr>
 												      <tr>
@@ -1593,12 +1601,7 @@ function getNowFormatDate() {
 																	"/>
 												        </td>
 												      </tr>
-												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
-												        <td>
-												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
-												        </td>
-												      </tr>
+												      
 												 </table>
 											    <button class="btnAthena EbtnLess" style="background-color:#00B287;" id="registerBtn">在一起吧</button>
 										<!-- 	</form>  -->
