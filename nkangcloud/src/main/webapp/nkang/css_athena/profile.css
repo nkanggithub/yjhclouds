@@ -85,7 +85,7 @@ table.tax tr td:nth-child(even) input {
 
 .HpLogo {
 	height: 60px;
-	margin-left: -10px !important;
+	margin-left: 10px !important;
 }
 
 #navlist li {
