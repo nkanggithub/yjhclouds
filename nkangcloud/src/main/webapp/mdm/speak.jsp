@@ -25,6 +25,22 @@
 </div>
 
          <script>
+         function getLogo(){
+        		jQuery.ajax({
+        			type : "GET",
+        			url : "../QueryClientMeta",
+        			data : {},
+        			cache : false,
+        			success : function(data) {
+        				var jsons = eval(data);
+        				$('img.HpLogo').attr('src',HpLogoSrc);
+        				$('span.clientCopyRight').text(copyRight);
+        			}
+        		});
+        	}
+         $(window).load(function() {
+        	 getLogo();
+         });
                      function startDictation() {
                     	 $('#speak').attr('src','../MetroStyleFiles/Microphone_pressed.png');
                          if (window.hasOwnProperty('webkitSpeechRecognition')) 
