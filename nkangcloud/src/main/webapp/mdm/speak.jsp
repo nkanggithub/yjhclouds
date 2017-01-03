@@ -7,6 +7,7 @@
   <meta name="description" content="Signature Pad - HTML5 canvas based smooth signature drawing using variable width spline interpolation.">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/profile.css"/>
   <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 </head>
 <body style="padding:0px;margin:0px;">
