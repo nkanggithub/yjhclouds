@@ -64,8 +64,8 @@ table tr td:nth-child(even) {
 		cache : false,
 		success : function(data) {
 			var jsons = eval(data);
-			$('img.HpLogo').attr('src',HpLogoSrc);
-			$('span.clientCopyRight').text(copyRight);
+			$('img.HpLogo').attr('src',jsons.clientLogo);
+			$('span.clientCopyRight').text(jsons.clientCopyRight);
 		}
 	});
   	$.ajax({  
