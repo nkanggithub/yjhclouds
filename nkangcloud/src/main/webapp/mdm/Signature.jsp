@@ -15,7 +15,7 @@
 <a href="profile.jsp?UID=<%=session.getAttribute("UID")%>">
 	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 </a>	
-<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="" alt="HP Logo" class="HpLogo">
+<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="" alt="Logo" class="HpLogo">
 <div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 <div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">电子签名</div>
 <input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
@@ -102,15 +102,13 @@ var HpLogoSrc="",copyRight="";
 			cache : false,
 			success : function(data) {
 				var jsons = eval(data);
-				HpLogoSrc=jsons.clientLogo;
-				copyRight=jsons.clientCopyRight;
 				$('img.HpLogo').attr('src',HpLogoSrc);
 				$('span.clientCopyRight').text(copyRight);
 			}
 		});
 	}
-$(document).ready(function() {
 	getLogo();
+$(document).ready(function() {
 	getOld();
 	// This is the part where jSignature is initialized.
 	var $sigdiv = $("#signature").jSignature({'UndoButton':true})

@@ -79,9 +79,9 @@ if (session.getAttribute("location") == null) {
 <script>
 var LastToLikeDate="",lastLikeTo="";
 var HpLogoSrc="",copyRight="";
+getLogo();
 $(window).load(function() {
 	//$(".mes-openbt").openmes({ext: 'php'});
-		getLogo();
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		checkReg();
 		getStockData(stockUrl);
@@ -277,7 +277,7 @@ function getRealName(){
 function showRecognitionDetail(from,to,point,type,coments)
 {
 	var text=coments.toString();
-	$("body").append("<div id='recognitionCenter' style='width:100%;height:100%;'> <div style='height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D'><img style='position:absolute;top:20px;left:35px;width:130px;height:auto' src='"+HpLogoSrc+"' alt='HP Logo' class='HpLogo'></div>"
+	$("body").append("<div id='recognitionCenter' style='width:100%;height:100%;'> <div style='height:90px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D'><img style='position:absolute;top:20px;left:35px;width:130px;height:auto' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'></div>"
 			+"<div style='position:absolute;top:140px;width:80%;left:10%;font-size:16px;'>"
 			+"<p style='float:left;width:110px;'>Congratulations</p><p id='to' style='float:left;'>"+to+"</p><p style='float:left;'>!</p></div>"
 			+"<div style='position:absolute;top:180px;width:80%;left:10%;height:auto;font-size:14px;font-family: HP Simplified, Arial, Sans-Serif;'>"
@@ -567,7 +567,7 @@ function recognizationPanelByPerson(personName){
 	}
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;width:130px;height:auto' class='HpLogo' src='"+HpLogoSrc+"' alt='HP Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;width:130px;height:auto' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1201,7 +1201,7 @@ function getNowFormatDate() {
 			<div class="container-fluid">
 				<a href="../DQMenu?UID=<%=uid%>"> <img
 					src=""
-					alt="HP Logo" class="HpLogo" />
+					alt="Logo" class="HpLogo" />
 				</a>
 				<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -1679,7 +1679,7 @@ function getNowFormatDate() {
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="" alt="HP Logo" class="HpLogo">
+						<img style="position:absolute;top:10px;right:20px;width:130px;height:auto" src="" alt="Logo" class="HpLogo">
 						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
