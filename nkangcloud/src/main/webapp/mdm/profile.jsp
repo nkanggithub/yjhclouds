@@ -1278,12 +1278,9 @@ function getNowFormatDate() {
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
-								  <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+								  <div style="width:100%;height:1px;">
 								    <div style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
 								    <div style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
-								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
 								  </div>
 								</div>
 								
