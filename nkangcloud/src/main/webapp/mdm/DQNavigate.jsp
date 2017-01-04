@@ -134,7 +134,7 @@ catch(Exception e){
 	
 </head> 
 <body onload="stylerevise()">
-	<a href="http://shenan.duapp.com/DQMenu?UID=<%= uid%>"><img src="../MetroStyleFiles/HPE_White.png" alt="HP Logo" style="width:175px;height:80px;position:absolute;left:4%;top:2%; z-index:6;"/></a>
+	<a href="http://shenan.duapp.com/DQMenu?UID=<%= uid%>"><img src=""  class="HpLogo" alt="Logo" style="width:175px;height:80px;position:absolute;left:4%;top:2%; z-index:6;"/></a>
 	<a><img id="data_lake_id" src="../MetroStyleFiles/lake-icon.png" onClick="Javascript:CommentMe();" class="data_lake_img"/></a>
 	<div class="metro-layout vertical">
 		<div class="header"></div>
@@ -189,5 +189,20 @@ catch(Exception e){
 			</div>
 		</div>
 	</div>
-	<div id="footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
-</body></html>
+	<div id="footer"><span class="clientCopyRight">© 2016 Hewlett-Packard Enterprise Development Company, L.P.</span></div>
+
+<script>
+         jQuery.ajax({
+     		type : "GET",
+     		url : "../QueryClientMeta",
+     		data : {},
+     		cache : false,
+     		success : function(data) {
+     			var jsons = eval(data);
+     			$('img.HpLogo').attr('src',jsons.clientLogo);
+     			$('span.clientCopyRight').text(jsons.clientCopyRight);
+     		}
+     	});
+</script>
+</body>
+</html>

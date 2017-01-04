@@ -567,7 +567,7 @@ function recognizationPanelByPerson(personName){
 	}
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:10px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1679,7 +1679,7 @@ function getNowFormatDate() {
 					<!-- Start Background -->
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
-						<img style="position:absolute;top:10px;right:20px;" src="" alt="Logo" class="HpLogo">
+						<img style="position:absolute;top:8px;right:20px;" src="" alt="Logo" class="HpLogo">
 						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
