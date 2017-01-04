@@ -68,7 +68,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 
 
-<link rel="stylesheet" href="../Jsp/CSS/w3.css">
+<!-- <link rel="stylesheet" href="../Jsp/CSS/w3.css"> -->
 <style>
 	.mySlides {display:none}
 	.w3-left, .w3-right, .w3-badge {cursor:pointer}
@@ -1279,8 +1279,8 @@ function getNowFormatDate() {
 								  <img class="mySlides BoardDetailImage" src="http://www.w3schools.com/w3css/img_fjords_wide.jpg" >
 								  <img class="mySlides BoardDetailImage" src="http://www.w3schools.com/w3css/img_mountains_wide.jpg" >
 								  <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-								    <div class="w3-left w3-padding-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-								    <div class="w3-right w3-padding-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+								    <div style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
+								    <div style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
 								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
 								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
 								    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
