@@ -1234,7 +1234,7 @@ function getNowFormatDate() {
 			<div class="container-fluid">
 				<a href="../DQMenu?UID=<%=uid%>" style="float: left;padding-top:10px;"> 
 					<img src=""
-					alt="Logo" class="HpLogo" style="display:inline !important;height:30px;float:none;padding:0px;vertical-align:bottom;"/><span class="clientSubName" style="font-size:12px;padding-left:10px;font-weight:bold;"></span>
+					alt="Logo" class="HpLogo" style="display:inline !important;height:30px;float:none;padding:0px;vertical-align:bottom;"/><span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;"></span>
 					<h1 style="color:#333;font-size:18px;" class="clientName"></h1>
 				</a>
 				<ul class="nav pull-right top-menu">
