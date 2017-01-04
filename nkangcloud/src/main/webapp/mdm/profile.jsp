@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
@@ -73,6 +73,7 @@ if (session.getAttribute("location") == null) {
 	.mySlides {display:none}
 	.w3-left, .w3-right, .w3-badge {cursor:pointer}
 	.w3-badge {height:13px;width:13px;padding:0}
+        #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;}  
 </style>
 
 
@@ -85,6 +86,28 @@ if (session.getAttribute("location") == null) {
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 
 <script>
+$(function(){  
+    $('#return-top').hide();  
+    $(function(){  
+        $(window).scroll(function(){  
+            if($(window).scrollTop()>300){  
+                $('#return-top').fadeIn(300);  
+                }  
+                else{$('#return-top').fadeOut(200);}  
+              
+            });  
+            $('#return-top').click(function(){  
+                  
+                $('body,html').animate({scrollTop:0},300);  
+                return false;  
+                  
+                })  
+          
+        })  
+      
+      
+    });
+
 var LastToLikeDate="",lastLikeTo="";
 var HpLogoSrc="",copyRight="";
 getLogo();
@@ -1666,6 +1689,7 @@ function getNowFormatDate() {
 								<div class="tab-pane" id="WorkMates">
 									<div class="Work_Mates_div2" id="Work_Mates_div">
 									</div>
+<div id="return-top"><img class="scroll-top" src="Jsp/PIC/upgrade.png" alt="" width="30px"></div>  
 								</div>
 							</div>
 						</div>
