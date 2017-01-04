@@ -22,12 +22,14 @@ String uid = request.getParameter("UID");
 
 .myfacevalue{
 	float:left;
-	width:55%;
+	width:55% !important;
 	text-align:right;
 }
 .myfacevalue canvas{
 	margin-top:50px;
 	float:right;
+	width:200px !important;
+	height:200px !important;
 }
 .myfacevalueattribute{
 	float:right;
@@ -89,8 +91,8 @@ table tr td:nth-child(even) {
 							+'			class="myfacevalue" onclick="javascript:alert(\'颜值\');"'
 							+'			data-type="radial-gauge"'
 							+'	        data-value="'+temp.levelNum+'"'
-							+'	        data-width="200"'
-							+'	        data-height="200"'
+							+'	        data-width="350"'
+							+'	        data-height="350"'
 							+'	        data-bar-width="10"'
 							+'	        data-bar-shadow="5"'
 							+'	        data-color-bar-progress="rgba(50,200,50,.75)"'
