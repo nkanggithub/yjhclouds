@@ -1275,9 +1275,9 @@ function getNowFormatDate() {
 						<div class="PositionR">
 								<!-- slides show start -->
 								<div class="w3-content w3-display-container" style="max-width:800px">
-								  <img class="mySlides BoardDetailImage" src="http://shenan.duapp.com/MetroStyleFiles/image/socialHPE.png" >
-								  <img class="mySlides BoardDetailImage" src="http://www.w3schools.com/w3css/img_fjords_wide.jpg" >
-								  <img class="mySlides BoardDetailImage" src="http://www.w3schools.com/w3css/img_mountains_wide.jpg" >
+								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
+								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
+								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
 								  <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
 								    <div style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
 								    <div style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
