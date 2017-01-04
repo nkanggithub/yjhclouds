@@ -981,7 +981,7 @@ visibility:visible;
  </div>
 	<div class="loader more" id="goaway"></div>
 	<div class="demo-content">
-		<img class="mes-openbt" data-mesid="message-5" style="width:150px;height:58px;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&oid=00D90000000pkXM&lastMod=1438220916000" alt="HP Logo"/> 
+		<span class="mes-openbt" data-mesid="message-5" ><img style="width:150px;height:58px;" class="HpLogo" src="" alt="Logo"/> </span>
 	</div>
 
 <div id="userInfo">
@@ -2101,7 +2101,18 @@ var pin_config = {
 
 	]
 }
+jQuery.ajax({
+		type : "GET",
+		url : "../QueryClientMeta",
+		data : {},
+		cache : false,
+		success : function(data) {
+			var jsons = eval(data);
+			$('img.HpLogo').attr('src',jsons.clientLogo);
+			$('span.clientCopyRight').text(jsons.clientCopyRight);
+		}
+	});
 
 	</script>
-	<div class="panel-footer"><span>©</span> 2016 Hewlett-Packard Enterprise Development Company, L.P.</div>
+	<div class="panel-footer"><span class="clientCopyRight">© 2016 Hewlett-Packard Enterprise Development Company, L.P.</span></div>
 </body></html>
