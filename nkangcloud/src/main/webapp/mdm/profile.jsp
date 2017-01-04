@@ -68,7 +68,7 @@ if (session.getAttribute("location") == null) {
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 
 
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="../Jsp/CSS/w3.css">
 <style>
 	.mySlides {display:none}
 	.w3-left, .w3-right, .w3-badge {cursor:pointer}
