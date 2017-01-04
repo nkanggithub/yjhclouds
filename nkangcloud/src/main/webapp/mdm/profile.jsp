@@ -90,15 +90,15 @@ $(function(){
     $('#return-top').hide();  
     $(function(){  
         $(window).scroll(function(){  
-            if($(window).scrollTop()>300){  
-                $('#return-top').fadeIn(300);  
+            if($(window).scrollTop()>200){  
+                $('#return-top').fadeIn(200);  
                 }  
                 else{$('#return-top').fadeOut(200);}  
               
             });  
             $('#return-top').click(function(){  
                   
-                $('body,html').animate({scrollTop:0},300);  
+                $('body,html').animate({scrollTop:0},200);  
                 return false;  
                   
                 })  
