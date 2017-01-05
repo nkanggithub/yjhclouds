@@ -1232,12 +1232,7 @@ function getNowFormatDate() {
 	<div class="navbar" style="width: 100%;">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a href="../DQMenu?UID=<%=uid%>" style="float: left;padding-top:10px;"> 
-					<img src=""
-					alt="Logo" class="HpLogo" style="display:inline !important;height:30px;float:none;padding:0px;vertical-align:bottom;"/><span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;"></span>
-					<h1 style="color:#333;font-size:18px;" class="clientName"></h1>
-				</a>
-				<ul class="nav pull-right top-menu">
+			<ul class="nav pull-right top-menu">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"
 						style="font-size: 15px; margin: 0px; padding: 5px 0px;">
@@ -1248,6 +1243,11 @@ function getNowFormatDate() {
 								class="userImage" alt="no_username" onclick="register()" />
 						</a></span></li>
 				</ul>
+				<a href="../DQMenu?UID=<%=uid%>" style="float: left;padding-top:10px;"> 
+					<img src=""
+					alt="Logo" class="HpLogo" style="display:inline !important;height:30px;float:none;padding:0px;vertical-align:bottom;"/><span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;"></span>
+					<h1 style="color:#333;font-size:18px;" class="clientName"></h1>
+				</a>
 			</div>
 		</div>
 	</div>
