@@ -138,8 +138,10 @@ function getLogo(){
 			$('h1.clientName').text(jsons.clientName);
 			$('.clientTheme').css('background-color',clientThemeColor);
 			$('.clientThemefont').css('color',clientThemeColor);
-			$('ul#myTabs li a').css('border-color',clientThemeColor);
 			$('ul#myTabs').css('border-color',clientThemeColor);
+			$('ul#myTabs li a').css('border-right-color',clientThemeColor);
+			$('ul#myTabs li a').css('border-top-color',clientThemeColor);
+			$('ul#myTabs li a').css('border-left-color',clientThemeColor);
 		}
 	});
 }
