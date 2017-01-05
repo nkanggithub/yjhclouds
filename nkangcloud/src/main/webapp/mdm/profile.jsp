@@ -132,11 +132,14 @@ function getLogo(){
 			HpLogoSrc=jsons.clientLogo;
 			copyRight=jsons.clientCopyRight;
 			clientThemeColor=jsons.clientThemeColor;
-			$('.clientTheme').css('background-color',clientThemeColor);
 			$('img.HpLogo').attr('src',HpLogoSrc);
 			$('span.clientCopyRight').text(copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
 			$('h1.clientName').text(jsons.clientName);
+			$('.clientTheme').css('background-color',clientThemeColor);
+			$('.clientThemefont').css('color',clientThemeColor);
+			$('ul#myTabs li a').css('border-color',clientThemeColor);
+			$('ul#myTabs').css('border-color',clientThemeColor);
 		}
 	});
 }
@@ -1285,8 +1288,8 @@ function getNowFormatDate() {
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
 								  <div style="width:100%;height:1px;">
-								    <div style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
-								    <div style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
+								    <div class="clientThemefont" style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
+								    <div class="clientThemefont" style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
 								  </div>
 								</div>
 								
