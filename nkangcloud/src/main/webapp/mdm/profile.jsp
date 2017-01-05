@@ -73,7 +73,29 @@ if (session.getAttribute("location") == null) {
 	.mySlides {display:none}
 	.w3-left, .w3-right, .w3-badge {cursor:pointer}
 	.w3-badge {height:13px;width:13px;padding:0}
-        #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;}  
+        #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
+    
+input#search{
+	height:45px;
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../MetroStyleFiles/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-top:3px;
+    margin-bottom:-5px;
+}
+
+input#search:focus {
+    width: 100%;
+} 
 </style>
 
 
@@ -1281,6 +1303,9 @@ function getNowFormatDate() {
 						</h2>
 					</div>
 				</div>
+				 <input type="text" id="search" name="search" placeholder="Search..">
+		
+		
 				<div class="row-fluid mtop10">
 					<div class="span12">
 						<div class="PositionR">
@@ -1327,7 +1352,7 @@ function getNowFormatDate() {
 						</div>
 					</div>
 				</div>
-			</div>
+				 	</div>
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
 					<div class="span12">
