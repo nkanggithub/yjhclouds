@@ -76,7 +76,7 @@ if (session.getAttribute("location") == null) {
         #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
     
 input#search{
-	height:30px;
+	height:31px;
     width: 10px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -92,7 +92,7 @@ input#search{
     margin-top:3px;
     margin-bottom:-5px;
     position: relative;
-    top:26px;
+    top:-9px;
 }
 
 .PositionR {
@@ -1299,9 +1299,10 @@ function getNowFormatDate() {
 						<div id="divBoardName" style="dispaly: none" title='LBName'></div>
 						<h2>
 							<nobr>
-								<span class="colorDarkBlue" id="location"><%=curLoc%></span> <span
+							<span
 									style="float: right; margin-right: 10px;" class="colorDarkBlue"
-									id="location"> <img
+									id="location">
+								<span class="colorDarkBlue" id="location" style="float: right;"><%=curLoc%></span>  <img
 									src="../MetroStyleFiles/setuplocation.png"
 									onclick="getLocation();" id="locationImg"
 									style="height: 25px; cursor: pointer; margin-top: -5px;" />
