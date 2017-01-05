@@ -132,13 +132,14 @@ public class MongoDBBasic {
 	    try{
 			DBObject query = new BasicDBObject();
 			query.put("Active", "Y");
-			String clientCopyRight =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientCopyRight").toString();
-			String clientLogo =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientLogo").toString();
-			String clientName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientName").toString();
-			String clientSubName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
-			String clientThemeColor = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
-			String clientStockCode = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
-			String clientActive = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
+			DBObject queryresults = mongoDB.getCollection(ClientMeta).findOne(query);
+			String clientCopyRight = queryresults.get("ClientCopyRight").toString();
+			String clientLogo = queryresults.get("ClientLogo").toString();
+			String clientName = queryresults.get("ClientName").toString();
+			String clientSubName = queryresults.get("ClientSubName").toString();
+			String clientThemeColor = queryresults.get("ClientSubName").toString();
+			String clientStockCode = queryresults.get("ClientSubName").toString();
+			String clientActive = queryresults.get("ClientSubName").toString();
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
