@@ -153,6 +153,49 @@ public class MongoDBBasic {
 	    return cm;
 	}
 	
+	public static String ActivaeClientMeta(String clientCode){
+		String cm = "";
+		mongoDB = getMongoDB();
+	    try{
+			DBObject query = new BasicDBObject();
+			query.put("ClientCode", clientCode);
+			String clientName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientName").toString();
+			if(!StringUtils.isEmpty(clientName)){
+				BasicDBObject doc = new BasicDBObject();
+				DBObject update = new BasicDBObject();
+				update.put("Active", "Y");
+				doc.put("$set", update); 
+				WriteResult wr = mongoDB.getCollection(ClientMeta).update(new BasicDBObject().append("ClientCode", clientCode), doc);  
+				
+				
+				//disable other clients
+				DBObject q = new BasicDBObject();
+				q.put("ClientCode", new BasicDBObject("$ne", clientCode));
+				q.put("Active","Y");
+				DBCursor dbcur = mongoDB.getCollection(ClientMeta).find(q);
+	            if (null != dbcur) {
+	            	while(dbcur.hasNext()){
+	            		DBObject o = dbcur.next();
+	    				DBObject qry = new BasicDBObject();
+	    				qry.put("ClientCode", new BasicDBObject("$ne", clientCode));
+	    				qry.put("Active","Y");
+	    				BasicDBObject doc1 = new BasicDBObject();
+	    				DBObject update1 = new BasicDBObject();
+	    				update1.put("Active", "N");
+	    				doc1.put("$set", update1); 
+	    				WriteResult wr1 = mongoDB.getCollection(ClientMeta).update(qry, doc1); 
+	            	}
+	            }
+	            cm = clientName;
+			}
+	    }
+		catch(Exception e){
+			log.info("ActivaeClientMeta--" + e.getMessage());
+			cm =  e.getMessage();
+		}
+	    return cm;
+	}
+	
 	@SuppressWarnings("null")
 	public static WeChatUser queryWeChatUser(String OpenID){
 		mongoDB = getMongoDB();

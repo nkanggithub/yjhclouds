@@ -114,6 +114,7 @@ public class CoreService
 					}
 				else {
 					respContent = "OK：" + textContent + "\n";
+					respContent = MongoDBBasic.ActivaeClientMeta(textContent);
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
