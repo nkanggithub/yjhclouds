@@ -137,9 +137,9 @@ public class MongoDBBasic {
 			String clientLogo = queryresults.get("ClientLogo").toString();
 			String clientName = queryresults.get("ClientName").toString();
 			String clientSubName = queryresults.get("ClientSubName").toString();
-			String clientThemeColor = queryresults.get("ClientSubName").toString();
-			String clientStockCode = queryresults.get("ClientSubName").toString();
-			String clientActive = queryresults.get("ClientSubName").toString();
+			String clientThemeColor = queryresults.get("ClientThemeColor").toString();
+			String clientStockCode = queryresults.get("ClientCode").toString();
+			String clientActive = queryresults.get("Active").toString();
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
