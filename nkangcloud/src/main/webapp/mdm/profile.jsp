@@ -1280,7 +1280,7 @@ function getNowFormatDate() {
 					<div class="span12">
 						<div class="PositionR">
 								<!-- slides show start -->
-								<div class="w3-content w3-display-container" style="max-width:800px">
+								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:10px;">
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
