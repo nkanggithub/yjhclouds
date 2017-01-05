@@ -298,9 +298,15 @@ a:hover,a:link {
 }
 
 #registerform table {
+	text-align:center;
 	magain: auto;
 	color: #ffffff;
-	font-size: 20px;
+	font-size: 15px;
+	border-collapse:collapse;
+}
+
+#registerform table tr td{
+	height:45px;
 }
 
 #registerform Div {
