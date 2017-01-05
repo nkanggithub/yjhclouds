@@ -1285,13 +1285,13 @@ function getNowFormatDate() {
 					<div class="span12">
 						<div class="PositionR">
 								<!-- slides show start -->
-								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:2px;">
+								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:1px;">
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
 								  <div style="width:100%;height:1px;">
-								    <div class="clientThemefont" style="position:relative; top:-50px;right:-90%; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
-								    <div class="clientThemefont" style="position:relative; top:-68px;right:-10%; width:20px;" onclick="plusDivs(1)">&#10095;</div>
+								    <div class="clientThemefont" style="position:relative; top:-50px;right:-90%; font-size:22px; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
+								    <div class="clientThemefont" style="position:relative; top:-68px;right:-10%; font-size:22px; width:20px;" onclick="plusDivs(1)">&#10095;</div>
 								  </div>
 								</div>
 								
