@@ -1483,7 +1483,7 @@ function getNowFormatDate() {
 											</tr>
 											<tr>
 												<td colspan="2" style="text-align: center; padding: 0px;">
-													<button class="btnAthena EbtnLess"
+													<button class="btnAthena EbtnLess clientTheme"
 														style="margin-top: -30px; padding: 0px;background-color:#00B287;"
 														id="tax_submit_button">计算</button>
 												</td>
