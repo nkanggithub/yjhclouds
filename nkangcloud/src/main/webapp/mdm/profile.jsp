@@ -1596,13 +1596,12 @@ function getNowFormatDate() {
 								<div id="registerform" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
-									<div class="modal-body readmoreHpop"
-										style="white-space: pre-line; padding: 0px;">
+									<div>
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
-											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+											style="float: right; height: 27px; cursor: pointer; margin-top: -30px; margin-right: 5px;" />
 												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
-												    <table id="tableForm" style="margin-top:-20px;">
+												    <table id="tableForm" style="margin-top:20px;">
 												    <tr>
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
 												        <td class="tdInput">
@@ -1652,12 +1651,11 @@ function getNowFormatDate() {
 												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
 												        </td>
 												      </tr>
-												      <tr>
+												      <tr class="sliderclass">
 												        <td style="width:50px" >Java</td>
 												        <td>
 															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true,
-																		rule: [0,25,50,75,100]
+																		showTip:true
 																	"/>
 												        </td>
 												      </tr>
@@ -1665,8 +1663,7 @@ function getNowFormatDate() {
 												        <td style="width:50px">H5</td>
 												        <td>
 															<input id="htmltag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true,
-																		rule: [0,25,50,75,100]
+																		showTip:true
 																	"/>
 												        </td>
 												      </tr>
@@ -1674,8 +1671,7 @@ function getNowFormatDate() {
 												        <td style="width:50px">WS</td>
 												        <td>
 															<input id="webservicetag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true,
-																		rule: [0,25,50,75,100]
+																		showTip:true
 																	"/>
 												        </td>
 												      </tr>
@@ -1683,17 +1679,17 @@ function getNowFormatDate() {
 												        <td style="width:50px">ETL</td>
 												        <td>
 															<input id="etltag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true,
-																		rule: [0,25,50,75,100]
+																		showTip:true
 																	"/>
 												        </td>
 												      </tr>
 												      
 												 </table>
-											    <button class="btnAthena EbtnLess clientTheme" style="background-color:#00B287;" id="registerBtn">在一起吧</button>
+											    <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="registerBtn">在一起吧</button>
 										<!-- 	</form>  -->
 									</div>
 								</div>
+
 
 								<div class="tab-pane" id="WorkMates">
 									<div class="Work_Mates_div2" id="Work_Mates_div">
