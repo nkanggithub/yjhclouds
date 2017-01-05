@@ -131,18 +131,24 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 	    try{
 			DBObject query = new BasicDBObject();
-			query.put("ID", "1");
+			query.put("Active", "Y");
 			String clientCopyRight =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientCopyRight").toString();
 			String clientLogo =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientLogo").toString();
 			String clientName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientName").toString();
 			String clientSubName =mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
+			String clientThemeColor = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
+			String clientStockCode = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
+			String clientActive = mongoDB.getCollection(ClientMeta).findOne(query).get("ClientSubName").toString();
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
 			cm.setClientSubName(clientSubName);
+			cm.setClientActive(clientActive);
+			cm.setClientStockCode(clientStockCode);
+			cm.setClientThemeColor(clientThemeColor);
 	    }
 		catch(Exception e){
-			log.info("QueryAccessKey--" + e.getMessage());
+			log.info("QueryClientMeta--" + e.getMessage());
 		}
 	    return cm;
 	}
