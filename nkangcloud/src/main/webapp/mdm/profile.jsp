@@ -109,7 +109,7 @@ $(function(){
     });
 
 var LastToLikeDate="",lastLikeTo="";
-var HpLogoSrc="",copyRight="";
+var HpLogoSrc="",copyRight="",clientThemeColor="";
 getLogo();
 $(window).load(function() {
 	//$(".mes-openbt").openmes({ext: 'php'});
@@ -131,6 +131,8 @@ function getLogo(){
 			var jsons = eval(data);
 			HpLogoSrc=jsons.clientLogo;
 			copyRight=jsons.clientCopyRight;
+			clientThemeColor=jsons.clientThemeColor;
+			$('.clientTheme').css('background-color',clientThemeColor);
 			$('img.HpLogo').attr('src',HpLogoSrc);
 			$('span.clientCopyRight').text(copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
@@ -600,7 +602,7 @@ function recognizationPanelByPerson(personName){
 	}
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:#56B39D;position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientTheme+";position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1263,7 +1265,7 @@ function getNowFormatDate() {
 						<div id="divBoardName" style="dispaly: none" title='LBName'></div>
 						<h2>
 							<nobr>
-								<span class="colorDarkBlue" id="location"><%=curLoc%></span> <span
+								<span class="clientTheme colorDarkBlue" id="location"><%=curLoc%></span> <span
 									style="float: right; margin-right: 10px;" class="colorDarkBlue"
 									id="location"> <img
 									src="../MetroStyleFiles/setuplocation.png"
@@ -1755,7 +1757,7 @@ function getNowFormatDate() {
 					<div class="mes-content item-profilebg solid-smoke"
 						data-show="hmove" data-start="-100" data-showdura="400">
 						<img style="position:absolute;top:8px;right:20px;" src="" alt="Logo" class="HpLogo">
-						<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
+						<div class="clientTheme" style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
 						</div>
 					<!-- End Background -->
 					<!-- Start Control Bar -->
