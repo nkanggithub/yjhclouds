@@ -462,7 +462,7 @@ function taxPanel(){
 				+'											<tr>'
 				+'												<td colspan="2" style="text-align: center; padding: 0px;">'
 				+'													<button class="btnAthena EbtnLess"'
-				+'														style="padding: 0px;background-color:#00B287;"'
+				+'														style="padding: 0px;background-color:'+clientThemeColor+';"'
 				+'														id="tax_submit_button" onclick="getTax()">计算</button>'
 				+'												</td>'
 				+'											</tr>'
@@ -1685,7 +1685,7 @@ function getNowFormatDate() {
 												      </tr>
 												      
 												 </table>
-											    <button class="btnAthena EbtnLess" style="background-color:#00B287;" id="registerBtn">在一起吧</button>
+											    <button class="btnAthena EbtnLess clientTheme" style="background-color:#00B287;" id="registerBtn">在一起吧</button>
 										<!-- 	</form>  -->
 									</div>
 								</div>
