@@ -852,7 +852,7 @@ function getUserInfo(username, headimgurl, openId) {
 							$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>');
 							$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
 							$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
-							$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].email);
+							$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;<a href='mailto:"+jsons.results[0].email+"'>"+jsons.results[0].email+"</a>");
 							$("#info_selfIntro").text(jsons.results[0].selfIntro);
 						}else{
 							$("#info_username span").html('未注册');
