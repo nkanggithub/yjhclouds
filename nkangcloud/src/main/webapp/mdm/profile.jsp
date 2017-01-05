@@ -602,7 +602,7 @@ function recognizationPanelByPerson(personName){
 	}
 function showCommonPanel()
 {
-	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientTheme+";position:absolute;top:70px;'></div></div>");
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
 	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass();
 	    }); }
@@ -1260,12 +1260,12 @@ function getNowFormatDate() {
 		<!-- BEGIN PAGE -->
 		<div id="main-content">
 			<div class="BDbg">
-				<div class="BDheading">
+				<div class="clientTheme  BDheading">
 					<div class="span12">
 						<div id="divBoardName" style="dispaly: none" title='LBName'></div>
 						<h2>
 							<nobr>
-								<span class="clientTheme colorDarkBlue" id="location"><%=curLoc%></span> <span
+								<span class="colorDarkBlue" id="location"><%=curLoc%></span> <span
 									style="float: right; margin-right: 10px;" class="colorDarkBlue"
 									id="location"> <img
 									src="../MetroStyleFiles/setuplocation.png"
