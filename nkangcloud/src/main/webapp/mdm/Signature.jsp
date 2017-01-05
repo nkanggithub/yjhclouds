@@ -17,7 +17,7 @@
 	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
 </a>	
 <img style="position:absolute;top:8px;right:20px;" src="" alt="Logo" class="HpLogo">
-<div style="width:100%;height:4px;background:#56B39D;position:absolute;top:70px;"></div>
+<div style="width:100%;height:4px;position:absolute;top:70px;" class="clientTheme"></div>
 <div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">电子签名</div>
 <input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
 <div id="old" style="vertical-align:middle;margin-top:150px;margin-bottom:-98px;padding-top:5px;height:170px;border:2px #56B39D solid;width:80%;margin-left:auto;margin-right:auto;text-align:center;"></div>
@@ -105,6 +105,7 @@ var HpLogoSrc="",copyRight="";
 				var jsons = eval(data);
 				$('img.HpLogo').attr('src',jsons.clientLogo);
 				$('span.clientCopyRight').text(jsons.clientCopyRight);
+				$('.clientTheme').css('background-color',jsons.clientThemeColor);
 			}
 		});
 	}
