@@ -76,21 +76,28 @@ if (session.getAttribute("location") == null) {
         #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
     
 input#search{
-	height:45px;
-    width: 130px;
+	height:30px;
+    width: 10px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
     background-image: url('../MetroStyleFiles/searchicon.png');
-    background-position: 10px 10px; 
+    background-position: 5px 5px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     margin-top:3px;
     margin-bottom:-5px;
+    position: relative;
+    top:26px;
+}
+
+.PositionR {
+    position: relative;
+    margin-top: -35px;
 }
 
 input#search:focus {
@@ -1303,12 +1310,13 @@ function getNowFormatDate() {
 						</h2>
 					</div>
 				</div>
-				 <input type="text" id="search" name="search" placeholder="Search..">
+				 
 		
 		
 				<div class="row-fluid mtop10">
 					<div class="span12">
 						<div class="PositionR">
+						<input type="text" id="search" name="search" placeholder="Search..">
 								<!-- slides show start -->
 								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:1px;">
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
