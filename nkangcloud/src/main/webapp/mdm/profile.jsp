@@ -1305,7 +1305,7 @@ function getNowFormatDate() {
 								<span class="colorDarkBlue" id="location" style="float: right;"><%=curLoc%></span>  <img
 									src="../MetroStyleFiles/setuplocation.png"
 									onclick="getLocation();" id="locationImg"
-									style="height: 25px; cursor: pointer; margin-top: -5px; margin-right:60px" />
+									style="height: 25px; cursor: pointer; margin-top: -5px; margin-right:55px" />
 								</span>
 							</nobr>
 						</h2>
