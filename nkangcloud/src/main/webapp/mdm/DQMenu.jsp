@@ -981,7 +981,7 @@ visibility:visible;
  </div>
 	<div class="loader more" id="goaway"></div>
 	<div class="demo-content">
-		<span class="mes-openbt" data-mesid="message-5" ><img style="height:40px;" class="HpLogo" src="" alt="Logo"/> </span>
+		<span class="mes-openbt" data-mesid="message-5" ><img style="width:100px;" class="HpLogo" src="" alt="Logo"/> </span>
 	</div>
 
 <div id="userInfo">
