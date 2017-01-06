@@ -912,10 +912,8 @@ function getMDLUserLists() {
 				success : function(data) {
 					data = '{"results":' + data + '}';
 					var jsons = eval('(' + data + ')');
-					var ul = "";
+					var ul = "",regNumber=0;
 					ul='<div class="Work_Mates_div_list_div2">'
-					+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>'+ jsons.results.length
-					+'</span><div class="clear"></div></div>';
 					for (var i = 0; i < jsons.results.length; i++) {
 						var temp = jsons.results[i];
 						var selfIntro=temp.selfIntro;
@@ -954,6 +952,7 @@ function getMDLUserLists() {
 						if(workDay==null||workDay=='null'||workDay==0){
 							workDay="";
 						}else{
+							regNumber++;
 							workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
 						}
 						if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
@@ -999,6 +998,11 @@ function getMDLUserLists() {
 						ul += li;
 					}
 					$("#Work_Mates_div").html(ul);
+					 ul = "";
+						ul='<div class="Work_Mates_div_list_div2">'
+						+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
+						+'&nbsp;&nbsp;&nbsp;已注册人数：'+regNumber
+						+'</span><div class="clear"></div></div>';
 				}
 			});
 }
