@@ -88,7 +88,7 @@ input#search{
     background-image: url('../MetroStyleFiles/searchicon.png');
     background-position: 5px 5px; 
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
+    padding: 12px 0px 12px 40px;
  /*    -webkit-transition: width 0.4s ease-in-out; */
     transition: width 0.4s ease-in-out;
     margin-top:3px;
