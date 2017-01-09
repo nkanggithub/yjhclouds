@@ -66,6 +66,8 @@ if (session.getAttribute("location") == null) {
 <script type="text/javascript" src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
+<link rel="stylesheet" type="text/css" href="../Jsp/CSS/common.css">
+<script type="text/javascript" src="../Jsp/JS/slides.js"></script>
 
 
 <!-- <link rel="stylesheet" href="../Jsp/CSS/w3.css"> -->
@@ -1327,46 +1329,56 @@ function getNowFormatDate() {
 									<input type="text" id="search"  name="q" placeholder="Search.."> 
       						    </form>
 					<!-- 	<input type="text" id="search" name="search" placeholder="Search.."> -->
-								<!-- slides show start -->
-								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:1px;">
-								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
-								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
-								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
-								  <div style="width:100%;height:1px;">
-								    <div class="clientThemefont" style="position:relative; top:-60px;right:-90%; font-size:22px; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
-								    <div class="clientThemefont" style="position:relative; top:-78px;right:-10%; font-size:22px; width:20px;" onclick="plusDivs(1)">&#10095;</div>
-								  </div>
-								</div>
 								
-								<script>
-									var slideIndex = 1;
-									showDivs(slideIndex);
-									
-									function plusDivs(n) {
-									  showDivs(slideIndex += n);
-									}
-									
-									function currentDiv(n) {
-									  showDivs(slideIndex = n);
-									}
-									
-									function showDivs(n) {
-									  var i;
-									  var x = document.getElementsByClassName("mySlides");
-									  var dots = document.getElementsByClassName("demo");
-									  if (n > x.length) {slideIndex = 1}    
-									  if (n < 1) {slideIndex = x.length}
-									  for (i = 0; i < x.length; i++) {
-									     x[i].style.display = "none";  
-									  }
-									  for (i = 0; i < dots.length; i++) {
-									     dots[i].className = dots[i].className.replace(" w3-white", "");
-									  }
-									  x[slideIndex-1].style.display = "block";  
-									  dots[slideIndex-1].className += " w3-white";
-									}
-								</script>
-								<!-- slides show end -->
+							   <!-- slides show start -->
+							   <div class="slide-main" id="touchMain">
+
+        <a class="prev" href="javascript:;" stat="prev1001"><img src="../MetroStyleFiles/image/l-btn.png" /></a>
+
+        <div class="slide-box" id="slideContent">
+
+            <div class="slide" id="bgstylec">
+
+            	<a stat="sslink-3" href="" target="_blank">
+
+                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/socialHPE.png" /></div>
+
+            	</a>
+
+            </div>
+
+            <div class="slide" id="bgstylea">
+
+            	<a stat="sslink-1" href="" target="_blank">
+
+                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakedashboard.jpg" /></div>
+
+            	</a>
+
+            </div>
+
+            <div class="slide" id="bgstyleb">
+
+            	<a stat="sslink-2" href="" target="_blank">
+
+                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakepure.jpg" /></div>
+
+            	</a>
+
+            </div>
+
+        </div>
+
+        <a class="next" href="javascript:;" stat="next1002"><img width=100% height=100% src="../MetroStyleFiles/image/r-btn.png" /></a>
+
+        <div class="item">
+
+        	<a class="cur" stat="item1001" href="javascript:;"></a><a href="javascript:;" stat="item1002"></a><a href="javascript:;" stat="item1003"></a>
+
+        </div>
+
+    </div>
+    <!-- slides show end -->
 						</div>
 					</div>
 				</div>
