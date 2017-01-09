@@ -1307,14 +1307,10 @@ function getNowFormatDate() {
 						<div id="divBoardName" style="dispaly: none" title='LBName'></div>
 						<h2>
 							<nobr>
-							<span
-									style="float: right; margin-right: 10px;" class="colorDarkBlue"
-									id="location">
-								<span class="colorDarkBlue" id="location" style="float: right;"><%=curLoc%></span>  <img
+								<span class="colorDarkBlue" id="location" style="float: left;padding-left:25px;"><%=curLoc%></span>  <img
 									src="../MetroStyleFiles/setuplocation.png"
 									onclick="getLocation();" id="locationImg"
-									style="height: 25px; cursor: pointer; margin-top: -5px; margin-right:55px" />
-								</span>
+									style="height: 21px;padding-top:4px;float:right; cursor: pointer; margin-top: -5px;z-index:10000;" />
 							</nobr>
 						</h2>
 					</div>
@@ -1325,8 +1321,8 @@ function getNowFormatDate() {
 				<div class="row-fluid mtop10">
 					<div class="span12">
 						<div class="PositionR">
-						<form id="searchForm" method="get" action="https://www.bing.com/search" style="margin-top:-43px;">
-									<input type="text" id="search"  name="q" placeholder="Search.."> 
+						<form id="searchForm" method="get" action="https://www.bing.com/search"  style="padding:0px;" >
+									<input type="text" id="search"  name="q" placeholder="Search.." style="margin-top:-63px;"> 
       						    </form>
 					<!-- 	<input type="text" id="search" name="search" placeholder="Search.."> -->
 								
