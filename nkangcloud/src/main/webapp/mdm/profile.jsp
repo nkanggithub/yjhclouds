@@ -79,29 +79,31 @@ input#search{
 	height:31px;
     width: 10px;
     box-sizing: border-box;
-    border: 2px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    background-color: white;
+    font-weight:bold;
+    color:#fff !important;
+    background-color:rgba(0, 0, 0, 0);
     background-image: url('../MetroStyleFiles/searchicon.png');
     background-position: 5px 5px; 
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
+ /*    -webkit-transition: width 0.4s ease-in-out; */
     transition: width 0.4s ease-in-out;
     margin-top:3px;
-    margin-bottom:-5px;
+    margin-bottom:8px;
     position: relative;
-    top:-9px;
 }
 
 .PositionR {
     position: relative;
-    margin-top: -35px;
+   /*  margin-top: -35px; */
 }
 
 input#search:focus {
     width: 100%;
+    background-color:rgba(200, 200, 200, 1);
 } 
 </style>
 
@@ -142,6 +144,7 @@ var HpLogoSrc="",copyRight="",clientThemeColor="";
 getLogo();
 $(window).load(function() {
 	//$(".mes-openbt").openmes({ext: 'php'});
+	$('input#search:focus').css('background-color',clientThemeColor);
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		checkReg();
 		getStockData(stockUrl);
@@ -1320,15 +1323,18 @@ function getNowFormatDate() {
 				<div class="row-fluid mtop10">
 					<div class="span12">
 						<div class="PositionR">
-						<input type="text" id="search" name="search" placeholder="Search..">
+						<form id="searchForm" method="get" action="https://www.bing.com/search" style="margin-top:-43px;">
+									<input type="text" id="search"  name="q" placeholder="Search.."> 
+      						    </form>
+					<!-- 	<input type="text" id="search" name="search" placeholder="Search.."> -->
 								<!-- slides show start -->
 								<div class="w3-content w3-display-container clientTheme" style="max-width:800px;padding:1px;">
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/socialHPE.png" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakedashboard.jpg" >
 								  <img class="mySlides BoardDetailImage" src="../MetroStyleFiles/image/datalakepure.jpg" >
 								  <div style="width:100%;height:1px;">
-								    <div class="clientThemefont" style="position:relative; top:-50px;right:-90%; font-size:22px; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
-								    <div class="clientThemefont" style="position:relative; top:-68px;right:-10%; font-size:22px; width:20px;" onclick="plusDivs(1)">&#10095;</div>
+								    <div class="clientThemefont" style="position:relative; top:-60px;right:-90%; font-size:22px; width:20px;" onclick="plusDivs(-1)">&#10094;</div>
+								    <div class="clientThemefont" style="position:relative; top:-78px;right:-10%; font-size:22px; width:20px;" onclick="plusDivs(1)">&#10095;</div>
 								  </div>
 								</div>
 								
@@ -1364,6 +1370,10 @@ function getNowFormatDate() {
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
 				 	</div>
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
