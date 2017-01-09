@@ -1327,7 +1327,7 @@ function getNowFormatDate() {
 					<!-- 	<input type="text" id="search" name="search" placeholder="Search.."> -->
 								
 							   <!-- slides show start -->
-							   <div class="slide-main" id="touchMain">
+							   <div class="slide-main" id="touchMain" style="margin-top:-20px;">
 
         <a class="prev" href="javascript:;" stat="prev1001"><img src="../MetroStyleFiles/image/l-btn.png" /></a>
 
@@ -1459,7 +1459,7 @@ function getNowFormatDate() {
 														<h4>股票</h4>
 												</td>
 												<td><img src="../MetroStyleFiles/menu-technology.png" />
-													<h4>技术快车</h4></td>
+													<h4>消息推送</h4></td>
 											</tr>
 											<tr>
 												<td>		<img  onclick="recognizationPanel()"
