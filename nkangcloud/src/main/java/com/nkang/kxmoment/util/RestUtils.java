@@ -15,6 +15,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.ctc.wstx.util.StringUtil;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -1884,6 +1884,42 @@ public static String regist(WeChatMDLUser user) {
 		}
 		return orgCountryCode;
 	}
+	
+	
+	
+    public static List<String> sendTextMessageToUserOnlyByCustomInterface(String content,String toUser,String fromUsersOpenID){
+ 	        List<String> result = new ArrayList<String>();
+ 	       List<String> dbUser =  MongoDBBasic.getRegisterUserByOpenID(fromUsersOpenID);
+ 	       Date date=new Date();
+ 			 String json = 
+ 				"{"+
+ 				  "\"touser\":\""+toUser+"\","+ 
+ 				  "\"msgtype\":\"text\", "+
+ 				   "\"text\":{"+
+ 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" 说：\n---------------\n"+content+"\""+
+ 				   "}"+
+ 				"}";
+
+ 	        System.out.println(json);
+
+           String access_token = MongoDBBasic.getValidAccessKey();
+
+ 	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+ 	       result.add(action);
+ 	       result.add(json);
+ 	       try {
+
+ 	    	 	connectWeiXinInterface(action,json);
+
+ 	       } catch (Exception e) {
+
+ 	           e.printStackTrace();
+
+ 	       }
+ 	       return result;
+
+   }
 	
     public static String sendTextMessageToUser(String content,List<String> toUser){
     	String result="";
