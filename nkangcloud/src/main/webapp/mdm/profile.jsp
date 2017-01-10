@@ -1651,10 +1651,11 @@ function getNowFormatDate() {
 								<div id="registerform" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
-									<div>
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px;">
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
-											style="float: right; height: 27px; cursor: pointer; margin-top: -30px; margin-right: 5px;" />
+											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
 												    <table id="tableForm" style="margin-top:20px;">
 												    <tr>
