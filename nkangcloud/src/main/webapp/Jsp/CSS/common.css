@@ -8,7 +8,11 @@
 	.a7{left:10px!important;top:300px!important;}
 	.a8{left:115px!important;width:225px;top:300px!important;}
 	}
-	
+@media (max-width: 321px) {
+	#sendR{
+	    height: 350px;
+    overflow: scroll;}
+	}
 	
 /* slide */
 .slide-main{ height: 221px; position: relative; }
