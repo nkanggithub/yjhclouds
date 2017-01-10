@@ -113,10 +113,21 @@ public class CoreService
 						respXml = MessageUtil.textMessageToXml(textMessage);
 					}
 				else {
-					respContent = "OK：" + textContent + "\n";
-					respContent = MongoDBBasic.ActivaeClientMeta(textContent);
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
+					List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+	                for(int i=0;i<allUser.size();i++){
+	                     if(fromUserName.equals(allUser.get(i))){
+	                         allUser.remove(i);
+	                     }
+	                }
+	                    
+	                 for(int i=0;i<allUser.size();i++){
+	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
+	                }
+//	                  respContent = "OK：" + textContent + "\n";
+//	                  respContent = MongoDBBasic.ActivaeClientMeta(textContent);
+	                    textMessage.setContent("message sent");
+	                    respXml = MessageUtil.textMessageToXml(textMessage);
+
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
