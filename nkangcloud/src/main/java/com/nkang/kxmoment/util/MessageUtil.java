@@ -53,6 +53,7 @@ public class MessageUtil {
 	public static final String RESP_MESSAGE_TYPE_IMAGE = "image";
 	public static final String RESP_MESSAGE_TYPE_VOICE = "voice";
 	public static final String RESP_MESSAGE_TYPE_VIDEO = "video";
+	public static final String RESP_MESSAGE_TYPE_CUSTOMER_SERVICE = "transfer_customer_service";
 
 	public static Element parseXml(HttpServletRequest request)
 			throws Exception {
