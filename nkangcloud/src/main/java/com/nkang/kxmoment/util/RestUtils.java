@@ -1920,7 +1920,38 @@ public static String regist(WeChatMDLUser user) {
  	       return result;
 
    }
-	
+    public static List<String> sendImgMessageToUserOnlyByCustomInterface(String toUser,String media_id){
+	        List<String> result = new ArrayList<String>();
+			 String json = 
+				"{"+
+				  "\"touser\":\""+toUser+"\","+ 
+				  "\"msgtype\":\"image\", "+
+				   "\"image\":{"+
+				     "\"media_id\":\""+media_id+"\""+
+				   "}"+
+				"}";
+
+	        System.out.println(json);
+
+       String access_token = MongoDBBasic.getValidAccessKey();
+
+	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+	       result.add(action);
+	       result.add(json);
+	       try {
+
+	    	 	connectWeiXinInterface(action,json);
+
+	       } catch (Exception e) {
+
+	           e.printStackTrace();
+
+	       }
+	       return result;
+
+}
+
     public static String sendTextMessageToUser(String content,List<String> toUser){
     	String result="";
     	String text="";
