@@ -59,6 +59,9 @@ $(window).load(function() {
 		getLogoLists();
 		getMDLUserLists();
 });
+function updateLogo(id){
+	alert(id);
+}
 function getLogoLists() {
 	jQuery.ajax({
 				type : "GET",
@@ -80,7 +83,7 @@ function getLogoLists() {
 							+'								应用中'
 							+'							</div>';
 					}else{
-						buttonText='<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
+						buttonText='<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="updateLogo(\"'+clientStockCode+'\")">'
 							+'								应用'
 							+'							</div>';
 					}
