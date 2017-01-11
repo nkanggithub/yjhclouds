@@ -231,6 +231,19 @@ public class MasterDataRestController {
 		}
 		return String.valueOf(result);
 	}
+	@RequestMapping("/ActivaeClientMeta")
+	public String ActivaeClientMeta(	@RequestParam(value="clientCode", required=true) String clientCode)
+	{
+		boolean result=false;
+		try{
+			MongoDBBasic.ActivaeClientMeta(clientCode);
+			result=true;
+		}
+		catch(Exception e){
+			result = false;
+		}
+		return String.valueOf(result);
+	}
 	
 	@RequestMapping("/getDBUserGeoInfo")
 	public static GeoLocation callGetDBUserGeoInfo(@RequestParam(value="OpenID", required=false) String OpenID){
