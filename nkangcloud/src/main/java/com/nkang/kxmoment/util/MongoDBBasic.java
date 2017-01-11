@@ -1292,7 +1292,7 @@ public class MongoDBBasic {
 	    try{
 	    	BasicDBObject sort=new BasicDBObject();
 			sort.put("Active", -1);
-			queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
+			queryresults = mongoDB.getCollection(ClientMeta).find().limit(500).sort(sort);
 			if (null != queryresults) {
             	while(queryresults.hasNext()){
             		ClientMeta cm = new ClientMeta();
