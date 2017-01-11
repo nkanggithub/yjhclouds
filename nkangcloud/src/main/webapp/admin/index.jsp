@@ -79,6 +79,13 @@ function getLogoLists() {
 						buttonText='							<div style="float: right; margin-top: -80px; background-color: #777; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
 							+'								应用中'
 							+'							</div>';
+						$('#logo_now').html('<img'
+								+'				src="'+temp.clientLogo+'"'
+								+'				alt="Logo" class="HpLogo"'
+								+'				style="display: inline !important; height: 30px; float: none; padding: 0px; vertical-align: bottom;"><span'
+								+'				class="clientSubName"'
+								+'				style="font-size: 12px; padding-left: 7px; color: #333;">'+temp.clientSubName+'</span>'
+								+'				<h1 style="color: #333; font-size: 18px;" class="clientName">'+temp.clientName+'</h1>');
 					}else{
 						buttonText='<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="updateLogo(\''+temp.clientStockCode+'\')">'
 							+'								应用'
