@@ -153,7 +153,6 @@ public class MongoDBBasic {
 		}
 	    return cm;
 	}
-	
 	public static String ActivaeClientMeta(String clientCode){
 		String cm = "";
 		mongoDB = getMongoDB();
@@ -1286,7 +1285,41 @@ public class MongoDBBasic {
 		}
 		return Oppts;
 	}
-	
+	public static ArrayList<ClientMeta> QueryClientMetaList(){
+		ArrayList<ClientMeta> result=new ArrayList<ClientMeta>();
+		mongoDB = getMongoDB();
+		DBCursor queryresults;
+	    try{
+	    	BasicDBObject sort=new BasicDBObject();
+			sort.put("Active", -1);
+			queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
+			if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		ClientMeta cm = new ClientMeta();
+            		DBObject o = queryresults.next();
+            		String clientCopyRight = o.get("ClientCopyRight").toString();
+        			String clientLogo = o.get("ClientLogo").toString();
+        			String clientName = o.get("ClientName").toString();
+        			String clientSubName = o.get("ClientSubName").toString();
+        			String clientThemeColor = o.get("ClientThemeColor").toString();
+        			String clientStockCode = o.get("ClientCode").toString();
+        			String clientActive = o.get("Active").toString();
+        			cm.setClientCopyRight(clientCopyRight);
+        			cm.setClientLogo(clientLogo);
+        			cm.setClientName(clientName);
+        			cm.setClientSubName(clientSubName);
+        			cm.setClientActive(clientActive);
+        			cm.setClientStockCode(clientStockCode);
+        			cm.setClientThemeColor(clientThemeColor);
+        			result.add(cm);
+            	}
+            }
+	    }
+		catch(Exception e){
+			log.info("QueryClientMeta--" + e.getMessage());
+		}
+	    return result;
+	}
 	@SuppressWarnings("unchecked")
 	public static List<WeChatMDLUser> getWeChatUserFromMongoDB(String OpenID) {
 		mongoDB = getMongoDB();
