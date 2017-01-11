@@ -106,7 +106,20 @@ function getLogoLists() {
 			});
 }
 function updateLogo(id){
-	alert(id);
+	jQuery.ajax({
+		type : "GET",
+		url : "../ActivaeClientMeta",
+		data : {clientCode:id},
+		cache : false,
+		success : function(data) {
+			if(data=="true"){
+				alert(1);
+			}
+			else{
+				alert(2);
+			}
+		}
+	});
 }
 function getMDLUserLists() {
 	$.ajax({
