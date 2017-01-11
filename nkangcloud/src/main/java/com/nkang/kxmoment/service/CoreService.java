@@ -137,7 +137,7 @@ public class CoreService
 				if(StringUtils.isEmpty(picurl)){
 					picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
 				}
-				articleList.clear();
+/*				articleList.clear();
 				Article article = new Article();
 				article.setTitle("看我颜值如何爆表-发个照片到这个公众号");
 				article.setDescription("看我颜值如何爆表");
@@ -154,7 +154,21 @@ public class CoreService
 				
 				newsMessage.setArticleCount(articleList.size());
 				newsMessage.setArticles(articleList);
-				respXml = MessageUtil.newsMessageToXml(newsMessage);
+				respXml = MessageUtil.newsMessageToXml(newsMessage);*/
+				List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+		    	for(int i=0;i<allUser.size();i++){
+		    		if(fromUserName.equals(allUser.get(i))){
+		    			allUser.remove(i);
+		    		}
+		    	}
+		    	log.info("mediaId-----------------:"+mediaId);
+		        
+		    	for(int i=0;i<allUser.size();i++){
+		    		RestUtils.sendImgMessageToUserOnlyByCustomInterface(allUser.get(i),mediaId);
+		    	}
+				
+				textMessage.setContent("image sent");
+				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
 			
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
