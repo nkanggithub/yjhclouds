@@ -113,10 +113,11 @@ function updateLogo(id){
 		cache : false,
 		success : function(data) {
 			if(data=="true"){
-				alert(1);
+				swal("Congratulations！", "网站LOGO替换成功!", "success"); 
+				location.reload();
 			}
 			else{
-				alert(2);
+				swal("网站LOGO替换失败!", "服务器出异常了", "error"); 	
 			}
 		}
 	});
