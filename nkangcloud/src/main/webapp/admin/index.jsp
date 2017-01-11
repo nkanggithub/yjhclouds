@@ -74,7 +74,16 @@ function getLogoLists() {
 						+'						</div>';
 					for (var i = 0; i < jsons.length; i++) {
 					var temp=jsons[i];
-					var buttomText=temp.clientActive=='Y'?'应用中':'应用';
+					var buttonText;
+					if(temp.clientActive=='Y'){
+						buttonText='							<div style="float: right; margin-top: -80px; background-color: #777; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
+							+'								应用中'
+							+'							</div>';
+					}else{
+						buttonText='<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
+							+'								应用'
+							+'							</div>';
+					}
 						var li='<div class="Work_Mates_div_list_div2" style="padding-bottom:0px !important;">'
 		+'							<img'
 		+'								src="'+temp.clientLogo+'"'
@@ -84,9 +93,7 @@ function getLogoLists() {
 		+'								style="font-size: 12px; padding-left: 7px; color: #333;">'+temp.clientSubName+'</span>'
 		+'							<h1 style="color: #333; font-size: 18px;padding-left:0px;" class="clientName">'+temp.clientName+'</h1>'
 		+'							<p style="font-size:10px;margin-bottom:3px;margin-top:-3px;">'+temp.clientCopyRight+'</p>'
-		+'							<div style="float: right; margin-top: -80px; background-color: #777; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
-		+'								应用中'
-		+'							</div>'
+		+buttonText
 		+'							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
 		+'								编辑'
 		+'							</div>'
@@ -488,49 +495,6 @@ jQuery
 				<div class="tab-pane active" id="logoElements">
 					<!-- start logoElements-->
 					<div class="Work_Mates_div2" id="Logo_div">
-						<div class="Work_Mates_div_list_div2">
-							<span class="total_num">总数：4</span>
-							<div class="clear"></div>
-						</div>
-						<div class="Work_Mates_div_list_div2" style="padding-bottom:0px !important;">
-							<img
-								src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM"
-								alt="Logo" class="HpLogo"
-								style="display: inline !important; height: 30px;padding-left:0px !important;margin-left:0px !important;vertical-align: bottom;"><span
-								class="clientSubName"
-								style="font-size: 12px; padding-left: 7px; color: #333;">Master
-								Data Management</span>
-							<h1 style="color: #333; font-size: 18px;padding-left:0px;" class="clientName">Hewlett-Packard
-								Enterprise</h1>
-							<p style="font-size:10px;margin-bottom:3px;margin-top:-3px;">2017 Hewlett-Packard Enterprise Development Company, L.P.</p>
-							<div style="float: right; margin-top: -80px; background-color: #777; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">
-								应用中
-							</div>
-							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">
-								编辑
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="Work_Mates_div_list_div2" style="padding-bottom:0px !important;">
-							<img
-								src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM"
-								alt="Logo" class="HpLogo"
-								style="display: inline !important; height: 30px;padding-left:0px !important;margin-left:0px !important;vertical-align: bottom;"><span
-								class="clientSubName"
-								style="font-size: 12px; padding-left: 7px; color: #333;">Master
-								Data Management</span>
-							<h1 style="color: #333; font-size: 18px;padding-left:0px;" class="clientName">Hewlett-Packard
-								Enterprise</h1>
-							<p style="font-size:10px;margin-bottom:3px;margin-top:-3px;">2017 Hewlett-Packard Enterprise Development Company, L.P.</p>
-							<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">
-								应用
-							</div>
-							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">
-								编辑
-							</div>
-							<div class="clear"></div>
-						</div>
-
 					</div>
 					<!-- end logoElements-->
 
