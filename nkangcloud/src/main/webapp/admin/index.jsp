@@ -535,6 +535,156 @@ jQuery
 					<!-- end logoElements-->
 
 				</div>
+				<div id="UserInfo" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px;">
+										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+										<div id="userInfoDiv">
+											<div id="info_interact"  style="position: absolute;width:100%;">
+												<img class="like" src="../MetroStyleFiles/like.png"/>
+												<img class="zan"  data-dismiss="modal" aria-hidden="true" onclick="recognizationPanel()" src="../MetroStyleFiles/zan.png"/>
+											</div>
+											<div id="info_interact2"
+												style="position: absolute; width: 100%; display: block; margin-top: 45px;">
+												<span class="like"
+													style="float: left; margin-left: 25px; width: 40px; text-align: center;"></span>
+												<span class="zan"
+													style="float: right; margin-right: 30px; margin-top: -20px; width: 40px; text-align: center;"></span>
+											</div>
+											<img id="info_imgurl"
+												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
+												alt="userImage" class="matesUserImage2" style="position: relative;">
+											<div id="info_username" style="margin-top:-20px;">
+												<span></span>
+											</div>
+											<table id="info_all">
+												<tr>
+													<td><img src="../MetroStyleFiles/group2.png"/></td>
+													<td><div id="info_group"></div></td>
+												</tr>
+												<tr>
+													<td><img src="../MetroStyleFiles/telephone2.png"/></td>
+													<td><div id="info_phone"></div></td>
+												</tr>
+												<tr>
+													<td><img src="../MetroStyleFiles/email2.png"/></td>
+													<td><div id="info_email"></div></td>
+												</tr>
+											</table>
+											<div id="info_selfIntro" style="margin-top:-10px;width:100%;text-align:center;"></div>
+											<div style="width:100%; padding:0px;margin-top:-35px;margin-bottom:-40px;overflow-x: auto;">
+												<table id="info_tag" style="margin-left:auto;margin-right:auto;">
+													<tr>
+													</tr>
+												</table>											
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+							
+								<div id="registerform" class="modal hide fade" tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true" data-backdrop="static">
+									<div class="modal-body readmoreHpop"
+										style="white-space: pre-line; padding: 0px;">
+										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
+											aria-hidden="true"
+											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
+												    <table id="tableForm" style="margin-top:20px;">
+												    <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
+												        <td class="tdInput">
+												          <input type="text" placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
+												        <td>
+												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
+												        <td>
+												          <select id="roleSelect">
+															<option selected="selected">Individual Contributor</option> 
+															<option>Team Lead</option>
+															<option>Technical Lead</option>
+															<option>Bussiness Analysis</option>
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
+												        <td>
+												         <select id='groupSelect'>
+															<option selected="selected">Chen, Hua-Quan</option>
+															<option>Kang, Ning</option>
+															<option>Zeng, Qiang</option>
+															<option>Li, Jian-Jun</option>
+															<option>Wu, Sha</option>
+															<option>Other</option>
+														</select>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
+												        <td>
+												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
+												        </td>
+												      </tr>
+												      <tr class="sliderclass">
+												        <td style="width:50px" >Java</td>
+												        <td>
+															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true
+																	"/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">H5</td>
+												        <td>
+															<input id="htmltag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true
+																	"/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">WS</td>
+												        <td>
+															<input id="webservicetag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true
+																	"/>
+												        </td>
+												      </tr>
+												      <tr>
+												        <td style="width:50px">ETL</td>
+												        <td>
+															<input id="etltag" class="easyui-slider" style="width:220px" data-options="
+																		showTip:true
+																	"/>
+												        </td>
+												      </tr>
+												      
+												 </table>
+											    <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="registerBtn">在一起吧</button>
+										<!-- 	</form>  -->
+									</div>
+								</div>
 				
 				
 				<div class="tab-pane" id="WorkMates">
