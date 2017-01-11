@@ -918,7 +918,7 @@ function getMDLUserLists() {
 					data = '{"results":' + data + '}';
 					var jsons = eval('(' + data + ')');
 					var ul = "",regNumber=0;
-					ul='<div class="Work_Mates_div_list_div2">'
+					ul='<div class="Work_Mates_div_list_div2" style="border-bottom:0px;">'
 					for (var i = 0; i < jsons.results.length; i++) {
 						var temp = jsons.results[i];
 						var selfIntro=temp.selfIntro;
