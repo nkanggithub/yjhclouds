@@ -703,6 +703,17 @@ public class MasterDataRestController {
 		}
 		return cm;
 	}
+	@RequestMapping("/QueryClientMetaList")
+	public static ArrayList<ClientMeta> QueryClientMetaList(){
+		ArrayList<ClientMeta> cm = new ArrayList<ClientMeta>();
+		try{
+			cm = MongoDBBasic.QueryClientMetaList();
+		}		
+		catch(Exception e){
+			cm = null;
+		}
+		return cm;
+	}
 	
 	@RequestMapping("/CallUpdateUserWithSignature")
 	public static boolean CallUpdateUserWithSignature(
