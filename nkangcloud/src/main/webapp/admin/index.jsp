@@ -55,10 +55,33 @@
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script type="text/javascript">
+var clientThemeColor,HpLogoSrc;
 $(window).load(function() {
-		getLogoLists();
-		getMDLUserLists();
+	getLogoLists();
+	getMDLUserLists();
+	//test();
 });
+function test(){
+	showCommonPanel()
+	$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+			+'<span>aaaaaaaaaaa</span>'
+			+'							</div>');
+	$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+}
+function showCommonPanel()
+{
+	$("body").append("<div  id='data_model_div' style='z-index:999;'  class='dataModelPanel'><img onclick='hideBouncePanel()' src='../MetroStyleFiles/EXIT1.png' style='width: 30px; height: 30px;position:absolute;top:20px;left:20px;' />	<img style='position:absolute;top:8px;right:20px;' class='HpLogo' src='"+HpLogoSrc+"' alt='Logo' class='HpLogo'><div style='width:100%;height:4px;background:"+clientThemeColor+";position:absolute;top:70px;'></div></div>");
+	$('#data_model_div').removeClass().addClass('panelShowAnmitation').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass();
+	    }); }
+function hideBouncePanel()
+{
+	$("body").find(".bouncePart").remove();
+	$("body").find("#data_model_div").remove();
+	}
+
 function getLogoLists() {
 	jQuery.ajax({
 				type : "GET",
@@ -79,6 +102,8 @@ function getLogoLists() {
 						buttonText='							<div style="float: right; margin-top: -80px; background-color: #777; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
 							+'								应用中'
 							+'							</div>';
+						clientThemeColor=temp.clientThemeColor;
+						HpLogoSrc=temp.clientLogo;
 						$('#logo_now').html('<img'
 								+'				src="'+temp.clientLogo+'"'
 								+'				alt="Logo" class="HpLogo"'
