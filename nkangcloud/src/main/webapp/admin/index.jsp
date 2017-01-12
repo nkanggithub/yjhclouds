@@ -62,9 +62,8 @@ var clientThemeColor,HpLogoSrc;
 $(window).load(function() {
 	getLogoLists();
 	getMDLUserLists();
-	//test();
 });
-function test(){
+function showLogoPanel(id){
 	showCommonPanel()
 	$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<span>aaaaaaaaaaa</span>'
@@ -129,7 +128,7 @@ function getLogoLists() {
 		+'							<h1 style="color: #333; font-size: 18px;padding-left:0px;" class="clientName">'+temp.clientName+'</h1>'
 		+'							<p style="font-size:10px;margin-bottom:3px;margin-top:-3px;">'+temp.clientCopyRight+'</p>'
 		+buttonText
-		+'							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;">'
+		+'							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="showLogoPanel(1)">'
 		+'								编辑'
 		+'							</div>'
 		+'							<div class="clear"></div>'
