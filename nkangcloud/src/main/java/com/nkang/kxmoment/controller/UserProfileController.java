@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MTP;
+import com.nkang.kxmoment.baseobject.TechnologyCar;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -218,5 +220,39 @@ public class UserProfileController {
 		List<String> str = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 		return str;
 		
+	} 
+	/*chang-zheng
+	 * 
+	 */
+	@RequestMapping("/userTechnologyCar")
+	public @ResponseBody String userTechnologyCar(HttpServletRequest request,
+			HttpServletResponse response ){
+		TechnologyCar tecar = new TechnologyCar();
+		tecar.setContent("测试消息");
+		tecar.setNum("1");
+		tecar.setPicture("www");
+		tecar.setTime(new Date().toLocaleString());
+		tecar.setType("ee");
+		MongoDBBasic.updateTechnologyCar("oqPI_xHLkY6wSAJEmjnQPPazePE8",tecar);
+		
+		return "ok";
+	} 
+	
+	/*chang-zheng
+	 * 
+	 */
+	@RequestMapping("/updateMtp")
+	public @ResponseBody String updateMtp(HttpServletRequest request,
+			HttpServletResponse response ){
+		MTP mtp = new MTP();
+		mtp.setComtent("ceshilllnlnlnln");
+		mtp.setNum("1");
+		mtp.setMtptime(new Date().toLocaleString());
+		mtp.setReleasetime(new Date().toLocaleString());
+		mtp.setTitle("hahh");
+		
+		MongoDBBasic.updateMtp("oqPI_xHLkY6wSAJEmjnQPPazePE8",mtp);
+		
+		return "ok";
 	} 
 }

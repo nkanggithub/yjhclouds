@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,12 @@ import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MTP;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
+import com.nkang.kxmoment.baseobject.TechnologyCar;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.DBUtils;
@@ -784,17 +787,31 @@ public class MasterDataRestController {
 	
 	/*
 	 * chang-zheng
-	 * 
+	 * test
 	 */
-	@RequestMapping("/updateUserCongratulateHistory")
-	public @ResponseBody String updateUserCongratulateHistory(){
-		CongratulateHistory con = new CongratulateHistory();
-		con.setComments("hello");
-		con.setFrom("me");
-		con.setPoint("22");
-		con.setTo("you");
-		con.setType("hh");
-		MongoDBBasic.updateUserCongratulateHistory("oqPI_xACjXB7pVPGi5KH9Nzqonj4",con);
+	@RequestMapping("/userTechnologyCar")
+	public @ResponseBody String userTechnologyCar(){
+		TechnologyCar tecar = new TechnologyCar();
+		tecar.setContent("测试消息");
+		tecar.setNum("1");
+		tecar.setPicture("www");
+		tecar.setTime(new Date().toLocaleString());
+		tecar.setType("ee");
+		MongoDBBasic.updateTechnologyCar("oqPI_xHLkY6wSAJEmjnQPPazePE8",tecar);
+		
+		return "ok";
+	}
+	//test
+	@RequestMapping("/updateMtp")
+	public @ResponseBody String updateMtp(){
+		MTP mtp = new MTP();
+		mtp.setComtent("ceshilllnlnlnln");
+		mtp.setNum("11");
+		mtp.setMtptime(new Date().toLocaleString());
+		mtp.setReleasetime(new Date().toLocaleString());
+		mtp.setTitle("hahh");
+		
+		MongoDBBasic.updateMtp("oqPI_xHLkY6wSAJEmjnQPPazePE8",mtp);
 		return "ok";
 	}
 }
