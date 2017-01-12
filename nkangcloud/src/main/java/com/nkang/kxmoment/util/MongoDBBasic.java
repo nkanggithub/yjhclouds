@@ -2238,7 +2238,7 @@ public class MongoDBBasic {
 					innerInsert.put("title", mtp.getTitle());
 					
 					arrayMTP.add(innerInsert);
-					update.put("TechnologyCar", arrayMTP);
+					update.put("MTP", arrayMTP);
 					doc.put("$set", update);
 					WriteResult wr = mongoDB.getCollection(wechat_user).update(
 							new BasicDBObject().append("OpenID", OpenID), doc);
