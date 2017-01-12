@@ -80,6 +80,26 @@ public class RegisterController {
 //		return false;
 	}
 	
+
+	@RequestMapping("/updateUserInfo")
+	@ResponseBody
+	public boolean updateUserInfo(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8"); 
+		String openId = request.getParameter("uid");
+		String isActived = request.getParameter("isActived");
+		String isAuthenticated = request.getParameter("isAuthenticated");
+		String isRegistered = request.getParameter("isRegistered");
+		String registerDate = request.getParameter("registerDate");
+		
+		WeChatMDLUser user = new WeChatMDLUser();
+		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
+		user.setIsActive(isActived);
+		user.setIsAuthenticated(isAuthenticated);
+		user.setIsRegistered(isRegistered);
+		user.setRegisterDate(registerDate);
+		return Boolean.parseBoolean(RestUtils.regist(user));
+	}
+	
 	@RequestMapping("/ajaxValidateTelephone")
 	@ResponseBody
 	private boolean ajaxValidateTelephone(HttpServletRequest request, HttpServletResponse response) throws IOException{
