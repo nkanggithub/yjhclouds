@@ -140,6 +140,18 @@ public class MongoDBBasic {
 			String clientThemeColor = queryresults.get("ClientThemeColor").toString();
 			String clientStockCode = queryresults.get("ClientCode").toString();
 			String clientActive = queryresults.get("Active").toString();
+			BasicDBList slide = (BasicDBList) queryresults.get("Slide");
+    		if(slide != null){
+    			ArrayList list=new ArrayList();
+        		Object[] tagObjects = slide.toArray();
+        		for(Object dbobj : tagObjects){
+        			if(dbobj instanceof DBObject){
+        				HashMap<String, String> temp=new HashMap<String, String>();
+        				list.add( ((DBObject)dbobj).get("src").toString());
+        			}
+        		}
+        		cm.setSlide(list);
+    		}
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
