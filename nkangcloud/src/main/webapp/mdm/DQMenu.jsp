@@ -1000,7 +1000,7 @@ visibility:visible;
 								class="userImage" alt="no_username"/>
 						</a></span></li>
 				</ul>
-				<br/>
+				<br/><br/>
  <div id="topinfo">
 		<svg id="fillgauge4" width="0%" height="0" onclick="gauge4.update(NewValue());"></svg>
 		<svg id="fillgauge5" width="50%" height="220" onclick="Javascript:OrganizationInformation();"></svg>
