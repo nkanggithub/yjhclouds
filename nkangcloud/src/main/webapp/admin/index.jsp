@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -36,6 +36,9 @@
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
 <link rel="stylesheet" type="text/css"
 	href="../nkang/autocomplete/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="../nkang/admin/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../nkang/admin/switch-buttons.css" />
+
 <script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
 <script type="text/javascript">
 	var $113 = $;
@@ -206,7 +209,7 @@ jQuery
 					$("#info_all").css('display','table');
 					$("img.zan").css('display','block');
 					$("span.zan").css('display','block');
-					$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>'+'<img onclick="updateUserInfo()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>'+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
 					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
 					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#fff;' href='mailto:"+jsons.results[0].email+"'>"+jsons.results[0].email+"</a>");
@@ -327,14 +330,14 @@ jQuery
 	});
 }
 
-function updateUserInfo(){
+function updateUserInfo(openId){
 	$('#UserInfo').modal('hide');
-	$('#registerform').modal('show');
+	$('#updateUserInfoForm').modal('show');
 	$.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
 		data : {
-			UID : $('#uid').val()
+			UID : openId
 		},
 		cache : false,
 		success : function(data) {
@@ -399,52 +402,33 @@ function updateUserInfo(){
 			}
 		}
 	});
-	$("#registerBtn").click(function(){
-		var uid = $("#uid").val();
-		var name = $("#realname").val();
-		var phone = $("#phone").val();
-		var email = $("#email").val();
-		//var suppovisor = $("#suppovisor").val();
-		var role = $("#roleSelect option:selected").val();
-		var group = $("#groupSelect option:selected").val();
-		var javatag = $("#javatag").val();
-		var htmltag = $("#htmltag").val();
-		var webservicetag = $("#webservicetag").val();
-		var etltag = $("#etltag").val();
-		var selfIntro = $("#selfIntro").val();
+	$("#updateUserInfoBtn").click(function(){
+		var isActived = $("#isActived").attr("checked");
+		var isAuthenticated = $("#isAuthenticated").attr("checked");
+		var isRegistered = $("#isRegistered").attr("checked");
+		var registerDate = $("#registerDate").val();
 		
-		 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		 var phoneFilter = /^1[0-9]{10}/;
-		 if (name.replace(/(^ *)|( *$)/g,'')==''){
-			 swal("Registered fail!", "Pls input your correct name information.", "error");
-		 }else if (!phoneFilter.test(phone)){
-			 swal("Registered fail!", "Pls input your correct phone information.", "error");
-		 }else if (!emailFilter.test(email)){
-			 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
-		 }else if (selfIntro==''){
-			 swal("Registered fail!", "Pls input your correct self-introduction information.", "error");
-		 }else{
-			$.ajax({
-				url:"../regist",
-				data:{uid:uid,name:name,telephone:phone,email:email,
-					role:role,group:group,javatag:javatag,htmltag:htmltag,
-					webservicetag:webservicetag,etltag:etltag,selfIntro:selfIntro},
-				type:"POST",
-				dataType:"json",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				cache:false,
-				async:false,
-				success:function(result) {
-					if(result){
-						$('#registerform').modal('hide');
-						swal("Registered successfully!", "Congratulations!", "success"); 
-						$("#realName").val(name);
-					} else {
-						swal("Registered fail!", "Pls input your correct information.", "error");
-					}
+		isActived== "undefined"?"false":"true";
+		isAuthenticated== "undefined"?"false":"true";
+		isRegistered== "undefined"?"false":"true";
+		
+		$.ajax({
+			url:"../updateUserInfo",
+			data:{uid:openId,isActived:isActived,isAuthenticated:isAuthenticated,isRegistered:isRegistered,registerDate:registerDate},
+			type:"POST",
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			cache:false,
+			async:false,
+			success:function(result) {
+				if(result){
+					$('#updateUserInfoForm').modal('hide');
+					swal("updateUserInformation successfully!", "Congratulations!", "success"); 
+				} else {
+					swal("updateUserInformation fail!", "Pls input your correct information.", "error");
 				}
-			});
-		}
+			}
+		});
 	});
 	
 }
@@ -552,7 +536,7 @@ function updateUserInfo(){
 
 
 							
-								<div id="registerform" class="modal hide fade" tabindex="-1"
+								<div id="updateUserInfoForm" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-body readmoreHpop"
@@ -560,93 +544,45 @@ function updateUserInfo(){
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-												<!-- <form id="registerFormSubmit" autocomplete="on"> -->
-												    <table id="tableForm" style="margin-top:20px;">
+												<table id="tableForm" style="margin-top:20px;">
 												    <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
-												        <td class="tdInput">
-												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/telephone2.png'/></td>
-												        <td class="tdInput">
-												          <input type="text" placeholder="请输入电话号码" id="phone" pattern="^1[34578]\d{9}$" required/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/email2.png'/></td>
+												        <td>是否激活</td>
 												        <td>
-												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
+												            <label class="switch-btn circle-style">
+												                <input class="checked-switch" type="checkbox" id="isActived"  />
+												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
+												                <span class="toggle-btn"></span> 
+												            </label>
 												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
+												    </tr>
+												    <tr>
+												        <td>是否验证</td>
 												        <td>
-												          <select id="roleSelect">
-															<option selected="selected">Individual Contributor</option> 
-															<option>Team Lead</option>
-															<option>Technical Lead</option>
-															<option>Bussiness Analysis</option>
-															<option>Other</option>
-														</select>
+												            <label class="switch-btn circle-style">
+												                <input class="checked-switch" type="checkbox" id="isAuthenticated" />
+												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
+												                <span class="toggle-btn"></span> 
+												            </label>
 												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
+												    </tr>
+												    <tr>
+												        <td>是否注册</td>
 												        <td>
-												         <select id='groupSelect'>
-															<option selected="selected">Chen, Hua-Quan</option>
-															<option>Kang, Ning</option>
-															<option>Zeng, Qiang</option>
-															<option>Li, Jian-Jun</option>
-															<option>Wu, Sha</option>
-															<option>Other</option>
-														</select>
+												            <label class="switch-btn circle-style">
+												                <input class="checked-switch" type="checkbox" id="isRegistered"/>
+												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
+												                <span class="toggle-btn"></span> 
+												            </label>
 												        </td>
-												      </tr>
-												      <tr>
-												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
-												        <td>
-												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
-												        </td>
-												      </tr>
-												      <tr class="sliderclass">
-												        <td style="width:50px" >Java</td>
-												        <td>
-															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true
-																	"/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td style="width:50px">H5</td>
-												        <td>
-															<input id="htmltag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true
-																	"/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td style="width:50px">WS</td>
-												        <td>
-															<input id="webservicetag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true
-																	"/>
-												        </td>
-												      </tr>
-												      <tr>
-												        <td style="width:50px">ETL</td>
-												        <td>
-															<input id="etltag" class="easyui-slider" style="width:220px" data-options="
-																		showTip:true
-																	"/>
-												        </td>
-												      </tr>
-												      
+												    </tr>
+												    <tr>
+													    <td>注册时间</td>
+													    <td>
+													    	<input type="date" id="registerDate">
+													    </td>
+												    </tr>
 												 </table>
-											    <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="registerBtn">在一起吧</button>
-										<!-- 	</form>  -->
+												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="updateUserInfoBtn">确定</button>
 									</div>
 								</div>
 				
