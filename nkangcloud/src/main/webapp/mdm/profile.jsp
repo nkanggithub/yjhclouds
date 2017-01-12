@@ -1334,7 +1334,7 @@ function getNowFormatDate() {
 							   <!-- slides show start -->
 							   <div class="slide-main" id="touchMain" style="margin-top:-20px;">
 
-        <a class="prev" href="javascript:;" stat="prev1001"><img src="../MetroStyleFiles/image/l-btn.png" /></a>
+        <a class="prev" style="display:none" href="javascript:;" stat="prev1001"><img src="../MetroStyleFiles/image/l-btn.png" /></a>
 
         <div class="slide-box" id="slideContent">
 
@@ -1370,7 +1370,7 @@ function getNowFormatDate() {
 
         </div>
 
-        <a class="next" href="javascript:;" stat="next1002"><img width=100% height=100% src="../MetroStyleFiles/image/r-btn.png" /></a>
+        <a class="next" style="display:none"  href="javascript:;" stat="next1002"><img width=100% height=100% src="../MetroStyleFiles/image/r-btn.png" /></a>
 
         <div class="item">
 
