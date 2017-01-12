@@ -176,6 +176,11 @@ function getLogo(){
 			$('ul#myTabs li a').css('border-right-color',clientThemeColor);
 			$('ul#myTabs li a').css('border-top-color',clientThemeColor);
 			$('ul#myTabs li a').css('border-left-color',clientThemeColor);
+			if(jsons.slide!=null){
+				$("#bgstylec a img").attr("src",jsons.slide[0]);
+				$("#bgstylea a img").attr("src",jsons.slide[1]);
+				$("#bgstyleb a img").attr("src",jsons.slide[2]);
+			}
 		}
 	});
 }
