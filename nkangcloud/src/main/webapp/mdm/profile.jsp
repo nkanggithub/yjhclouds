@@ -167,7 +167,7 @@ function getLogo(){
 			copyRight=jsons.clientCopyRight;
 			clientThemeColor=jsons.clientThemeColor;
 			$('img.HpLogo').attr('src',HpLogoSrc);
-			$('span.clientCopyRight').text(copyRight);
+			$('span.clientCopyRight').text('©'+copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
 			$('h1.clientName').text(jsons.clientName);
 			$('.clientTheme').css('background-color',clientThemeColor);

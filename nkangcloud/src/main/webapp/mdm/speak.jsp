@@ -34,7 +34,7 @@
      		success : function(data) {
      			var jsons = eval(data);
      			$('img.HpLogo').attr('src',jsons.clientLogo);
-     			$('span.clientCopyRight').text(jsons.clientCopyRight);
+     			$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
      			$('.clientTheme').css('background-color',jsons.clientThemeColor);
      		}
      	});
