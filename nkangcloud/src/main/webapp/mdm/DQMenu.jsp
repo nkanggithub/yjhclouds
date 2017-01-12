@@ -980,17 +980,27 @@ visibility:visible;
 </c:forEach>
  </div>
 	<div class="loader more" id="goaway"></div>
-	<div class="demo-content">
-		<span class="mes-openbt" data-mesid="message-5" ><img style="width:100px;" class="HpLogo" src="" alt="Logo"/> </span>
-	</div>
-
-<div id="userInfo">
-	<p class="navbar-text pull-right">Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="navbar-link">${ userInfo.nickname }</a><br />
-		<a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"><img src="${ userInfo.headimgurl }" alt="userImage" class="userImage pull-right"/></a>
-	</p>
-
-</div>
-
+	
+				<a style="padding-top:10px;"> 
+					<img src=""
+					alt="Logo" class="HpLogo" style="display:inline !important;height:40px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;"/>
+					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;"></span>
+					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:0px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName"></h2>
+				</a>
+				<div class="clear"></div>
+				<ul class="nav pull-right top-menu" style="margin-top:-60px;float: right;">
+					<li class="dropdown"><nobr>Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="dropdown-toggle"
+						data-toggle="dropdown"
+						style="font-size: 15px; margin: 0px; padding: 5px 0px;">
+							<span class="username colorBlue" id="username"> ${ userInfo.nickname }
+						</span>
+					</a></nobr> <br/>
+					<span><a style="float: right;" href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"> <img id="userImage"
+								src="${ userInfo.headimgurl }" alt="userImage"
+								class="userImage" alt="no_username"/>
+						</a></span></li>
+				</ul>
+				<br/>
  <div id="topinfo">
 		<svg id="fillgauge4" width="0%" height="0" onclick="gauge4.update(NewValue());"></svg>
 		<svg id="fillgauge5" width="50%" height="220" onclick="Javascript:OrganizationInformation();"></svg>
@@ -2109,7 +2119,9 @@ jQuery.ajax({
 		success : function(data) {
 			var jsons = eval(data);
 			$('img.HpLogo').attr('src',jsons.clientLogo);
-			$('span.clientCopyRight').text(jsons.clientCopyRight);
+			$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
+			$('span.clientSubName').text(jsons.clientSubName);
+			$('h2.clientName').text(jsons.clientName);
 		}
 	});
 
