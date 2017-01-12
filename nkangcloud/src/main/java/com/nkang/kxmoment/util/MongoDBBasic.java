@@ -34,10 +34,12 @@ import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MTP;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
+import com.nkang.kxmoment.baseobject.TechnologyCar;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
@@ -2151,6 +2153,101 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID",query);
 				
 			return dbuser;
+		}
+		
+		/*
+		 * chang-zheng to update user CongratulateHistory
+		 */
+		public static boolean updateTechnologyCar(String OpenID, TechnologyCar tecar) {
+			mongoDB = getMongoDB();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(
+					new java.util.Date().getTime());
+			Boolean ret = false;
+			try {
+				List<DBObject> arrayTcar = new ArrayList<DBObject>();
+				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+				if (null != dbcur) {
+					while (dbcur.hasNext()) {
+						DBObject o = dbcur.next();
+						BasicDBList hist = (BasicDBList) o.get("TechnologyCar");
+						if (hist != null) {
+							Object[] TechnologyCar = hist.toArray();
+							for (Object dbobj : TechnologyCar) {
+								if (dbobj instanceof DBObject) {
+									arrayTcar.add((DBObject) dbobj);
+								}
+							}
+						}
+					}
+
+					BasicDBObject doc = new BasicDBObject();
+					DBObject update = new BasicDBObject();
+					DBObject innerInsert = new BasicDBObject();
+					innerInsert.put("num", tecar.getNum());
+					innerInsert.put("content", tecar.getContent());
+					innerInsert.put("picture", tecar.getPicture());
+					innerInsert.put("time", tecar.getTime());
+					innerInsert.put("type", tecar.getType());
+					innerInsert.put("title", tecar.getTitle());
+					
+					arrayTcar.add(innerInsert);
+					update.put("TechnologyCar", arrayTcar);
+					doc.put("$set", update);
+					WriteResult wr = mongoDB.getCollection(wechat_user).update(
+							new BasicDBObject().append("OpenID", OpenID), doc);
+				}
+				ret = true;
+			} catch (Exception e) {
+				log.info("updateUser--" + e.getMessage());
+			}
+			return ret;
+		}
+		
+		/*
+		 * chang-zheng to update user CongratulateHistory
+		 */
+		public static boolean updateMtp(String OpenID, MTP mtp) {
+			mongoDB = getMongoDB();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(
+					new java.util.Date().getTime());
+			Boolean ret = false;
+			try {
+				List<DBObject> arrayMTP = new ArrayList<DBObject>();
+				DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", OpenID));
+				if (null != dbcur) {
+					while (dbcur.hasNext()) {
+						DBObject o = dbcur.next();
+						BasicDBList hist = (BasicDBList) o.get("MTP");
+						if (hist != null) {
+							Object[] mtparray = hist.toArray();
+							for (Object dbobj : mtparray) {
+								if (dbobj instanceof DBObject) {
+									arrayMTP.add((DBObject) dbobj);
+								}
+							}
+						}
+					}
+
+					BasicDBObject doc = new BasicDBObject();
+					DBObject update = new BasicDBObject();
+					DBObject innerInsert = new BasicDBObject();
+					innerInsert.put("num", mtp.getNum());
+					innerInsert.put("content", mtp.getComtent());
+					innerInsert.put("mtptime", mtp.getMtptime());
+					innerInsert.put("releasetime", mtp.getReleasetime());
+					innerInsert.put("title", mtp.getTitle());
+					
+					arrayMTP.add(innerInsert);
+					update.put("TechnologyCar", arrayMTP);
+					doc.put("$set", update);
+					WriteResult wr = mongoDB.getCollection(wechat_user).update(
+							new BasicDBObject().append("OpenID", OpenID), doc);
+				}
+				ret = true;
+			} catch (Exception e) {
+				log.info("updateUser--" + e.getMessage());
+			}
+			return ret;
 		}
 	    // END
 }
