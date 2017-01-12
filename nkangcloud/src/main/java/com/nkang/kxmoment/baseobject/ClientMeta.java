@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.ArrayList;
+
 public class ClientMeta {
 	private String ClientCopyRight;
 	private String ClientLogo;
@@ -8,7 +10,14 @@ public class ClientMeta {
 	private String clientThemeColor;
 	private String clientStockCode;
 	private String clientActive;
+	private ArrayList<String> Slide;
 	
+	public ArrayList<String> getSlide() {
+		return Slide;
+	}
+	public void setSlide(ArrayList<String> slide) {
+		Slide = slide;
+	}
 	public String getClientThemeColor() {
 		return clientThemeColor;
 	}
