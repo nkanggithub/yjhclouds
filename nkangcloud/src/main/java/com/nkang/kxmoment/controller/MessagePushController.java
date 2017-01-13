@@ -49,7 +49,7 @@ public class MessagePushController {
 
 		CongratulateHistory ch=new CongratulateHistory();
 		ch.setTo("Panda");
-		return RestUtils.sendNewsToUser(request.getParameter("uid"),request.getParameter("uid"),ch);
+		return RestUtils.sendRecognitionToUser(request.getParameter("uid"),request.getParameter("uid"),ch);
 
 		
 		
