@@ -412,9 +412,9 @@ function postTechArticle(){
         type: "POST",
         url:"../userProfile/addTechArticle",
         data:{
-        	openID:$("#openID").val(),
+        	openId:$("#openID").val(),
         	title:$("#techTitle").text(),
-        	type:$("#type option:selected").val(),
+        	type:$("#techType option:selected").val(),
         	content:$("#content").val()
         	
         },
