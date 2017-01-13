@@ -31,6 +31,7 @@ import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.TechnologyCar;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
@@ -2001,18 +2002,36 @@ public static String regist(WeChatMDLUser user) {
 
    }
     
-   
-    public static String sendNewsToUser(String openId,String toOpenId,CongratulateHistory ch){
+    public static String sendTechArticleToUser(String openId,String toOpenId,TechnologyCar tc){
     	String result ="";
+    			String str="{\"title\":\""+tc.getTitle()+"\",\"description\":\""+"author:"+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+"read more"+tc.getContent()+"\",\"url\":\"http://shenan.duapp.com/mdm/TechArticle.jsp?num="+tc.getNum()+"&uid="+openId+"\",\"picurl\":"
+    					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
+    	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
-    	   /*     ArrayList<Object> articles = new ArrayList<Object>();
+    	                "{\"articles\":[" +str +"]}"+"}";
 
-    	       Article a = new Article();
 
-    	       articles.add(a);
+    	        System.out.println(json);
 
-    	       String str = JsonUtil.getJsonStrFromList(articles);
-    	*/
+/*    	       String access_token = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
+    	        String access_token =  MongoDBBasic.getValidAccessKey();
+
+    	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+    	       try {
+
+    	    	 	result =  connectWeiXinInterface(action,json);
+
+    	       } catch (Exception e) {
+
+    	           e.printStackTrace();
+
+    	       }
+    	       return result;
+
+    	    }
+    public static String sendRecognitionToUser(String openId,String toOpenId,CongratulateHistory ch){
+    	String result ="";
     			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
