@@ -182,11 +182,11 @@ public class UserProfileController {
 		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");
 		if("true".equals(request.getParameter("isAll"))){
 			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendNewsToUser(openid,openIDs.get(i),conhis);
+				RestUtils.sendRecognitionToUser(openid,openIDs.get(i),conhis);
 			}
 		}else{
-			RestUtils.sendNewsToUser(openid,openid, conhis);
-			RestUtils.sendNewsToUser(openid,fromOpenid, conhis);
+			RestUtils.sendRecognitionToUser(openid,openid, conhis);
+			RestUtils.sendRecognitionToUser(openid,fromOpenid, conhis);
 		}
 		return "ok";
 	} 
@@ -220,6 +220,26 @@ public class UserProfileController {
 		List<String> str = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 		return str;
 		
+	} 
+	
+	@RequestMapping("/addTechArticle")
+	public @ResponseBody String addTechArticle(HttpServletRequest request,
+			HttpServletResponse response ){
+		TechnologyCar tc=new TechnologyCar();
+		String openid=request.getParameter("openId");
+		int num=MongoDBBasic.getTechCarMaxNumByOpenID(openid)+1;
+		tc.setNum(num+"");
+		tc.setType(request.getParameter("type"));
+		tc.setTitle(request.getParameter("title"));
+		tc.setContent(request.getParameter("content"));
+		tc.setTime(new Date().toLocaleString());
+		MongoDBBasic.updateTechnologyCar(openid,tc);
+		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+			for(int i=0;i<openIDs.size();i++){
+				RestUtils.sendTechArticleToUser(openid,openIDs.get(i),tc);
+			}
+		
+		return "ok";
 	} 
 	/*chang-zheng
 	 * 
