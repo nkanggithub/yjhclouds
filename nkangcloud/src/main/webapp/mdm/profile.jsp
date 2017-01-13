@@ -613,7 +613,7 @@ function mesSend(){
 			+"	<div class='rcommon'><p class='bsLabel'>Title</p><input id='techTitle' type='text' placeholder='please enter your title' class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='techType'><option>IT资讯</option><option>MDM相关</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>content</p><textarea id='content' style='height:90px' placeholder='please enter your content' class='input-xlarge bsBtn'></textarea></div>"
-			+"	<div class='rcommon' style='text-align:center;margin-top:90px'><button onclick='postTechArticle()' name='doublebutton-0' class='btn'>Submit</button><div style='position: relative;top: -70px;left: 100px;' ><input type='checkbox' id='sendAll'>Send All	</div></div>"
+			+"	<div class='rcommon' style='text-align:center;margin-top:90px'><button onclick='postTechArticle()' name='doublebutton-0' class='btn'>Submit</button><div style='position: relative;top: -70px;left: 100px;' >	</div></div>"
 			+"	</div>"
 			+"	</div>"
 			+"  <div class='tab-pane' id='bElements'>"
