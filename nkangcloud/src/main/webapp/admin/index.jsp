@@ -139,6 +139,7 @@ function getLogoLists() {
 								+'				class="clientSubName"'
 								+'				style="font-size: 12px; padding-left: 7px; color: #333;">'+temp.clientSubName+'</span>'
 								+'				<h1 style="color: #333; font-size: 18px;" class="clientName">'+temp.clientName+'</h1>');
+						$('#logo_now_color').css('border-color',temp.clientThemeColor);
 					}else{
 						buttonText='<div style="float: right; margin-top: -80px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="updateLogo(\''+temp.clientStockCode+'\')">'
 							+'								应用'
@@ -446,7 +447,7 @@ function updateUserInfo(openId){
 		</div>
 	</div>
 	<div class="TABclass">
-		<div style="border-top: 4px solid #00B388; padding: 5px;">
+		<div id="logo_now_color" style="border-top: 4px solid #00B388; padding: 5px;">
 			<ul class="nav nav-tabs" id="myTabs"
 				style="border-color: rgb(0, 179, 136);">
 				<li class="active"><a href="#logoElements" data-toggle="tab"
