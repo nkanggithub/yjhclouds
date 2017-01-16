@@ -229,7 +229,6 @@ public class UserProfileController {
 		String openid=request.getParameter("openId");
 		int num=MongoDBBasic.getTechCarMaxNumByOpenID(openid)+1;
 		tc.setNum(num+"");
-		tc.setType(request.getParameter("type"));
 		tc.setTitle(request.getParameter("title"));
 		tc.setContent(request.getParameter("content"));
 		tc.setTime(new Date().toLocaleString());
@@ -237,6 +236,24 @@ public class UserProfileController {
 		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 			for(int i=0;i<openIDs.size();i++){
 				RestUtils.sendTechArticleToUser(openid,openIDs.get(i),tc);
+			}
+		
+		return "ok";
+	} 
+	@RequestMapping("/addMTP")
+	public @ResponseBody String addMTP(HttpServletRequest request,
+			HttpServletResponse response ){
+		MTP mtp=new MTP();
+		String openid=request.getParameter("openId");
+		int num=MongoDBBasic.getTechCarMaxNumByOpenID(openid)+1;
+		mtp.setNum(num+"");
+		mtp.setTitle(request.getParameter("title"));
+		mtp.setComtent(request.getParameter("content"));
+		mtp.setMtptime(new Date().toLocaleString());
+		MongoDBBasic.updateMtp(openid,mtp);
+		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+			for(int i=0;i<openIDs.size();i++){
+				RestUtils.sendMTPToUser(openid,openIDs.get(i),mtp);
 			}
 		
 		return "ok";
