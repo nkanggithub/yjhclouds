@@ -411,7 +411,7 @@ function postNotification(){
 	$.ajax({
         cache: false,
         type: "POST",
-        url:"../userProfile/addTechArticle",
+        url:"../userProfile/addNotification",
         data:{
         	openId:$("#openID").val(),
         	title:$("#notificationTitle").val(),
