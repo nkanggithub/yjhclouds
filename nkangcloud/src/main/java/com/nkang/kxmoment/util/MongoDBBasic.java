@@ -2105,6 +2105,38 @@ public class MongoDBBasic {
 			}
 			return num;
 		}
+		public static int getTechCarMaxNumByOpenID(String OpenID) {
+			int num=0;
+			mongoDB = getMongoDB();
+			DBCursor queryresults;
+			try{
+					DBObject query = new BasicDBObject();
+					query.put("OpenID", OpenID);
+					queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+				if (null != queryresults) {
+	            	while(queryresults.hasNext()){
+					DBObject o = queryresults.next();
+	                Object TechnologyCar = o.get("TechnologyCar");
+	                BasicDBList TechnologyCarObj = (BasicDBList)TechnologyCar;
+	                if(TechnologyCarObj != null){
+	                	
+	                    Object[] ConObjects = TechnologyCarObj.toArray();
+						for(Object co : ConObjects){
+	                        			if(co instanceof DBObject){
+	                        				if(null!=((DBObject)co).get("num"))
+	                        				{
+	                        					num=Integer.parseInt(String.valueOf( ((DBObject)co).get("num")).trim());
+	                        					}
+	                        			}
+	                        		}
+	                		}
+	            	}
+				}
+			}catch(Exception e){
+				log.info("getWeChatUserFromMongoDB--" + e.getMessage());
+			}
+			return num;
+		}
 		public static String getRegisterUserByrealName(String realName){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
