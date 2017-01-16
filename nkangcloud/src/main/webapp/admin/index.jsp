@@ -29,11 +29,21 @@
 	href="../MetroStyleFiles/CSS/sonhlab-base.css" />
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles/CSS/openmes.css" />
-	<link rel="stylesheet" type="text/css"
-	href="admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="../nkang/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../nkang/demo.css">
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../nkang/admin/admin.css">
+<link rel="stylesheet" type="text/css"
+	href="../nkang/autocomplete/jquery-ui.css">
 
+<script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
+<script type="text/javascript">
+	var $113 = $;
+</script>
+<script type="text/javascript"
+	src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles//CSS/animation-effects.css" />
@@ -45,14 +55,16 @@
 	src="../MetroStyleFiles//JS/openmes.min.js"></script>
 <script src="../Jsp/JS/modernizr.js"></script>
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
+<script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script type="text/javascript">
 var clientThemeColor,HpLogoSrc;
 $(window).load(function() {
+	showLogoPanel(1);
 	getLogoLists();
 	getMDLUserLists();
 });
 function showLogoPanel(id){
-	showCommonPanel()
+	showCommonPanel();
 	$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<table style="margin-left:auto;margin-right:auto;">'
 			+'	<tr>'
@@ -109,7 +121,6 @@ function hideBouncePanel()
 	$("body").find(".bouncePart").remove();
 	$("body").find("#data_model_div").remove();
 	}
-
 function getLogoLists() {
 	jQuery.ajax({
 				type : "GET",
