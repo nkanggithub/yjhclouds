@@ -381,7 +381,7 @@ function updateUserInfo(openId){
 </head>
 <body style="padding: 0px !important; margin: 0px;">
 	<div class="navbar-inner" style="background-color: #fff !important;">
-		<div class="container-fluid">
+		<div class="container-fluid" id="logo_now">
 			<a href="../DQMenu?UID=oqPI_xACjXB7pVPGi5KH9Nzqonj4"
 				style="float: left; padding-top: 10px;"> <img
 				src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM"
