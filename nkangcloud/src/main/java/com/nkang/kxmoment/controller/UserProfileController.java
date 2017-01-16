@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
-import com.nkang.kxmoment.baseobject.MTP;
-import com.nkang.kxmoment.baseobject.TechnologyCar;
-import com.nkang.kxmoment.baseobject.WeChatMDLUser;
-import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.ToolUtils;
@@ -222,55 +219,22 @@ public class UserProfileController {
 		
 	} 
 	
-	@RequestMapping("/addTechArticle")
-	public @ResponseBody String addTechArticle(HttpServletRequest request,
+	@RequestMapping("/addNotification")
+	public @ResponseBody String addNotification(HttpServletRequest request,
 			HttpServletResponse response ){
-		TechnologyCar tc=new TechnologyCar();
+		Notification note=new Notification();
 		String openid=request.getParameter("openId");
-		int num=MongoDBBasic.getTechCarMaxNumByOpenID(openid)+1;
-		tc.setNum(num+"");
-		tc.setTitle(request.getParameter("title"));
-		tc.setContent(request.getParameter("content"));
-		tc.setTime(new Date().toLocaleString());
-		MongoDBBasic.updateTechnologyCar(openid,tc);
+		int num=MongoDBBasic.getNotificationMaxNumByOpenID(openid)+1;
+		note.setNum(num+"");
+		note.setType(request.getParameter("type"));
+		note.setTitle(request.getParameter("title"));
+		note.setContent(request.getParameter("content"));
+		note.setTime(new Date().toLocaleString());
+		MongoDBBasic.updateNotification(openid,note);
 		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendTechArticleToUser(openid,openIDs.get(i),tc);
+				RestUtils.sendNotificationToUser(openid,openIDs.get(i),note);
 			}
-		
-		return "ok";
-	} 
-	@RequestMapping("/addMTP")
-	public @ResponseBody String addMTP(HttpServletRequest request,
-			HttpServletResponse response ){
-		MTP mtp=new MTP();
-		String openid=request.getParameter("openId");
-		int num=MongoDBBasic.getTechCarMaxNumByOpenID(openid)+1;
-		mtp.setNum(num+"");
-		mtp.setTitle(request.getParameter("title"));
-		mtp.setComtent(request.getParameter("content"));
-		mtp.setMtptime(new Date().toLocaleString());
-		MongoDBBasic.updateMtp(openid,mtp);
-		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
-			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendMTPToUser(openid,openIDs.get(i),mtp);
-			}
-		
-		return "ok";
-	} 
-	/*chang-zheng
-	 * 
-	 */
-	@RequestMapping("/userTechnologyCar")
-	public @ResponseBody String userTechnologyCar(HttpServletRequest request,
-			HttpServletResponse response ){
-		TechnologyCar tecar = new TechnologyCar();
-		tecar.setContent("测试消息");
-		tecar.setNum("1");
-		tecar.setPicture("www");
-		tecar.setTime(new Date().toLocaleString());
-		tecar.setType("ee");
-		MongoDBBasic.updateTechnologyCar("oqPI_xHLkY6wSAJEmjnQPPazePE8",tecar);
 		
 		return "ok";
 	} 
@@ -278,18 +242,19 @@ public class UserProfileController {
 	/*chang-zheng
 	 * 
 	 */
-	@RequestMapping("/updateMtp")
-	public @ResponseBody String updateMtp(HttpServletRequest request,
+	@RequestMapping("/userNotification")
+	public @ResponseBody String userNotification(HttpServletRequest request,
 			HttpServletResponse response ){
-		MTP mtp = new MTP();
-		mtp.setComtent("ceshilllnlnlnln");
-		mtp.setNum("1");
-		mtp.setMtptime(new Date().toLocaleString());
-		mtp.setReleasetime(new Date().toLocaleString());
-		mtp.setTitle("hahh");
-		
-		MongoDBBasic.updateMtp("oqPI_xHLkY6wSAJEmjnQPPazePE8",mtp);
+		Notification note = new Notification();
+		note.setContent("测试消息");
+		note.setNum("1");
+		note.setPicture("www");
+		note.setTime(new Date().toLocaleString());
+		note.setType("ee");
+		MongoDBBasic.updateNotification("oqPI_xHLkY6wSAJEmjnQPPazePE8",note);
 		
 		return "ok";
 	} 
+	
+
 }
