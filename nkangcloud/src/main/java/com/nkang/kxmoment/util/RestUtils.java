@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.MTP;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -2010,7 +2011,34 @@ public static String regist(WeChatMDLUser user) {
        return result;
 
    }
-    
+    public static String sendMTPToUser(String openId,String toOpenId,MTP mtp){
+    	String result ="";
+    			String str="{\"title\":\""+mtp.getTitle()+"\",\"description\":\""+"author:"+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+"read more"+mtp.getComtent()+"\",\"url\":\"http://shenan.duapp.com/mdm/TechArticle.jsp?num="+mtp.getNum()+"&uid="+openId+"\",\"picurl\":"
+    					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
+    	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
+
+    	                "{\"articles\":[" +str +"]}"+"}";
+
+
+    	        System.out.println(json);
+
+/*    	       String access_token = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
+    	        String access_token =  MongoDBBasic.getValidAccessKey();
+
+    	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+    	       try {
+
+    	    	 	result =  connectWeiXinInterface(action,json);
+
+    	       } catch (Exception e) {
+
+    	           e.printStackTrace();
+
+    	       }
+    	       return result;
+
+    	    }
     public static String sendTechArticleToUser(String openId,String toOpenId,TechnologyCar tc){
     	String result ="";
     			String str="{\"title\":\""+tc.getTitle()+"\",\"description\":\""+"author:"+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+"read more"+tc.getContent()+"\",\"url\":\"http://shenan.duapp.com/mdm/TechArticle.jsp?num="+tc.getNum()+"&uid="+openId+"\",\"picurl\":"
