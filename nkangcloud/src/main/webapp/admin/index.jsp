@@ -57,46 +57,47 @@
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script type="text/javascript">
-var clientThemeColor,HpLogoSrc;
+var clientThemeColor,HpLogoSrc,LogoData;
 $(window).load(function() {
 	getLogoLists();
 	getMDLUserLists();
 });
-function showLogoPanel(id){
+function showLogoPanel(index){
 	showCommonPanel();
+	var thisLogo=LogoData[index];
 	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
 			+'	<tr>'
-			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value=""/></td>'
-			+'		<td><input name="ClientLogo" type="text" style="width:150px;"/></td>'
+			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value="'+thisLogo.clientStockCode+'"/></td>'
+			+'		<td><input name="ClientLogo" type="text" style="width:150px;"  value="'+thisLogo.ClientLogo+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>公司名称：</td>'
-			+'		<td><input name="ClientName" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="ClientName" type="text" style="width:150px;"  value="'+thisLogo.ClientName+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>部门名称：</td>'
-			+'		<td><input name="ClientSubName" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="ClientSubName" type="text" style="width:150px;" value="'+thisLogo.ClientSubName+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>版权归属：</td>'
-			+'		<td><input name="ClientCopyRight" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="ClientCopyRight" type="text" style="width:150px;" value="'+thisLogo.ClientCopyRight+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>主题颜色：</td>'
-			+'		<td><input name="ClientThemeColor" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="ClientThemeColor" type="text" style="width:150px;" value="'+thisLogo.clientThemeColor+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url1：</td>'
-			+'		<td><input name="Slide1" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="Slide1" type="text" style="width:150px;" value="'+thisLogo.Slide[0]+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url2：</td>'
-			+'		<td><input name="Slide2" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="Slide2" type="text" style="width:150px;" value="'+thisLogo.Slide[1]+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url3：</td>'
-			+'		<td><input name="Slide3" type="text" style="width:150px;"/></td>'
+			+'		<td><input name="Slide3" type="text" style="width:150px;" value="'+thisLogo.Slide[2]+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
@@ -133,6 +134,7 @@ function getLogoLists() {
 						+'							<span class="total_num">总数：'+jsons.length+'</span>'
 						+'							<div class="clear"></div>'
 						+'						</div>';
+					LogoData=jsons;
 					for (var i = 0; i < jsons.length; i++) {
 					var temp=jsons[i];
 					var buttonText;
@@ -165,7 +167,7 @@ function getLogoLists() {
 		+'							<h1 style="color: #333; font-size: 18px;padding-left:0px;" class="clientName">'+temp.clientName+'</h1>'
 		+'							<p style="font-size:10px;margin-bottom:3px;margin-top:-3px;">'+temp.clientCopyRight+'</p>'
 		+buttonText
-		+'							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="showLogoPanel(1)">'
+		+'							<div style="float: right; margin-top: -50px; background-color: #0197D6; color: #fff; font-weight:bold; font-size: 13px; padding: 3px;width:50px;text-align:center;border-radius:6px;" onclick="showLogoPanel('+i+')">'
 		+'								编辑'
 		+'							</div>'
 		+'							<div class="clear"></div>'
