@@ -137,24 +137,7 @@ public class CoreService
 				if(StringUtils.isEmpty(picurl)){
 					picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
 				}
-/*				articleList.clear();
-				Article article = new Article();
-				article.setTitle("看我颜值如何爆表-发个照片到这个公众号");
-				article.setDescription("看我颜值如何爆表");
-				article.setPicUrl(picurl);
-				article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
-				articleList.add(article);
-				
-				Article article2 = new Article();
-				article2.setTitle("点我测颜值");
-				article2.setDescription("点我测颜值");
-				article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
-				article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
-				articleList.add(article2);
-				
-				newsMessage.setArticleCount(articleList.size());
-				newsMessage.setArticles(articleList);
-				respXml = MessageUtil.newsMessageToXml(newsMessage);*/
+
 				List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 		    	for(int i=0;i<allUser.size();i++){
 		    		if(fromUserName.equals(allUser.get(i))){
@@ -258,11 +241,20 @@ public class CoreService
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
-						article2.setTitle("User Profile");
+						article2.setTitle("了解我自己");
 						article2.setDescription("My Personal Applications");
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 						article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
+						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
+						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
+							Article article3 = new Article();
+							article3.setTitle("产品管理");
+							article3.setDescription("Administration");
+							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
+							article3.setUrl("http://shenan.duapp.com/admin/index.jsp");
+							articleList.add(article3);
+						}
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
