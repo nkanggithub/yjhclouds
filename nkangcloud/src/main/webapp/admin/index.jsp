@@ -54,7 +54,45 @@ $(window).load(function() {
 function showLogoPanel(id){
 	showCommonPanel()
 	$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-			+'<span>aaaaaaaaaaa</span>'
+			+'<table style="margin-left:auto;margin-right:auto;">'
+			+'	<tr>'
+			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value=""/></td>'
+			+'		<td><input name="ClientLogo" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>公司名称：</td>'
+			+'		<td><input name="ClientName" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>部门名称：</td>'
+			+'		<td><input name="ClientSubName" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>版权归属：</td>'
+			+'		<td><input name="ClientCopyRight" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>主题颜色：</td>'
+			+'		<td><input name="ClientThemeColor" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>幻灯片url1：</td>'
+			+'		<td><input name="Slide1" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>幻灯片url2：</td>'
+			+'		<td><input name="Slide2" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td>幻灯片url3：</td>'
+			+'		<td><input name="Slide3" type="text"/></td>'
+			+'	</tr>'
+			+'	<tr>'
+			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
+			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:#00B388;" id="tax_submit_button" onclick="">保存</button>												'
+			+'		</td>'
+			+'	</tr>'
+			+'</table>'
 			+'							</div>');
 	$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
@@ -381,9 +419,9 @@ function updateUserInfo(openId){
 </head>
 <body style="padding: 0px !important; margin: 0px;">
 	<div class="navbar-inner" style="background-color: #fff !important;">
-		<div class="container-fluid" id="logo_now">
+		<div class="container-fluid">
 			<a href="../DQMenu?UID=oqPI_xACjXB7pVPGi5KH9Nzqonj4"
-				style="float: left; padding-top: 10px;"> <img
+				style="float: left; padding-top: 10px;"  id="logo_now"> <img
 				src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM"
 				alt="Logo" class="HpLogo"
 				style="display: inline !important; height: 30px; float: none; padding: 0px; vertical-align: bottom;"><span
