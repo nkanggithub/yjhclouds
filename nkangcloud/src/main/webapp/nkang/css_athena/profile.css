@@ -448,6 +448,14 @@ canvas{
 	    height: 350px;
     overflow: scroll;}
 	}
+#sendR
+{
+	    width: 80%;
+    position: absolute;
+    top: 120px;
+    left: 10%;
+    z-index: 999;
+}
 	
 /* slide */
 .slide-main{ height: 221px; position: relative; }
