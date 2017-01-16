@@ -422,15 +422,7 @@ function updateUserInfo(openId){
 	<div class="navbar-inner" style="background-color: #fff !important;">
 		<div class="container-fluid">
 			<a href="../DQMenu?UID=oqPI_xACjXB7pVPGi5KH9Nzqonj4"
-				style="float: left; padding-top: 10px;"  id="logo_now"> <img
-				src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=015900000053FQo&amp;oid=00D90000000pkXM"
-				alt="Logo" class="HpLogo"
-				style="display: inline !important; height: 30px; float: none; padding: 0px; vertical-align: bottom;"><span
-				class="clientSubName"
-				style="font-size: 12px; padding-left: 7px; color: #333;">Master
-					Data Management</span>
-				<h1 style="color: #333; font-size: 18px;" class="clientName">Hewlett-Packard
-					Enterprise</h1>
+				style="float: left; padding-top: 10px;"  id="logo_now"> 
 			</a>
 			<div class="clear"></div>
 			<ul class="nav pull-right top-menu" style="margin-top: -70px;display:none;">
@@ -447,7 +439,7 @@ function updateUserInfo(openId){
 		</div>
 	</div>
 	<div class="TABclass">
-		<div id="logo_now_color" style="border-top: 4px solid #00B388; padding: 5px;">
+		<div id="logo_now_color" style="border-top: 4px solid #fff; padding: 5px;">
 			<ul class="nav nav-tabs" id="myTabs"
 				style="border-color: rgb(0, 179, 136);">
 				<li class="active"><a href="#logoElements" data-toggle="tab"
