@@ -433,7 +433,7 @@ function updateUserInfo(openId){
 					Enterprise</h1>
 			</a>
 			<div class="clear"></div>
-			<ul class="nav pull-right top-menu" style="margin-top: -70px;">
+			<ul class="nav pull-right top-menu" style="margin-top: -70px;display:none;">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"
 					style="font-size: 15px; margin: 0px; padding: 5px 0px;">
