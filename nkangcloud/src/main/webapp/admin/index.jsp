@@ -59,45 +59,44 @@
 <script type="text/javascript">
 var clientThemeColor,HpLogoSrc;
 $(window).load(function() {
-	showLogoPanel(1);
 	getLogoLists();
 	getMDLUserLists();
 });
 function showLogoPanel(id){
 	showCommonPanel();
-	$("body").append('<div id="WeatherPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>天气</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-			+'<table style="margin-left:auto;margin-right:auto;">'
+	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
 			+'	<tr>'
 			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value=""/></td>'
-			+'		<td><input name="ClientLogo" type="text"/></td>'
+			+'		<td><input name="ClientLogo" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>公司名称：</td>'
-			+'		<td><input name="ClientName" type="text"/></td>'
+			+'		<td><input name="ClientName" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>部门名称：</td>'
-			+'		<td><input name="ClientSubName" type="text"/></td>'
+			+'		<td><input name="ClientSubName" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>版权归属：</td>'
-			+'		<td><input name="ClientCopyRight" type="text"/></td>'
+			+'		<td><input name="ClientCopyRight" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>主题颜色：</td>'
-			+'		<td><input name="ClientThemeColor" type="text"/></td>'
+			+'		<td><input name="ClientThemeColor" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url1：</td>'
-			+'		<td><input name="Slide1" type="text"/></td>'
+			+'		<td><input name="Slide1" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url2：</td>'
-			+'		<td><input name="Slide2" type="text"/></td>'
+			+'		<td><input name="Slide2" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td>幻灯片url3：</td>'
-			+'		<td><input name="Slide3" type="text"/></td>'
+			+'		<td><input name="Slide3" type="text" style="width:150px;"/></td>'
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
@@ -106,7 +105,7 @@ function showLogoPanel(id){
 			+'	</tr>'
 			+'</table>'
 			+'							</div>');
-	$('#WeatherPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	$('#LogoEditPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
 }
