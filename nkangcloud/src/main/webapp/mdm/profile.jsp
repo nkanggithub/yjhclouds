@@ -406,15 +406,16 @@ function postRecognition(){
     });
 
 }
-function postTechArticle(){
+function postNotification(){
+	var type=$("#notificationType option:selected").val();
 	$.ajax({
         cache: false,
         type: "POST",
         url:"../userProfile/addTechArticle",
         data:{
         	openId:$("#openID").val(),
-        	title:$("#techTitle").val(),
-        	type:$("#techType option:selected").val(),
+        	title:$("#notificationTitle").val(),
+        	type:type,
         	content:$("#content").val()
         	
         },
@@ -604,10 +605,10 @@ function signaturePanel(){
 function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
-			+"	<div class='rcommon'><p class='bsLabel'>标题</p><input id='techTitle' type='text' placeholder='please enter your title' class='input-xlarge bsBtn'></div>"
-			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='techType'><option>技术快车</option><option>MTP</option></select></div>"
+			+"	<div class='rcommon'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='please enter your title' class='input-xlarge bsBtn'></div>"
+			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='techCar'>技术快车</option><option value='mtp'>MTP</option><option value='interaction'>团队沟通</option><option value='tb'>团队建设</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>内容</p><textarea id='content' style='height:180px' placeholder='please enter your content' class='input-xlarge bsBtn'></textarea></div>"
-			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postTechArticle()' name='doublebutton-0' class='btn'>Submit</button></div>"
+			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postNotification()' name='doublebutton-0' class='btn'>Submit</button></div>"
 			+"	</div>"
 			+"<div id='footer'><span class='clientCopyRight'><nobr>hpe</nobr></span></div>");
 	$('#sendR').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
