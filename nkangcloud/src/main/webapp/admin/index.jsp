@@ -456,7 +456,7 @@ function updateUserInfo(openId){
 					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">人员管理</a></li>
 			</ul>
 			<div class="tab-content" id="dvTabContent"
-				style="border: 0px; padding-top: 0px;">
+				style="border: 0px; padding-top: 0px;margin-top:0px;">
 				<div class="tab-pane active" id="logoElements">
 					<!-- start logoElements-->
 					<div class="Work_Mates_div2" id="Logo_div">
