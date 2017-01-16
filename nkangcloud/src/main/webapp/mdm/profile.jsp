@@ -603,26 +603,14 @@ function signaturePanel(){
 }
 function mesSend(){
 	showCommonPanel();
-	$("body").append("<div class='TAB2class bouncePart' id='mesSend'>"
-			+"	<ul class='nav nav-tabs' id='myTabs'>"
-			+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>技术快车</a></li>"
-			+"	<li id='bbElements'><a href='#bElements' data-toggle='tab'>MTP</a></li></ul>"
-			+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
-			+"	<div class='tab-pane active' id='aElements'>"
-			+"	<div id='sendR'>"
-			+"	<div class='rcommon'><p class='bsLabel'>Title</p><input id='techTitle' type='text' placeholder='please enter your title' class='input-xlarge bsBtn'></div>"
-			+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='techType'><option>IT资讯</option><option>MDM相关</option></select></div>"
-			+"	<div class='rcommon'><p class='bsLabel'>content</p><textarea id='content' style='height:90px' placeholder='please enter your content' class='input-xlarge bsBtn'></textarea></div>"
-			+"	<div class='rcommon' style='text-align:center;margin-top:90px'><button onclick='postTechArticle()' name='doublebutton-0' class='btn'>Submit</button><div style='position: relative;top: -70px;left: 100px;' >	</div></div>"
+	$("body").append("	<div id='sendR'>"
+			+"	<div class='rcommon'><p class='bsLabel'>标题</p><input id='techTitle' type='text' placeholder='please enter your title' class='input-xlarge bsBtn'></div>"
+			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='techType'><option>技术快车</option><option>MTP</option></select></div>"
+			+"	<div class='rcommon'><p class='bsLabel'>内容</p><textarea id='content' style='height:180px' placeholder='please enter your content' class='input-xlarge bsBtn'></textarea></div>"
+			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postTechArticle()' name='doublebutton-0' class='btn'>Submit</button></div>"
 			+"	</div>"
-			+"	</div>"
-			+"  <div class='tab-pane' id='bElements'>"
-			+"	<div id='myArticleList'>"
-			+"  </div>"
-			+"		</div>"
-			+"	</div>"
-			+"</div><div id='footer'><span class='clientCopyRight'><nobr>hpe</nobr></span></div>");
-	$('#mesSend').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+			+"<div id='footer'><span class='clientCopyRight'><nobr>hpe</nobr></span></div>");
+	$('#sendR').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
 }
