@@ -100,7 +100,7 @@ function showLogoPanel(id){
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
-			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:#00B388;" id="tax_submit_button" onclick="">保存</button>												'
+			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:'+clientThemeColor+';" id="tax_submit_button" onclick="">保存</button>												'
 			+'		</td>'
 			+'	</tr>'
 			+'</table>'
