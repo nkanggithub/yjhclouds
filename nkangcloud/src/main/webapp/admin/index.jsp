@@ -520,8 +520,8 @@ function updateUserInfo(openId){
 								<div id="updateUserInfoForm" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
-									<div class="modal-body readmoreHpop"
-										style="white-space: pre-line; padding: 0px;">
+									<div class="modal-body"
+										style="white-space: pre-line; padding: 0px; margin-top:100px">
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
