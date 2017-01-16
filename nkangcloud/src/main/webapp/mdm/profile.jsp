@@ -424,7 +424,7 @@ function postNotification(){
             alert("Connection error");
         },
         success: function(data) {
-        	swal("Success!", "Your Article has been submitted successfully", "success");
+        	swal("Success!", "Your Notification has been submitted successfully", "success");
         	hideBouncePanel();
         }
     });
@@ -628,7 +628,7 @@ function recognizationPanel(){
 				+"	<li id='bbElements'><a href='#bElements' onclick='getRecognitionInfoByOpenID()' data-toggle='tab'>Recieved Recognition</a></li></ul>"
 				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
 				+"	<div class='tab-pane active' id='aElements'>"
-				+"	<div id='sendR'>"
+				+"	<div id='sendRe'>"
 				+"	<div class='rcommon'><p class='bsLabel'>From</p><p class='bsBtn' id='from'>"+realName+"</p></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>To</p><select class='bsBtn' id='to'>"+selectContent+"</select></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
@@ -662,7 +662,7 @@ function recognizationPanelByPerson(personName){
 				+"	<li id='bbElements'><a href='#bElements' onclick='getRecognitionInfoByOpenID()'  data-toggle='tab'>Recieved Recognition</a></li></ul>"
 				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
 				+"	<div class='tab-pane active' id='aElements'>"
-				+"	<div id='sendR'>"
+				+"	<div id='sendRe'>"
 				+"	<div class='rcommon'><p class='bsLabel'>From</p><p class='bsBtn' id='from'>"+realName+"</p></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>To</p><select class='bsBtn' id='to'>"+selectContent+"</select></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>Type</p><select class='bsBtn' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
@@ -691,6 +691,7 @@ function hideBouncePanel()
 {
 	$("body").find(".bouncePart").remove();
 	$("body").find("#data_model_div").remove();
+	$("body").find("#sendR").remove();
 	}
 function hideRecognitionCenter()
 {
