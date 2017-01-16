@@ -1,6 +1,6 @@
 package com.nkang.kxmoment.baseobject;
 
-public class TechnologyCar {
+public class Notification {
 	public String num;
 	public String title;
 	public String type;
