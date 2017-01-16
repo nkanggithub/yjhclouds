@@ -14,6 +14,27 @@ public class Teamer{
 	public String like;
 	public String groupid;
 	public String realName;
+	public String isActive;
+	public String IsAuthenticated;
+	public String IsRegistered;
+	public String getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	public String getIsAuthenticated() {
+		return IsAuthenticated;
+	}
+	public void setIsAuthenticated(String isAuthenticated) {
+		IsAuthenticated = isAuthenticated;
+	}
+	public String getIsRegistered() {
+		return IsRegistered;
+	}
+	public void setIsRegistered(String isRegistered) {
+		IsRegistered = isRegistered;
+	}
 	public ArrayList tag;
 	public ArrayList getTag() {
 		return tag;
