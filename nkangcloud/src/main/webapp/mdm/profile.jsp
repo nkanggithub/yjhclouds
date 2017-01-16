@@ -413,7 +413,7 @@ function postNotification(){
         type: "POST",
         url:"../userProfile/addNotification",
         data:{
-        	openId:$("#openID").val(),
+        	openId:$("#uid").val(),
         	title:$("#notificationTitle").val(),
         	type:type,
         	content:$("#content").val()
