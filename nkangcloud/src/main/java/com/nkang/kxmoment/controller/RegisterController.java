@@ -33,7 +33,7 @@ public class RegisterController {
 		String name = request.getParameter("name");
 		String role = request.getParameter("role");
 		Date now = new Date(); 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String registerDate = dateFormat.format(now);
 		//String selfIntro = URLDecoder.decode(request.getParameter("selfIntro"),"UTF-8");
 		String selfIntro = request.getParameter("selfIntro");
@@ -90,13 +90,15 @@ public class RegisterController {
 		String isAuthenticated = request.getParameter("isAuthenticated");
 		String isRegistered = request.getParameter("isRegistered");
 		String registerDate = request.getParameter("registerDate");
-		
+		System.out.println(openId+".."+isActived+".."+isAuthenticated+".."+isRegistered+".."+registerDate);
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setIsActive(isActived);
 		user.setIsAuthenticated(isAuthenticated);
 		user.setIsRegistered(isRegistered);
-		user.setRegisterDate(registerDate);
+		if(!StringUtils.isNullOrEmpty(registerDate)){
+			user.setRegisterDate(registerDate);
+		}
 		return Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	

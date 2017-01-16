@@ -1728,6 +1728,15 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
 				arr.add("selfIntro="+user.getSelfIntro());
 			}
+			if(user.getIsActive()!=null&&!"".equals(user.getIsActive())){
+				arr.add("IsActive="+user.getIsActive());
+			}
+			if(user.getIsAuthenticated()!=null&&!"".equals(user.getIsAuthenticated())){
+				arr.add("IsAuthenticated="+user.getIsAuthenticated());
+			}
+			if(user.getIsRegistered()!=null&&!"".equals(user.getIsRegistered())){
+				arr.add("IsRegistered="+user.getIsRegistered());
+			}
 			//Skill = html:45,java:50
 			ArrayList list = user.getTag();
 			String skill = "";

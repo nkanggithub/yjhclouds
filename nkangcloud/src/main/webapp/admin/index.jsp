@@ -29,22 +29,11 @@
 	href="../MetroStyleFiles/CSS/sonhlab-base.css" />
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles/CSS/openmes.css" />
-<link rel="stylesheet" type="text/css"
-	href="../nkang/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css"
+	href="admin.css" />
 <link rel="stylesheet" type="text/css" href="../nkang/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="../nkang/demo.css">
 <link rel="stylesheet" type="text/css" href="../nkang/animate.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../nkang/autocomplete/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="../nkang/admin/normalize.css" />
-<link rel="stylesheet" type="text/css" href="../nkang/admin/switch-buttons.css" />
 
-<script type="text/javascript" src="../nkang/easyui/jquery.min.js"></script>
-<script type="text/javascript">
-	var $113 = $;
-</script>
-<script type="text/javascript"
-	src="../nkang/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles//CSS/animation-effects.css" />
@@ -56,7 +45,6 @@
 	src="../MetroStyleFiles//JS/openmes.min.js"></script>
 <script src="../Jsp/JS/modernizr.js"></script>
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
-<script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <script type="text/javascript">
 var clientThemeColor,HpLogoSrc;
 $(window).load(function() {
@@ -344,72 +332,27 @@ function updateUserInfo(openId){
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
-				if(jsons.results[0].realName !="未注册"){
-					$("#realname").val(jsons.results[0].realName);
+				 if(jsons.results[0].IsActive !="未注册"){
+					$("input[name='isActived']").attr("checked",jsons.results[0].IsActive);
 				}
-				if(jsons.results[0].phone !="未注册"){
-					$("#phone").val(jsons.results[0].phone);
+				if(jsons.results[0].IsAuthenticated !="未注册"){
+					$("input[name='isAuthenticated']").attr("checked",jsons.results[0].IsAuthenticated);
 				}
-				if(jsons.results[0].email !="未注册"){
-					$("#email").val(jsons.results[0].email);
+				if(jsons.results[0].IsRegistered !="未注册"){
+					$("input[name='IsRegistered']").attr("checked",jsons.results[0].IsRegistered);
 				}
-				$("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
-			    var count=$("#roleSelect option").length;
-			    for(var i=0;i<count;i++)  
-			       {           if($("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
-			          {  
-			              $("#roleSelect").get(0).options[i].selected = true;  
-			            
-			              break;  
-			          }  
-			      }
-			    count=$("#groupSelect option").length;
-			    for(var i=0;i<count;i++)  
-			       {           if($("#groupSelect").get(0).options[i].text == jsons.results[0].groupid)  
-			          {  
-			              $("#groupSelect").get(0).options[i].selected = true;  
-			            
-			              break;  
-			          }  
-			      }
-			    if(jsons.results[0].tag!="未注册"){
-					for(var j=0;j<jsons.results[0].tag.length;j++){
-						var tag=jsons.results[0].tag[j];
-						for (var key in tag) { 
-							if(key=="java"){
-								$113("#javatag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="html"){
-								$113("#htmltag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="webservice"){
-								$113("#webservicetag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="etl"){
-								$113("#etltag").slider("setValue",tag[key]);
-							}
-						}
-					}
-				}
-			    
-			    if(jsons.results[0].selfIntro !="未注册"){
-					$("#selfIntro").val(jsons.results[0].selfIntro);
-			    }
+			    if(jsons.results[0].registerDate !="未注册"){
+			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
+			    } 
 			}
 		}
 	});
 	$("#updateUserInfoBtn").click(function(){
-		var isActived = $("#isActived").attr("checked");
-		var isAuthenticated = $("#isAuthenticated").attr("checked");
-		var isRegistered = $("#isRegistered").attr("checked");
+		var isActived = $("input[name='isActived']:checked").val();
+		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
+		var isRegistered = $("input[name='isRegistered']:checked").val();
 		var registerDate = $("#registerDate").val();
-		
-		isActived== "undefined"?"false":"true";
-		isAuthenticated== "undefined"?"false":"true";
-		isRegistered== "undefined"?"false":"true";
+		console.log(isActived+"..."+isAuthenticated+"===="+isRegistered+",,"+registerDate+"...."+openId);
 		
 		$.ajax({
 			url:"../updateUserInfo",
@@ -546,38 +489,26 @@ function updateUserInfo(openId){
 												<table id="tableForm" style="margin-top:20px;">
 												    <tr>
 												        <td>是否激活</td>
-												        <td>
-												            <label class="switch-btn circle-style">
-												                <input class="checked-switch" type="checkbox" id="isActived"  />
-												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
-												                <span class="toggle-btn"></span> 
-												            </label>
+												        <td class="tdText">
+												        	<input type="radio" name="isActived" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
 												        <td>是否验证</td>
-												        <td>
-												            <label class="switch-btn circle-style">
-												                <input class="checked-switch" type="checkbox" id="isAuthenticated" />
-												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
-												                <span class="toggle-btn"></span> 
-												            </label>
+												        <td class="tdText">
+												        	<input type="radio" name="isAuthenticated" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
 												        <td>是否注册</td>
-												        <td>
-												            <label class="switch-btn circle-style">
-												                <input class="checked-switch" type="checkbox" id="isRegistered"/>
-												                <span class="text-switch" data-yes="yes" data-no="no"></span> 
-												                <span class="toggle-btn"></span> 
-												            </label>
+												        <td class="tdText">
+												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
 													    <td>注册时间</td>
-													    <td>
-													    	<input type="date" id="registerDate">
+													    <td class="tdText" >
+													    	<input type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px; margin-left: 80px;">
 													    </td>
 												    </tr>
 												 </table>
