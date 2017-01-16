@@ -382,15 +382,16 @@ function updateUserInfo(openId){
 			data = data.replace(/:null/g, ':"未注册"');
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
+			console.log(jsons.results[0].IsActive+".."+jsons.results[0].IsAuthenticated+".."+jsons.results[0].IsRegistered);
 			if (jsons.results.length > 0) {
 				 if(jsons.results[0].IsActive !="未注册"){
-					$("input[name='isActived']").attr("checked",jsons.results[0].IsActive);
+					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
 				}
 				if(jsons.results[0].IsAuthenticated !="未注册"){
-					$("input[name='isAuthenticated']").attr("checked",jsons.results[0].IsAuthenticated);
+					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
 				}
 				if(jsons.results[0].IsRegistered !="未注册"){
-					$("input[name='IsRegistered']").attr("checked",jsons.results[0].IsRegistered);
+					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
 				}
 			    if(jsons.results[0].registerDate !="未注册"){
 			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
@@ -403,7 +404,9 @@ function updateUserInfo(openId){
 		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
 		var isRegistered = $("input[name='isRegistered']:checked").val();
 		var registerDate = $("#registerDate").val();
-		console.log(isActived+"..."+isAuthenticated+"===="+isRegistered+",,"+registerDate+"...."+openId);
+		if(isActived==null || isAuthenticated==null ||  isRegistered==null || registerDate==null){
+			swal("updateUserInformation fail! Don't input blank content", "Pls input your correct information.", "error");
+		}
 		
 		$.ajax({
 			url:"../updateUserInfo",
@@ -425,7 +428,6 @@ function updateUserInfo(openId){
 	});
 	
 }
-
 
 </script>
 <title>admin</title>

@@ -567,10 +567,6 @@ public class MasterDataRestController {
 		teamer.setPhone(phone);
 		teamer.setGroupid(groupid);
 		teamer.setRealName(name);
-		teamer.setIsActive(isActive);
-		teamer.setIsAuthenticated(isAuthenticated);
-		teamer.setIsRegistered(isRegistered);
-		
 		ArrayList taglist=new ArrayList();
 		String[] tagArr = skill.split(",");
 		for(int i=0;i<tagArr.length;i++){

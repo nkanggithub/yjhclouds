@@ -435,6 +435,26 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static boolean updateUserWithManageStatus(String openid, String isActived,String isAuthenticated,String isRegistered,String registerDate){
+		mongoDB = getMongoDB();
+		boolean ret = false;
+		try{
+			BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("FaceUrl", isActived);
+			update.put("FaceUrl", isAuthenticated);
+			update.put("FaceUrl", isRegistered);
+			update.put("FaceUrl", registerDate);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
+			ret = true;
+		}
+		catch(Exception e){
+			log.info("updateUserWithManageStatus--" + e.getMessage());
+		}
+		return ret;
+	}
+	
 	public static boolean updateUserWithFaceUrl(String openid, String picurl){
 		mongoDB = getMongoDB();
 		boolean ret = false;
