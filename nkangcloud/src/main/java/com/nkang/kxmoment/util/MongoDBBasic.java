@@ -1444,7 +1444,7 @@ public class MongoDBBasic {
             				}
             				if(teamobj.get("registerDate") != null){
             					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
-            					SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd");
+            					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 				String dstr=teamobj.get("registerDate").toString();
                 				java.util.Date date=sdf.parse(dstr);
                 				long  s1=date.getTime();//将时间转为毫秒
