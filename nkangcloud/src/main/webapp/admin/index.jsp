@@ -72,7 +72,7 @@ function showLogoPanel(index){
 		Slide3=thisLogo.slide[2];
 	}
 	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-			+'<form action="../callUpdateClientMeta" >'
+			+'<form id="callUpdateClientMeta" >'
 			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
 			+'	<tr>'
 			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value="'+thisLogo.clientStockCode+'"/></td>'
@@ -115,7 +115,21 @@ function showLogoPanel(index){
 			+'</form>'
 			+'							</div>');
 	$('#submit_button').click(function(){
-		alert(1);
+		jQuery.ajax({
+			type : "GET",
+			url : "../callUpdateClientMeta",
+			data : $('#callUpdateClientMeta').serialize(),
+			cache : false,
+			success : function(data) {
+				if(data=="true"){
+					swal("Congratulations！", "LOGO信息修改成功!", "success"); 
+					window.location.reload();
+				}
+				else{
+					swal("LOGO信息修改失败!", "服务器出异常了", "error"); 	
+				}
+			}
+		});
 	});
 	$('#LogoEditPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
