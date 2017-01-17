@@ -125,7 +125,8 @@ public class CoreService
 	                }
 	                TextMessage textMessage1 = new TextMessage();
 	                textMessage1.setContent("message sent");
-	                textMessage1.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
+	                respXml = MessageUtil.textMessageToXml(textMessage1);
+/*	                textMessage1.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
 	                textMessage1.setCreateTime(new Date().getTime());
 	                textMessage1.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 	                textMessage1.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
@@ -135,7 +136,7 @@ public class CoreService
                     catch(Exception e){
                     	textMessage1.setContent(e.toString());
                     	respXml = MessageUtil.textMessageToXml(textMessage1);
-                    }
+                    }*/
                     
 				}
 			}
