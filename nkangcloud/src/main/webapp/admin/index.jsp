@@ -66,10 +66,10 @@ function showLogoPanel(index){
 	showCommonPanel();
 	var thisLogo=LogoData[index];
 	var Slide1="",Slide2="",Slide3="";
-	if(jsons.slide!=null){
-		Slide1=thisLogo.Slide[0];
-		Slide2=thisLogo.Slide[1];
-		Slide3=thisLogo.Slide[2];
+	if(thisLogo.slide!=null){
+		Slide1=thisLogo.slide[0];
+		Slide2=thisLogo.slide[1];
+		Slide3=thisLogo.slide[2];
 	}
 	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
