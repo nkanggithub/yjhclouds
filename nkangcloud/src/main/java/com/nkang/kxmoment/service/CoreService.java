@@ -123,11 +123,10 @@ public class CoreService
 	                 for(int i=0;i<allUser.size();i++){
 	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
 	                }
-//	                  respContent = "OK：" + textContent + "\n";
-//	                  respContent = MongoDBBasic.ActivaeClientMeta(textContent);
-	                    textMessage.setContent("message sent");
-	                    respXml = MessageUtil.textMessageToXml(textMessage);
-
+                    textMessage.setContent("message sent");
+                    textMessage.setFromUserName(fromUserName);
+                    textMessage.setToUserName("oqPI_xJGebPF506CPedixK92iRtg"); // to bit
+                    respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
