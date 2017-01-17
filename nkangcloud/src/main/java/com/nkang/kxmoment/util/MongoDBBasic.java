@@ -435,7 +435,7 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean updateUserWithManageStatus(String openid, String isActived,String isAuthenticated,String isRegistered,String registerDate){
+	public static boolean updateUserWithManageStatus(String openid, String isActived,String isAuthenticated,String isRegistered){
 		mongoDB = getMongoDB();
 		boolean ret = false;
 		try{
@@ -444,7 +444,6 @@ public class MongoDBBasic {
 			update.put("IsActive", isActived);
 			update.put("IsAuthenticated", isAuthenticated);
 			update.put("IsRegistered", isRegistered);
-			update.put("registerDate", registerDate);
 			doc.put("$set", update); 
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
 			ret = true;

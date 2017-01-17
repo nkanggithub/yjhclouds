@@ -98,8 +98,8 @@ public class RegisterController {
 		if(!StringUtils.isNullOrEmpty(registerDate)){
 			user.setRegisterDate(registerDate);
 		}
-		System.out.println(user.openid+user.IsActive+user.IsAuthenticated+user.IsRegistered+user.registerDate);
-		return MongoDBBasic.updateUserWithManageStatus(user.getOpenid(), user.getIsActive(), user.getIsAuthenticated(), user.getIsRegistered(), user.getRegisterDate());
+		Boolean.parseBoolean(RestUtils.regist(user));
+		return MongoDBBasic.updateUserWithManageStatus(user.getOpenid(), user.getIsActive(), user.getIsAuthenticated(), user.getIsRegistered())&&Boolean.parseBoolean(RestUtils.regist(user));
 	}
 	
 	@RequestMapping("/ajaxValidateTelephone")

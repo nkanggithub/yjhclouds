@@ -549,9 +549,6 @@ public class MasterDataRestController {
 			@RequestParam(value="selfIntro", required=false) String selfIntro,
 			@RequestParam(value="email", required=false) String email,
 			@RequestParam(value="phone", required=false) String phone,
-			@RequestParam(value="IsActive", required=false) String isActive,
-			@RequestParam(value="IsAuthenticated", required=false) String isAuthenticated,
-			@RequestParam(value="IsRegistered", required=false) String isRegistered,
 			@RequestParam(value="group", required=false) String groupid,
 			@RequestParam(value="name", required=false) String name,
 			@RequestParam(value="skill", required=false) String skill
