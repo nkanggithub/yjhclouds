@@ -245,6 +245,7 @@ public class MasterDataRestController {
 		boolean result=false;
 		ClientMeta cm=new ClientMeta();
 		cm.setClientStockCode(ClientCode);
+		cm.setClientName(ClientName);
 		cm.setClientLogo(ClientLogo);
 		cm.setClientSubName(ClientSubName);
 		cm.setClientCopyRight(ClientCopyRight);
