@@ -231,6 +231,43 @@ public class MasterDataRestController {
 		}
 		return String.valueOf(result);
 	}
+	@RequestMapping("/callUpdateClientMeta")
+	public String callUpdateClientMeta(	@RequestParam(value="ClientCode", required=true) String ClientCode,
+									@RequestParam(value="ClientLogo", required=false) String ClientLogo,
+									@RequestParam(value="ClientName", required=false) String ClientName,
+									@RequestParam(value="ClientSubName", required=false) String ClientSubName,
+									@RequestParam(value="ClientCopyRight", required=false) String ClientCopyRight,
+									@RequestParam(value="ClientThemeColor", required=false) String ClientThemeColor,
+									@RequestParam(value="Slide1", required=false) String Slide1,
+									@RequestParam(value="Slide2", required=false) String Slide2,
+									@RequestParam(value="Slide3", required=false) String Slide3)
+	{
+		boolean result=false;
+		ClientMeta cm=new ClientMeta();
+		cm.setClientStockCode(ClientCode);
+		cm.setClientLogo(ClientLogo);
+		cm.setClientSubName(ClientSubName);
+		cm.setClientCopyRight(ClientCopyRight);
+		cm.setClientThemeColor(ClientThemeColor);
+		ArrayList<HashMap<String, String>> slideList=new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> a=new HashMap<String, String>();
+		a.put("src", Slide1);
+		slideList.add(a);
+		a=new HashMap<String, String>();
+		a.put("src", Slide2);
+		slideList.add(a);
+		a=new HashMap<String, String>();
+		a.put("src", Slide3);
+		slideList.add(a);
+		cm.setSlide(slideList);
+		try{
+			result = MongoDBBasic.updateClientMeta(cm);
+		}
+		catch(Exception e){
+			result = false;
+		}
+		return String.valueOf(result);
+	}
 	@RequestMapping("/ActivaeClientMeta")
 	public String ActivaeClientMeta(	@RequestParam(value="clientCode", required=true) String clientCode)
 	{
