@@ -124,7 +124,7 @@ public class CoreService
 	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
 	                }
 
-	                textMessage.setContent(allUser.size() + "recevied");
+	                textMessage.setContent(allUser.size() + " recevied");
 	                respXml = MessageUtil.textMessageToXml(textMessage);
 /*	                textMessage1.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
 	                textMessage1.setCreateTime(new Date().getTime());
