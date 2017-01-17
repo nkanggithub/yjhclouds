@@ -441,10 +441,10 @@ public class MongoDBBasic {
 		try{
 			BasicDBObject doc = new BasicDBObject();
 			DBObject update = new BasicDBObject();
-			update.put("FaceUrl", isActived);
-			update.put("FaceUrl", isAuthenticated);
-			update.put("FaceUrl", isRegistered);
-			update.put("FaceUrl", registerDate);
+			update.put("IsActive", isActived);
+			update.put("IsAuthenticated", isAuthenticated);
+			update.put("IsRegistered", isRegistered);
+			update.put("registerDate", registerDate);
 			doc.put("$set", update); 
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
 			ret = true;
