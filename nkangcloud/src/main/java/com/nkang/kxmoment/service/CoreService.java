@@ -124,8 +124,9 @@ public class CoreService
 	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
 	                }
                     textMessage.setContent("message sent");
-        			textMessage.setFromUserName(fromUserName);
-                    textMessage.setToUserName("oqPI_xJGebPF506CPedixK92iRtg"); // to bit
+        			textMessage.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
+        			textMessage.setCreateTime(new Date().getTime());
+        			textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
                     textMessage.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
                     
                     respXml = MessageUtil.textMessageToXml(textMessage);
