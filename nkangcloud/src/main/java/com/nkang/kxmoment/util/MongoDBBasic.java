@@ -1359,12 +1359,11 @@ public class MongoDBBasic {
         			String clientActive = o.get("Active").toString();
         			BasicDBList slide = (BasicDBList) o.get("Slide");
             		if(slide != null){
-            			ArrayList list=new ArrayList();
+            			ArrayList<String> list=new ArrayList<String>();
                 		Object[] tagObjects = slide.toArray();
                 		for(Object dbobj : tagObjects){
                 			if(dbobj instanceof DBObject){
-                				HashMap<String, String> temp=new HashMap<String, String>();
-                				list.add( ((DBObject)dbobj).get("src").toString());
+                				list.add(((DBObject)dbobj).get("src").toString());
                 			}
                 		}
                 		cm.setSlide(list);
