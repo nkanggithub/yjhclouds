@@ -365,7 +365,28 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	
+	public static boolean updateClientMeta(ClientMeta cm){
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+	    try{
+                BasicDBObject doc = new BasicDBObject();  
+    	    	DBObject update = new BasicDBObject();
+    	    	update.put("ClientCopyRight", cm.getClientCopyRight());
+    	    	update.put("ClientLogo", cm.getClientLogo());
+    	    	update.put("ClientName",cm.getClientName());
+    	    	update.put("ClientSubName", cm.getClientSubName());
+    	    	update.put("ClientThemeColor", cm.getClientThemeColor());
+    	    	update.put("ClientName", cm.getClientName());
+    	    	update.put("Slide", cm.getSlide());
+    	    	doc.put("$set", update);  
+    	    	WriteResult wr = mongoDB.getCollection(ClientMeta).update(new BasicDBObject().append("ClientCode", cm.getClientStockCode()), doc);
+    			ret = true;
+	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
+		return ret;
+	}
 	
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
