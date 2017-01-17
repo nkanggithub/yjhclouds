@@ -460,7 +460,7 @@ function updateUserInfo(openId){
 <body style="padding: 0px !important; margin: 0px;">
 	<div class="navbar-inner" style="background-color: #fff !important;">
 		<div class="container-fluid">
-			<a href="../DQMenu?UID=oqPI_xACjXB7pVPGi5KH9Nzqonj4"
+			<a 
 				style="float: left; padding-top: 10px;"  id="logo_now"> 
 			</a>
 			<div class="clear"></div>
