@@ -1446,7 +1446,7 @@ public class MongoDBBasic {
             					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
             					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 				String dstr=teamobj.get("registerDate").toString();
-                				dstr.replaceAll("/", "-");
+                				dstr=dstr.replaceAll("/", "-");
                 				java.util.Date date=sdf.parse(dstr);
                 				long  s1=date.getTime();//将时间转为毫秒
                 				long s2=System.currentTimeMillis();//得到当前的毫秒
