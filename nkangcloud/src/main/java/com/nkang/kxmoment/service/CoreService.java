@@ -123,13 +123,14 @@ public class CoreService
 	                 for(int i=0;i<allUser.size();i++){
 	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
 	                }
-                    textMessage.setContent("message sent");
-        			textMessage.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
-        			textMessage.setCreateTime(new Date().getTime());
-        			textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-                    textMessage.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
+	                TextMessage textMessage1 = new TextMessage();
+	                textMessage1.setContent("message sent");
+	                textMessage1.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
+	                textMessage1.setCreateTime(new Date().getTime());
+	                textMessage1.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
+	                textMessage1.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
                     
-                    respXml = MessageUtil.textMessageToXml(textMessage);
+                    respXml = MessageUtil.textMessageToXml(textMessage1);
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
