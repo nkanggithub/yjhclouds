@@ -129,8 +129,14 @@ public class CoreService
 	                textMessage1.setCreateTime(new Date().getTime());
 	                textMessage1.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 	                textMessage1.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
+                    try{
+                    	respXml = MessageUtil.textMessageToXml(textMessage1);
+                    }
+                    catch(Exception e){
+                    	textMessage1.setContent(e.toString());
+                    	respXml = MessageUtil.textMessageToXml(textMessage1);
+                    }
                     
-                    respXml = MessageUtil.textMessageToXml(textMessage1);
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
