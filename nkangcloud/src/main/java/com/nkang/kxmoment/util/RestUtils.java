@@ -38,7 +38,7 @@ import com.nkang.kxmoment.baseobject.WeChatUser;
 public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
-	private static String localInd = "Y";
+	private static String localInd = "N";
 	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
