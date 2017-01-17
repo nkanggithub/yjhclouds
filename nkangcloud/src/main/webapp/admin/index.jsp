@@ -72,7 +72,7 @@ function showLogoPanel(index){
 		Slide3=thisLogo.slide[2];
 	}
 	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-			+'<form action="../callUpdateClientMeta">'
+			+'<form action="../callUpdateClientMeta" >'
 			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
 			+'	<tr>'
 			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value="'+thisLogo.clientStockCode+'"/></td>'
@@ -108,12 +108,15 @@ function showLogoPanel(index){
 			+'	</tr>'
 			+'	<tr>'
 			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
-			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:'+clientThemeColor+';" id="tax_submit_button" onclick="">保存</button>												'
+			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:'+clientThemeColor+';" id="submit_button" onclick="">保存</button>												'
 			+'		</td>'
 			+'	</tr>'
 			+'</table>'
 			+'</form>'
 			+'							</div>');
+	$('#submit_button').click(function(){
+		alert(1);
+	});
 	$('#LogoEditPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	    });
