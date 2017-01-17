@@ -134,13 +134,13 @@ public class MongoDBBasic {
 			DBObject query = new BasicDBObject();
 			query.put("Active", "Y");
 			DBObject queryresults = mongoDB.getCollection(ClientMeta).findOne(query);
-			String clientCopyRight = queryresults.get("ClientCopyRight").toString();
-			String clientLogo = queryresults.get("ClientLogo").toString();
-			String clientName = queryresults.get("ClientName").toString();
-			String clientSubName = queryresults.get("ClientSubName").toString();
-			String clientThemeColor = queryresults.get("ClientThemeColor").toString();
-			String clientStockCode = queryresults.get("ClientCode").toString();
-			String clientActive = queryresults.get("Active").toString();
+			String clientCopyRight = queryresults.get("ClientCopyRight")==null?"":queryresults.get("ClientCopyRight").toString();
+			String clientLogo = queryresults.get("ClientLogo")==null?"":queryresults.get("ClientLogo").toString();
+			String clientName = queryresults.get("ClientName")==null?"":queryresults.get("ClientName").toString();
+			String clientSubName = queryresults.get("ClientSubName")==null?"":queryresults.get("ClientSubName").toString();
+			String clientThemeColor = queryresults.get("ClientThemeColor")==null?"":queryresults.get("ClientThemeColor").toString();
+			String clientStockCode =queryresults.get("ClientCode")==null?"": queryresults.get("ClientCode").toString();
+			String clientActive = queryresults.get("Active")==null?"":queryresults.get("Active").toString();
 			BasicDBList slide = (BasicDBList) queryresults.get("Slide");
     		if(slide != null){
     			ArrayList list=new ArrayList();
@@ -1350,13 +1350,13 @@ public class MongoDBBasic {
             	while(queryresults.hasNext()){
             		ClientMeta cm = new ClientMeta();
             		DBObject o = queryresults.next();
-            		String clientCopyRight = o.get("ClientCopyRight").toString();
-        			String clientLogo = o.get("ClientLogo").toString();
-        			String clientName = o.get("ClientName").toString();
-        			String clientSubName = o.get("ClientSubName").toString();
-        			String clientThemeColor = o.get("ClientThemeColor").toString();
-        			String clientStockCode = o.get("ClientCode").toString();
-        			String clientActive = o.get("Active").toString();
+            		String clientCopyRight = o.get("ClientCopyRight")==null?"":o.get("ClientCopyRight").toString();
+        			String clientLogo = o.get("ClientLogo")==null?"":o.get("ClientLogo").toString();
+        			String clientName = o.get("ClientName")==null?"":o.get("ClientName").toString();
+        			String clientSubName = o.get("ClientSubName")==null?"":o.get("ClientSubName").toString();
+        			String clientThemeColor = o.get("ClientThemeColor")==null?"":o.get("ClientThemeColor").toString();
+        			String clientStockCode = o.get("ClientCode")==null?"":o.get("ClientCode").toString();
+        			String clientActive =o.get("Active")==null?"": o.get("Active").toString();
         			BasicDBList slide = (BasicDBList) o.get("Slide");
             		if(slide != null){
             			ArrayList<String> list=new ArrayList<String>();
