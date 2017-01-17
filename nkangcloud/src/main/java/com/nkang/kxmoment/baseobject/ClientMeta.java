@@ -10,12 +10,12 @@ public class ClientMeta {
 	private String clientThemeColor;
 	private String clientStockCode;
 	private String clientActive;
-	private ArrayList Slide;
+	private ArrayList<?> Slide;
 	
-	public ArrayList getSlide() {
+	public ArrayList<?> getSlide() {
 		return Slide;
 	}
-	public void setSlide(ArrayList slide) {
+	public void setSlide(ArrayList<?> slide) {
 		Slide = slide;
 	}
 	public String getClientThemeColor() {
