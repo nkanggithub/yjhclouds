@@ -72,6 +72,7 @@ function showLogoPanel(index){
 		Slide3=thisLogo.slide[2];
 	}
 	$("body").append('<div id="LogoEditPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>LOGO编辑</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+			+'<form action="../callUpdateClientMeta">'
 			+'<table style="margin-left:auto;margin-right:auto; id="logoEdit">'
 			+'	<tr>'
 			+'		<td>Logo的url：<input name="ClientCode" type="hidden" value="'+thisLogo.clientStockCode+'"/></td>'
@@ -111,6 +112,7 @@ function showLogoPanel(index){
 			+'		</td>'
 			+'	</tr>'
 			+'</table>'
+			+'</form>'
 			+'							</div>');
 	$('#LogoEditPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
