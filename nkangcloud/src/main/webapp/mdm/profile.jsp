@@ -1429,15 +1429,14 @@ function getNowFormatDate() {
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
 					<div class="span12">
-						<div class="TABclass">
-							<ul class="nav nav-tabs" id="myTabs">
-								<li id="liSocialElements" class="active"><a
-									href="#SocialElements" data-toggle="tab">Socialization</a></li>
-								<li id="liBoardContent"><a href="#BoardContent"
-									data-toggle="tab">Recognition</a></li>
-								<li id="liWorkMates"><a href="#WorkMates" data-toggle="tab">Work
-										Mates</a></li>
-							</ul>
+						<div class="TABclass"><a class="naviArrow is-selected" ></a>
+						<div class="naviPanel">
+						<div class="navi isSelected">
+						<p class="naviText">微应用</p>
+							</div>
+							<div class="navi"><p class="naviText">微维护</p></div>
+								<div class="navi"><p class="naviText">微成员</p></div>
+							</div>
 							<div class="tab-content" id="dvTabContent" style="border: 0px;">
 								<div class="tab-pane" id="BoardContent">
 									<div>
