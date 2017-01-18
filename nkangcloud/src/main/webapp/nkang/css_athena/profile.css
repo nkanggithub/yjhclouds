@@ -465,9 +465,9 @@ canvas{
     border-left: .9em solid transparent;
     border-right: .9em solid transparent;
     border-top: .9em solid #00b287;
-    position: absolute;
-    top: 340px;
-    left: 18%;
+    position: relative;
+    top: 0px;
+    left: 50%;
     z-index:1000;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
