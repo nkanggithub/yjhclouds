@@ -1429,9 +1429,10 @@ function getNowFormatDate() {
 			<div class="container-fluid">
 				<div class="row-fluid mtop20">
 					<div class="span12">
-						<div class="TABclass"><a class="naviArrow is-selected" ></a>
-						<div class="naviPanel">
+						<div class="TABclass">
+							<div class="naviPanel">
 						<div class="navi isSelected">
+						<a class="naviArrow is-selected" ></a>
 						<p class="naviText">微应用</p>
 							</div>
 							<div class="navi"><p class="naviText">微维护</p></div>
