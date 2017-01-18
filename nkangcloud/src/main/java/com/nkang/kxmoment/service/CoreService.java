@@ -193,9 +193,9 @@ public class CoreService
 					}
 					articleList.clear();
 					Article article = new Article();
-					article.setTitle("Master Data Quality Governace");
-					article.setDescription("Master Data Quality Governace Reporting");
-					article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+					article.setTitle("移动应用");
+					article.setDescription("移动应用");
+					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 					article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
 					Article article2 = new Article();
@@ -245,9 +245,9 @@ public class CoreService
 					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("Master Data Quality Governace");
-						article.setDescription("Master Data Quality Governace Reporting");
-						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+						article.setTitle("移动应用");
+						article.setDescription("移动应用");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
