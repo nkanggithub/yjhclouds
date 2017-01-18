@@ -2005,7 +2005,7 @@ public static String regist(WeChatMDLUser user) {
     public static String sendNotificationToUser(String openId,String toOpenId,Notification note){
     	String result ="";
     			String str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://shenan.duapp.com/mdm/TechArticle.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
-    					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
+    					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
     	                "{\"articles\":[" +str +"]}"+"}";
