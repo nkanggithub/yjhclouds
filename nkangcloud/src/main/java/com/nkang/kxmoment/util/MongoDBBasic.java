@@ -2288,5 +2288,54 @@ public class MongoDBBasic {
 			return ret;
 		}
 		
+		/*
+		 * chang-zheng to update user getNotification
+		 */
+	public static List<Notification> getNotification(String OpenID, String num) {
+		mongoDB = getMongoDB();
+		List<Notification> nfList = new ArrayList<Notification>();
+		DBObject query = new BasicDBObject();
+		query.put("OpenID", OpenID);
+		DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+		if (null != queryresults) {
+			while (queryresults.hasNext()) {
+				DBObject o = queryresults.next();
+				Object TechnologyCar = o.get("TechnologyCar");
+				BasicDBList TechnologyCarObj = (BasicDBList) TechnologyCar;
+				if (TechnologyCarObj != null) {
+					Notification nt = new Notification();
+					Object[] ConObjects = TechnologyCarObj.toArray();
+					for (Object co : ConObjects) {
+						if (co instanceof DBObject) {
+							if (!StringUtils.isEmpty(num)) {
+								if (null != ((DBObject) co).get("num")) {
+									if (num.equals(((DBObject) co).get("num").toString())) {
+										nt.setContent(((DBObject) co).get("content").toString());
+										nt.setNum(num);
+										nt.setPicture(((DBObject) co).get("picture").toString());
+										nt.setTime(((DBObject) co).get("time").toString());
+										nt.setTitle(((DBObject) co).get("title").toString());
+										nt.setType(((DBObject) co).get("type").toString());
+										nfList.add(nt);
+									}
 
+								}
+							} else {
+								nt.setContent(((DBObject) co).get("content").toString());
+								nt.setNum(((DBObject) co).get("num").toString());
+								nt.setPicture(((DBObject) co).get("picture").toString());
+								nt.setTime(((DBObject) co).get("time").toString());
+								nt.setTitle(((DBObject) co).get("title").toString());
+								nt.setType(((DBObject) co).get("type").toString());
+								nfList.add(nt);
+							}
+						}
+					}
+				}
+
+			}
+		}
+		return nfList;
+	}
 }
+					
