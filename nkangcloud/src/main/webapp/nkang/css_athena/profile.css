@@ -468,7 +468,6 @@ canvas{
     position: relative;
     top: 0px;
     left: 50%;
-    z-index:1000;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);	
@@ -492,6 +491,7 @@ position: relative;
 	float:left;
 	width:33.3%;
 	border-top:10px solid #B4B8BB;
+	height:30px;
 }
 .naviText
 {
