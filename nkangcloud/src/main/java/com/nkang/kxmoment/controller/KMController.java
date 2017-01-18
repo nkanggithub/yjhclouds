@@ -40,12 +40,14 @@ public class KMController {
 		allowCrossDomain(request, response);
 		Map<String, Object> respParms = new HashMap<String, Object>();
 		boolean flag = true;
+		String[] keywordArr = null;
 		if(keyword==null || keyword.length()<=0){
 			flag = false;
-		}
-		String[] keywordArr = keyword.split("\\s+");
-		if(keywordArr.length <= 0){
-			flag = false;
+		}else{
+			keywordArr = keyword.split("\\s+");
+			if(keywordArr.length <= 0){
+				flag = false;
+			}
 		}
 		if(!flag){
 			respParms.put("code", "901");
