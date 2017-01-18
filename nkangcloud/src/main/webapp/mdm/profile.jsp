@@ -145,6 +145,36 @@ var LastToLikeDate="",lastLikeTo="";
 var HpLogoSrc="",copyRight="",clientThemeColor="";
 getLogo();
 $(window).load(function() {
+	$("#navSupport").on("click",function(){
+		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
+		$("#navApp").removeClass("isSelected");
+		$("#navApp a").remove();
+		$("#navMember").removeClass("isSelected");
+		$("#navMember a").remove();
+		$("#SocialElements").hide();
+		$("#BoardContent").show();
+		$("#WorkMates").hide();
+	});
+	$("#navApp").on("click",function(){
+		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
+		$("#navSupport").removeClass("isSelected");
+		$("#navSupport a").remove();
+		$("#navMember").removeClass("isSelected");
+		$("#navMember a").remove();
+		$("#SocialElements").show();
+		$("#BoardContent").hide();
+		$("#WorkMates").hide();
+	});
+	$("#navMember").on("click",function(){
+		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
+		$("#navSupport").removeClass("isSelected");
+		$("#navSupport a").remove();
+		$("#navApp").removeClass("isSelected");
+		$("#navApp a").remove();
+		$("#SocialElements").hide();
+		$("#BoardContent").hide();
+		$("#WorkMates").show();
+	});
 	//$(".mes-openbt").openmes({ext: 'php'});
 	$('input#search:focus').css('background-color',clientThemeColor);
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
