@@ -145,31 +145,35 @@ var LastToLikeDate="",lastLikeTo="";
 var HpLogoSrc="",copyRight="",clientThemeColor="";
 getLogo();
 $(window).load(function() {
+	$('head').append("<style>.naviArrow.is-selected::after{content: ''; display: block;width: 0;height: 0;border-left: .9em solid transparent;border-right: .9em solid transparent;border-top: .9em solid "+clientThemeColor+";position: relative;top: 0px;left: 50%;-webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);transform: translateX(-50%);}</style>");
 	$("#navSupport").on("click",function(){
-		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
-		$("#navApp").removeClass("isSelected");
+		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
+		$(".naviArrow.is-selected::after").css("border-top",".9em solid "+clientThemeColor);
+		$("#navApp").css("border-top","10px solid #B4B8BB");
 		$("#navApp a").remove();
-		$("#navMember").removeClass("isSelected");
+		$("#navMember").css("border-top","10px solid #B4B8BB");
 		$("#navMember a").remove();
 		$("#SocialElements").hide();
 		$("#BoardContent").show();
 		$("#WorkMates").hide();
 	});
 	$("#navApp").on("click",function(){
-		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
-		$("#navSupport").removeClass("isSelected");
+		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
+		$(".naviArrow.is-selected::after").css("border-top",".9em solid "+clientThemeColor);
+		$("#navSupport").css("border-top","10px solid #B4B8BB");
 		$("#navSupport a").remove();
-		$("#navMember").removeClass("isSelected");
+		$("#navMember").css("border-top","10px solid #B4B8BB");
 		$("#navMember a").remove();
 		$("#SocialElements").show();
 		$("#BoardContent").hide();
 		$("#WorkMates").hide();
 	});
 	$("#navMember").on("click",function(){
-		$(this).append("<a class='naviArrow is-selected'></a>").removeClass("isSelected").addClass("isSelected");
-		$("#navSupport").removeClass("isSelected");
+		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
+		$("naviArrow is-selected::after").css("border-top",".9em solid "+clientThemeColor);
+		$("#navSupport").css("border-top","10px solid #B4B8BB");
 		$("#navSupport a").remove();
-		$("#navApp").removeClass("isSelected");
+		$("#navApp").css("border-top","10px solid #B4B8BB");
 		$("#navApp a").remove();
 		$("#SocialElements").hide();
 		$("#BoardContent").hide();
@@ -206,6 +210,7 @@ function getLogo(){
 			$('ul#myTabs li a').css('border-right-color',clientThemeColor);
 			$('ul#myTabs li a').css('border-top-color',clientThemeColor);
 			$('ul#myTabs li a').css('border-left-color',clientThemeColor);
+			$("#navApp").css("border-top","10px solid "+clientThemeColor);
 			if(jsons.slide!=null){
 				$("#bgstylec a img").attr("src",jsons.slide[0]);
 				$("#bgstylea a img").attr("src",jsons.slide[1]);
@@ -1461,7 +1466,7 @@ function getNowFormatDate() {
 					<div class="span12">
 						<div class="TABclass">
 							<div class="naviPanel">
-						<div id="navApp"  class="navi isSelected">
+						<div id="navApp"  class="navi">
 						<a class="naviArrow is-selected" ></a>
 						<p class="naviText">微应用</p>
 							</div>
