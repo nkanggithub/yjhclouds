@@ -96,13 +96,6 @@ public class CoreService
 					    date.set(Calendar.MINUTE, 5);
 					    date.set(Calendar.SECOND, 0);
 					    date.set(Calendar.MILLISECOND, 0);
-					    // Schedule to run every Sunday in midnight
-					    //timer.schedule(new CronJob(),date.getTime(),1000 * 60 * 60 * 24 * 7);
-//					    timer.schedule(new CronJobForMangoDB(), 0 , 5 * 60 * 1000);
-//					    log.info("-----CronJobForMangoDB Started and running----" + timer.toString());
-//					    respContent = "started " + timer.toString();
-//						textMessage.setContent(respContent);
-//						respXml = MessageUtil.textMessageToXml(textMessage);
 					}
 					else if ("MTJOB".equals(textContent)) {
 						timer.purge();
@@ -126,18 +119,6 @@ public class CoreService
 
 	                textMessage.setContent(allUser.size() + " recevied");
 	                respXml = MessageUtil.textMessageToXml(textMessage);
-/*	                textMessage1.setFromUserName("oqPI_xLq1YEJOczHi4DS2-1U0zqc"); // from Ning
-	                textMessage1.setCreateTime(new Date().getTime());
-	                textMessage1.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-	                textMessage1.setToUserName("oqPI_xACjXB7pVPGi5KH9Nzqonj4"); // to qing
-                    try{
-                    	respXml = MessageUtil.textMessageToXml(textMessage1);
-                    }
-                    catch(Exception e){
-                    	textMessage1.setContent(e.toString());
-                    	respXml = MessageUtil.textMessageToXml(textMessage1);
-                    }*/
-                    
 				}
 			}
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
@@ -198,12 +179,7 @@ public class CoreService
 					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 					article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
-					Article article2 = new Article();
-					article2.setTitle("User Profile");
-					article2.setDescription("Master Data Quality Governace Reporting");
-					article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
-					article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
-					articleList.add(article2);
+
 					Article article4 = new Article();
 					article4.setTitle("Data Visualization");
 					article4.setDescription("Master Data Visualization");
@@ -227,15 +203,15 @@ public class CoreService
 					if(eventKey.equals("MDLAKE")){ // Data Lake
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("Master Data Quality Governace");
-						article.setDescription("Master Data Quality Governace Reporting");
-						article.setPicUrl("http://www.micropole.com/library/img/SCHEMA-1.png");
+						article.setTitle("我的主数据");
+						article.setDescription("我的主数据");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article4 = new Article();
-						article4.setTitle("Data Visualization");
+						article4.setTitle("主数据可视化");
 						article4.setDescription("Master Data Visualization");
-						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
 						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
@@ -251,7 +227,7 @@ public class CoreService
 						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
-						article2.setTitle("了解我自己");
+						article2.setTitle("微应用");
 						article2.setDescription("My Personal Applications");
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 						article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
