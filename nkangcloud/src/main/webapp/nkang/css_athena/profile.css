@@ -457,7 +457,7 @@ canvas{
     z-index: 999;
 }
 
-.naviArrow.is-selected::after{
+/* .naviArrow.is-selected::after{
     content: '';
     display: block;
     width: 0;
@@ -472,7 +472,7 @@ canvas{
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);	
 	
-}
+} */
 .naviPanel
 {
 position: relative;
