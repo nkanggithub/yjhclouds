@@ -11,16 +11,31 @@
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/profile.css"/>
 <script src="../Jsp/JS/modernizr.js"></script>
+<style>
+.icon {
+    display: inline-block;
+    width: 30px; height: 30px;
+    overflow: hidden;
+    -overflow: hidden;
+}
+.icon > img.exit {
+    position: relative;
+    left: -30px;
+    border-right: 30px solid transparent;
+    -webkit-filter: drop-shadow(30px 0 #fff);
+    filter: drop-shadow(20px 0);   
+}
+</style>
 </head>
 <body style="padding:0px;margin:0px;">
 <a href="profile.jsp?UID=<%=session.getAttribute("UID")%>">
-	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
+	<i class="icon" style="position:absolute;top:20px;left:20px;"><img class="exit"  src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;" /></i>
 </a>	
 <img style="position:absolute;top:8px;right:20px;" src="" alt="Logo" class="HpLogo">
 <div style="width:100%;height:4px;position:absolute;top:70px;" class="clientTheme"></div>
 <div style="width:80%;position:absolute;top:103px;left:10%;font-size: 21px;padding:6px 0;color: #444444;border-bottom:1px solid #ddd;">电子签名</div>
 <input id="uid" type="hidden" value="<%=session.getAttribute("UID")%>" />											
-<div id="old" style="vertical-align:middle;margin-top:150px;margin-bottom:-98px;padding-top:5px;height:170px;border:2px #56B39D solid;width:80%;margin-left:auto;margin-right:auto;text-align:center;"></div>
+<div id="old" style="vertical-align:middle;margin-top:150px;margin-bottom:-98px;padding-top:5px;height:170px;border:2px #fff solid;width:80%;margin-left:auto;margin-right:auto;text-align:center;"></div>
 <div id="content">		
 	<div id="signatureparent">
 		<div id="signature"></div></div>
@@ -34,7 +49,7 @@
 	jQuery.noConflict()
 </script>
 <script>
-var HpLogoSrc="",copyRight="";
+var HpLogoSrc="",copyRight="",clientThemeColor="";
 (function($) {
 	var topics = {};
 	$.publish = function(topic, args) {
@@ -103,9 +118,14 @@ var HpLogoSrc="",copyRight="";
 			cache : false,
 			success : function(data) {
 				var jsons = eval(data);
+				clientThemeColor=jsons.clientThemeColor;
 				$('img.HpLogo').attr('src',jsons.clientLogo);
 				$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
 				$('.clientTheme').css('background-color',jsons.clientThemeColor);
+				$('#old').css('border-color',jsons.clientThemeColor);
+				$('#save').css('background-color',jsons.clientThemeColor);
+				$('canvas').css('border-color',jsons.clientThemeColor);
+				$('.icon > img.exit ').css('-webkit-filter','drop-shadow(30px 0 '+jsons.clientThemeColor+')');
 			}
 		});
 	}
@@ -117,7 +137,7 @@ $(document).ready(function() {
 	// All the code below is just code driving the demo. 
 	var $tools = $('#tools')
 
-	$('<input type="button" name="svg" value="保存签名"  style="float:right;margin-right:10%;color:#fff;background-color:#56B39D;border:none;padding:10px;font-size:18px;margin-top:0px;">').bind('click', function(e){
+	$('<input type="button" id="save" name="svg" value="保存签名"  style="float:right;margin-right:10%;color:#fff;background-color:'+clientThemeColor+';border:none;padding:10px;font-size:18px;margin-top:0px;">').bind('click', function(e){
 		if (e.target.value !== ''){
 			//var data = $sigdiv.jSignature('getData', e.target.value)
 			var data = $sigdiv.jSignature('getData', 'svg')
