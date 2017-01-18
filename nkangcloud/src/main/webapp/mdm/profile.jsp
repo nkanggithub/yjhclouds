@@ -1438,7 +1438,7 @@ function getNowFormatDate() {
 							<div class="navi"><p class="naviText">微维护</p></div>
 								<div class="navi"><p class="naviText">微成员</p></div>
 							</div>
-							<div class="tab-content" id="dvTabContent" style="border: 0px;">
+							<div class="tab-content" id="dvTabContent" style="border: 0px;margin-top:-30px">
 								<div class="tab-pane" id="BoardContent">
 									<div>
 										<div class="panel-group" id="accordion">
