@@ -27,4 +27,11 @@ public final class Constants {
 	//web-proxy.austin.hpecorp.net:8080
 	// WESK: HYAMgd0odZSpLS8kmrGnoMezFoCTdxFQtWEnZL7lMIz
 	//https://shenan.duapp.com/coreServlet
+	
+	/**
+	 * MongoDB 集合名字
+	 */
+	public final class MONGO_CLN_NAMES{
+		public static final String KM = "KMPool";
+	}
 }

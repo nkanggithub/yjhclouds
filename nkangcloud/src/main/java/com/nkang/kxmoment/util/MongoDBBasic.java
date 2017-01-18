@@ -52,7 +52,7 @@ public class MongoDBBasic {
 	private static String wechat_comments = "Wechat_Comments";
 	private static String ClientMeta = "Client_Meta";
 
-	private static DB getMongoDB(){
+	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
 		}
@@ -67,12 +67,13 @@ public class MongoDBBasic {
 
         MongoClient mongoClient = new MongoClient(
         		new ServerAddress(serverName),
+        		// createMongoCRCredential / createScramSha1Credential 
         		Arrays.asList(MongoCredential.createMongoCRCredential(usrname, databaseName,passwrd.toCharArray())),
         		new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
         mongoClientCollection.setMongoClient(mongoClient);
 
         mongoDB = mongoClient.getDB(databaseName);
-        mongoDB.addUser(usrname, passwrd.toCharArray());
+//        mongoDB.addUser(usrname, passwrd.toCharArray());
 
         return mongoDB;
 	}
