@@ -18,7 +18,7 @@ public class KMVo {
 	private String desc;
 	private Float rating;
 	private Integer count;
-	private String[] SME;
+	private SMEVo[] SME;
 	
     public String getId() {
 		return id;
@@ -56,10 +56,10 @@ public class KMVo {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-	public String[] getSME() {
+	public SMEVo[] getSME() {
 		return SME;
 	}
-	public void setSME(String[] sME) {
+	public void setSME(SMEVo[] sME) {
 		SME = sME;
 	}
 	@Override
