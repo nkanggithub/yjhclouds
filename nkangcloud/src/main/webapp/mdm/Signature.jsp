@@ -124,6 +124,7 @@ var HpLogoSrc="",copyRight="",clientThemeColor="";
 				$('.clientTheme').css('background-color',jsons.clientThemeColor);
 				$('#old').css('border-color',jsons.clientThemeColor);
 				$('#save').css('background-color',jsons.clientThemeColor);
+				$('#rest').css('background-color',jsons.clientThemeColor);
 				$('canvas').css('border-color',jsons.clientThemeColor);
 				$('.icon > img.exit ').css('-webkit-filter','drop-shadow(30px 0 '+jsons.clientThemeColor+')');
 			}
