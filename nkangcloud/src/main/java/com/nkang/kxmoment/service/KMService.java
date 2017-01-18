@@ -19,7 +19,7 @@ import com.nkang.kxmoment.util.MongoDBBasic;
 
 /**
  * Knowledge Meta Service Handle
- * @author xue-ke.du@hpe.com
+ * @author xue-ke.du
  *
  */
 public class KMService {

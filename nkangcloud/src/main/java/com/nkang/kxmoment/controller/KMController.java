@@ -17,7 +17,7 @@ import com.nkang.kxmoment.service.KMService;
 
 /**
  * Knowledge Meta Controller
- * @author xue-ke.du@hpe.com
+ * @author xue-ke.du
  *
  */
 @Controller

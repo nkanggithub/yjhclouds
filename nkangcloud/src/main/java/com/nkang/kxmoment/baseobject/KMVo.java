@@ -7,7 +7,7 @@ import com.mongodb.DBObject;
 
 /**
  * Knowledge Meta Value Object
- * @author xue-ke.du@hpe.com
+ * @author xue-ke.du
  *
  */
 public class KMVo {
