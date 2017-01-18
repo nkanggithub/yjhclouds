@@ -44,6 +44,19 @@ table tr td:nth-child(odd) {
 table tr td:nth-child(even) {
 	text-align: left;
 }
+.icon {
+    display: inline-block;
+    width: 30px; height: 30px;
+    overflow: hidden;
+    -overflow: hidden;
+}
+.icon > img.exit {
+    position: relative;
+    left: -30px;
+    border-right: 30px solid transparent;
+    -webkit-filter: drop-shadow(30px 0 #fff);
+    filter: drop-shadow(20px 0);   
+}
 </style>
 
     
@@ -51,7 +64,7 @@ table tr td:nth-child(even) {
 </head>
 <body style="padding:0px;margin:0px;">
 <a href="profile.jsp?UID=<%=uid%>">
-	<img src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;" />
+	<i class="icon" style="position:absolute;top:20px;left:20px;"><img class="exit"   src="../MetroStyleFiles//EXIT1.png" style="width: 30px; height: 30px;" /></i>
 </a>	
 <img style="position:absolute;top:8px;right:20px;" src="" alt="Logo" class="HpLogo">
 <div style="width:100%;height:4px;position:absolute;top:70px;" class="clientTheme"></div>
@@ -70,6 +83,7 @@ table tr td:nth-child(even) {
 			$('img.HpLogo').attr('src',jsons.clientLogo);
 			$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
 			$('.clientTheme').css('background-color',jsons.clientThemeColor);
+			$('.icon > img.exit ').css('-webkit-filter','drop-shadow(30px 0 '+jsons.clientThemeColor+')');
 		}
 	});
   	$.ajax({  
