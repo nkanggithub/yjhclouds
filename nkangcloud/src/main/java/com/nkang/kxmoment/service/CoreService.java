@@ -177,21 +177,21 @@ public class CoreService
 					Article article = new Article();
 					article.setTitle("永佳和塑胶有限公司");
 					article.setDescription("永佳和塑胶有限公司");
-					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
+					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJST&oid=00D90000000pkXM");
 					article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
 
 					Article article4 = new Article();
-					article4.setTitle("Data Visualization");
-					article4.setDescription("Master Data Visualization");
-					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
+					article4.setTitle("董事长致辞");
+					article4.setDescription("董事长致词");
+					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
 					article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
 					articleList.add(article4);
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
 					respXml = MessageUtil.newsMessageToXml(newsMessage);
 					if(!ret){
-						respContent = "User Initialization Failedï¼š\n";
+						respContent = "User Initialization Failed \n";
 						textMessage.setContent(respContent);
 						respXml = MessageUtil.textMessageToXml(textMessage);
 					}
@@ -222,17 +222,47 @@ public class CoreService
 					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("胖和应用");
-						article.setDescription("胖和应用");
+						article.setTitle("胖和微应用");
+						article.setDescription("我的应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
-						article2.setTitle("胖和应用");
+						article2.setTitle("胖和微应用");
 						article2.setDescription("My Personal Applications");
-						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
+						article2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJUj&oid=00D90000000pkXM");
 						article2.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
+						
+						
+						Article article4 = new Article();
+						article4.setTitle("U8登录");
+						article4.setDescription("My Personal Applications");
+						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJXi&oid=00D90000000pkXM");
+						article4.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						articleList.add(article4);
+						
+						Article article5 = new Article();
+						article5.setTitle("U订货登录");
+						article5.setDescription("My Personal Applications");
+						article5.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJX9&oid=00D90000000pkXM");
+						article5.setUrl("https://udh.yonyouup.com/login");
+						articleList.add(article5);
+						
+						Article article6 = new Article();
+						article6.setTitle("ERP登录");
+						article6.setDescription("My Personal Applications");
+						article6.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJUj&oid=00D90000000pkXM");
+						article6.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						articleList.add(article6);
+						
+						Article article7 = new Article();
+						article7.setTitle("CRM登录");
+						article7.setDescription("My Personal Applications");
+						article7.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJUj&oid=00D90000000pkXM");
+						article7.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						articleList.add(article7);
+						
 						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
 						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
@@ -335,8 +365,8 @@ public class CoreService
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " 永佳和客户在您附近 ");
-						article.setDescription(NearByOpptsExt.size() + "永佳和客户在您附近\n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 个永佳和客户在您附近 ");
+						article.setDescription(NearByOpptsExt.size() + "个永佳和客户在您附近\n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/MoreCustomer.jsp?UID=" + fromUserName);
 						articleList.add(article);
@@ -369,8 +399,8 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " 永佳和竞争者在您附近");
-						article.setDescription(NearByOpptsExt.size() +"永佳和竞争者在您附近\n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 个永佳和竞争者在您附近");
+						article.setDescription(NearByOpptsExt.size() +"个永佳和竞争者在您附近\n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
@@ -402,8 +432,8 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " 永佳和合作伙伴在您附近");
-						article.setDescription(NearByOpptsExt.size() + "永佳和合作伙伴在您附近 \n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 个永佳和合作伙伴在您附近");
+						article.setDescription(NearByOpptsExt.size() + "个永佳和合作伙伴在您附近 \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
