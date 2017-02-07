@@ -239,7 +239,7 @@ public class CoreService
 						article4.setTitle("U8登录");
 						article4.setDescription("My Personal Applications");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJXi&oid=00D90000000pkXM");
-						article4.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						article4.setUrl("https://udh.yonyouup.com/login");
 						articleList.add(article4);
 						
 						Article article5 = new Article();
@@ -252,15 +252,15 @@ public class CoreService
 						Article article6 = new Article();
 						article6.setTitle("ERP登录");
 						article6.setDescription("My Personal Applications");
-						article6.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJUj&oid=00D90000000pkXM");
-						article6.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						article6.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJa3&oid=00D90000000pkXM");
+						article6.setUrl("https://udh.yonyouup.com/login");
 						articleList.add(article6);
 						
 						Article article7 = new Article();
 						article7.setTitle("CRM登录");
 						article7.setDescription("My Personal Applications");
-						article7.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJUj&oid=00D90000000pkXM");
-						article7.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
+						article7.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJZe&oid=00D90000000pkXM");
+						article7.setUrl("https://udh.yonyouup.com/login");
 						articleList.add(article7);
 						
 						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
