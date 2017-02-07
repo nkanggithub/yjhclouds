@@ -335,8 +335,8 @@ public class CoreService
 						cityInfo = RestUtils.getUserCityInfoWithLatLng(lat,lng);
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " Customers NearBy HPE ");
-						article.setDescription(NearByOpptsExt.size() + " Customers " +  "Found Near By You \n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 永佳和客户在您附近 ");
+						article.setDescription(NearByOpptsExt.size() + "永佳和客户在您附近\n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/MoreCustomer.jsp?UID=" + fromUserName);
 						articleList.add(article);
@@ -369,8 +369,8 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " Competitors NearBy HPE");
-						article.setDescription(NearByOpptsExt.size() +  " Competitor " +  "Found Near By You \n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 永佳和竞争者在您附近");
+						article.setDescription(NearByOpptsExt.size() +"永佳和竞争者在您附近\n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
@@ -402,8 +402,8 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " Partners NearBy HPE");
-						article.setDescription(NearByOpptsExt.size() + " Partner " +  "Found Near By You \n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 永佳和合作伙伴在您附近");
+						article.setDescription(NearByOpptsExt.size() + "永佳和合作伙伴在您附近 \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
