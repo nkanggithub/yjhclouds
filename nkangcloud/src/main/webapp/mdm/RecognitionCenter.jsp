@@ -21,7 +21,7 @@ String signature=MongoDBBasic.getUserWithSignature(openid);
 
 <head>
   <meta charset="utf-8">
-  <title>HPE - Recognition</title>
+  <title>永佳和塑胶有限公司</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>

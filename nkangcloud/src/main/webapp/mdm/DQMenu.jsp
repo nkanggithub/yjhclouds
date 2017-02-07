@@ -4,7 +4,7 @@
 <html class=" js csstransitions">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>MDM Makes it Matter</title> 
+	<title>永佳和塑胶有限公司</title> 
 	<meta content="" name="hpe" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="icon" type="image/x-icon" href="webitem/hpe.ico"/>

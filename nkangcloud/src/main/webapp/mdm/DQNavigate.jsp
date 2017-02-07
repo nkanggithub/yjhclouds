@@ -19,7 +19,7 @@ catch(Exception e){
 <!DOCTYPE html>
 <html lang="en" class="csstransforms csstransforms3d csstransitions">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>MDM Makes it Matter</title> 
+	<title>永佳和塑胶有限公司</title> 
 	<meta content="" name="description" />
 	<meta content="" name="hpe" />
 	<meta name="keywords" content="">
@@ -189,7 +189,7 @@ catch(Exception e){
 			</div>
 		</div>
 	</div>
-	<div id="footer"><span class="clientCopyRight">� 2016 Hewlett-Packard Enterprise Development Company, L.P.</span></div>
+	<div id="footer"><span class="clientCopyRight">© 2016 Hewlett-Packard Enterprise Development Company, L.P.</span></div>
 
 <script>
          jQuery.ajax({
@@ -200,7 +200,7 @@ catch(Exception e){
      		success : function(data) {
      			var jsons = eval(data);
      			$('img.HpLogo').attr('src',jsons.clientLogo);
-     			$('span.clientCopyRight').text('�'+jsons.clientCopyRight);
+     			$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
      		}
      	});
 </script>

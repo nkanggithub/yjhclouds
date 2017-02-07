@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>永佳和塑胶有限公司</title>
 </head>
 <body>
 <form id="file_upload_id" name="file_upload_name" action="../userProfile/fileUpload" method="post" enctype="multipart/form-data">
