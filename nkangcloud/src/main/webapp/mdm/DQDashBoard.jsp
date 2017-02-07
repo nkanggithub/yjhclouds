@@ -23,8 +23,8 @@ String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG());
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="hpe" />
-	<link rel="icon" type="image/x-icon" href="../webitem/hpe.ico">
-	<link rel="short icon" type="image/x-icon" href="../webitem/hpe.ico">
+	<link rel="icon" type="image/x-icon" href="../webitem/yjh.ico">
+	<link rel="short icon" type="image/x-icon" href="../webitem/yjh.ico">
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css" 			rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css" 	rel="stylesheet" type="text/css"/>
 	<link href="../nkang/assets_athena/font-awesome/css/font-awesome.css" 			rel="stylesheet" type="text/css"/>

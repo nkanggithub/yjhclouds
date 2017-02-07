@@ -7,8 +7,8 @@
 	<title>永佳和塑胶有限公司</title> 
 	<meta content="" name="hpe" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="icon" type="image/x-icon" href="webitem/hpe.ico"/>
-	<link rel="short icon" type="image/x-icon" href="webitem/hpe.ico"/>
+	<link rel="icon" type="image/x-icon" href="webitem/yjh.ico"/>
+	<link rel="short icon" type="image/x-icon" href="webitem/yjh.ico"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/sonhlab-base.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metrotab-v2.css"/>
 	<link rel="stylesheet" type="text/css" href="MetroStyleFiles//CSS/metro-bootstrap.min.css"/>

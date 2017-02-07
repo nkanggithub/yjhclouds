@@ -24,8 +24,8 @@ catch(Exception e){
 	<meta content="" name="hpe" />
 	<meta name="keywords" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="../webitem/hpe.ico">
-	<link rel="short icon" type="image/x-icon" href="../webitem/hpe.ico">
+	<link rel="icon" type="image/x-icon" href="../webitem/yjh.ico">
+	<link rel="short icon" type="image/x-icon" href="../webitem/yjh.ico">
 	<link rel="stylesheet" type="text/css" media="all" href="../MetroStyleFiles/metro.css">
 	<script src="../MetroStyleFiles/jquery.min.js"></script>
 	<script src="../MetroStyleFiles/jquery.plugins.min.js"></script>

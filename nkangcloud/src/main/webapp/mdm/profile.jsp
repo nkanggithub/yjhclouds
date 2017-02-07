@@ -37,13 +37,11 @@ if (session.getAttribute("location") == null) {
 <head>
 <meta charset="utf-8" />
 <title>永佳和塑胶有限公司</title>
-<!-- <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	 -->
-
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
-<meta content="" name="hpe" />
-
+<meta content="" name="wonderful" />
+<link rel="icon" type="image/x-icon" href="../webitem/yjh.ico">
+<link rel="short icon" type="image/x-icon" href="../webitem/yjh.ico">
 
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css"/>
