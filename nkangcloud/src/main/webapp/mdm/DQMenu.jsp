@@ -802,7 +802,7 @@
 		}
 		function OrganizationInformation(){
 			/*swal("200M", document.getElementById("totalOPSI").innerHTML+" Organizations", "success");*/
-			window.location.href="http://shenan.duapp.com/mdm/DQNavigate.jsp?UID="+document.getElementById("uid").innerHTML;
+			window.location.href="http://yongjiahe.duapp.com/mdm/DQNavigate.jsp?UID="+document.getElementById("uid").innerHTML;
 		}
 		function showDetailsForClient(paraStr,ws){
 			/*swal(paraStr,"<span style='color:red'>"+paraStr+"</span>", "success","true");*/
@@ -989,13 +989,13 @@ visibility:visible;
 				</a>
 				<div class="clear"></div>
 				<ul class="nav pull-right top-menu" style="margin-top:-60px;float: right;">
-					<li class="dropdown"><nobr>Welcome <a href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }" class="dropdown-toggle"
+					<li class="dropdown"><nobr>Welcome <a href="http://yongjiahe.duapp.com/mdm/profile.jsp?UID=${ uid }" class="dropdown-toggle"
 						data-toggle="dropdown"
 						style="font-size: 15px; margin: 0px; padding: 5px 0px;">
 							<span class="username colorBlue" id="username"> ${ userInfo.nickname }
 						</span>
 					</a></nobr> <br/>
-					<span><a style="float: right;" href="http://shenan.duapp.com/mdm/profile.jsp?UID=${ uid }"> <img id="userImage"
+					<span><a style="float: right;" href="http://yongjiahe.duapp.com/mdm/profile.jsp?UID=${ uid }"> <img id="userImage"
 								src="${ userInfo.headimgurl }" alt="userImage"
 								class="userImage" alt="no_username"/>
 						</a></span></li>
