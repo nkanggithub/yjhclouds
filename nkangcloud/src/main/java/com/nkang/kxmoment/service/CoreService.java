@@ -28,6 +28,7 @@ import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
+import com.nkang.kxmoment.util.Constants;
 
 public class CoreService
 {
@@ -126,7 +127,7 @@ public class CoreService
 				String picurl = requestObject.element("PicUrl").getText();
 				MongoDBBasic.updateUserWithFaceUrl(fromUserName,picurl);
 				if(StringUtils.isEmpty(picurl)){
-					picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
+					picurl = "http://"+Constants.baehost+"/MetroStyleFiles/menu-face.png";
 				}
 
 				List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
@@ -177,14 +178,14 @@ public class CoreService
 					article.setTitle("ç§»åŠ¨åº”ç”¨");
 					article.setDescription("ç§»åŠ¨åº”ç”¨");
 					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
-					article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+					article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
 
 					Article article4 = new Article();
 					article4.setTitle("Data Visualization");
 					article4.setDescription("Master Data Visualization");
 					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009urNv&oid=00D90000000pkXM");
-					article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
+					article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
 					articleList.add(article4);
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
@@ -206,13 +207,13 @@ public class CoreService
 						article.setTitle("æˆ‘çš„ä¸»æ•°æ�®");
 						article.setDescription("æˆ‘çš„ä¸»æ•°æ�®");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article4 = new Article();
 						article4.setTitle("ä¸»æ•°æ�®å�¯è§†åŒ–");
 						article4.setDescription("Master Data Visualization");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
-						article4.setUrl("http://shenan.duapp.com/DQMenu?UID=" + fromUserName);
+						article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
 						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
@@ -224,13 +225,13 @@ public class CoreService
 						article.setTitle("ç§»åŠ¨åº”ç”¨");
 						article.setDescription("ç§»åŠ¨åº”ç”¨");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("å¾®åº”ç”¨");
 						article2.setDescription("My Personal Applications");
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
-						article2.setUrl("http://shenan.duapp.com/mdm/profile.jsp?UID=" + fromUserName);
+						article2.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
 						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
@@ -238,7 +239,7 @@ public class CoreService
 							article3.setTitle("äº§å“�ç®¡ç�†");
 							article3.setDescription("Administration");
 							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
-							article3.setUrl("http://shenan.duapp.com/admin/index.jsp");
+							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp");
 							articleList.add(article3);
 						}
 						newsMessage.setArticleCount(articleList.size());
@@ -250,8 +251,8 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle("My Lasted Recognitions");
 						article.setDescription("My Lasted Recognition");
-						article.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg");
-						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg");
+						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
 						// add article here
@@ -265,7 +266,7 @@ public class CoreService
 						String icoURLPartnerFirst = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaRc&oid=00D90000000pkXM";
 						String icoURLBaisForAction = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaS6&oid=00D90000000pkXM";
 						String icoURLInnovator = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkaSa&oid=00D90000000pkXM";
-						String icoURL = "http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg";
+						String icoURL = "http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg";
 						for(int i = myRecog; i >= 1; i--){
 							myarticle = new Article();
 							congratulateHistory = new CongratulateHistory();
@@ -291,7 +292,7 @@ public class CoreService
 								icoURL = icoURLPartnerFirst;
 							}
 							myarticle.setPicUrl(icoURL);
-							myarticle.setUrl("http://shenan.duapp.com/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
+							myarticle.setUrl("http://"+Constants.baehost+"/mdm/RecognitionCenter.jsp?uid=" + fromUserName + "&num="+i);
 							articleList.add(myarticle);
 						}						
 
@@ -302,21 +303,21 @@ public class CoreService
 					else if(eventKey.equals("MYFACE")){
 						String picurl = MongoDBBasic.getUserWithFaceUrl(fromUserName);
 						if(StringUtils.isEmpty(picurl)){
-							picurl = "http://shenan.duapp.com/MetroStyleFiles/menu-face.png";
+							picurl = "http://"+Constants.baehost+"/MetroStyleFiles/menu-face.png";
 						}
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("çœ‹æˆ‘é¢œå€¼å¦‚ä½•çˆ†è¡¨-å�‘ä¸ªç…§ç‰‡åˆ°è¿™ä¸ªå…¬ä¼—å�·");
 						article.setDescription("çœ‹æˆ‘é¢œå€¼å¦‚ä½•çˆ†è¡¨");
 						article.setPicUrl(picurl);
-						article.setUrl("http://shenan.duapp.com/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
 						Article article2 = new Article();
 						article2.setTitle("æµ‹æˆ‘é¢œå€¼");
 						article2.setDescription("æµ‹æˆ‘é¢œå€¼");
-						article2.setPicUrl("http://shenan.duapp.com/MetroStyleFiles/menu-face.png");
-						article2.setUrl("http://shenan.duapp.com/mdm/face.jsp?UID=" + fromUserName);
+						article2.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/menu-face.png");
+						article2.setUrl("http://"+Constants.baehost+"/mdm/face.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						
 						newsMessage.setArticleCount(articleList.size());
@@ -337,7 +338,7 @@ public class CoreService
 						article.setTitle(NearByOpptsExt.size() + " Customers NearBy HPE ");
 						article.setDescription(NearByOpptsExt.size() + " Customers " +  "Found Near By You \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/mdm/MoreCustomer.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/MoreCustomer.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
@@ -348,7 +349,7 @@ public class CoreService
 							articlevar.setTitle(NearByOpptsExt.get(i).getOpptName() + "\n" + NearByOpptsExt.get(i).getSegmentArea() + "\n" + NearByOpptsExt.get(i).getDistance() + " KM");
 							articlevar.setDescription("NearBy Opportunity");
 							articlevar.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM");
-							articlevar.setUrl("http://shenan.duapp.com/mdm/MoreCustomer.jsp?UID=" + fromUserName);
+							articlevar.setUrl("http://"+Constants.baehost+"/mdm/MoreCustomer.jsp?UID=" + fromUserName);
 							articleList.add(articlevar);
 						}
 						newsMessage.setArticleCount(articleList.size());
@@ -371,7 +372,7 @@ public class CoreService
 						article.setTitle(NearByOpptsExt.size() + " Competitors NearBy HPE");
 						article.setDescription(NearByOpptsExt.size() +  " Competitor " +  "Found Near By You \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/index.jsp");
+						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
@@ -382,7 +383,7 @@ public class CoreService
 							articlevar.setTitle(NearByOpptsExt.get(i).getOpptName() + "\n" + NearByOpptsExt.get(i).getSegmentArea() + "\n" + NearByOpptsExt.get(i).getDistance() + " KM");
 							articlevar.setDescription("NearBy Opportunity");
 							articlevar.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM");
-							articlevar.setUrl("http://shenan.duapp.com/index.jsp");
+							articlevar.setUrl("http://"+Constants.baehost+"/index.jsp");
 							articleList.add(articlevar);
 						}
 						newsMessage.setArticleCount(articleList.size());
@@ -404,7 +405,7 @@ public class CoreService
 						article.setTitle(NearByOpptsExt.size() + " Partners NearBy HPE");
 						article.setDescription(NearByOpptsExt.size() + " Partner " +  "Found Near By You \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/index.jsp");
+						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
@@ -415,7 +416,7 @@ public class CoreService
 							articlevar.setTitle(NearByOpptsExt.get(i).getOpptName() + "\n" + NearByOpptsExt.get(i).getSegmentArea() + "\n" + NearByOpptsExt.get(i).getDistance() + " KM");
 							articlevar.setDescription("NearBy Opportunity");
 							articlevar.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM");
-							articlevar.setUrl("http://shenan.duapp.com/index.jsp");
+							articlevar.setUrl("http://"+Constants.baehost+"/index.jsp");
 							articleList.add(articlevar);
 						}
 						
@@ -439,7 +440,7 @@ public class CoreService
 						article.setTitle(NearByOpptsExt.size() + " Opportunity NearBy HPE ");
 						article.setDescription(NearByOpptsExt.size() + " Opportunity " +  "Found Near By You \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-						article.setUrl("http://shenan.duapp.com/index.jsp");
+						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
@@ -450,7 +451,7 @@ public class CoreService
 							articlevar.setTitle(NearByOpptsExt.get(i).getOpptName() + "\n" + NearByOpptsExt.get(i).getSegmentArea() + "\n" + NearByOpptsExt.get(i).getDistance() + " KM");
 							articlevar.setDescription("NearBy Opportunity");
 							articlevar.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2gP&oid=00D90000000pkXM");
-							articlevar.setUrl("http://shenan.duapp.com/index.jsp");
+							articlevar.setUrl("http://"+Constants.baehost+"/index.jsp");
 							articleList.add(articlevar);
 						}
 						newsMessage.setArticleCount(articleList.size());
