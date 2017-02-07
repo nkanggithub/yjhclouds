@@ -39,7 +39,6 @@ public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "N";
-	private static String baehost = "yongjiahe.duapp.com";
 	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
@@ -877,7 +876,7 @@ public class RestUtils {
 		if(localInd == "Y"){
 			try {
 					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
-					String url = "http://"+baehost+"/getDataQualityReportByParameterV2?";
+					String url = "http://"+Constants.baehost+"/getDataQualityReportByParameterV2?";
 					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
 						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
 						url =  url + "stateProvince="+stateProvince;
