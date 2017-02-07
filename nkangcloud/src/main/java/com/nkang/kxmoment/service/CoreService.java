@@ -467,8 +467,8 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), "", lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " Opportunity NearBy HPE ");
-						article.setDescription(NearByOpptsExt.size() + " Opportunity " +  "Found Near By You \n" + addr);
+						article.setTitle(NearByOpptsExt.size() + " 个永佳和机遇在您附近 ");
+						article.setDescription(NearByOpptsExt.size() + "个永佳和机遇在您附近 \n" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/index.jsp");
 						articleList.add(article);
