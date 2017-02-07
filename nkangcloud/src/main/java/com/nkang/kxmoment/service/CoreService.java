@@ -222,13 +222,13 @@ public class CoreService
 					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("ç§»åŠ¨åº”ç”¨");
-						article.setDescription("ç§»åŠ¨åº”ç”¨");
+						article.setTitle("胖和应用");
+						article.setDescription("胖和应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
-						article2.setTitle("å¾®åº”ç”¨");
+						article2.setTitle("胖和应用");
 						article2.setDescription("My Personal Applications");
 						article2.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 						article2.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
@@ -236,7 +236,7 @@ public class CoreService
 						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
 						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
-							article3.setTitle("äº§å“�ç®¡ç�†");
+							article3.setTitle("客户管理");
 							article3.setDescription("Administration");
 							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp");
