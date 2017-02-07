@@ -175,8 +175,8 @@ public class CoreService
 					}
 					articleList.clear();
 					Article article = new Article();
-					article.setTitle("ç§»åŠ¨åº”ç”¨");
-					article.setDescription("ç§»åŠ¨åº”ç”¨");
+					article.setTitle("永佳和塑胶有限公司");
+					article.setDescription("永佳和塑胶有限公司");
 					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 					article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 					articleList.add(article);
@@ -204,14 +204,14 @@ public class CoreService
 					if(eventKey.equals("MDLAKE")){ // Data Lake
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("æˆ‘çš„ä¸»æ•°æ�®");
-						article.setDescription("æˆ‘çš„ä¸»æ•°æ�®");
+						article.setTitle("永佳和塑胶有限公司");
+						article.setDescription("永佳和塑胶有限公司");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article4 = new Article();
-						article4.setTitle("ä¸»æ•°æ�®å�¯è§†åŒ–");
-						article4.setDescription("Master Data Visualization");
+						article4.setTitle("永佳和塑胶有限公司");
+						article4.setDescription("永佳和塑胶有限公司");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
 						articleList.add(article4);
