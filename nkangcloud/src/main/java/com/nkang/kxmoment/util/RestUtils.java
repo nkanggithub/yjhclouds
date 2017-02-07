@@ -39,6 +39,7 @@ public class RestUtils {
 	private static Logger log=Logger.getLogger(RestUtils.class);
 	private static final  double EARTH_RADIUS = 6371000; 
 	private static String localInd = "N";
+	private static String baehost = "yongjiahe.duapp.com";
 	private static Map<String,OrgCountryCode> OrgCountryCodeMap;
 	public static String getAccessKey() {
 			String url = "https://"+Constants.wechatapihost+"/cgi-bin/token?grant_type=client_credential&appid="+ Constants.APP_ID+ "&secret=" + Constants.APPSECRET;
@@ -876,7 +877,7 @@ public class RestUtils {
 		if(localInd == "Y"){
 			try {
 					//String url = "http://shenan.duapp.com/getDataQualityReportByParameter?stateProvince="+s+"&"+"nonlatinCity="+c+"&cityRegion="+cr;
-					String url = "http://shenan.duapp.com/getDataQualityReportByParameterV2?";
+					String url = "http://"+baehost+"/getDataQualityReportByParameterV2?";
 					if(stateProvince != "" && stateProvince.toLowerCase() != "null"){
 						stateProvince = URLEncoder.encode(stateProvince, "UTF-8");
 						url =  url + "stateProvince="+stateProvince;
@@ -1570,7 +1571,7 @@ public class RestUtils {
 		return ret;
 	}
 	public static  String getMDLUserLists(String openid){
-		String urlStr = "http://shenan.duapp.com/CallGetWeChatUserFromMongoDB";
+		String urlStr = "http://"+Constants.baehost+"/CallGetWeChatUserFromMongoDB";
 		if(openid!=null&&!"".equals(openid)){
 			urlStr+="?openid="+openid;
 		}
@@ -1597,7 +1598,7 @@ public class RestUtils {
          return strBuf.toString();  
 	}
 	public static  String getCallUpdateUserWithSignature(String openid,String svg){
-		String urlStr = "http://shenan.duapp.com/CallUpdateUserWithSignature";
+		String urlStr = "http://"+Constants.baehost+"/CallUpdateUserWithSignature";
 		try {
 			urlStr+="?openid="+openid+"&svg="+URLEncoder.encode(svg, "utf-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -1702,7 +1703,7 @@ public class RestUtils {
 		
 public static String regist(WeChatMDLUser user) {
 			
-			String urlStr = "http://shenan.duapp.com/CallRegisterUser";
+			String urlStr = "http://"+Constants.baehost+"/CallRegisterUser";
 			ArrayList<String> arr = new ArrayList<String>();
 			if(user.getOpenid()!=null&&!"".equals(user.getOpenid())){
 				arr.add("openid="+user.getOpenid());
@@ -1897,7 +1898,7 @@ public static String regist(WeChatMDLUser user) {
  				  "\"touser\":\""+toUser+"\","+ 
  				  "\"msgtype\":\"text\", "+
  				   "\"text\":{"+
- 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" 说：\n---------------\n"+content+"\""+
+ 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" è¯´ï¼š\n---------------\n"+content+"\""+
  				   "}"+
  				"}";
 
@@ -1972,14 +1973,14 @@ public static String regist(WeChatMDLUser user) {
 
     	}
 
-       //获取access_token
+       //èŽ·å�–access_token
 
 
         String json = "{\"touser\": [\""+text+"\"],\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
         String accessToken = MongoDBBasic.getValidAccessKey();
 /*       String accessToken = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
 
-       //获取请求路径
+       //èŽ·å�–è¯·æ±‚è·¯å¾„
        String action =  "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token="+accessToken;
        if(toUser.size()==1){
     	   json= "{\"touser\": \""+toUser.get(0)+"\",\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
@@ -2004,7 +2005,7 @@ public static String regist(WeChatMDLUser user) {
 
     public static String sendNotificationToUser(String openId,String toOpenId,Notification note){
     	String result ="";
-    			String str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://shenan.duapp.com/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
+    			String str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://yongjiahe.duapp.com/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
@@ -2032,8 +2033,8 @@ public static String regist(WeChatMDLUser user) {
     	    }
     public static String sendRecognitionToUser(String openId,String toOpenId,CongratulateHistory ch){
     	String result ="";
-    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://shenan.duapp.com/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
-    					+ "\"http://shenan.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
+    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://yongjiahe.duapp.com/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
+    					+ "\"http://yongjiahe.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
     	                "{\"articles\":[" +str +"]}"+"}";
@@ -2087,7 +2088,7 @@ public static String regist(WeChatMDLUser user) {
 
            OutputStream os = http.getOutputStream();
 
-           os.write(json.getBytes("UTF-8"));// 传入参数
+           os.write(json.getBytes("UTF-8"));// ä¼ å…¥å�‚æ•°
 
            InputStream is = http.getInputStream();
 
@@ -2099,7 +2100,7 @@ public static String regist(WeChatMDLUser user) {
 
            result = new String(jsonBytes, "UTF-8");
 
-        //   System.out.println("请求返回结果:"+result);
+        //   System.out.println("è¯·æ±‚è¿”å›žç»“æžœ:"+result);
 
            os.flush();
 

@@ -3,9 +3,9 @@ package com.nkang.kxmoment.util;
 public final class Constants {
 	private Constants(){}
 	
-	public static final String WECHAT_TOKEN = "SDFCTOKENSHANNKANG";
+	public static final String WECHAT_TOKEN = "SDFCTOKENSHANNKANG";//YJH
 	public static final String APP_ID = "wxaa0a9bfa29863d87"; //YJH
-	public static final String APPSECRET = "513c09d69e91abb862e178536f2021a4";
+	public static final String APPSECRET = "7b2fbfc81353fed1f7fc046129dc671d"; //YJH
 	
 	
 	public static final String BAIDU_APPKEY = "473c34a48268d02986e607cb5d7d564c";
