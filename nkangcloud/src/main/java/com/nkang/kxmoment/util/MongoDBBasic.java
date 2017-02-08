@@ -29,6 +29,7 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
@@ -51,7 +52,7 @@ public class MongoDBBasic {
 	private static String client_pool = "ClientPool";
 	private static String wechat_comments = "Wechat_Comments";
 	private static String ClientMeta = "Client_Meta";
-
+	private static String collectionBill = "SaleBill";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -2336,6 +2337,67 @@ public class MongoDBBasic {
 			}
 		}
 		return nfList;
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR billOfSell
+	 */
+	public static void saveBillOfSell(List<BillOfSell> billOfSellList){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		
+		for(BillOfSell bs : billOfSellList){
+			query.put("orderNumber", bs.getOrderNumber());
+			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
+			if(queryresult==null){
+				DBObject updateQuery = new BasicDBObject();
+				updateQuery.put("businessType",bs.getBusinessType());
+				updateQuery.put("sellType",bs.getSellType());
+				updateQuery.put("orderNumber",bs.getOrderNumber());
+				updateQuery.put("orderTime",bs.getOrderTime());
+				updateQuery.put("customerName",bs.getCustomerName());
+				updateQuery.put("currency",bs.getCurrency());
+				updateQuery.put("parities",bs.getParities());
+				updateQuery.put("salesDepartments",bs.getSalesDepartments());
+				updateQuery.put("salesman",bs.getSalesman());
+				updateQuery.put("inventoryCoding",bs.getInventoryCoding());
+				updateQuery.put("inventoryCode",bs.getInventoryCode());
+				updateQuery.put("inventoryName",bs.getInventoryName());
+				updateQuery.put("specificationsModels",bs.getSpecificationsModels());
+				updateQuery.put("measurement",bs.getMeasurement());
+				updateQuery.put("count",bs.getCount());
+				
+				updateQuery.put("unitPrice",bs.getUnitPrice());
+				updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
+				updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
+				updateQuery.put("tax",bs.getTax());
+				updateQuery.put("totalPriceWithTax",bs.getTotalPriceWithTax());
+				updateQuery.put("taxRateString",bs.getTaxRateString());
+				updateQuery.put("deductible",bs.getDeductible());
+				updateQuery.put("deductible2",bs.getDeductible2());
+				updateQuery.put("advanceShipmentDate",bs.getAdvanceShipmentDate());
+				updateQuery.put("ordersForChildTableID",bs.getOrdersForChildTableID());
+				updateQuery.put("unfilledOrderCount",bs.getUnfilledOrderCount());
+				updateQuery.put("noInvoiceCount",bs.getNoInvoiceCount());
+				updateQuery.put("reservedNum",bs.getReservedNum());
+				updateQuery.put("notDeliverNum",bs.getNotDeliverNum());
+				updateQuery.put("notDeliverAmount",bs.getNotDeliverAmount());
+				updateQuery.put("noInvoiceCounts",bs.getNoInvoiceCounts());
+				updateQuery.put("noInvoiceAmount",bs.getNoInvoiceAmount());
+				updateQuery.put("amountPurchased",bs.getAmountPurchased());
+				updateQuery.put("noamountPurchased",bs.getNoamountPurchased());
+				updateQuery.put("noProduction",bs.getNoProduction());
+				updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
+				updateQuery.put("noImportVolume",bs.getNoImportVolume());
+				
+				BasicDBObject doc = new BasicDBObject();  
+				doc.put("$set", updateQuery);
+				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
+			}
+			
+		}
+		
 	}
 }
 					
