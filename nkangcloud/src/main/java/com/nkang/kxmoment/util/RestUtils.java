@@ -75,6 +75,46 @@ public class RestUtils {
 			return accessToken;
 	}
 
+	public static List<String> getWeChatUserListID(String akey){
+		List<String> listOfOpenID = new ArrayList<String>();
+		String url = "https://"+Constants.wechatapihost+"/cgi-bin/user/get?access_token="+ akey;
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("GET"); //must be get request
+	           http.setRequestProperty("Content-Type","application/json");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	           } 
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           String message = new String(jsonBytes, "UTF-8");
+	           JSONObject demoJson = new JSONObject(message);
+	           if(demoJson.has("data")){
+	        	   JSONObject Resultdata = demoJson.getJSONObject("data");
+		           if(Resultdata.has("openid")){
+		        	   String openIDs = Resultdata.getString("openid");
+		        	   String str = openIDs.substring(1, openIDs.length()-1);
+		        	   String [] strArray = str.split(",");
+		        	   for(String s : strArray){
+		        		   listOfOpenID.add(s);
+		        	   }
+		           }
+	           }
+	           is.close();
+	       } catch (Exception e) {
+	    	   e.printStackTrace();
+	       } 
+		return listOfOpenID;
+	}
 	public static WeChatUser getWeChatUserInfo(String akey, String openID){
 		WeChatUser wcu = new WeChatUser();
 		
