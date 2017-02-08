@@ -827,7 +827,7 @@ public class MasterDataRestController {
 	 */
 	@RequestMapping("/saveBill")
 	public static String saveBill(){
-		String ret = "success !!";
+		String ret = "faild !!";
 		BillOfSellPoi bos = new BillOfSellPoi();
 		List<BillOfSell> billOfSellList;
 		try {
@@ -836,6 +836,7 @@ public class MasterDataRestController {
 			if(billOfSellList!=null){
 				try{
 					MongoDBBasic.saveBillOfSell(billOfSellList);
+					ret = "success !!";
 				}catch(Exception e){
 					ret = e.getMessage();
 				}	
