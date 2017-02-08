@@ -175,18 +175,34 @@ public class CoreService
 					}
 					articleList.clear();
 					Article article = new Article();
-					article.setTitle("永佳和塑胶有限公司");
-					article.setDescription("永佳和塑胶有限公司");
+					article.setTitle("永佳和塑胶有限公司简介");
+					article.setDescription("永佳和塑胶有限公司简介");
 					article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJST&oid=00D90000000pkXM");
-					article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
+					article.setUrl("http://mp.weixin.qq.com/s/KtlqEakeUhJuAun5sbm6og");
 					articleList.add(article);
 
+					Article articleculture = new Article();
+					articleculture.setTitle("企业文化");
+					articleculture.setDescription("企业文化");
+					articleculture.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+					articleculture.setUrl("http://mp.weixin.qq.com/s/YaBzsBHerq7I_UIZO29Tmw");
+					articleList.add(articleculture);
+					
 					Article article4 = new Article();
-					article4.setTitle("董事长致辞");
+					article4.setTitle("董事长致词");
 					article4.setDescription("董事长致词");
 					article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
-					article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
+					article4.setUrl("http://mp.weixin.qq.com/s/2Ia4fdPe3dmTnKynbX1DkA");
 					articleList.add(article4);
+					
+					Article articleContactUs = new Article();
+					articleContactUs.setTitle("联系我们");
+					articleContactUs.setDescription("联系我们");
+					articleContactUs.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+					articleContactUs.setUrl("http://mp.weixin.qq.com/s/qErL5R9ZqIuf_BFJv-NA7g");
+					articleList.add(articleContactUs);
+					
+					
 					newsMessage.setArticleCount(articleList.size());
 					newsMessage.setArticles(articleList);
 					respXml = MessageUtil.newsMessageToXml(newsMessage);
@@ -331,24 +347,75 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if(eventKey.equals("MYFACE")){
-						String picurl = MongoDBBasic.getUserWithFaceUrl(fromUserName);
-						if(StringUtils.isEmpty(picurl)){
-							picurl = "http://"+Constants.baehost+"/MetroStyleFiles/menu-face.png";
-						}
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("çœ‹æˆ‘é¢œå€¼å¦‚ä½•çˆ†è¡¨-å�‘ä¸ªç…§ç‰‡åˆ°è¿™ä¸ªå…¬ä¼—å�·");
-						article.setDescription("çœ‹æˆ‘é¢œå€¼å¦‚ä½•çˆ†è¡¨");
-						article.setPicUrl(picurl);
-						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setTitle("永佳和塑胶有限公司简介");
+						article.setDescription("永佳和塑胶有限公司简介");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJST&oid=00D90000000pkXM");
+						article.setUrl("http://mp.weixin.qq.com/s/KtlqEakeUhJuAun5sbm6og");
 						articleList.add(article);
+
+						Article articleculture = new Article();
+						articleculture.setTitle("企业文化");
+						articleculture.setDescription("企业文化");
+						articleculture.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articleculture.setUrl("http://mp.weixin.qq.com/s/YaBzsBHerq7I_UIZO29Tmw");
+						articleList.add(articleculture);
 						
-						Article article2 = new Article();
-						article2.setTitle("æµ‹æˆ‘é¢œå€¼");
-						article2.setDescription("æµ‹æˆ‘é¢œå€¼");
-						article2.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/menu-face.png");
-						article2.setUrl("http://"+Constants.baehost+"/mdm/face.jsp?UID=" + fromUserName);
-						articleList.add(article2);
+						Article article4 = new Article();
+						article4.setTitle("董事长致词");
+						article4.setDescription("董事长致词");
+						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						article4.setUrl("http://mp.weixin.qq.com/s/2Ia4fdPe3dmTnKynbX1DkA");
+						articleList.add(article4);
+						
+						Article articleContactUs = new Article();
+						articleContactUs.setTitle("联系我们");
+						articleContactUs.setDescription("联系我们");
+						articleContactUs.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articleContactUs.setUrl("http://mp.weixin.qq.com/s/qErL5R9ZqIuf_BFJv-NA7g");
+						articleList.add(articleContactUs);
+						
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}
+					else if(eventKey.equals("subcompany")){
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("永佳和塑胶有限公司下属公司");
+						article.setDescription("永佳和塑胶有限公司下属公司");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJST&oid=00D90000000pkXM");
+						article.setUrl("http://mp.weixin.qq.com/s/byKfEHFk6keGvq17ggZeOA");
+						articleList.add(article);
+
+						Article articlesub1 = new Article();
+						articlesub1.setTitle("厦门永佳和塑料有限公司");
+						articlesub1.setDescription("厦门永佳和塑料有限公司");
+						articlesub1.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub1.setUrl("http://mp.weixin.qq.com/s/YXlFOaGXo7QqZy4gyu0tDg");
+						articleList.add(articlesub1);
+						
+						Article articlesub2 = new Article();
+						articlesub2.setTitle("重庆永佳和塑料有限公司");
+						articlesub2.setDescription("重庆永佳和塑料有限公司");
+						articlesub2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub2.setUrl("http://mp.weixin.qq.com/s/RpBKLRYhKUJ_2QFpaK3RkQ");
+						articleList.add(articlesub2);
+						
+						Article articlesub3 = new Article();
+						articlesub3.setTitle("武汉永佳和新材料有限公司");
+						articlesub3.setDescription("武汉永佳和新材料有限公司");
+						articlesub3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub3.setUrl("http://mp.weixin.qq.com/s/0qrFDbZAnOU-wNvnIYIL2A");
+						articleList.add(articlesub3);
+						
+						Article articlesub4 = new Article();
+						articlesub4.setTitle("香港永佳和");
+						articlesub4.setDescription("香港永佳和");
+						articlesub4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub4.setUrl("http://mp.weixin.qq.com/s/JBj5mqttK_NVPGj6R8zdvQ");
+						articleList.add(articlesub4);
 						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
