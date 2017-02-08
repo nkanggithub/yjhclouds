@@ -36,7 +36,11 @@ public class CoreService
 	private static Timer timer= new Timer();
 	public static String processRequest(HttpServletRequest request)
 	{
-		
+		String xiamenlogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3R&oid=00D90000000pkXM";
+		String chongqinglogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3b&oid=00D90000000pkXM";
+		String wuhanlogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3l&oid=00D90000000pkXM";
+		String hongkonglogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3v&oid=00D90000000pkXM";
+		String subcompanylogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM45&oid=00D90000000pkXM";
 		String respXml = null;
 		String respContent = "unknown request type.";
 		String AccessKey = MongoDBBasic.getValidAccessKey();
@@ -295,8 +299,8 @@ public class CoreService
 					else if(eventKey.equals("MYRECOG")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("My Lasted Recognitions");
-						article.setDescription("My Lasted Recognition");
+						article.setTitle("我的胖和业绩");
+						article.setDescription("我的胖和业绩");
 						article.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg");
 						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
 						articleList.add(article);
@@ -385,35 +389,35 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle("永佳和塑胶有限公司下属公司");
 						article.setDescription("永佳和塑胶有限公司下属公司");
-						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJST&oid=00D90000000pkXM");
+						article.setPicUrl(subcompanylogo);
 						article.setUrl("http://mp.weixin.qq.com/s/byKfEHFk6keGvq17ggZeOA");
 						articleList.add(article);
 
 						Article articlesub1 = new Article();
 						articlesub1.setTitle("厦门永佳和塑料有限公司");
 						articlesub1.setDescription("厦门永佳和塑料有限公司");
-						articlesub1.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub1.setPicUrl(xiamenlogo);
 						articlesub1.setUrl("http://mp.weixin.qq.com/s/YXlFOaGXo7QqZy4gyu0tDg");
 						articleList.add(articlesub1);
 						
 						Article articlesub2 = new Article();
 						articlesub2.setTitle("重庆永佳和塑料有限公司");
 						articlesub2.setDescription("重庆永佳和塑料有限公司");
-						articlesub2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub2.setPicUrl(chongqinglogo);
 						articlesub2.setUrl("http://mp.weixin.qq.com/s/RpBKLRYhKUJ_2QFpaK3RkQ");
 						articleList.add(articlesub2);
 						
 						Article articlesub3 = new Article();
 						articlesub3.setTitle("武汉永佳和新材料有限公司");
 						articlesub3.setDescription("武汉永佳和新材料有限公司");
-						articlesub3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub3.setPicUrl(wuhanlogo);
 						articlesub3.setUrl("http://mp.weixin.qq.com/s/0qrFDbZAnOU-wNvnIYIL2A");
 						articleList.add(articlesub3);
 						
 						Article articlesub4 = new Article();
 						articlesub4.setTitle("香港永佳和");
 						articlesub4.setDescription("香港永佳和");
-						articlesub4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articlesub4.setPicUrl(hongkonglogo);
 						articlesub4.setUrl("http://mp.weixin.qq.com/s/JBj5mqttK_NVPGj6R8zdvQ");
 						articleList.add(articlesub4);
 						
