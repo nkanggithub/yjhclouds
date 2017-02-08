@@ -41,6 +41,8 @@ public class CoreService
 		String wuhanlogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3l&oid=00D90000000pkXM";
 		String hongkonglogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM3v&oid=00D90000000pkXM";
 		String subcompanylogo = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM45&oid=00D90000000pkXM";
+		String contactUS = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM7n&oid=00D90000000pkXM";
+		String companyCulture = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM82&oid=00D90000000pkXM";
 		String respXml = null;
 		String respContent = "unknown request type.";
 		String AccessKey = MongoDBBasic.getValidAccessKey();
@@ -188,7 +190,7 @@ public class CoreService
 					Article articleculture = new Article();
 					articleculture.setTitle("企业文化");
 					articleculture.setDescription("企业文化");
-					articleculture.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+					articleculture.setPicUrl(companyCulture);
 					articleculture.setUrl("http://mp.weixin.qq.com/s/YaBzsBHerq7I_UIZO29Tmw");
 					articleList.add(articleculture);
 					
@@ -202,7 +204,7 @@ public class CoreService
 					Article articleContactUs = new Article();
 					articleContactUs.setTitle("联系我们");
 					articleContactUs.setDescription("联系我们");
-					articleContactUs.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+					articleContactUs.setPicUrl(contactUS);
 					articleContactUs.setUrl("http://mp.weixin.qq.com/s/qErL5R9ZqIuf_BFJv-NA7g");
 					articleList.add(articleContactUs);
 					
@@ -362,7 +364,7 @@ public class CoreService
 						Article articleculture = new Article();
 						articleculture.setTitle("企业文化");
 						articleculture.setDescription("企业文化");
-						articleculture.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articleculture.setPicUrl(companyCulture);
 						articleculture.setUrl("http://mp.weixin.qq.com/s/YaBzsBHerq7I_UIZO29Tmw");
 						articleList.add(articleculture);
 						
@@ -376,7 +378,7 @@ public class CoreService
 						Article articleContactUs = new Article();
 						articleContactUs.setTitle("联系我们");
 						articleContactUs.setDescription("联系我们");
-						articleContactUs.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM");
+						articleContactUs.setPicUrl(contactUS);
 						articleContactUs.setUrl("http://mp.weixin.qq.com/s/qErL5R9ZqIuf_BFJv-NA7g");
 						articleList.add(articleContactUs);
 						
