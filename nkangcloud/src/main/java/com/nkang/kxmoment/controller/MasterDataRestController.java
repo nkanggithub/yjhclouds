@@ -825,14 +825,9 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * FOR billOfSell
 	 */
-/*	@RequestMapping("/saveBill")
+	@RequestMapping("/saveBill")
 	public static String saveBill(@RequestParam(value="billOfSellList", required=false) List<BillOfSell> billOfSellList){
 		String ret = "faild !!";
-		BillOfSellPoi bos = new BillOfSellPoi();
-		//List<BillOfSell> billOfSellList;
-		try {
-			billOfSellList = bos.readXls();
-			
 			if(billOfSellList!=null){
 				try{
 					MongoDBBasic.saveBillOfSell(billOfSellList);
@@ -842,14 +837,9 @@ public class MasterDataRestController {
 				}	
 			}
 			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
 		return ret;
 		
-	}*/
+	}
 	
 	/*
 	 * chang-zheng
