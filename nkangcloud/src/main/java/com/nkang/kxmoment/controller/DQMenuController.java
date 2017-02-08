@@ -424,7 +424,7 @@ public @ResponseBody List<OrgOtherPartySiteInstance>  getALLCountryName(HttpServ
  * chang-zheng
  * test saveBills	local
  */
-@RequestMapping("/saveBills")
+/*@RequestMapping("/saveBills")
 public static String saveBill(){
 	String ret = "faild !!";
 	BillOfSellPoi bos = new BillOfSellPoi();
@@ -450,5 +450,5 @@ public static String saveBill(){
 	}
 	return ret;
 	
-}
+}*/
 }
