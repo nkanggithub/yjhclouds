@@ -2349,8 +2349,12 @@ public class MongoDBBasic {
 		
 		for(BillOfSell bs : billOfSellList){
 			query.put("orderNumber", bs.getOrderNumber());
+			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
 			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
-			if(queryresult==null){
+		
+			
+			if(queryresult!=null){
+				
 				DBObject updateQuery = new BasicDBObject();
 				updateQuery.put("businessType",bs.getBusinessType());
 				updateQuery.put("sellType",bs.getSellType());
@@ -2394,10 +2398,14 @@ public class MongoDBBasic {
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
+			}else{
+				BasicDBObject doc = BasicDBObject.parse(bs.toString());  
+				mongoDB.getCollection(collectionBill).save(doc);
 			}
 			
 		}
 		
 	}
+	
 }
 					
