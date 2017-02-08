@@ -285,7 +285,7 @@ public class CoreService
 						article7.setUrl("https://udh.yonyouup.com/login");
 						articleList.add(article7);
 						
-						String hardcodeUID = "oqPI_xLq1YEJOczHi4DS2-1U0zqc";
+						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
 						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
 							article3.setTitle("客户管理");
