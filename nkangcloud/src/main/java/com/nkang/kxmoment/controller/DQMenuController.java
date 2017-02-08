@@ -1,4 +1,6 @@
 package com.nkang.kxmoment.controller;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
@@ -23,6 +26,8 @@ import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Radar;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.BillOfSellPoi;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 @Controller
@@ -415,5 +420,35 @@ public @ResponseBody List<OrgOtherPartySiteInstance>  getALLCountryName(HttpServ
 	listOfCities.get(0).setAllCity(citys);
 	return listOfCities;
 }	
+/*
+ * chang-zheng
+ * test saveBills	local
+ */
+@RequestMapping("/saveBills")
+public static String saveBill(){
+	String ret = "faild !!";
+	BillOfSellPoi bos = new BillOfSellPoi();
+	List<BillOfSell> billOfSellList;
+	try {
+		billOfSellList = bos.readXls();
 	
+		String url =  "http://yongjiahe.duapp.com/saveBill?billOfSellList="+ billOfSellList;
+		 URL urlGet = new URL(url);
+	     HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	     http.setRequestMethod("GET"); //must be get request
+	     http.setRequestProperty("Content-Type","application/json");
+	     http.setDoOutput(true);
+	     http.setDoInput(true);
+	     System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	     System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	     http.connect();
+	      ret = "success !!";
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		ret=e.getMessage();
+	}
+	return ret;
+	
+}
 }
