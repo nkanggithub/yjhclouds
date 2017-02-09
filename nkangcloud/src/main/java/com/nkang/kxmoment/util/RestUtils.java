@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
@@ -2154,6 +2155,156 @@ public static String regist(WeChatMDLUser user) {
        return "status:"+result;
 
     }
+    /*
+     * chang-zheng
+     */
+    public static String callSaveBills(BillOfSell bs) throws UnsupportedEncodingException {
+		String url = "http://"+Constants.baehost+"/saveBill?";
+		if(bs != null){
+			if(!StringUtils.isEmpty(bs.getBusinessType())){
+				url = url + "businessType="+URLEncoder.encode(bs.getBusinessType(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getSellType())){
+				url = url + "&sellType="+URLEncoder.encode(bs.getSellType(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getOrderNumber())){
+				url = url + "&orderNumber="+URLEncoder.encode(bs.getOrderNumber(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getOrderTime())){
+				url = url + "&orderTime="+URLEncoder.encode(bs.getOrderTime(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getCustomerName())){
+				url = url + "&customerName="+URLEncoder.encode(bs.getCustomerName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getCurrency())){
+				url = url + "&currency="+URLEncoder.encode(bs.getCurrency(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getParities())){
+				url = url + "&parities="+URLEncoder.encode(bs.getParities(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getSalesDepartments())){
+				url = url + "&salesDepartments="+URLEncoder.encode(bs.getSalesDepartments(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getSalesman())){
+				url = url + "&salesman="+URLEncoder.encode(bs.getSalesman(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getInventoryCoding())){
+				url = url + "&inventoryCoding="+URLEncoder.encode(bs.getInventoryCoding(),"UTF-8");
+			}
+			
+			
+			if(!StringUtils.isEmpty(bs.getInventoryName())){
+				url = url + "&inventoryName="+URLEncoder.encode(bs.getInventoryName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getSpecificationsModels())){
+				url = url + "&specificationsModels="+URLEncoder.encode(bs.getSpecificationsModels(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getMeasurement())){
+				url = url + "&measurement="+URLEncoder.encode(bs.getMeasurement(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getCount())){
+				url = url + "&count="+URLEncoder.encode(bs.getCount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getUnitPrice())){
+				url = url + "&unitPrice="+URLEncoder.encode(bs.getUnitPrice(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getPriceExcludingTax())){
+				url = url + "&priceExcludingTax="+URLEncoder.encode(bs.getPriceExcludingTax(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoTaxAmount())){
+				url = url + "&noTaxAmount="+URLEncoder.encode(bs.getNoTaxAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getTax())){
+				url = url + "&tax="+URLEncoder.encode(bs.getTax(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getTotalPriceWithTax())){
+				url = url + "&totalPriceWithTax="+URLEncoder.encode(bs.getTotalPriceWithTax(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getTaxRateString())){
+				url = url + "&taxRateString="+URLEncoder.encode(bs.getTaxRateString(),"UTF-8");
+			}
+			
+			
+			if(!StringUtils.isEmpty(bs.getDeductible())){
+				url = url + "&deductible="+URLEncoder.encode(bs.getDeductible(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getDeductible2())){
+				url = url + "&deductible2="+URLEncoder.encode(bs.getDeductible2(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getAdvanceShipmentDate())){
+				url = url + "&advanceShipmentDate="+URLEncoder.encode(bs.getAdvanceShipmentDate(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getOrdersForChildTableID())){
+				url = url + "&ordersForChildTableID="+URLEncoder.encode(bs.getOrdersForChildTableID(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getUnfilledOrderCount())){
+				url = url + "&unfilledOrderCount="+URLEncoder.encode(bs.getUnfilledOrderCount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoInvoiceCount())){
+				url = url + "&noInvoiceCount="+URLEncoder.encode(bs.getNoInvoiceCount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getReservedNum())){
+				url = url + "&reservedNum="+URLEncoder.encode(bs.getReservedNum(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNotDeliverNum())){
+				url = url + "&notDeliverNum="+URLEncoder.encode(bs.getNotDeliverNum(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNotDeliverAmount())){
+				url = url + "&notDeliverAmount="+URLEncoder.encode(bs.getNotDeliverAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoInvoiceCounts())){
+				url = url + "&noInvoiceCounts="+URLEncoder.encode(bs.getNoInvoiceCounts(),"UTF-8");
+			}
+			
+			
+			if(!StringUtils.isEmpty(bs.getNoInvoiceAmount())){
+				url = url + "&noInvoiceAmount="+URLEncoder.encode(bs.getNoInvoiceAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getAmountPurchased())){
+				url = url + "&amountPurchased="+URLEncoder.encode(bs.getAmountPurchased(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoamountPurchased())){
+				url = url + "&noamountPurchased="+URLEncoder.encode(bs.getNoamountPurchased(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoProduction())){
+				url = url + "&noProduction="+URLEncoder.encode(bs.getNoProduction(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoOutsourcing())){
+				url = url + "&noOutsourcing="+URLEncoder.encode(bs.getNoOutsourcing(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(bs.getNoImportVolume())){
+				url = url + "&noImportVolume="+URLEncoder.encode(bs.getNoImportVolume(),"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           if(localInd == "Y"){
+		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+		           System.setProperty("http.proxyPort", "8080");  
+	           }
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           //JSONObject demoJson = new JSONObject(message);
+	           is.close();
+	           //System.out.println(message + "- success http ---------" + url);
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + "failed http ---------" + url);
+	    	   return "failed";
+	       } 
+		return "success";
+	}
 }
 
 
