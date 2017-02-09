@@ -2,8 +2,10 @@ package com.nkang.kxmoment.util;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -68,6 +70,7 @@ public class BillOfSellPoi {
 			                xlsDto.setOrderNumber(orderNumber+"");
 		
 			                HSSFCell orderTime = hssfRow.getCell(5);
+			               // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.SIMPLIFIED_CHINESE);
 		
 			                xlsDto.setOrderTime(orderTime+"");
 		
@@ -77,8 +80,8 @@ public class BillOfSellPoi {
 			                
 			                HSSFCell currency = hssfRow.getCell(7);
 			                xlsDto.setCurrency(currency+"");
-			                HSSFCell parities = hssfRow.getCell(8);
-			                xlsDto.setParities(parities+"");
+			                HSSFCell exchange = hssfRow.getCell(8);
+			                xlsDto.setExchange(exchange+"");
 			                HSSFCell salesDepartments = hssfRow.getCell(9);
 			            	
 			                xlsDto.setSalesDepartments(salesDepartments+"");
@@ -97,12 +100,12 @@ public class BillOfSellPoi {
 			               
 			                xlsDto.setSpecificationsModels(specificationsModels+"");
 			                
-			                HSSFCell measurement = hssfRow.getCell(15);
-			                xlsDto.setMeasurement(measurement+"");
-			                HSSFCell count = hssfRow.getCell(16);
-			                xlsDto.setCount(count+"");
-			                HSSFCell unitPrice = hssfRow.getCell(17);
-			                xlsDto.setUnitPrice(unitPrice+"");
+			                HSSFCell unit = hssfRow.getCell(15);
+			                xlsDto.setUnit(unit+"");
+			                HSSFCell amount = hssfRow.getCell(16);
+			                xlsDto.setAmount(amount+"");
+			                HSSFCell unitPriceIncludTax = hssfRow.getCell(17);
+			                xlsDto.setUnitPriceIncludTax(unitPriceIncludTax+"");
 			                HSSFCell priceExcludingTax = hssfRow.getCell(18);
 			                xlsDto.setPriceExcludingTax(priceExcludingTax+"");
 			                HSSFCell noTaxAmount = hssfRow.getCell(19);
