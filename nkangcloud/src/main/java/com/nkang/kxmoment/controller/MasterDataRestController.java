@@ -916,7 +916,7 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * FOR billOfSell
 	 */
-	@RequestMapping("/saveBills")
+	/*@RequestMapping("/saveBills")
 	public static String saveBills(){
 		String ret = "faild !!";
 		BillOfSellPoi bos = new BillOfSellPoi();
@@ -940,5 +940,5 @@ public class MasterDataRestController {
 		
 		return ret;
 		
-	}
+	}*/
 }
