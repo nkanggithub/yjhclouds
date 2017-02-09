@@ -289,7 +289,7 @@ public class MongoDBBasic {
 		catch(Exception e){
 			log.info("queryWeChatUser--" + e.getMessage());
 		}
-		return false;
+		return result;
 	}
 	public static boolean createUser(WeChatUser wcu){
 		mongoDB = getMongoDB();
