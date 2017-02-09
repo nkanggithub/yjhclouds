@@ -2467,9 +2467,9 @@ public class MongoDBBasic {
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
-//			query.put("orderNumber", bs.getOrderNumber());
-//			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
-//			DBObject queryresult = mongoDB.getCollection(collectionBill).findOne(query);
+			query.put("orderNumber", bs.getOrderNumber());
+			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
+			DBObject queryresult = mongoDB.getCollection(collectionBill).findOne(query);
 
 			
 			DBObject updateQuery = new BasicDBObject();
@@ -2511,23 +2511,17 @@ public class MongoDBBasic {
 			updateQuery.put("noProduction",bs.getNoProduction());
 			updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
 			updateQuery.put("noImportVolume",bs.getNoImportVolume());
-			
-			
-		/*	
 			if(queryresult!=null){
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
 				ret="update ok";
 			}else{
-				//BasicDBObject doc = BasicDBObject.parse(bs.toString());  
-				//mongoDB.getCollection(collectionBill).save(doc);
-				mongoDB.getCollection(collectionBill).insert(updateQuery);
-				ret="insert ok";
-			}*/
-			WriteResult writeResult;
-			writeResult=mongoDB.getCollection(collectionBill).insert(updateQuery);
-			ret="insert ok  -->" + writeResult;
+				WriteResult writeResult;
+				writeResult=mongoDB.getCollection(collectionBill).insert(updateQuery);
+				ret="insert ok  -->" + writeResult;
+			}
+			
 		}
 		return ret;
 		
