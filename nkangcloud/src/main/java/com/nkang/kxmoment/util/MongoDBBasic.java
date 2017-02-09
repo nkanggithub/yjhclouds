@@ -261,6 +261,36 @@ public class MongoDBBasic {
 		}
 		return false;
 	}
+	public static boolean delNullUser(){
+		Boolean ret = false;
+		mongoDB = getMongoDB();
+		DBCollection dbCol = mongoDB.getCollection(wechat_user);  
+        BasicDBObject doc = new BasicDBObject();  
+        doc.put("OpenID", null);  
+        dbCol.remove(doc);  
+        ret = true;
+		return ret;
+	}
+	public static boolean syncWechatUserToMongo(WeChatUser wcu){
+		mongoDB = getMongoDB();
+		boolean result=false;
+		WeChatUser ret = null;
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("OpenID", wcu.getOpenid());
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	if(queryresult != null){
+	    		result=updateUser( wcu.getOpenid(),null,null,wcu);
+	    	}else{
+	    		result=createUser(wcu);
+	    	}
+	    	result=true;
+	    }
+		catch(Exception e){
+			log.info("queryWeChatUser--" + e.getMessage());
+		}
+		return false;
+	}
 	public static boolean createUser(WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
@@ -2414,67 +2444,64 @@ public class MongoDBBasic {
 	public static String saveBillOfSell(BillOfSell bs){
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
-		String ret="fail..";
+		String ret="";
 		if(bs!=null){
 			query.put("orderNumber", bs.getOrderNumber());
 			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
 			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
 		
-
-			
-			DBObject updateQuery = new BasicDBObject();
-			updateQuery.put("businessType",bs.getBusinessType());
-			updateQuery.put("sellType",bs.getSellType());
-			updateQuery.put("orderNumber",bs.getOrderNumber());
-			updateQuery.put("orderTime",bs.getOrderTime());
-			updateQuery.put("customerName",bs.getCustomerName());
-			updateQuery.put("currency",bs.getCurrency());
-			updateQuery.put("parities",bs.getParities());
-			updateQuery.put("salesDepartments",bs.getSalesDepartments());
-			updateQuery.put("salesman",bs.getSalesman());
-			updateQuery.put("inventoryCoding",bs.getInventoryCoding());
-			updateQuery.put("inventoryCode",bs.getInventoryCode());
-			updateQuery.put("inventoryName",bs.getInventoryName());
-			updateQuery.put("specificationsModels",bs.getSpecificationsModels());
-			updateQuery.put("measurement",bs.getMeasurement());
-			updateQuery.put("count",bs.getCount());
-			
-			updateQuery.put("unitPrice",bs.getUnitPrice());
-			updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
-			updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
-			updateQuery.put("tax",bs.getTax());
-			updateQuery.put("totalPriceWithTax",bs.getTotalPriceWithTax());
-			updateQuery.put("taxRateString",bs.getTaxRateString());
-			updateQuery.put("deductible",bs.getDeductible());
-			updateQuery.put("deductible2",bs.getDeductible2());
-			updateQuery.put("advanceShipmentDate",bs.getAdvanceShipmentDate());
-			updateQuery.put("ordersForChildTableID",bs.getOrdersForChildTableID());
-			updateQuery.put("unfilledOrderCount",bs.getUnfilledOrderCount());
-			updateQuery.put("noInvoiceCount",bs.getNoInvoiceCount());
-			updateQuery.put("reservedNum",bs.getReservedNum());
-			updateQuery.put("notDeliverNum",bs.getNotDeliverNum());
-			updateQuery.put("notDeliverAmount",bs.getNotDeliverAmount());
-			updateQuery.put("noInvoiceCounts",bs.getNoInvoiceCounts());
-			updateQuery.put("noInvoiceAmount",bs.getNoInvoiceAmount());
-			updateQuery.put("amountPurchased",bs.getAmountPurchased());
-			updateQuery.put("noamountPurchased",bs.getNoamountPurchased());
-			updateQuery.put("noProduction",bs.getNoProduction());
-			updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
-			updateQuery.put("noImportVolume",bs.getNoImportVolume());
-			
 			
 			if(queryresult!=null){
+				
+				DBObject updateQuery = new BasicDBObject();
+				updateQuery.put("businessType",bs.getBusinessType());
+				updateQuery.put("sellType",bs.getSellType());
+				updateQuery.put("orderNumber",bs.getOrderNumber());
+				updateQuery.put("orderTime",bs.getOrderTime());
+				updateQuery.put("customerName",bs.getCustomerName());
+				updateQuery.put("currency",bs.getCurrency());
+				updateQuery.put("parities",bs.getParities());
+				updateQuery.put("salesDepartments",bs.getSalesDepartments());
+				updateQuery.put("salesman",bs.getSalesman());
+				updateQuery.put("inventoryCoding",bs.getInventoryCoding());
+				updateQuery.put("inventoryCode",bs.getInventoryCode());
+				updateQuery.put("inventoryName",bs.getInventoryName());
+				updateQuery.put("specificationsModels",bs.getSpecificationsModels());
+				updateQuery.put("measurement",bs.getMeasurement());
+				updateQuery.put("count",bs.getCount());
+				
+				updateQuery.put("unitPrice",bs.getUnitPrice());
+				updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
+				updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
+				updateQuery.put("tax",bs.getTax());
+				updateQuery.put("totalPriceWithTax",bs.getTotalPriceWithTax());
+				updateQuery.put("taxRateString",bs.getTaxRateString());
+				updateQuery.put("deductible",bs.getDeductible());
+				updateQuery.put("deductible2",bs.getDeductible2());
+				updateQuery.put("advanceShipmentDate",bs.getAdvanceShipmentDate());
+				updateQuery.put("ordersForChildTableID",bs.getOrdersForChildTableID());
+				updateQuery.put("unfilledOrderCount",bs.getUnfilledOrderCount());
+				updateQuery.put("noInvoiceCount",bs.getNoInvoiceCount());
+				updateQuery.put("reservedNum",bs.getReservedNum());
+				updateQuery.put("notDeliverNum",bs.getNotDeliverNum());
+				updateQuery.put("notDeliverAmount",bs.getNotDeliverAmount());
+				updateQuery.put("noInvoiceCounts",bs.getNoInvoiceCounts());
+				updateQuery.put("noInvoiceAmount",bs.getNoInvoiceAmount());
+				updateQuery.put("amountPurchased",bs.getAmountPurchased());
+				updateQuery.put("noamountPurchased",bs.getNoamountPurchased());
+				updateQuery.put("noProduction",bs.getNoProduction());
+				updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
+				updateQuery.put("noImportVolume",bs.getNoImportVolume());
+				
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
-				ret="ok";
 			}else{
-				//BasicDBObject doc = BasicDBObject.parse(bs.toString());  
+				BasicDBObject doc = BasicDBObject.parse(bs.toString());  
 				//mongoDB.getCollection(collectionBill).save(doc);
-				mongoDB.getCollection(collectionBill).insert(updateQuery);
-				ret="ok";
+				mongoDB.getCollection(collectionBill).insert(doc);
 			}
-			
+			ret="ok";
 		}
 		return ret;
 		
