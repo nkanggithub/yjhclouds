@@ -2479,17 +2479,17 @@ public class MongoDBBasic {
 			updateQuery.put("orderTime",bs.getOrderTime());
 			updateQuery.put("customerName",bs.getCustomerName());
 			updateQuery.put("currency",bs.getCurrency());
-			updateQuery.put("parities",bs.getParities());
+			updateQuery.put("exchange",bs.getExchange());
 			updateQuery.put("salesDepartments",bs.getSalesDepartments());
 			updateQuery.put("salesman",bs.getSalesman());
 			updateQuery.put("inventoryCoding",bs.getInventoryCoding());
 			updateQuery.put("inventoryCode",bs.getInventoryCode());
 			updateQuery.put("inventoryName",bs.getInventoryName());
 			updateQuery.put("specificationsModels",bs.getSpecificationsModels());
-			updateQuery.put("measurement",bs.getMeasurement());
-			updateQuery.put("count",bs.getCount());
+			updateQuery.put("unit",bs.getUnit());
+			updateQuery.put("amount",bs.getAmount());
 			
-			updateQuery.put("unitPrice",bs.getUnitPrice());
+			updateQuery.put("unitPriceIncludTax",bs.getUnitPriceIncludTax());
 			updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
 			updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
 			updateQuery.put("tax",bs.getTax());
