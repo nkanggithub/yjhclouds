@@ -280,7 +280,7 @@ public class MongoDBBasic {
 	    	query.put("OpenID", wcu.getOpenid());
 	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
 	    	if(queryresult != null){
-	    		result=updateUser( wcu.getOpenid(),null,null,wcu);
+	    		result=updateUser(wcu);
 	    	}else{
 	    		result=createUser(wcu);
 	    	}
@@ -419,7 +419,25 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
-	
+	public static boolean updateUser(WeChatUser wcu){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+            BasicDBObject doc = new BasicDBObject();  
+	    	DBObject update = new BasicDBObject();
+	    	update.put("HeadUrl", wcu.getHeadimgurl());
+	    	update.put("NickName", wcu.getNickname());
+    	    update.put("Created", DateUtil.timestamp2Str(cursqlTS));
+	    	doc.put("$set", update);  
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", wcu.getOpenid()), doc);
+            ret = true;
+	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
+		return ret;
+	}
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
