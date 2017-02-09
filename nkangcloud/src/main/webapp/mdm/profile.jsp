@@ -1058,7 +1058,7 @@ function getMDLUserLists() {
 						var li='	<div class="Work_Mates_div_list_div2">'
 							+'                                           	 	<div class="Work_Mates_img_div2">'
 							+'                                        			 <img src="'
-							+ temp.headimgurl
+							+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
 							+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
 							+ temp.nickname
 							+ '\',\''
