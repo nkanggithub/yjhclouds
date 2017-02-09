@@ -1110,7 +1110,7 @@ function syncUser(){
 		data : {},
 		cache : false,
 		success : function(data) {
-			alert(data);
+			swal("Congratulations！", data, "success"); 
 			$("#syncUser").attr("src","../MetroStyleFiles/refresh2.png");
 		}
 	});
