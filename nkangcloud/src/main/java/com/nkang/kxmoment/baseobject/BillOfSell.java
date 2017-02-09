@@ -14,7 +14,7 @@ public class BillOfSell {
 	//币种
 	private String currency;
 	//汇率
-	private String parities;
+	private String exchange;
 	//销售部门
 	private String salesDepartments;
 	//业 务 员
@@ -28,11 +28,11 @@ public class BillOfSell {
 	//规格型号
 	private String specificationsModels;
 	//主计量单位
-	private String measurement;
+	private String unit;
 	//数量
-	private String count;
+	private String amount;
 	//含税单价
-	private String unitPrice;
+	private String unitPriceIncludTax;
 	//无税单价
 	private String priceExcludingTax;
 	//无税金额
@@ -111,12 +111,6 @@ public class BillOfSell {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public String getParities() {
-		return parities;
-	}
-	public void setParities(String parities) {
-		this.parities = parities;
-	}
 	public String getSalesDepartments() {
 		return salesDepartments;
 	}
@@ -137,24 +131,6 @@ public class BillOfSell {
 	}
 	public void setSpecificationsModels(String specificationsModels) {
 		this.specificationsModels = specificationsModels;
-	}
-	public String getMeasurement() {
-		return measurement;
-	}
-	public void setMeasurement(String measurement) {
-		this.measurement = measurement;
-	}
-	public String getCount() {
-		return count;
-	}
-	public void setCount(String count) {
-		this.count = count;
-	}
-	public String getUnitPrice() {
-		return unitPrice;
-	}
-	public void setUnitPrice(String unitPrice) {
-		this.unitPrice = unitPrice;
 	}
 	public String getPriceExcludingTax() {
 		return priceExcludingTax;
@@ -297,6 +273,32 @@ public class BillOfSell {
 	public void setInventoryCoding(String inventoryCoding) {
 		this.inventoryCoding = inventoryCoding;
 	}
+	
+	
+	public String getExchange() {
+		return exchange;
+	}
+	public void setExchange(String exchange) {
+		this.exchange = exchange;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+	public String getAmount() {
+		return amount;
+	}
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	public String getUnitPriceIncludTax() {
+		return unitPriceIncludTax;
+	}
+	public void setUnitPriceIncludTax(String unitPriceIncludTax) {
+		this.unitPriceIncludTax = unitPriceIncludTax;
+	}
 	public String info() {
 		String infoString=this.businessType + "\n"
 				+this.sellType + "\n"
@@ -305,7 +307,7 @@ public class BillOfSell {
 				+this.customerName + "\n"
 				
 				+ this.currency + "\n"
-				+this.parities + "\n"
+				+this.exchange + "\n"
 				+this.salesDepartments + "\n"
 				+this.salesman + "\n"
 				+this.inventoryCoding + "\n"
@@ -313,9 +315,9 @@ public class BillOfSell {
 				
 				+this.inventoryName + "\n"
 				+this.specificationsModels + "\n"
-				+this.measurement + "\n"
-				+this.count + "\n"
-				+ this.unitPrice + "\n"
+				+this.unit + "\n"
+				+this.amount + "\n"
+				+ this.unitPriceIncludTax + "\n"
 				+this.priceExcludingTax + "\n"
 				+this.noTaxAmount + "\n"
 				
