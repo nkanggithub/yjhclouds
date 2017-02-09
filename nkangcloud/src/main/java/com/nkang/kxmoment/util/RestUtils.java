@@ -2284,10 +2284,10 @@ public static String regist(WeChatMDLUser user) {
 	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
-	           if(localInd == "Y"){
-		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
-		           System.setProperty("http.proxyPort", "8080");  
-	           }
+//	           if(localInd == "Y"){
+//		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
+//		           System.setProperty("http.proxyPort", "8080");  
+//	           }
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -2301,6 +2301,8 @@ public static String regist(WeChatMDLUser user) {
 	           //System.out.println(message + "- success http ---------" + url);
 	       } catch (Exception e) {
 	    	   System.out.println("error:::" + message + "failed http ---------" + url);
+	    	   System.out.println("error:"+e.getMessage());
+	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
 		return "success";
