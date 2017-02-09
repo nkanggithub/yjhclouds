@@ -2407,5 +2407,75 @@ public class MongoDBBasic {
 		
 	}
 	
+	/*
+	 * chang-zheng
+	 * FOR billOfSell
+	 */
+	public static String saveBillOfSell(BillOfSell bs){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="";
+		if(bs!=null){
+			query.put("orderNumber", bs.getOrderNumber());
+			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
+			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
+		
+			
+			if(queryresult!=null){
+				
+				DBObject updateQuery = new BasicDBObject();
+				updateQuery.put("businessType",bs.getBusinessType());
+				updateQuery.put("sellType",bs.getSellType());
+				updateQuery.put("orderNumber",bs.getOrderNumber());
+				updateQuery.put("orderTime",bs.getOrderTime());
+				updateQuery.put("customerName",bs.getCustomerName());
+				updateQuery.put("currency",bs.getCurrency());
+				updateQuery.put("parities",bs.getParities());
+				updateQuery.put("salesDepartments",bs.getSalesDepartments());
+				updateQuery.put("salesman",bs.getSalesman());
+				updateQuery.put("inventoryCoding",bs.getInventoryCoding());
+				updateQuery.put("inventoryCode",bs.getInventoryCode());
+				updateQuery.put("inventoryName",bs.getInventoryName());
+				updateQuery.put("specificationsModels",bs.getSpecificationsModels());
+				updateQuery.put("measurement",bs.getMeasurement());
+				updateQuery.put("count",bs.getCount());
+				
+				updateQuery.put("unitPrice",bs.getUnitPrice());
+				updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
+				updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
+				updateQuery.put("tax",bs.getTax());
+				updateQuery.put("totalPriceWithTax",bs.getTotalPriceWithTax());
+				updateQuery.put("taxRateString",bs.getTaxRateString());
+				updateQuery.put("deductible",bs.getDeductible());
+				updateQuery.put("deductible2",bs.getDeductible2());
+				updateQuery.put("advanceShipmentDate",bs.getAdvanceShipmentDate());
+				updateQuery.put("ordersForChildTableID",bs.getOrdersForChildTableID());
+				updateQuery.put("unfilledOrderCount",bs.getUnfilledOrderCount());
+				updateQuery.put("noInvoiceCount",bs.getNoInvoiceCount());
+				updateQuery.put("reservedNum",bs.getReservedNum());
+				updateQuery.put("notDeliverNum",bs.getNotDeliverNum());
+				updateQuery.put("notDeliverAmount",bs.getNotDeliverAmount());
+				updateQuery.put("noInvoiceCounts",bs.getNoInvoiceCounts());
+				updateQuery.put("noInvoiceAmount",bs.getNoInvoiceAmount());
+				updateQuery.put("amountPurchased",bs.getAmountPurchased());
+				updateQuery.put("noamountPurchased",bs.getNoamountPurchased());
+				updateQuery.put("noProduction",bs.getNoProduction());
+				updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
+				updateQuery.put("noImportVolume",bs.getNoImportVolume());
+				
+				BasicDBObject doc = new BasicDBObject();  
+				doc.put("$set", updateQuery);
+				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
+			}else{
+				BasicDBObject doc = BasicDBObject.parse(bs.toString());  
+				//mongoDB.getCollection(collectionBill).save(doc);
+				mongoDB.getCollection(collectionBill).insert(doc);
+			}
+			ret="ok";
+		}
+		return ret;
+		
+	}
+	
 }
 					
