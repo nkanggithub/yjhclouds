@@ -826,19 +826,90 @@ public class MasterDataRestController {
 	 * FOR billOfSell
 	 */
 	@RequestMapping("/saveBill")
-	public static String saveBill(@RequestParam(value="billOfSellList", required=false) List<BillOfSell> billOfSellList){
-		String ret = "faild !!";
-			if(billOfSellList!=null){
-				try{
-					MongoDBBasic.saveBillOfSell(billOfSellList);
-					ret = "success !!";
-				}catch(Exception e){
-					ret = e.getMessage();
-				}	
-			}
+	public static String saveBill(@RequestParam(value="businessType", required=false) String businessType,
+			@RequestParam(value="sellType", required=false) String sellType,
+			@RequestParam(value="orderNumber", required=false) String orderNumber,
+			@RequestParam(value="orderTime", required=false) String orderTime,
+			@RequestParam(value="customerName", required=false) String customerName,
+			@RequestParam(value="currency", required=false) String currency,
+			@RequestParam(value="parities", required=false) String parities,
+			@RequestParam(value="salesDepartments", required=false) String salesDepartments,
+			@RequestParam(value="salesman", required=false) String salesman,
+			@RequestParam(value="inventoryCoding", required=false) String inventoryCoding,
 			
-		return ret;
+			@RequestParam(value="inventoryName", required=false) String inventoryName,
+			@RequestParam(value="specificationsModels", required=false) String specificationsModels,
+			@RequestParam(value="measurement", required=false) String measurement,
+			@RequestParam(value="count", required=false) String count,
+			@RequestParam(value="unitPrice", required=false) String unitPrice,
+			@RequestParam(value="priceExcludingTax", required=false) String priceExcludingTax,
+			@RequestParam(value="noTaxAmount", required=false) String noTaxAmount,
+			@RequestParam(value="tax", required=false) String tax,
+			@RequestParam(value="totalPriceWithTax", required=false) String totalPriceWithTax,
+			@RequestParam(value="taxRateString", required=false) String taxRateString,
+			
+			@RequestParam(value="deductible", required=false) String deductible,
+			@RequestParam(value="deductible2", required=false) String deductible2,
+			@RequestParam(value="advanceShipmentDate", required=false) String advanceShipmentDate,
+			@RequestParam(value="ordersForChildTableID", required=false) String ordersForChildTableID,
+			@RequestParam(value="unfilledOrderCount", required=false) String unfilledOrderCount,
+			@RequestParam(value="noInvoiceCount", required=false) String noInvoiceCount,
+			@RequestParam(value="reservedNum", required=false) String reservedNum,
+			@RequestParam(value="notDeliverNum", required=false) String notDeliverNum,
+			@RequestParam(value="notDeliverAmount", required=false) String notDeliverAmount,
+			@RequestParam(value="noInvoiceCounts", required=false) String noInvoiceCounts,
+			
+			@RequestParam(value="noInvoiceAmount", required=false) String noInvoiceAmount,
+			@RequestParam(value="amountPurchased", required=false) String amountPurchased,
+			@RequestParam(value="noamountPurchased", required=false) String noamountPurchased,
+			@RequestParam(value="noProduction", required=false) String noProduction,
+			@RequestParam(value="noOutsourcing", required=false) String noOutsourcing,
+			@RequestParam(value="noImportVolume", required=false) String noImportVolume){
 		
+		BillOfSell bos = new BillOfSell();
+		bos.setBusinessType(businessType);
+		bos.setSellType(sellType);
+		bos.setOrderNumber(orderNumber);
+		bos.setOrderTime(orderTime);
+		bos.setCustomerName(customerName);
+		bos.setCurrency(currency);
+		bos.setParities(parities);
+		bos.setSalesDepartments(salesDepartments);
+		bos.setSalesman(salesman);
+		bos.setInventoryCoding(inventoryCoding);
+		
+		bos.setInventoryName(inventoryName);
+		bos.setSpecificationsModels(specificationsModels);
+		bos.setMeasurement(measurement);
+		bos.setCount(count);
+		bos.setUnitPrice(unitPrice);
+		bos.setPriceExcludingTax(priceExcludingTax);
+		bos.setNoTaxAmount(noTaxAmount);
+		bos.setTax(tax);
+		bos.setTotalPriceWithTax(totalPriceWithTax);
+		bos.setTaxRateString(taxRateString);
+		
+		bos.setDeductible(deductible);
+		bos.setDeductible2(deductible2);
+		bos.setAdvanceShipmentDate(advanceShipmentDate);
+		bos.setOrdersForChildTableID(ordersForChildTableID);
+		bos.setUnfilledOrderCount(unfilledOrderCount);
+		bos.setNoInvoiceCount(noInvoiceCount);
+		bos.setReservedNum(reservedNum);
+		bos.setNotDeliverNum(notDeliverNum);
+		bos.setNotDeliverAmount(notDeliverAmount);
+		bos.setNoInvoiceCounts(noInvoiceCounts);
+		
+		bos.setNoInvoiceAmount(noInvoiceAmount);
+		bos.setAmountPurchased(amountPurchased);
+		bos.setNoamountPurchased(noamountPurchased);
+		bos.setNoProduction(noProduction);
+		bos.setNoOutsourcing(noOutsourcing);
+		bos.setNoImportVolume(noImportVolume);
+		
+		String ret;
+		ret=MongoDBBasic.saveBillOfSell(bos);
+		return ret;
 	}
 	
 	/*
