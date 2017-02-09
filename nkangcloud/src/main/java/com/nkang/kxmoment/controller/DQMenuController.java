@@ -424,24 +424,18 @@ public @ResponseBody List<OrgOtherPartySiteInstance>  getALLCountryName(HttpServ
  * chang-zheng
  * test saveBills	local
  */
-/*@RequestMapping("/saveBills")
+@RequestMapping("/saveBills")
 public static String saveBill(){
 	String ret = "faild !!";
 	BillOfSellPoi bos = new BillOfSellPoi();
+	
 	List<BillOfSell> billOfSellList;
 	try {
 		billOfSellList = bos.readXls();
-	
-		String url =  "http://yongjiahe.duapp.com/saveBill?billOfSellList="+ billOfSellList;
-		 URL urlGet = new URL(url);
-	     HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-	     http.setRequestMethod("GET"); //must be get request
-	     http.setRequestProperty("Content-Type","application/json");
-	     http.setDoOutput(true);
-	     http.setDoInput(true);
-	     System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-	     System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-	     http.connect();
+		for(BillOfSell bs : billOfSellList){
+			RestUtils.callSaveBills(bs);
+		}
+		
 	      ret = "success !!";
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
@@ -449,6 +443,5 @@ public static String saveBill(){
 		ret=e.getMessage();
 	}
 	return ret;
-	
-}*/
+}
 }
