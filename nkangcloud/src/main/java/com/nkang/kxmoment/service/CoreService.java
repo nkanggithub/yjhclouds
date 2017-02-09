@@ -78,8 +78,9 @@ public class CoreService
 					int sucNum=0;
 					String akey=RestUtils.getAccessKey();
 					List<String> IdLists=RestUtils.getWeChatUserListID(akey);
+					MongoDBBasic.delNullUser();
 					for (int i = 0; i < IdLists.size(); i++) {
-						WeChatUser user=RestUtils.getWeChatUserInfo(akey, IdLists.get(i).replaceAll("\"",""));
+						WeChatUser user=RestUtils.getWeChatUserInfo(akey,IdLists.get(i).replaceAll("\"",""));
 						res=MongoDBBasic.syncWechatUserToMongo(user);
 						if(res==true){
 							sucNum++;
