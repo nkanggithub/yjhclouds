@@ -2500,13 +2500,14 @@ public class MongoDBBasic {
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
-			
+				ret="update ok";
 			}else{
 				//BasicDBObject doc = BasicDBObject.parse(bs.toString());  
 				//mongoDB.getCollection(collectionBill).save(doc);
 				mongoDB.getCollection(collectionBill).insert(updateQuery);
+				ret="insert ok";
 			}
-			ret="ok";
+			
 		}
 		return ret;
 		
