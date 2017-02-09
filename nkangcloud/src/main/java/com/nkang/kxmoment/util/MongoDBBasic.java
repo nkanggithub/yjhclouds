@@ -2467,9 +2467,9 @@ public class MongoDBBasic {
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
-			query.put("orderNumber", bs.getOrderNumber());
-			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
-			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
+//			query.put("orderNumber", bs.getOrderNumber());
+//			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
+//			DBObject queryresult = mongoDB.getCollection(collectionBill).findOne(query);
 
 			
 			DBObject updateQuery = new BasicDBObject();
@@ -2513,7 +2513,7 @@ public class MongoDBBasic {
 			updateQuery.put("noImportVolume",bs.getNoImportVolume());
 			
 			
-			
+		/*	
 			if(queryresult!=null){
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
@@ -2524,8 +2524,10 @@ public class MongoDBBasic {
 				//mongoDB.getCollection(collectionBill).save(doc);
 				mongoDB.getCollection(collectionBill).insert(updateQuery);
 				ret="insert ok";
-			}
-			
+			}*/
+			WriteResult writeResult;
+			writeResult=mongoDB.getCollection(collectionBill).insert(updateQuery);
+			ret="insert ok  -->" + writeResult;
 		}
 		return ret;
 		
