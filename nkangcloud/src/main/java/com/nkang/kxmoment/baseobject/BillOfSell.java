@@ -1,7 +1,11 @@
 package com.nkang.kxmoment.baseobject;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class BillOfSell {
 	
+	public static Gson gson = new GsonBuilder().create();
 	private String businessType;
 	private String sellType;
 	private String orderNumber;
@@ -340,4 +344,8 @@ public class BillOfSell {
 		return infoString;
 		
 	}
+	@Override
+    public String toString() {
+        return gson.toJson(this);
+    }
 }
