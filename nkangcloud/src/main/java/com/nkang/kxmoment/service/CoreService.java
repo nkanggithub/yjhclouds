@@ -73,8 +73,22 @@ public class CoreService
 					respContent = RestUtils.createMenu(AccessKey);
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
-				}
-				else if ("SJOB".equals(textContent)) {
+				}else if ("syncUser".equals(textContent)) {
+					boolean res;
+					int sucNum=0;
+					String akey=RestUtils.getAccessKey();
+					List<String> IdLists=RestUtils.getWeChatUserListID(akey);
+					for (int i = 0; i < IdLists.size(); i++) {
+						WeChatUser user=RestUtils.getWeChatUserInfo(akey, IdLists.get(i).replaceAll("\"",""));
+						res=MongoDBBasic.syncWechatUserToMongo(user);
+						if(res==true){
+							sucNum++;
+						}
+					}
+					respContent = sucNum+"条数据同步成功!";
+					textMessage.setContent(respContent);
+					respXml = MessageUtil.textMessageToXml(textMessage);
+				}else if ("SJOB".equals(textContent)) {
 					Calendar date = Calendar.getInstance();
 				    //date.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 				    date.set(Calendar.HOUR, 0);
