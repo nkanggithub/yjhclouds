@@ -1442,7 +1442,7 @@ public class MongoDBBasic {
             		DBObject o = queryresults.next();
             		if(o.get("OpenID") != null){
             			weChatMDLUser.setOpenid(o.get("OpenID").toString());
-                		if(o.get("CurLAT").toString() != null){
+                		if(o.get("CurLAT") != null){
                 			weChatMDLUser.setLat(o.get("CurLAT").toString());
                 		}
                 		if(o.get("CurLNG") != null){
