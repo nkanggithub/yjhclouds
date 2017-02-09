@@ -2414,7 +2414,7 @@ public class MongoDBBasic {
 	public static String saveBillOfSell(BillOfSell bs){
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
-		String ret="";
+		String ret="fail..";
 		if(bs!=null){
 			query.put("orderNumber", bs.getOrderNumber());
 			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
@@ -2467,13 +2467,14 @@ public class MongoDBBasic {
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
-			
+				ret="ok";
 			}else{
 				//BasicDBObject doc = BasicDBObject.parse(bs.toString());  
 				//mongoDB.getCollection(collectionBill).save(doc);
 				mongoDB.getCollection(collectionBill).insert(updateQuery);
+				ret="ok";
 			}
-			ret="ok";
+			
 		}
 		return ret;
 		
