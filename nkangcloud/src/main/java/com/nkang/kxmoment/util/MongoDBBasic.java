@@ -2446,6 +2446,9 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		String ret="";
 		if(bs!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
 			query.put("orderNumber", bs.getOrderNumber());
 			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
 			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
