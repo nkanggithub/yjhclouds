@@ -19,6 +19,7 @@ import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.ToolUtils;
@@ -26,6 +27,27 @@ import com.nkang.kxmoment.util.ToolUtils;
 @Controller
 @RequestMapping("/userProfile")
 public class UserProfileController {
+	@RequestMapping(value = "/getWechatUserLists", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String getWechatUserLists(HttpServletRequest request,
+			HttpServletResponse response) {
+		boolean res;
+		int sucNum=0;
+		String akey=RestUtils.getAccessKey();
+		List<String> IdLists=RestUtils.getWeChatUserListID(akey);
+		MongoDBBasic.delNullUser();
+		for (int i = 0; i < IdLists.size(); i++) {
+			WeChatUser user=RestUtils.getWeChatUserInfo(akey,IdLists.get(i).replaceAll("\"",""));
+			res=MongoDBBasic.syncWechatUserToMongo(user);
+//			res=MongoDBBasic.createUser(user);
+			if(res==true){
+				sucNum++;
+			}
+		}
+		return sucNum+"条数据同步成功!";
+//		WeChatUser user=RestUtils.getWeChatUserInfo(akey, IdLists.get(0).replaceAll("\"",""));
+//		return IdLists.get(0)+"==========="+user.toString();
+	}
 	@RequestMapping(value = "/getWeather", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getWeather(HttpServletRequest request,
