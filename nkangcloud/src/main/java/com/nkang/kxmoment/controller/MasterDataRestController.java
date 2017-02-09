@@ -832,16 +832,16 @@ public class MasterDataRestController {
 			@RequestParam(value="orderTime", required=false) String orderTime,
 			@RequestParam(value="customerName", required=false) String customerName,
 			@RequestParam(value="currency", required=false) String currency,
-			@RequestParam(value="parities", required=false) String parities,
+			@RequestParam(value="exchange", required=false) String exchange,
 			@RequestParam(value="salesDepartments", required=false) String salesDepartments,
 			@RequestParam(value="salesman", required=false) String salesman,
 			@RequestParam(value="inventoryCoding", required=false) String inventoryCoding,
 			
 			@RequestParam(value="inventoryName", required=false) String inventoryName,
 			@RequestParam(value="specificationsModels", required=false) String specificationsModels,
-			@RequestParam(value="measurement", required=false) String measurement,
-			@RequestParam(value="count", required=false) String count,
-			@RequestParam(value="unitPrice", required=false) String unitPrice,
+			@RequestParam(value="unit", required=false) String unit,
+			@RequestParam(value="amount", required=false) String amount,
+			@RequestParam(value="unitPriceIncludTax", required=false) String unitPriceIncludTax,
 			@RequestParam(value="priceExcludingTax", required=false) String priceExcludingTax,
 			@RequestParam(value="noTaxAmount", required=false) String noTaxAmount,
 			@RequestParam(value="tax", required=false) String tax,
@@ -873,16 +873,16 @@ public class MasterDataRestController {
 		bos.setOrderTime(orderTime);
 		bos.setCustomerName(customerName);
 		bos.setCurrency(currency);
-		bos.setParities(parities);
+		bos.setExchange(exchange);
 		bos.setSalesDepartments(salesDepartments);
 		bos.setSalesman(salesman);
 		bos.setInventoryCoding(inventoryCoding);
 		
 		bos.setInventoryName(inventoryName);
 		bos.setSpecificationsModels(specificationsModels);
-		bos.setMeasurement(measurement);
-		bos.setCount(count);
-		bos.setUnitPrice(unitPrice);
+		bos.setUnit(unit);
+		bos.setAmount(amount);
+		bos.setUnitPriceIncludTax(unitPriceIncludTax);
 		bos.setPriceExcludingTax(priceExcludingTax);
 		bos.setNoTaxAmount(noTaxAmount);
 		bos.setTax(tax);
@@ -907,7 +907,7 @@ public class MasterDataRestController {
 		bos.setNoOutsourcing(noOutsourcing);
 		bos.setNoImportVolume(noImportVolume);
 		
-		String ret;
+		String ret="";
 		ret=MongoDBBasic.saveBillOfSell(bos);
 		return ret;
 	}
