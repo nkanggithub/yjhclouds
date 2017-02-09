@@ -2179,8 +2179,8 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(bs.getCurrency())){
 				url = url + "&currency="+URLEncoder.encode(bs.getCurrency(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(bs.getParities())){
-				url = url + "&parities="+URLEncoder.encode(bs.getParities(),"UTF-8");
+			if(!StringUtils.isEmpty(bs.getExchange())){
+				url = url + "&exchange="+URLEncoder.encode(bs.getExchange(),"UTF-8");
 			}
 			if(!StringUtils.isEmpty(bs.getSalesDepartments())){
 				url = url + "&salesDepartments="+URLEncoder.encode(bs.getSalesDepartments(),"UTF-8");
@@ -2199,14 +2199,14 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(bs.getSpecificationsModels())){
 				url = url + "&specificationsModels="+URLEncoder.encode(bs.getSpecificationsModels(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(bs.getMeasurement())){
-				url = url + "&measurement="+URLEncoder.encode(bs.getMeasurement(),"UTF-8");
+			if(!StringUtils.isEmpty(bs.getUnit())){
+				url = url + "&unit="+URLEncoder.encode(bs.getUnit(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(bs.getCount())){
-				url = url + "&count="+URLEncoder.encode(bs.getCount(),"UTF-8");
+			if(!StringUtils.isEmpty(bs.getAmount())){
+				url = url + "&amount="+URLEncoder.encode(bs.getAmount(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(bs.getUnitPrice())){
-				url = url + "&unitPrice="+URLEncoder.encode(bs.getUnitPrice(),"UTF-8");
+			if(!StringUtils.isEmpty(bs.getUnitPriceIncludTax())){
+				url = url + "&unitPriceIncludTax="+URLEncoder.encode(bs.getUnitPriceIncludTax(),"UTF-8");
 			}
 			if(!StringUtils.isEmpty(bs.getPriceExcludingTax())){
 				url = url + "&priceExcludingTax="+URLEncoder.encode(bs.getPriceExcludingTax(),"UTF-8");
@@ -2305,7 +2305,7 @@ public static String regist(WeChatMDLUser user) {
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
-		return "success";
+		return message;
 	}
 }
 
