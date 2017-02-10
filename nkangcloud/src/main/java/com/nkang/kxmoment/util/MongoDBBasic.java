@@ -2511,7 +2511,7 @@ public class MongoDBBasic {
 			updateQuery.put("noProduction",bs.getNoProduction());
 			updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
 			updateQuery.put("noImportVolume",bs.getNoImportVolume());
-			if(queryresult!=null){
+			if(queryresult!=null && bs.getOrderNumber()!=null && bs.getOrdersForChildTableID()!=null){
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
