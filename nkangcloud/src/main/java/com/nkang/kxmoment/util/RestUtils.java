@@ -2363,10 +2363,10 @@ public static String regist(WeChatMDLUser user) {
 	           is.close();
 	       } catch (Exception e) {
 	    	   System.out.println("error:::" + message + "failed http ---------" + url);
-	    	   System.out.println("error:"+e.getMessage());
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
+		 System.out.println(url);
 		return message;
     }
 }
