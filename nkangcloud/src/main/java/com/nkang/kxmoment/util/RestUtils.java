@@ -29,6 +29,7 @@ import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
@@ -2362,13 +2363,55 @@ public static String regist(WeChatMDLUser user) {
 	           message = new String(jsonBytes, "UTF-8");
 	           is.close();
 	       } catch (Exception e) {
-	    	   System.out.println("error:::" + message + "failed http ---------" + url);
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
 		 System.out.println(url);
 		return message;
     }
+    /*
+     * chang-zheng
+     * saveLocation
+     */
+    public static String callSaveLocation(String item, Location location) throws UnsupportedEncodingException {
+		String url = "http://"+Constants.baehost+"/saveLocation?";
+		if(location != null){
+			if(!StringUtils.isEmpty(location.getChengDu())){
+				url = url + "chengDu="+URLEncoder.encode(location.getChengDu(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(location.getChongQing())){
+				url = url + "&chongQing="+URLEncoder.encode(location.getChongQing(),"UTF-8");
+			}
+			String message= "errorrrr";
+			try {
+		           URL urlGet = new URL(url);
+		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+		           http.setRequestMethod("PUT"); //must be get request
+		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		           http.setDoOutput(true);
+		           http.setDoInput(true);
+		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+		           http.connect();
+		           InputStream is = http.getInputStream();
+		           int size = is.available();
+		           byte[] jsonBytes = new byte[size];
+		           is.read(jsonBytes);
+		           message = new String(jsonBytes, "UTF-8");
+		           is.close();
+		       } catch (Exception e) {
+		    	   System.out.println("error:::" + message + " failed http ---------" + url);
+		    	   System.out.println(e.getMessage());
+		    	   log.error("callSaveBills faild",e);
+		    	   return "failed";
+		       } 
+		}
+		 System.out.println(url);
+		return url;
+    }
+			
 }
 
 
