@@ -1581,12 +1581,14 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td>
+												<td><img src="../MetroStyleFiles/menu-develop.png" />
+													<h4>开发中</h4></td>
+											</tr>
+											<%-- <tr>
+											<td>
 												 <a href="face.jsp?UID=<%=uid%>">
 												 <img src="../MetroStyleFiles/menu-face.png" /></a>
 													<h4>测颜值</h4></td>
-											</tr>
-											<tr>
 												<td>
 												<!--  onclick="SpeechPanel()" -->
 												 <a href="speak.jsp?UID=<%=uid%>"><img 
@@ -1597,9 +1599,8 @@ function getNowFormatDate() {
 													<h4>开发中</h4></a></td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
-												<td><img src="../MetroStyleFiles/menu-develop.png" />
-													<h4>开发中</h4></td>
-											</tr>
+												
+											</tr> --%>
 										</table>
 									</div>
 								</div>
