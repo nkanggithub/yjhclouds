@@ -2607,6 +2607,12 @@ public class MongoDBBasic {
 			List<DBObject> locationList = new ArrayList<DBObject>();
 			DBCursor onlineQuotation = mongoDB.getCollection(collectionQuotation).find(new BasicDBObject().append("item", item));
 			if (null != onlineQuotation) {
+				BasicDBObject doc = new BasicDBObject();
+				DBObject update = new BasicDBObject();
+//				DBObject innerInsert = new BasicDBObject();
+//				innerInsert.put("chengDu",location.getChengDu() );
+//				innerInsert.put("chongQing", location.getChongQing());
+				
 				while (onlineQuotation.hasNext()) {
 					DBObject o = onlineQuotation.next();
 					BasicDBList hist = (BasicDBList) o.get("locationList");
@@ -2614,20 +2620,26 @@ public class MongoDBBasic {
 						Object[] locations = hist.toArray();
 						for (Object dbobj : locations) {
 							if (dbobj instanceof DBObject) {
+								((DBObject) dbobj).put("chengDu",location.getChengDu() );
+								((DBObject) dbobj).put("chongQing", location.getChongQing() );
 								locationList.add((DBObject) dbobj);
 							}
 						}
 					}
+					else{
+						DBObject innerInsert = new BasicDBObject();
+						innerInsert.put("chengDu",location.getChengDu() );
+						innerInsert.put("chongQing", location.getChongQing());
+						
+						locationList.add(innerInsert);
+					}
 				}
 
-				BasicDBObject doc = new BasicDBObject();
-				DBObject update = new BasicDBObject();
-				DBObject innerInsert = new BasicDBObject();
-				innerInsert.put("chengDu",location.getChengDu() );
-				innerInsert.put("chongQing", location.getChongQing());
 				
-				locationList.add(innerInsert);
+				
+				
 				update.put("locationList", locationList);
+				
 				doc.put("$set", update);
 				WriteResult wr = mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", item), doc);
 				if(wr!=null){

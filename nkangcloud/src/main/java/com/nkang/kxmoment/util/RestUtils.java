@@ -2381,11 +2381,12 @@ public static String regist(WeChatMDLUser user) {
 			url = url + "item="+URLEncoder.encode(item,"UTF-8");
 			
 			if(!StringUtils.isEmpty(location.getChengDu())){
-				url = url + "chengDu="+URLEncoder.encode(location.getChengDu(),"UTF-8");
+				url = url + "&chengDu="+URLEncoder.encode(location.getChengDu(),"UTF-8");
 			}
 			if(!StringUtils.isEmpty(location.getChongQing())){
 				url = url + "&chongQing="+URLEncoder.encode(location.getChongQing(),"UTF-8");
 			}
+		}
 			String message= "errorrrr";
 			try {
 		           URL urlGet = new URL(url);
@@ -2409,9 +2410,9 @@ public static String regist(WeChatMDLUser user) {
 		    	   log.error("callSaveBills faild",e);
 		    	   return "failed";
 		       } 
-		}
+		
 		 System.out.println(url);
-		return url;
+		return message;
     }
 			
 }
