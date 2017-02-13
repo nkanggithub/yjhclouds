@@ -301,7 +301,8 @@ public class CoreService
 						articleList.add(article7);
 						
 						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
-						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
+						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
+						if(hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
 							article3.setTitle("胖和微管理");
 							article3.setDescription("Administration");
