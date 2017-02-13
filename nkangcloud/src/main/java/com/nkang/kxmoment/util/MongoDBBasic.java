@@ -2516,7 +2516,7 @@ public class MongoDBBasic {
 				doc.put("$set", updateQuery);
 				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
 				ret="update ok";
-			}else if(bs.getOrderNumber()!=null && bs.getOrdersForChildTableID()!=null){
+			}else if(!bs.getOrderNumber().equals("") && !bs.getOrdersForChildTableID().equals("")){
 				WriteResult writeResult;
 				writeResult=mongoDB.getCollection(collectionBill).insert(updateQuery);
 				ret="insert ok  -->" + writeResult;
