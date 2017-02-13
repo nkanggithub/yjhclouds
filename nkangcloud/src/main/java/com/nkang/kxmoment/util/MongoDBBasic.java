@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
@@ -41,6 +42,7 @@ import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -307,7 +309,24 @@ public class MongoDBBasic {
 	    	insert.put("FormatAddress", "");
 	    	insert.put("CurLAT", "");
 	    	insert.put("CurLNG", "");
-	    	insert.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+	    	insert.put("Role",new Role());
+	    	
+	    	DBObject RoleObj = new BasicDBObject();
+	    	Role role=new Role();
+	    	RoleObj.put("isExternalUpStream", role.isExternalUpStream());
+	    	RoleObj.put("isExternalCustomer", role.isExternalCustomer());
+	    	RoleObj.put("isExternalPartner", role.isExternalPartner());
+	    	RoleObj.put("isExternalCompetitor", role.isExternalCompetitor());
+	    	RoleObj.put("isInternalSeniorMgt", role.isInternalSeniorMgt());
+	    	RoleObj.put("isInternalImtMgt", role.isInternalImtMgt());
+	    	RoleObj.put("isInternalBizEmp", role.isInternalBizEmp());
+	    	RoleObj.put("isInternalNonBizEmp", role.isInternalNonBizEmp());
+	    	RoleObj.put("isInternalQuoter", role.isInternalQuoter());
+	    	RoleObj.put("isITOperations", role.isITOperations());
+
+	    	insert.put("Role", RoleObj);
+	    	
+	    	
 			mongoDB.getCollection(wechat_user).insert(insert);
 			ret = true;
 	    }
