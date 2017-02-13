@@ -1572,7 +1572,7 @@ function getNowFormatDate() {
 														<h4>奖项管理</h4>
 												</td>
 												<td><img  class="mes-openbt" data-mesid="message-tax" 
-														src="../MetroStyleFiles/menu-time.png" />
+														src="../MetroStyleFiles/menu-price.png" />
 														<h4>产品报价</h4>
 												</td>
 												<td> <!-- onclick="signaturePanel()"  -->
