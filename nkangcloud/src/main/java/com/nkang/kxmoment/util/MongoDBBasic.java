@@ -2555,7 +2555,7 @@ public class MongoDBBasic {
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
 			
-			if(queryresult!=null){
+			if(queryresult==null){
 				WriteResult writeResult;
 				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
 				ret="insert Quotation ok  -->" + writeResult;
