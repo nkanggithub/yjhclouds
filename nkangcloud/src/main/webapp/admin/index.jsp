@@ -456,7 +456,7 @@ function updateUserInfo(openId){
 }
 
 </script>
-<title>admin</title>
+<title>胖和微管理</title>
 </head>
 <body style="padding: 0px !important; margin: 0px;">
 	<div class="navbar-inner" style="background-color: #fff !important;">
