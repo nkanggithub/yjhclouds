@@ -1573,7 +1573,7 @@ function getNowFormatDate() {
 												</td>
 												<td><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-time.png" />
-														<h4>世界时间</h4>
+														<h4>产品报价</h4>
 												</td>
 												<td> <!-- onclick="signaturePanel()"  -->
 												 <a href="Signature.jsp?UID=<%=uid%>">
