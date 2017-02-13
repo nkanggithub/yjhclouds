@@ -947,4 +947,23 @@ public class MasterDataRestController {
 		return ret;
 		
 	}
+	
+	/*
+	 * chang-zheng
+	 * FOR OnlineQuotation
+	 */
+	@RequestMapping("/saveLocation")
+	public static String saveLocation(@RequestParam(value="item", required=false) String item,
+			@RequestParam(value="chongQing", required=false) String chongQing,
+			@RequestParam(value="chengDu", required=false) String chengDu
+			){
+		Location location = new Location();
+		location.setChengDu(chengDu);
+		location.setChongQing(chongQing);
+		String ret="";
+		ret=MongoDBBasic.saveLocation(item,location);
+		
+		return ret;
+	}
+		
 }
