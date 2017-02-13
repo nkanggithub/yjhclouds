@@ -1593,8 +1593,8 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-signature.png" /></a>
 														<h4>智能语音</h4>
 												</td>
-												<td><img src="../MetroStyleFiles/menu-develop.png" />
-													<h4>开发中</h4></td>
+												<td><a href="quoteDetail.jsp"><img src="../MetroStyleFiles/menu-develop.png" />
+													<h4>开发中</h4></a></td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
 													<h4>开发中</h4></td>
 												<td><img src="../MetroStyleFiles/menu-develop.png" />
