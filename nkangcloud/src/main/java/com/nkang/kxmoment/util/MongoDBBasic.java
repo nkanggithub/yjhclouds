@@ -2535,14 +2535,14 @@ public class MongoDBBasic {
 	 */
 	public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
 		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
+		//DBObject query = new BasicDBObject();
 		String ret="Quotation fail";
 		if(onlineQuotation!=null){
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
-			query.put("item", onlineQuotation.getItem());
-			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
+		//	query.put("item", onlineQuotation.getItem());
+			//DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
 
 			DBObject insertQuery = new BasicDBObject();
 			insertQuery.put("category",onlineQuotation.getCategory());
@@ -2554,12 +2554,18 @@ public class MongoDBBasic {
 			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-			
-			if(queryresult==null){
-				WriteResult writeResult;
-				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
+			WriteResult writeResult;
+			writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
+			if(writeResult!=null){
 				ret="insert Quotation ok  -->" + writeResult;
 			}
+			
+//			
+//			if(queryresult==null){
+//				WriteResult writeResult;
+//				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
+//				ret="insert Quotation ok  -->" + writeResult;
+//			}
 			
 		}
 		return ret;
