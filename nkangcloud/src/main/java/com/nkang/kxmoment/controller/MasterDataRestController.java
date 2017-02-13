@@ -20,7 +20,9 @@ import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
@@ -914,31 +916,35 @@ public class MasterDataRestController {
 	
 	/*
 	 * chang-zheng
-	 * FOR billOfSell
+	 * FOR OnlineQuotation
 	 */
-	/*@RequestMapping("/saveBills")
-	public static String saveBills(){
-		String ret = "faild !!";
-		BillOfSellPoi bos = new BillOfSellPoi();
-		List<BillOfSell> billOfSellList;
-		try {
-			billOfSellList = bos.readXls();
-			
-			if(billOfSellList!=null){
-				try{
-					MongoDBBasic.saveBillOfSell(billOfSellList);
-					ret = "success !!";
-				}catch(Exception e){
-					ret = e.getMessage();
-				}	
-			}
-			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+	@RequestMapping("/saveQuotation")
+	public static String saveQuotation(@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="categoryGrade", required=false) String categoryGrade,
+			@RequestParam(value="item", required=false) String item,
+			@RequestParam(value="quotationPrice", required=false) String quotationPrice,
+			@RequestParam(value="comments", required=false) String comments,
+			@RequestParam(value="locationList", required=false) List<Location> locationList,
+			@RequestParam(value="avaliableInventory", required=false) String avaliableInventory,
+			@RequestParam(value="onDelivery", required=false) String onDelivery,
+			@RequestParam(value="soldOutOfPay", required=false) String soldOutOfPay,
+			@RequestParam(value="originalProducer", required=false) String originalProducer
+			){
 		
+		OnlineQuotation quotation = new OnlineQuotation();
+		quotation.setCategory(category);
+		quotation.setCategoryGrade(categoryGrade);
+		quotation.setItem(item);
+		quotation.setComments(comments);
+		quotation.setLocationList(locationList);
+		quotation.setAvaliableInventory(avaliableInventory);
+		quotation.setOnDelivery(onDelivery);
+		quotation.setSoldOutOfPay(soldOutOfPay);
+		quotation.setOriginalProducer(originalProducer);
+		
+		String ret="";
+		ret=MongoDBBasic.saveOnlineQuotation(quotation);
 		return ret;
 		
-	}*/
+	}
 }
