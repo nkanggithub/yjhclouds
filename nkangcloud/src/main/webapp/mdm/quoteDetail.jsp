@@ -1,16 +1,14 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<!Doctype html>
+﻿<!Doctype html>
 <html>
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
+<script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
+<!--	<link href='css/horsey.css' rel='stylesheet' type='text/css' />
+	<link href='css/example.css' rel='stylesheet' type='text/css' />-->
 <style>
 *{margin:0;padding:0;}
-#quoteList
-{
-position:absolute;
-top:90px;
-width:100%;
-}
 .singleQuote
 {
 height:90px;
@@ -93,15 +91,36 @@ width:95%;
 font-size:13px;
 line-height:22px;}
 .HpLogo {
-  height: 50px;
-    margin-left: 5px !important;
+    position: relative;
+    top: 8px;
+    left: 1%;
+    width: 150px;
+    height: 58px;
 }
+.searchBox
+{    border: none;
+    outline: none;
+    background-color: #ecf0f1;
+    padding-top:10px;
+	padding-bottom:10px;
+	padding-left:3%;
+    color: #14204f;
+    border: 0;
+    margin: 5px 0;
+    display: block;
+    width: 97%;}
 </style>
 </head>
 <body>
-<img style="position:absolute;top:15px;right:20px;" class="HpLogo" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" alt="Logo"><div style="width:100%;height:4px;background:#0067B6;position:absolute;top:80px;"></div>
-<div id="quoteList">
-<div class="singleQuote">
+<div style="padding:10px;border-bottom:2px solid #0067B6"> 
+					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
+					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
+					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
+				</div>
+<!--<input class="searchBox" id='hy' />-->
+<div  style="position: absolute; top: 120px;" data-role="page" style="padding-top:15px" data-theme="c">
+ <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">0215A/ABC</p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -114,8 +133,8 @@ line-height:22px;}
 <p>成都 0</p>
 </div>
 </div>
-</div>
-<div class="singleQuote">
+</li>
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">PA-757K/ABC/一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -128,8 +147,8 @@ line-height:22px;}
 <p>成都 34.635</p>
 </div>
 </div>
-</div>
-<div class="singleQuote">
+</li>
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">PC/ABS-385KZ</p><p class="quotePrice"><span style="color:green">￥25500</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -142,9 +161,9 @@ line-height:22px;}
 <p>成都 1</p>
 </div>
 </div>
-</div>
+</li>
 
-<div class="singleQuote">
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">PA-749SK/ABS/押出级</p><p class="quotePrice"><span style="color:red">￥18600</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -157,8 +176,8 @@ line-height:22px;}
 <p>成都 2.925</p>
 </div>
 </div>
-</div>
-<div class="singleQuote">
+</li>
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">PA-726M/ABS/电镀级</p><p class="quotePrice"><span style="color:black">￥18800</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -171,8 +190,8 @@ line-height:22px;}
 <p>成都 0</p>
 </div>
 </div>
-</div>
-<div class="singleQuote">
+</li>
+<li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">PC/1100</p><p class="quotePrice"><span style="color:black">￥23800</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
@@ -185,7 +204,11 @@ line-height:22px;}
 <p>成都 0</p>
 </div>
 </div>
+</li>
+</ul>
 </div>
-</div>
+<!--
+	<script src='js/horsey.js'></script>
+	<script src='js/example.js'></script>-->
 </body>
 </html>
