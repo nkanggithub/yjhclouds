@@ -1,15 +1,26 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.List;
+
 public class OnlineQuotation {
 	private String category;
 	private String categoryGrade;
 	private String item;
 	private String quotationPrice;
 	private String comments;
+	private List<Location> locationList;
 	private String avaliableInventory;
 	private String onDelivery;
 	private String soldOutOfPay;
 	private String originalProducer;
+	
+	
+	public List<Location> getLocationList() {
+		return locationList;
+	}
+	public void setLocationList(List<Location> locationList) {
+		this.locationList = locationList;
+	}
 	public String getCategory() {
 		return category;
 	}
