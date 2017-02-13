@@ -224,6 +224,7 @@ public class BillOfSellPoi {
 						str = "12";
 						break;
 					default:
+						str = " ";
 						break;
 					}
 					date = strarray[0]+"-"+str+"-"+strarray[2];
