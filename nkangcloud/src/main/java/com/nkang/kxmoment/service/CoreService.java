@@ -255,6 +255,17 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}else if(eventKey.equals("bizBA")){ // Data Lake
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("永佳和实时报价");
+						article.setDescription("永佳和实时报价");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmMS2&oid=00D90000000pkXM"); //big data
+						article.setUrl("http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=" + fromUserName);
+						articleList.add(article);
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
