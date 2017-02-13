@@ -303,7 +303,7 @@ public class CoreService
 						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
 						if(hardcodeUID.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
-							article3.setTitle("客户管理");
+							article3.setTitle("胖和微管理");
 							article3.setDescription("Administration");
 							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
 							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp");
