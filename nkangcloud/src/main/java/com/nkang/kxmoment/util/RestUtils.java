@@ -31,6 +31,7 @@ import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -2307,6 +2308,67 @@ public static String regist(WeChatMDLUser user) {
 	       } 
 		return message;
 	}
+    
+    
+    /*
+     * chang-zheng
+     */
+    public static String callOnlineQuotation(OnlineQuotation quotation) throws UnsupportedEncodingException {
+		String url = "http://"+Constants.baehost+"/saveQuotation?";
+		if(quotation != null){
+			if(!StringUtils.isEmpty(quotation.getCategory())){
+				url = url + "category="+URLEncoder.encode(quotation.getCategory(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getCategoryGrade())){
+				url = url + "&categoryGrade="+URLEncoder.encode(quotation.getCategoryGrade(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getItem())){
+				url = url + "&item="+URLEncoder.encode(quotation.getItem(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getQuotationPrice())){
+				url = url + "&quotationPrice="+URLEncoder.encode(quotation.getQuotationPrice(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getComments())){
+				url = url + "&comments="+URLEncoder.encode(quotation.getComments(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getAvaliableInventory())){
+				url = url + "&avaliableInventory="+URLEncoder.encode(quotation.getAvaliableInventory(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getOnDelivery())){
+				url = url + "&onDelivery="+URLEncoder.encode(quotation.getOnDelivery(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getSoldOutOfPay())){
+				url = url + "&soldOutOfPay="+URLEncoder.encode(quotation.getSoldOutOfPay(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getOriginalProducer())){
+				url = url + "&originalProducer="+URLEncoder.encode(quotation.getOriginalProducer(),"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + "failed http ---------" + url);
+	    	   System.out.println("error:"+e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return "failed";
+	       } 
+		return message;
+    }
 }
 
 
