@@ -38,6 +38,7 @@ import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -53,6 +54,7 @@ public class MongoDBBasic {
 	private static String wechat_comments = "Wechat_Comments";
 	private static String ClientMeta = "Client_Meta";
 	private static String collectionBill = "SaleBill";
+	private static String collectionQuotation = "Quotation";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -2525,6 +2527,42 @@ public class MongoDBBasic {
 		}
 		return ret;
 		
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR OnlineQuotation
+	 */
+	public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="Quotation fail";
+		if(onlineQuotation!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+			query.put("item", onlineQuotation.getItem());
+			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
+
+			DBObject insertQuery = new BasicDBObject();
+			insertQuery.put("category",onlineQuotation.getCategory());
+			insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
+			insertQuery.put("item",onlineQuotation.getItem());
+			insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
+			insertQuery.put("locationList",onlineQuotation.getLocationList());
+			insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
+			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
+			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
+			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+			
+			if(queryresult!=null){
+				WriteResult writeResult;
+				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
+				ret="insert Quotation ok  -->" + writeResult;
+			}
+			
+		}
+		return ret;
 	}
 	
 }
