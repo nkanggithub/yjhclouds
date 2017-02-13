@@ -1581,8 +1581,8 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-pen.png" /></a>
 														<h4>电子签名</h4>
 												</td>
-												<td><img src="../MetroStyleFiles/menu-develop.png" />
-													<h4>开发中</h4></td>
+												<td><a href="quoteDetail.jsp"><img src="../MetroStyleFiles/menu-develop.png" />
+													<h4>开发中</h4></a></td>
 											</tr>
 											<%-- <tr>
 											<td>
