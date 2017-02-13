@@ -121,7 +121,7 @@ line-height:22px;}
 <div  style="position: absolute; top: 120px;" data-role="page" style="padding-top:15px" data-theme="c">
  <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">0215A/ABC</p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">0215A/ABS</p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>179.86</p></div>
@@ -135,7 +135,7 @@ line-height:22px;}
 </div>
 </li>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-757K/ABC/一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PA-757K/ABS/一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>148.6327</p></div>
