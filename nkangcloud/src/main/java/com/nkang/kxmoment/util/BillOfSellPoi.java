@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
 import com.nkang.kxmoment.baseobject.BillOfSell;
 
@@ -70,9 +71,9 @@ public class BillOfSellPoi {
 			                xlsDto.setOrderNumber(orderNumber+"");
 		
 			                HSSFCell orderTime = hssfRow.getCell(5);
-			               // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.SIMPLIFIED_CHINESE);
+			                String ordert =TransitionDate(orderTime+"");
 		
-			                xlsDto.setOrderTime(orderTime+"");
+			                xlsDto.setOrderTime(ordert);
 		
 			                HSSFCell customerName = hssfRow.getCell(6);
 		
@@ -129,7 +130,7 @@ public class BillOfSellPoi {
 			                
 			                HSSFCell advanceShipmentDate = hssfRow.getCell(25);
 			            	
-			                xlsDto.setAdvanceShipmentDate(advanceShipmentDate+"");
+			                xlsDto.setAdvanceShipmentDate(TransitionDate(advanceShipmentDate+""));
 			                
 			                HSSFCell ordersForChildTableID = hssfRow.getCell(26);
 			                xlsDto.setOrdersForChildTableID(ordersForChildTableID+"");
@@ -178,5 +179,59 @@ public class BillOfSellPoi {
 	        }
 			return list;
 	 }
-	 
+
+	 public String TransitionDate(String date){
+		 String str = "";
+		
+		 if(date!=null){
+			 String[] strarray=date.split("-");
+			 if(strarray!=null && strarray.length>1){
+				 switch (strarray[1]) {
+					case "一月": 
+						str = "01";
+						break;
+					case "二月": 
+						str = "02";
+						break;
+					case "三月": 
+						str = "03";
+						break;
+					case "四月": 
+						str = "04";
+						break;
+					case "五月": 
+						str = "05";
+						break;
+					case "六月": 
+						str = "06";
+						break;
+					case "七月": 
+						str = "07";
+						break;
+					case "八月": 
+						str = "08";
+						break;
+					case "久月": 
+						str = "09";
+						break;
+					case "十月": 
+						str = "10";
+						break;
+					case "十一月": 
+						str = "11";
+						break;
+					case "十二月": 
+						str = "12";
+						break;
+					default:
+						break;
+					}
+					date = strarray[0]+"-"+str+"-"+strarray[2];
+			 }
+		 }
+		 
+		 return date;
+	 }
 }
+
+
