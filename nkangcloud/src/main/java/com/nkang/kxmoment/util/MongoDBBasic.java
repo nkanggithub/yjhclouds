@@ -35,6 +35,7 @@ import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
@@ -2571,5 +2572,52 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	/*
+	 * chang-zheng
+	 * FOR OnlineQuotation
+	 */
+	public static String saveLocation(String item, Location location){
+		mongoDB = getMongoDB();
+		//DBObject query = new BasicDBObject();
+		String ret="saveLocation fail";
+		if(location!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+
+			List<DBObject> locationList = new ArrayList<DBObject>();
+			DBCursor onlineQuotation = mongoDB.getCollection(collectionQuotation).find(new BasicDBObject().append("item", item));
+			if (null != onlineQuotation) {
+				while (onlineQuotation.hasNext()) {
+					DBObject o = onlineQuotation.next();
+					BasicDBList hist = (BasicDBList) o.get("locationList");
+					if (hist != null) {
+						Object[] locations = hist.toArray();
+						for (Object dbobj : locations) {
+							if (dbobj instanceof DBObject) {
+								locationList.add((DBObject) dbobj);
+							}
+						}
+					}
+				}
+
+				BasicDBObject doc = new BasicDBObject();
+				DBObject update = new BasicDBObject();
+				DBObject innerInsert = new BasicDBObject();
+				innerInsert.put("chengDu",location.getChengDu() );
+				innerInsert.put("chongQing", location.getChongQing());
+				
+				locationList.add(innerInsert);
+				update.put("locationList", locationList);
+				doc.put("$set", update);
+				WriteResult wr = mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", item), doc);
+				if(wr!=null){
+					ret = "saveLocation success";
+				}
+			}
+		}
+			
+		return ret;
+	}
 }
 					
