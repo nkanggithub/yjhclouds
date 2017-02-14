@@ -2579,7 +2579,7 @@ public class MongoDBBasic {
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
 			
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			insertQuery.put("lastUpdate",cursqlTS);
+			insertQuery.put("lastUpdate",cursqlTS.toString());
 			
 			WriteResult writeResult;
 			if(queryresult==null){
@@ -2733,7 +2733,6 @@ public class MongoDBBasic {
 	 * getOneQuotation
 	 */
 	
-	@SuppressWarnings("unchecked")
 	public static List<OnlineQuotation> getOneQuotation(String item) {
 		DBObject dbQuotation ;
 		DBObject dbquery = new BasicDBObject();  
