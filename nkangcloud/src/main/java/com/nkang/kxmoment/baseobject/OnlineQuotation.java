@@ -83,6 +83,7 @@ public class OnlineQuotation {
 				this.item + "\n"+
 				this.quotationPrice + "\n"+
 				this.comments + "\n"+
+				this.locationAmounts + "\n"+
 				this.avaliableInventory + "\n"+
 				this.onDelivery + "\n"+
 				this.soldOutOfPay + "\n"+
