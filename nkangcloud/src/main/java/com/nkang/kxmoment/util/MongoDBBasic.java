@@ -2727,5 +2727,36 @@ public class MongoDBBasic {
 		return quotationList;
 	}
 	
+	
+	/*
+	 * chang-zheng
+	 * getOneQuotation
+	 */
+	
+	@SuppressWarnings("unchecked")
+	public static List<OnlineQuotation> getOneQuotation(String item) {
+		DBObject dbQuotation ;
+		DBObject dbquery = new BasicDBObject();  
+		dbquery.put("item", item);
+		dbQuotation = mongoDB.getCollection(collectionQuotation).findOne(dbquery);
+		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
+		
+			OnlineQuotation qt = new OnlineQuotation();
+			qt.setCategory(dbQuotation.get("category") == null ? "" : dbQuotation.get("Category").toString());
+			qt.setCategoryGrade(dbQuotation.get("categoryGrade") == null ? "" : dbQuotation.get("categoryGrade").toString());
+			qt.setItem(dbQuotation.get("item") == null ? "" : dbQuotation.get("item").toString());
+			qt.setQuotationPrice(dbQuotation.get("quotationPrice") == null ? "" : dbQuotation.get("quotationPrice").toString());
+			qt.setComments(dbQuotation.get("comments") == null ? "" : dbQuotation.get("comments").toString());
+			qt.setLocationAmounts(dbQuotation.get("locationAmounts") == null ? "" : dbQuotation.get("locationAmounts").toString());
+			qt.setAvaliableInventory(dbQuotation.get("avaliableInventory") == null ? "" : dbQuotation.get("avaliableInventory").toString());
+			qt.setOnDelivery(dbQuotation.get("onDelivery") == null ? "" : dbQuotation.get("onDelivery").toString());
+			qt.setSoldOutOfPay(dbQuotation.get("soldOutOfPay") == null ? "" : dbQuotation.get("soldOutOfPay").toString());
+			qt.setOriginalProducer(dbQuotation.get("originalProducer") == null ? "" : dbQuotation.get("originalProducer").toString());
+			qt.setLastUpdate(dbQuotation.get("lastUpdate") == null ? "" : dbQuotation.get("lastUpdate").toString());
+			quotationList.add(qt);
+		 
+		return quotationList;
+	}
+	
 }
 					
