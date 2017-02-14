@@ -19,7 +19,7 @@ border-bottom:1px solid gray;
 line-height:40px;
 width:100%;
 height:35%;
-font-size:22px;
+font-size:18px;
 font-weight:bold;
 }
 .secondLayer
@@ -31,14 +31,15 @@ margin-top: 2px;
 .quoteTitle
 {
 padding-left:4%;
-width:68%;
+width:45%;
 height:100%;
 float:left;
 }
 .quotePrice
 {
 
-width:28%;
+width:27%;
+margin-left:1%;
 height:100%;
 float:left;
 }
@@ -51,22 +52,22 @@ float:left;
 }
 .quoteInventory
 {
-margin-left:5%;
-width:24%;
-border:1px solid #347F78;
-background:#2BD2CA;
+margin-left: 5%;
+    width: 24%;
+    border: 1px solid #2BD2CA;
+    color: #2BD2CA;
 }
 .soldOutOfPay
 {
-width:30%;
-border:1px solid #676767;
-background:#CBCCCE;
+width: 30%;
+    border: 1px solid #CBCCCE;
+    color: #CBCCCE;
 }
 .onDelivery
 {
-width:20%;
-border:1px solid #B06B5C;
-background:#FF896F;
+    width: 20%;
+    border: 1px solid #FF896F;
+    color: #FF896F;
 }
 .shape p
 {
@@ -109,6 +110,22 @@ line-height:22px;}
     margin: 5px 0;
     display: block;
     width: 97%;}
+	.tag
+	{    width: 16%;
+    margin-left: 1%;
+    margin-right: 5%;
+    float: left;
+    height: 25px;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: normal;
+    color: black;}
+	.tagStyle{
+	 border: 1px solid #2BD2CA;
+    background: #2BD2CA;
+	}
 </style>
 </head>
 <body>
@@ -121,11 +138,11 @@ line-height:22px;}
 <div  style="position: absolute; top: 120px;" data-role="page" style="padding-top:15px" data-theme="c">
  <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">0215A/ABS</p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">0215A [ABS]</p><p class="tag"></p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>179.86</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>14.175</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>14.175</p></div>
 <div class="shape onDelivery"><p>在途</p><p>0</p></div>
 </div>
 <div class="rightPanel">
@@ -135,11 +152,11 @@ line-height:22px;}
 </div>
 </li>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-757K/ABS/一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PA-757K [ABS]</p><p class="tag tagStyle">一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>148.6327</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>99</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>99</p></div>
 <div class="shape onDelivery"><p>在途</p><p>194</p></div>
 </div>
 <div class="rightPanel">
@@ -149,11 +166,11 @@ line-height:22px;}
 </div>
 </li>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PC/ABS-385KZ</p><p class="quotePrice"><span style="color:green">￥25500</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PC/ABS-385KZ</p><p class="tag"></p><p class="quotePrice"><span style="color:green">￥25500</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>1</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>0</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>0</p></div>
 <div class="shape onDelivery"><p>在途</p><p>0</p></div>
 </div>
 <div class="rightPanel">
@@ -164,11 +181,11 @@ line-height:22px;}
 </li>
 
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-749SK/ABS/押出级</p><p class="quotePrice"><span style="color:red">￥18600</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PA-749SK [ABS]</p><p class="tag tagStyle">押出级</p><p class="quotePrice"><span style="color:red">￥18600</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>49.6755</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>19.25</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>19.25</p></div>
 <div class="shape onDelivery"><p>在途</p><p>57</p></div>
 </div>
 <div class="rightPanel">
@@ -178,11 +195,11 @@ line-height:22px;}
 </div>
 </li>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-726M/ABS/电镀级</p><p class="quotePrice"><span style="color:black">￥18800</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PA-726M [ABS]</p><p class="tag tagStyle">电镀级</p><p class="quotePrice"><span style="color:black">￥18800</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>84.1005</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>20.275</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>20.275</p></div>
 <div class="shape onDelivery"><p>在途</p><p>84</p></div>
 </div>
 <div class="rightPanel">
@@ -192,11 +209,11 @@ line-height:22px;}
 </div>
 </li>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PC/1100</p><p class="quotePrice"><span style="color:black">￥23800</span></p></div>
+<div class="firstLayer"><p class="quoteTitle">PC/1100</p><p class="tag"></p><p class="quotePrice"><span style="color:black">￥23800</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
 <div class="shape quoteInventory "><p>可用库存</p><p>7.325</p></div>
-<div class="shape soldOutOfPay"><p>已售未下载</p><p>0</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p>0</p></div>
 <div class="shape onDelivery"><p>在途</p><p>0</p></div>
 </div>
 <div class="rightPanel">
