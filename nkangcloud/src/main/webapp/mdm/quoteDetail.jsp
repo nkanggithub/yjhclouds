@@ -232,7 +232,7 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %></p><% if(null==ql.get(i).getCategoryGrade()){ %><p class="tag"></p>
+<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %><%if(null!=ql.get(i).getCategory()){  %>[<%=ql.get(i).getCategory() %>]<%} %></p><% if(null==ql.get(i).getCategoryGrade()){ %><p class="tag"></p>
 <% 
 }else{
 	%>
