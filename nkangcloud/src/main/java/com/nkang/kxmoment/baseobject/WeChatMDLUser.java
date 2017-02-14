@@ -11,6 +11,7 @@ public class WeChatMDLUser extends WeChatUser {
 	public int workDay;
 	public int CongratulateNum;
 	public String role;
+	public Role roleObj;
 	public String selfIntro;
 	public String email;
 	public String phone;
@@ -21,6 +22,12 @@ public class WeChatMDLUser extends WeChatUser {
 	public ArrayList tag;
 	public HashMap like;
 	
+	public Role getRoleObj() {
+		return roleObj;
+	}
+	public void setRoleObj(Role roleObj) {
+		this.roleObj = roleObj;
+	}
 	public String getCompanyName() {
 		return companyName;
 	}
