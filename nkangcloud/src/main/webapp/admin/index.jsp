@@ -574,7 +574,34 @@ function updateUserInfo(openId){
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 												<table id="tableForm" style="margin-top:20px;">
-												    <tr>
+													<tr>
+														<td><nobr>真实姓名:</nobr></td>
+														<td><input type="text" name=""/></td>
+													</tr>
+													<tr>
+														<td>手机号码:</td>
+														<td><input type="text" name=""/></td>
+													</tr>
+													<tr>
+														<td>电子邮箱:</td>
+														<td><input type="text" name=""/></td>
+													</tr>
+													<tr>
+														<td>角色:</td>
+														<td align="left">
+															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户<br/>
+															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商<br/>
+															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户<br/>
+															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手<br/>
+															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理<br/>
+															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员<br/>
+															<input type="checkbox"  name="role" value="isInternalImtMgt" />内部中级管理<br/>
+															<input type="checkbox"  name="role" value="isInternalQuoter" />内部报价者<br/>
+															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员<br/>
+															<input type="checkbox"  name="role" value="isITOperations" />IT运维
+														</td>
+													</tr>
+													<tr>
 												        <td>是否激活</td>
 												        <td class="tdText">
 												        	<input type="radio" name="isActived" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" checked="checked" value="false"/>否
