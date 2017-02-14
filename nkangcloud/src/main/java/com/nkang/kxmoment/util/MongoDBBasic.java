@@ -2620,10 +2620,10 @@ public class MongoDBBasic {
 						Object[] locations = hist.toArray();
 						for (Object dbobj : locations) {
 							if (dbobj instanceof DBObject) {
-								if(location.getChengDu()!=null && !"".equals(location.getChengDu())){
+								if(location.getChengDu()!=null){
 									((DBObject) dbobj).put("chengDu",location.getChengDu() );
 								}
-								if(location.getChongQing()!=null && !"".equals(location.getChongQing())){
+								if(location.getChongQing()!=null){
 									((DBObject) dbobj).put("chongQing", location.getChongQing() );
 								}
 								
