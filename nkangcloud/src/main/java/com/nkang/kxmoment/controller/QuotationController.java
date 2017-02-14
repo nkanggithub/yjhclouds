@@ -47,13 +47,13 @@ public class QuotationController {
 		
 	}
 	@RequestMapping("/getAllQuotations")
-	public@ResponseBody List<OnlineQuotation> getAllQuotations(){
+	public @ResponseBody List<OnlineQuotation> getAllQuotations(){
 		return MongoDBBasic.getAllQuotations();
 		
 	}
 	
 	@RequestMapping("/getOneQuotation")
-	public@ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=true) String item){
+	public @ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=true) String item){
 		List<OnlineQuotation> Quotation =new ArrayList<OnlineQuotation>();
 		Quotation=MongoDBBasic.getOneQuotation(item);
 		return Quotation;
