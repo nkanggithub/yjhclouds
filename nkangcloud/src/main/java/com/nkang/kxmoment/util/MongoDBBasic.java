@@ -531,18 +531,32 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	public static boolean updateUserWithManageStatus(String openid, String isActived,String isAuthenticated,String isRegistered,String registerDate){
+	public static boolean updateUserWithManageStatus(WeChatMDLUser user){
 		mongoDB = getMongoDB();
 		boolean ret = false;
 		try{
 			BasicDBObject doc = new BasicDBObject();
 			DBObject update = new BasicDBObject();
-			update.put("IsActive", isActived);
-			update.put("IsAuthenticated", isAuthenticated);
-			update.put("IsRegistered", isRegistered);
-			update.put("Teamer.registerDate", registerDate);
+			update.put("IsActive", user.getIsActive());
+			update.put("IsAuthenticated", user.getIsAuthenticated());
+			update.put("IsRegistered", user.getIsRegistered());
+			update.put("Teamer.registerDate", user.getRegisterDate());
+			DBObject RoleObj = new BasicDBObject();
+	    	Role role=user.getRoleObj();
+	    	RoleObj.put("isExternalUpStream", role.isExternalUpStream());
+	    	RoleObj.put("isExternalCustomer", role.isExternalCustomer());
+	    	RoleObj.put("isExternalPartner", role.isExternalPartner());
+	    	RoleObj.put("isExternalCompetitor", role.isExternalCompetitor());
+	    	RoleObj.put("isInternalSeniorMgt", role.isInternalSeniorMgt());
+	    	RoleObj.put("isInternalImtMgt", role.isInternalImtMgt());
+	    	RoleObj.put("isInternalBizEmp", role.isInternalBizEmp());
+	    	RoleObj.put("isInternalNonBizEmp", role.isInternalNonBizEmp());
+	    	RoleObj.put("isInternalQuoter", role.isInternalQuoter());
+	    	RoleObj.put("isITOperations", role.isITOperations());
+
+	    	update.put("Role", RoleObj);
 			doc.put("$set", update); 
-			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", openid), doc);     
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", user.getOpenid()), doc);     
 			ret = true;
 		}
 		catch(Exception e){
