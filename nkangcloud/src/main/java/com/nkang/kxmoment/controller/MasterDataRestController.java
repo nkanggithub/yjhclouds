@@ -945,8 +945,8 @@ public class MasterDataRestController {
 		quotation.setSoldOutOfPay(soldOutOfPay);
 		quotation.setOriginalProducer(originalProducer);
 		
-		String ret="";
-		ret=MongoDBBasic.saveOnlineQuotation(quotation);
+		
+		String ret = MongoDBBasic.saveOnlineQuotation(quotation);
 		return ret;
 		
 	}
