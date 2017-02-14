@@ -2577,9 +2577,8 @@ public class MongoDBBasic {
 			insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+			insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
 			
-			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			insertQuery.put("lastUpdate",cursqlTS.toString());
 			
 			WriteResult writeResult;
 			if(queryresult==null){
