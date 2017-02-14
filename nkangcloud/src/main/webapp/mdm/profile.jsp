@@ -1496,7 +1496,7 @@ function getNowFormatDate() {
 						<a class="naviArrow is-selected" ></a>
 						<p class="naviText">微应用</p>
 							</div>
-							<div id="navSupport"   class="navi"><p class="naviText">微维护</p></div>
+							<div id="navSupport"   class="navi"><p class="naviText">微表情</p></div>
 								<div id="navMember"  class="navi"><p class="naviText">微成员</p></div>
 							</div>
 							<div class="tab-content" id="dvTabContent" style="border: 0px;margin-top:-30px">
@@ -1505,9 +1505,18 @@ function getNowFormatDate() {
 										<div class="panel-group" id="accordion">
 											<div id="DivLearnings"
 												style="text-align: center; padding: 50px 0px;">
-
+												<img src="../mdm/images/delivering.gif" />
+												<img src="../mdm/images/moneymoney.gif" />
+												<img src="../mdm/images/nodeliverywithoutpay.gif" />
+												<img src="../mdm/images/noinventory.gif" />
+												<img src="../mdm/images/nosales.gif" />
+												<img src="../mdm/images/orderplease.gif" />
+												<img src="../mdm/images/payreceived.gif" />
+												<img src="../mdm/images/payreceived2.gif" />
+												<img src="../mdm/images/priceincrease.gif" />
+												<img src="../mdm/images/quotation.gif" />
+												<img src="../mdm/images/selfservice.gif" />
 												<img src="../MetroStyleFiles/image/Maintenace.gif" />
-
 											</div>
 										</div>
 									</div>
