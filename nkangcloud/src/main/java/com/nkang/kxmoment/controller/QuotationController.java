@@ -44,4 +44,10 @@ public class QuotationController {
 		return ret;
 		
 	}
+	@RequestMapping("/getAllQuotations")
+	@ResponseBody
+	public List<OnlineQuotation> getAllQuotations(){
+		return MongoDBBasic.getAllQuotations();
+		
+	}
 }
