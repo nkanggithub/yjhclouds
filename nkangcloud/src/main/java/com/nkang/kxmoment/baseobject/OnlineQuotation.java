@@ -8,18 +8,18 @@ public class OnlineQuotation {
 	private String item;
 	private String quotationPrice;
 	private String comments;
-	private List<Location> locationList;
+	private String locationAmounts;
 	private String avaliableInventory;
 	private String onDelivery;
 	private String soldOutOfPay;
 	private String originalProducer;
 	
 	
-	public List<Location> getLocationList() {
-		return locationList;
+	public String getLocationAmounts() {
+		return locationAmounts;
 	}
-	public void setLocationList(List<Location> locationList) {
-		this.locationList = locationList;
+	public void setLocationAmounts(String locationAmounts) {
+		this.locationAmounts = locationAmounts;
 	}
 	public String getCategory() {
 		return category;
