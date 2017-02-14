@@ -2555,14 +2555,14 @@ public class MongoDBBasic {
 	 */
 	public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
 		mongoDB = getMongoDB();
-		//DBObject query = new BasicDBObject();
+		DBObject query = new BasicDBObject();
 		String ret="Quotation fail";
 		if(onlineQuotation!=null){
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
-		//	query.put("item", onlineQuotation.getItem());
-			//DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
+			query.put("item", onlineQuotation.getItem());
+			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
 
 			DBObject insertQuery = new BasicDBObject();
 			insertQuery.put("category",onlineQuotation.getCategory());
@@ -2575,21 +2575,51 @@ public class MongoDBBasic {
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
 			WriteResult writeResult;
-			writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
-			if(writeResult!=null){
+			if(queryresult==null){
+				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
+				ret="insert Quotation ok  -->" + writeResult;
+			}else{
+				BasicDBObject doc = new BasicDBObject();  
+				doc.put("$set", insertQuery);
+				writeResult=mongoDB.getCollection(collectionQuotation).update(insertQuery, doc);
 				ret="insert Quotation ok  -->" + writeResult;
 			}
-			
-//			
-//			if(queryresult==null){
-//				WriteResult writeResult;
-//				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
-//				ret="insert Quotation ok  -->" + writeResult;
-//			}
-			
 		}
 		return ret;
 	}
+	
+	/*
+	 * chang-zheng
+	 * FOR OnlineQuotation
+	 */
+	/*public static String UpdateOnlineQuotation(OnlineQuotation onlineQuotation){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="Quotation fail";
+		if(onlineQuotation!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+			query.put("item", onlineQuotation.getItem());
+			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
+			if(queryresult!=null){
+				DBObject updateQuery = new BasicDBObject();
+				updateQuery.put("category",onlineQuotation.getCategory());
+				updateQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
+				updateQuery.put("item",onlineQuotation.getItem());
+				updateQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
+				updateQuery.put("locationList",onlineQuotation.getLocationList());
+				updateQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
+				updateQuery.put("onDelivery",onlineQuotation.getOnDelivery());
+				updateQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
+				updateQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+				WriteResult writeResult;
+				writeResult=mongoDB.getCollection(collectionQuotation).insert(updateQuery);
+			}
+		}
+		return ret;
+	}
+	*/
 	
 	/*
 	 * chang-zheng
