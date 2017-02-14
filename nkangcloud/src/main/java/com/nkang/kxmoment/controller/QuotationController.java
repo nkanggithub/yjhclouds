@@ -46,23 +46,23 @@ public class QuotationController {
 		
 	}
 	@RequestMapping("/getAllQuotations")
-	@ResponseBody
-	public List<OnlineQuotation> getAllQuotations(){
+	
+	public@ResponseBody List<OnlineQuotation> getAllQuotations(){
 		return MongoDBBasic.getAllQuotations();
 		
 	}
 	
 	@RequestMapping("/getOneQuotation")
-	@ResponseBody
-	public List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=false) String item){
+	
+	public@ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=false) String item){
 		List<OnlineQuotation> Quotation =new ArrayList<OnlineQuotation>();
 		Quotation=MongoDBBasic.getOneQuotation(item);
 		return Quotation;
 	}
 	
 	@RequestMapping("/getQuotationsByQuery")
-	@ResponseBody
-	public List<OnlineQuotation> getQuotationsByQuery(@RequestParam(value="category", required=false) String category,
+	
+	public @ResponseBody List<OnlineQuotation> getQuotationsByQuery(@RequestParam(value="category", required=false) String category,
 			@RequestParam(value="item", required=false) String item){
 		
 		return MongoDBBasic.getQuotationsByQuery(category,item);
