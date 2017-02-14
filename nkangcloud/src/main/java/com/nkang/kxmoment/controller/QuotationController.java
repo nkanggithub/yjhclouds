@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -54,9 +55,9 @@ public class QuotationController {
 	@RequestMapping("/getOneQuotation")
 	@ResponseBody
 	public List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=false) String item){
-		
-		return MongoDBBasic.getOneQuotation(item);
-		
+		List<OnlineQuotation> Quotation =new ArrayList<OnlineQuotation>();
+		Quotation=MongoDBBasic.getOneQuotation(item);
+		return Quotation;
 	}
 	
 	@RequestMapping("/getQuotationsByQuery")
