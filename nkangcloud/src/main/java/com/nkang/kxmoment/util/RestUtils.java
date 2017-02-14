@@ -2336,7 +2336,7 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(quotation.getComments())){
 				url = url + "&comments="+URLEncoder.encode(quotation.getComments(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(quotation.getComments())){
+			if(!StringUtils.isEmpty(quotation.getLocationAmounts())){
 				url = url + "&locationAmounts="+URLEncoder.encode(quotation.getLocationAmounts(),"UTF-8");
 			}
 			
