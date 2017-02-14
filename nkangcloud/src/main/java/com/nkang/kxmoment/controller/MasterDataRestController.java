@@ -932,6 +932,7 @@ public class MasterDataRestController {
 			@RequestParam(value="soldOutOfPay", required=false) String soldOutOfPay,
 			@RequestParam(value="originalProducer", required=false) String originalProducer
 			){
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		
 		OnlineQuotation quotation = new OnlineQuotation();
 		quotation.setCategory(category);
@@ -944,7 +945,7 @@ public class MasterDataRestController {
 		quotation.setOnDelivery(onDelivery);
 		quotation.setSoldOutOfPay(soldOutOfPay);
 		quotation.setOriginalProducer(originalProducer);
-		
+		quotation.setLastUpdate(cursqlTS.toString());
 		
 		String ret = MongoDBBasic.saveOnlineQuotation(quotation);
 		return ret;
