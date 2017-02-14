@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
@@ -2335,6 +2336,10 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(quotation.getComments())){
 				url = url + "&comments="+URLEncoder.encode(quotation.getComments(),"UTF-8");
 			}
+			if(!StringUtils.isEmpty(quotation.getComments())){
+				url = url + "&locationAmounts="+URLEncoder.encode(quotation.getLocationAmounts(),"UTF-8");
+			}
+			
 			if(!StringUtils.isEmpty(quotation.getAvaliableInventory())){
 				url = url + "&avaliableInventory="+URLEncoder.encode(quotation.getAvaliableInventory(),"UTF-8");
 			}
