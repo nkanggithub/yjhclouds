@@ -245,8 +245,8 @@ for(int i=0;i<ql.size();i++){
 <div class="shape onDelivery"><p>在途</p><p><%=ql.get(i).getOnDelivery() %></p></div>
 </div>
 <div class="rightPanel">
-<p><%=ql.get(i).getLocationAmounts().split("|")[0] %></p>
-<p><%=ql.get(i).getLocationAmounts().split("|")[1] %></p>
+<p><%=ql.get(i).getLocationAmounts().split("\\|")[0] %></p>
+<p><%=ql.get(i).getLocationAmounts().split("\\|")[1] %></p>
 </div>
 </div>
 </li>
