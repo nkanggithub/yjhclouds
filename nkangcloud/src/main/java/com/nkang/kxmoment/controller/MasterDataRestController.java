@@ -938,6 +938,7 @@ public class MasterDataRestController {
 		quotation.setCategoryGrade(categoryGrade);
 		quotation.setItem(item);
 		quotation.setComments(comments);
+		quotation.setQuotationPrice(quotationPrice);
 		quotation.setLocationAmounts(locationAmounts);
 		quotation.setAvaliableInventory(avaliableInventory);
 		quotation.setOnDelivery(onDelivery);
