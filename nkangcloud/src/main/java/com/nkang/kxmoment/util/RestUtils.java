@@ -2378,7 +2378,7 @@ public static String regist(WeChatMDLUser user) {
      * chang-zheng
      * saveLocation
      */
-    public static String callSaveLocation(String item, Location location) throws UnsupportedEncodingException {
+   /* public static String callSaveLocation(String item, Location location) throws UnsupportedEncodingException {
 		String url = "http://"+Constants.baehost+"/saveLocation?";
 		if(location != null){
 			url = url + "item="+URLEncoder.encode(item,"UTF-8");
@@ -2417,7 +2417,7 @@ public static String regist(WeChatMDLUser user) {
 		 System.out.println(url);
 		return message;
     }
-			
+		*/	
 }
 
 
