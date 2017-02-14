@@ -2582,7 +2582,7 @@ public class MongoDBBasic {
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", insertQuery);
 				writeResult=mongoDB.getCollection(collectionQuotation).update(insertQuery, doc);
-				ret="insert Quotation ok  -->" + writeResult;
+				ret="update Quotation ok  -->" + writeResult;
 			}
 		}
 		return ret;
@@ -2685,5 +2685,19 @@ public class MongoDBBasic {
 			
 		return ret;
 	}
+	
+	/*
+	 * chang-zheng
+	 * getAllQuotations
+	 */
+	
+	@SuppressWarnings("unchecked")
+	public static List<OnlineQuotation> getAllQuotations() {
+		List<OnlineQuotation> results = new ArrayList<OnlineQuotation>();
+		DBObject dbquery = new BasicDBObject();  
+		results = mongoDB.getCollection(collectionQuotation).distinct("item", dbquery);
+		return results;
+	}
+	
 }
 					
