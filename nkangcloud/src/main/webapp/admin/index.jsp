@@ -56,7 +56,27 @@
 <script src="../Jsp/JS/modernizr.js"></script>
 <script src="../Jsp/JS/jSignature.min.noconflict.js"></script>
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
+<style>
+   #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
+</style>
 <script type="text/javascript">
+$(function(){  
+    $('#return-top').hide();  
+    $(function(){  
+        $(window).scroll(function(){  
+            if($(window).scrollTop()>200){  
+                $('#return-top').fadeIn(200);  
+                }  
+                else{$('#return-top').fadeOut(200);}  
+            });  
+            $('#return-top').click(function(){  
+                $('body,html').animate({scrollTop:0},200);  
+                return false;  
+                });  
+        });  
+    });
+
+
 var clientThemeColor,HpLogoSrc,LogoData;
 $(window).load(function() {
 	getLogoLists();
@@ -470,7 +490,6 @@ function updateUserInfo(openId){
 	});
 	
 }
-
 </script>
 <title>胖和微管理</title>
 </head>
@@ -510,7 +529,6 @@ function updateUserInfo(openId){
 					<div class="Work_Mates_div2" id="Logo_div">
 					</div>
 					<!-- end logoElements-->
-
 				</div>
 				<div id="UserInfo" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
@@ -587,7 +605,7 @@ function updateUserInfo(openId){
 														<td><input type="text" name=""/></td>
 													</tr>
 													<tr>
-														<td>角色:</td>
+														<td>用户角色:</td>
 														<td align="left">
 															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户<br/>
 															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商<br/>
@@ -602,26 +620,26 @@ function updateUserInfo(openId){
 														</td>
 													</tr>
 													<tr>
-												        <td>是否激活</td>
-												        <td class="tdText">
+												        <td>是否激活:</td>
+												        <td  align="left" class="tdText">
 												        	<input type="radio" name="isActived" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
-												        <td>是否验证</td>
-												        <td class="tdText">
+												        <td>是否验证:</td>
+												        <td align="left"  class="tdText">
 												        	<input type="radio" name="isAuthenticated" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
-												        <td>是否注册</td>
-												        <td class="tdText">
+												        <td>是否注册:</td>
+												        <td  align="left" class="tdText">
 												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否
 												        </td>
 												    </tr>
 												    <tr>
-													    <td>注册时间</td>
-													    <td class="tdText" >
+													    <td>注册时间:</td>
+													    <td align="left" class="tdText" >
 													    	<input type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px; margin-left: 80px;">
 													    </td>
 												    </tr>
@@ -671,6 +689,7 @@ function updateUserInfo(openId){
 						</div> -->
 
 					</div>
+					<div id="return-top" style="display: block;"><img class="scroll-top" src="../Jsp/PIC/upgrade.png" alt="" width="50px"></div>
 				</div>
 				
 				
