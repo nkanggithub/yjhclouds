@@ -2581,7 +2581,7 @@ public class MongoDBBasic {
 			}else{
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", insertQuery);
-				writeResult=mongoDB.getCollection(collectionQuotation).update(insertQuery, doc);
+				writeResult=mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", onlineQuotation.getItem()), doc);
 				ret="update Quotation ok  -->" + writeResult;
 			}
 		}
