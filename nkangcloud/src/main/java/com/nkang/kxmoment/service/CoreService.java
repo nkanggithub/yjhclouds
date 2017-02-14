@@ -273,7 +273,7 @@ public class CoreService
 						article.setTitle("胖和微应用");
 						article.setDescription("我的应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.html");
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("胖和微应用");
