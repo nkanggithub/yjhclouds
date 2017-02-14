@@ -7,11 +7,10 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
 String AccessKey = RestUtils.callGetValidAccessKey();
-List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-%>  
+%> 
 <!DOCTYPE html>
 <!-- saved from url=(0078)http://app.xiujiadian.com/staticpage/servicedescription/brand-description.html -->
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -81,7 +80,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 	<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 	<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-	<p style="position: absolute;top: 10px;right: 10px;font-size: 15px;">欢迎您,<%=wcu.getNickname() %> </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>				
+	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您,<%=wcu.getNickname() %> </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>				
 </div>
 <div class="wrap">
     <section class="main-content-descirption">
@@ -90,7 +89,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
         		<p class="tip-t">您刚好需要<br>我正好专业</p>
         		<p class="tip-b">中国塑料领跑者</p>
         		<div class="img-wrap">
-        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM82&oid=00D90000000pkXM" width="100%" height="400px">
+        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM82&oid=00D90000000pkXM" width="100%" height="330px">
         		</div>
         		<div class="arrow-box">
         			<span class="arrow-icon arrow-affter" id="slideDown"><img src="./啄木鸟家电_files/icon-goldarrow.png"></span>
@@ -166,11 +165,11 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
         	<div class="page" style="height:580px;">
         		<p class="tip-t">联系我们</p>
         		<p class="tip-b">
-        			公        司：  厦门永佳和塑胶有限公司
-联 系  人：  谷成钢 (总经理)
-电        话：  0592-5691619
-传        真：  0592-5650851
-地        址：  厦门市湖里区枋钟路2362号金山财富广场2号楼10层
+        			公        司：  厦门永佳和塑胶有限公司<br/>
+联 系  人：  谷成钢 (总经理)<br/>
+电        话：  0592-5691619<br/>
+传        真：  0592-5650851<br/>
+地        址：  厦门市湖里区枋钟路2362号金山财富广场2号楼10层<br/>
         		</p>
         		<div class="img-wrap" style="bottom:20px;">
         			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM7n&oid=00D90000000pkXM" width="100%">
@@ -217,10 +216,6 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	        </div>
 	        <div class="tel-box">
 	            <a href="tel:0592-5691619" style="color:#a0a0a0;">0592-5691619</a>
-	            <a href="tel:0592-5691619" class="telphone-box" style="color:#a0a0a0;">
-	               	 服务咨询
-	                <span class="tel-icon"></span>
-	            </a>
 	        </div>
 	     </div>
     </section>
