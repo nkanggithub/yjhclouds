@@ -1,4 +1,19 @@
-﻿<!Doctype html>
+﻿<%@ page language="java" pageEncoding="UTF-8"%>
+ <%@ page import="java.util.*,org.json.JSONObject"%>
+<%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
+<%@ page import="com.nkang.kxmoment.util.RestUtils"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
+<%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%	
+
+
+String AccessKey = RestUtils.callGetValidAccessKey();
+String uid = request.getParameter("UID");
+WeChatUser wcu;
+wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+%> 
+<!Doctype html>
 <html>
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -203,10 +218,11 @@ line-height:22px;}
 </style>
 </head>
 <body>
-<div style="padding:10px;border-bottom:2px solid #0067B6"> 
+<div style="padding:10px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
+					<p style="position: absolute;top: 13px;right: 10px;font-size: 15px;">欢迎, <%=wcu.getNickname() %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl()  %>" alt=""/>
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
