@@ -2569,7 +2569,7 @@ public class MongoDBBasic {
 			insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
 			insertQuery.put("item",onlineQuotation.getItem());
 			insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-			insertQuery.put("locationList",onlineQuotation.getLocationList());
+			//insertQuery.put("locationList",onlineQuotation.getLocationList());
 			insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
 			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
