@@ -38,7 +38,8 @@ public class QuotationController {
 			quotation.setOnDelivery(onDelivery);
 			quotation.setSoldOutOfPay(soldOutOfPay);
 			quotation.setOriginalProducer(originalProducer);
-			
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			quotation.setLastUpdate(cursqlTS.toString());
 			String ret="";
 			ret=MongoDBBasic.saveOnlineQuotation(quotation);
 		
@@ -52,7 +53,7 @@ public class QuotationController {
 	}
 	
 	@RequestMapping("/getOneQuotation")
-	public@ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=false) String item){
+	public@ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=true) String item){
 		List<OnlineQuotation> Quotation =new ArrayList<OnlineQuotation>();
 		Quotation=MongoDBBasic.getOneQuotation(item);
 		return Quotation;
