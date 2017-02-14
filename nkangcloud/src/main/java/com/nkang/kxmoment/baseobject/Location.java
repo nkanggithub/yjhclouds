@@ -1,7 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
 public class Location {
-	private String chongQing;
+	/*private String chongQing;
 	private String chengDu;
 	private String shangHai;
 	public String getChongQing() {
@@ -21,6 +21,6 @@ public class Location {
 	}
 	public void setShangHai(String shangHai) {
 		this.shangHai = shangHai;
-	}
+	}*/
 
 }
