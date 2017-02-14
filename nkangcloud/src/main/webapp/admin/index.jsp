@@ -372,7 +372,7 @@ jQuery
 				var li='	<div class="Work_Mates_div_list_div2">'
 					+'                                           	 	<div class="Work_Mates_img_div2">'
 					+'                                        			 <img src="'
-					+ temp.headimgurl
+					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
 					+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
 					+ temp.nickname
 					+ '\',\''
@@ -466,13 +466,14 @@ function updateUserInfo(openId){
 		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
 		var isRegistered = $("input[name='isRegistered']:checked").val();
 		var registerDate = $("#registerDate").val();
+		var role = $("input[name='role']:checked").val();
 		if(isActived==null || isAuthenticated==null ||  isRegistered==null || registerDate==null){
 			swal("updateUserInformation fail! Don't input blank content", "Pls input your correct information.", "error");
 		}
 		
 		$.ajax({
 			url:"../updateUserInfo",
-			data:{uid:openId,isActived:isActived,isAuthenticated:isAuthenticated,isRegistered:isRegistered,registerDate:registerDate},
+			data:$("#atest").serialize(),
 			type:"POST",
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -591,6 +592,7 @@ function updateUserInfo(openId){
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+												<form id="atest">
 												<table id="tableForm" style="margin-top:20px;">
 													<tr>
 														<td><nobr>真实姓名:</nobr></td>
@@ -610,16 +612,16 @@ function updateUserInfo(openId){
 															<nobr>
 															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户
 															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商
-															</nobr><br/><nobr>
+															</nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户
 															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手
-															</nobr><br/><nobr>
+															</nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理
 															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员
-															</nobr><br/><nobr>
+															</nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalImtMgt" />内部中级管理
 															<input type="checkbox"  name="role" value="isInternalQuoter" />内部报价者
-															</nobr><br/><nobr>
+															</nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员
 															<input type="checkbox"  name="role" value="isITOperations" />IT运维
 															</nobr>
@@ -650,6 +652,7 @@ function updateUserInfo(openId){
 													    </td>
 												    </tr>
 												 </table>
+												 </form>
 												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="updateUserInfoBtn">确定</button>
 									</div>
 								</div>
