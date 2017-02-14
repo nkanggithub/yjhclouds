@@ -5,9 +5,83 @@
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
+<script>
+$(function(){
+
+$(".singleQuote").on("swiperight",function(){
+$(this).addClass("followBtn");
+$(this).append("<div class='follow'><p>关注</p><p class='cancelFollow' onclick='cancelFollow(this);'>取消</p></div>");
+$(this).siblings().removeClass("followBtn");
+$(this).siblings().remove(".follow");
+$(this).siblings().removeClass("editBtn");
+$(this).siblings().remove(".edit");
+});
+$(".singleQuote").on("swipeleft",function(){
+$(this).addClass("editBtn");
+$(this).append("<div class='edit'><p>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div>");
+$(this).siblings().removeClass("editBtn");
+$(this).siblings().remove(".edit");
+$(this).siblings().removeClass("followBtn");
+$(this).siblings().remove(".follow");
+});
+function cancelEdit(obj){
+$(obj).parent().parent().removeClass("editBtn");
+$(obj).parent().parent().remove(".edit");
+};
+window.cancelEdit=cancelEdit;
+function cancelFollow(obj){
+$(obj).parent().parent().removeClass("followBtn");
+$(obj).parent().parent().remove(".follow");
+};
+window.cancelFollow=cancelFollow;
+})
+
+</script>
 <!--	<link href='css/horsey.css' rel='stylesheet' type='text/css' />
 	<link href='css/example.css' rel='stylesheet' type='text/css' />-->
 <style>
+.edit
+{width: 70px;
+    height: 90px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: -70px;
+	font-size:14px;
+    background: red;
+    border-bottom: 1px solid black;}
+	.edit p
+	{width:100%;
+	height:30px;
+	line-height:60px;
+	}
+.follow
+{width: 70px;
+    height: 90px;
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: -70px;
+	font-size:14px;
+    background: red;
+    border-bottom: 1px solid black;}
+	.follow p
+	{width:100%;
+	height:30px;
+	line-height:60px;
+	}
+.editBtn
+{
+position: relative;
+    left: -70px;
+	}
+.followBtn
+{
+position: relative;
+    right: -70px;
+	}
 *{margin:0;padding:0;}
 .singleQuote
 {
@@ -39,7 +113,7 @@ float:left;
 {
 
 width:27%;
-margin-left:1%;
+margin-right:1%;
 height:100%;
 float:left;
 }
@@ -135,7 +209,7 @@ line-height:22px;}
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
 				</div>
 <!--<input class="searchBox" id='hy' />-->
-<div  style="position: absolute; top: 120px;" data-role="page" style="padding-top:15px" data-theme="c">
+<div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
  <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
 <li class="singleQuote">
 <div class="firstLayer"><p class="quoteTitle">0215A [ABS]</p><p class="tag"></p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
@@ -229,3 +303,4 @@ line-height:22px;}
 	<script src='js/example.js'></script>-->
 </body>
 </html>
+
