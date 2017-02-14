@@ -926,7 +926,7 @@ public class MasterDataRestController {
 			@RequestParam(value="item", required=false) String item,
 			@RequestParam(value="quotationPrice", required=false) String quotationPrice,
 			@RequestParam(value="comments", required=false) String comments,
-			@RequestParam(value="locationList", required=false) List<Location> locationList,
+			@RequestParam(value="locationAmounts", required=false) String locationAmounts,
 			@RequestParam(value="avaliableInventory", required=false) String avaliableInventory,
 			@RequestParam(value="onDelivery", required=false) String onDelivery,
 			@RequestParam(value="soldOutOfPay", required=false) String soldOutOfPay,
@@ -938,7 +938,7 @@ public class MasterDataRestController {
 		quotation.setCategoryGrade(categoryGrade);
 		quotation.setItem(item);
 		quotation.setComments(comments);
-		quotation.setLocationList(locationList);
+		quotation.setLocationAmounts(locationAmounts);
 		quotation.setAvaliableInventory(avaliableInventory);
 		quotation.setOnDelivery(onDelivery);
 		quotation.setSoldOutOfPay(soldOutOfPay);
