@@ -13,8 +13,15 @@ public class OnlineQuotation {
 	private String onDelivery;
 	private String soldOutOfPay;
 	private String originalProducer;
+	private String lastUpdate;
 	
 	
+	public String getLastUpdate() {
+		return lastUpdate;
+	}
+	public void setLastUpdate(String lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 	public String getLocationAmounts() {
 		return locationAmounts;
 	}
