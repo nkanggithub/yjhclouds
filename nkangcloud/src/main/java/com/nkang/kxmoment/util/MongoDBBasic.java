@@ -2723,7 +2723,7 @@ public class MongoDBBasic {
 			while (cor.hasNext()) {
 				DBObject objQuotation = cor.next();
 				OnlineQuotation qt = new OnlineQuotation();
-				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("Category").toString());
+				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("category").toString());
 				qt.setCategoryGrade(objQuotation.get("categoryGrade") == null ? "" : objQuotation.get("categoryGrade").toString());
 				qt.setItem(objQuotation.get("item") == null ? "" : objQuotation.get("item").toString());
 				qt.setQuotationPrice(objQuotation.get("quotationPrice") == null ? "" : objQuotation.get("quotationPrice").toString());
@@ -2756,7 +2756,7 @@ public class MongoDBBasic {
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
 		
 			OnlineQuotation qt = new OnlineQuotation();
-			qt.setCategory(dbQuotation.get("category") == null ? "" : dbQuotation.get("Category").toString());
+			qt.setCategory(dbQuotation.get("category") == null ? "" : dbQuotation.get("category").toString());
 			qt.setCategoryGrade(dbQuotation.get("categoryGrade") == null ? "" : dbQuotation.get("categoryGrade").toString());
 			qt.setItem(dbQuotation.get("item") == null ? "" : dbQuotation.get("item").toString());
 			qt.setQuotationPrice(dbQuotation.get("quotationPrice") == null ? "" : dbQuotation.get("quotationPrice").toString());
@@ -2791,7 +2791,7 @@ public class MongoDBBasic {
 			while (cor.hasNext()) {
 				DBObject objQuotation = cor.next();
 				OnlineQuotation qt = new OnlineQuotation();
-				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("Category").toString());
+				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("category").toString());
 				qt.setCategoryGrade(objQuotation.get("categoryGrade") == null ? "" : objQuotation.get("categoryGrade").toString());
 				qt.setItem(objQuotation.get("item") == null ? "" : objQuotation.get("item").toString());
 				qt.setQuotationPrice(objQuotation.get("quotationPrice") == null ? "" : objQuotation.get("quotationPrice").toString());
