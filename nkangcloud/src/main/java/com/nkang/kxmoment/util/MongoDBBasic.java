@@ -2625,7 +2625,7 @@ public class MongoDBBasic {
 	 * chang-zheng
 	 * FOR OnlineQuotation
 	 */
-	public static String saveLocation(String item, Location location){
+	/*public static String saveLocation(String item, Location location){
 		mongoDB = getMongoDB();
 		//DBObject query = new BasicDBObject();
 		String ret="saveLocation fail";
@@ -2685,7 +2685,7 @@ public class MongoDBBasic {
 			
 		return ret;
 	}
-	
+	*/
 	/*
 	 * chang-zheng
 	 * getAllQuotations
