@@ -2,6 +2,7 @@ package com.nkang.kxmoment.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -2575,7 +2576,10 @@ public class MongoDBBasic {
 			insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-			insertQuery.put("lastUpdate",new Date().toString());
+			
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			insertQuery.put("lastUpdate",cursqlTS);
+			
 			WriteResult writeResult;
 			if(queryresult==null){
 				insertQuery.put("item",onlineQuotation.getItem());
