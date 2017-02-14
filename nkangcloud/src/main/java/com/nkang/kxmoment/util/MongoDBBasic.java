@@ -2575,7 +2575,7 @@ public class MongoDBBasic {
 			WriteResult writeResult;
 			if(queryresult==null){
 				insertQuery.put("item",onlineQuotation.getItem());
-				insertQuery.put("locationList",onlineQuotation.getLocationList());
+				insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
 				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
 				ret="insert Quotation ok  -->" + writeResult;
 			}else{
