@@ -279,7 +279,7 @@ jQuery
 					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#fff;' href='mailto:"+jsons.results[0].email+"'>"+jsons.results[0].email+"</a>");
 					$("#info_selfIntro").text(jsons.results[0].selfIntro);
 				}else{
-					$("#info_username span").html('未注册');
+					$("#info_username span").html('未注册'+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$("img.zan").css('display','none');
 					$("span.zan").css('display','none');
 					$("#info_all").css('display','none');
@@ -406,6 +406,7 @@ function syncUser(){
 		success : function(data) {
 			swal("Congratulations！", data, "success"); 
 			$("#syncUser").attr("src","../MetroStyleFiles/refresh2.png");
+			getMDLUserLists();
 		}
 	});
 }
