@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -2572,6 +2573,7 @@ public class MongoDBBasic {
 			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+			insertQuery.put("lastUpdate",new Date().toString());
 			WriteResult writeResult;
 			if(queryresult==null){
 				insertQuery.put("item",onlineQuotation.getItem());
