@@ -386,14 +386,29 @@ jQuery
 				ul += li;
 			}
 			ul='<div class="Work_Mates_div_list_div2">'
-			+'<span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
+			+'<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;"/><span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
 			+'&nbsp;&nbsp;&nbsp;已注册人数：'+regNumber
 			+'</span><div class="clear"></div></div>'+ul;
 			$("#Work_Mates_div").html(ul);
+			$("#syncUser").click(function(){
+				syncUser();
+			});
 		}
 	});
 }
-
+function syncUser(){
+	$("#syncUser").attr("src","../MetroStyleFiles/loading.gif");
+	jQuery.ajax({
+		type : "GET",
+		url : "../userProfile/getWechatUserLists",
+		data : {},
+		cache : false,
+		success : function(data) {
+			swal("Congratulations！", data, "success"); 
+			$("#syncUser").attr("src","../MetroStyleFiles/refresh2.png");
+		}
+	});
+}
 function updateUserInfo(openId){
 	$('#UserInfo').modal('hide');
 	$('#updateUserInfoForm').modal('show');
