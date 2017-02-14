@@ -1,8 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
- <%@ page import="java.util.*,org.json.JSONObject"%>
-<%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
+<%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
-<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
@@ -12,7 +10,6 @@ WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 %> 
 <!DOCTYPE html>
-<!-- saved from url=(0078)http://app.xiujiadian.com/staticpage/servicedescription/brand-description.html -->
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -92,7 +89,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
         			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM82&oid=00D90000000pkXM" width="100%" height="330px">
         		</div>
         		<div class="arrow-box">
-        			<span class="arrow-icon arrow-affter" id="slideDown"><img src="./啄木鸟家电_files/icon-goldarrow.png"></span>
+        			<span class="arrow-icon arrow-affter" id="slideDown"><img src="../Jsp/PIC/icon-goldarrow.png"></span>
         		</div>
         	</div>
         	<div class="page" id="pageD1">
@@ -207,7 +204,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	            
 	            </div>
 	            <div class="btn-box">
-	                <button class="btn" onclick="appointment()">马上询价</button>
+	                <a href="http://yongjiahe.duapp.com/mdm/quoteDetail.jsp?UID="+<%= uid%>+"""><button class="btn">马上询价</button></a>
 	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
