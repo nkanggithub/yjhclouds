@@ -954,7 +954,7 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * FOR OnlineQuotation
 	 */
-	@RequestMapping("/saveLocation")
+	/*@RequestMapping("/saveLocation")
 	public static String saveLocation(@RequestParam(value="item", required=false) String item,
 			@RequestParam(value="chongQing", required=false) String chongQing,
 			@RequestParam(value="chengDu", required=false) String chengDu
@@ -967,5 +967,5 @@ public class MasterDataRestController {
 		
 		return ret;
 	}
-		
+		*/
 }
