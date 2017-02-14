@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mysql.jdbc.StringUtils;
+import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -92,15 +93,42 @@ public class RegisterController {
 		String isAuthenticated = request.getParameter("isAuthenticated");
 		String isRegistered = request.getParameter("isRegistered");
 		String registerDate = request.getParameter("registerDate");
+		String[] checkbox= request.getParameterValues("role");
+		Role role=new Role();
+		for(int i =0;i<checkbox.length;i++) //对checkbox进行遍历  
+		{  
+			if(checkbox[i].equals("isExternalUpStream")){
+				role.setExternalUpStream(true);
+			}else if(checkbox[i].equals("isExternalCustomer")){
+				role.setExternalCustomer(true);
+			}else if(checkbox[i].equals("isExternalPartner")){
+				role.setExternalPartner(true);
+			}else if(checkbox[i].equals("isExternalCompetitor")){
+				role.setExternalCompetitor(true);
+			}else if(checkbox[i].equals("isInternalSeniorMgt")){
+				role.setInternalSeniorMgt(true);
+			}else if(checkbox[i].equals("isInternalImtMgt")){
+				role.setInternalImtMgt(true);
+			}else if(checkbox[i].equals("isInternalBizEmp")){
+				role.setInternalBizEmp(true);
+			}else if(checkbox[i].equals("isInternalNonBizEmp")){
+				role.setInternalNonBizEmp(true);
+			}else if(checkbox[i].equals("isInternalQuoter")){
+				role.setInternalQuoter(true);
+			}else if(checkbox[i].equals("isITOperations")){
+				role.setITOperations(true);
+			}
+		}  
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setIsActive(isActived);
 		user.setIsAuthenticated(isAuthenticated);
 		user.setIsRegistered(isRegistered);
+		user.setRoleObj(role);
 		if(!StringUtils.isNullOrEmpty(registerDate)){
 			user.setRegisterDate(registerDate);
 		}
-		return MongoDBBasic.updateUserWithManageStatus(user.getOpenid(), user.getIsActive(), user.getIsAuthenticated(), user.getIsRegistered(),user.getRegisterDate());
+		return MongoDBBasic.updateUserWithManageStatus(user);
 	}
 	
 	@RequestMapping("/ajaxValidateTelephone")
