@@ -2582,25 +2582,87 @@ public class MongoDBBasic {
 			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
 
 			DBObject insertQuery = new BasicDBObject();
-			insertQuery.put("category",onlineQuotation.getCategory());
-			insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
-			insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-			insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
-			insertQuery.put("comments",onlineQuotation.getComments());
-			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
-			insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
-			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
-			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-			insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
-			
 			
 			WriteResult writeResult;
 			if(queryresult==null){
 				insertQuery.put("item",onlineQuotation.getItem());
+				insertQuery.put("category",onlineQuotation.getCategory());
+				insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
+				insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
+				insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
+				insertQuery.put("comments",onlineQuotation.getComments());
+				insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
+				insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
+				insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
+				insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+				insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
+				
 				
 				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
 				ret="insert Quotation ok  -->" + writeResult;
 			}else{
+				if(onlineQuotation.getCategory()==null && queryresult.get("category")!=null){
+					insertQuery.put("category",queryresult.get("category").toString());
+				}else {
+					insertQuery.put("category",onlineQuotation.getCategory());
+				}
+				
+				if(onlineQuotation.getCategoryGrade()==null && queryresult.get("categoryGrade")!=null){
+					insertQuery.put("categoryGrade",queryresult.get("categoryGrade").toString());
+				}else {
+					insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
+				}
+				
+				if(onlineQuotation.getQuotationPrice()==null && queryresult.get("quotationPrice")!=null){
+					insertQuery.put("quotationPrice",queryresult.get("quotationPrice").toString());
+				}else {
+					insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
+				}
+				
+
+				if(onlineQuotation.getAvaliableInventory()==null && queryresult.get("avaliableInventory")!=null){
+					insertQuery.put("avaliableInventory",queryresult.get("avaliableInventory").toString());
+				}else {
+					insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
+				}
+
+				if(onlineQuotation.getComments()==null && queryresult.get("comments")!=null){
+					insertQuery.put("comments",queryresult.get("comments").toString());
+				}else {
+					insertQuery.put("comments",onlineQuotation.getComments());
+				}
+				
+				if(onlineQuotation.getOnDelivery()==null && queryresult.get("onDelivery")!=null){
+					insertQuery.put("onDelivery",queryresult.get("onDelivery").toString());
+				}else {
+					insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
+				}
+
+				if(onlineQuotation.getLocationAmounts()==null && queryresult.get("locationAmounts")!=null){
+					insertQuery.put("locationAmounts",queryresult.get("locationAmounts").toString());
+				}else {
+					insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
+				}
+
+				if(onlineQuotation.getSoldOutOfPay()==null && queryresult.get("soldOutOfPay")!=null){
+					insertQuery.put("soldOutOfPay",queryresult.get("soldOutOfPay").toString());
+				}else {
+					insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
+				}
+				
+				if(onlineQuotation.getOriginalProducer()==null && queryresult.get("originalProducer")!=null){
+					insertQuery.put("originalProducer",queryresult.get("originalProducer").toString());
+				}else {
+					insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
+				}
+				
+
+				if(onlineQuotation.getLastUpdate()==null && queryresult.get("lastUpdate")!=null){
+					insertQuery.put("lastUpdate",queryresult.get("lastUpdate").toString());
+				}else {
+					insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
+				}
+				
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", insertQuery);
 				writeResult=mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", onlineQuotation.getItem()), doc);
