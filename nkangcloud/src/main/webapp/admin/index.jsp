@@ -587,7 +587,7 @@ function updateUserInfo(openId){
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-body"
-										style="white-space: pre-line; padding: 0px; margin-top:100px">
+										style="white-space: pre-line; padding: 0px;">
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
@@ -607,8 +607,8 @@ function updateUserInfo(openId){
 													<tr>
 														<td>用户角色:</td>
 														<td align="left">
-															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户<br/>
-															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商<br/>
+															<nobr><input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户
+															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商</nobr><br/>
 															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户<br/>
 															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手<br/>
 															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理<br/>
@@ -636,11 +636,11 @@ function updateUserInfo(openId){
 												        <td  align="left" class="tdText">
 												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否
 												        </td>
-												    </tr>
+												    </tr> 
 												    <tr>
 													    <td>注册时间:</td>
 													    <td align="left" class="tdText" >
-													    	<input type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px; margin-left: 80px;">
+													    	<input type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;">
 													    </td>
 												    </tr>
 												 </table>
