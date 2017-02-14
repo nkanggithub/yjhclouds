@@ -50,4 +50,22 @@ public class QuotationController {
 		return MongoDBBasic.getAllQuotations();
 		
 	}
+	
+	@RequestMapping("/getOneQuotation")
+	@ResponseBody
+	public List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=false) String item){
+		
+		return MongoDBBasic.getOneQuotation(item);
+		
+	}
+	
+	@RequestMapping("/getQuotationsByQuery")
+	@ResponseBody
+	public List<OnlineQuotation> getQuotationsByQuery(@RequestParam(value="category", required=false) String category,
+			@RequestParam(value="item", required=false) String item){
+		
+		return MongoDBBasic.getQuotationsByQuery(category,item);
+		
+	}
+	
 }
