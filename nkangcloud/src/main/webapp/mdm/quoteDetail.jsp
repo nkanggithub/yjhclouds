@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,org.json.JSONObject"%>
-<%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
+<%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
@@ -9,10 +9,11 @@
 
 
 String AccessKey = RestUtils.callGetValidAccessKey();
+List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-%> 
+%>  
 <!Doctype html>
 <html>
 <head>
@@ -222,96 +223,34 @@ line-height:22px;}
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-					<p style="position: absolute;top: 8px;right: 10px;font-size: 15px;">欢迎, <%=wcu.getNickname() %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl()  %>" alt=""/>
+					<p style="position: absolute;top: 8px;right: 10px;font-size: 15px;">欢迎,<%=wcu.getNickname() %> </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
  <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
+<%
+for(int i=0;i<ql.size();i++){
+%>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">0215A [ABS]</p><p class="tag"></p><p class="quotePrice"><span style="color:red">￥16700</span></p></div>
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>179.86</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>14.175</p></div>
-<div class="shape onDelivery"><p>在途</p><p>0</p></div>
-</div>
-<div class="rightPanel">
-<p>重庆 194.035</p>
-<p>成都 0</p>
-</div>
-</div>
-</li>
-<li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-757K [ABS]</p><p class="tag tagStyle">一般级</p><p class="quotePrice"><span style="color:red">￥18200</span></p></div>
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>148.6327</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>99</p></div>
-<div class="shape onDelivery"><p>在途</p><p>194</p></div>
-</div>
-<div class="rightPanel">
-<p>重庆 18.9977</p>
-<p>成都 34.635</p>
-</div>
-</div>
-</li>
-<li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PC/ABS-385KZ</p><p class="tag"></p><p class="quotePrice"><span style="color:green">￥25500</span></p></div>
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>1</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>0</p></div>
-<div class="shape onDelivery"><p>在途</p><p>0</p></div>
-</div>
-<div class="rightPanel">
-<p>重庆 0</p>
-<p>成都 1</p>
-</div>
-</div>
-</li>
+<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %></p><% if(null==ql.get(i)){ %><p class="tag"></p>
+<% 
+}else{
+	%>
+	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"><span style="color:red">￥<%=ql.get(i).getQuotationPrice() %></span></p></div>
 
-<li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-749SK [ABS]</p><p class="tag tagStyle">押出级</p><p class="quotePrice"><span style="color:red">￥18600</span></p></div>
 <div class="secondLayer">
 <div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>49.6755</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>19.25</p></div>
-<div class="shape onDelivery"><p>在途</p><p>57</p></div>
+<div class="shape quoteInventory "><p>可用库存</p><p><%=ql.get(i).getAvaliableInventory() %></p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p><%=ql.get(i).getSoldOutOfPay() %></p></div>
+<div class="shape onDelivery"><p>在途</p><p><%=ql.get(i).getOnDelivery() %></p></div>
 </div>
 <div class="rightPanel">
-<p>重庆 9.0005</p>
-<p>成都 2.925</p>
+<p><%=ql.get(i).getLocationAmounts().split("|")[0] %></p>
+<p><%=ql.get(i).getLocationAmounts().split("|")[1] %></p>
 </div>
 </div>
 </li>
-<li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PA-726M [ABS]</p><p class="tag tagStyle">电镀级</p><p class="quotePrice"><span style="color:black">￥18800</span></p></div>
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>84.1005</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>20.275</p></div>
-<div class="shape onDelivery"><p>在途</p><p>84</p></div>
-</div>
-<div class="rightPanel">
-<p>重庆 20.3755</p>
-<p>成都 0</p>
-</div>
-</div>
-</li>
-<li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle">PC/1100</p><p class="tag"></p><p class="quotePrice"><span style="color:black">￥23800</span></p></div>
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p>7.325</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p>0</p></div>
-<div class="shape onDelivery"><p>在途</p><p>0</p></div>
-</div>
-<div class="rightPanel">
-<p>重庆 7.325</p>
-<p>成都 0</p>
-</div>
-</div>
-</li>
+<%} %>
 </ul>
 </div>
 <!--
