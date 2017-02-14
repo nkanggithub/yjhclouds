@@ -900,8 +900,6 @@ function showRegister(){
 			 swal("Registered fail!", "Pls input your correct phone information.", "error");
 		 }else if (!emailFilter.test(email)){
 			 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
-		 }else if (selfIntro==''){
-			 swal("Registered fail!", "Pls input your correct self-introduction information.", "error");
 		 }else{
 			$.ajax({
 				url:"../regist",
