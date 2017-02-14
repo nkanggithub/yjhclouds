@@ -14,7 +14,15 @@ public class Teamer{
 	public String like;
 	public String groupid;
 	public String realName;
+	public String companyName;
 	public ArrayList tag;
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	public ArrayList getTag() {
 		return tag;
 	}

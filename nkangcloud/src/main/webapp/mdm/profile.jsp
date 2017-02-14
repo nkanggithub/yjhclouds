@@ -829,7 +829,7 @@ function showRegister(){
 				if(jsons.results[0].email !="未注册"){
 					$("#email").val(jsons.results[0].email);
 				}
-				$("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
+				/* $("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
 			    var count=$("#roleSelect option").length;
 			    for(var i=0;i<count;i++)  
 			       {           if($("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
@@ -873,23 +873,24 @@ function showRegister(){
 			    
 			    if(jsons.results[0].selfIntro !="未注册"){
 					$("#selfIntro").val(jsons.results[0].selfIntro);
-			    }
+			    } */
 			}
 		}
 	});
 	$("#registerBtn").click(function(){
 		var uid = $("#uid").val();
+		var companyname = $("#companyname").val();
 		var name = $("#realname").val();
 		var phone = $("#phone").val();
 		var email = $("#email").val();
 		//var suppovisor = $("#suppovisor").val();
-		var role = $("#roleSelect option:selected").val();
+		/* var role = $("#roleSelect option:selected").val();
 		var group = $("#groupSelect option:selected").val();
 		var javatag = $("#javatag").val();
 		var htmltag = $("#htmltag").val();
 		var webservicetag = $("#webservicetag").val();
 		var etltag = $("#etltag").val();
-		var selfIntro = $("#selfIntro").val();
+		var selfIntro = $("#selfIntro").val(); */
 		
 		 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		 var phoneFilter = /^1[0-9]{10}/;
@@ -904,9 +905,8 @@ function showRegister(){
 		 }else{
 			$.ajax({
 				url:"../regist",
-				data:{uid:uid,name:name,telephone:phone,email:email,
-					role:role,group:group,javatag:javatag,htmltag:htmltag,
-					webservicetag:webservicetag,etltag:etltag,selfIntro:selfIntro},
+				data:{uid:uid,companyname:companyname,name:name,telephone:phone,email:email
+					},//role:role,group:group,javatag:javatag,htmltag:htmltag,webservicetag:webservicetag,etltag:etltag,selfIntro:selfIntro
 				type:"POST",
 				dataType:"json",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1767,6 +1767,12 @@ function getNowFormatDate() {
 												    <tr>
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
 												        <td class="tdInput">
+												          <input type="text" placeholder="请输入公司名称" id="companyname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
+												        </td>
+												      </tr>
+												    <tr>
+												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/username2.png'/></td>
+												        <td class="tdInput">
 												          <input type="text" placeholder="请输入真实姓名" id="realname"  pattern="^[\u4E00-\u9FA0\s]+$|^[a-zA-Z\s]+$" required/>
 												        </td>
 												      </tr>
@@ -1782,6 +1788,7 @@ function getNowFormatDate() {
 												          <input class="inputClass" placeholder="请输入邮箱地址" type="email" id="email" required/>
 												        </td>
 												      </tr>
+												      <!--
 												      <tr>
 												        <td class="tdText"><img class='imgclass' src='../MetroStyleFiles/role2.png'/></td>
 												        <td>
@@ -1794,7 +1801,7 @@ function getNowFormatDate() {
 														</select>
 												        </td>
 												      </tr>
-												      <tr>
+												       <tr>
 												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/group2.png"/></td>
 												        <td>
 												         <select id='groupSelect'>
@@ -1806,14 +1813,14 @@ function getNowFormatDate() {
 															<option>Other</option>
 														</select>
 												        </td>
-												      </tr>
-												      <tr>
+												      </tr> -->
+												      <!-- <tr>
 												        <td class="tdText"><img class="imgclass" src="../MetroStyleFiles/selfIntro2.png"/></td>
 												        <td>
 												          <input class="inputClass" type="text" placeholder="请输入个人简介" id="selfIntro" required/>
 												        </td>
-												      </tr>
-												      <tr class="sliderclass">
+												      </tr> -->
+												      <!-- <tr class="sliderclass">
 												        <td style="width:50px" >Java</td>
 												        <td>
 															<input id="javatag" class="easyui-slider" style="width:220px" data-options="
@@ -1844,7 +1851,7 @@ function getNowFormatDate() {
 																		showTip:true
 																	"/>
 												        </td>
-												      </tr>
+												      </tr> -->
 												      
 												 </table>
 											    <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="registerBtn">在一起吧</button>

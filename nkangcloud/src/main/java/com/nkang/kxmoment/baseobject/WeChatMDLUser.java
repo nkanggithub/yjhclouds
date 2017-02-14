@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class WeChatMDLUser extends WeChatUser {
 
 	public String realName;
+	public String companyName;
 	public String registerDate;
 	public int workDay;
 	public int CongratulateNum;
@@ -19,6 +20,13 @@ public class WeChatMDLUser extends WeChatUser {
 	public String IsRegistered;
 	public ArrayList tag;
 	public HashMap like;
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	public String getIsActive() {
 		return IsActive;
 	}

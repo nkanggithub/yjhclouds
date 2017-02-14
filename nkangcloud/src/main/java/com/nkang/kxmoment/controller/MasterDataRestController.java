@@ -593,6 +593,7 @@ public class MasterDataRestController {
 			@RequestParam(value="phone", required=false) String phone,
 			@RequestParam(value="group", required=false) String groupid,
 			@RequestParam(value="name", required=false) String name,
+			@RequestParam(value="companyname", required=false) String companyname,
 			@RequestParam(value="skill", required=false) String skill
 			){
 		boolean ret = false;
@@ -605,6 +606,7 @@ public class MasterDataRestController {
 		teamer.setEmail(email);
 		teamer.setPhone(phone);
 		teamer.setGroupid(groupid);
+		teamer.setCompanyName(companyname);
 		teamer.setRealName(name);
 		ArrayList taglist=new ArrayList();
 		String[] tagArr = skill.split(",");

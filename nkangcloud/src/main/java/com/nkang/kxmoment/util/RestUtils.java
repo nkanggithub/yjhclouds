@@ -1750,6 +1750,9 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getOpenid()!=null&&!"".equals(user.getOpenid())){
 				arr.add("openid="+user.getOpenid());
 			}
+			if(user.getCompanyName()!=null&&!"".equals(user.getCompanyName())){
+				arr.add("companyname="+user.getCompanyName());
+			}
 			if(user.getRealName()!=null&&!"".equals(user.getRealName())){
 				arr.add("name="+user.getRealName());
 			}
@@ -1762,7 +1765,7 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getRegisterDate()!=null&&!"".equals(user.getRegisterDate())){
 				arr.add("registerDate="+user.getRegisterDate());
 			}
-			if(user.getRole()!=null&&!"".equals(user.getRole())){
+			/*if(user.getRole()!=null&&!"".equals(user.getRole())){
 				arr.add("role="+user.getRole());
 			}
 			if(user.getGroupid()!=null&&!"".equals(user.getGroupid())){
@@ -1812,7 +1815,7 @@ public static String regist(WeChatMDLUser user) {
 			System.out.println(skill);
 			if(user.getTag().size()>0){
 				arr.add("skill="+skill);
-			}
+			}*/
 			
 			String temp="";
 			for(int i=0;i<arr.size();i++){
