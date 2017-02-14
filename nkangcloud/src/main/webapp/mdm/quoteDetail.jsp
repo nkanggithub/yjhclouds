@@ -131,7 +131,7 @@ float:left;
 width:27%;
 margin-right:1%;
 height:100%;
-float:left;
+float:right;
 }
 .shape{
 margin-top:2%;
@@ -219,11 +219,13 @@ line-height:22px;}
 </style>
 </head>
 <body>
+<img style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-					<p style="position: absolute;top: 8px;right: 10px;font-size: 15px;">欢迎,<%=wcu.getNickname() %> </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
+					<p style="position: absolute;top: 10px;right: 10px;font-size: 15px;">欢迎,<%=wcu.getNickname() %> </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
+				
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
@@ -232,10 +234,7 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %><%if(null!=ql.get(i).getCategory()){  %>[<%=ql.get(i).getCategory() %>]<%} %></p><% if(null==ql.get(i).getCategoryGrade()){ %><p class="tag"></p>
-<% 
-}else{
-	%>
+<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %><%if(null!=ql.get(i).getCategory()){  %>[<%=ql.get(i).getCategory() %>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
 	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"><span style="color:red">￥<%=ql.get(i).getQuotationPrice() %></span></p></div>
 
 <div class="secondLayer">
@@ -258,4 +257,3 @@ for(int i=0;i<ql.size();i++){
 	<script src='js/example.js'></script>-->
 </body>
 </html>
-
