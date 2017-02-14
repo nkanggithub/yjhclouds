@@ -2567,15 +2567,14 @@ public class MongoDBBasic {
 			DBObject insertQuery = new BasicDBObject();
 			insertQuery.put("category",onlineQuotation.getCategory());
 			insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
-			insertQuery.put("item",onlineQuotation.getItem());
 			insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-			
 			insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
 			insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
 			insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 			insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
 			WriteResult writeResult;
 			if(queryresult==null){
+				insertQuery.put("item",onlineQuotation.getItem());
 				insertQuery.put("locationList",onlineQuotation.getLocationList());
 				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
 				ret="insert Quotation ok  -->" + writeResult;
