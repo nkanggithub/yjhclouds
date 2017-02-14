@@ -607,16 +607,22 @@ function updateUserInfo(openId){
 													<tr>
 														<td>用户角色:</td>
 														<td align="left">
-															<nobr><input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户
-															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商</nobr><br/>
-															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户<br/>
-															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手<br/>
-															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理<br/>
-															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员<br/>
-															<input type="checkbox"  name="role" value="isInternalImtMgt" />内部中级管理<br/>
-															<input type="checkbox"  name="role" value="isInternalQuoter" />内部报价者<br/>
-															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员<br/>
+															<nobr>
+															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户
+															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商
+															</nobr><br/><nobr>
+															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户
+															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手
+															</nobr><br/><nobr>
+															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理
+															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员
+															</nobr><br/><nobr>
+															<input type="checkbox"  name="role" value="isInternalImtMgt" />内部中级管理
+															<input type="checkbox"  name="role" value="isInternalQuoter" />内部报价者
+															</nobr><br/><nobr>
+															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员
 															<input type="checkbox"  name="role" value="isITOperations" />IT运维
+															</nobr>
 														</td>
 													</tr>
 													<tr>
