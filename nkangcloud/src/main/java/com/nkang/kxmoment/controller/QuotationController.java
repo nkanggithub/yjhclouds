@@ -47,12 +47,9 @@ public class QuotationController {
 		
 	}
 	@RequestMapping("/getAllQuotations")
-	public @ResponseBody String getAllQuotations(){
+	public @ResponseBody List<OnlineQuotation> getAllQuotations(){
 		
-		if(MongoDBBasic.getAllQuotations().size()>1){
-			return "yyyy";
-		}
-		return "nnnnn";
+		return MongoDBBasic.getAllQuotations();
 		
 	}
 	
