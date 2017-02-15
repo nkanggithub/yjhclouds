@@ -313,7 +313,7 @@ public class CoreService
 						
 						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
 						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
-						if(hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
+						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
 							Article article3 = new Article();
 							article3.setTitle("胖和微管理");
 							article3.setDescription("Administration");
