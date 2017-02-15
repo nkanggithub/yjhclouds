@@ -269,6 +269,22 @@ public class MongoDBBasic {
 		}
 		return false;
 	}
+	public static boolean checkUserAuth(String OpenID,String RoleName){
+		mongoDB = getMongoDB();
+	    try{
+	    	DBObject query = new BasicDBObject();
+	    	query.put("OpenID", OpenID);
+	    	query.put("Role."+RoleName, true);
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(query);
+	    	if(queryresult != null){
+	    		return true;
+	    	}
+	    }
+		catch(Exception e){
+			log.info("queryEmail--" + e.getMessage());
+		}
+		return false;
+	}
 	public static boolean delNullUser(){
 		Boolean ret = false;
 		mongoDB = getMongoDB();
