@@ -288,58 +288,6 @@ jQuery
 							}
 						}
 					}
-					if(jsons.results[0].roleObj.externalUpStream){
-						$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.externalCustomer){
-						$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.externalPartner){
-						$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.externalCompetitor){
-						$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.internalSeniorMgt){
-						$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.internalImtMgt){
-						$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.internalBizEmp){
-						$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.internalNonBizEmp){
-						$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.internalQuoter){
-						$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
-					}
-					if(jsons.results[0].roleObj.itoperations){
-						$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
-					}else{
-						$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
-					}
-					
-					$("#atest input[name='companyName']").val(jsons.results[0].companyName);
 					
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
@@ -360,6 +308,95 @@ jQuery
 					$("#info_all").css('display','none');
 					$("#info_selfIntro").text('');
 				}
+				
+				//*  update data start */
+				data = data.replace(/:"未编辑"/g, ':"未注册"');
+				jsons = eval('(' + data + ')');
+				if(jsons.results[0].roleObj.externalUpStream){
+					$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCustomer){
+					$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalPartner){
+					$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCompetitor){
+					$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalSeniorMgt){
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalImtMgt){
+					$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalBizEmp){
+					$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalNonBizEmp){
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalQuoter){
+					$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.itoperations){
+					$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
+				}
+				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+				
+				if(jsons.results[0].IsActive !="未注册"){
+					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsAuthenticated !="未注册"){
+					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsRegistered !="未注册"){
+					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
+				}
+			    if(jsons.results[0].registerDate !="未注册"){
+			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
+			    } 
+			    if(jsons.results[0].realName !="未注册"){
+			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
+			    }else{
+			    	$("#atest input[name='realName']").val("");
+			    }
+			    if(jsons.results[0].phone !="未注册"){
+			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
+			    }else{
+			    	$("#atest input[name='phone']").val("");
+			    }
+			    if(jsons.results[0].email !="未注册"){
+			    	$("#atest input[name='email']").val(jsons.results[0].email);
+			    }else{
+			    	$("#atest input[name='email']").val("");
+			    }
+			    if(jsons.results[0].companyName !="未注册"){
+			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+			    }else{
+			    	$("#atest input[name='companyName']").val("");
+			    }
+				//*  update data  end */
 				$('#UserInfo').modal('show');
 			}
 		}
@@ -489,46 +526,6 @@ function updateUserInfo(openId){
 	$('#UserInfo').modal('hide');
 	$('#updateUserInfoForm').modal('show');
 	$("#atest_uid").val(openId);
-	$.ajax({
-		type : "GET",
-		url : "../userProfile/getMDLUserLists",
-		data : {
-			UID : openId
-		},
-		cache : false,
-		success : function(data) {
-			data = data.replace(/:null/g, ':"未注册"');
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
-			console.log(jsons.results[0].IsActive+".."+jsons.results[0].IsAuthenticated+".."+jsons.results[0].IsRegistered);
-			if (jsons.results.length > 0) {
-				 if(jsons.results[0].IsActive !="未注册"){
-					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
-				}
-				if(jsons.results[0].IsAuthenticated !="未注册"){
-					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
-				}
-				if(jsons.results[0].IsRegistered !="未注册"){
-					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
-				}
-			    if(jsons.results[0].registerDate !="未注册"){
-			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
-			    } 
-			    if(jsons.results[0].realName !="未注册"){
-			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
-			    }
-			    if(jsons.results[0].phone !="未注册"){
-			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
-			    }
-			    if(jsons.results[0].email !="未注册"){
-			    	$("#atest input[name='email']").val(jsons.results[0].email);
-			    }
-			    if(jsons.results[0].companyName !="未注册"){
-			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
-			    }
-			}
-		}
-	});
 	$("#updateUserInfoBtn").click(function(){
 		var isActived = $("input[name='isActived']:checked").val();
 		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
