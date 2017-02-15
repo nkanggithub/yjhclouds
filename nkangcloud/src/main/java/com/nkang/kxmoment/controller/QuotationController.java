@@ -74,7 +74,15 @@ public class QuotationController {
 		return ret;
 		
 	}
-			
+	
+
+	@RequestMapping("/removeQuotationByItem")
+	@ResponseBody
+	public String removeQuotationByItem(@RequestParam(value="item", required=true) String item){
+		String ret="";
+		ret=MongoDBBasic.delQuotationByItem(item);
+		return ret;
+	}
 			
 	@RequestMapping("/getAllQuotations")
 	public @ResponseBody List<OnlineQuotation> getAllQuotations(){
