@@ -1517,9 +1517,6 @@ public class MongoDBBasic {
                 		if(o.get("NickName") != null){
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
-                		if(o.get("companyName") != null){
-                			weChatMDLUser.setCompanyName(o.get("companyName").toString());
-                		}
                 		Object CongratulateHistory = o.get("CongratulateHistory");
                 		BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
                 		if(CongratulateHistoryObj != null){
@@ -1581,6 +1578,9 @@ public class MongoDBBasic {
             				if(teamobj.get("role") != null){
             					weChatMDLUser.setRole(teamobj.get("role").toString());
             				}
+            				if(teamobj.get("companyName") != null){
+                    			weChatMDLUser.setCompanyName(teamobj.get("companyName").toString());
+                    		}
             				if(teamobj.get("registerDate") != null){
             					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
             					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
