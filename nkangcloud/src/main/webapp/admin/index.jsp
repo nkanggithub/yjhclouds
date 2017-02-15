@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%
+String uid = request.getParameter("UID");
+String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
+String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
+if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCase(uid)||hardcodeUID2.equalsIgnoreCase(uid)){
+}else{
+	out.print("你没有查看该页面的权限！");
+	return;
+}
+
+
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
