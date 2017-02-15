@@ -318,7 +318,7 @@ public class CoreService
 							article3.setTitle("胖和微管理");
 							article3.setDescription("Administration");
 							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
-							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp");
+							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
 							articleList.add(article3);
 						}
 						newsMessage.setArticleCount(articleList.size());
