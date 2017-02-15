@@ -585,30 +585,30 @@ public class MasterDataRestController {
 	@RequestMapping("/CallRegisterUser")
 	public static boolean CallRegisterUser(
 			@RequestParam(value="openid", required=false) String openid,
-			@RequestParam(value="suppovisor", required=false) String suppovisor,
+			//@RequestParam(value="suppovisor", required=false) String suppovisor,
 			@RequestParam(value="registerDate", required=false) String registerDate,
-			@RequestParam(value="role", required=false) String role,
-			@RequestParam(value="selfIntro", required=false) String selfIntro,
+			//@RequestParam(value="role", required=false) String role,
+			//@RequestParam(value="selfIntro", required=false) String selfIntro,
 			@RequestParam(value="email", required=false) String email,
 			@RequestParam(value="phone", required=false) String phone,
-			@RequestParam(value="group", required=false) String groupid,
+			//@RequestParam(value="group", required=false) String groupid,
 			@RequestParam(value="name", required=false) String name,
-			@RequestParam(value="companyname", required=false) String companyname,
-			@RequestParam(value="skill", required=false) String skill
+			@RequestParam(value="companyname", required=false) String companyname
+			//@RequestParam(value="skill", required=false) String skill
 			){
 		boolean ret = false;
 		Teamer teamer = new Teamer();
 		teamer.setOpenid(openid);
-		teamer.setSelfIntro(selfIntro);
-		teamer.setSuppovisor(suppovisor);
+		//teamer.setSelfIntro(selfIntro);
+		//teamer.setSuppovisor(suppovisor);
 		teamer.setRegisterDate(registerDate);
-		teamer.setRole(role);
+		//teamer.setRole(role);
 		teamer.setEmail(email);
 		teamer.setPhone(phone);
-		teamer.setGroupid(groupid);
-		teamer.setCompanyName(companyname);
+		//teamer.setGroupid(groupid);
+		//teamer.setCompanyName(companyname);
 		teamer.setRealName(name);
-		ArrayList taglist=new ArrayList();
+		/*ArrayList taglist=new ArrayList();
 		String[] tagArr = skill.split(",");
 		for(int i=0;i<tagArr.length;i++){
 			String[] tag=tagArr[i].split(":");
@@ -619,7 +619,7 @@ public class MasterDataRestController {
 				taglist.add(temp);
 			}
 		}
-		teamer.setTag(taglist);
+		teamer.setTag(taglist);*/
 		try{
 			ret = MongoDBBasic.registerUser(teamer);
 		}		
@@ -627,6 +627,7 @@ public class MasterDataRestController {
 			ret = false;
 		}
 		return ret;
+		
 	}
 	
 	@RequestMapping("/CallUpdateOpptLatLngIntoMongoDB")
