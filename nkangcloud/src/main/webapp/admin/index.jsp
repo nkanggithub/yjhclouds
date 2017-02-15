@@ -263,7 +263,7 @@ jQuery
 				$("#info_tag tr").html("");
 				$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
 				$("#info_interact2 span.like").text(jsons.results[0].like.number==""?0:jsons.results[0].like.number);
-				if(jsons.results[0].role!="未注册"){
+				if(jsons.results[0].registerDate!="未注册"){
 					$("#info_username span").html(jsons.results[0].realName);
 					$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
 					$("#info_interact2 span.zan").text(jsons.results[0].CongratulateNum);
@@ -293,7 +293,9 @@ jQuery
 					$("#info_all").css('display','table');
 					$("img.zan").css('display','block');
 					$("span.zan").css('display','block');
-					$("#info_username span").html(username+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>'+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
+					$("#info_username span").html(username
+							//+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>'
+							+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
 					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
 					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#fff;' href='mailto:"+jsons.results[0].email+"'>"+jsons.results[0].email+"</a>");
@@ -459,6 +461,18 @@ function updateUserInfo(openId){
 			    if(jsons.results[0].registerDate !="未注册"){
 			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
 			    } 
+			    if(jsons.results[0].realName !="未注册"){
+			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
+			    }
+			    if(jsons.results[0].phone !="未注册"){
+			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
+			    }
+			    if(jsons.results[0].email !="未注册"){
+			    	$("#atest input[name='email']").val(jsons.results[0].email);
+			    }
+			    if(jsons.results[0].companyName !="未注册"){
+			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+			    }
 			}
 		}
 	});
