@@ -2675,6 +2675,23 @@ public class MongoDBBasic {
 	
 	/*
 	 * chang-zheng
+	 * remove OnlineQuotation
+	 */
+	public static String delQuotationByItem(String item){
+		String ret = "fail";
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		query.put("item", item);
+		WriteResult wt = mongoDB.getCollection(collectionQuotation).remove(query);  
+        
+        if(wt!=null){
+        	ret = "removed";
+        }
+		return ret;
+	}
+	
+	/*
+	 * chang-zheng
 	 * FOR OnlineQuotation
 	 */
 	/*public static String UpdateOnlineQuotation(OnlineQuotation onlineQuotation){
@@ -2776,10 +2793,8 @@ public class MongoDBBasic {
 	 * getAllQuotations
 	 */
 	
-	@SuppressWarnings("unchecked")
 	public static List<OnlineQuotation> getAllQuotations() {
 		DBCursor cor ;
-		DBObject dbquery = new BasicDBObject();  
 		cor = mongoDB.getCollection(collectionQuotation).find();
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
 		if(cor!=null){
