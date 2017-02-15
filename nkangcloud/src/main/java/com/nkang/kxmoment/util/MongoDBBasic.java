@@ -1517,6 +1517,9 @@ public class MongoDBBasic {
                 		if(o.get("NickName") != null){
                 			weChatMDLUser.setNickname(o.get("NickName").toString());
                 		}
+                		if(o.get("companyName") != null){
+                			weChatMDLUser.setCompanyName(o.get("companyName").toString());
+                		}
                 		Object CongratulateHistory = o.get("CongratulateHistory");
                 		BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
                 		if(CongratulateHistoryObj != null){
@@ -1524,6 +1527,47 @@ public class MongoDBBasic {
                     		Object[] ConObjects = CongratulateHistoryObj.toArray();
                     		weChatMDLUser.setCongratulateNum(ConObjects.length);
                 		}
+                		Object role = o.get("Role");
+            			DBObject roleobj = new BasicDBObject();
+            			roleobj = (DBObject)role;
+            			Role RoleObj=new Role();
+            			if(roleobj != null){
+            				if(roleobj.get("isExternalUpStream") != null){
+            					RoleObj.setExternalUpStream(Boolean.parseBoolean(roleobj.get("isExternalUpStream").toString()));
+            				}
+            				if(roleobj.get("isExternalCustomer") != null){
+            					RoleObj.setExternalCustomer(Boolean.parseBoolean(roleobj.get("isExternalCustomer").toString()));
+            				}
+            				if(roleobj.get("isExternalPartner") != null){
+            					RoleObj.setExternalPartner(Boolean.parseBoolean(roleobj.get("isExternalPartner").toString()));
+            				}
+            				if(roleobj.get("isExternalCompetitor") != null){
+            					RoleObj.setExternalCompetitor(Boolean.parseBoolean(roleobj.get("isExternalCompetitor").toString()));
+            				}
+            				if(roleobj.get("isInternalSeniorMgt") != null){
+            					RoleObj.setInternalSeniorMgt(Boolean.parseBoolean(roleobj.get("isInternalSeniorMgt").toString()));
+            				}
+            				if(roleobj.get("isInternalImtMgt") != null){
+            					RoleObj.setInternalImtMgt(Boolean.parseBoolean(roleobj.get("isInternalImtMgt").toString()));
+            				}
+            				if(roleobj.get("isInternalBizEmp") != null){
+            					RoleObj.setInternalBizEmp(Boolean.parseBoolean(roleobj.get("isInternalBizEmp").toString()));
+            				}
+            				if(roleobj.get("isInternalNonBizEmp") != null){
+            					RoleObj.setInternalNonBizEmp(Boolean.parseBoolean(roleobj.get("isInternalNonBizEmp").toString()));
+            				}
+            				if(roleobj.get("isInternalQuoter") != null){
+            					RoleObj.setInternalQuoter(Boolean.parseBoolean(roleobj.get("isInternalQuoter").toString()));
+            				}
+            				if(roleobj.get("isITOperations") != null){
+            					RoleObj.setITOperations(Boolean.parseBoolean(roleobj.get("isITOperations").toString()));
+            				}
+            				
+            			}
+                		
+            			weChatMDLUser.setRoleObj(RoleObj);
+            			
+            			
                 		Object teamer = o.get("Teamer");
             			DBObject teamobj = new BasicDBObject();
             			teamobj = (DBObject)teamer;
