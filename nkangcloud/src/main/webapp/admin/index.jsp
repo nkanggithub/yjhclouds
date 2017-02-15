@@ -433,6 +433,7 @@ function syncUser(){
 function updateUserInfo(openId){
 	$('#UserInfo').modal('hide');
 	$('#updateUserInfoForm').modal('show');
+	$("#atest_uid").val(openId);
 	$.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
@@ -466,7 +467,6 @@ function updateUserInfo(openId){
 		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
 		var isRegistered = $("input[name='isRegistered']:checked").val();
 		var registerDate = $("#registerDate").val();
-		var role = $("input[name='role']:checked").val();
 		if(isActived==null || isAuthenticated==null ||  isRegistered==null || registerDate==null){
 			swal("updateUserInformation fail! Don't input blank content", "Pls input your correct information.", "error");
 		}
@@ -593,18 +593,23 @@ function updateUserInfo(openId){
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
 												<form id="atest">
-												<table id="tableForm" style="margin-top:20px;">
+												<input type="hidden" name="uid" id="atest_uid"/>
+												<table id="tableForm" style="margin-top:-20px;">
 													<tr>
 														<td><nobr>真实姓名:</nobr></td>
-														<td><input type="text" name=""/></td>
+														<td><input type="text" name="realName"/></td>
 													</tr>
 													<tr>
 														<td>手机号码:</td>
-														<td><input type="text" name=""/></td>
+														<td><input type="text" name="phone"/></td>
 													</tr>
 													<tr>
 														<td>电子邮箱:</td>
-														<td><input type="text" name=""/></td>
+														<td><input type="text" name="email"/></td>
+													</tr>
+													<tr>
+														<td>公司名称:</td>
+														<td><input type="text" name="companyName"/></td>
 													</tr>
 													<tr>
 														<td>用户角色:</td>
@@ -648,12 +653,12 @@ function updateUserInfo(openId){
 												    <tr>
 													    <td>注册时间:</td>
 													    <td align="left" class="tdText" >
-													    	<input type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;">
+													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;">
 													    </td>
 												    </tr>
 												 </table>
 												 </form>
-												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-bottom: -35px;" id="updateUserInfoBtn">确定</button>
+												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-top: -50px;" id="updateUserInfoBtn">确定</button>
 									</div>
 								</div>
 				
