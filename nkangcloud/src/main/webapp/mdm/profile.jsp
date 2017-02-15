@@ -1507,19 +1507,19 @@ function getNowFormatDate() {
 									<div>
 										<div class="panel-group" id="accordion">
 											<div id="DivLearnings"
-												style="text-align: center; padding: 50px 0px;">
-												<img src="../mdm/images/delivering.gif" />
-												<img src="../mdm/images/moneymoney.gif" />
-												<img src="../mdm/images/nodeliverywithoutpay.gif" />
-												<img src="../mdm/images/noinventory.gif" />
-												<img src="../mdm/images/nosales.gif" />
-												<img src="../mdm/images/orderplease.gif" />
-												<img src="../mdm/images/payreceived.gif" />
-												<img src="../mdm/images/payreceived2.gif" />
-												<img src="../mdm/images/priceincrease.gif" />
-												<img src="../mdm/images/quotation.gif" />
-												<img src="../mdm/images/selfservice.gif" />
-												<img src="../MetroStyleFiles/image/Maintenace.gif" />
+												style="text-align: center; padding: 0px 0px;">
+												<img src="../mdm/images/delivering.gif" width="100"/>
+												<img src="../mdm/images/moneymoney.gif" width="100" />
+												<img src="../mdm/images/nodeliverywithoutpay.gif" width="100" />
+												<img src="../mdm/images/noinventory.gif"  width="100"/>
+												<img src="../mdm/images/nosales.gif"  width="100"/>
+												<img src="../mdm/images/orderplease.gif"  width="100"/>
+												<img src="../mdm/images/payreceived.gif"  width="100"/>
+												<img src="../mdm/images/payreceived2.gif"  width="100"/>
+												<img src="../mdm/images/priceincrease.gif"  width="100"/>
+												<img src="../mdm/images/quotation.gif"  width="100"/>
+												<img src="../mdm/images/selfservice.gif"  width="100"/>
+												<img src="../MetroStyleFiles/image/Maintenace.gif"  width="100"/>
 											</div>
 										</div>
 									</div>
