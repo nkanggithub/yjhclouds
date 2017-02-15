@@ -288,6 +288,59 @@ jQuery
 							}
 						}
 					}
+					if(jsons.results[0].roleObj.externalUpStream){
+						$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.externalCustomer){
+						$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.externalPartner){
+						$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.externalCompetitor){
+						$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.internalSeniorMgt){
+						$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.internalImtMgt){
+						$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.internalBizEmp){
+						$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.internalNonBizEmp){
+						$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.internalQuoter){
+						$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
+					}
+					if(jsons.results[0].roleObj.itoperations){
+						$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
+					}else{
+						$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
+					}
+					
+					$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+					
 					data = data.replace(/:"未注册"/g, ':"未编辑"');
 					jsons = eval('(' + data + ')');
 					$("#info_all").css('display','table');
