@@ -97,32 +97,34 @@ public class RegisterController {
 		String phone=request.getParameter("phone");
 		String email=request.getParameter("email");
 		String companyName=request.getParameter("companyName");
-		String[] checkbox= request.getParameterValues("role");
 		Role role=new Role();
-		for(int i =0;i<checkbox.length;i++) //对checkbox进行遍历  
-		{  
-			if(checkbox[i].equals("isExternalUpStream")){
-				role.setExternalUpStream(true);
-			}else if(checkbox[i].equals("isExternalCustomer")){
-				role.setExternalCustomer(true);
-			}else if(checkbox[i].equals("isExternalPartner")){
-				role.setExternalPartner(true);
-			}else if(checkbox[i].equals("isExternalCompetitor")){
-				role.setExternalCompetitor(true);
-			}else if(checkbox[i].equals("isInternalSeniorMgt")){
-				role.setInternalSeniorMgt(true);
-			}else if(checkbox[i].equals("isInternalImtMgt")){
-				role.setInternalImtMgt(true);
-			}else if(checkbox[i].equals("isInternalBizEmp")){
-				role.setInternalBizEmp(true);
-			}else if(checkbox[i].equals("isInternalNonBizEmp")){
-				role.setInternalNonBizEmp(true);
-			}else if(checkbox[i].equals("isInternalQuoter")){
-				role.setInternalQuoter(true);
-			}else if(checkbox[i].equals("isITOperations")){
-				role.setITOperations(true);
-			}
-		}  
+		if(request.getParameterValues("role")!=null){
+			String[] checkbox= request.getParameterValues("role");
+			for(int i =0;i<checkbox.length;i++) //对checkbox进行遍历  
+			{  
+				if(checkbox[i].equals("isExternalUpStream")){
+					role.setExternalUpStream(true);
+				}else if(checkbox[i].equals("isExternalCustomer")){
+					role.setExternalCustomer(true);
+				}else if(checkbox[i].equals("isExternalPartner")){
+					role.setExternalPartner(true);
+				}else if(checkbox[i].equals("isExternalCompetitor")){
+					role.setExternalCompetitor(true);
+				}else if(checkbox[i].equals("isInternalSeniorMgt")){
+					role.setInternalSeniorMgt(true);
+				}else if(checkbox[i].equals("isInternalImtMgt")){
+					role.setInternalImtMgt(true);
+				}else if(checkbox[i].equals("isInternalBizEmp")){
+					role.setInternalBizEmp(true);
+				}else if(checkbox[i].equals("isInternalNonBizEmp")){
+					role.setInternalNonBizEmp(true);
+				}else if(checkbox[i].equals("isInternalQuoter")){
+					role.setInternalQuoter(true);
+				}else if(checkbox[i].equals("isITOperations")){
+					role.setITOperations(true);
+				}
+			}  												
+		}
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setRealName(realName);
