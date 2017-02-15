@@ -93,6 +93,10 @@ public class RegisterController {
 		String isAuthenticated = request.getParameter("isAuthenticated");
 		String isRegistered = request.getParameter("isRegistered");
 		String registerDate = request.getParameter("registerDate");
+		String realName=request.getParameter("realName");
+		String phone=request.getParameter("phone");
+		String email=request.getParameter("email");
+		String companyName=request.getParameter("companyName");
 		String[] checkbox= request.getParameterValues("role");
 		Role role=new Role();
 		for(int i =0;i<checkbox.length;i++) //对checkbox进行遍历  
@@ -121,6 +125,10 @@ public class RegisterController {
 		}  
 		WeChatMDLUser user = new WeChatMDLUser();
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
+		user.setRealName(realName);
+		user.setPhone(phone);
+		user.setEmail(email);
+		user.setCompanyName(companyName);
 		user.setIsActive(isActived);
 		user.setIsAuthenticated(isAuthenticated);
 		user.setIsRegistered(isRegistered);
