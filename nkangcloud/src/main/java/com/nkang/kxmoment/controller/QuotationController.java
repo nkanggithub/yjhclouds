@@ -3,6 +3,10 @@ package com.nkang.kxmoment.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,6 +50,32 @@ public class QuotationController {
 		return ret;
 		
 	}
+	
+	
+	@RequestMapping("/updateQuotationByItem")
+	@ResponseBody
+	public String updateQuotation(HttpServletRequest request, HttpServletResponse response){
+		OnlineQuotation quotation = new OnlineQuotation();
+		quotation.setAvaliableInventory(request.getParameter("avaliableInventory"));
+		quotation.setCategory(request.getParameter("category"));
+		quotation.setCategoryGrade(request.getParameter("categoryGrade"));
+		quotation.setComments(request.getParameter("comments"));
+		quotation.setItem(request.getParameter("item"));
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		quotation.setLastUpdate(cursqlTS.toString());
+		quotation.setLocationAmounts(request.getParameter("locationAmounts"));
+		quotation.setOnDelivery(request.getParameter("onDelivery"));
+		quotation.setOriginalProducer(request.getParameter("originalProducer"));
+		quotation.setQuotationPrice(request.getParameter("quotationPrice"));
+		quotation.setSoldOutOfPay(request.getParameter("soldOutOfPay"));
+		
+		String ret="";
+		ret=MongoDBBasic.saveOnlineQuotation(quotation);
+		return ret;
+		
+	}
+			
+			
 	@RequestMapping("/getAllQuotations")
 	public @ResponseBody List<OnlineQuotation> getAllQuotations(){
 		
