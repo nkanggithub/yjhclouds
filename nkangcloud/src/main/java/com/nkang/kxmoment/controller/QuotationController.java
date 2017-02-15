@@ -57,8 +57,8 @@ public class QuotationController {
 	public String updateQuotation(HttpServletRequest request, HttpServletResponse response){
 		OnlineQuotation quotation = new OnlineQuotation();
 		quotation.setAvaliableInventory(request.getParameter("avaliableInventory"));
-		quotation.setCategory(request.getParameter("category"));
-		quotation.setCategoryGrade(request.getParameter("categoryGrade"));
+		quotation.setCategory(request.getParameter("category").trim());
+		quotation.setCategoryGrade(request.getParameter("categoryGrade").trim());
 		quotation.setComments(request.getParameter("comments"));
 		quotation.setItem(request.getParameter("item"));
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
