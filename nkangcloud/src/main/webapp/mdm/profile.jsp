@@ -820,6 +820,9 @@ function showRegister(){
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
+				if(jsons.results[0].companyName !="未注册"){
+					$("#companyname").val(jsons.results[0].companyName);
+				}
 				if(jsons.results[0].realName !="未注册"){
 					$("#realname").val(jsons.results[0].realName);
 				}
