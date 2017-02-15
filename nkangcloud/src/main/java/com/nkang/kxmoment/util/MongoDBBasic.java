@@ -542,6 +542,11 @@ public class MongoDBBasic {
 			update.put("IsAuthenticated", user.getIsAuthenticated());
 			update.put("IsRegistered", user.getIsRegistered());
 			update.put("Teamer.registerDate", user.getRegisterDate());
+			update.put("Teamer.realName", user.getRealName());
+			update.put("Teamer.companyName", user.getCompanyName());
+			update.put("Teamer.email", user.getEmail());
+			update.put("Teamer.phone", user.getPhone());
+			
 			DBObject RoleObj = new BasicDBObject();
 	    	Role role=user.getRoleObj();
 	    	RoleObj.put("isExternalUpStream", role.isExternalUpStream());
