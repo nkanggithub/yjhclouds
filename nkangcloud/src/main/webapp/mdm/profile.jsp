@@ -1582,9 +1582,9 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>奖项管理</h4>
 												</td>
-												<td><img  class="mes-openbt" data-mesid="message-tax" 
+												<td><a href="DataVisulization.jsp"><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-price.png" />
-														<h4>产品报价</h4>
+														<h4>胖和数据</h4></a>
 												</td>
 												<td> <!-- onclick="signaturePanel()"  -->
 												 <a href="Signature.jsp?UID=<%=uid%>">
