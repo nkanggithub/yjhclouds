@@ -590,27 +590,27 @@ jQuery
 			            },
 			            "data": [
 			                {
-			                    "label": "上游客户 "+UpStreamList.length+"人",
+			                    "label": "上游客户:"+UpStreamList.length+"人",
 			                    "value": UpStreamList.length
 			                }, 
 			                {
-			                    "label": "下游客户 "+DownStreamList.length+"人",
+			                    "label": "下游客户:"+DownStreamList.length+"人",
 			                    "value": DownStreamList.length
 			                }, 
 			                {
-			                    "label": "贸易商 "+PartnerList.length+"人",
+			                    "label": "贸易商:"+PartnerList.length+"人",
 			                    "value": PartnerList.length
 			                }, 
 			                {
-			                    "label": "代理商 "+CompetitorList.length+"人",
+			                    "label": "代理商:"+CompetitorList.length+"人",
 			                    "value": CompetitorList.length
 			                }, 
 			                {
-			                    "label": "内部员工 "+InternalList.length+"人",
+			                    "label": "内部员工:"+InternalList.length+"人",
 			                    "value": InternalList.length
 			                }, 
 			                {
-			                    "label": "未分类 "+NoRoleList.length+"人",
+			                    "label": "未分类:"+NoRoleList.length+"人",
 			                    "value": NoRoleList.length
 			                }
 			            ]
