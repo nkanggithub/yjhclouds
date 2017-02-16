@@ -446,23 +446,23 @@ jQuery
 				var congratulate="";
 				//************************
 				var temp_B=true;
-				if(temp.roleObj.isExternalUpStream){
+				if(temp.roleObj.externalUpStream){
 					UpStreamList.push(temp);
 					temp_B=false;
 				}
-				if(temp.roleObj.isExternalCustomer){
+				if(temp.roleObj.externalCustomer){
 					DownStreamList.push(temp);
 					temp_B=false;
 				}
-				if(temp.roleObj.isExternalPartner){
+				if(temp.roleObj.externalPartner){
 					PartnerList.push(temp);
 					temp_B=false;
 				}
-				if(temp.roleObj.isExternalCompetitor){
+				if(temp.roleObj.externalCompetitor){
 					CompetitorList.push(temp);
 					temp_B=false;
 				}
-				if(temp.roleObj.isInternalSeniorMgt||temp.roleObj.isInternalImtMgt||temp.roleObj.isInternalBizEmp||temp.roleObj.isInternalNonBizEmp||temp.roleObj.isInternalQuoter||temp.roleObj.isITOperations){
+				if(temp.roleObj.internalSeniorMgt||temp.roleObj.internalImtMgt||temp.roleObj.internalBizEmp||temp.roleObj.internalNonBizEmp||temp.roleObj.internalQuoter||temp.roleObj.itoperations){
 					InternalList.push(temp);
 					temp_B=false;
 				}
