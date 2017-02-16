@@ -72,6 +72,67 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 <style>
    #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
 </style>
+<script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
+<script>
+FusionCharts.ready(function () {
+    var revenueChart = new FusionCharts({
+        type: 'doughnut2d',
+        renderAt: 'chart-container',
+        width: '350',
+        height: '300',
+        dataFormat: 'json',
+        dataSource: {
+            "chart": {
+                "caption": "",
+                "subCaption": "",
+                "numberSuffix": "人",
+                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+                "bgColor": "#ffffff",
+                "showBorder": "0",
+                "use3DLighting": "0",
+                "showShadow": "0",
+                "enableSmartLabels": "0",
+                "startingAngle": "310",
+                "showLabels": "0",
+                "showPercentValues": "1",
+                "showLegend": "1",
+                "legendShadow": "0",
+                "legendBorderAlpha": "0",
+                "defaultCenterLabel": "总人数: 198人",
+                "centerLabel": " $label: $value",
+                "centerLabelBold": "1",
+                "showTooltip": "0",
+                "decimals": "0",
+                "captionFontSize": "14",
+                "subcaptionFontSize": "14",
+                "subcaptionFontBold": "0"
+            },
+            "data": [
+                {
+                    "label": "上游",
+                    "value": "13"
+                }, 
+                {
+                    "label": "下游",
+                    "value": "25"
+                }, 
+                {
+                    "label": "贸易商",
+                    "value": "13"
+                }, 
+                {
+                    "label": "合作伙伴",
+                    "value": "24"
+                }, 
+                {
+                    "label": "内部",
+                    "value": "100"
+                }
+            ]
+        }
+    }).render();
+});
+</script>
 <script type="text/javascript">
 $(function(){  
     $('#return-top').hide();  
@@ -595,14 +656,14 @@ function updateUserInfo(openId){
 		<div id="logo_now_color" style="border-top: 4px solid #fff; padding: 5px;">
 			<ul class="nav nav-tabs" id="myTabs"
 				style="border-color: rgb(0, 179, 136);">
-				<li class="active"><a href="#logoElements" data-toggle="tab"
-					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">LOGO管理</a></li>
-				<li><a href="#WorkMates" data-toggle="tab"
+				<li class="active"><a href="#WorkMates" data-toggle="tab"
 					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">人员管理</a></li>
+				<li><a href="#logoElements" data-toggle="tab"
+					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">LOGO管理</a></li>
 			</ul>
 			<div class="tab-content" id="dvTabContent"
 				style="border: 0px; padding-top: 0px;margin-top:0px;">
-				<div class="tab-pane active" id="logoElements">
+				<div class="tab-pane" id="logoElements">
 					<!-- start logoElements-->
 					<div class="Work_Mates_div2" id="Logo_div">
 					</div>
@@ -740,7 +801,8 @@ function updateUserInfo(openId){
 								</div>
 				
 				
-				<div class="tab-pane" id="WorkMates">
+				<div class="tab-pane active" id="WorkMates">
+				<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					<div class="Work_Mates_div2" id="Work_Mates_div">
 						<!-- <div class="Work_Mates_div_list_div2">
 							<span class="total_num"><img
