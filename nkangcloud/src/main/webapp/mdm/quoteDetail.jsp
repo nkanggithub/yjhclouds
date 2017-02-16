@@ -28,7 +28,10 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 <script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
 $(function(){
-
+function toTop()
+{
+	window.scrollTo(0,0);}
+	window.toTop=toTop;
 $(".singleQuote").on("swiperight",function(){
 $(this).css("overflow","hidden");
 $(this).removeClass("editBtn");
@@ -382,7 +385,7 @@ line-height:22px;}
 </head>
 <body>
 <input id="isSpecial" type="hidden" value="<%= special %>" />
-<img style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
+<img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
