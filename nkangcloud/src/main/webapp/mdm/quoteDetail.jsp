@@ -331,10 +331,10 @@ for(int i=0;i<ql.size();i++){
 </div>
 </div>
 <% if(ql.get(i).getApproveStatus()=="0") {%>
-<img style="width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
+<img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
 <% } %>
 <% if(ql.get(i).getApproveStatus()=="1") {%>
-<img style="width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
+<img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
 <% } %>
 </li>
 <%} %>
