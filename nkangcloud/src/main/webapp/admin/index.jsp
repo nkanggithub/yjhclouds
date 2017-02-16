@@ -74,70 +74,14 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 <script>
-FusionCharts.ready(function () {
-    var revenueChart = new FusionCharts({
-        type: 'doughnut2d',
-        renderAt: 'chart-container',
-        width: '350',
-        height: '300',
-        dataFormat: 'json',
-        dataSource: {
-            "chart": {
-                "caption": "",
-                "subCaption": "",
-                "numberSuffix": "人",
-                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#8e7080",
-                "bgColor": "#ffffff",
-                "showBorder": "0",
-                "use3DLighting": "0",
-                "showShadow": "0",
-                "enableSmartLabels": "0",
-                "startingAngle": "310",
-                "showLabels": "0",
-                "showPercentValues": "1",
-                "showLegend": "1",
-                "legendShadow": "0",
-                "legendBorderAlpha": "0",
-                "defaultCenterLabel": "总人数: 198人",
-                "centerLabel": " $label: $value",
-                "centerLabelBold": "1",
-                "showTooltip": "0",
-                "decimals": "0",
-                "captionFontSize": "14",
-                "subcaptionFontSize": "14",
-                "subcaptionFontBold": "0"
-            },
-            "data": [
-                {
-                    "label": "上游客户",
-                    "value": "13"
-                }, 
-                {
-                    "label": "下游客户",
-                    "value": "25"
-                }, 
-                {
-                    "label": "贸易商",
-                    "value": "13"
-                }, 
-                {
-                    "label": "代理商",
-                    "value": "24"
-                }, 
-                {
-                    "label": "内部员工",
-                    "value": "60"
-                }, 
-                {
-                    "label": "未分类",
-                    "value": "100"
-                }
-            ]
-        }
-    }).render();
-});
-</script>
-<script type="text/javascript">
+var UpStreamList= new Array();
+var DownStreamList= new Array();
+var PartnerList= new Array();
+var CompetitorList= new Array();
+var InternalList= new Array();
+var NoRoleList= new Array();
+var totalNum;
+
 $(function(){  
     $('#return-top').hide();  
     $(function(){  
@@ -500,6 +444,32 @@ jQuery
 				var tag=temp.tag;
 				var tagHtml="";
 				var congratulate="";
+				//************************
+				var temp_B=true;
+				if(temp.roleObj.isExternalUpStream){
+					UpStreamList.push(temp);
+					temp_B=false;
+				}
+				if(temp.roleObj.isExternalCustomer){
+					DownStreamList.push(temp);
+					temp_B=false;
+				}
+				if(temp.roleObj.isExternalPartner){
+					PartnerList.push(temp);
+					temp_B=false;
+				}
+				if(temp.roleObj.isExternalCompetitor){
+					CompetitorList.push(temp);
+					temp_B=false;
+				}
+				if(temp.roleObj.isInternalSeniorMgt||temp.roleObj.isInternalImtMgt||temp.roleObj.isInternalBizEmp||temp.roleObj.isInternalNonBizEmp||temp.roleObj.isInternalQuoter||temp.roleObj.isITOperations){
+					InternalList.push(temp);
+					temp_B=false;
+				}
+				if(temp_B){
+					NoRoleList.push(temp);
+				}
+				//************************
 				
 				if(temp.openid==$('#uid').val()){
 					LastToLikeDate=temp.like.lastLikeDate;
@@ -582,6 +552,70 @@ jQuery
 			$("#Work_Mates_div").html(ul);
 			$("#syncUser").click(function(){
 				syncUser();
+			});
+			
+			
+			FusionCharts.ready(function () {
+			    var revenueChart = new FusionCharts({
+			        type: 'doughnut2d',
+			        renderAt: 'chart-container',
+			        width: '350',
+			        height: '300',
+			        dataFormat: 'json',
+			        dataSource: {
+			            "chart": {
+			                "caption": "",
+			                "subCaption": "",
+			                "numberSuffix": "人",
+			                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#8e7080",
+			                "bgColor": "#ffffff",
+			                "showBorder": "0",
+			                "use3DLighting": "0",
+			                "showShadow": "0",
+			                "enableSmartLabels": "0",
+			                "startingAngle": "310",
+			                "showLabels": "0",
+			                "showPercentValues": "1",
+			                "showLegend": "1",
+			                "legendShadow": "0",
+			                "legendBorderAlpha": "0",
+			                "defaultCenterLabel": "总人数: "+jsons.results.length+"人",
+			                "centerLabel": " $label: $value",
+			                "centerLabelBold": "1",
+			                "showTooltip": "0",
+			                "decimals": "0",
+			                "captionFontSize": "14",
+			                "subcaptionFontSize": "14",
+			                "subcaptionFontBold": "0"
+			            },
+			            "data": [
+			                {
+			                    "label": "上游客户",
+			                    "value": UpStreamList.length
+			                }, 
+			                {
+			                    "label": "下游客户",
+			                    "value": DownStreamList.length
+			                }, 
+			                {
+			                    "label": "贸易商",
+			                    "value": PartnerList.length
+			                }, 
+			                {
+			                    "label": "代理商",
+			                    "value": CompetitorList.length
+			                }, 
+			                {
+			                    "label": "内部员工",
+			                    "value": InternalList.length
+			                }, 
+			                {
+			                    "label": "未分类",
+			                    "value": NoRoleList.length
+			                }
+			            ]
+			        }
+			    }).render();
 			});
 		}
 	});
