@@ -35,6 +35,7 @@ function toTop()
 $(".singleQuote").on("swiperight",function(){
 $(this).css("overflow","hidden");
 $(this).removeClass("editBtn");
+$(this).removeClass("specialEditBtn");
 $(this).remove(".edit");
 });
 $(".singleQuote").on("swipeleft",function(){
