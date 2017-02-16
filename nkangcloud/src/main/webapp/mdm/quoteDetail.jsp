@@ -316,6 +316,7 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
+<input type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
 <div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span><%if(null!=ql.get(i).getCategory()){  %>[<span id="category"><%=ql.get(i).getCategory() %></span>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
 	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
 
@@ -330,10 +331,10 @@ for(int i=0;i<ql.size();i++){
 <p><%=ql.get(i).getLocationAmounts().split("\\|")[1] %></p>
 </div>
 </div>
-<% if(ql.get(i).getApproveStatus().equals("0")) {%>
+<% if(("0").equals(ql.get(i).getApproveStatus())) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
 <% } %>
-<% if(ql.get(i).getApproveStatus().equals("1")) {%>
+<% if(("1").equals(ql.get(i).getApproveStatus())) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
 <% } %>
 </li>
