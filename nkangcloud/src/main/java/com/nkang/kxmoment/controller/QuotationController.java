@@ -112,4 +112,14 @@ public class QuotationController {
 		
 	}
 	
+	@RequestMapping("/updateStatus")
+	public @ResponseBody String updateStatus(@RequestParam(value="item", required=true) String item,
+			@RequestParam(value="approveStatus", required=false) String approveStatus){
+		OnlineQuotation onlineQuotation = new OnlineQuotation();
+		onlineQuotation.setApproveStatus(approveStatus);
+		onlineQuotation.setItem(item);
+		return MongoDBBasic.saveOnlineQuotation(onlineQuotation);
+		
+	}
+	
 }
