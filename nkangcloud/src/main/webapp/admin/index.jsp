@@ -569,7 +569,7 @@ jQuery
 			                "caption": "",
 			                "subCaption": "",
 			                "numberSuffix": "人",
-			                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#8e7080",
+			                "paletteColors": "#8e0000,#8e7080,#0075c2,#1aaf5d,#f2c500,#f45b00",
 			                "bgColor": "#ffffff",
 			                "showBorder": "0",
 			                "use3DLighting": "0",
