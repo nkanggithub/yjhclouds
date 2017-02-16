@@ -86,7 +86,7 @@ FusionCharts.ready(function () {
                 "caption": "",
                 "subCaption": "",
                 "numberSuffix": "人",
-                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+                "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000,#8e7080",
                 "bgColor": "#ffffff",
                 "showBorder": "0",
                 "use3DLighting": "0",
@@ -109,11 +109,11 @@ FusionCharts.ready(function () {
             },
             "data": [
                 {
-                    "label": "上游",
+                    "label": "上游客户",
                     "value": "13"
                 }, 
                 {
-                    "label": "下游",
+                    "label": "下游客户",
                     "value": "25"
                 }, 
                 {
@@ -121,11 +121,15 @@ FusionCharts.ready(function () {
                     "value": "13"
                 }, 
                 {
-                    "label": "合作伙伴",
+                    "label": "代理商",
                     "value": "24"
                 }, 
                 {
-                    "label": "内部",
+                    "label": "内部员工",
+                    "value": "60"
+                }, 
+                {
+                    "label": "未分类",
                     "value": "100"
                 }
             ]
