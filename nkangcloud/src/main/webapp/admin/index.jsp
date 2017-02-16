@@ -164,7 +164,7 @@ function showLogoPanel(index){
 			cache : false,
 			success : function(data) {
 				if(data=="true"){
-					swal("Congratulations！", "LOGO信息修改成功!", "success"); 
+					swal("恭喜！", "LOGO信息修改成功!", "success"); 
 					window.location.reload();
 				}
 				else{
@@ -545,10 +545,12 @@ jQuery
 					+'                                          </div>';
 				ul += li;
 			}
-			ul='<div class="Work_Mates_div_list_div2"  style="margin-top:20px;">'
-			+'<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;"/><span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
+			 ul='<div class="Work_Mates_div_list_div2"  style="margin-top:20px;">'
+			/* +'<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;"/><span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
 			+'&nbsp;&nbsp;&nbsp;已注册人数：'+regNumber
-			+'</span><div class="clear"></div></div>'+ul;
+			+'</span><div class="clear"></div>' */
+			+'</div>'
+			+ul;
 			$("#Work_Mates_div").html(ul);
 			$("#syncUser").click(function(){
 				syncUser();
@@ -613,9 +615,17 @@ jQuery
 			                    "label": "未分类:"+NoRoleList.length+"人",
 			                    "value": NoRoleList.length
 			                }
-			            ]
+			            ],
+			            "events": { 
+			                "beforeLinkedItemOpen": function(eventObj, dataObj) { 
+			                    console.log(eventObj);
+			                    console.log(dataObj);
+			                }
+			            }
 			        }
 			    }).render();
+			    
+			    
 			});
 		}
 	});
@@ -628,7 +638,7 @@ function syncUser(){
 		data : {},
 		cache : false,
 		success : function(data) {
-			swal("Congratulations！", data, "success"); 
+			swal("同步成功！", data, "success"); 
 			$("#syncUser").attr("src","../MetroStyleFiles/refresh2.png");
 			getMDLUserLists();
 		}
@@ -644,7 +654,7 @@ function updateUserInfo(openId){
 		var isRegistered = $("input[name='isRegistered']:checked").val();
 		var registerDate = $("#registerDate").val();
 		if(isActived==null || isAuthenticated==null ||  isRegistered==null || registerDate==null){
-			swal("updateUserInformation fail! Don't input blank content", "Pls input your correct information.", "error");
+			swal("修改信息失败", "请输入正确的信息", "error");
 		}
 		
 		$.ajax({
@@ -658,9 +668,9 @@ function updateUserInfo(openId){
 			success:function(result) {
 				if(result){
 					$('#updateUserInfoForm').modal('hide');
-					swal("updateUserInformation successfully!", "Congratulations!", "success"); 
+					swal("更改成功!", "恭喜!", "success"); 
 				} else {
-					swal("updateUserInformation fail!", "Pls input your correct information.", "error");
+					swal("更改失败!", "请填写正确的信息.", "error");
 				}
 			}
 		});
@@ -840,7 +850,8 @@ function updateUserInfo(openId){
 				
 				
 				<div class="tab-pane active" id="WorkMates">
-				<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
+					<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;float:right;margin-top:10px;"/>
+					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					<div class="Work_Mates_div2" id="Work_Mates_div">
 						<!-- <div class="Work_Mates_div_list_div2">
 							<span class="total_num"><img
