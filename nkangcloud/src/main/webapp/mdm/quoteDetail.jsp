@@ -26,10 +26,12 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 $(function(){
 
 $(".singleQuote").on("swiperight",function(){
+$(this).css("overflow","hidden");
 $(this).removeClass("editBtn");
 $(this).remove(".edit");
 });
 $(".singleQuote").on("swipeleft",function(){
+	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
 $(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
 $(this).siblings().removeClass("editBtn");
@@ -37,6 +39,7 @@ $(this).siblings().remove(".edit");
 });
 function edit(obj)
 {
+	var isUpdatePrice="0";
 	var price=$(obj).parent(".edit").siblings(".firstLayer").children(".quotePrice").find("span").text();
 	var inventory=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#inventoryValue").text();
 	var soldOutOfPay=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#soldOutOfPayValue").text();
@@ -66,6 +69,8 @@ function edit(obj)
 		function(inputValue){
 			if (inputValue === false){ return false; }
 			else{
+				if($("#newPrice").val().trim()!==price)
+					{isUpdatePrice="1";}
 				 $.ajax({
 					 url:'../updateQuotationByItem',
 					 type:"POST",
@@ -76,7 +81,8 @@ function edit(obj)
 						 quotationPrice:$("#newPrice").val(),
 						 avaliableInventory:$("#newInventory").val(),
 						 soldOutOfPay:$("#newSoldOutOfPay").val(),
-						 onDelivery:$("#newOnDelivery").val()
+						 onDelivery:$("#newOnDelivery").val(),
+						 isUpdatePrice:isUpdatePrice
 					 },
 					 success: function(data) {
 						 $(obj).parent().parent().removeClass("editBtn");
@@ -91,12 +97,19 @@ function edit(obj)
 									 var html="";
 									 var category="";
 									 var grade="";
+									 var status="";
 									 for(var i=0;i<data.length;i++){
 										 if(data[i].category!=""){
 											 category="[<span id='category'>"+data[i].category+"</span>]";
 										 }
 										 if(data[i].categoryGrade!=""){
 											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
+										 }
+										 if(data[i].approveStatus="0"){
+											 status="<img style='width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+										 }
+										 if(data[i].approveStatus=="1"){
+											 status="<img style='width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 										 }
 										 html+="<li class='singleQuote'>"
 											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
@@ -110,7 +123,7 @@ function edit(obj)
 											 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
 											 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
 											 +"</div></div>"
-											 +"<div class='edit'><p onclick='edit(this)'>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div></li>";
+											 +"<div class='edit'><p onclick='edit(this)'>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div>"+status+"</li>";
 										 grade="";
 										 category="";
 									 }
@@ -166,9 +179,12 @@ position: relative;
 *{margin:0;padding:0;}
 .singleQuote
 {
+position:relative;
+padding-left:0px!important;
 height:90px;
 width:100%;
 border-bottom:1px solid gray;
+overflow:hidden;
 }
 .firstLayer{
 line-height:40px;
@@ -313,6 +329,12 @@ for(int i=0;i<ql.size();i++){
 <p><%=ql.get(i).getLocationAmounts().split("\\|")[1] %></p>
 </div>
 </div>
+<% if(ql.get(i).getApproveStatus()=="0") {%>
+<img style="width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
+<% } %>
+<% if(ql.get(i).getApproveStatus()=="1") {%>
+<img style="width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
+<% } %>
 </li>
 <%} %>
 </ul>
