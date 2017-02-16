@@ -6,8 +6,6 @@
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
-
-
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
@@ -21,36 +19,124 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
+<script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
 <script>
 $(function(){
 
 $(".singleQuote").on("swiperight",function(){
-$(this).addClass("followBtn");
-$(this).append("<div class='follow'><p>关注</p><p class='cancelFollow' onclick='cancelFollow(this);'>取消</p></div>");
-$(this).siblings().removeClass("followBtn");
-$(this).siblings().remove(".follow");
-$(this).siblings().removeClass("editBtn");
-$(this).siblings().remove(".edit");
+$(this).removeClass("editBtn");
+$(this).remove(".edit");
 });
 $(".singleQuote").on("swipeleft",function(){
 $(this).addClass("editBtn");
-$(this).append("<div class='edit'><p>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div>");
+$(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
 $(this).siblings().removeClass("editBtn");
 $(this).siblings().remove(".edit");
-$(this).siblings().removeClass("followBtn");
-$(this).siblings().remove(".follow");
 });
-function cancelEdit(obj){
-$(obj).parent().parent().removeClass("editBtn");
-$(obj).parent().parent().remove(".edit");
-};
-window.cancelEdit=cancelEdit;
-function cancelFollow(obj){
-$(obj).parent().parent().removeClass("followBtn");
-$(obj).parent().parent().remove(".follow");
-};
-window.cancelFollow=cancelFollow;
-})
+function edit(obj)
+{
+	var price=$(obj).parent(".edit").siblings(".firstLayer").children(".quotePrice").find("span").text();
+	var inventory=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#inventoryValue").text();
+	var soldOutOfPay=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#soldOutOfPayValue").text();
+	var onDelivery=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#onDeliveryValue").text();
+	var category=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#category").text();
+	var item=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
+	var categoryGrade=$(obj).parent(".edit").siblings(".firstLayer").children(".tagStyle").text();
+/* 	if(categoryGrade==""){categoryGrade="&nbsp";}
+	if(category==""){category="&nbsp";} */
+	var formText="<p style='width:40%;float:left;height:40px;line-height:40px;'>牌号：</p><input id='newItem' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+item+" disabled='true'/>"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>级别：</p><input id='newGrade' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+categoryGrade+" />"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>类型：</p><input id='newCategory' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+category+" />"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>价格：</p><input id='newPrice' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+price+" />"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>可用库存：</p><input id='newInventory' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+inventory+" />"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>已售未下账：</p><input id='newSoldOutOfPay' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+soldOutOfPay+" />"  
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>在途：</p><input id='newOnDelivery' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+onDelivery+" />";
+	swal({  
+        title:"编辑报价",  
+        text:formText,
+        html:"true",
+        showConfirmButton:"true", 
+		showCancelButton: true,   
+		closeOnConfirm: false,  
+        confirmButtonText:"OK",  
+        animation:"slide-from-top"  
+      }, 
+		function(inputValue){
+			if (inputValue === false){ return false; }
+			else{
+				 $.ajax({
+					 url:'../updateQuotationByItem',
+					 type:"POST",
+					 data:{
+						 item:$("#newItem").val(),
+						 categoryGrade:$("#newGrade").val(),
+						 category:$("#newCategory").val(),
+						 quotationPrice:$("#newPrice").val(),
+						 avaliableInventory:$("#newInventory").val(),
+						 soldOutOfPay:$("#newSoldOutOfPay").val(),
+						 onDelivery:$("#newOnDelivery").val()
+					 },
+					 success: function(data) {
+						 $(obj).parent().parent().removeClass("editBtn");
+						 $(obj).parent().parent().remove(".edit");
+						 swal("Success", "报价更新成功", "success");
+						 $.ajax({
+							 url:'../getAllQuotations',
+							 type:"POST",
+							 success:function(data){
+								 if(data)
+									 {
+									 var html="";
+									 var category="";
+									 var grade="";
+									 for(var i=0;i<data.length;i++){
+										 if(data[i].category!=""){
+											 category="[<span id='category'>"+data[i].category+"</span>]";
+										 }
+										 if(data[i].categoryGrade!=""){
+											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
+										 }
+										 html+="<li class='singleQuote'>"
+											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
+											 +"<div class='secondLayer'>"
+											 +"<div class='leftPanel'>"
+											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
+											 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].soldOutOfPay+"</p></div>"
+											 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
+											 +"</div>"
+											 +"<div class='rightPanel'>"
+											 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
+											 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
+											 +"</div></div>"
+											 +"<div class='edit'><p onclick='edit(this)'>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div></li>";
+										 grade="";
+										 category="";
+									 }
+									 $("#QuoteList").html(html);
+									 }
+								 }
+							 });
+					 },
+					 error:function(data){
+						 
+					 }
+					 });
+			}});
+	}
+window.edit=edit;
+function textClear(obj){
+	if($(obj).val()=="/"){
+	$(obj).val("");}
+}
+function textReturn(obj){
+	if($(obj).val()==""){
+	$(obj).val("/");}
+}
+window.textClear=textClear;
+window.textReturn=textReturn;
+});
 
 </script>
 <!--	<link href='css/horsey.css' rel='stylesheet' type='text/css' />
@@ -70,33 +156,12 @@ window.cancelFollow=cancelFollow;
 	.edit p
 	{width:100%;
 	height:30px;
-	line-height:60px;
-	}
-.follow
-{width: 70px;
-    height: 90px;
-    color: white;
-    text-align: center;
-    position: absolute;
-    top: 0px;
-    left: -70px;
-	font-size:14px;
-    background: red;
-    border-bottom: 1px solid black;}
-	.follow p
-	{width:100%;
-	height:30px;
-	line-height:60px;
+	line-height:90px;
 	}
 .editBtn
 {
 position: relative;
     left: -70px;
-	}
-.followBtn
-{
-position: relative;
-    right: -70px;
 	}
 *{margin:0;padding:0;}
 .singleQuote
@@ -234,14 +299,14 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
-<div class="firstLayer"><p class="quoteTitle"><%=ql.get(i).getItem() %><%if(null!=ql.get(i).getCategory()){  %>[<%=ql.get(i).getCategory() %>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
-	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"><span style="color:red">￥<%=ql.get(i).getQuotationPrice() %></span></p></div>
+<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span><%if(null!=ql.get(i).getCategory()){  %>[<span id="category"><%=ql.get(i).getCategory() %></span>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
+	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
 
 <div class="secondLayer">
 <div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p><%=ql.get(i).getAvaliableInventory() %></p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p><%=ql.get(i).getSoldOutOfPay() %></p></div>
-<div class="shape onDelivery"><p>在途</p><p><%=ql.get(i).getOnDelivery() %></p></div>
+<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getAvaliableInventory() %></p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue"><%=ql.get(i).getSoldOutOfPay() %></p></div>
+<div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDelivery() %></p></div>
 </div>
 <div class="rightPanel">
 <p><%=ql.get(i).getLocationAmounts().split("\\|")[0] %></p>
