@@ -10,7 +10,7 @@ String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
 int special=0;
-if("oij7nt5yOIOqcn58N8JnzP8RRVao".equals(uid)){
+if("oij7nt5yOIOqcn58N8JnzP8RRVao".equals(uid)||"oij7nt5GgpKftiaoMSKD68MTLXpc".equals(uid)){
 	special=1;
 }
 WeChatUser wcu;
