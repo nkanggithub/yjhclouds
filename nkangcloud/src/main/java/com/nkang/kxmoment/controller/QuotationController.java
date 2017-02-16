@@ -72,7 +72,8 @@ public class QuotationController {
 		quotation.setOriginalProducer(request.getParameter("originalProducer"));
 		quotation.setQuotationPrice(request.getParameter("quotationPrice"));
 		quotation.setSoldOutOfPay(request.getParameter("soldOutOfPay"));
-		quotation.setApproveStatus(0);
+		if(request.getParameter("isUpdatePrice")=="1"){
+		quotation.setApproveStatus("0");}
 		
 		String ret="";
 		ret=MongoDBBasic.saveOnlineQuotation(quotation);
