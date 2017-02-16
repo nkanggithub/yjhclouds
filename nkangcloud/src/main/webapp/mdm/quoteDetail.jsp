@@ -9,6 +9,10 @@
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
+int special=0;
+if("oij7nt5yOIOqcn58N8JnzP8RRVao".equals(uid)){
+	special=1;
+}
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 %>  
@@ -33,10 +37,76 @@ $(this).remove(".edit");
 $(".singleQuote").on("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
-$(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
+var status=$(this).find("#status").val();
+if($("#isSpecial").val()=="1"&&status=="0"){
+	$(this).addClass("specialEditBtn");
+$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'>编辑</p><p onclick='approve(this)'>批准</p></div>");}
+else{
+	$(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
+}
 $(this).siblings().removeClass("editBtn");
+$(this).siblings().removeClass("specialEditBtn");
 $(this).siblings().remove(".edit");
 });
+function approve(obj)
+{
+	var item=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
+	 $.ajax({
+		 url:'../updateStatus',
+		 type:"POST",
+		 data:{
+			 item:item,
+			 approveStatus:"1"
+		 },
+		 success: function(data) {
+			 swal("Success", "该审核已被您批准通过", "success");
+			 $.ajax({
+				 url:'../getAllQuotations',
+				 type:"POST",
+				 success:function(data){
+					 if(data)
+						 {
+						 var html="";
+						 var category="";
+						 var grade="";
+						 var status="";
+						 for(var i=0;i<data.length;i++){
+							 if(data[i].category!=""){
+								 category="[<span id='category'>"+data[i].category+"</span>]";
+							 }
+							 if(data[i].categoryGrade!=""){
+								 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
+							 }
+							 if(data[i].approveStatus=="0"){
+								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+							 }
+							 if(data[i].approveStatus=="1"){
+								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+							 }
+							 html+="<li class='singleQuote'>"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
+								 +"<div class='secondLayer'>"
+								 +"<div class='leftPanel'>"
+								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
+								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].soldOutOfPay+"</p></div>"
+								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
+								 +"</div>"
+								 +"<div class='rightPanel'>"
+								 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
+								 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
+								 +"</div></div>"
+								 +status+"</li>";
+							 grade="";
+							 category="";
+							 status="";
+						 }
+						 $("#QuoteList").html(html);
+						 }
+					 }
+				 });
+		 }
+	 });
+	}
 function edit(obj)
 {
 	var isUpdatePrice="0";
@@ -105,7 +175,7 @@ function edit(obj)
 										 if(data[i].categoryGrade!=""){
 											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
 										 }
-										 if(data[i].approveStatus="0"){
+										 if(data[i].approveStatus=="0"){
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 										 }
 										 if(data[i].approveStatus=="1"){
@@ -123,7 +193,7 @@ function edit(obj)
 											 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
 											 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
 											 +"</div></div>"
-											 +"<div class='edit'><p onclick='edit(this)'>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div>"+status+"</li>";
+											 +status+"</li>";
 										 grade="";
 										 category="";
 										 status="";
@@ -140,6 +210,7 @@ function edit(obj)
 			}});
 	}
 window.edit=edit;
+window.approve=approve;
 function textClear(obj){
 	if($(obj).val()=="/"){
 	$(obj).val("");}
@@ -167,16 +238,25 @@ window.textReturn=textReturn;
 	font-size:14px;
     background: red;
     border-bottom: 1px solid black;}
+    .specialEdit{width:100px;right:-100px;}
+    
 	.edit p
 	{width:100%;
 	height:30px;
 	line-height:90px;
 	}
+	.specialEdit p
+	{width:50%;
+	float:left;}
 .editBtn
 {
 position: relative;
     left: -70px;
 	}
+.specialEditBtn
+{
+    left: -100px;
+	}	
 *{margin:0;padding:0;}
 .singleQuote
 {
@@ -301,6 +381,7 @@ line-height:22px;}
 </style>
 </head>
 <body>
+<input id="isSpecial" type="hidden" value="<%= special %>" />
 <img style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
@@ -316,7 +397,7 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
-<input type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
+<input id="status" type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
 <div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span><%if(null!=ql.get(i).getCategory()){  %>[<span id="category"><%=ql.get(i).getCategory() %></span>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
 	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
 
