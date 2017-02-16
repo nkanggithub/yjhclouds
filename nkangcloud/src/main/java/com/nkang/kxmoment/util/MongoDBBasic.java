@@ -2747,11 +2747,15 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		query.put("item", item);
-		WriteResult wt = mongoDB.getCollection(collectionQuotation).remove(query);  
-        
-        if(wt!=null){
-        	ret = "removed";
-        }
+		try{
+			WriteResult wt = mongoDB.getCollection(collectionQuotation).remove(query);  
+	        
+	        if(wt!=null){
+	        	ret = "removed";
+	        }
+		}catch(Exception e){
+			log.info("delQuotationByItem--" + e.getMessage());
+		}
 		return ret;
 	}
 	

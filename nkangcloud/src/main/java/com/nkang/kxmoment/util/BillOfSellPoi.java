@@ -1,11 +1,10 @@
 package com.nkang.kxmoment.util;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -14,8 +13,86 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
 import com.nkang.kxmoment.baseobject.BillOfSell;
+import com.nkang.kxmoment.baseobject.OnlineQuotation;
 
 public class BillOfSellPoi {
+	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
+		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
+		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/AAA.XLS");
+
+	        HSSFWorkbook hssfWorkbook;
+			try {
+				hssfWorkbook = new HSSFWorkbook(is);
+			
+				OnlineQuotation xlsDto = null;
+
+				// 循环工作表Sheet
+
+				    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+			
+			            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+			            HSSFRow hssfRowHead = hssfSheet.getRow(0);
+			            HSSFCell location1 = hssfRowHead.getCell(5);
+			            HSSFCell location2 = hssfRowHead.getCell(6);
+			            if (hssfSheet == null) {
+		
+			                continue;
+		
+			            }
+		
+			            // 循环行Row
+		
+				            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+			
+				                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+			
+				                if (hssfRow == null) {
+			
+				                    continue;
+			
+				                }
+				                xlsDto = new OnlineQuotation();
+				                // 循环列Cell
+					         //   for (int cellNum = 0; cellNum <=9; cellNum++) {
+					            	
+					                HSSFCell category = hssfRow.getCell(0);
+					                xlsDto.setCategory(category+"");
+				
+					                HSSFCell categoryGrade = hssfRow.getCell(1);
+					                xlsDto.setCategoryGrade(categoryGrade+"");
+				
+					                HSSFCell item = hssfRow.getCell(2);
+					                xlsDto.setItem(item+"");
+					                
+					                HSSFCell quotationPrice = hssfRow.getCell(3);
+					                xlsDto.setQuotationPrice(quotationPrice+"");
+				
+					                HSSFCell comments = hssfRow.getCell(4);
+					                xlsDto.setComments(comments+"");
+				
+					                HSSFCell locationAmounts1 = hssfRow.getCell(5);
+					                HSSFCell locationAmounts2 = hssfRow.getCell(6);
+					                xlsDto.setLocationAmounts(location1+" : "+locationAmounts1+" | "+location2+" : "+locationAmounts2+"");
+				
+					                HSSFCell avaliableInventory = hssfRow.getCell(7);
+					                xlsDto.setAvaliableInventory(avaliableInventory+"");
+				
+					                HSSFCell onDelivery = hssfRow.getCell(8);
+					                xlsDto.setOnDelivery(onDelivery+"");
+				
+					                HSSFCell soldOutOfPay = hssfRow.getCell(9);
+					                xlsDto.setSoldOutOfPay(soldOutOfPay+"");
+				
+					       //     }
+					            quotationList.add(xlsDto);
+				            }
+			        }
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return quotationList;
+	} 
 
 	 public List<BillOfSell> readXls() throws IOException  {
 	
