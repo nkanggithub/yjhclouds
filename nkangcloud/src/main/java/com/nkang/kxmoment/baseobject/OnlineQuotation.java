@@ -13,11 +13,11 @@ public class OnlineQuotation {
 	private String onDelivery;
 	private String soldOutOfPay;
 	private String originalProducer;
-	private int approveStatus;
-	public int getApproveStatus() {
+	private String approveStatus;
+	public String getApproveStatus() {
 		return approveStatus;
 	}
-	public void setApproveStatus(int approveStatus) {
+	public void setApproveStatus(String approveStatus) {
 		this.approveStatus = approveStatus;
 	}
 	private String lastUpdate;
