@@ -57,8 +57,12 @@ public class QuotationController {
 	public String updateQuotation(HttpServletRequest request, HttpServletResponse response){
 		OnlineQuotation quotation = new OnlineQuotation();
 		quotation.setAvaliableInventory(request.getParameter("avaliableInventory"));
-		quotation.setCategory(request.getParameter("category").trim());
-		quotation.setCategoryGrade(request.getParameter("categoryGrade").trim());
+		if(!"/".equals(request.getParameter("category"))){
+		quotation.setCategory(request.getParameter("category"));}
+		else{quotation.setCategory("");}
+		if(!"/".equals(request.getParameter("categoryGrade"))){
+		quotation.setCategoryGrade(request.getParameter("categoryGrade"));}
+		else{quotation.setCategoryGrade("");}
 		quotation.setComments(request.getParameter("comments"));
 		quotation.setItem(request.getParameter("item"));
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
@@ -68,6 +72,7 @@ public class QuotationController {
 		quotation.setOriginalProducer(request.getParameter("originalProducer"));
 		quotation.setQuotationPrice(request.getParameter("quotationPrice"));
 		quotation.setSoldOutOfPay(request.getParameter("soldOutOfPay"));
+		quotation.setApproveStatus(0);
 		
 		String ret="";
 		ret=MongoDBBasic.saveOnlineQuotation(quotation);
