@@ -106,10 +106,10 @@ function edit(obj)
 											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
 										 }
 										 if(data[i].approveStatus="0"){
-											 status="<img style='width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 										 }
 										 if(data[i].approveStatus=="1"){
-											 status="<img style='width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 										 }
 										 html+="<li class='singleQuote'>"
 											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
@@ -126,6 +126,7 @@ function edit(obj)
 											 +"<div class='edit'><p onclick='edit(this)'>编辑</p><p class='cancelEdit' onclick='cancelEdit(this);'>取消</p></div>"+status+"</li>";
 										 grade="";
 										 category="";
+										 status="";
 									 }
 									 $("#QuoteList").html(html);
 									 }
