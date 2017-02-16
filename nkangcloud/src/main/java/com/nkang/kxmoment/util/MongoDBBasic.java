@@ -2662,7 +2662,7 @@ public class MongoDBBasic {
 				insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
 				insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
 				insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
-				
+				insertQuery.put("approveStatus",onlineQuotation.getApproveStatus());
 				
 				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
 				ret="insert Quotation ok  -->" + writeResult;
@@ -2728,7 +2728,7 @@ public class MongoDBBasic {
 				}else {
 					insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
 				}
-				
+				insertQuery.put("approveStatus",onlineQuotation.getApproveStatus());
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", insertQuery);
 				writeResult=mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", onlineQuotation.getItem()), doc);
