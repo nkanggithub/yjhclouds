@@ -2881,6 +2881,7 @@ public class MongoDBBasic {
 				qt.setSoldOutOfPay(objQuotation.get("soldOutOfPay") == null ? "" : objQuotation.get("soldOutOfPay").toString());
 				qt.setOriginalProducer(objQuotation.get("originalProducer") == null ? "" : objQuotation.get("originalProducer").toString());
 				qt.setLastUpdate(objQuotation.get("lastUpdate") == null ? "" : objQuotation.get("lastUpdate").toString());
+				qt.setLastUpdate(objQuotation.get("approveStatus") == null ? "" : objQuotation.get("approveStatus").toString());
 				quotationList.add(qt);
 			}
 			 
