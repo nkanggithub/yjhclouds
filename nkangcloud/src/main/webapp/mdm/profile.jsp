@@ -1582,7 +1582,7 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>奖项管理</h4>
 												</td>
-												<td><a href="DataVisulization.jsp"><img  class="mes-openbt" data-mesid="message-tax" 
+												<td><a href="DataVisualization.jsp"><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-price.png" />
 														<h4>胖和数据</h4></a>
 												</td>
