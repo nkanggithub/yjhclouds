@@ -270,7 +270,7 @@ public class CoreService
 					else if(eventKey.equals("MYAPPS")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("胖和微应用");
+						article.setTitle("胖和欢迎您随时砸单");
 						article.setDescription("我的应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
@@ -317,7 +317,7 @@ public class CoreService
 							Article article3 = new Article();
 							article3.setTitle("胖和微管理");
 							article3.setDescription("Administration");
-							article3.setPicUrl("http://www.ecozine.com/sites/default/files/imagecache/category_blog/imagefield_default_images/icn-profile_0.png");
+							article3.setPicUrl("http://"+Constants.baehost+"/mdm/images/yjhadmin.jpg");
 							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
 							articleList.add(article3);
 						}
