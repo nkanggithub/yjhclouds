@@ -243,8 +243,8 @@ function checkReg() {
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			if (jsons.results.length > 0) {
-				if(jsons.results[0].role=="未注册"){
-					swal("你还未注册哦", "未注册用户很多功能不能使用,建议点击头像立即注册！", "error");
+				if(jsons.results[0].IsActive=="未注册"||jsons.results[0].IsActive=="false"){
+						swal("你还未注册哦", "未注册用户很多功能不能使用,建议点击头像立即注册！", "error");
 				}
 			}
 		}
