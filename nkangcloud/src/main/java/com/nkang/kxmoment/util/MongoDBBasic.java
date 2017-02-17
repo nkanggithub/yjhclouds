@@ -328,6 +328,7 @@ public class MongoDBBasic {
 	    	insert.put("FormatAddress", "");
 	    	insert.put("CurLAT", "");
 	    	insert.put("CurLNG", "");
+	    	insert.put("IsActive", "false");
 	    	insert.put("Role",new Role());
 	    	
 	    	DBObject RoleObj = new BasicDBObject();
