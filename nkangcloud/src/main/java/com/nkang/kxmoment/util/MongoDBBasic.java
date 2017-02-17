@@ -1510,7 +1510,7 @@ public class MongoDBBasic {
 			}
 			else{
 				BasicDBObject sort=new BasicDBObject();
-				sort.put("Teamer.role", -1);
+				sort.put("IsActive", 1);
 				sort.put("Teamer.registerDate", 1);
 				sort.put("Created", 1);
 				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
