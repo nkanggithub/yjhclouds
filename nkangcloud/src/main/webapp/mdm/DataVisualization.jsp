@@ -23,7 +23,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid); */
         var estProcChart = new FusionCharts({
             type: 'errorline',
             renderAt: 'chart-container',
-            width: '350',
+            width: '380',
             height: '350',
             dataFormat: 'json',
             dataSource: {
