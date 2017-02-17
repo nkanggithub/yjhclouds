@@ -44,7 +44,7 @@ $(this).addClass("editBtn");
 var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="1"&&status=="0"){
 	$(this).addClass("specialEditBtn");
-$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'>编辑</p><p onclick='approve(this)'>批准</p></div>");}
+$(this).append("<div class='edit specialEdit'><p style='background-color:blue;' onclick='approve(this)'>批准</p><p onclick='edit(this)'>编辑</p></div>");}
 else{
 	$(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
 }
@@ -251,7 +251,8 @@ window.textReturn=textReturn;
 	}
 	.specialEdit p
 	{width:50%;
-	float:left;}
+	float:left;
+	height:100%;}
 .editBtn
 {
 position: relative;
