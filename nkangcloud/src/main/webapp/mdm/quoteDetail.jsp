@@ -32,13 +32,13 @@ function toTop()
 {
 	window.scrollTo(0,0);}
 	window.toTop=toTop;
-$(".singleQuote").on("swiperight",function(){
+$(".singleQuote").live("swiperight",function(){
 $(this).css("overflow","hidden");
 $(this).removeClass("editBtn");
 $(this).removeClass("specialEditBtn");
 $(this).remove(".edit");
 });
-$(".singleQuote").on("swipeleft",function(){
+$(".singleQuote").live("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
 var status=$(this).find("#status").val();
@@ -88,6 +88,7 @@ function approve(obj)
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 							 }
 							 html+="<li class='singleQuote'>"
+								 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
 								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
@@ -186,6 +187,7 @@ function edit(obj)
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 										 }
 										 html+="<li class='singleQuote'>"
+										 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
 											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
 											 +"<div class='secondLayer'>"
 											 +"<div class='leftPanel'>"
