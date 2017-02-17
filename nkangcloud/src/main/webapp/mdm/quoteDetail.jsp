@@ -44,9 +44,9 @@ $(this).addClass("editBtn");
 var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="1"&&status=="0"){
 	$(this).addClass("specialEditBtn");
-$(this).append("<div class='edit specialEdit'><p style='background-color:blue;' onclick='approve(this)'>批准</p><p onclick='edit(this)'>编辑</p></div>");}
+$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");}
 else{
-	$(this).append("<div class='edit'><p onclick='edit(this)'>编辑</p></div>");
+	$(this).append("<div class='edit'><p style='background-color:red;' onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 }
 $(this).siblings().removeClass("editBtn");
 $(this).siblings().removeClass("specialEditBtn");
@@ -74,6 +74,7 @@ function approve(obj)
 						 var category="";
 						 var grade="";
 						 var status="";
+						 var priceColor="<p class='quotePrice' style='color:red'>￥<span>";
 						 for(var i=0;i<data.length;i++){
 							 if(data[i].category!=""){
 								 category="[<span id='category'>"+data[i].category+"</span>]";
@@ -86,10 +87,11 @@ function approve(obj)
 							 }
 							 if(data[i].approveStatus=="1"){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+								 priceColor="<p class='quotePrice' style='color:red'>￥<span>";
 							 }
 							 html+="<li class='singleQuote'>"
 								 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
 								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
@@ -173,6 +175,7 @@ function edit(obj)
 									 var category="";
 									 var grade="";
 									 var status="";
+									 var priceColor="<p class='quotePrice' style='color:red'>￥<span>";
 									 for(var i=0;i<data.length;i++){
 										 if(data[i].category!=""){
 											 category="[<span id='category'>"+data[i].category+"</span>]";
@@ -185,10 +188,11 @@ function edit(obj)
 										 }
 										 if(data[i].approveStatus=="1"){
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+											 priceColor="<p class='quotePrice' style='color:red'>￥<span>";
 										 }
 										 html+="<li class='singleQuote'>"
 										 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+"<p class='quotePrice' style='color:red'>￥<span>"+data[i].quotationPrice+"</span></p></div>"
+											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
 											 +"<div class='secondLayer'>"
 											 +"<div class='leftPanel'>"
 											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
@@ -225,8 +229,12 @@ function textReturn(obj){
 	if($(obj).val()==""){
 	$(obj).val("/");}
 }
+function focusThis(){
+	swal("Success", "关注成功", "success");
+}
 window.textClear=textClear;
 window.textReturn=textReturn;
+window.focusThis=focusThis;
 });
 
 </script>
@@ -242,17 +250,19 @@ window.textReturn=textReturn;
     top: 0px;
     right: -70px;
 	font-size:14px;
-    background: red;
+    background: #D3D3D3;
     border-bottom: 1px solid black;}
-    .specialEdit{width:100px;right:-100px;}
-    
+    .specialEdit{width:180px;right:-180px;}
+    .specialEdit img,.edit img {
+    width:25px;height:auto;position:absolute;top:15px;margin-left: 2px;
+    }
 	.edit p
 	{width:100%;
-	height:30px;
-	line-height:90px;
+	height:100%;
+	line-height:130px;
 	}
 	.specialEdit p
-	{width:50%;
+	{width:33%;
 	float:left;
 	height:100%;}
 .editBtn
@@ -262,7 +272,7 @@ position: relative;
 	}
 .specialEditBtn
 {
-    left: -100px;
+    left: -180px;
 	}	
 *{margin:0;padding:0;}
 .singleQuote
