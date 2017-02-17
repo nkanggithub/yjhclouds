@@ -73,6 +73,9 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
    #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
+<script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
 <script>
 var UpStreamList= new Array();
 var DownStreamList= new Array();
@@ -435,7 +438,7 @@ jQuery
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			var ul = "",regNumber=0;
-			ul='<div class="Work_Mates_div_list_div2" style="border-bottom:0px;">'
+			ul='<li class="Work_Mates_div_list_div2" style="border-bottom:0px;">'
 			for (var i = 0; i < jsons.results.length; i++) {
 				var temp = jsons.results[i];
 				var selfIntro=temp.selfIntro;
@@ -509,7 +512,7 @@ jQuery
 					congratulate='<div style="float:right;"><img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
 						+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
 				}
-				var li='	<div class="Work_Mates_div_list_div2">'
+				var li='	<li class="Work_Mates_div_list_div2">'
 					+'                                           	 	<div class="Work_Mates_img_div2">'
 					+'                                        			 <img src="'
 					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
@@ -542,14 +545,14 @@ jQuery
 					+'                                        		</div>'
 					+workDay
 					+'                                                <div class="clear"></div>'
-					+'                                          </div>';
+					+'                                          </li>';
 				ul += li;
 			}
-			 ul='<div class="Work_Mates_div_list_div2"  style="margin-top:20px;">'
+			 ul='<li class="Work_Mates_div_list_div2"  style="margin-top:20px;">'
 			/* +'<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;"/><span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
 			+'&nbsp;&nbsp;&nbsp;已注册人数：'+regNumber
 			+'</span><div class="clear"></div>' */
-			+'</div>'
+			+'</li>'
 			+ul;
 			$("#Work_Mates_div").html(ul);
 			$("#syncUser").click(function(){
@@ -852,45 +855,9 @@ function updateUserInfo(openId){
 				<div class="tab-pane active" id="WorkMates">
 					<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;float:right;margin-top:10px;"/>
 					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
-					<div class="Work_Mates_div2" id="Work_Mates_div">
-						<!-- <div class="Work_Mates_div_list_div2">
-							<span class="total_num"><img
-								src="../MetroStyleFiles/role.png">总人数：44&nbsp;&nbsp;&nbsp;已注册人数：12</span>
-							<div class="clear"></div>
-						</div>
-						<div class="Work_Mates_div_list_div2">
-							<div class="Work_Mates_img_div2">
-								<img
-									src="http://wx.qlogo.cn/mmopen/3ial0wgAS7u3B8Oc7LqK5ZJb3ViaMo87OiaoNqLjWrKk7TLtITLqbMXWjWEZDGxZbn6ZpuiaKU1PiasiaiaULdSSW3scW9S1b9uWzt9/0"
-									alt="userImage" class="matesUserImage"
-									onclick="getUserInfo('康宁','http://wx.qlogo.cn/mmopen/3ial0wgAS7u3B8Oc7LqK5ZJb3ViaMo87OiaoNqLjWrKk7TLtITLqbMXWjWEZDGxZbn6ZpuiaKU1PiasiaiaULdSSW3scW9S1b9uWzt9/0','oqPI_xLq1YEJOczHi4DS2-1U0zqc');">
-							</div>
-							<div class="Work_Mates_text_div">
-								<h2>
-									<span
-										onclick="getUserInfo('康宁','http://wx.qlogo.cn/mmopen/3ial0wgAS7u3B8Oc7LqK5ZJb3ViaMo87OiaoNqLjWrKk7TLtITLqbMXWjWEZDGxZbn6ZpuiaKU1PiasiaiaULdSSW3scW9S1b9uWzt9/0','oqPI_xLq1YEJOczHi4DS2-1U0zqc');">康宁</span><span
-										class="role">Team Lead</span>
-									<div style="float: right;">
-										<img src="../MetroStyleFiles/reward.png" style="height: 25px;"><span
-											style="font-size: 12px; color: #07090B; font-weight: normal;">11</span>
-										<div></div>
-									</div>
-								</h2>
-								<div>
-									<div class="tag">java</div>
-									<div class="tag">html</div>
-									<div class="tag">webservice</div>
-									<div class="tag">etl</div>
-									<br> <span class="selfIntro">写点什么吧又不知道写什么...</span>
-								</div>
-							</div>
-							<div
-								style="float: right; margin-top: -45px; background-color: #eee; color: #333; font-size: 13px; padding: 3px;">907
-								Days</div>
-							<div class="clear"></div>
-						</div> -->
-
-					</div>
+					<div  style="position: absolute; top: 440px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
+ <ul class="Work_Mates_div2" id="Work_Mates_div" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top:15px">
+					</ul></div>
 					<div id="return-top" style="display: block;"><img class="scroll-top" src="../mdm/images/quotation2.gif" alt="" width="100px"></div>
 				</div>
 				
