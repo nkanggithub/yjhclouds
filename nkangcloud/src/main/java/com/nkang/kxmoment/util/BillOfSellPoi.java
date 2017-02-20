@@ -10,10 +10,12 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 
 import com.nkang.kxmoment.baseobject.BillOfSell;
+import com.nkang.kxmoment.baseobject.Inventory;
+import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 
 public class BillOfSellPoi {
 	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
@@ -309,6 +311,198 @@ public class BillOfSellPoi {
 		 }
 		 
 		 return date;
+	 }
+	 
+	 public List<Inventory> readXlsOfInventory() throws FileNotFoundException{
+			List<Inventory> inventoryList = new ArrayList<Inventory>();
+			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/Inventory.XLS");
+
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+				
+					Inventory xlsDto = null;
+
+					// 循环工作表Sheet
+
+					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+				
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           
+				            // 循环行Row
+			
+					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				
+					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				
+					                if (hssfRow == null) {
+				
+					                    continue;
+				
+					                }
+					                xlsDto = new Inventory();
+//					                // 循环列Cell
+//						            for (int cellNum = 0; cellNum <=6; cellNum++) {
+//						            	
+						                HSSFCell repositoryName = hssfRow.getCell(0);
+						                xlsDto.setRepositoryName(repositoryName+"");
+						                
+						                HSSFCell plasticItem = hssfRow.getCell(1);
+						                xlsDto.setPlasticItem(plasticItem+"");
+						                
+						                HSSFCell unit = hssfRow.getCell(2);
+						                xlsDto.setUnit(unit+"");
+						                
+						                HSSFCell inventoryAmount = hssfRow.getCell(3);
+						                xlsDto.setInventoryAmount(inventoryAmount+"");
+						                
+						                HSSFCell waitDeliverAmount = hssfRow.getCell(4);
+						                xlsDto.setWaitDeliverAmount(waitDeliverAmount+"");
+						                
+						                HSSFCell reserveDeliverAmount = hssfRow.getCell(5);
+						                xlsDto.setReserveDeliverAmount(reserveDeliverAmount+"");
+						                
+						                HSSFCell availableAmount = hssfRow.getCell(6);
+						                xlsDto.setAvailableAmount(availableAmount+"");
+						                
+						                inventoryList.add(xlsDto);
+//						            }
+					            }
+					    }
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return inventoryList;
+	 }
+	 
+	 public List<OnDelivery> readXlsOfOnDelivery() throws FileNotFoundException{
+			List<OnDelivery> OnDeliveryList = new ArrayList<OnDelivery>();
+			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OnDelivery.XLS");
+
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+				
+					OnDelivery xlsDto = null;
+
+					// 循环工作表Sheet
+
+					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+				
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           
+				            // 循环行Row
+			
+					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				
+					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				
+					                if (hssfRow == null) {
+				
+					                    continue;
+				
+					                }
+					                xlsDto = new OnDelivery();
+//					                // 循环列Cell
+						                HSSFCell billID = hssfRow.getCell(2);
+						                xlsDto.setBillID(billID+"");
+						                
+						                HSSFCell date = hssfRow.getCell(3);
+						                xlsDto.setDate(TransitionDate(date+""));
+						                
+						                HSSFCell provider = hssfRow.getCell(4);
+						                xlsDto.setProvider(provider+"");
+						                
+						                HSSFCell plasticItem = hssfRow.getCell(5);
+						                xlsDto.setPlasticItem(plasticItem+"");
+						                
+						                HSSFCell amount = hssfRow.getCell(6);
+						                xlsDto.setAmount(amount+"");
+						                
+						                HSSFCell originalPrice = hssfRow.getCell(7);
+						                xlsDto.setOriginalPrice(originalPrice+"");
+						                
+						                HSSFCell taxRate = hssfRow.getCell(8);
+						                xlsDto.setTaxRate(taxRate+"");
+						                
+						                HSSFCell billType = hssfRow.getCell(9);
+						                xlsDto.setBillType(billType+"");
+						                
+						                HSSFCell notInInRepository = hssfRow.getCell(10);
+						                xlsDto.setNotInInRepository(notInInRepository+"");
+						                
+						                OnDeliveryList.add(xlsDto);
+					            }
+					    }
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return OnDeliveryList;
+	 }
+	 
+	 public List<OrderNopay> readXlsOfOrderNopay() throws FileNotFoundException{
+			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
+			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS");
+
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+				
+					OrderNopay xlsDto = null;
+
+					// 循环工作表Sheet
+
+					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+				
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           
+				            // 循环行Row
+			
+					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+				
+					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+				
+					                if (hssfRow == null) {
+				
+					                    continue;
+				
+					                }
+					                xlsDto = new OrderNopay();
+//					                // 循环列Cell
+						                HSSFCell customerNameString = hssfRow.getCell(0);
+						                xlsDto.setCustomerNameString(customerNameString+"");
+						                
+						                HSSFCell salesman = hssfRow.getCell(1);
+						                xlsDto.setSalesman(salesman+"");
+						                
+						                HSSFCell billID = hssfRow.getCell(2);
+						                xlsDto.setBillID(billID+"");
+						                
+						                HSSFCell billDate = hssfRow.getCell(3);
+						                xlsDto.setBillDate(billDate+"");
+						                
+						                HSSFCell plasticItem = hssfRow.getCell(4);
+						                xlsDto.setPlasticItem(plasticItem+"");
+						                
+						                HSSFCell unfilledOrderAmount = hssfRow.getCell(5);
+						                xlsDto.setUnfilledOrderAmount(unfilledOrderAmount+"");
+						                
+						                HSSFCell filledOrderAmount = hssfRow.getCell(6);
+						                xlsDto.setFilledOrderAmount(filledOrderAmount+"");
+						                
+						                HSSFCell noInvoiceAmount = hssfRow.getCell(7);
+						                xlsDto.setNoInvoiceAmount(noInvoiceAmount+"");
+						                
+						                OrderNopayList.add(xlsDto);
+					            }
+					    }
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return OrderNopayList;
 	 }
 }
 
