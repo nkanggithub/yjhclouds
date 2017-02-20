@@ -2195,6 +2195,30 @@ div.tagsinput .not_valid {
 	font-size: 10px;
 	-webkit-transition: color 0.2s;
 }
+#tag {
+	background: #bbb;
+	border-radius: 3px 0 0 3px;
+	color: #fff !important;
+	display: inline-block;
+	/*height: 26px;
+    line-height: 26px;*/
+	padding: 0 4px 0 11px;
+	position: relative;
+	margin: 0 0px 4px 0;
+	text-decoration: none;
+	font-size: 10px;
+	-webkit-transition: color 0.2s;
+}
+#tag::after {
+	background: #F5F5F5;
+	border-bottom: 8px solid #FFF;
+	border-left: 3px solid #bbb;
+	border-top: 12px solid #FFF;
+	position: absolute;
+	content: '';
+	right: 0;
+	top: 0;
+}
 .tag::before {
 	background: #F5F5F5;
 	border-radius: 10px;
