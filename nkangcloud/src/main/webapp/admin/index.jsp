@@ -563,7 +563,7 @@ jQuery
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
-					+'完善度'+infoPer+'%'
+					+'<span style="font-size:12px;color:green">完善度'+infoPer+'%</span>'
 					+'</h2>'
 					+ '<div>'
 					+tagHtml
