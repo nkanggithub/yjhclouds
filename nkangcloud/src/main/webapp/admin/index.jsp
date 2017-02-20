@@ -514,7 +514,7 @@ jQuery
 					infoPer+=40;
 				}else{
 				}
-				if(companyName==null||companyName=='null'||||companyName==''){
+				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
 				}else{
 					infoPer+=10;
