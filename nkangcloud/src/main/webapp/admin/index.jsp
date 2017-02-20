@@ -509,12 +509,12 @@ jQuery
 				}
 				
 				
-				if(temp.phone!=null&&temp.phone!='null'){
+				if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
 					selfIntro="电话号码:"+temp.phone;
 					infoPer+=40;
 				}else{
 				}
-				if(companyName==null||companyName=='null'){
+				if(companyName==null||companyName=='null'||||companyName==''){
 					companyName="";
 				}else{
 					infoPer+=10;
@@ -533,6 +533,9 @@ jQuery
 				}else{
 					regNumber++;
 					workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
+					if(temp.isActive!="true"){
+					workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:red;font-size:13px;padding:3px;">待审核</div>';
+					}
 				}
 				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
 					
