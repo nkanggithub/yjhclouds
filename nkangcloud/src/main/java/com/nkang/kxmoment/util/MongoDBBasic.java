@@ -39,6 +39,7 @@ import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
@@ -61,6 +62,7 @@ public class MongoDBBasic {
 	private static String ClientMeta = "Client_Meta";
 	private static String collectionBill = "SaleBill";
 	private static String collectionQuotation = "Quotation";
+	private static String collectionInventory = "Inventory";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -2958,6 +2960,85 @@ public class MongoDBBasic {
 		return quotationList;
 			
 	}
+	
+	/*
+	 * chang-zheng
+	 * to save Inventory
+	 */
+	public static String saveInventory(Inventory inventory){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="Quotation fail";
+		if(inventory!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+			query.put("plasticItem", inventory.getPlasticItem());
+			DBObject queryresult = mongoDB.getCollection(collectionInventory).findOne(query);
 
+			DBObject insertQuery = new BasicDBObject();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			WriteResult writeResult;
+			if(queryresult==null){
+				insertQuery.put("repositoryName",inventory.getRepositoryName());
+				insertQuery.put("plasticItem",inventory.getPlasticItem());
+				insertQuery.put("unit",inventory.getUnit());
+				insertQuery.put("inventoryAmount",inventory.getInventoryAmount());
+				insertQuery.put("waitDeliverAmount",inventory.getWaitDeliverAmount());
+				insertQuery.put("reserveDeliverAmount",inventory.getReserveDeliverAmount());
+				insertQuery.put("availableAmount",inventory.getAvailableAmount());
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+				
+				writeResult=mongoDB.getCollection(collectionInventory).insert(insertQuery);
+				ret="insert Inventory ok  -->" + writeResult;
+			}else{
+				if(inventory.getRepositoryName()==null){
+					insertQuery.put("repositoryName",queryresult.get("repositoryName"));
+				}else {
+					insertQuery.put("repositoryName",inventory.getRepositoryName());
+				}
+				
+				if(inventory.getUnit()==null){
+					insertQuery.put("unit",queryresult.get("categoryGrade"));
+				}else {
+					insertQuery.put("unit",inventory.getUnit());
+				}
+				
+				if(inventory.getInventoryAmount()==null){
+					insertQuery.put("inventoryAmount",queryresult.get("inventoryAmount"));
+				}else {
+					insertQuery.put("inventoryAmount",inventory.getInventoryAmount());
+				}
+				
+
+				if(inventory.getWaitDeliverAmount()==null){
+					insertQuery.put("waitDeliverAmount",queryresult.get("waitDeliverAmount"));
+				}else {
+					insertQuery.put("waitDeliverAmount",inventory.getWaitDeliverAmount());
+				}
+
+				if(inventory.getReserveDeliverAmount()==null ){
+					insertQuery.put("reserveDeliverAmount",queryresult.get("reserveDeliverAmount"));
+				}else {
+					insertQuery.put("reserveDeliverAmount",inventory.getReserveDeliverAmount());
+				}
+				
+				if(inventory.getAvailableAmount()==null ){
+					insertQuery.put("availableAmount",queryresult.get("availableAmount"));
+				}else {
+					insertQuery.put("availableAmount",inventory.getAvailableAmount());
+				}
+
+				
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+			
+				BasicDBObject doc = new BasicDBObject();  
+				doc.put("$set", insertQuery);
+				writeResult=mongoDB.getCollection(collectionInventory).update(new BasicDBObject().append("plasticItem", inventory.getPlasticItem()), doc);
+				ret="update Inventory ok  -->" + writeResult;
+			}
+		}
+		return ret;
+	}
 }
 					
