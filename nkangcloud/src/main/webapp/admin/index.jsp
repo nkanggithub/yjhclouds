@@ -508,9 +508,6 @@ jQuery
 				if(temp.phone!=null&&temp.phone!='null'){
 					selfIntro="电话号码:"+temp.phone;
 				}else{
-					if(selfIntro.length>10){
-						selfIntro=(selfIntro.substr(0,12)+'...');
-					}
 				}
 				if(companyName==null||companyName=='null'){
 					companyName="";
