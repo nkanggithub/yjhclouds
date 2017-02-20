@@ -44,6 +44,7 @@ import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Role;
@@ -2976,6 +2977,7 @@ public class MongoDBBasic {
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
+			query.put("repositoryName", inventory.getRepositoryName());
 			query.put("plasticItem", inventory.getPlasticItem());
 			DBObject queryresult = mongoDB.getCollection(collectionInventory).findOne(query);
 
@@ -3043,5 +3045,7 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	
+	
 }
 					
