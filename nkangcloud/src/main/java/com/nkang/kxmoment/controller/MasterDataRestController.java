@@ -986,7 +986,6 @@ public class MasterDataRestController {
 			@RequestParam(value="reserveDeliverAmount", required=false) String reserveDeliverAmount,
 			@RequestParam(value="availableAmount", required=false) String availableAmount
 			){
-		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		
 		Inventory it = new Inventory();
 		it.setAvailableAmount(availableAmount);
