@@ -439,38 +439,62 @@ jQuery
 			var jsons = eval('(' + data + ')');
 			var ul = "",regNumber=0;
 			ul='<li class="Work_Mates_div_list_div2" style="border-bottom:0px;">'
-			for (var i = 0; i < jsons.results.length; i++) {
+			for (var i = jsons.results.length-1; i >0 ; i--) {
 				var temp = jsons.results[i];
-				var selfIntro=temp.selfIntro;
-				var role=temp.role;
+				var selfIntro="";
+				var companyName=temp.companyName;
 				var workDay=temp.workDay;
 				var tag=temp.tag;
 				var tagHtml="";
 				var congratulate="";
+				var role= new Array();
 				//************************
 				var temp_B=true;
 				if(temp.roleObj.externalUpStream){
 					UpStreamList.push(temp);
+					role.push("上游客户");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalCustomer){
 					DownStreamList.push(temp);
+					role.push("下游客户");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalPartner){
 					PartnerList.push(temp);
+					role.push("合作伙伴");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalCompetitor){
 					CompetitorList.push(temp);
+					role.push("竞争对手");
 					temp_B=false;
 				}
-				if(temp.roleObj.internalSeniorMgt||temp.roleObj.internalImtMgt||temp.roleObj.internalBizEmp||temp.roleObj.internalNonBizEmp||temp.roleObj.internalQuoter||temp.roleObj.itoperations){
+				if(temp.roleObj.internalSeniorMgt){
 					InternalList.push(temp);
+					role.push("报价审核");
 					temp_B=false;
 				}
+				if(temp.roleObj.internalImtMgt){
+					InternalList.push(temp);
+					role.push("信息发布");
+					temp_B=false;
+				}
+//				if(temp.roleObj.internalBizEmp|| temp.roleObj.internalNonBizEmp){
+				if(temp.roleObj.internalQuoter){
+					InternalList.push(temp);
+					role.push("报价修改");
+					temp_B=false;
+				}
+				if(temp.roleObj.itoperations){
+					InternalList.push(temp);
+					role.push("后台管理");
+					temp_B=false;
+				}
+				
 				if(temp_B){
 					NoRoleList.push(temp);
+					role.push("未分类");
 				}
 				//************************
 				
@@ -481,23 +505,23 @@ jQuery
 
 				
 				
-				if(selfIntro==null||selfIntro=='null'){
-					selfIntro="nothing";
+				if(temp.phone!=null&&temp.phone!='null'){
+					selfIntro="电话号码:"+temp.phone;
 				}else{
 					if(selfIntro.length>10){
 						selfIntro=(selfIntro.substr(0,12)+'...');
 					}
 				}
-				if(role==null||role=='null'){
-					role="";
+				if(companyName==null||companyName=='null'){
+					companyName="";
 				}
-				if(tag!=null&&tag!='null'){
-					for(var j=0;j<tag.length&&j<4;j++){
-						for (var key in tag[j]) { 
-							tagHtml+='													<div class="tag">'
-							+key
+				if(role!=null&&role!='null'){
+					for(var j=0;j<role.length&&j<4;j++){
+							tagHtml+='													<div class="tag" '
+							+(role[j]=='未分类'?'id="tag" ':'')
+							+'>'
+							+role[j]
 							+'													</div>';
-						}
 					}
 				}
 				if(workDay==null||workDay=='null'||workDay==0){
@@ -534,7 +558,7 @@ jQuery
 					+ '\');">'
 					+ temp.nickname
 					+ '</span><span class="role">'
-					+role+'</span>'
+					+companyName+'</span>'
 					+congratulate
 					+'</h2>'
 					+ '<div>'
