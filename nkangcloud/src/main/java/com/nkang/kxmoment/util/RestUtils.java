@@ -1937,7 +1937,7 @@ public static String regist(WeChatMDLUser user) {
  				  "\"touser\":\""+toUser+"\","+ 
  				  "\"msgtype\":\"text\", "+
  				   "\"text\":{"+
- 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+" è¯´ï¼š\n---------------\n"+content+"\""+
+ 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"说：\n---------------\n"+content+"\""+
  				   "}"+
  				"}";
 
