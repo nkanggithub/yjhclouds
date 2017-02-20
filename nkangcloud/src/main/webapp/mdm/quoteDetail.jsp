@@ -47,7 +47,7 @@ var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="2"&&status=="0"){
 	$(this).addClass("specialEditBtn");
 $(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");}
-else if($("#isSpecial").val()=="1"){
+else if($("#isSpecial").val()=="1"||$("#isSpecial").val()=="2"){
 	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 }
 else if($("#isSpecial").val()=="0"){
@@ -428,7 +428,7 @@ for(int i=0;i<ql.size();i++){
 <input id="status" type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
 <% if(special==1||special==2){ %>
 
-<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><% if("0".equals(ql.get(i).getApproveStatus())){%><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else if("1".equals(ql.get(i).getApproveStatus())){ %><p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else {%><p class="quotePrice"  style="color:black">￥<span><%=ql.get(i).getQuotationPrice() %></span><% }%></p></div>
+<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><% if("0".equals(ql.get(i).getApproveStatus())){%><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else if("1".equals(ql.get(i).getApproveStatus())){ %><p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else {%><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span><% }%></p></div>
 
 <div class="secondLayer">
 <div class="leftPanel">
@@ -447,7 +447,7 @@ for(int i=0;i<ql.size();i++){
 <% } %>
 <% } else { %>
 
-<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><p class="quotePrice"  style="color:black">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
+<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
 
 <div class="secondLayer">
 <div class="leftPanel">
