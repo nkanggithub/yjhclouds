@@ -504,6 +504,7 @@ jQuery
 					lastLikeTo=temp.like.lastLikeTo;
 				}
 				if(temp.realName!=null&&temp.realName!='null'){
+					temp.nickname=temp.realName;
 					infoPer+=40;
 				}
 				
