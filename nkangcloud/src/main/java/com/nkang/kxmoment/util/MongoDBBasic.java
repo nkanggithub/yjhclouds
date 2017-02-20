@@ -1591,8 +1591,11 @@ public class MongoDBBasic {
             				if(teamobj.get("selfIntro") != null){
             					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
             				}
+            				if(teamobj.get("phone") != null){
+            					weChatMDLUser.setPhone(teamobj.get("phone").toString());
+            				}
             				if(teamobj.get("realName") != null){
-            					weChatMDLUser.setNickname(teamobj.get("realName").toString());
+            					weChatMDLUser.setRealName(teamobj.get("realName").toString());
             				}
             				if(teamobj.get("role") != null){
             					weChatMDLUser.setRole(teamobj.get("role").toString());
