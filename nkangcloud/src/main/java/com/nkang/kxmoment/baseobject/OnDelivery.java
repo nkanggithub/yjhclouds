@@ -78,5 +78,8 @@ public class OnDelivery {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
+	public String info(){
+		return billID + "\n" +notInInRepository;
+		
+	}
 }
