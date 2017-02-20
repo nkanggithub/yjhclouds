@@ -1,7 +1,7 @@
 package com.nkang.kxmoment.baseobject;
 
 public class Inventory {
-	private String repository;
+	private String repositoryName;
 	private String plasticItem;
 	private String unit;
 	private String inventoryAmount;
@@ -16,11 +16,12 @@ public class Inventory {
 	public void setLastUpdate(String lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	public String getRepository() {
-		return repository;
+
+	public String getRepositoryName() {
+		return repositoryName;
 	}
-	public void setRepository(String repository) {
-		this.repository = repository;
+	public void setRepositoryName(String repositoryName) {
+		this.repositoryName = repositoryName;
 	}
 	public String getPlasticItem() {
 		return plasticItem;
@@ -59,4 +60,14 @@ public class Inventory {
 		this.availableAmount = availableAmount;
 	}
 	
+	public String info(){
+		return repositoryName + "\n"
+				+plasticItem + "\n"
+				+unit + "\n"
+				+inventoryAmount + "\n"
+				+waitDeliverAmount + "\n"
+				+reserveDeliverAmount + "\n"
+				+availableAmount + "\n";
+		
+	}
 }
