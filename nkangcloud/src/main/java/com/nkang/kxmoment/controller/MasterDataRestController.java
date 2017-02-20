@@ -20,6 +20,7 @@ import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
@@ -971,4 +972,33 @@ public class MasterDataRestController {
 		return ret;
 	}
 		*/
+	
+	/*
+	 * chang-zheng
+	 * FOR Inventory
+	 */
+	@RequestMapping("/saveInventory")
+	public static String saveInventory(@RequestParam(value="repositoryName", required=false) String repositoryName,
+			@RequestParam(value="plasticItem", required=false) String plasticItem,
+			@RequestParam(value="unit", required=false) String unit,
+			@RequestParam(value="inventoryAmount", required=false) String inventoryAmount,
+			@RequestParam(value="waitDeliverAmount", required=false) String waitDeliverAmount,
+			@RequestParam(value="reserveDeliverAmount", required=false) String reserveDeliverAmount,
+			@RequestParam(value="availableAmount", required=false) String availableAmount
+			){
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		
+		Inventory it = new Inventory();
+		it.setAvailableAmount(availableAmount);
+		it.setInventoryAmount(inventoryAmount);
+		it.setPlasticItem(plasticItem);
+		it.setRepositoryName(repositoryName);
+		it.setReserveDeliverAmount(reserveDeliverAmount);
+		it.setUnit(unit);
+		it.setWaitDeliverAmount(waitDeliverAmount);
+		
+		String ret = MongoDBBasic.saveInventory(it);
+		return ret;
+	}
 }
+		
