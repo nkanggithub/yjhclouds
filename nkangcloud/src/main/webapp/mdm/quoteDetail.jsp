@@ -9,10 +9,11 @@
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
+
 int special=0;
-if("oij7nt5yOIOqcn58N8JnzP8RRVao".equals(uid)||"oij7nt5GgpKftiaoMSKD68MTLXpc".equals(uid)){
-	special=1;
-}
+if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){special=1;}
+if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){special=2;}
+
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 %>  
@@ -36,20 +37,26 @@ $(".singleQuote").live("swiperight",function(){
 $(this).css("overflow","hidden");
 $(this).removeClass("editBtn");
 $(this).removeClass("specialEditBtn");
+$(this).removeClass("noEditBtn");
 $(this).remove(".edit");
 });
 $(".singleQuote").live("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
 var status=$(this).find("#status").val();
-if($("#isSpecial").val()=="1"&&status=="0"){
+if($("#isSpecial").val()=="2"&&status=="0"){
 	$(this).addClass("specialEditBtn");
 $(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");}
-else{
-	$(this).append("<div class='edit'><p style='background-color:red;' onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+else if($("#isSpecial").val()=="1"){
+	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+}
+else if($("#isSpecial").val()=="0"){
+	$(this).addClass("noEditBtn");
+	$(this).append("<div class='edit noEdit'><p style='background-color:orange;' onclick='edit(this)'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 }
 $(this).siblings().removeClass("editBtn");
 $(this).siblings().removeClass("specialEditBtn");
+$(this).siblings().removeClass("noEditBtn");
 $(this).siblings().remove(".edit");
 });
 function approve(obj)
@@ -241,14 +248,17 @@ window.focusThis=focusThis;
 <!--	<link href='css/horsey.css' rel='stylesheet' type='text/css' />
 	<link href='css/example.css' rel='stylesheet' type='text/css' />-->
 <style>
+.noEdit{width: 60px!important; right: -60px!important;}
+.noEdit p{ right: -60px!important;width:100%!important;}
+.noEditBtn{left:-60px!important;}
 .edit
-{width: 70px;
+{width: 120px;
     height: 90px;
     color: white;
     text-align: center;
     position: absolute;
     top: 0px;
-    right: -70px;
+    right: -120px;
 	font-size:14px;
     background: #D3D3D3;
     border-bottom: 1px solid black;}
@@ -257,9 +267,10 @@ window.focusThis=focusThis;
     width:25px;height:auto;position:absolute;top:15px;margin-left: 2px;
     }
 	.edit p
-	{width:100%;
+	{width:50%;
 	height:100%;
 	line-height:130px;
+	float:left;
 	}
 	.specialEdit p
 	{width:33%;
@@ -268,7 +279,7 @@ window.focusThis=focusThis;
 .editBtn
 {
 position: relative;
-    left: -70px;
+    left: -120px;
 	}
 .specialEditBtn
 {
@@ -415,8 +426,9 @@ for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
 <input id="status" type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
-<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span><%if(null!=ql.get(i).getCategory()){  %>[<span id="category"><%=ql.get(i).getCategory() %></span>]<%} %></p><% if(null!=ql.get(i).getCategoryGrade()&&!"".equals(ql.get(i).getCategoryGrade())){ %>
-	<p class="tag tagStyle"><%=ql.get(i).getCategoryGrade() %></p><% } %><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
+<% if(special==1||special==2){ %>
+
+<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><% if("0".equals(ql.get(i).getApproveStatus())){%><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else if("1".equals(ql.get(i).getApproveStatus())){ %><p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else {%><p class="quotePrice"  style="color:black">￥<span><%=ql.get(i).getQuotationPrice() %></span><% }%></p></div>
 
 <div class="secondLayer">
 <div class="leftPanel">
@@ -425,8 +437,6 @@ for(int i=0;i<ql.size();i++){
 <div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDelivery() %></p></div>
 </div>
 <div class="rightPanel">
-<p><%=ql.get(i).getLocationAmounts().split("\\|")[0] %></p>
-<p><%=ql.get(i).getLocationAmounts().split("\\|")[1] %></p>
 </div>
 </div>
 <% if(("0").equals(ql.get(i).getApproveStatus())) {%>
@@ -434,6 +444,21 @@ for(int i=0;i<ql.size();i++){
 <% } %>
 <% if(("1").equals(ql.get(i).getApproveStatus())) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
+<% } %>
+<% } else { %>
+
+<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><p class="quotePrice"  style="color:black">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
+
+<div class="secondLayer">
+<div class="leftPanel">
+<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue">N/A</p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue">N/A</p></div>
+<div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue">N/A</p></div>
+</div>
+<div class="rightPanel">
+</div>
+</div>
+
 <% } %>
 </li>
 <%} %>
