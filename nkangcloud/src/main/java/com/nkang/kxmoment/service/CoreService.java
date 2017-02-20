@@ -89,6 +89,10 @@ public class CoreService
 					respContent = sucNum+"条数据同步成功!";
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
+				}else if ("K8003".equals(textContent)||"8003".equals(textContent)) {
+					respContent = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM";
+					textMessage.setContent(respContent);
+					respXml = MessageUtil.textMessageToXml(textMessage);
 				}else if ("SJOB".equals(textContent)) {
 					Calendar date = Calendar.getInstance();
 				    //date.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
