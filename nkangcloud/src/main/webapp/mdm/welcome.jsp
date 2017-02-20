@@ -3,11 +3,13 @@
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%	
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+String baehosthost = Constants.baehost;
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,7 +21,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
     <link rel="stylesheet" href="../Jsp/CSS/layer.css" id="layui_layer_skinlayercss">
    <script>
     function appointment(){
-    	window.location.href="http://yongjiahe.duapp.com/mdm/quoteDetail.jsp?UID="+<%= uid%>;
+    	window.location.href="http://"+baehosthost+"/mdm/quoteDetail.jsp?UID="+<%= uid%>;
     }
     $(function(){
     	//分享到朋友圈
@@ -204,7 +206,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	            
 	            </div>
 	            <div class="btn-box">
-	                <a href="http://yongjiahe.duapp.com/mdm/quoteDetail.jsp?UID="+<%= uid%>+"""><button class="btn">马上询价</button></a>
+	                <a href="http://"+<%= baehosthost%>+"/mdm/quoteDetail.jsp?UID="+<%= uid%>+"""><button class="btn">马上询价</button></a>
 	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
