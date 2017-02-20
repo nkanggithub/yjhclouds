@@ -448,6 +448,7 @@ jQuery
 				var tagHtml="";
 				var congratulate="";
 				var role= new Array();
+				var infoPer=0;
 				//************************
 				var temp_B=true;
 				if(temp.roleObj.externalUpStream){
@@ -502,15 +503,20 @@ jQuery
 					LastToLikeDate=temp.like.lastLikeDate;
 					lastLikeTo=temp.like.lastLikeTo;
 				}
-
+				if(temp.realName!=null&&temp.realName!='null'){
+					infoPer+=40;
+				}
 				
 				
 				if(temp.phone!=null&&temp.phone!='null'){
 					selfIntro="电话号码:"+temp.phone;
+					infoPer+=40;
 				}else{
 				}
 				if(companyName==null||companyName=='null'){
 					companyName="";
+				}else{
+					infoPer+=10;
 				}
 				if(role!=null&&role!='null'){
 					for(var j=0;j<role.length&&j<4;j++){
