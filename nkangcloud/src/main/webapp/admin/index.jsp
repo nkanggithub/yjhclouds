@@ -463,12 +463,12 @@ jQuery
 				}
 				if(temp.roleObj.externalPartner){
 					PartnerList.push(temp);
-					role.push("合作伙伴");
+					role.push("贸易商");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalCompetitor){
 					CompetitorList.push(temp);
-					role.push("竞争对手");
+					role.push("代理商");
 					temp_B=false;
 				}
 				if(temp.roleObj.internalSeniorMgt){
