@@ -562,7 +562,7 @@ jQuery
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
-					+congratulate
+					+'完善度'+infoPer
 					+'</h2>'
 					+ '<div>'
 					+tagHtml
