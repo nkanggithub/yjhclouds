@@ -2,7 +2,7 @@ package com.nkang.kxmoment.baseobject;
 
 public class OrderNopay {
 	//客户简称
-	private String customerNameString;
+	private String customerName;
 	//业务员
 	private String salesman;
 	//订单号
@@ -18,11 +18,12 @@ public class OrderNopay {
 	//未开票数量
 	private String noInvoiceAmount;
 	private String lastUpdate;
-	public String getCustomerNameString() {
-		return customerNameString;
+	
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setCustomerNameString(String customerNameString) {
-		this.customerNameString = customerNameString;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 	public String getSalesman() {
 		return salesman;
