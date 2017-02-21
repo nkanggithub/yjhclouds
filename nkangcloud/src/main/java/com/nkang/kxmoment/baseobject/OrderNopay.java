@@ -74,7 +74,7 @@ public class OrderNopay {
 		this.lastUpdate = lastUpdate;
 	}
 	public String info(){
-		return customerNameString + "\n"
+		return customerName + "\n"
 				+billID + "\n"
 				+noInvoiceAmount + "\n";
 		
