@@ -1650,6 +1650,15 @@ public class MongoDBBasic {
             				}
             			}
             			weChatMDLUser.setLike(likeMap);
+            			if(o.get("IsActive") != null){
+                			weChatMDLUser.setIsActive(o.get("IsActive").toString());
+                		}
+            			if(o.get("IsAuthenticated") != null){
+                			weChatMDLUser.setIsAuthenticated(o.get("IsAuthenticated").toString());
+                		}
+            			if(o.get("IsRegistered") != null){
+                			weChatMDLUser.setIsRegistered(o.get("IsRegistered").toString());
+                		}
                 		if(!StringUtils.isEmpty(OpenID)){
                 			if(teamobj != null){
                 				if(teamobj.get("email") != null){
@@ -1664,15 +1673,6 @@ public class MongoDBBasic {
                 				if(teamobj.get("groupid") != null){
                 					weChatMDLUser.setGroupid(teamobj.get("groupid").toString());
                 				}
-                    		}
-                			if(o.get("IsActive") != null){
-                    			weChatMDLUser.setIsActive(o.get("IsActive").toString());
-                    		}
-                			if(o.get("IsAuthenticated") != null){
-                    			weChatMDLUser.setIsAuthenticated(o.get("IsAuthenticated").toString());
-                    		}
-                			if(o.get("IsRegistered") != null){
-                    			weChatMDLUser.setIsRegistered(o.get("IsRegistered").toString());
                     		}
                 		}
             		}
