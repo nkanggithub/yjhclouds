@@ -3170,7 +3170,30 @@ public class MongoDBBasic {
 		return ret;
 	
 	}
+	/*public static String insertQuotationList(QuotationList quotation){
+		mongoDB = getMongoDB();
+		String ret="Quotation fail";
+		if(quotation!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+			DBObject queryresult = null;
+			WriteResult writeResult;
+			DBObject insertQuery = new BasicDBObject();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+				insertQuery.put("plasticItem", quotation.getPlasticItem());
+				insertQuery.put("status", quotation.getStatus());
+				insertQuery.put("approveBy", quotation.getApproveBy());
+				insertQuery.put("editBy",quotation.getEditBy());
+				insertQuery.put("dateTime",quotation.getDateTime());
+				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
+				ret="insert quotation ok  -->" + writeResult;
+		}
+		return ret;
 	
+	}*/
 	/*
 	 * CHANG -ZHENG
 	 *
