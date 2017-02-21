@@ -473,11 +473,11 @@ public class CoreService
 						articlenav1.setTitle("公运库\n九龙坡区铁路村198号\n工作时间8:30AM-17:30PM\n电话68526840");
 						articlenav1.setDescription("公运库-电话68526840");
 						articlenav1.setPicUrl(navPic);
-						articlenav1.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E4%B9%9D%E9%BE%99%E5%9D%A1%E5%8C%BA%E9%93%81%E8%B7%AF%E6%9D%91198%E5%8F%B7&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&src=0/vt=map");
+						articlenav1.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E4%B9%9D%E9%BE%99%E5%9D%A1%E5%8C%BA%E9%93%81%E8%B7%AF%E4%BA%8C%E6%9D%91198%E5%8F%B7&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&src=0/vt=map");
 						articleList.add(articlenav1);
 						
 						Article articlenav2 = new Article();
-						articlenav2.setTitle("囤鑫中石化库\n港城工业园区C区\n工作时间8:30AM-17:20PM\n囤鑫中石化库-电话88301978");
+						articlenav2.setTitle("囤鑫中石化库\n港城工业园区C区\n工作时间8:30AM-17:20PM\n电话88301978");
 						articlenav2.setDescription("囤鑫中石化库-电话88301978");
 						articlenav2.setPicUrl(navPic);
 						articlenav2.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E6%B8%AF%E5%9F%8E%E5%B7%A5%E4%B8%9A%E5%9B%AD%E5%8C%BAc%E5%8C%BA&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B1%9F%E5%8C%97%E5%8C%BA&sug_forward=c1f324f93a6385b832f71d3b&src=1/vt=map");
