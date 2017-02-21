@@ -81,28 +81,22 @@ function approve(obj)
 					 if(data)
 						 {
 						 var html="";
-						 var roleHtml="";
-						// var category="";
-						// var grade="";
 						 var status="";
 						 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 						 for(var i=0;i<data.length;i++){
-							/*  if(data[i].category!=""){
-								 category="[<span id='category'>"+data[i].category+"</span>]";
-							 } */
-							/*  if(data[i].categoryGrade!=""){
-								 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
-							 } */
-							 if(data[i].approveStatus=="1"){
+							
+							 if(data[i].approveStatus=="0"){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
-							 if(data[i].approveStatus=="2"){
+							 if(data[i].approveStatus=="1"){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 							 }
-							 if($("#isSpecial").val()=="1"||status=="2"){
-								 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+								
+							
+							 html+="<li class='singleQuote'>"
+								 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
 								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
@@ -112,26 +106,7 @@ function approve(obj)
 								 +"</div>"
 								 +"<div class='rightPanel'>"
 								 +"</div></div>"
-								 +status;
-							 }else
-								 {
-								 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
-								 +"<div class='secondLayer'>"
-								 +"<div class='leftPanel'>"
-								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>N/A</p></div>"
-								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>N/A</p></div>"
-								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>N/A</p></div>"
-								 +"</div>"
-								 +"<div class='rightPanel'>"
-								 +"</div></div>"
-								 +status;
-								 }
-							 html+="<li class='singleQuote'>"
-								 +roleHtml+"</li>";
-							 grade="";
-							 category="";
-							 status="";
+								 +status +"</li>"; 
 						 }
 						 $("#QuoteList").html(html);
 						 }
@@ -198,9 +173,6 @@ function edit(obj)
 								 if(data)
 									 {
 									 var html="";
-									 var roleHtml="";
-									// var category="";
-									// var grade="";
 									 var status="";
 									 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 									 for(var i=0;i<data.length;i++){
@@ -210,16 +182,18 @@ function edit(obj)
 										/*  if(data[i].categoryGrade!=""){
 											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
 										 } */
-										 if(data[i].approveStatus=="1"){
+										 if(data[i].approveStatus=="0"){
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 											 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 										 }
-										 if(data[i].approveStatus=="2"){
+										 if(data[i].approveStatus=="1"){
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 											 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 										 }
-										 if($("#isSpecial").val()=="1"||status=="2"){
-											 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+											
+										
+										 html+="<li class='singleQuote'>"
+											 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
 											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
 											 +"<div class='secondLayer'>"
 											 +"<div class='leftPanel'>"
@@ -229,26 +203,7 @@ function edit(obj)
 											 +"</div>"
 											 +"<div class='rightPanel'>"
 											 +"</div></div>"
-											 +status;
-										 }else
-											 {
-											 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
-											 +"<div class='secondLayer'>"
-											 +"<div class='leftPanel'>"
-											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>N/A</p></div>"
-											 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>N/A</p></div>"
-											 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>N/A</p></div>"
-											 +"</div>"
-											 +"<div class='rightPanel'>"
-											 +"</div></div>"
-											 +status;
-											 }
-										 html+="<li class='singleQuote'>"
-											 +roleHtml+"</li>";
-										 grade="";
-										 category="";
-										 status="";
+											 +status +"</li>"; 
 									 }
 									 $("#QuoteList").html(html);
 									 }
@@ -484,7 +439,7 @@ for(int i=0;i<ql.size();i++){
 <% if(("1").equals(ql.get(i).getApproveStatus())) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
 <% } %>
-<% } else { %>
+<% } else if(special==0){ %>
 
 <div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
 
