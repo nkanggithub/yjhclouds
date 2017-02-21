@@ -349,7 +349,7 @@ function showUpdateUserPanel(openid){
 			success:function(result) {
 				if(result){
 					swal("更改成功!", "恭喜!", "success"); 
-					$('#UpdateUserPart').removeClass("bounceInDown animated");
+					hideBouncePanel();
 				} else {
 					swal("更改失败!", "请填写正确的信息.", "error");
 				}
