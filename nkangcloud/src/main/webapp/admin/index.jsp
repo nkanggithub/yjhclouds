@@ -328,6 +328,8 @@ function showUpdateUserPanel(openid){
 			}
 		}
 	});
+
+	$("#atest_uid").val(openid);
 	$("#updateUserInfoBtn").click(function(){
 		var isActived = $("input[name='isActived']:checked").val();
 		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
@@ -346,8 +348,8 @@ function showUpdateUserPanel(openid){
 			async:false,
 			success:function(result) {
 				if(result){
-					$('#updateUserInfoForm').modal('hide');
 					swal("更改成功!", "恭喜!", "success"); 
+					$('#UpdateUserPart').removeClass("bounceInDown animated");
 				} else {
 					swal("更改失败!", "请填写正确的信息.", "error");
 				}
@@ -599,6 +601,7 @@ jQuery
 					selfIntro="电话:"+temp.phone;
 					infoPer+=40;
 				}else{
+					selfIntro="&nbsp;";
 				}
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
@@ -618,9 +621,9 @@ jQuery
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;">'+workDay+'天</div>';
+					workDay='<div style="float:right;margin-top:-25px;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;">待审核</div>';
+					workDay='<div style="float:right;margin-top:-25px;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;">待审核</div>';
 					}
 				}
 				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
@@ -633,20 +636,20 @@ jQuery
 					+'                                           	 	<div class="Work_Mates_img_div2">'
 					+'                                        			 <img src="'
 					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
-					+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="updateUserInfo(\''+ temp.openid + '\');"/> '
+					+ '" alt="userImage" class="matesUserImage" alt="no_username" /> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_text_div">'
-					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span  onclick="updateUserInfo(\''+ temp.openid + '\');">'
+					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span>'
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
 					+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
 					+'</h2>'
-					+workDay
 					+ '<div>'
 					+tagHtml
 					+'<br/>'
 					+'													<span class="selfIntro">'+selfIntro+'</span>'
+					+workDay
 					+'												</div>'
 					+'                                        		</div>'
 					+'                                                <div class="clear"></div>'
