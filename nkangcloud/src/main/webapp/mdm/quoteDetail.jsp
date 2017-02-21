@@ -43,6 +43,9 @@ $(this).remove(".edit");
 $("#item").live("click",function(){
 	$("#pic").css("display","block");
 });
+$("#picClose").live("click",function(){
+	$("#pic").css("display","none");
+});
 $(".singleQuote").live("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
@@ -399,9 +402,10 @@ line-height:22px;}
 </style>
 </head>
 <body>
-<div id="pic" style="width:80%;border-radius:10px;background:rgba(0,0,0,0.1);height:80%;position:absolute;left:10%;top:10%;display:none;z-index:9999" >
-<img style="position:absolute;left:10%;width:80%;height:auto;" src="../mdm/images/delivering.gif" alt=""/>
-<img style="position:absolute;top:260px;left:10%;width:80%;height:auto;" src="../mdm/images/nodeliverywithoutpay.gif" alt=""/>
+<div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:absolute;left:5%;top:10%;display:none;z-index:9999" >
+<img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM" alt=""/>
+ <img id="picClose" style="position:absolute;top:10px;right:10px;width:15px;height:auto;" src="../MetroStyleFiles/Close2.png" alt=""/> 
+
 </div>
 <input id="isSpecial" type="hidden" value="<%= special %>" />
 <img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
