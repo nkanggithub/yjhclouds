@@ -571,6 +571,7 @@ public class MongoDBBasic {
 			update.put("Teamer.companyName", user.getCompanyName());
 			update.put("Teamer.email", user.getEmail());
 			update.put("Teamer.phone", user.getPhone());
+			update.put("Teamer.selfIntro", user.getSelfIntro());
 			
 			DBObject RoleObj = new BasicDBObject();
 	    	Role role=user.getRoleObj();
