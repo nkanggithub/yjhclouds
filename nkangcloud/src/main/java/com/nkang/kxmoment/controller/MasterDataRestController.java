@@ -1064,8 +1064,9 @@ public class MasterDataRestController {
 	 * FOR delete
 	 */
 	@RequestMapping("/deleteDB")
-	public static void deleteDB(@RequestParam(value="dbName", required=true) String dbName){
-		MongoDBBasic.DeleteDB(dbName);
+	public static String deleteDB(@RequestParam(value="dbName", required=true) String dbName){
+		String wr = MongoDBBasic.DeleteDB(dbName)+"";
+		return wr;
 	}
 }
 		
