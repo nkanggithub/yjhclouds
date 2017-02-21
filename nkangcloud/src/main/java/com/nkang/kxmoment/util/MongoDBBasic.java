@@ -3090,7 +3090,7 @@ public class MongoDBBasic {
 	public static String saveOrderNopay(OrderNopay orderNopay){
 
 		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
+	
 		String ret="Quotation fail";
 		if(orderNopay!=null){
 			if(mongoDB == null){
@@ -3116,6 +3116,15 @@ public class MongoDBBasic {
 		}
 		return ret;
 	
+	}
+	/*
+	 * CHANG -ZHENG
+	 *
+	 *delete
+	 **/
+	public static void DeleteDB(String dbName){
+	DBObject query = new BasicDBObject();
+	mongoDB.getCollection(dbName).remove(query);
 	}
 }
 					
