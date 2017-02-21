@@ -40,6 +40,9 @@ $(this).removeClass("specialEditBtn");
 $(this).removeClass("noEditBtn");
 $(this).remove(".edit");
 });
+$("#item").live("click",function(){
+	$("#pic").css("display","block");
+});
 $(".singleQuote").live("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
@@ -78,27 +81,29 @@ function approve(obj)
 					 if(data)
 						 {
 						 var html="";
-						 var category="";
-						 var grade="";
+						 var roleHtml="";
+						// var category="";
+						// var grade="";
 						 var status="";
-						 var priceColor="<p class='quotePrice' style='color:red'>￥<span>";
+						 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 						 for(var i=0;i<data.length;i++){
-							 if(data[i].category!=""){
+							/*  if(data[i].category!=""){
 								 category="[<span id='category'>"+data[i].category+"</span>]";
-							 }
-							 if(data[i].categoryGrade!=""){
+							 } */
+							/*  if(data[i].categoryGrade!=""){
 								 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
-							 }
-							 if(data[i].approveStatus=="0"){
-								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
-							 }
+							 } */
 							 if(data[i].approveStatus=="1"){
-								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
-								 priceColor="<p class='quotePrice' style='color:red'>￥<span>";
+								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
-							 html+="<li class='singleQuote'>"
-								 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
+							 if(data[i].approveStatus=="2"){
+								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+								 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
+							 }
+							 if($("#isSpecial").val()=="1"||status=="2"){
+								 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
 								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
@@ -106,10 +111,24 @@ function approve(obj)
 								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
 								 +"</div>"
 								 +"<div class='rightPanel'>"
-								 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
-								 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
 								 +"</div></div>"
-								 +status+"</li>";
+								 +status;
+							 }else
+								 {
+								 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
+								 +"<div class='secondLayer'>"
+								 +"<div class='leftPanel'>"
+								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>N/A</p></div>"
+								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>N/A</p></div>"
+								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>N/A</p></div>"
+								 +"</div>"
+								 +"<div class='rightPanel'>"
+								 +"</div></div>"
+								 +status;
+								 }
+							 html+="<li class='singleQuote'>"
+								 +roleHtml+"</li>";
 							 grade="";
 							 category="";
 							 status="";
@@ -179,27 +198,29 @@ function edit(obj)
 								 if(data)
 									 {
 									 var html="";
-									 var category="";
-									 var grade="";
+									 var roleHtml="";
+									// var category="";
+									// var grade="";
 									 var status="";
-									 var priceColor="<p class='quotePrice' style='color:red'>￥<span>";
+									 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 									 for(var i=0;i<data.length;i++){
-										 if(data[i].category!=""){
+										/*  if(data[i].category!=""){
 											 category="[<span id='category'>"+data[i].category+"</span>]";
-										 }
-										 if(data[i].categoryGrade!=""){
+										 } */
+										/*  if(data[i].categoryGrade!=""){
 											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
-										 }
-										 if(data[i].approveStatus=="0"){
-											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
-										 }
+										 } */
 										 if(data[i].approveStatus=="1"){
-											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
-											 priceColor="<p class='quotePrice' style='color:red'>￥<span>";
+											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+											 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 										 }
-										 html+="<li class='singleQuote'>"
-										 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span>"+category+"</p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
+										 if(data[i].approveStatus=="2"){
+											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+											 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
+										 }
+										 if($("#isSpecial").val()=="1"||status=="2"){
+											 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
 											 +"<div class='secondLayer'>"
 											 +"<div class='leftPanel'>"
 											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
@@ -207,10 +228,24 @@ function edit(obj)
 											 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
 											 +"</div>"
 											 +"<div class='rightPanel'>"
-											 +"<p>"+data[i].locationAmounts.split("|")[0]+"</p>"
-											 +"<p>"+data[i].locationAmounts.split("|")[1]+"</p>"
 											 +"</div></div>"
-											 +status+"</li>";
+											 +status;
+										 }else
+											 {
+											 roleHtml="<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
+											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+grade+priceColor+data[i].quotationPrice+"</span></p></div>"
+											 +"<div class='secondLayer'>"
+											 +"<div class='leftPanel'>"
+											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>N/A</p></div>"
+											 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>N/A</p></div>"
+											 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>N/A</p></div>"
+											 +"</div>"
+											 +"<div class='rightPanel'>"
+											 +"</div></div>"
+											 +status;
+											 }
+										 html+="<li class='singleQuote'>"
+											 +roleHtml+"</li>";
 										 grade="";
 										 category="";
 										 status="";
@@ -409,6 +444,10 @@ line-height:22px;}
 </style>
 </head>
 <body>
+<div id="pic" style="width:80%;border-radius:10px;background:rgba(0,0,0,0.1);height:80%;position:absolute;left:10%;top:10%;display:none;z-index:9999" >
+<img style="position:absolute;left:10%;width:80%;height:auto;" src="../mdm/images/delivering.gif" alt=""/>
+<img style="position:absolute;top:260px;left:10%;width:80%;height:auto;" src="../mdm/images/nodeliverywithoutpay.gif" alt=""/>
+</div>
 <input id="isSpecial" type="hidden" value="<%= special %>" />
 <img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
