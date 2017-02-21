@@ -297,6 +297,7 @@ function showUpdateUserPanel(openid){
 					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
 				}
 				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+				$("#atest input[name='selfIntro']").val(jsons.results[0].selfIntro);
 				
 				if(jsons.results[0].IsActive !="未注册"){
 					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
