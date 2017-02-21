@@ -483,19 +483,19 @@ public class CoreService
 						articlenav2.setUrl("https://m.amap.com/search/mapview/keywords=%E6%B8%AF%E5%9F%8E%E5%B7%A5%E4%B8%9A%E5%9B%AD%E5%8C%BAC%E5%8C%BA&city=500105&poiid=B0FFFDFSOS");
 						articleList.add(articlenav2);
 						
-						Article articlenav3 = new Article();
-						articlenav3.setTitle("直发库");
-						articlenav3.setDescription("直发库");
-						articlenav3.setPicUrl(navPic);
-						articlenav3.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
-						articleList.add(articlenav3);
-						
 						Article articlenav4 = new Article();
 						articlenav4.setTitle("天地金中心库\n工作时间8:30AM-18:30PM\n电话:65329881"); //重庆沙坪坝区土主镇西部物流园区中石油仓储中心
 						articlenav4.setDescription("天地金中心库-电话65329881");
 						articlenav4.setPicUrl(navPic);
 						articlenav4.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E8%A5%BF%E9%83%A8%E7%89%A9%E6%B5%81%E5%9B%AD&city=500106&poiid=B0FFF3P6P9");
 						articleList.add(articlenav4);
+						
+						Article articlenav3 = new Article();
+						articlenav3.setTitle("直发库");
+						articlenav3.setDescription("直发库");
+						articlenav3.setPicUrl(navPic);
+						articlenav3.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articleList.add(articlenav3);
 						
 						Article articlenav5 = new Article();
 						articlenav5.setTitle("铁风库");
