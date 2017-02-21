@@ -143,7 +143,7 @@ $(window).load(function() {
 	$(".Work_Mates_div_list_div2").live("swipeleft",function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
-		var openid=$(this).find("span").text();
+		var openid=$(this).find("span.openid").text();
 		$(this).append("<div class='edit'><p onclick='updateUserInfo(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 	});
 	
