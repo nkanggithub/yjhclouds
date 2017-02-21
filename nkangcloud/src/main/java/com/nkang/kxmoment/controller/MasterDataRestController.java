@@ -28,6 +28,7 @@ import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -1056,6 +1057,32 @@ public class MasterDataRestController {
 		orderNopay.setSalesman(salesman);
 		orderNopay.setUnfilledOrderAmount(unfilledOrderAmount);
 		String ret = MongoDBBasic.saveOrderNopay(orderNopay);
+		return ret;
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR saveOrderNopay
+	 */
+	@RequestMapping("/saveQuotationList")
+	public static String saveQuotationList(@RequestParam(value="plasticItem", required=false) String plasticItem,
+			@RequestParam(value="status", required=false) String status,
+			@RequestParam(value="approveBy", required=false) String approveBy,
+			@RequestParam(value="editBy", required=false) String editBy,
+			@RequestParam(value="dateTime", required=false) String dateTime,
+			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
+			@RequestParam(value="mongoID", required=false) String mongoID
+			){
+		
+		QuotationList quotation = new QuotationList();
+		quotation.setApproveBy(approveBy);
+		quotation.setDateTime(dateTime);
+		quotation.setEditBy(editBy);
+		quotation.setPlasticItem(plasticItem);
+		quotation.setStatus(status);
+		quotation.setSuggestPrice(suggestPrice);
+		
+		String ret = MongoDBBasic.UpdateQuotationList(mongoID,quotation);
 		return ret;
 	}
 	
