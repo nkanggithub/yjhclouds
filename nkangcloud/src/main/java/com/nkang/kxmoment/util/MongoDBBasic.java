@@ -2476,7 +2476,8 @@ public class MongoDBBasic {
 									if (num.equals(((DBObject) co).get("num").toString())) {
 										nt.setContent(((DBObject) co).get("content").toString());
 										nt.setNum(num);
-										nt.setPicture(((DBObject) co).get("picture").toString());
+										if (null != ((DBObject) co).get("picture")) {
+										nt.setPicture(((DBObject) co).get("picture").toString());}
 										nt.setTime(((DBObject) co).get("time").toString());
 										nt.setTitle(((DBObject) co).get("title").toString());
 										nt.setType(((DBObject) co).get("type").toString());
