@@ -30,9 +30,11 @@ import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -2416,6 +2418,126 @@ public static String regist(WeChatMDLUser user) {
 		return message;
     }
 		*/	
+    
+    /*
+     * chang-zheng
+     */
+    public static String callsaveInventory(Inventory inventory) throws UnsupportedEncodingException {
+		String url = "http://"+Constants.baehost+"/saveInventory?";
+		if(inventory != null){
+			if(!StringUtils.isEmpty(inventory.getRepositoryName())){
+				url = url + "repositoryName="+URLEncoder.encode(inventory.getRepositoryName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(inventory.getPlasticItem())){
+				url = url + "&plasticItem="+URLEncoder.encode(inventory.getPlasticItem(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(inventory.getUnit())){
+				url = url + "&unit="+URLEncoder.encode(inventory.getUnit(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(inventory.getInventoryAmount())){
+				url = url + "&inventoryAmount="+URLEncoder.encode(inventory.getInventoryAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(inventory.getWaitDeliverAmount())){
+				url = url + "&waitDeliverAmount="+URLEncoder.encode(inventory.getWaitDeliverAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(inventory.getReserveDeliverAmount())){
+				url = url + "&reserveDeliverAmount="+URLEncoder.encode(inventory.getReserveDeliverAmount(),"UTF-8");
+			}
+			
+			if(!StringUtils.isEmpty(inventory.getAvailableAmount())){
+				url = url + "&availableAmount="+URLEncoder.encode(inventory.getAvailableAmount(),"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return "failed";
+	       } 
+		 System.out.println(url);
+		return message;
+    }
+    
+    /*
+     * chang-zheng
+     */
+    public static String callsaveOnDelivery(OnDelivery onDelivery) throws UnsupportedEncodingException {
+
+		String url = "http://"+Constants.baehost+"/saveOnDelivery?";
+		if(onDelivery != null){
+			if(!StringUtils.isEmpty(onDelivery.getBillID())){
+				url = url + "billID="+URLEncoder.encode(onDelivery.getBillID(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getDate())){
+				url = url + "&date="+URLEncoder.encode(onDelivery.getDate(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getProvider())){
+				url = url + "&provider="+URLEncoder.encode(onDelivery.getProvider(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getPlasticItem())){
+				url = url + "&plasticItem="+URLEncoder.encode(onDelivery.getPlasticItem(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getAmount())){
+				url = url + "&amount="+URLEncoder.encode(onDelivery.getAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getOriginalPrice())){
+				url = url + "&originalPrice="+URLEncoder.encode(onDelivery.getOriginalPrice(),"UTF-8");
+			}
+			
+			if(!StringUtils.isEmpty(onDelivery.getTaxRate())){
+				url = url + "&taxRate="+URLEncoder.encode(onDelivery.getTaxRate(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getBillType())){
+				url = url + "&billType="+URLEncoder.encode(onDelivery.getBillType(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(onDelivery.getNotInInRepository())){
+				url = url + "&notInInRepository="+URLEncoder.encode(onDelivery.getNotInInRepository(),"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return "failed";
+	       } 
+		 System.out.println(url);
+		return message;
+    
+    }
 }
 
 
