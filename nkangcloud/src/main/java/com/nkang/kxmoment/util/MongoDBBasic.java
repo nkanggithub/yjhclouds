@@ -3086,7 +3086,7 @@ public class MongoDBBasic {
 	
 	/*
 	 * chang-zheng
-	 * to save OnDelivery
+	 * to save OrderNopay
 	 */
 	public static String saveOrderNopay(OrderNopay orderNopay){
 
