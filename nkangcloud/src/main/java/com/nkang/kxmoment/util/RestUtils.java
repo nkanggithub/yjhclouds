@@ -415,7 +415,7 @@ public class RestUtils {
     
     public static String createMenu(String access_token) {
         //String menu = "{\"button\":[{\"name\":\"Near By\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Opportunity\",\"key\":\"nboppt\"},{\"type\":\"click\",\"name\":\"Customer\",\"key\":\"nbcust\"},{\"type\":\"click\",\"name\":\"Competitor\",\"key\":\"nbcompe\"},{\"type\":\"click\",\"name\":\"Partner\",\"key\":\"nbpartner\"}]},{\"name\":\"MDG\",\"sub_button\":[{\"type\":\"click\",\"name\":\"Data Lake\",\"key\":\"MDLAKE\"},{\"type\":\"click\",\"name\":\"Customer Care\",\"key\":\"05_SIGN\"}]}]}";
-        String menu = "{\"button\":[{\"name\":\"胖和发现\",\"sub_button\":[{\"type\":\"click\",\"name\":\"胖和机遇\",\"key\":\"nboppt\"},{\"type\":\"click\",\"name\":\"胖和客户\",\"key\":\"nbcust\"},{\"type\":\"click\",\"name\":\"胖和竞争\",\"key\":\"nbcompe\"},{\"type\":\"click\",\"name\":\"胖和伙伴\",\"key\":\"nbpartner\"}]},{\"name\":\"胖和报价\",\"sub_button\":[{\"type\":\"click\",\"name\":\"数据湖\",\"key\":\"MDLAKE\"},{\"type\":\"click\",\"name\":\"详细报价\",\"key\":\"bizBA\"}]},{\"name\":\"胖和入口\",\"sub_button\":[{\"type\":\"click\",\"name\":\"胖和应用\",\"key\":\"MYAPPS\"},{\"type\":\"click\",\"name\":\"胖和荣誉\",\"key\":\"MYRECOG\"}, {\"type\":\"click\",\"name\":\"下属公司\",\"key\":\"subcompany\"},{\"type\":\"click\",\"name\":\"关于胖和\",\"key\":\"MYFACE\"}]}]}";
+        String menu = "{\"button\":[{\"name\":\"胖和发现\",\"sub_button\":[{\"type\":\"click\",\"name\":\"胖和库房\",\"key\":\"storagenav\"},{\"type\":\"click\",\"name\":\"胖和机遇\",\"key\":\"nboppt\"},{\"type\":\"click\",\"name\":\"胖和客户\",\"key\":\"nbcust\"},{\"type\":\"click\",\"name\":\"胖和竞争\",\"key\":\"nbcompe\"},{\"type\":\"click\",\"name\":\"胖和伙伴\",\"key\":\"nbpartner\"}]},{\"name\":\"胖和报价\",\"sub_button\":[{\"type\":\"click\",\"name\":\"数据湖\",\"key\":\"MDLAKE\"},{\"type\":\"click\",\"name\":\"报价管理\",\"key\":\"bizBA\"}]},{\"name\":\"胖和入口\",\"sub_button\":[{\"type\":\"click\",\"name\":\"胖和应用\",\"key\":\"MYAPPS\"},{\"type\":\"click\",\"name\":\"胖和荣誉\",\"key\":\"MYRECOG\"}, {\"type\":\"click\",\"name\":\"下属公司\",\"key\":\"subcompany\"},{\"type\":\"click\",\"name\":\"关于胖和\",\"key\":\"MYFACE\"}]}]}";
         String action = "https://"+Constants.wechatapihost+"/cgi-bin/menu/create?access_token="+access_token;
           try {
              URL url = new URL(action);
@@ -1940,7 +1940,7 @@ public static String regist(WeChatMDLUser user) {
  				  "\"touser\":\""+toUser+"\","+ 
  				  "\"msgtype\":\"text\", "+
  				   "\"text\":{"+
- 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"说：\n---------------\n"+content+"\""+
+ 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"è¯´ï¼š\n---------------\n"+content+"\""+
  				   "}"+
  				"}";
 
@@ -2015,14 +2015,14 @@ public static String regist(WeChatMDLUser user) {
 
     	}
 
-       //èŽ·å�–access_token
+       //Ã¨Å½Â·Ã¥ï¿½â€“access_token
 
 
         String json = "{\"touser\": [\""+text+"\"],\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
         String accessToken = MongoDBBasic.getValidAccessKey();
 /*       String accessToken = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
 
-       //èŽ·å�–è¯·æ±‚è·¯å¾„
+       //Ã¨Å½Â·Ã¥ï¿½â€“Ã¨Â¯Â·Ã¦Â±â€šÃ¨Â·Â¯Ã¥Â¾â€ž
        String action =  "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token="+accessToken;
        if(toUser.size()==1){
     	   json= "{\"touser\": \""+toUser.get(0)+"\",\"msgtype\": \"text\", \"text\": {\"content\": \""+content+"\"}}";
@@ -2053,7 +2053,7 @@ public static String regist(WeChatMDLUser user) {
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}else
     	{
-    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"由 重庆永嘉和塑料有限公司 发布"+note.getContent()+"\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
+    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"ç”± é‡�åº†æ°¸å˜‰å’Œå¡‘æ–™æœ‰é™�å…¬å�¸ å�‘å¸ƒ"+note.getContent()+"\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
 					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
@@ -2137,7 +2137,7 @@ public static String regist(WeChatMDLUser user) {
 
            OutputStream os = http.getOutputStream();
 
-           os.write(json.getBytes("UTF-8"));// ä¼ å…¥å�‚æ•°
+           os.write(json.getBytes("UTF-8"));// Ã¤Â¼Â Ã¥â€¦Â¥Ã¥ï¿½â€šÃ¦â€¢Â°
 
            InputStream is = http.getInputStream();
 
@@ -2149,7 +2149,7 @@ public static String regist(WeChatMDLUser user) {
 
            result = new String(jsonBytes, "UTF-8");
 
-        //   System.out.println("è¯·æ±‚è¿”å›žç»“æžœ:"+result);
+        //   System.out.println("Ã¨Â¯Â·Ã¦Â±â€šÃ¨Â¿â€�Ã¥â€ºÅ¾Ã§Â»â€œÃ¦Å¾Å“:"+result);
 
            os.flush();
 
