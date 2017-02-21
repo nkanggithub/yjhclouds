@@ -25,6 +25,7 @@ import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Teamer;
@@ -1029,6 +1030,42 @@ public class MasterDataRestController {
 		onDelivery.setTaxRate(taxRate);
 		String ret = MongoDBBasic.saveOnDelivery(onDelivery);
 		return ret;
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR saveOrderNopay
+	 */
+	@RequestMapping("/saveOrderNopay")
+	public static String saveOrderNopay(@RequestParam(value="customerName", required=false) String customerName,
+			@RequestParam(value="salesman", required=false) String salesman,
+			@RequestParam(value="billID", required=false) String billID,
+			@RequestParam(value="billDate", required=false) String billDate,
+			@RequestParam(value="plasticItem", required=false) String plasticItem,
+			@RequestParam(value="unfilledOrderAmount", required=false) String unfilledOrderAmount,
+			@RequestParam(value="filledOrderAmount", required=false) String filledOrderAmount,
+			@RequestParam(value="noInvoiceAmount", required=false) String noInvoiceAmount
+			){
+		
+		OrderNopay orderNopay = new OrderNopay();
+		orderNopay.setBillDate(billDate);
+		orderNopay.setBillID(billID);
+		orderNopay.setCustomerName(customerName);
+		orderNopay.setNoInvoiceAmount(noInvoiceAmount);
+		orderNopay.setPlasticItem(plasticItem);
+		orderNopay.setSalesman(salesman);
+		orderNopay.setUnfilledOrderAmount(unfilledOrderAmount);
+		String ret = MongoDBBasic.saveOrderNopay(orderNopay);
+		return ret;
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR delete
+	 */
+	@RequestMapping("/deleteDB")
+	public static void deleteDB(@RequestParam(value="dbName", required=true) String dbName){
+		MongoDBBasic.DeleteDB(dbName);
 	}
 }
 		
