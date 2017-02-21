@@ -48,6 +48,7 @@ import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -67,6 +68,7 @@ public class MongoDBBasic {
 	private static String collectionInventory = "Inventory";
 	private static String collectionOnDelivery = "OnDelivery";
 	private static String collectionOrderNopay = "OrderNopay";
+	private static String collectionQuotationList = "QuotationList";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -3117,39 +3119,58 @@ public class MongoDBBasic {
 	
 	/*
 	 * chang-zheng
-	 * to save OrderNopay
+	 * to save QuotationList
 	 */
-	/*public static String UpdateQuttationList(QuttationList quttation){
+	public static String UpdateQuotationList(String mongoID,QuotationList quotation){
 
 		mongoDB = getMongoDB();
 	
 		String ret="Quotation fail";
-		if(orderNopay!=null){
+		if(quotation!=null){
 			if(mongoDB == null){
 				mongoDB = getMongoDB();
 			}
-
+			DBObject queryresult = null;
+			if(!StringUtils.isEmpty(mongoID) ){
+				DBObject Query = new BasicDBObject();
+				Query.put("_id", mongoID);
+				queryresult = mongoDB.getCollection(collectionQuotationList).findOne(Query);
+			}
+			WriteResult writeResult;
 			DBObject insertQuery = new BasicDBObject();
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			WriteResult writeResult;
-				insertQuery.put("customerName", orderNopay.getCustomerName());
-				insertQuery.put("salesman", orderNopay.getSalesman());
-				insertQuery.put("billID", orderNopay.getBillID());
-				insertQuery.put("billDate",orderNopay.getBillDate());
-				insertQuery.put("plasticItem",orderNopay.getPlasticItem());
-				insertQuery.put("unfilledOrderAmount",orderNopay.getUnfilledOrderAmount());
-				insertQuery.put("filledOrderAmount",orderNopay.getFilledOrderAmount());
-				insertQuery.put("noInvoiceAmount",orderNopay.getNoInvoiceAmount());
-				
+			if(queryresult!=null){
+				insertQuery.put("plasticItem", queryresult.get("plasticItem"));
+				insertQuery.put("status", quotation.getStatus());
+				insertQuery.put("approveBy",quotation.getApproveBy());
+				insertQuery.put("editBy",quotation.getEditBy());
+				insertQuery.put("dateTime",queryresult.get("dateTime"));
+				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
 				insertQuery.put("lastUpdate",cursqlTS.toString());
-				//mongoDB.getCollection(collectionorderNopay).remove(query);
+				
+				BasicDBObject doc = new BasicDBObject();  
+				doc.put("$set", insertQuery);
+				writeResult=mongoDB.getCollection(collectionQuotationList).update(new BasicDBObject().append("_id", mongoID), doc);
+				
+				ret="update QuotationList ok  -->" + writeResult;
+			}else{
+				insertQuery.put("plasticItem", quotation.getPlasticItem());
+				insertQuery.put("status", quotation.getStatus());
+				insertQuery.put("approveBy", quotation.getApproveBy());
+				insertQuery.put("editBy",quotation.getEditBy());
+				insertQuery.put("dateTime",quotation.getDateTime());
+				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
+				insertQuery.put("lastUpdate",cursqlTS.toString());
 				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
-				ret="insert orderNopay ok  -->" + writeResult;
+				ret="insert quotation ok  -->" + writeResult;
+			}
+			
+				
 		}
 		return ret;
 	
 	}
-	*/
+	
 	/*
 	 * CHANG -ZHENG
 	 *
