@@ -472,7 +472,7 @@ public class BillOfSellPoi {
 					                xlsDto = new OrderNopay();
 //					                // 循环列Cell
 						                HSSFCell customerNameString = hssfRow.getCell(0);
-						                xlsDto.setCustomerNameString(customerNameString+"");
+						                xlsDto.setCustomerName(customerNameString+"");
 						                
 						                HSSFCell salesman = hssfRow.getCell(1);
 						                xlsDto.setSalesman(salesman+"");
