@@ -174,6 +174,10 @@ function showUpdateUserPanel(openid){
 	            +'														<td><input type="text" name="companyName"/></td>'
 	            +'													</tr>'
 	            +'													<tr>'
+	            +'														<td>销售代表:</td>'
+	            +'														<td><input type="text" name="selfIntro"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
 	            +'														<td>用户角色:</td>'
 	            +'														<td align="left">'
 	            +'															<nobr>'
@@ -220,7 +224,7 @@ function showUpdateUserPanel(openid){
 	            +'												    </tr>'
 	            +'												 </table>'
 	            +'												 </form>'
-	            +'												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-left: 90px;" id="updateUserInfoBtn">确定</button>'
+	            +'												 <button class="btnAthena EbtnLess" style="background-color:#005CA1;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>'
 				+'							</div>');
 	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
@@ -520,8 +524,13 @@ function updateLogo(id){
 	});
 }
 function getMDLUserLists() {
-jQuery
-	.ajax({
+	 UpStreamList= new Array();
+	 DownStreamList= new Array();
+	 PartnerList= new Array();
+	 CompetitorList= new Array();
+	 InternalList= new Array();
+	 NoRoleList= new Array();
+jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
 		data : {},
@@ -605,6 +614,10 @@ jQuery
 					infoPer+=40;
 				}else{
 					selfIntro="&nbsp;";
+				}
+				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
+					selfIntro+="&nbsp;&nbsp;&nbsp;&nbsp;销售代表:"+temp.selfIntro;
+				}else{
 				}
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
@@ -921,7 +934,7 @@ function updateUserInfo(openId){
 				<li class="active"><a href="#WorkMates" data-toggle="tab"
 					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">人员管理</a></li>
 				<li><a href="#logoElements" data-toggle="tab"
-					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">LOGO管理</a></li>
+					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">版权管理</a></li>
 			</ul>
 			<div class="tab-content" id="dvTabContent"
 				style="border: 0px; padding-top: 0px;margin-top:0px;">
