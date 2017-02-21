@@ -468,17 +468,17 @@ public class CoreService
 						articleList.add(article);
 						
 						Article articlenav1 = new Article();
-						articlenav1.setTitle("公运库");
-						articlenav1.setDescription("公运库");
+						articlenav1.setTitle("公运库-九龙坡区铁路村198号-工作时间8:30AM-17:30PM");
+						articlenav1.setDescription("公运库-电话68526840");
 						articlenav1.setPicUrl(chongqinglogo);
-						articlenav1.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav1.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E4%B9%9D%E9%BE%99%E5%9D%A1%E5%8C%BA%E9%93%81%E8%B7%AF%E6%9D%91198%E5%8F%B7&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&src=0/vt=map");
 						articleList.add(articlenav1);
 						
 						Article articlenav2 = new Article();
-						articlenav2.setTitle("囤鑫中石化库");
-						articlenav2.setDescription("囤鑫中石化库");
+						articlenav2.setTitle("囤鑫中石化库-港城工业园区C区-工作时间8:30AM-17:20PM");
+						articlenav2.setDescription("囤鑫中石化库-电话88301978");
 						articlenav2.setPicUrl(chongqinglogo);
-						articlenav2.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav2.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E6%B8%AF%E5%9F%8E%E5%B7%A5%E4%B8%9A%E5%9B%AD%E5%8C%BAc%E5%8C%BA&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B1%9F%E5%8C%97%E5%8C%BA&sug_forward=c1f324f93a6385b832f71d3b&src=1/vt=map");
 						articleList.add(articlenav2);
 						
 						Article articlenav3 = new Article();
@@ -489,10 +489,10 @@ public class CoreService
 						articleList.add(articlenav3);
 						
 						Article articlenav4 = new Article();
-						articlenav4.setTitle("天地金中心库");
-						articlenav4.setDescription("天地金中心库");
+						articlenav4.setTitle("天地金中心库-重庆沙坪坝区土主镇西部物流园区中石油仓储中心-工作时间8:30AM-18:30PM");
+						articlenav4.setDescription("天地金中心库-电话65329881");
 						articlenav4.setPicUrl(chongqinglogo);
-						articlenav4.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav4.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E8%A5%BF%E9%83%A8%E7%89%A9%E6%B5%81%E5%9B%AD&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E9%87%8D%E5%BA%86%E5%B8%82&sug_forward=9434cf40ee8a5a6d83a00c0f&src=1/vt=map");
 						articleList.add(articlenav4);
 						
 						Article articlenav5 = new Article();
