@@ -470,21 +470,21 @@ public class CoreService
 						articleList.add(article);
 						
 						Article articlenav1 = new Article();
-						articlenav1.setTitle("公运库\n工作时间8:30-17:30\n电话:68526840"); //九龙坡区铁路村198号
+						articlenav1.setTitle("公运库[TEL:68526840]\n工作时间8:30-17:30"); //九龙坡区铁路村198号
 						articlenav1.setDescription("公运库-电话68526840");
 						articlenav1.setPicUrl(navPic);
 						articlenav1.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E5%85%AC%E8%B7%AF%E8%BF%90%E8%BE%93(%E9%9B%86%E5%9B%A2)%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E7%AC%AC%E4%BA%8C%E5%88%86%E5%85%AC%E5%8F%B8&city=500107&poiid=B00179776F");
 						articleList.add(articlenav1);
 						
 						Article articlenav2 = new Article();
-						articlenav2.setTitle("囤鑫中石化库\n工作时间8:30-17:20\n电话:88301978"); //港城工业园区C区
+						articlenav2.setTitle("囤鑫中石化库[TEL:88301978]\n工作时间8:30-17:20"); //港城工业园区C区
 						articlenav2.setDescription("囤鑫中石化库-电话88301978");
 						articlenav2.setPicUrl(navPic);
 						articlenav2.setUrl("https://m.amap.com/search/mapview/keywords=%E6%B8%AF%E5%9F%8E%E5%B7%A5%E4%B8%9A%E5%9B%AD%E5%8C%BAC%E5%8C%BA&city=500105&poiid=B0FFFDFSOS");
 						articleList.add(articlenav2);
 						
 						Article articlenav4 = new Article();
-						articlenav4.setTitle("天地金中心库\n工作时间8:30AM-18:30PM\n电话:65329881"); //重庆沙坪坝区土主镇西部物流园区中石油仓储中心
+						articlenav4.setTitle("天地金中心库[TEL:65329881]\n工作时间8:30-18:30"); //重庆沙坪坝区土主镇西部物流园区中石油仓储中心
 						articlenav4.setDescription("天地金中心库-电话65329881");
 						articlenav4.setPicUrl(navPic);
 						articlenav4.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E8%A5%BF%E9%83%A8%E7%89%A9%E6%B5%81%E5%9B%AD&city=500106&poiid=B0FFF3P6P9");
