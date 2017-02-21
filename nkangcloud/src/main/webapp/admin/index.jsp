@@ -144,10 +144,217 @@ $(window).load(function() {
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
-		$(this).append("<div class='edit'><p onclick='updateUserInfo(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 	});
 	
 });
+
+function showUpdateUserPanel(openid){
+	showCommonPanel();
+	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑人员信息</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	            +'<form id="atest">'
+	            +'												<input type="hidden" name="uid" id="atest_uid"/>'
+	            +'												<table id="tableForm" style="margin-top:-20px;">'
+	            +'													<tr>'
+	            +'														<td><nobr>真实姓名:</nobr></td>'
+	            +'														<td><input type="text" name="realName"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'														<td>手机号码:</td>'
+	            +'														<td><input type="text" name="phone"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'														<td>电子邮箱:</td>'
+	            +'														<td><input type="text" name="email"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'														<td>公司名称:</td>'
+	            +'														<td><input type="text" name="companyName"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'														<td>用户角色:</td>'
+	            +'														<td align="left">'
+	            +'															<nobr>'
+	            +'															<input type="checkbox"  name="role" value="isExternalUpStream" />上游客户'
+	            +'															<input type="checkbox"  name="role" value="isExternalPartner" />供应商'
+	            +'															</nobr><br/><nobr>'
+	            +'															<input type="checkbox"  name="role" value="isExternalCustomer" />下游客户'
+	            +'															<input type="checkbox"  name="role" value="isExternalCompetitor" />代理商'
+	            +'															</nobr><br/><nobr>'
+	            +'															<input type="checkbox"  name="role" value="isInternalImtMgt" />信息发布'
+	            +'															<input type="checkbox"  name="role" value="isInternalQuoter" />报价修改'
+	            +'															</nobr><br/><nobr>'
+	            +'															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />报价审核'
+	            +'															<input type="checkbox"  name="role" value="isITOperations" />后台管理'
+	            +'															<!-- </nobr><br/><nobr>'
+	            +'															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员'
+	            +'															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员 -->'
+	            +'															</nobr>'
+	            +'														</td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'												        <td>是否激活:</td>'
+	            +'												        <td  align="left" class="tdText">'
+	            +'												        	<input type="radio" name="isActived" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" checked="checked" value="false"/>否'
+	            +'												        </td>'
+	            +'												    </tr>'
+	            +'												    <tr>'
+	            +'												        <td>是否验证:</td>'
+	            +'												        <td align="left"  class="tdText">'
+	            +'												        	<input type="radio" name="isAuthenticated" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" checked="checked" value="false"/>否'
+	            +'												        </td>'
+	            +'												    </tr>'
+	            +'												    <tr>'
+	            +'												        <td>是否注册:</td>'
+	            +'												        <td  align="left" class="tdText">'
+	            +'												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否'
+	            +'												        </td>'
+	            +'												    </tr> '
+	            +'												    <tr>'
+	            +'													    <td>注册时间:</td>'
+	            +'													    <td align="left" class="tdText" >'
+	            +'													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;">'
+	            +'													    </td>'
+	            +'												    </tr>'
+	            +'												 </table>'
+	            +'												 </form>'
+	            +'												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-left: 90px;" id="updateUserInfoBtn">确定</button>'
+				+'							</div>');
+	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	    });
+	jQuery
+	.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {
+			UID : openid
+			
+		},
+		cache : false,
+		success : function(data) {
+			data = data.replace(/:null/g, ':"未注册"');
+			data = '{"results":' + data + '}';
+			var jsons = eval('(' + data + ')');
+			if (jsons.results.length > 0) {
+				//*  update data start */
+				data = data.replace(/:"未编辑"/g, ':"未注册"');
+				jsons = eval('(' + data + ')');
+				if(jsons.results[0].roleObj.externalUpStream){
+					$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCustomer){
+					$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalPartner){
+					$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCompetitor){
+					$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalSeniorMgt){
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalImtMgt){
+					$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalBizEmp){
+					$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalNonBizEmp){
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalQuoter){
+					$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.itoperations){
+					$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
+				}
+				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+				
+				if(jsons.results[0].IsActive !="未注册"){
+					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsAuthenticated !="未注册"){
+					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsRegistered !="未注册"){
+					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
+				}
+			    if(jsons.results[0].registerDate !="未注册"){
+			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
+			    } 
+			    if(jsons.results[0].realName !="未注册"){
+			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
+			    }else{
+			    	$("#atest input[name='realName']").val("");
+			    }
+			    if(jsons.results[0].phone !="未注册"){
+			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
+			    }else{
+			    	$("#atest input[name='phone']").val("");
+			    }
+			    if(jsons.results[0].email !="未注册"){
+			    	$("#atest input[name='email']").val(jsons.results[0].email);
+			    }else{
+			    	$("#atest input[name='email']").val("");
+			    }
+			    if(jsons.results[0].companyName !="未注册"){
+			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+			    }else{
+			    	$("#atest input[name='companyName']").val("");
+			    }
+				//*  update data  end */
+			}
+		}
+	});
+	$("#updateUserInfoBtn").click(function(){
+		var isActived = $("input[name='isActived']:checked").val();
+		var isAuthenticated = $("input[name='isAuthenticated']:checked").val();
+		var isRegistered = $("input[name='isRegistered']:checked").val();
+		var registerDate = $("#registerDate").val();
+		if(isActived==null || isAuthenticated==null ||  isRegistered==null || registerDate==null){
+			swal("修改信息失败", "请输入正确的信息", "error");
+		}
+		$.ajax({
+			url:"../updateUserInfo",
+			data:$("#atest").serialize(),
+			type:"POST",
+			dataType:"json",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			cache:false,
+			async:false,
+			success:function(result) {
+				if(result){
+					$('#updateUserInfoForm').modal('hide');
+					swal("更改成功!", "恭喜!", "success"); 
+				} else {
+					swal("更改失败!", "请填写正确的信息.", "error");
+				}
+			}
+		});
+	});
+}
 function showLogoPanel(index){
 	showCommonPanel();
 	var thisLogo=LogoData[index];
@@ -193,7 +400,7 @@ function showLogoPanel(index){
 			+'		<td><input name="Slide3" type="text" style="width:150px;" value="'+Slide3+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
-			+'		<td colspan="2" style="text-align: center; padding: 0px;margin-top:10px;">	'
+			+'		<td colspan="2" style="text-align: center; padding: 0px;padding-top:10px;">	'
 			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:'+clientThemeColor+';" id="submit_button" onclick="">保存</button>												'
 			+'		</td>'
 			+'	</tr>'
@@ -726,6 +933,7 @@ function updateUserInfo(openId){
 										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
 											aria-hidden="true"
 											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
+											<!-- 
 												<form id="atest">
 												<input type="hidden" name="uid" id="atest_uid"/>
 												<table id="tableForm" style="margin-top:-20px;">
@@ -762,7 +970,7 @@ function updateUserInfo(openId){
 															<input type="checkbox"  name="role" value="isITOperations" />后台管理
 															<!-- </nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员
-															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员 -->
+															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员 --><!--
 															</nobr>
 														</td>
 													</tr>
@@ -793,6 +1001,7 @@ function updateUserInfo(openId){
 												 </table>
 												 </form>
 												 <button class="btnAthena EbtnLess" style="background-color:#00B287;margin-top: -50px;" id="updateUserInfoBtn">确定</button>
+												  -->
 									</div>
 								</div>
 				
