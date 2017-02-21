@@ -516,6 +516,10 @@ public class CoreService
 						articlenav7.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
 						articleList.add(articlenav7);
 						
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+						
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
 						String CurType = "customer";
