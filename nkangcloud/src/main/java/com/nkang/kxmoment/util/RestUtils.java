@@ -36,6 +36,7 @@ import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -2475,6 +2476,8 @@ public static String regist(WeChatMDLUser user) {
 		return message;
     }
     
+    
+    
     /*
      * chang-zheng
      */
@@ -2537,6 +2540,67 @@ public static String regist(WeChatMDLUser user) {
 		 System.out.println(url);
 		return message;
     
+    }
+    
+    /*
+     * chang-zheng
+     */
+    public static String callsaveOrderNopay(OrderNopay orderNopay) throws UnsupportedEncodingException {
+
+
+		String url = "http://"+Constants.baehost+"/saveOrderNopay?";
+		if(orderNopay != null){
+			if(!StringUtils.isEmpty(orderNopay.getCustomerName())){
+				url = url + "customerName="+URLEncoder.encode(orderNopay.getCustomerName(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getSalesman())){
+				url = url + "&salesman="+URLEncoder.encode(orderNopay.getSalesman(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getBillID())){
+				url = url + "&billID="+URLEncoder.encode(orderNopay.getBillID(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getBillDate())){
+				url = url + "&billDate="+URLEncoder.encode(orderNopay.getBillDate(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getPlasticItem())){
+				url = url + "&plasticItem="+URLEncoder.encode(orderNopay.getPlasticItem(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getUnfilledOrderAmount())){
+				url = url + "&unfilledOrderAmount="+URLEncoder.encode(orderNopay.getUnfilledOrderAmount(),"UTF-8");
+			}
+			
+			if(!StringUtils.isEmpty(orderNopay.getFilledOrderAmount())){
+				url = url + "&filledOrderAmount="+URLEncoder.encode(orderNopay.getFilledOrderAmount(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(orderNopay.getNoInvoiceAmount())){
+				url = url + "&noInvoiceAmount="+URLEncoder.encode(orderNopay.getNoInvoiceAmount(),"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return "failed";
+	       } 
+		 System.out.println(url);
+		return message;
     }
 }
 
