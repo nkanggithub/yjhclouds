@@ -71,6 +71,36 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 <script type="text/javascript" src="../nkang/autocomplete/jquery-ui.js"></script>
 <style>
    #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
+.edit
+{
+	width: 60px;
+    height: 100px;
+    color: #438CD0;
+    font-family:微软雅黑;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: -60px;
+	font-size:14px;
+    background: #eee;
+    border-bottom: 1px solid #ccc;
+}
+.edit img {
+    width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
+}
+.edit p
+{
+	width:50%;
+	height:100%;
+	line-height:130px;
+	margin-right:auto;
+	margin-left:auto;
+}
+.editBtn
+{
+	position: relative;
+    left: -60px;
+}
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 
@@ -101,20 +131,22 @@ $(function(){
         });  
     });
 
-
 var clientThemeColor,HpLogoSrc,LogoData;
 $(window).load(function() {
 	getLogoLists();
 	getMDLUserLists();
-	
-	
- 	$("li.Work_Mates_div_list_div2").live("swiperight",function(){
+	$(".Work_Mates_div_list_div2").on("swiperight",function(){
 		$(this).css("overflow","hidden");
 		$(this).removeClass("editBtn");
 		$(this).removeClass("specialEditBtn");
 		$(this).removeClass("noEditBtn");
 		$(this).remove(".edit");
 		}); 
+	$(".Work_Mates_div_list_div2").live("swipeleft",function(){
+		$(this).css("overflow","visible");
+		$(this).addClass("editBtn");
+		$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit2.png' slt='' />编辑</p></div>");
+	});
 	
 });
 function showLogoPanel(index){
@@ -380,9 +412,9 @@ jQuery
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+'天</div>';
+					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:red;font-size:13px;padding:3px;">待审核</div>';
+					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;">待审核</div>';
 					}
 				}
 				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
