@@ -57,7 +57,7 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 </script>
 <script type="text/javascript"
 	src="../nkang/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../MetroStyleFiles//CSS/animation-effects.css" />
 <link rel="stylesheet" type="text/css" href="../Jsp/CSS/common.css">
@@ -106,6 +106,16 @@ var clientThemeColor,HpLogoSrc,LogoData;
 $(window).load(function() {
 	getLogoLists();
 	getMDLUserLists();
+	
+	
+ 	$("li.Work_Mates_div_list_div2").live("swiperight",function(){
+		$(this).css("overflow","hidden");
+		$(this).removeClass("editBtn");
+		$(this).removeClass("specialEditBtn");
+		$(this).removeClass("noEditBtn");
+		$(this).remove(".edit");
+		}); 
+	
 });
 function showLogoPanel(index){
 	showCommonPanel();
@@ -277,7 +287,6 @@ jQuery
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
 			var ul = "",regNumber=0;
-			ul='<li class="Work_Mates_div_list_div2" style="border-bottom:0px;">'
 			for (var i = jsons.results.length-1; i >0 ; i--) {
 				var temp = jsons.results[i];
 				var selfIntro="";
@@ -406,12 +415,6 @@ jQuery
 					+'                                          </li>';
 				ul += li;
 			}
-			 ul='<li class="Work_Mates_div_list_div2"  style="margin-top:20px;">'
-			/* +'<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;"/><span class="total_num"><img src="../MetroStyleFiles/role.png"/>总人数：'+ jsons.results.length
-			+'&nbsp;&nbsp;&nbsp;已注册人数：'+regNumber
-			+'</span><div class="clear"></div>' */
-			+'</li>'
-			+ul;
 			$("#Work_Mates_div").html(ul);
 			$("#syncUser").click(function(){
 				syncUser();
