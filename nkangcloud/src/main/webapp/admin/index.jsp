@@ -266,167 +266,6 @@ function updateLogo(id){
 		}
 	});
 }
-function getUserInfo(username, headimgurl, openId) {
-	$("#info_interact").css("display","block");
-	$("#info_interact2").css("display","block");
-	$("#info_imgurl").attr("src",headimgurl);
-	//$("#info_username span").html(username+'<img src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-jQuery
-	.ajax({
-		type : "GET",
-		url : "../userProfile/getMDLUserLists",
-		data : {
-			UID : openId
-			
-		},
-		cache : false,
-		success : function(data) {
-			data = data.replace(/:null/g, ':"未注册"');
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
-			if (jsons.results.length > 0) {
-				$("#info_tag tr").html("");
-				$("#info_interact img.like").attr("onclick","toLike('"+username+"','"+jsons.results[0].openid+"')");
-				$("#info_interact2 span.like").text(jsons.results[0].like.number==""?0:jsons.results[0].like.number);
-				if(jsons.results[0].registerDate!="未注册"){
-					$("#info_username span").html(jsons.results[0].realName);
-					$("#info_interact img.zan").attr("onclick","recognizationPanelByPerson('"+jsons.results[0].realName+"')");
-					$("#info_interact2 span.zan").text(jsons.results[0].CongratulateNum);
-					if(jsons.results[0].tag!="未注册"){
-						for(var j=0;j<jsons.results[0].tag.length;j++){
-							var tag=jsons.results[0].tag[j];
-							for (var key in tag) { 
-								var td='<td>'
-									+'				<div id="'+key+'" data-dimension="70" data-text="'
-									+tag[key]
-									+'%" data-info="" data-width="8" data-fontsize="18" data-percent="'
-									+tag[key]
-									+'" data-fgcolor="#FFF" data-bgcolor="#aaa" data-fill=""></div>'
-									//+'" data-fgcolor="#61a9dc" data-bgcolor="#eee" data-fill="#ddd"></div>'
-									+'				<span style="font-size:12px;">'
-									+key
-									+'</span>'
-									+'														</td>';
-
-								$("#info_tag tr").append(td);
-								$('#'+key).circliful();
-							}
-						}
-					}
-					
-					data = data.replace(/:"未注册"/g, ':"未编辑"');
-					jsons = eval('(' + data + ')');
-					$("#info_all").css('display','table');
-					$("img.zan").css('display','block');
-					$("span.zan").css('display','block');
-					$("#info_username span").html(username
-							//+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']</span>'
-							+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-					$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
-					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
-					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;<a style='color:#fff;' href='mailto:"+jsons.results[0].email+"'>"+jsons.results[0].email+"</a>");
-					$("#info_selfIntro").text(jsons.results[0].selfIntro);
-				}else{
-					$("#info_username span").html('未注册'+'<img onclick="updateUserInfo(\''+ openId + '\')" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
-					$("img.zan").css('display','none');
-					$("span.zan").css('display','none');
-					$("#info_all").css('display','none');
-					$("#info_selfIntro").text('');
-				}
-				
-				//*  update data start */
-				data = data.replace(/:"未编辑"/g, ':"未注册"');
-				jsons = eval('(' + data + ')');
-				if(jsons.results[0].roleObj.externalUpStream){
-					$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.externalCustomer){
-					$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.externalPartner){
-					$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.externalCompetitor){
-					$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.internalSeniorMgt){
-					$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.internalImtMgt){
-					$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.internalBizEmp){
-					$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.internalNonBizEmp){
-					$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.internalQuoter){
-					$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
-				}
-				if(jsons.results[0].roleObj.itoperations){
-					$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
-				}else{
-					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
-				}
-				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
-				
-				if(jsons.results[0].IsActive !="未注册"){
-					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
-				}
-				if(jsons.results[0].IsAuthenticated !="未注册"){
-					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
-				}
-				if(jsons.results[0].IsRegistered !="未注册"){
-					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
-				}
-			    if(jsons.results[0].registerDate !="未注册"){
-			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
-			    } 
-			    if(jsons.results[0].realName !="未注册"){
-			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
-			    }else{
-			    	$("#atest input[name='realName']").val("");
-			    }
-			    if(jsons.results[0].phone !="未注册"){
-			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
-			    }else{
-			    	$("#atest input[name='phone']").val("");
-			    }
-			    if(jsons.results[0].email !="未注册"){
-			    	$("#atest input[name='email']").val(jsons.results[0].email);
-			    }else{
-			    	$("#atest input[name='email']").val("");
-			    }
-			    if(jsons.results[0].companyName !="未注册"){
-			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
-			    }else{
-			    	$("#atest input[name='companyName']").val("");
-			    }
-				//*  update data  end */
-				$('#UserInfo').modal('show');
-			}
-		}
-	});
-}
 function getMDLUserLists() {
 jQuery
 	.ajax({
@@ -510,7 +349,7 @@ jQuery
 				
 				
 				if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
-					selfIntro="电话号码:"+temp.phone;
+					selfIntro="电话:"+temp.phone;
 					infoPer+=40;
 				}else{
 				}
@@ -532,9 +371,9 @@ jQuery
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+' Days</div>';
+					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:#333;font-size:13px;padding:3px;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;margin-top:-45px;background-color:#eee;color:red;font-size:13px;padding:3px;">待审核</div>';
+					workDay='<div style="float:right;margin-top:-5px;background-color:#eee;color:red;font-size:13px;padding:3px;">待审核</div>';
 					}
 				}
 				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
@@ -547,34 +386,22 @@ jQuery
 					+'                                           	 	<div class="Work_Mates_img_div2">'
 					+'                                        			 <img src="'
 					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
-					+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="getUserInfo(\''
-					+ temp.nickname
-					+ '\',\''
-					+ temp.headimgurl
-					+ '\',\''
-					+ temp.openid
-					+ '\');"/> '
+					+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="updateUserInfo(\''+ temp.openid + '\');"/> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_text_div">'
-					+'                                        			 <h2><span  onclick="getUserInfo(\''
-					+ temp.nickname
-					+ '\',\''
-					+ temp.headimgurl
-					+ '\',\''
-					+ temp.openid
-					+ '\');">'
+					+'                                        			 <h2><span  onclick="updateUserInfo(\''+ temp.openid + '\');">'
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
-					+'<span style="font-size:12px;color:green">完善度'+infoPer+'%</span>'
+					+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
 					+'</h2>'
+					+workDay
 					+ '<div>'
 					+tagHtml
 					+'<br/>'
 					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+'												</div>'
 					+'                                        		</div>'
-					+workDay
 					+'                                                <div class="clear"></div>'
 					+'                                          </li>';
 				ul += li;
@@ -679,6 +506,112 @@ function syncUser(){
 	});
 }
 function updateUserInfo(openId){
+	jQuery
+	.ajax({
+		type : "GET",
+		url : "../userProfile/getMDLUserLists",
+		data : {
+			UID : openId
+			
+		},
+		cache : false,
+		success : function(data) {
+			data = data.replace(/:null/g, ':"未注册"');
+			data = '{"results":' + data + '}';
+			var jsons = eval('(' + data + ')');
+			if (jsons.results.length > 0) {
+				//*  update data start */
+				data = data.replace(/:"未编辑"/g, ':"未注册"');
+				jsons = eval('(' + data + ')');
+				if(jsons.results[0].roleObj.externalUpStream){
+					$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCustomer){
+					$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalPartner){
+					$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.externalCompetitor){
+					$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalSeniorMgt){
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalImtMgt){
+					$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalBizEmp){
+					$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalNonBizEmp){
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.internalQuoter){
+					$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
+				}
+				if(jsons.results[0].roleObj.itoperations){
+					$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
+				}else{
+					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
+				}
+				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+				
+				if(jsons.results[0].IsActive !="未注册"){
+					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsAuthenticated !="未注册"){
+					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
+				}
+				if(jsons.results[0].IsRegistered !="未注册"){
+					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
+				}
+			    if(jsons.results[0].registerDate !="未注册"){
+			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
+			    } 
+			    if(jsons.results[0].realName !="未注册"){
+			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
+			    }else{
+			    	$("#atest input[name='realName']").val("");
+			    }
+			    if(jsons.results[0].phone !="未注册"){
+			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
+			    }else{
+			    	$("#atest input[name='phone']").val("");
+			    }
+			    if(jsons.results[0].email !="未注册"){
+			    	$("#atest input[name='email']").val(jsons.results[0].email);
+			    }else{
+			    	$("#atest input[name='email']").val("");
+			    }
+			    if(jsons.results[0].companyName !="未注册"){
+			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+			    }else{
+			    	$("#atest input[name='companyName']").val("");
+			    }
+				//*  update data  end */
+			}
+		}
+	});
+	
 	$('#UserInfo').modal('hide');
 	$('#updateUserInfoForm').modal('show');
 	$("#atest_uid").val(openId);
@@ -751,59 +684,6 @@ function updateUserInfo(openId){
 					</div>
 					<!-- end logoElements-->
 				</div>
-				<div id="UserInfo" class="modal hide fade" tabindex="-1"
-									role="dialog" aria-labelledby="myModalLabel1"
-									aria-hidden="true" data-backdrop="static">
-									<div class="modal-body readmoreHpop"
-										style="white-space: pre-line; padding: 0px;">
-										<img src="../MetroStyleFiles/Close2.png" data-dismiss="modal"
-											aria-hidden="true"
-											style="float: right; height: 27px; cursor: pointer; margin-top: -15px; margin-right: 5px;" />
-										<div id="userInfoDiv">
-											<div id="info_interact"  style="position: absolute;width:100%;">
-												<img class="like" src="../MetroStyleFiles/like.png"/>
-												<img class="zan"  data-dismiss="modal" aria-hidden="true" onclick="recognizationPanel()" src="../MetroStyleFiles/zan.png"/>
-											</div>
-											<div id="info_interact2"
-												style="position: absolute; width: 100%; display: block; margin-top: 45px;">
-												<span class="like"
-													style="float: left; margin-left: 25px; width: 40px; text-align: center;"></span>
-												<span class="zan"
-													style="float: right; margin-right: 30px; margin-top: -20px; width: 40px; text-align: center;"></span>
-											</div>
-											<img id="info_imgurl"
-												src="http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoeEwjLFW3dyR80Mic1pzmg5b1qV0EFD4aegic9hic5iawRIDgJIImrY0XybC57j16ka4SabDCqy3TTtd2/0"
-												alt="userImage" class="matesUserImage2" style="position: relative;">
-											<div id="info_username" style="margin-top:-20px;">
-												<span></span>
-											</div>
-											<table id="info_all">
-												<tr>
-													<td><img src="../MetroStyleFiles/group2.png"/></td>
-													<td><div id="info_group"></div></td>
-												</tr>
-												<tr>
-													<td><img src="../MetroStyleFiles/telephone2.png"/></td>
-													<td><div id="info_phone"></div></td>
-												</tr>
-												<tr>
-													<td><img src="../MetroStyleFiles/email2.png"/></td>
-													<td><div id="info_email"></div></td>
-												</tr>
-											</table>
-											<div id="info_selfIntro" style="margin-top:-10px;width:100%;text-align:center;"></div>
-											<div style="width:100%; padding:0px;margin-top:-35px;margin-bottom:-40px;overflow-x: auto;">
-												<table id="info_tag" style="margin-left:auto;margin-right:auto;">
-													<tr>
-													</tr>
-												</table>											
-											</div>
-										</div>
-									</div>
-								</div>
-
-
-							
 								<div id="updateUserInfoForm" class="modal hide fade" tabindex="-1"
 									role="dialog" aria-labelledby="myModalLabel1"
 									aria-hidden="true" data-backdrop="static">
@@ -835,20 +715,20 @@ function updateUserInfo(openId){
 														<td>用户角色:</td>
 														<td align="left">
 															<nobr>
-															<input type="checkbox"  name="role" value="isExternalUpStream" />外部上游客户
-															<input type="checkbox"  name="role" value="isExternalPartner" />外部供应商
+															<input type="checkbox"  name="role" value="isExternalUpStream" />上游客户
+															<input type="checkbox"  name="role" value="isExternalPartner" />供应商
 															</nobr><br/><br/><nobr>
-															<input type="checkbox"  name="role" value="isExternalCustomer" />外部下游客户
-															<input type="checkbox"  name="role" value="isExternalCompetitor" />外部竞争对手
+															<input type="checkbox"  name="role" value="isExternalCustomer" />下游客户
+															<input type="checkbox"  name="role" value="isExternalCompetitor" />代理商
 															</nobr><br/><br/><nobr>
-															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />内部高级管理
-															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员
+															<input type="checkbox"  name="role" value="isInternalImtMgt" />信息发布
+															<input type="checkbox"  name="role" value="isInternalQuoter" />报价修改
 															</nobr><br/><br/><nobr>
-															<input type="checkbox"  name="role" value="isInternalImtMgt" />内部中级管理
-															<input type="checkbox"  name="role" value="isInternalQuoter" />内部报价者
-															</nobr><br/><br/><nobr>
+															<input type="checkbox"  name="role" value="isInternalSeniorMgt" />报价审核
+															<input type="checkbox"  name="role" value="isITOperations" />后台管理
+															<!-- </nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalNonBizEmp" />内部非业务员
-															<input type="checkbox"  name="role" value="isITOperations" />IT运维
+															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员 -->
 															</nobr>
 														</td>
 													</tr>
