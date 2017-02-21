@@ -2053,7 +2053,7 @@ public static String regist(WeChatMDLUser user) {
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}else
     	{
-    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
+    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"由 重庆永嘉和塑料有限公司 发布"+note.getContent()+"\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
 					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
