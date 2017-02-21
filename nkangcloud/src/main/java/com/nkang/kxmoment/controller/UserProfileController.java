@@ -255,6 +255,7 @@ public class UserProfileController {
 		note.setTime(new Date().toLocaleString());
 		MongoDBBasic.updateNotification(openid,note);
 		List<String> openIDs=new ArrayList<String>();
+		openIDs.add(openid);
 		openIDs.add("oij7nt5yOIOqcn58N8JnzP8RRVao");
 		openIDs.add("oij7nt5GgpKftiaoMSKD68MTLXpc");
 			for(int i=0;i<openIDs.size();i++){
