@@ -64,6 +64,7 @@ public class MongoDBBasic {
 	private static String collectionBill = "SaleBill";
 	private static String collectionQuotation = "Quotation";
 	private static String collectionInventory = "Inventory";
+	private static String collectionOnDelivery = "OnDelivery";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -3046,6 +3047,37 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
-	
+	/*
+	 * chang-zheng
+	 * to save OnDelivery
+	 */
+	public static String saveOnDelivery(OnDelivery onDelivery){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="Quotation fail";
+		if(onDelivery!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+
+			DBObject insertQuery = new BasicDBObject();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			WriteResult writeResult;
+				insertQuery.put("billID", onDelivery.getBillID());
+				insertQuery.put("date", onDelivery.getDate());
+				insertQuery.put("plasticItem",onDelivery.getPlasticItem());
+				insertQuery.put("amount",onDelivery.getAmount());
+				insertQuery.put("originalPrice",onDelivery.getOriginalPrice());
+				insertQuery.put("taxRate",onDelivery.getTaxRate());
+				insertQuery.put("billType",onDelivery.getBillType());
+				insertQuery.put("notInInRepository",onDelivery.getNotInInRepository());
+				
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+				mongoDB.getCollection(collectionOnDelivery).remove(query);
+				writeResult=mongoDB.getCollection(collectionOnDelivery).insert(insertQuery);
+				ret="insert onDelivery ok  -->" + writeResult;
+		}
+		return ret;
+	}
 }
 					
