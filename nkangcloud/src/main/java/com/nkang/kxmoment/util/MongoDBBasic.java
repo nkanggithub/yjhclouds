@@ -3123,9 +3123,10 @@ public class MongoDBBasic {
 	 *
 	 *delete
 	 **/
-	public static void DeleteDB(String dbName){
+	public static WriteResult DeleteDB(String dbName){
 	DBObject query = new BasicDBObject();
-	mongoDB.getCollection(dbName).remove(query);
+	WriteResult wr = mongoDB.getCollection(dbName).remove(query);
+	return wr;
 	}
 }
 					
