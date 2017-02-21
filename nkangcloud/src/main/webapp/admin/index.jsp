@@ -664,10 +664,10 @@ jQuery.ajax({
 					+companyName+'</span>'
 					+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
 					+'</h2>'
-					+ '<div><p style="padding:0px;">'
+					+ '<div>'
 					+tagHtml
 					+workDay
-					+'</p>'
+					+'</div><div>'
 					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+'												</div>'
 					+'                                        		</div>'
