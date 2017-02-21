@@ -7,6 +7,13 @@ public class Notification {
 	public String content;
 	public String time;
 	public String picture;
+	public String webUrl;
+	public String getWebUrl() {
+		return webUrl;
+	}
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
+	}
 	public String getNum() {
 		return num;
 	}
