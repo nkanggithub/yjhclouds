@@ -23,6 +23,7 @@ import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
@@ -997,6 +998,36 @@ public class MasterDataRestController {
 		it.setWaitDeliverAmount(waitDeliverAmount);
 		
 		String ret = MongoDBBasic.saveInventory(it);
+		return ret;
+	}
+	
+	/*
+	 * chang-zheng
+	 * FOR saveOnDelivery
+	 */
+	@RequestMapping("/saveOnDelivery")
+	public static String saveOnDelivery(@RequestParam(value="billID", required=false) String billID,
+			@RequestParam(value="date", required=false) String date,
+			@RequestParam(value="provider", required=false) String provider,
+			@RequestParam(value="plasticItem", required=false) String plasticItem,
+			@RequestParam(value="amount", required=false) String amount,
+			@RequestParam(value="originalPrice", required=false) String originalPrice,
+			@RequestParam(value="taxRate", required=false) String taxRate,
+			@RequestParam(value="billType", required=false) String billType,
+			@RequestParam(value="notInInRepository", required=false) String notInInRepository
+			){
+		
+		OnDelivery onDelivery = new OnDelivery();
+		onDelivery.setAmount(amount);
+		onDelivery.setBillID(billID);
+		onDelivery.setBillType(billType);
+		onDelivery.setDate(date);
+		onDelivery.setNotInInRepository(notInInRepository);
+		onDelivery.setOriginalPrice(originalPrice);
+		onDelivery.setPlasticItem(plasticItem);
+		onDelivery.setProvider(provider);
+		onDelivery.setTaxRate(taxRate);
+		String ret = MongoDBBasic.saveOnDelivery(onDelivery);
 		return ret;
 	}
 }
