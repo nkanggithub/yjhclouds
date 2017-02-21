@@ -616,10 +616,7 @@ jQuery.ajax({
 				}else{
 					selfIntro="&nbsp;";
 				}
-				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
-					selfIntro+="&nbsp;&nbsp;&nbsp;&nbsp;销售代表:"+temp.selfIntro;
-				}else{
-				}
+				
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
 				}else{
@@ -638,10 +635,15 @@ jQuery.ajax({
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;margin-top:-25px;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;">'+workDay+'天</div>';
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;margin-top:-25px;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;">待审核</div>';
+					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;">待审核</div>';
 					}
+				}
+				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
+					selfIntro+='<div style="float:right;margin-right:5px;">销售代表:'+temp.selfIntro+'</div>';
+				}else{
+					
 				}
 				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
 					
@@ -662,11 +664,11 @@ jQuery.ajax({
 					+companyName+'</span>'
 					+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
 					+'</h2>'
-					+ '<div>'
+					+ '<div><p style="padding:0px;">'
 					+tagHtml
-					+'<br/>'
-					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+workDay
+					+'</p>'
+					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+'												</div>'
 					+'                                        		</div>'
 					+'                                                <div class="clear"></div>'
