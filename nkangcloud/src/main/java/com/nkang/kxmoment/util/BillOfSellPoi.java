@@ -265,7 +265,7 @@ public class BillOfSellPoi {
 		 if(date!=null){
 			 String[] strarray=date.split("-");
 			 if(strarray!=null && strarray.length>1){
-				 switch (strarray[1]) {
+	/*			 switch (strarray[1]) {
 					case "一月": 
 						str = "01";
 						break;
@@ -305,7 +305,7 @@ public class BillOfSellPoi {
 					default:
 						str = " ";
 						break;
-					}
+					}*/
 					date = strarray[0]+"-"+str+"-"+strarray[2];
 			 }
 		 }
