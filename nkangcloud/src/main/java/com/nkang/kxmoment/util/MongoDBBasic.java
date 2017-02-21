@@ -46,6 +46,7 @@ import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
@@ -65,6 +66,7 @@ public class MongoDBBasic {
 	private static String collectionQuotation = "Quotation";
 	private static String collectionInventory = "Inventory";
 	private static String collectionOnDelivery = "OnDelivery";
+	private static String collectionOrderNopay = "OrderNopay";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -3074,11 +3076,46 @@ public class MongoDBBasic {
 				insertQuery.put("notInInRepository",onDelivery.getNotInInRepository());
 				
 				insertQuery.put("lastUpdate",cursqlTS.toString());
-				mongoDB.getCollection(collectionOnDelivery).remove(query);
+				//mongoDB.getCollection(collectionOnDelivery).remove(query);
 				writeResult=mongoDB.getCollection(collectionOnDelivery).insert(insertQuery);
 				ret="insert onDelivery ok  -->" + writeResult;
 		}
 		return ret;
+	}
+	
+	/*
+	 * chang-zheng
+	 * to save OnDelivery
+	 */
+	public static String saveOrderNopay(OrderNopay orderNopay){
+
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		String ret="Quotation fail";
+		if(orderNopay!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+
+			DBObject insertQuery = new BasicDBObject();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			WriteResult writeResult;
+				insertQuery.put("customerName", orderNopay.getCustomerName());
+				insertQuery.put("salesman", orderNopay.getSalesman());
+				insertQuery.put("billID", orderNopay.getBillID());
+				insertQuery.put("billDate",orderNopay.getBillDate());
+				insertQuery.put("plasticItem",orderNopay.getPlasticItem());
+				insertQuery.put("unfilledOrderAmount",orderNopay.getUnfilledOrderAmount());
+				insertQuery.put("filledOrderAmount",orderNopay.getFilledOrderAmount());
+				insertQuery.put("noInvoiceAmount",orderNopay.getNoInvoiceAmount());
+				
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+				//mongoDB.getCollection(collectionorderNopay).remove(query);
+				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
+				ret="insert orderNopay ok  -->" + writeResult;
+		}
+		return ret;
+	
 	}
 }
 					
