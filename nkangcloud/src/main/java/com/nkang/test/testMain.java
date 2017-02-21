@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,11 +39,18 @@ import org.json.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Inventory;
+import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
+import com.nkang.kxmoment.baseobject.OnDelivery;
+import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.OrganizationSearch4Solr;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.CommenJsonUtil;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.CsvFileWriter;
@@ -65,7 +74,118 @@ public class testMain{
 	private static Logger log=Logger.getLogger(testMain.class);
 	private static Timer timer= new Timer();
 	public static void main(String[] args) throws Exception {
-		//read("C://MDM_10//Nkang WorkSpace//nkangcloudFY16//src//main//resources//clientLoading.csv");
+		
+		/*java.sql.Timestamp sqlTS = null;;
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		System.out.println(cursqlTS);
+	}*/
+		
+		BillOfSellPoi bos = new BillOfSellPoi();
+		RestUtils.deleteDB("OrderNopay");
+		List<OrderNopay> OrderNopayS;
+		int x=0;
+		try {
+			OrderNopayS = bos.readXlsOfOrderNopay();
+			for(OrderNopay ol : OrderNopayS){
+				x++;
+				String ret = RestUtils.callsaveOrderNopay(ol);
+				 System.out.println(x+"----"+ret);
+				 //System.out.println(oq.info());
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+	
+	
+		/*
+	BillOfSellPoi bos = new BillOfSellPoi();
+	List<Inventory> Inventorys;
+	String rett = RestUtils.deleteDB("Inventory");
+	 System.out.println("==="+rett);
+	int x=0;
+	try {
+		Inventorys = bos.readXlsOfInventory();
+		for(Inventory ol : Inventorys){
+			x++;
+			String ret = RestUtils.callsaveInventory(ol);
+			 System.out.println(x+"----"+ret);
+			 //System.out.println(oq.info());
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.println(e.getMessage());
+	}*/
+	
+}
+	
+		
+/*		Location lt = new Location();
+		lt.setChengDu("23.8");
+		lt.setChongQing("33.8");
+		//lt.setShangHai("AD//J");
+		String ret = RestUtils.callSaveLocation("0215A", lt);
+		
+		 System.out.println("----"+ret);
+	}*/
+		//for(int i=0;i<2;i++){
+		/*	List<Location> ls = new ArrayList<Location>();
+			OnlineQuotation quotation = new OnlineQuotation();
+			
+			
+			quotation.setCategory("ABS");
+			quotation.setCategoryGrade("一般级");
+			quotation.setItem("0215AAAA");
+			quotation.setComments("");
+			quotation.setLocationAmounts("chongQing : 22.3 | chengDu : 23.2");
+			quotation.setAvaliableInventory("123.2");
+			quotation.setOnDelivery("194");
+			quotation.setSoldOutOfPay("2");
+			quotation.setOriginalProducer("");
+			String ret = RestUtils.callOnlineQuotation(quotation);
+			
+			 System.out.println("----"+ret);
+		}*/
+		
+//	}
+		/*
+		BillOfSellPoi bos = new BillOfSellPoi();
+		
+		List<BillOfSell> billOfSellList;
+			billOfSellList = bos.readXls();
+			for(BillOfSell bO : billOfSellList){
+				System.out.println("----"+bO.info());
+			}
+	}
+		  */
+	/*	
+		BillOfSellPoi bos = new BillOfSellPoi();
+		
+		List<BillOfSell> billOfSellList;
+		try {
+			billOfSellList = bos.readXls();
+			for(BillOfSell bs : billOfSellList){
+				
+				String ret = RestUtils.callSaveBills(bs);
+				 System.out.println("BillOfSell----"+ret);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}*/
+		
+		
+/*		//read("C://MDM_10//Nkang WorkSpace//nkangcloudFY16//src//main//resources//clientLoading.csv");
 
 		//loading data from mdm to baidu cloud
 		//RestUtils.getUserCityInfoWithLatLng("29.605253","106.361580");
@@ -74,13 +194,13 @@ public class testMain{
 		
 		//System.out.println(RestUtils.getlatLngwithQuery(opsi.getSiteName(), opsi.getCityRegion()));
 		
-/*		String queryStr = "";
+		String queryStr = "";
 		GoogleLocationUtils gApi = new GoogleLocationUtils();
 		GeoLocation geo =  new GeoLocation();
 		geo = gApi.geocodeByAddressNoSSL("Sabah");
-		System.out.print(geo.getLAT() + "---------"+geo.getLNG());*/
+		System.out.print(geo.getLAT() + "---------"+geo.getLNG());
 		
-  /*  StopWatch sw = new StopWatch();
+    StopWatch sw = new StopWatch();
 		sw.start();
 		System.out.println("starting data load--please wait");
 		List<OrgOtherPartySiteInstance> opsiList = new ArrayList<OrgOtherPartySiteInstance>();
@@ -89,15 +209,15 @@ public class testMain{
 			RestUtils.callMasterDataUpsert(opsi);
 		}
 		sw.getElapsedMs();
-		System.out.println("over all loading time : " + sw);*/
+		System.out.println("over all loading time : " + sw);
 		
 		
-/*		String[] locales = Locale.getISOCountries();
+		String[] locales = Locale.getISOCountries();
 		for (String countryCode : locales) {
 			Locale obj = new Locale("", countryCode);
 			System.out.println("Country Code = " + obj.getCountry() + ", Country Name = " + obj.getDisplayCountry());
 		}
-		System.out.println("Done");*/
+		System.out.println("Done");
 		
 		
 //		FaceRecognition fr = new FaceRecognition();
@@ -107,9 +227,9 @@ public class testMain{
   ObjectMapper mapper = new ObjectMapper();
  // System.out.println(mapper.writeValueAsString(str));
 	
- /* String json = "{\"deviceid\": \"12345\",\"cmd\": \"login\"}";
+  String json = "{\"deviceid\": \"12345\",\"cmd\": \"login\"}";
 	JSONObject obj = JsonUtil.jsonToObject(json);
-	System.out.println(obj.getString("deviceid"));*/
+	System.out.println(obj.getString("deviceid"));
 	//-------------------------------------------------
 	String jsonArray = str.substring(1, str.length()-1);//"{'loves':[{'1':'read book','2':'swim','3':'kickball'}]}";
 	//JSONArray jsonArrayData = CommenJsonUtil.jsonToArray("faceAttributes",jsonArray);
@@ -119,7 +239,7 @@ public class testMain{
 	 
 	System.out.println(CommenJsonUtil.jsonToObject(jsonArrayData.get("faceAttributes").toString()).get("age"));
 	
-	/*PushContentVo v = new PushContentVo("push", "0", "", "channel", 
+	PushContentVo v = new PushContentVo("push", "0", "", "channel", 
 			"imgurl", "title", "{http://content}", "source", "time", "timestamp");
 	
 	String json = JsonUtil.objectToJson(v);
@@ -135,16 +255,16 @@ public class testMain{
 		System.out.println(JsonUtil.objectToJson(vo));
 		list.add(vo);
 	}
-	System.out.println(collectionToJson(list));*/
+	System.out.println(collectionToJson(list));
 }
 
 	
   
- /* ss=str.split(",");
+  ss=str.split(",");
   for (int i = 0; i < ss.length; i++)
       System.out.println(ss[i]);
 	
-}*/
+}
         
 
 	
@@ -184,18 +304,18 @@ public class testMain{
 						webServiceStr += "," + sp[1];
 						params[3] = webServiceStr;
 					}
-					/*String [] sp = line.split("\\|");
+					String [] sp = line.split("\\|");
 					if(sp.length == 4){
 						System.out.println(RestUtils.CallLoadClientIntoMongoDB(sp[0],sp[1],sp[2],sp[3]));
-					}*/
+					}
 				}
 				Collection<String[]> paramsCol = paramsMap.values();
 				Iterator<String[]> paramsIt = paramsCol.iterator();
 				while(paramsIt.hasNext()){
 					String[] params = paramsIt.next();
-/*					if(params[3].length() > 1000){
+					if(params[3].length() > 1000){
 						continue;
-					}*/
+					}
 					RestUtils.CallLoadClientIntoMongoDB(params[0],params[1],params[2],params[3]);
 					System.out.println(params[0] +  " --- " + params[3]);
 					//break;
@@ -261,6 +381,7 @@ public class testMain{
 			tax = level6 + (salary - 80000) * 0.45;
 		return tax;
 	}
+	*/
 	
 	
 }

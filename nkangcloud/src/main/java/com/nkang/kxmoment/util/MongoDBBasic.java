@@ -3118,6 +3118,42 @@ public class MongoDBBasic {
 		return ret;
 	
 	}
+	
+	/*
+	 * chang-zheng
+	 * to save OrderNopay
+	 */
+	/*public static String UpdateQuttationList(QuttationList quttation){
+
+		mongoDB = getMongoDB();
+	
+		String ret="Quotation fail";
+		if(orderNopay!=null){
+			if(mongoDB == null){
+				mongoDB = getMongoDB();
+			}
+
+			DBObject insertQuery = new BasicDBObject();
+			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+			WriteResult writeResult;
+				insertQuery.put("customerName", orderNopay.getCustomerName());
+				insertQuery.put("salesman", orderNopay.getSalesman());
+				insertQuery.put("billID", orderNopay.getBillID());
+				insertQuery.put("billDate",orderNopay.getBillDate());
+				insertQuery.put("plasticItem",orderNopay.getPlasticItem());
+				insertQuery.put("unfilledOrderAmount",orderNopay.getUnfilledOrderAmount());
+				insertQuery.put("filledOrderAmount",orderNopay.getFilledOrderAmount());
+				insertQuery.put("noInvoiceAmount",orderNopay.getNoInvoiceAmount());
+				
+				insertQuery.put("lastUpdate",cursqlTS.toString());
+				//mongoDB.getCollection(collectionorderNopay).remove(query);
+				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
+				ret="insert orderNopay ok  -->" + writeResult;
+		}
+		return ret;
+	
+	}
+	*/
 	/*
 	 * CHANG -ZHENG
 	 *
