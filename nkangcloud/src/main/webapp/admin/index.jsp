@@ -352,6 +352,7 @@ function showUpdateUserPanel(openid){
 				if(result){
 					swal("更改成功!", "恭喜!", "success"); 
 					hideBouncePanel();
+					getMDLUserLists();
 				} else {
 					swal("更改失败!", "请填写正确的信息.", "error");
 				}
@@ -420,7 +421,8 @@ function showLogoPanel(index){
 			success : function(data) {
 				if(data=="true"){
 					swal("恭喜！", "LOGO信息修改成功!", "success"); 
-					window.location.reload();
+					hideBouncePanel();
+					getLogoLists();
 				}
 				else{
 					swal("LOGO信息修改失败!", "服务器出异常了", "error"); 	
@@ -509,8 +511,7 @@ function updateLogo(id){
 		cache : false,
 		success : function(data) {
 			if(data=="true"){
-				swal("Congratulations！", "网站LOGO替换成功!", "success"); 
-				window.location.reload();
+				swal("请手动刷新该页面", "网站LOGO替换成功!", "success"); 
 			}
 			else{
 				swal("网站LOGO替换失败!", "服务器出异常了", "error"); 	
