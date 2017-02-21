@@ -251,6 +251,7 @@ public class UserProfileController {
 		note.setType(request.getParameter("type"));
 		note.setTitle(request.getParameter("title"));
 		note.setContent(request.getParameter("content"));
+		note.setWebUrl(request.getParameter("url"));
 		note.setTime(new Date().toLocaleString());
 		MongoDBBasic.updateNotification(openid,note);
 		List<String> openIDs=MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
