@@ -75,14 +75,14 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 {
 	width: 60px;
     height: 100px;
-    color: #438CD0;
+    color: #fff;
     font-family:微软雅黑;
     text-align: center;
     position: absolute;
     top: 0px;
     right: -60px;
 	font-size:14px;
-    background: #eee;
+    background: #438CD0;
     border-bottom: 1px solid #ccc;
 }
 .edit img {
@@ -92,7 +92,7 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 {
 	width:50%;
 	height:100%;
-	line-height:130px;
+	line-height:145px;
 	margin-right:auto;
 	margin-left:auto;
 }
@@ -135,17 +135,16 @@ var clientThemeColor,HpLogoSrc,LogoData;
 $(window).load(function() {
 	getLogoLists();
 	getMDLUserLists();
-	$(".Work_Mates_div_list_div2").on("swiperight",function(){
+	$(".Work_Mates_div_list_div2").live("swiperight",function(){
 		$(this).css("overflow","hidden");
 		$(this).removeClass("editBtn");
-		$(this).removeClass("specialEditBtn");
-		$(this).removeClass("noEditBtn");
 		$(this).remove(".edit");
 		}); 
 	$(".Work_Mates_div_list_div2").live("swipeleft",function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
-		$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit2.png' slt='' />编辑</p></div>");
+		var openid=$(this).find("span").text();
+		$(this).append("<div class='edit'><p onclick='updateUserInfo(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 	});
 	
 });
@@ -194,7 +193,7 @@ function showLogoPanel(index){
 			+'		<td><input name="Slide3" type="text" style="width:150px;" value="'+Slide3+'"/></td>'
 			+'	</tr>'
 			+'	<tr>'
-			+'		<td colspan="2" style="text-align: center; padding: 0px;">	'
+			+'		<td colspan="2" style="text-align: center; padding: 0px;margin-top:10px;">	'
 			+'			<button class="btnAthena EbtnLess" style="padding: 0px;background-color:'+clientThemeColor+';" id="submit_button" onclick="">保存</button>												'
 			+'		</td>'
 			+'	</tr>'
@@ -430,7 +429,7 @@ jQuery
 					+ '" alt="userImage" class="matesUserImage" alt="no_username" onclick="updateUserInfo(\''+ temp.openid + '\');"/> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_text_div">'
-					+'                                        			 <h2><span  onclick="updateUserInfo(\''+ temp.openid + '\');">'
+					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span  onclick="updateUserInfo(\''+ temp.openid + '\');">'
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
