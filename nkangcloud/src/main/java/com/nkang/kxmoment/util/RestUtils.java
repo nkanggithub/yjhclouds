@@ -2620,12 +2620,12 @@ public static String regist(WeChatMDLUser user) {
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
-	           InputStream is = http.getInputStream();
-	           int size = is.available();
-	           byte[] jsonBytes = new byte[size];
-	           is.read(jsonBytes);
-	           //message = new String(jsonBytes, "UTF-8");
-	           is.close();
+//	           InputStream is = http.getInputStream();
+//	           int size = is.available();
+//	           byte[] jsonBytes = new byte[size];
+//	           is.read(jsonBytes);
+//	           //message = new String(jsonBytes, "UTF-8");
+//	           is.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
