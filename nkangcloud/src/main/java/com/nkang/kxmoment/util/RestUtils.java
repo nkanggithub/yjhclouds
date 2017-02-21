@@ -2046,7 +2046,7 @@ public static String regist(WeChatMDLUser user) {
 
     public static String sendNotificationToUser(String openId,String toOpenId,Notification note){
     	String result ="";
-    			String str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://yongjiahe.duapp.com/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
+    			String str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
@@ -2074,8 +2074,8 @@ public static String regist(WeChatMDLUser user) {
     	    }
     public static String sendRecognitionToUser(String openId,String toOpenId,CongratulateHistory ch){
     	String result ="";
-    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://yongjiahe.duapp.com/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
-    					+ "\"http://yongjiahe.duapp.com/MetroStyleFiles/RecognitionImage.jpg\"}";
+    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://"+Constants.baehost+"/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
+    					+ "\"http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
     	                "{\"articles\":[" +str +"]}"+"}";
