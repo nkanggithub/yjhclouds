@@ -145,6 +145,8 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).siblings().removeClass("editBtn");
+		$(this).siblings().remove(".edit");
 	});
 	
 });
