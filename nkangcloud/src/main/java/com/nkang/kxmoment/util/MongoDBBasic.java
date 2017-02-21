@@ -3065,6 +3065,7 @@ public class MongoDBBasic {
 			WriteResult writeResult;
 				insertQuery.put("billID", onDelivery.getBillID());
 				insertQuery.put("date", onDelivery.getDate());
+				insertQuery.put("provider", onDelivery.getProvider());
 				insertQuery.put("plasticItem",onDelivery.getPlasticItem());
 				insertQuery.put("amount",onDelivery.getAmount());
 				insertQuery.put("originalPrice",onDelivery.getOriginalPrice());
