@@ -2434,7 +2434,6 @@ public class MongoDBBasic {
 					DBObject innerInsert = new BasicDBObject();
 					innerInsert.put("num", note.getNum());
 					innerInsert.put("content", note.getContent());
-					innerInsert.put("picture", note.getPicture());
 					innerInsert.put("time", note.getTime());
 					innerInsert.put("type", note.getType());
 					innerInsert.put("title", note.getTitle());
@@ -2476,12 +2475,9 @@ public class MongoDBBasic {
 									if (num.equals(((DBObject) co).get("num").toString())) {
 										nt.setContent(((DBObject) co).get("content").toString());
 										nt.setNum(num);
-										if (null != ((DBObject) co).get("picture")) {
-										nt.setPicture(((DBObject) co).get("picture").toString());}
 										nt.setTime(((DBObject) co).get("time").toString());
 										nt.setTitle(((DBObject) co).get("title").toString());
 										nt.setType(((DBObject) co).get("type").toString());
-										nt.setWebUrl(((DBObject) co).get("url").toString());
 										nfList.add(nt);
 									}
 
@@ -2489,12 +2485,9 @@ public class MongoDBBasic {
 							} else {
 								nt.setContent(((DBObject) co).get("content").toString());
 								nt.setNum(((DBObject) co).get("num").toString());
-								if (null != ((DBObject) co).get("picture")) {
-								nt.setPicture(((DBObject) co).get("picture").toString());}
 								nt.setTime(((DBObject) co).get("time").toString());
 								nt.setTitle(((DBObject) co).get("title").toString());
 								nt.setType(((DBObject) co).get("type").toString());
-								nt.setWebUrl(((DBObject) co).get("url").toString());
 								nfList.add(nt);
 							}
 						}
