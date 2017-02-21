@@ -653,7 +653,7 @@ function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
 			+"	<div class='rcommon'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
-			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='techCar'>技术快车</option><option value='mtp'>MTP</option><option value='interaction'>团队沟通</option><option value='tb'>团队建设</option></select></div>"
+			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='techCar'>技术</option><option value='mtp'>报价</option><option value='interaction'>沟通</option><option value='tb'>行情</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' placeholder='请输入网页链接' class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon'><textarea id='content' style='height:180px;width:95%;line-height:20px' placeholder='请输入内容' class='input-xlarge bsBtn'></textarea></div>"
 			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postNotification()' name='doublebutton-0' class='btn'>提交</button></div>"
