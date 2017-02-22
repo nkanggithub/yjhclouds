@@ -696,6 +696,9 @@ jQuery.ajax({
 			$("#syncUser").click(function(){
 				syncUser();
 			});
+			$("#refreshUser").click(function(){
+				getMDLUserLists();
+			});
 			
 			
 			FusionCharts.ready(function () {
