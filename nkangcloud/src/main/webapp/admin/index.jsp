@@ -780,7 +780,7 @@ function syncUser(){
 		cache : false,
 		success : function(data) {
 			swal("同步成功！", data, "success"); 
-			$("#syncUser").attr("src","../MetroStyleFiles/refresh2.png");
+			$("#syncUser").attr("src","../MetroStyleFiles/sync.png");
 			getMDLUserLists();
 		}
 	});
@@ -1046,7 +1046,8 @@ function updateUserInfo(openId){
 				
 				
 				<div class="tab-pane active" id="WorkMates">
-					<img id="syncUser"  src="../MetroStyleFiles/refresh2.png" style="height:20px;float:right;margin-top:10px;"/>
+					<img id="refreshUser"  src="../MetroStyleFiles/refresh2.png" style="height:30px;float:right;margin-top:10px;margin-left:15px;"/>
+					<img id="syncUser"  src="../MetroStyleFiles/sync.png" style="height:30px;float:right;margin-top:10px;"/>
 					<div id="chart-container" style="margin-left:auto;margin-right:auto;text-align:center;"></div>
 					<div  style="position: absolute; top: 440px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
  <ul class="Work_Mates_div2" id="Work_Mates_div" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top:15px">
