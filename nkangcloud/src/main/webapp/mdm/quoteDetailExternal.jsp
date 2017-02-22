@@ -23,7 +23,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style>
- #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
+ #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;z-index:9999;} 
 .HpLogo {
     position: relative;
     top: 8px;
@@ -57,6 +57,9 @@ ul li.singleQuote .firstLayer .quotePrice{
 	color:#333;
 }
 ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
+	color:#EC4848;
+}
+ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
 	color:red;
 }
 ul li.singleQuote .firstLayer .quotePrice.low,ul li.singleQuote .firstLayer  .change.low{
@@ -110,18 +113,19 @@ ul li.singleQuote .firstLayer  .change{
 
 <script>
 $(function(){
-	  $('#return-top').hide();  
 	   $(function(){  
-	       $(window).scroll(function(){  
-	           if($(window).scrollTop()>200){  
-	               $('#return-top').fadeIn(200);  
+	      	 $(window).scroll(function(){  
+	           	  if($(window).scrollTop()>200){  
+	                 $('#return-top').fadeIn(200);  
 	               }  
-	               else{$('#return-top').fadeOut(200);}  
+	               else{
+	            	 //  $('#return-top').fadeOut(200);
+	            	 }  
 	           });  
 	           $('#return-top').click(function(){  
 	               $('body,html').animate({scrollTop:0},200);  
 	               return false;  
-	               });  
+	            });  
 	   });
 	    
 	    
