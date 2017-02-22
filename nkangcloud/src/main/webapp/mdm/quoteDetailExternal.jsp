@@ -61,6 +61,9 @@ ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .c
 ul li.singleQuote .firstLayer .quotePrice.low,ul li.singleQuote .firstLayer  .change.low{
 	color:#0853A0;
 }
+ul li.singleQuote .firstLayer .quotePrice.lose,ul li.singleQuote .firstLayer  .change.lose{
+	color:#bbb;
+}
 ul li.singleQuote .firstLayer  .change{
 	font-size:10px;
 	float:right;
@@ -71,10 +74,60 @@ ul li.singleQuote .firstLayer  .change{
 .clear{
 	clear:both;
 }
+.edit
+{
+	width: 60px;
+    height: 100%;
+    color: #fff;
+    font-family:微软雅黑;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: -60px;
+	font-size:14px;
+    background: #438CD0;
+    border-bottom: 1px solid #ccc;
+}
+.edit img {
+    width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
+}
+.edit p
+{
+	width:50%;
+	height:100%;
+	line-height:145px;
+	margin-right:auto;
+	margin-left:auto;
+}
+.editBtn
+{
+	position: relative;
+    left: -60px;
+}
 </style>
 
 <script>
 $(function(){
+	getAllDatas();
+	$(".singleQuote").live("swiperight",function(){
+		$(this).css("overflow","hidden");
+		$(this).removeClass("editBtn");
+		$(this).remove(".edit");
+	}); 
+	$(".singleQuote").live("swipeleft",function(){
+		$(this).css("overflow","visible");
+		$(this).addClass("editBtn");
+		var openid=$(this).find("span.openid").text();
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).siblings().removeClass("editBtn");
+		$(this).siblings().remove(".edit");
+	});
+	
+	
+	
+	
+});
+function getAllDatas(){
 	$.ajax({
 		 url:'../getAllQuotations',
 		 type:"POST",
@@ -83,20 +136,23 @@ $(function(){
 				 {
 				 var html="";
 				 for(var i=0;i<data.length;i++){
-					 html+='<li class="singleQuote">'
-						 +'	<div class="firstLayer  attention">'
-						 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span><span class="tag">已关注</span></div>'
-						 +'		<div class="quotePrice high">￥<span class="price">'+data[i].quotationPrice+'</span></div>'
-						/*  +'		<span class="change high">+10</span>' */
-						 +'		<div class="clear"></div>'
-						 +'	</div>'
-						 +'</li>'; 
+					 if(data[i].item!=""){
+						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
+						 html+='<li class="singleQuote">'
+							 +'	<div class="firstLayer  attention">'
+							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span><span class="tag">已关注</span></div>'
+							 +'		<div class="quotePrice '+priceColor+'">￥<span class="price">'+data[i].quotationPrice+'</span></div>'
+							/*  +'		<span class="change high">+10</span>' */
+							 +'		<div class="clear"></div>'
+							 +'	</div>'
+							 +'</li>'; 
+					 }
 				 }
 				 $("#QuoteList").html(html);
 				 }
 			 }
 		 });
-});
+}
 </script>
 </head>
 <body>
@@ -110,7 +166,7 @@ $(function(){
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-					<p style="position: absolute;top: 10px;right: 10px;font-size: 15px;">欢迎您,<%=wcu.getNickname() %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
+					<p style="position: absolute;right: 10px;font-size: 15px;">欢迎您,<%=wcu.getNickname() %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
 				
 				</div>
 <!--<input class="searchBox" id='hy' />-->
