@@ -74,7 +74,7 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 .edit
 {
 	width: 60px;
-    height: 100px;
+    height: 100%;
     color: #fff;
     font-family:微软雅黑;
     text-align: center;
@@ -175,7 +175,11 @@ function showUpdateUserPanel(openid){
 	            +'													</tr>'
 	            +'													<tr>'
 	            +'														<td>销售代表:</td>'
-	            +'														<td><input type="text" name="selfIntro"/></td>'
+	            +'														<td><input type="text"  placeholder="永佳和销售代表"  name="selfIntro"/></td>'
+	            +'													</tr>'
+	            +'													<tr>'
+	            +'														<td>用户职位:</td>'
+	            +'														<td><input type="text" name="companyRole"/></td>'
 	            +'													</tr>'
 	            +'													<tr>'
 	            +'														<td>用户角色:</td>'
@@ -197,7 +201,7 @@ function showUpdateUserPanel(openid){
 	            +'															<input type="checkbox"  name="role" value="isInternalBizEmp" />内部业务员 -->'
 	            +'															</nobr>'
 	            +'														</td>'
-	            +'													</tr>'
+	            +'													</tr>'/* 
 	            +'													<tr>'
 	            +'												        <td>是否激活:</td>'
 	            +'												        <td  align="left" class="tdText">'
@@ -209,19 +213,19 @@ function showUpdateUserPanel(openid){
 	            +'												        <td align="left"  class="tdText">'
 	            +'												        	<input type="radio" name="isAuthenticated" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" checked="checked" value="false"/>否'
 	            +'												        </td>'
-	            +'												    </tr>'
-	            +'												    <tr>'
-	            +'												        <td>是否注册:</td>'
-	            +'												        <td  align="left" class="tdText">'
-	            +'												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否'
-	            +'												        </td>'
-	            +'												    </tr> '
+	            +'												    </tr>' */
 	            +'												    <tr>'
 	            +'													    <td>注册时间:</td>'
 	            +'													    <td align="left" class="tdText" >'
 	            +'													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;">'
 	            +'													    </td>'
 	            +'												    </tr>'
+	            +'												    <tr>'
+	            +'												        <td>确认注册:</td>'
+	            +'												        <td  align="left" class="tdText">'
+	            +'												        	<input type="radio" name="isRegistered" value="true"/>是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" checked="checked" value="false"/>否'
+	            +'												        </td>'
+	            +'												    </tr> '
 	            +'												 </table>'
 	            +'												 </form>'
 	            +'												 <button class="btnAthena EbtnLess" style="background-color:#005CA1;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>'
@@ -325,6 +329,11 @@ function showUpdateUserPanel(openid){
 			    	$("#atest input[name='email']").val(jsons.results[0].email);
 			    }else{
 			    	$("#atest input[name='email']").val("");
+			    }
+			    if(jsons.results[0].role !="未注册"){
+			    	$("#atest input[name='companyRole']").val(jsons.results[0].role);
+			    }else{
+			    	$("#atest input[name='companyRole']").val("");
 			    }
 			    if(jsons.results[0].companyName !="未注册"){
 			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
@@ -544,6 +553,7 @@ jQuery.ajax({
 				var temp = jsons.results[i];
 				var selfIntro="";
 				var companyName=temp.companyName;
+				var companyRole=temp.role;
 				var workDay=temp.workDay;
 				var tag=temp.tag;
 				var tagHtml="";
@@ -622,6 +632,12 @@ jQuery.ajax({
 				}else{
 					infoPer+=10;
 				}
+				if(companyRole==null||companyRole=='null'||companyRole==''){
+					companyRole="";
+				}else{
+					companyRole="【"+companyRole+"】";
+				}
+				companyName+=companyRole;
 				if(role!=null&&role!='null'){
 					for(var j=0;j<role.length&&j<4;j++){
 							tagHtml+='													<div class="tag" '
