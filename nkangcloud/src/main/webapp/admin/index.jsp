@@ -300,9 +300,6 @@ function showUpdateUserPanel(openid){
 				}else{
 					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
 				}
-				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
-				$("#atest input[name='selfIntro']").val(jsons.results[0].selfIntro);
-				
 				if(jsons.results[0].IsActive !="未注册"){
 					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
 				}
@@ -335,10 +332,15 @@ function showUpdateUserPanel(openid){
 			    }else{
 			    	$("#atest input[name='companyRole']").val("");
 			    }
-			    if(jsons.results[0].companyName !="未注册"){
+			    if(jsons.results[0].companyName!="未注册"){
 			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
 			    }else{
 			    	$("#atest input[name='companyName']").val("");
+			    }
+			    if(jsons.results[0].selfIntro!="未注册"){
+			    	$("#atest input[name='selfIntro']").val(jsons.results[0].selfIntro);
+			    }else{
+			    	$("#atest input[name='selfIntro']").val("");
 			    }
 				//*  update data  end */
 			}
