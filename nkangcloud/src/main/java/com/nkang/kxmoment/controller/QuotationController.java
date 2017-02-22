@@ -123,7 +123,7 @@ public class QuotationController {
 		
 	}
 	
-
+/*
 	@RequestMapping("/updateQuotation")
 	public @ResponseBody String updateQuotation(@RequestParam(value="plasticItem", required=false) String plasticItem,
 			@RequestParam(value="status", required=false) String status,
@@ -144,6 +144,6 @@ public class QuotationController {
 		
 		String ret = MongoDBBasic.UpdateQuotationList(mongoID,quotation);
 		return ret;
-	}
+	}*/
 	
 }
