@@ -86,7 +86,7 @@ $(function(){
 					 html+='<li class="singleQuote">'
 						 +'	<div class="firstLayer  attention">'
 						 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span><span class="tag">已关注</span></div>'
-						 +'		<div class="quotePrice high">￥<span class="price">'+priceColor+data[i].quotationPrice+'</span></div>'
+						 +'		<div class="quotePrice high">￥<span class="price">'+data[i].quotationPrice+'</span></div>'
 						/*  +'		<span class="change high">+10</span>' */
 						 +'		<div class="clear"></div>'
 						 +'	</div>'
