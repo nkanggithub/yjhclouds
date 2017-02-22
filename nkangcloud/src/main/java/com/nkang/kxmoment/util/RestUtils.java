@@ -2049,11 +2049,11 @@ public static String regist(WeChatMDLUser user) {
     	String result ="";
     	String str="";
     	if("".equals(note.getWebUrl())||""==note.getWebUrl()){
-    			str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"From "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
+    			str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"发布者 - "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}else
     	{
-    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"ç”± é‡�åº†æ°¸å˜‰å’Œå¡‘æ–™æœ‰é™�å…¬å�¸ å�‘å¸ƒ"+note.getContent()+"\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
+    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\"重庆永佳和塑料有限公司\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
 					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
