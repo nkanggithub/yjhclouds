@@ -266,21 +266,21 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle("胖和欢迎您随时砸单");
 						article.setDescription("永佳和塑料有限公司");
-						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwEg&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
 						Article articleForInternal = new Article();
 						articleForInternal.setTitle("永佳和报价管理");
 						articleForInternal.setDescription("永佳和实时报价");
-						articleForInternal.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmMS2&oid=00D90000000pkXM"); //big data
+						articleForInternal.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFt&oid=00D90000000pkXM"); //big data
 						articleForInternal.setUrl("http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=" + fromUserName);
 						articleList.add(articleForInternal);
 						
 						Article articleforCustomer = new Article();
 						articleforCustomer.setTitle("永佳和实时报价");
 						articleforCustomer.setDescription("永佳和实时报价");
-						articleforCustomer.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmMS2&oid=00D90000000pkXM"); //big data
+						articleforCustomer.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFj&oid=00D90000000pkXM"); //big data
 						articleforCustomer.setUrl("http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID=" + fromUserName);
 						articleList.add(articleforCustomer);
 						newsMessage.setArticleCount(articleList.size());
