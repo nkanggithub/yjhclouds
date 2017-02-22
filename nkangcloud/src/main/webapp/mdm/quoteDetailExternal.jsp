@@ -23,6 +23,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <script type="text/javascript" src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style>
+ #return-top{position:fixed;bottom:40px;right:10px; text-align:center; display:none;} 
 .HpLogo {
     position: relative;
     top: 8px;
@@ -109,6 +110,22 @@ ul li.singleQuote .firstLayer  .change{
 
 <script>
 $(function(){
+	  $('#return-top').hide();  
+	   $(function(){  
+	       $(window).scroll(function(){  
+	           if($(window).scrollTop()>200){  
+	               $('#return-top').fadeIn(200);  
+	               }  
+	               else{$('#return-top').fadeOut(200);}  
+	           });  
+	           $('#return-top').click(function(){  
+	               $('body,html').animate({scrollTop:0},200);  
+	               return false;  
+	               });  
+	       });  
+	   });
+	    
+	    
 	getAllDatas();
 	$(".singleQuote").live("swiperight",function(){
 		$(this).css("overflow","hidden");
@@ -168,7 +185,7 @@ function getAllDatas(){
  <img class="picClose" style="position:absolute;top:10px;right:10px;width:15px;height:auto;" src="../MetroStyleFiles/Close2.png" alt=""/> 
 
 </div>
-<img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
+<div id="return-top" style="display: block;"><img class="scroll-top" src="../mdm/images/quotation.gif" alt="" width="100px"></div>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
