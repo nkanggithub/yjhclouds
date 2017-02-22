@@ -3162,7 +3162,7 @@ public class MongoDBBasic {
 				insertQuery.put("dateTime",quotation.getDateTime());
 				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
 				insertQuery.put("lastUpdate",cursqlTS.toString());
-				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
+				writeResult=mongoDB.getCollection(collectionQuotationList).insert(insertQuery);
 				ret="insert quotation ok  -->" + writeResult;
 			}
 			
