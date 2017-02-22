@@ -107,14 +107,6 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
 <script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
 <script>
-var UpStreamList= new Array();
-var DownStreamList= new Array();
-var PartnerList= new Array();
-var CompetitorList= new Array();
-var InternalList= new Array();
-var NoRoleList= new Array();
-var totalNum;
-
 $(function(){  
     $('#return-top').hide();  
     $(function(){  
@@ -438,12 +430,12 @@ function updateLogo(id){
 	});
 }
 function getMDLUserLists() {
-	 UpStreamList.length=0;
-	 DownStreamList.length=0;
-	 PartnerList.length=0;
-	 CompetitorList.length=0;
-	 InternalList.length=0;
-	 NoRoleList.length=0;
+	var UpStreamList=0;
+	var DownStreamList= 0;
+	var PartnerList= 0;
+	var CompetitorList= 0;
+	var InternalList=0;
+	var NoRoleList=0;
 jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
@@ -467,49 +459,49 @@ jQuery.ajax({
 				//************************
 				var temp_B=true;
 				if(temp.roleObj.externalUpStream){
-					UpStreamList.push(temp);
+					UpStreamList++;
 					role.push("上游客户");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalCustomer){
-					DownStreamList.push(temp);
+					DownStreamList++;
 					role.push("下游工厂");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalPartner){
-					PartnerList.push(temp);
+					PartnerList++;
 					role.push("贸易商");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalCompetitor){
-					CompetitorList.push(temp);
+					CompetitorList++;
 					role.push("代理商");
 					temp_B=false;
 				}
 				if(temp.roleObj.internalSeniorMgt){
-					InternalList.push(temp);
+					InternalList++;
 					role.push("报价审核");
 					temp_B=false;
 				}
 				if(temp.roleObj.internalImtMgt){
-					InternalList.push(temp);
+					InternalList++;
 					role.push("信息发布");
 					temp_B=false;
 				}
 //				if(temp.roleObj.internalBizEmp|| temp.roleObj.internalNonBizEmp){
 				if(temp.roleObj.internalQuoter){
-					InternalList.push(temp);
+					InternalList++;
 					role.push("报价修改");
 					temp_B=false;
 				}
 				if(temp.roleObj.itoperations){
-					InternalList.push(temp);
+					InternalList++;
 					role.push("后台管理");
 					temp_B=false;
 				}
 				
 				if(temp_B){
-					NoRoleList.push(temp);
+					NoRoleList++;
 					role.push("未分类");
 				}
 				//************************
@@ -638,28 +630,28 @@ jQuery.ajax({
 			            },
 			            "data": [
 			                {
-			                    "label": "上游客户:"+UpStreamList.length+"人",
-			                    "value": UpStreamList.length
+			                    "label": "上游客户:"+UpStreamList+"人",
+			                    "value": UpStreamList
 			                }, 
 			                {
-			                    "label": "下游工厂:"+DownStreamList.length+"人",
-			                    "value": DownStreamList.length
+			                    "label": "下游工厂:"+DownStreamList+"人",
+			                    "value": DownStreamList
 			                }, 
 			                {
-			                    "label": "贸易商:"+PartnerList.length+"人",
-			                    "value": PartnerList.length
+			                    "label": "贸易商:"+PartnerList+"人",
+			                    "value": PartnerList
 			                }, 
 			                {
-			                    "label": "代理商:"+CompetitorList.length+"人",
-			                    "value": CompetitorList.length
+			                    "label": "代理商:"+CompetitorList+"人",
+			                    "value": CompetitorList
 			                }, 
 			                {
-			                    "label": "内部员工:"+InternalList.length+"人",
-			                    "value": InternalList.length
+			                    "label": "内部员工:"+InternalList+"人",
+			                    "value": InternalList
 			                }, 
 			                {
-			                    "label": "未分类:"+NoRoleList.length+"人",
-			                    "value": NoRoleList.length
+			                    "label": "未分类:"+NoRoleList+"人",
+			                    "value": NoRoleList
 			                }
 			            ],
 			            "events": { 
