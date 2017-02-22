@@ -438,12 +438,12 @@ function updateLogo(id){
 	});
 }
 function getMDLUserLists() {
-	 UpStreamList= new Array();
-	 DownStreamList= new Array();
-	 PartnerList= new Array();
-	 CompetitorList= new Array();
-	 InternalList= new Array();
-	 NoRoleList= new Array();
+	 UpStreamList.length=0;
+	 DownStreamList.length=0;
+	 PartnerList.length=0;
+	 CompetitorList.length=0;
+	 InternalList.length=0;
+	 NoRoleList.length=0;
 jQuery.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
