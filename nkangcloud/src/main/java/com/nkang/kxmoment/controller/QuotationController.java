@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.util.MongoDBBasic;
 
 @Controller
@@ -120,6 +121,29 @@ public class QuotationController {
 		onlineQuotation.setItem(item);
 		return MongoDBBasic.saveOnlineQuotation(onlineQuotation);
 		
+	}
+	
+
+	@RequestMapping("/updateQuotation")
+	public @ResponseBody String updateQuotation(@RequestParam(value="plasticItem", required=false) String plasticItem,
+			@RequestParam(value="status", required=false) String status,
+			@RequestParam(value="approveBy", required=false) String approveBy,
+			@RequestParam(value="editBy", required=false) String editBy,
+			@RequestParam(value="dateTime", required=false) String dateTime,
+			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
+			@RequestParam(value="mongoID", required=false) String mongoID
+			){
+		
+		QuotationList quotation = new QuotationList();
+		quotation.setApproveBy(approveBy);
+		quotation.setDateTime(dateTime);
+		quotation.setEditBy(editBy);
+		quotation.setPlasticItem(plasticItem);
+		quotation.setStatus(status);
+		quotation.setSuggestPrice(suggestPrice);
+		
+		String ret = MongoDBBasic.UpdateQuotationList(mongoID,quotation);
+		return ret;
 	}
 	
 }
