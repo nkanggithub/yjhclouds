@@ -97,6 +97,8 @@ public class RegisterController {
 		String phone=request.getParameter("phone");
 		String email=request.getParameter("email");
 		String companyName=request.getParameter("companyName");
+		String companyRole=request.getParameter("companyRole");
+		String selfIntro=request.getParameter("selfIntro");
 		Role role=new Role();
 		if(request.getParameterValues("role")!=null){
 			String[] checkbox= request.getParameterValues("role");
@@ -126,6 +128,7 @@ public class RegisterController {
 			}  												
 		}
 		WeChatMDLUser user = new WeChatMDLUser();
+		user.setRole(companyRole);
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setRealName(realName);
 		user.setPhone(phone);
@@ -135,6 +138,7 @@ public class RegisterController {
 		user.setIsAuthenticated(isAuthenticated);
 		user.setIsRegistered(isRegistered);
 		user.setRoleObj(role);
+		user.setSelfIntro(selfIntro);
 		if(!StringUtils.isNullOrEmpty(registerDate)){
 			user.setRegisterDate(registerDate);
 		}
