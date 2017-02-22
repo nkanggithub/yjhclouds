@@ -148,6 +148,8 @@ $(function(){
 	
 });
 function UpdateTag(){
+	$(".singleQuote").removeClass("editBtn");
+	$(".singleQuote").remove(".edit");
 	alert("功能开发中");
 }
 function getAllDatas(){
