@@ -114,6 +114,7 @@ function approve(obj)
 								 +"<div class='rightPanel'>"
 								 +"</div></div>"
 								 +status +"</li>"; 
+								 status="";
 						 }
 						 $("#QuoteList").html(html);
 						 }
@@ -215,6 +216,7 @@ function edit(obj)
 											 +"<div class='rightPanel'>"
 											 +"</div></div>"
 											 +status +"</li>"; 
+											 status="";
 									 }
 									 $("#QuoteList").html(html);
 									 }
