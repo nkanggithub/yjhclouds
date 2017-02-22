@@ -182,9 +182,9 @@ function showUpdateUserPanel(openid){
 	            +'														<td align="left">'
 	            +'															<nobr>'
 	            +'															<input type="checkbox"  name="role" value="isExternalUpStream" />上游客户'
-	            +'															<input type="checkbox"  name="role" value="isExternalPartner" />供应商'
+	            +'															<input type="checkbox"  name="role" value="isExternalPartner" />贸易商'
 	            +'															</nobr><br/><nobr>'
-	            +'															<input type="checkbox"  name="role" value="isExternalCustomer" />下游客户'
+	            +'															<input type="checkbox"  name="role" value="isExternalCustomer" />下游工厂'
 	            +'															<input type="checkbox"  name="role" value="isExternalCompetitor" />代理商'
 	            +'															</nobr><br/><nobr>'
 	            +'															<input type="checkbox"  name="role" value="isInternalImtMgt" />信息发布'
@@ -559,7 +559,7 @@ jQuery.ajax({
 				}
 				if(temp.roleObj.externalCustomer){
 					DownStreamList.push(temp);
-					role.push("下游客户");
+					role.push("下游工厂");
 					temp_B=false;
 				}
 				if(temp.roleObj.externalPartner){
@@ -635,9 +635,9 @@ jQuery.ajax({
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;">'+workDay+'天</div>';
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;">待审核</div>';
+					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;">待审核</div>';
 					}
 				}
 				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
@@ -666,8 +666,7 @@ jQuery.ajax({
 					+'</h2>'
 					+ '<div>'
 					+tagHtml
-					+workDay
-					+'</div><div>'
+					+'</div>'+workDay+'<div>'
 					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+'												</div>'
 					+'                                        		</div>'
@@ -720,7 +719,7 @@ jQuery.ajax({
 			                    "value": UpStreamList.length
 			                }, 
 			                {
-			                    "label": "下游客户:"+DownStreamList.length+"人",
+			                    "label": "下游工厂:"+DownStreamList.length+"人",
 			                    "value": DownStreamList.length
 			                }, 
 			                {
@@ -980,9 +979,9 @@ function updateUserInfo(openId){
 														<td align="left">
 															<nobr>
 															<input type="checkbox"  name="role" value="isExternalUpStream" />上游客户
-															<input type="checkbox"  name="role" value="isExternalPartner" />供应商
+															<input type="checkbox"  name="role" value="isExternalPartner" />贸易商
 															</nobr><br/><br/><nobr>
-															<input type="checkbox"  name="role" value="isExternalCustomer" />下游客户
+															<input type="checkbox"  name="role" value="isExternalCustomer" />下游工厂
 															<input type="checkbox"  name="role" value="isExternalCompetitor" />代理商
 															</nobr><br/><br/><nobr>
 															<input type="checkbox"  name="role" value="isInternalImtMgt" />信息发布
