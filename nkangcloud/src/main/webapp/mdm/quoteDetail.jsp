@@ -58,7 +58,7 @@ else if($("#isSpecial").val()=="1"||$("#isSpecial").val()=="2"){
 }
 else if($("#isSpecial").val()=="0"){
 	$(this).addClass("noEditBtn");
-	$(this).append("<div class='edit noEdit'><p style='background-color:orange;' onclick='edit(this)'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+	$(this).append("<div class='edit noEdit'><p style='background-color:orange;' onclick='focus(this)'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 }
 $(this).siblings().removeClass("editBtn");
 $(this).siblings().removeClass("specialEditBtn");
@@ -417,13 +417,13 @@ line-height:22px;}
 </style>
 </head>
 <body>
-<div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:absolute;left:5%;top:10%;display:none;z-index:9999" >
+<div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >
 <img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM" alt=""/>
  <img class="picClose" style="position:absolute;top:10px;right:10px;width:15px;height:auto;" src="../MetroStyleFiles/Close2.png" alt=""/> 
 
 </div>
 <input id="isSpecial" type="hidden" value="<%= special %>" />
-<img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:85%;right:10px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
+<img onclick="toTop()" style="width:90px;height:auto;position:fixed;top:84%;right:20px;z-index:1000" src="../mdm/images/quotation.gif" alt="" />
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
