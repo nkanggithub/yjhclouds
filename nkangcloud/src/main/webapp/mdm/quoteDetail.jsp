@@ -85,16 +85,20 @@ function approve(obj)
 						 {
 						 var html="";
 						 var status="";
-						 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
+						 var priceColor="";
 						 for(var i=0;i<data.length;i++){
 							
 							 if(data[i].approveStatus=="0"){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
-							 if(data[i].approveStatus=="1"){
+							 else if(data[i].approveStatus=="1"){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
+							 }
+							 else
+							 {
+							 priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 							 }
 								
 							
@@ -177,7 +181,7 @@ function edit(obj)
 									 {
 									 var html="";
 									 var status="";
-									 var priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
+									 var priceColor="";
 									 for(var i=0;i<data.length;i++){
 										/*  if(data[i].category!=""){
 											 category="[<span id='category'>"+data[i].category+"</span>]";
@@ -189,10 +193,14 @@ function edit(obj)
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 											 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 										 }
-										 if(data[i].approveStatus=="1"){
+										 else if(data[i].approveStatus=="1"){
 											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 											 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 										 }
+										 else
+											 {
+											 priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
+											 }
 											
 										
 										 html+="<li class='singleQuote'>"
