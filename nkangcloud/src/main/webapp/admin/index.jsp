@@ -139,7 +139,7 @@ $(window).load(function() {
 		$(this).css("overflow","hidden");
 		$(this).removeClass("editBtn");
 		$(this).remove(".edit");
-		}); 
+	}); 
 	$(".Work_Mates_div_list_div2").live("swipeleft",function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
@@ -153,6 +153,8 @@ $(window).load(function() {
 
 function showUpdateUserPanel(openid){
 	showCommonPanel();
+	$(".Work_Mates_div_list_div2").removeClass("editBtn");
+	$(".Work_Mates_div_list_div2").remove(".edit");
 	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑人员信息</legend><div style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 	            +'<form id="atest">'
 	            +'												<input type="hidden" name="uid" id="atest_uid"/>'
@@ -239,7 +241,6 @@ function showUpdateUserPanel(openid){
 		url : "../userProfile/getMDLUserLists",
 		data : {
 			UID : openid
-			
 		},
 		cache : false,
 		success : function(data) {
@@ -653,9 +654,9 @@ jQuery.ajax({
 					workDay="";
 				}else{
 					regNumber++;
-					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;">'+workDay+'天</div>';
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;">'+workDay+'天</div>';
 					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;">待审核</div>';
+					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;">待审核</div>';
 					}
 				}
 				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
