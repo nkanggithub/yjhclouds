@@ -85,17 +85,17 @@ ul li.singleQuote .firstLayer  .change{
     top: 0px;
     right: -60px;
 	font-size:14px;
-    background: #438CD0;
+    background: orange;
     border-bottom: 1px solid #ccc;
 }
 .edit img {
-    width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
+    width:25px;height:auto;position:absolute;top:8px;margin-left: 2px;
 }
 .edit p
 {
 	width:50%;
 	height:100%;
-	line-height:145px;
+	line-height:70px;
 	margin-right:auto;
 	margin-left:auto;
 }
@@ -118,7 +118,7 @@ $(function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
-		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
