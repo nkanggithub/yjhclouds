@@ -159,11 +159,13 @@ function getAllDatas(){
 					 if(data[i].item!=""){
 						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
 						 var tag='';
+						 var attention='';
 						 if(i<7){
 							 tag='<span class="tag">已关注</span>';
+							 attention='attention';
 						 }
 						 html+='<li class="singleQuote">'
-							 +'	<div class="firstLayer  attention">'
+							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
 							 +'		<div class="quotePrice '+priceColor+'">￥<span class="price">'+data[i].quotationPrice+'</span></div>'
 							/*  +'		<span class="change high">+10</span>' */
