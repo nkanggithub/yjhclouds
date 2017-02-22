@@ -3141,7 +3141,7 @@ public class MongoDBBasic {
 			WriteResult writeResult;
 			DBObject insertQuery = new BasicDBObject();
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			if(queryresult!=null){
+			if(queryresult!=null && queryresult.get("status")!="Y"){
 				insertQuery.put("plasticItem", queryresult.get("plasticItem"));
 				insertQuery.put("status", quotation.getStatus());
 				insertQuery.put("approveBy",quotation.getApproveBy());
