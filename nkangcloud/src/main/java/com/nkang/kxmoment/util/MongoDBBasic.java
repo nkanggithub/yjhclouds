@@ -518,7 +518,7 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 	    try{
-	    	List<String> kmLists = new ArrayList<String>();
+	    	HashSet<String> kmSets = new HashSet<String>();
 	    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", openid));
             if (null != dbcur) {
             	while(dbcur.hasNext()){
@@ -528,7 +528,7 @@ public class MongoDBBasic {
                 		Object[] kmObjects = hist.toArray();
                 		for(Object dbobj : kmObjects){
                 			if(dbobj instanceof String){
-                				kmLists.add((String) dbobj);
+                				kmSets.add((String) dbobj);
                 			}
                 		}
             		}
@@ -536,8 +536,8 @@ public class MongoDBBasic {
             }
             BasicDBObject doc = new BasicDBObject();  
 	    	DBObject update = new BasicDBObject();
-	    	kmLists.add(kmItem);
-    	    update.put("kmLists",kmLists );
+	    	kmSets.add(kmItem);
+    	    update.put("kmLists",kmSets);
 	    	doc.put("$set", update);  
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
             ret = true;
