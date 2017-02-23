@@ -3302,8 +3302,9 @@ public class MongoDBBasic {
 				insertQuery.put("time",articleMessage.getTime());
 				insertQuery.put("picture",articleMessage.getPicture());
 				insertQuery.put("webUrl",articleMessage.getWebUrl());
-				/*if(!"".equals(articleMessage.getAuthor())){
-				insertQuery.put("author",articleMessage.getAuthor());}*/
+				insertQuery.put("visitedNum",articleMessage.getVisitedNum());
+				if(!"".equals(articleMessage.getAuthor())){
+				insertQuery.put("author",articleMessage.getAuthor());}
 				writeResult=mongoDB.getCollection(Article_Message).insert(insertQuery);
 				ret="insert articleMessage ok  -->" + writeResult;
 			}else{
@@ -3355,6 +3356,11 @@ public class MongoDBBasic {
 				}else {
 					insertQuery.put("author",articleMessage.getAuthor());
 				}
+				if(articleMessage.getVisitedNum()==null && queryresult.get("visitedNum")!=null){
+					insertQuery.put("visitedNum",queryresult.get("visitedNum").toString());
+				}else {
+					insertQuery.put("visitedNum",articleMessage.getVisitedNum());
+				}
 				
 				BasicDBObject doc = new BasicDBObject();  
 				doc.put("$set", insertQuery);
@@ -3379,13 +3385,41 @@ public class MongoDBBasic {
 		}else{
 			return 0;}
 	}
-	public static List<String> getArticleMessageByType(String type){
+	public static List<String> getArticleMessageTitleByType(String type){
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		query.put("type", type);
 		@SuppressWarnings("unchecked")
 		List<String> amList = mongoDB.getCollection(Article_Message).distinct("title",query);
 			return amList;
+	}
+	public static List<ArticleMessage> getArticleMessageByType(String type) {
+		mongoDB = getMongoDB();
+		List<ArticleMessage> amList = new ArrayList<ArticleMessage>();
+		ArticleMessage am = null;
+		DBCursor queryresults;
+		try{
+				DBObject query = new BasicDBObject();
+				BasicDBObject sort=new BasicDBObject();
+				sort.put("visitedNum", -1);
+				query.put("type", type);
+				queryresults = mongoDB.getCollection(Article_Message).find(query).sort(sort);
+			if (null != queryresults) {
+            	while(queryresults.hasNext()){
+				DBObject o = queryresults.next();
+				am=new ArticleMessage();
+				am.setNum(o.get("num") == null ? "" : o.get("num").toString());
+				am.setContent(o.get("content") == null ? "" : o.get("content").toString());
+				am.setTime(o.get("time") == null ? "" : o.get("time").toString());
+				am.setTitle(o.get("title") == null ? "" : o.get("title").toString());
+				am.setVisitedNum(o.get("visitedNum") == null ? "" : o.get("visitedNum").toString());
+				amList.add(am);
+            	}
+			}
+		}catch(Exception e){
+			log.info("getArcticleMessageByNum--" + e.getMessage());
+		}
+		return amList;
 	}
 	public static List<ArticleMessage> getArticleMessageByNum(String num) {
 		mongoDB = getMongoDB();
@@ -3404,6 +3438,7 @@ public class MongoDBBasic {
 				am.setContent(o.get("content") == null ? "" : o.get("content").toString());
 				am.setTime(o.get("time") == null ? "" : o.get("time").toString());
 				am.setTitle(o.get("title") == null ? "" : o.get("title").toString());
+				am.setVisitedNum(o.get("visitedNum") == null ? "" : o.get("visitedNum").toString());
 				amList.add(am);
             	}
 			}
@@ -3412,7 +3447,32 @@ public class MongoDBBasic {
 		}
 		return amList;
 	}
-	public static boolean updateVisitedHistory(String num,String openId){
+	public static boolean updateVisitedNumber(String num){
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+	    try{
+	    	DBCursor dbcur = mongoDB.getCollection(Article_Message).find(new BasicDBObject().append("num", num));
+	    	String visitedNum="";
+			if(dbcur!=null){
+				while (dbcur.hasNext()) {
+					DBObject objam = dbcur.next();
+					visitedNum=objam.get("num") == null ? "" : objam.get("num").toString();
+				}
+			}
+            BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("visitedNum", Integer.parseInt(visitedNum)+1);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(Article_Message).update(new BasicDBObject().append("num", num), doc);     
+			ret = true;
+            
+	    }
+		catch(Exception e){
+			log.info("saveUserKM--" + e.getMessage());
+		}
+		return ret;
+	}
+/*	public static boolean updateVisitedHistory(String num,String openId){
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 	    try{
@@ -3447,8 +3507,8 @@ public class MongoDBBasic {
 			log.info("saveUserKM--" + e.getMessage());
 		}
 		return ret;
-	}
-	public static List<String> queryVisitedHistoryByNum(String num){
+	}*/
+/*	public static List<String> queryVisitedHistoryByNum(String num){
 		mongoDB = getMongoDB();
 		List<String> vLists = new ArrayList<String>();
 	    try{
@@ -3472,7 +3532,7 @@ public class MongoDBBasic {
 			log.info("queryUserKM--" + e.getMessage());
 		}
 		return vLists;
-	}
+	}*/
 	
 }
 					
