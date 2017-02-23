@@ -3294,7 +3294,8 @@ public class MongoDBBasic {
 			
 			WriteResult writeResult;
 			if(queryresult==null){
-				
+
+				System.out.println("add new Article--------------");
 				insertQuery.put("num",articleMessage.getNum());
 				insertQuery.put("title",articleMessage.getTitle());
 				insertQuery.put("type",articleMessage.getType());
@@ -3308,6 +3309,7 @@ public class MongoDBBasic {
 				writeResult=mongoDB.getCollection(Article_Message).insert(insertQuery);
 				ret="insert articleMessage ok  -->" + writeResult;
 			}else{
+				System.out.println("update old Article--------------");
 				if(articleMessage.getNum()==null && queryresult.get("num")!=null){
 					insertQuery.put("num",queryresult.get("num").toString());
 				}else {
@@ -3378,6 +3380,7 @@ public class MongoDBBasic {
 			while (cor.hasNext()) {
 				DBObject objam = cor.next();
 				maxNum=objam.get("num") == null ? "" : objam.get("num").toString();
+				System.out.println("maxNum----------------"+maxNum);
 			}
 		}
 		if(!"".equals(maxNum)){
