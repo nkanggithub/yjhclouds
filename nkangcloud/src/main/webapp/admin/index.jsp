@@ -175,7 +175,7 @@ function showUpdateUserPanel(openid){
 			data = data.replace(/:null/g, ':""');
 			data = '{"results":' + data + '}';
 			var jsons = eval('(' + data + ')');
-			if (jsons.results.length > 0) {
+			if (data.length > 0) {
 				var isExternalUpStream=jsons.results[0].roleObj.externalUpStream;
 				var isExternalCustomer=jsons.results[0].roleObj.externalCustomer;
 				var isExternalPartner=jsons.results[0].roleObj.externalPartner;
