@@ -148,15 +148,15 @@ $(function(){
 		var tagNum=$(this).find('span.tag').length;
 		var item=$(this).find('span.item').text();
 		if(tagNum==0){
-			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\')"><img src="../mdm/images/focus.png" />关注</p></div>');
+			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\',this)"><img src="../mdm/images/focus.png" />关注</p></div>');
 		}else{
-			$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\')">取消<br/>关注</p></div>');
+			$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>关注</p></div>');
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
 });
-function UpdateTag(item,flag){
+function UpdateTag(item,flag,obj){
 	$(".singleQuote").removeClass("editBtn");
 	$(".singleQuote").remove(".edit");
 	$.ajax({
@@ -169,7 +169,15 @@ function UpdateTag(item,flag){
 		 },
 		 success:function(result){
 			 if(result==true){
-				 alert("成功");
+				 if(flag=='add'){
+					 $(obj).parent(".singleQuote").find(".firstLayer").addClass("attention");
+					 $(obj).parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
+					 alert("关注成功");
+				 }else  if(flag=='del'){
+					 $(obj).parent(".singleQuote").find(".firstLayer").removeClass("attention");
+					 $(obj).parent(".singleQuote").find(".firstLayer").find(".quoteTitle").remove(".tag");
+					 alert("取消成功");
+				 }
 			 }else{
 				 alert("失败");
 			 }
