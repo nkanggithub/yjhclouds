@@ -418,20 +418,21 @@ public class BillOfSellPoi {
 						                HSSFCell plasticItem = hssfRow.getCell(5);
 						                xlsDto.setPlasticItem(plasticItem+"");
 						                
-						                HSSFCell amount = hssfRow.getCell(6);
-						                xlsDto.setAmount(amount+"");
+						               // HSSFCell amount = hssfRow.getCell(6);
+						                Double amount=hssfRow.getCell(6).getNumericCellValue();
+						                xlsDto.setAmount(amount);
 						                
-						                HSSFCell originalPrice = hssfRow.getCell(7);
-						                xlsDto.setOriginalPrice(originalPrice+"");
+						                Double originalPrice = hssfRow.getCell(7).getNumericCellValue();;
+						                xlsDto.setOriginalPrice(originalPrice);
 						                
-						                HSSFCell taxRate = hssfRow.getCell(8);
-						                xlsDto.setTaxRate(taxRate+"");
+						                Double taxRate = hssfRow.getCell(8).getNumericCellValue();;
+						                xlsDto.setTaxRate(taxRate);
 						                
 						                HSSFCell billType = hssfRow.getCell(9);
 						                xlsDto.setBillType(billType+"");
 						                
-						                HSSFCell notInInRepository = hssfRow.getCell(10);
-						                xlsDto.setNotInInRepository(notInInRepository+"");
+						                Double notInInRepository = hssfRow.getCell(10).getNumericCellValue();;
+						                xlsDto.setNotInInRepository(notInInRepository);
 						                
 						                OnDeliveryList.add(xlsDto);
 					            }

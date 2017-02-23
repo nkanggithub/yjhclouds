@@ -9,14 +9,14 @@ public class OnDelivery {
 	private String provider;
 	//存货名称
 	private String plasticItem;
-	private String amount;
+	private Double amount;
 	//原币单价
-	private String originalPrice;
-	private String taxRate;
+	private Double originalPrice;
+	private Double taxRate;
 	//单据类型
 	private String billType;
 	//未入库数量
-	private String notInInRepository;
+	private Double notInInRepository;
 	private String lastUpdate;
 	public String getBillID() {
 		return billID;
@@ -42,22 +42,23 @@ public class OnDelivery {
 	public void setPlasticItem(String plasticItem) {
 		this.plasticItem = plasticItem;
 	}
-	public String getAmount() {
+
+	public Double getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	public String getOriginalPrice() {
+	public Double getOriginalPrice() {
 		return originalPrice;
 	}
-	public void setOriginalPrice(String originalPrice) {
+	public void setOriginalPrice(Double originalPrice) {
 		this.originalPrice = originalPrice;
 	}
-	public String getTaxRate() {
+	public Double getTaxRate() {
 		return taxRate;
 	}
-	public void setTaxRate(String taxRate) {
+	public void setTaxRate(Double taxRate) {
 		this.taxRate = taxRate;
 	}
 	public String getBillType() {
@@ -66,10 +67,10 @@ public class OnDelivery {
 	public void setBillType(String billType) {
 		this.billType = billType;
 	}
-	public String getNotInInRepository() {
+	public Double getNotInInRepository() {
 		return notInInRepository;
 	}
-	public void setNotInInRepository(String notInInRepository) {
+	public void setNotInInRepository(Double notInInRepository) {
 		this.notInInRepository = notInInRepository;
 	}
 	public String getLastUpdate() {

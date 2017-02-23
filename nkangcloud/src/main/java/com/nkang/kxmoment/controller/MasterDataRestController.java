@@ -1025,11 +1025,11 @@ public class MasterDataRestController {
 			@RequestParam(value="date", required=false) String date,
 			@RequestParam(value="provider", required=false) String provider,
 			@RequestParam(value="plasticItem", required=false) String plasticItem,
-			@RequestParam(value="amount", required=false) String amount,
-			@RequestParam(value="originalPrice", required=false) String originalPrice,
-			@RequestParam(value="taxRate", required=false) String taxRate,
+			@RequestParam(value="amount", required=false) Double amount,
+			@RequestParam(value="originalPrice", required=false) Double originalPrice,
+			@RequestParam(value="taxRate", required=false) Double taxRate,
 			@RequestParam(value="billType", required=false) String billType,
-			@RequestParam(value="notInInRepository", required=false) String notInInRepository
+			@RequestParam(value="notInInRepository", required=false) Double notInInRepository
 			){
 		
 		OnDelivery onDelivery = new OnDelivery();

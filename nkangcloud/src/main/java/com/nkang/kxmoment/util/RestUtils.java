@@ -2506,21 +2506,21 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(onDelivery.getPlasticItem())){
 				url = url + "&plasticItem="+URLEncoder.encode(onDelivery.getPlasticItem(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(onDelivery.getAmount())){
-				url = url + "&amount="+URLEncoder.encode(onDelivery.getAmount(),"UTF-8");
+			if(onDelivery.getAmount()!=null){
+				url = url + "&amount="+onDelivery.getAmount();
 			}
-			if(!StringUtils.isEmpty(onDelivery.getOriginalPrice())){
-				url = url + "&originalPrice="+URLEncoder.encode(onDelivery.getOriginalPrice(),"UTF-8");
+			if(onDelivery.getOriginalPrice()!=null){
+				url = url + "&originalPrice="+onDelivery.getOriginalPrice();
 			}
 			
-			if(!StringUtils.isEmpty(onDelivery.getTaxRate())){
-				url = url + "&taxRate="+URLEncoder.encode(onDelivery.getTaxRate(),"UTF-8");
+			if(onDelivery.getTaxRate()!=null){
+				url = url + "&taxRate="+onDelivery.getTaxRate();
 			}
 			if(!StringUtils.isEmpty(onDelivery.getBillType())){
 				url = url + "&billType="+URLEncoder.encode(onDelivery.getBillType(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(onDelivery.getNotInInRepository())){
-				url = url + "&notInInRepository="+URLEncoder.encode(onDelivery.getNotInInRepository(),"UTF-8");
+			if(onDelivery.getNotInInRepository()!=null){
+				url = url + "&notInInRepository="+onDelivery.getNotInInRepository();
 			}
 		}
 		String message= "errorrrr";
