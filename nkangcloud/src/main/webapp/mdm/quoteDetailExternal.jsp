@@ -148,9 +148,9 @@ $(function(){
 		var tagNum=$(this).find('span.tag').length;
 		var item=$(this).find('span.item').text();
 		if(tagNum==0){
-			$(this).append("<div class='edit'><p onclick='UpdateTag(\'"+item+"\',\'add\')'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\')"><img src="../mdm/images/focus.png" />关注</p></div>');
 		}else{
-			$(this).append("<div class='edit no'><p onclick='UpdateTag(\'"+item+"\',\'del\')'>取消<br/>关注</p></div>");
+			$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\')">取消<br/>关注</p></div>');
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
@@ -160,7 +160,7 @@ function UpdateTag(item,flag){
 	$(".singleQuote").removeClass("editBtn");
 	$(".singleQuote").remove(".edit");
 	$.ajax({
-		 url:'../queryUserKM',
+		 url:'../saveUserKM',
 		 type:"POST",
 		 data : {
 			 openid : $("#openid").val(),
