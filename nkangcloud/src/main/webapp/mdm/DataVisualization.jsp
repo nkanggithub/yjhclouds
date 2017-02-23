@@ -342,10 +342,10 @@ color:white;
   <div class="large-12 small-12 columns">
   <img class="arrow" src="../Jsp/JS/pizzaChart/img/arrow.png" alt=""/>
     <ul data-pie-id="svg2" data-options='{"donut":"true"}'>
-      <li data-value="70"><span class="text-left">Water Buffalo (39%)</span><span class="text-right">60</span></li>
-      <li data-value="20"><span class="text-left">Bison (11%)</span><span class="text-right">20</span></li>
-      <li data-value="12"><span class="text-left">Sheep (7%)</span><span class="text-right">12</span></li>
-      <li data-value="32"><span class="text-left">Goat (18%)</span><span class="text-right">32</span></li>
+      <li data-value="70"><span class="text-left">Technology (39%)</span><span class="text-right">60</span></li>
+      <li data-value="20"><span class="text-left">Market (11%)</span><span class="text-right">20</span></li>
+      <li data-value="12"><span class="text-left">Communication (7%)</span><span class="text-right">12</span></li>
+      <li data-value="32"><span class="text-left">Quatation(18%)</span><span class="text-right">32</span></li>
     </ul>
   </div>
 
