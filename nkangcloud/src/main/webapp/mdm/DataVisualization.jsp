@@ -1,13 +1,18 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
-<%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
-<%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+
 <%	
-/* String AccessKey = RestUtils.callGetValidAccessKey();
-String uid = request.getParameter("UID");
-WeChatUser wcu;
-wcu = RestUtils.getWeChatUserInfo(AccessKey, uid); */
+List<String> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
+int BJTotalNum=BJtitles.size();
+List<String> HQtitles =MongoDBBasic.getArticleMessageByType("hq");
+int HQTotalNum=HQtitles.size();
+List<String> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
+int GTTotalNum=GTtitles.size();
+List<String> JStitles =MongoDBBasic.getArticleMessageByType("js");
+int JSTotalNum=JStitles.size();
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -342,46 +347,43 @@ color:white;
   <div class="large-12 small-12 columns">
   <img class="arrow" src="../Jsp/JS/pizzaChart/img/arrow.png" alt=""/>
     <ul data-pie-id="svg2" data-options='{"donut":"true"}'>
-      <li data-value="70"><span class="text-left">Technology (39%)</span><span class="text-right">60</span></li>
-      <li data-value="20"><span class="text-left">Market (11%)</span><span class="text-right">20</span></li>
-      <li data-value="12"><span class="text-left">Communication (7%)</span><span class="text-right">12</span></li>
-      <li data-value="32"><span class="text-left">Quatation(18%)</span><span class="text-right">32</span></li>
+          <li data-value="<%=BJTotalNum %>"><span class="text-left">报价</span><span  id="bjNum" class="text-right"><%=BJTotalNum %></span></li>
+      <li data-value="<%=HQTotalNum %>"><span class="text-left">行情</span><span id="hqNum" class="text-right"><%=HQTotalNum %></span></li>
+      <li data-value="<%=GTTotalNum %>"><span class="text-left">沟通</span><span id="gtNum" class="text-right"><%=GTTotalNum %></span></li>
+      <li data-value="<%=JSTotalNum %>"><span class="text-left">技术 </span><span id="jsNum" class="text-right"><%=JSTotalNum %></span></li>
+
     </ul>
   </div>
 
   <div id="detailPanel" class="large-12 small-12 columns">
-    <span class="title">数量排行榜</span>
-  <div id="JSdetail" class="commonPanel">
-  <div class="singleArticle"><p class="rank">1</p>
-  <p class="at">技术文章1</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">2</p>
-  <p class="at">技术文章2</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">3</p>
-  <p class="at">技术文章3</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+    <span class="title">访问量排行榜</span>
+  <div id="BJdetail" class="commonPanel">
+  <% for(int i=0;i<BJtitles.size();i++) {%>
+  <div class="singleArticle">
+  <p class="rank"><%=i+1 %></p>
+  <p class="at"><%=BJtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+<% } %>
   </div>
     <div id="HQdetail"  class="commonPanel" style="display:none">
-  <div class="singleArticle"><p class="rank">1</p>
-  <p class="at">行情文章1</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">2</p>
-  <p class="at">行情文章2</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">3</p>
-  <p class="at">行情文章3</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+      <% for(int i=0;i<HQtitles.size();i++) {%>
+  <div class="singleArticle">
+  <p class="rank"><%=i+1 %></p>
+  <p class="at"><%=HQtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+<% } %>
   </div>
     <div id="GTdetail"  class="commonPanel" style="display:none">
-  <div class="singleArticle"><p class="rank">1</p>
-  <p class="at">沟通文章1</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">2</p>
-  <p class="at">沟通文章2</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">3</p>
-  <p class="at">沟通文章3</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+      <% for(int i=0;i<GTtitles.size();i++) {%>
+  <div class="singleArticle">
+  <p class="rank"><%=i+1 %></p>
+  <p class="at"><%=GTtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+<% } %>
   </div>
-    <div id="BJdetail"  class="commonPanel" style="display:none">
-  <div class="singleArticle"><p class="rank">1</p>
-  <p class="at">报价文章1</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">2</p>
-  <p class="at">报价文章2</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
-    <div class="singleArticle"><p class="rank">3</p>
-  <p class="at">报价文章3</p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+    <div id="JSdetail"  class="commonPanel" style="display:none">
+      <% for(int i=0;i<JStitles.size();i++) {%>
+  <div class="singleArticle">
+  <p class="rank"><%=i+1 %></p>
+  <p class="at"><%=JStitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+<% } %>
   </div>
   </div>
 </div>
@@ -403,6 +405,7 @@ var i=$(this).index();
 	  var j=i/2+1;
 	  $("div#detailPanel .commonPanel:nth-child("+j+")").show();
 	   $("div#detailPanel .commonPanel:nth-child("+j+")").siblings(".commonPanel").hide();
+
 	  
     });
 	$("#qc").click(function(){
