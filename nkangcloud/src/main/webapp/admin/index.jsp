@@ -145,13 +145,15 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
-		$(this).append("<div class='edit km'><p onclick=''>牌号<br/>管理</p></div>");
+		$(this).append("<div class='edit km'><p onclick='showKMPanel(\""+openid+"\")'>牌号<br/>管理</p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
 	
 });
-
+function showKMPanel(openid){
+	location.href='../mdm/quoteDetailExternal.jsp?UID='+openid;
+}
 function showUpdateUserPanel(openid){
 	showCommonPanel();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
