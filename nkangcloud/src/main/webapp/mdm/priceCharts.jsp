@@ -28,11 +28,9 @@ body{
 </head>
 <body>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative;text-align:right;"> 
-					<img onclick="javascript:history.go(-1);" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:30px;left:20px;">
+					<img onclick="javascript:history.go(-1);" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:20px;left:20px;">
 
-					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;top: 8px;left: 1%;position: relative;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
-					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
-					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
+					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;top:5px;left: 1%;position: relative;height:50px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;margin-right:10px;">
 				</div>
 
 
