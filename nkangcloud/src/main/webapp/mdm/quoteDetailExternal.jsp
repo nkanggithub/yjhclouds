@@ -170,16 +170,16 @@ function UpdateTag(item,flag,obj){
 		 success:function(result){
 			 if(result==true){
 				 if(flag=='add'){
-					 swal("恭喜！", "该牌号关注成功", "success");
+					 swal("关注成功 ", "恭喜你成功关注该牌号", "success");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
 				 }else  if(flag=='del'){
-					 swal("成功！", "你取消对该牌号的关注", "success");
+					 swal("取消成功", "你取消了对该牌号的关注", "success");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
 				 }
 			 }else{
-				 swal("失败！", "请刷新页面后重试", "error");
+				 swal("操作失败", "请刷新页面后重试", "error");
 			 }
 		 }
 	});
