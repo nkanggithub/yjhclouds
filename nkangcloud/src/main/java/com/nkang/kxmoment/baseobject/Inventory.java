@@ -4,10 +4,10 @@ public class Inventory {
 	private String repositoryName;
 	private String plasticItem;
 	private String unit;
-	private String inventoryAmount;
-	private String waitDeliverAmount;
-	private String reserveDeliverAmount;
-	private String availableAmount;
+	private Double inventoryAmount;
+	private Double waitDeliverAmount;
+	private Double reserveDeliverAmount;
+	private Double availableAmount;
 	private String lastUpdate;
 	
 	public String getLastUpdate() {
@@ -35,31 +35,31 @@ public class Inventory {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public String getInventoryAmount() {
+	
+	public Double getInventoryAmount() {
 		return inventoryAmount;
 	}
-	public void setInventoryAmount(String inventoryAmount) {
+	public void setInventoryAmount(Double inventoryAmount) {
 		this.inventoryAmount = inventoryAmount;
 	}
-	public String getWaitDeliverAmount() {
+	public Double getWaitDeliverAmount() {
 		return waitDeliverAmount;
 	}
-	public void setWaitDeliverAmount(String waitDeliverAmount) {
+	public void setWaitDeliverAmount(Double waitDeliverAmount) {
 		this.waitDeliverAmount = waitDeliverAmount;
 	}
-	public String getReserveDeliverAmount() {
+	public Double getReserveDeliverAmount() {
 		return reserveDeliverAmount;
 	}
-	public void setReserveDeliverAmount(String reserveDeliverAmount) {
+	public void setReserveDeliverAmount(Double reserveDeliverAmount) {
 		this.reserveDeliverAmount = reserveDeliverAmount;
 	}
-	public String getAvailableAmount() {
+	public Double getAvailableAmount() {
 		return availableAmount;
 	}
-	public void setAvailableAmount(String availableAmount) {
+	public void setAvailableAmount(Double availableAmount) {
 		this.availableAmount = availableAmount;
 	}
-	
 	public String info(){
 		return repositoryName + "\n"
 				+plasticItem + "\n"

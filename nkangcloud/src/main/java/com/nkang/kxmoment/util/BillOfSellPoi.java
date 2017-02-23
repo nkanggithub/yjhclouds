@@ -353,17 +353,18 @@ public class BillOfSellPoi {
 						                HSSFCell unit = hssfRow.getCell(2);
 						                xlsDto.setUnit(unit+"");
 						                
-						                HSSFCell inventoryAmount = hssfRow.getCell(3);
-						                xlsDto.setInventoryAmount(inventoryAmount+"");
+						               // HSSFCell inventoryAmount = hssfRow.getCell(3);
+						                Double inventoryAmount = hssfRow.getCell(3).getNumericCellValue(); 
+						                xlsDto.setInventoryAmount(inventoryAmount);
 						                
-						                HSSFCell waitDeliverAmount = hssfRow.getCell(4);
-						                xlsDto.setWaitDeliverAmount(waitDeliverAmount+"");
+						                Double waitDeliverAmount = hssfRow.getCell(4).getNumericCellValue();
+						                xlsDto.setWaitDeliverAmount(waitDeliverAmount);
 						                
-						                HSSFCell reserveDeliverAmount = hssfRow.getCell(5);
-						                xlsDto.setReserveDeliverAmount(reserveDeliverAmount+"");
+						                Double reserveDeliverAmount = hssfRow.getCell(5).getNumericCellValue();
+						                xlsDto.setReserveDeliverAmount(reserveDeliverAmount);
 						                
-						                HSSFCell availableAmount = hssfRow.getCell(6);
-						                xlsDto.setAvailableAmount(availableAmount+"");
+						                Double availableAmount = hssfRow.getCell(6).getNumericCellValue();
+						                xlsDto.setAvailableAmount(availableAmount);
 						                
 						                inventoryList.add(xlsDto);
 //						            }

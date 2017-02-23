@@ -997,10 +997,10 @@ public class MasterDataRestController {
 	public static String saveInventory(@RequestParam(value="repositoryName", required=false) String repositoryName,
 			@RequestParam(value="plasticItem", required=false) String plasticItem,
 			@RequestParam(value="unit", required=false) String unit,
-			@RequestParam(value="inventoryAmount", required=false) String inventoryAmount,
-			@RequestParam(value="waitDeliverAmount", required=false) String waitDeliverAmount,
-			@RequestParam(value="reserveDeliverAmount", required=false) String reserveDeliverAmount,
-			@RequestParam(value="availableAmount", required=false) String availableAmount
+			@RequestParam(value="inventoryAmount", required=false) Double inventoryAmount,
+			@RequestParam(value="waitDeliverAmount", required=false) Double waitDeliverAmount,
+			@RequestParam(value="reserveDeliverAmount", required=false) Double reserveDeliverAmount,
+			@RequestParam(value="availableAmount", required=false) Double availableAmount
 			){
 		
 		Inventory it = new Inventory();

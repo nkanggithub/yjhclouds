@@ -39,6 +39,7 @@ import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
+import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
@@ -2442,18 +2443,18 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(inventory.getUnit())){
 				url = url + "&unit="+URLEncoder.encode(inventory.getUnit(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(inventory.getInventoryAmount())){
-				url = url + "&inventoryAmount="+URLEncoder.encode(inventory.getInventoryAmount(),"UTF-8");
+			if(inventory.getInventoryAmount()!=null){
+				url = url + "&inventoryAmount="+inventory.getInventoryAmount();
 			}
-			if(!StringUtils.isEmpty(inventory.getWaitDeliverAmount())){
-				url = url + "&waitDeliverAmount="+URLEncoder.encode(inventory.getWaitDeliverAmount(),"UTF-8");
+			if(inventory.getWaitDeliverAmount()!=null){
+				url = url + "&waitDeliverAmount="+inventory.getWaitDeliverAmount();
 			}
-			if(!StringUtils.isEmpty(inventory.getReserveDeliverAmount())){
-				url = url + "&reserveDeliverAmount="+URLEncoder.encode(inventory.getReserveDeliverAmount(),"UTF-8");
+			if(inventory.getReserveDeliverAmount()!=null){
+				url = url + "&reserveDeliverAmount="+inventory.getReserveDeliverAmount();
 			}
 			
-			if(!StringUtils.isEmpty(inventory.getAvailableAmount())){
-				url = url + "&availableAmount="+URLEncoder.encode(inventory.getAvailableAmount(),"UTF-8");
+			if(inventory.getAvailableAmount()!=null){
+				url = url + "&availableAmount="+inventory.getAvailableAmount();
 			}
 		}
 		String message= "errorrrr";
@@ -2641,6 +2642,65 @@ public static String regist(WeChatMDLUser user) {
 		return message;
     	
     }
+    
+    /*
+     * chang-zheng
+     */
+    public static String callUpdateQuotationList(String mongoID,QuotationList quotation) throws UnsupportedEncodingException {
+
+
+		String url = "http://"+Constants.baehost+"/updateQuotationList?";
+		if(quotation != null){
+			if(!StringUtils.isEmpty(quotation.getPlasticItem())){
+				url = url + "plasticItem="+URLEncoder.encode(quotation.getPlasticItem(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getStatus())){
+				url = url + "&status="+URLEncoder.encode(quotation.getStatus(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getApproveBy())){
+				url = url + "&approveBy="+URLEncoder.encode(quotation.getApproveBy(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getEditBy())){
+				url = url + "&editBy="+URLEncoder.encode(quotation.getEditBy(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getDateTime())){
+				url = url + "&dateTime="+URLEncoder.encode(quotation.getDateTime(),"UTF-8");
+			}
+			if(!StringUtils.isEmpty(quotation.getSuggestPrice())){
+				url = url + "&suggestPrice="+URLEncoder.encode(quotation.getSuggestPrice(),"UTF-8");
+			}
+			
+			if(!StringUtils.isEmpty(mongoID)){
+				url = url + "&mongoID="+URLEncoder.encode(mongoID,"UTF-8");
+			}
+		}
+		String message= "errorrrr";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	           message = new String(jsonBytes, "UTF-8");
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return "failed";
+	       } 
+		 System.out.println(url);
+		return message;
+    }
+    
 }
 
 
