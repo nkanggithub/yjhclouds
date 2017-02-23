@@ -7,7 +7,7 @@
 String uid = request.getParameter("uid");
 String num = request.getParameter("num");
 List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
-MongoDBBasic.updateVisitedHistory(num, uid);
+MongoDBBasic.updateVisitedNumber(num);
 ArticleMessage n=new ArticleMessage();
 /* n.setContent("此部分功能正在开发中，请等待。。");
 n.setTitle("Notification!");

@@ -5,13 +5,13 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 
 <%	
-List<String> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
+List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
 int BJTotalNum=BJtitles.size();
-List<String> HQtitles =MongoDBBasic.getArticleMessageByType("hq");
+List<ArticleMessage> HQtitles =MongoDBBasic.getArticleMessageByType("hq");
 int HQTotalNum=HQtitles.size();
-List<String> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
+List<ArticleMessage> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
 int GTTotalNum=GTtitles.size();
-List<String> JStitles =MongoDBBasic.getArticleMessageByType("js");
+List<ArticleMessage> JStitles =MongoDBBasic.getArticleMessageByType("js");
 int JSTotalNum=JStitles.size();
 %> 
 <!DOCTYPE html>
@@ -76,13 +76,14 @@ font-size:14px;
 border-bottom:1px solid #F0F0F0;
 position:relative;
 }
-.singleArticle img
+.singleArticle span
 { 
     position: absolute;
     z-index: 1000;
     top: 17px;
     right: 15px;
-    width: 8px;
+    font-size: 14px;
+    color: #d3d3d3;
 
 }
 .singleArticle p
@@ -361,28 +362,28 @@ color:white;
   <% for(int i=0;i<BJtitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
-  <p class="at"><%=BJtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+  <p class="at"><%=BJtitles.get(i).getTitle() %></p><span><%=BJtitles.get(i).getVisitedNum() %></span></div>
 <% } %>
   </div>
     <div id="HQdetail"  class="commonPanel" style="display:none">
       <% for(int i=0;i<HQtitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
-  <p class="at"><%=HQtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+  <p class="at"><%=HQtitles.get(i).getTitle()  %></p><span><%=HQtitles.get(i).getVisitedNum() %></span></div>
 <% } %>
   </div>
     <div id="GTdetail"  class="commonPanel" style="display:none">
       <% for(int i=0;i<GTtitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
-  <p class="at"><%=GTtitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+  <p class="at"><%=GTtitles.get(i).getTitle()  %></p><span><%=GTtitles.get(i).getVisitedNum() %></span></div>
 <% } %>
   </div>
     <div id="JSdetail"  class="commonPanel" style="display:none">
       <% for(int i=0;i<JStitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
-  <p class="at"><%=JStitles.get(i) %></p><img src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt=""/></div>
+  <p class="at"><%=JStitles.get(i).getTitle()  %></p><span><%=JStitles.get(i).getVisitedNum() %></span></div>
 <% } %>
   </div>
   </div>
