@@ -172,7 +172,7 @@ function getAllDatas(){
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'">￥<span class="price">'+data[i].quotationPrice+'</span></div>'
+							 +'		<div class="quotePrice '+priceColor+'"><span class="price">'+data[i].quotationPrice+'</span>元/吨</div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
