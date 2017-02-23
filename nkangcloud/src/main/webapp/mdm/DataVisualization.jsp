@@ -127,11 +127,11 @@ font-weight:bold;
 }
 #JSdetail .rank
 {
-  color: #FF9A38;
+  color: #FFD427;
 }
 #BJdetail .rank
 {
-  color: #FFD427;
+  color: #FF9A38;
 }
 #GTdetail .rank
 {
