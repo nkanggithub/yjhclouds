@@ -105,7 +105,7 @@ ul li.singleQuote .firstLayer  .change{
 	font-weight:bold;
 }
 .edit.no{
-background: #666;
+background: #999;
 }
 .edit.no p
 {
