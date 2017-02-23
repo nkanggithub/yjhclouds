@@ -489,6 +489,65 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	public static List<String> queryUserKM(String openid){
+		mongoDB = getMongoDB();
+		List<String> kmLists = new ArrayList<String>();
+	    try{
+	    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", openid));
+            if (null != dbcur) {
+            	while(dbcur.hasNext()){
+            		DBObject o = dbcur.next();
+            		BasicDBList hist = (BasicDBList) o.get("kmLists");
+            		if(hist != null){
+                		Object[] kmObjects = hist.toArray();
+                		for(Object dbobj : kmObjects){
+                			if(dbobj instanceof String){
+                				kmLists.add((String) dbobj);
+                			}
+                		}
+            		}
+            	}
+            }
+	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
+		return kmLists;
+	}
+	public static boolean saveUserKM(String openid,String kmItem){
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+	    try{
+	    	List<String> kmLists = new ArrayList<String>();
+	    	DBCursor dbcur = mongoDB.getCollection(wechat_user).find(new BasicDBObject().append("OpenID", openid));
+            if (null != dbcur) {
+            	while(dbcur.hasNext()){
+            		DBObject o = dbcur.next();
+            		BasicDBList hist = (BasicDBList) o.get("kmLists");
+            		if(hist != null){
+                		Object[] kmObjects = hist.toArray();
+                		for(Object dbobj : kmObjects){
+                			if(dbobj instanceof String){
+                				kmLists.add((String) dbobj);
+                			}
+                		}
+            		}
+            	}
+            }
+            BasicDBObject doc = new BasicDBObject();  
+	    	DBObject update = new BasicDBObject();
+	    	kmLists.add(kmItem);
+    	    update.put("kmLists",kmLists );
+	    	doc.put("$set", update);  
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
+            ret = true;
+            
+	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
+		return ret;
+	}
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
