@@ -146,7 +146,7 @@ $(function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var tagNum=$(this).find('span.tag').length;
-		var item=$(this).find('span.item')[0].text();
+		var item=$(this).find('span.item').text();
 		if(tagNum==0){
 			$(this).append("<div class='edit'><p onclick='UpdateTag(\'"+item+"\',\'add\')'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 		}else{
