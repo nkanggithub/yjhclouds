@@ -270,16 +270,18 @@ public class CoreService
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
-						Article articleForInternal = new Article();
-						articleForInternal.setTitle("永佳和报价管理");
-						articleForInternal.setDescription("永佳和实时报价");
-						articleForInternal.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFt&oid=00D90000000pkXM"); //big data
-						articleForInternal.setUrl("http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=" + fromUserName);
-						articleList.add(articleForInternal);
-						
+						if(MongoDBBasic.checkUserAuth(fromUserName, "isInternalSeniorMgt") || MongoDBBasic.checkUserAuth(fromUserName, "isInternalImtMgt") || MongoDBBasic.checkUserAuth(fromUserName, "isITOperations") || MongoDBBasic.checkUserAuth(fromUserName, "isInternalQuoter")){
+							Article articleForInternal = new Article();
+							articleForInternal.setTitle("报价管理");
+							articleForInternal.setDescription("报价管理");
+							articleForInternal.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFt&oid=00D90000000pkXM"); //big data
+							articleForInternal.setUrl("http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=" + fromUserName);
+							articleList.add(articleForInternal);
+						}
+
 						Article articleforCustomer = new Article();
-						articleforCustomer.setTitle("永佳和实时报价");
-						articleforCustomer.setDescription("永佳和实时报价");
+						articleforCustomer.setTitle("实时报价");
+						articleforCustomer.setDescription("实时报价");
 						articleforCustomer.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFj&oid=00D90000000pkXM"); //big data
 						articleforCustomer.setUrl("http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID=" + fromUserName);
 						articleList.add(articleforCustomer);
