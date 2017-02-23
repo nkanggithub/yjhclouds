@@ -234,7 +234,7 @@ function getAllDatas(){
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'"><a href="priceCharts.jsp"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</a></div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
