@@ -154,10 +154,68 @@ function UpdateTag(){
 }
 function getAllDatas(){
 	$.ajax({
+		 url:'../queryUserKM',
+		 type:"POST",
+		 data : {
+			 openid : $("#openid").val()
+		 },
+		 success:function(KMLikeArr){
+		 	$.ajax({
+			 url:'../getAllQuotations',
+			 type:"POST",
+			 success:function(resData){
+			 if(resData.length)
+			{
+				var NoLikeArr=new Array();
+				var LikeArr=new Array();
+				if(KMLikeArr.length>0){
+						 for(var i=0;i<resData.length;i++){
+						 		var itemTemp=$.trim(resData[i].item);
+						 		var index=$.inArray(itemTemp,KMLikeArr);
+						 		if(index>-1){
+						 			resData[i]["like"]=true;
+						 			LikeArr.push(resData[i]);
+						 			KMLikeArr.splice(index,1);
+						 		}else{
+						 			NoLikeArr.push(resData[i]);
+						 		}
+						}
+		 		}else{
+		 			NoLikeArr=resData;
+		 		}
+				var data=$.merge(LikeArr, NoLikeArr);   
+				 var html="";
+				 for(var i=0;i<data.length;i++){
+					 if(data[i].item!=""){
+						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
+						 var tag='';
+						 var attention='';
+						 if(data[i]["like"]==true){
+							 tag='<span class="tag">已关注</span>';
+							 attention='attention';
+						 }
+						 html+='<li class="singleQuote">'
+							 +'	<div class="firstLayer '+attention+'">'
+							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'"><span class="price">'+data[i].quotationPrice+'</span>元/吨</div>'
+							/*  +'		<span class="change high">+10</span>' */
+							 +'		<div class="clear"></div>'
+							 +'	</div>'
+							 +'</li>'; 
+					 }
+				 }
+				 $("#QuoteList").html(html);
+				 }
+			 }
+		 });
+		 		
+		}
+	});
+	$.ajax({
 		 url:'../getAllQuotations',
 		 type:"POST",
 		 success:function(data){
-			 if(data)
+			 if(data.length)
 				 {
 				 var html="";
 				 for(var i=0;i<data.length;i++){
@@ -198,7 +256,7 @@ function getAllDatas(){
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
 					<p style="position: absolute;right: 10px;top: 0px;font-size: 15px;">欢迎您,<%=wcu.getNickname() %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=wcu.getHeadimgurl() %>" alt=""/>
-				
+				<input id="openid" type="hidden" value="<%=uid%>"/>
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
