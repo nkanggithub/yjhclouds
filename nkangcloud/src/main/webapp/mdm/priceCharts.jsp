@@ -28,7 +28,7 @@ body{
 </head>
 <body>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative;text-align:right;"> 
-					<img onclick="ToBackPage()" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:30px;left:20px;">
+					<img onclick="javascript:history.go(-1);" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px;position:absolute;top:30px;left:20px;">
 
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;top: 8px;left: 1%;position: relative;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
@@ -47,9 +47,6 @@ body{
 
 
 <script type="text/javascript">
-function ToBackPage(){
-	history.go(-1):
-}
 $(function(){
 	var bodyWidth = document.body.offsetWidth;
 	$("#echarts").css("width",bodyWidth);
