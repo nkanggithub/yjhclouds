@@ -3302,7 +3302,8 @@ public class MongoDBBasic {
 				insertQuery.put("time",articleMessage.getTime());
 				insertQuery.put("picture",articleMessage.getPicture());
 				insertQuery.put("webUrl",articleMessage.getWebUrl());
-				insertQuery.put("author",articleMessage.getAuthor());
+				/*if(!"".equals(articleMessage.getAuthor())){
+				insertQuery.put("author",articleMessage.getAuthor());}*/
 				writeResult=mongoDB.getCollection(Article_Message).insert(insertQuery);
 				ret="insert articleMessage ok  -->" + writeResult;
 			}else{
