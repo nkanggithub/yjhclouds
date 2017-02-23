@@ -184,8 +184,8 @@ function UpdateTag(item,flag,obj){
 		 }
 	});
 }
-function ToCharPage(){
-	location.href="priceCharts.jsp";
+function ToCharPage(item){
+	location.href="priceCharts.jsp?item="+item;
 }
 function getAllDatas(){
 	$.ajax({
@@ -237,7 +237,7 @@ function getAllDatas(){
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage()"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].item+'\')"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
