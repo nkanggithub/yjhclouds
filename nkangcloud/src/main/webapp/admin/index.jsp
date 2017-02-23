@@ -80,13 +80,20 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
     text-align: center;
     position: absolute;
     top: 0px;
-    right: -60px;
+    right: -120px;
 	font-size:14px;
     background: #438CD0;
     border-bottom: 1px solid #ccc;
 }
+.edit.km{
+	right: -60px;
+    background: orange;
+}
 .edit img {
     width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
+}
+.edit.km p{
+	line-height:75px;
 }
 .edit p
 {
@@ -99,7 +106,7 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 .editBtn
 {
 	position: relative;
-    left: -60px;
+    left: -120px;
 }
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
@@ -137,6 +144,7 @@ $(window).load(function() {
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
 		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).append("<div class='edit km'><p onclick=''>牌号<br/>管理</p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
