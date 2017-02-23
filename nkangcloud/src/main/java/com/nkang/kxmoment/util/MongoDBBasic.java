@@ -3456,7 +3456,7 @@ public class MongoDBBasic {
 			if(dbcur!=null){
 				while (dbcur.hasNext()) {
 					DBObject objam = dbcur.next();
-					visitedNum=objam.get("num") == null ? "" : objam.get("num").toString();
+					visitedNum=objam.get("visitedNum") == null ? "" : objam.get("visitedNum").toString();
 				}
 			}
             BasicDBObject doc = new BasicDBObject();
