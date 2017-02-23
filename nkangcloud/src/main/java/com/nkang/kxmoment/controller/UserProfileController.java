@@ -248,6 +248,7 @@ public class UserProfileController {
 		ArticleMessage am=new ArticleMessage();
 		String openid=request.getParameter("openId");
 		int num=MongoDBBasic.getArticleMessageMaxNum()+1;
+		System.out.println("new Article num--------------"+num);
 		am.setNum(num+"");
 		am.setType(request.getParameter("type"));
 		am.setTitle(request.getParameter("title"));
@@ -258,14 +259,14 @@ public class UserProfileController {
 		am.setTime(new Date().toLocaleString());
 		MongoDBBasic.saveArticleMessage(am);
 		List<String> openIDs=new ArrayList<String>();
-	//	openIDs.add(openid);
+		openIDs.add(openid);
 		openIDs.add("oij7nt5yOIOqcn58N8JnzP8RRVao");
-	//	openIDs.add("oij7nt5GgpKftiaoMSKD68MTLXpc");
+		openIDs.add("oij7nt5GgpKftiaoMSKD68MTLXpc");
 			for(int i=0;i<openIDs.size();i++){
 				RestUtils.sendNotificationToUser(openid,openIDs.get(i),am);
 			}
 		
-		return "ok";
+		return "ok"+num;
 	} 
 		
 	/*chang-zheng
