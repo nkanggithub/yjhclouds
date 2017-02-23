@@ -104,6 +104,13 @@ ul li.singleQuote .firstLayer  .change{
 	margin-left:auto;
 	font-weight:bold;
 }
+.edit.no{
+background: #666;
+}
+.edit.no p
+{
+	line-height:20px;
+}
 .editBtn
 {
 	position: relative;
@@ -138,7 +145,13 @@ $(function(){
 	$(".singleQuote").live("swipeleft",function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
-		$(this).append("<div class='edit'><p onclick='UpdateTag()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+		var tagNum=$(this).find('span.tag').length;
+	
+		if(tagNum==0){
+			$(this).append("<div class='edit'><p onclick='UpdateTag()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+		}else{
+			$(this).append("<div class='edit no'><p onclick='UpdateTag()'>取消<br/>关注</p></div>");
+		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
@@ -190,14 +203,19 @@ function getAllDatas(){
 						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
 						 var tag='';
 						 var attention='';
+						 var unit='<span class="unit">元/吨</span>';
 						 if(data[i]["like"]==true){
 							 tag='<span class="tag">已关注</span>';
 							 attention='attention';
 						 }
+						 if(data[i].quotationPrice=="暂停报价")
+						 {
+							 unit='';
+						 }
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'"><span class="price">'+data[i].quotationPrice+'</span>元/吨</div>'
+							 +'		<div class="quotePrice '+priceColor+'"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
