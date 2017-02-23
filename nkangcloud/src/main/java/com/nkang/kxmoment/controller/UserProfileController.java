@@ -254,6 +254,7 @@ public class UserProfileController {
 		am.setContent(request.getParameter("content"));
 		am.setWebUrl(request.getParameter("url"));
 		am.setAuthor(openid);
+		am.setVisitedNum("0");
 		am.setTime(new Date().toLocaleString());
 		MongoDBBasic.saveArticleMessage(am);
 		List<String> openIDs=new ArrayList<String>();
@@ -266,7 +267,7 @@ public class UserProfileController {
 		
 		return "ok";
 	} 
-	
+		
 	/*chang-zheng
 	 * 
 	 */
