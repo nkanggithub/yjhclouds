@@ -514,7 +514,8 @@ public class MongoDBBasic {
 		}
 		return kmLists;
 	}
-	public static boolean saveUserKM(String openid,String kmItem){
+	public static boolean saveUserKM(String openid,String kmItem,String flag){
+		kmItem=kmItem.trim();
 		mongoDB = getMongoDB();
 		Boolean ret = false;
 	    try{
@@ -528,7 +529,13 @@ public class MongoDBBasic {
                 		Object[] kmObjects = hist.toArray();
                 		for(Object dbobj : kmObjects){
                 			if(dbobj instanceof String){
-                				kmSets.add((String) dbobj);
+                				if("del".equals(flag)){
+                					if(!kmItem.equals((String) dbobj)){
+                						kmSets.add((String) dbobj);
+                					}
+                				}else{
+                					kmSets.add((String) dbobj);
+                				}
                 			}
                 		}
             		}
@@ -536,7 +543,9 @@ public class MongoDBBasic {
             }
             BasicDBObject doc = new BasicDBObject();  
 	    	DBObject update = new BasicDBObject();
-	    	kmSets.add(kmItem);
+	    	if("add".equals(flag)){
+	    		kmSets.add(kmItem);
+	    	}
     	    update.put("kmLists",kmSets);
 	    	doc.put("$set", update);  
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
