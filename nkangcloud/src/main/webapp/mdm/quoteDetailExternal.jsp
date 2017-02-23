@@ -184,6 +184,9 @@ function UpdateTag(item,flag,obj){
 		 }
 	});
 }
+function ToCharPage(){
+	location.href="priceCharts.jsp";
+}
 function getAllDatas(){
 	$.ajax({
 		 url:'../queryUserKM',
@@ -234,7 +237,7 @@ function getAllDatas(){
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'"><a href="priceCharts.jsp"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</a></div>'
+							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage()"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
