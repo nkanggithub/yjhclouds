@@ -10,6 +10,13 @@ public class ArticleMessage {
 	public String time;
 	public String picture;
 	public List<String> visited;
+	public String visitedNum;
+	public String getVisitedNum() {
+		return visitedNum;
+	}
+	public void setVisitedNum(String visitedNum) {
+		this.visitedNum = visitedNum;
+	}
 	public String author;
 	public String getAuthor() {
 		return author;
