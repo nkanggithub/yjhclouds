@@ -146,24 +146,35 @@ $(function(){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var tagNum=$(this).find('span.tag').length;
-	
+		var item=$(this).find('span.item')[0].text();
 		if(tagNum==0){
-			$(this).append("<div class='edit'><p onclick='UpdateTag()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
+			$(this).append("<div class='edit'><p onclick='UpdateTag(\'"+item+"\',\'add\')'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
 		}else{
-			$(this).append("<div class='edit no'><p onclick='UpdateTag()'>取消<br/>关注</p></div>");
+			$(this).append("<div class='edit no'><p onclick='UpdateTag(\'"+item+"\',\'del\')'>取消<br/>关注</p></div>");
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
-	
-	
-	
-	
 });
-function UpdateTag(){
+function UpdateTag(item,flag){
 	$(".singleQuote").removeClass("editBtn");
 	$(".singleQuote").remove(".edit");
-	alert("功能开发中");
+	$.ajax({
+		 url:'../queryUserKM',
+		 type:"POST",
+		 data : {
+			 openid : $("#openid").val(),
+			 kmItem : item,
+			 flag : flag
+		 },
+		 success:function(result){
+			 if(result==true){
+				 alert("成功");
+			 }else{
+				 alert("失败");
+			 }
+		 }
+	});
 }
 function getAllDatas(){
 	$.ajax({
