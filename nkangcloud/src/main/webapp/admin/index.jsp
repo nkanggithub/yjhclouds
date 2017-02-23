@@ -80,20 +80,21 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
     text-align: center;
     position: absolute;
     top: 0px;
-    right: -120px;
+    right: -60px;
 	font-size:14px;
     background: #438CD0;
     border-bottom: 1px solid #ccc;
 }
 .edit.km{
-	right: -60px;
+	right: -120px;
     background: orange;
 }
 .edit img {
     width:25px;height:auto;position:absolute;top:25px;margin-left: 2px;
 }
 .edit.km p{
-	line-height:75px;
+	line-height:35px;
+	padding-top:20px;
 }
 .edit p
 {
