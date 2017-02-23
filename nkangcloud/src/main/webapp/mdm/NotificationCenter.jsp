@@ -1,13 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="com.nkang.kxmoment.baseobject.Notification"%>
+<%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="java.util.List"%>
 <%	
- String uid = request.getParameter("uid");
+String uid = request.getParameter("uid");
 String num = request.getParameter("num");
-List<Notification> nList=MongoDBBasic.getNotification(uid, num);  
-Notification n=new Notification();
+List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
+MongoDBBasic.updateVisitedHistory(num, uid);
+ArticleMessage n=new ArticleMessage();
 /* n.setContent("此部分功能正在开发中，请等待。。");
 n.setTitle("Notification!");
 n.setTime("2017/2/10 16:42"); */
