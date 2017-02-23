@@ -170,16 +170,16 @@ function UpdateTag(item,flag,obj){
 		 success:function(result){
 			 if(result==true){
 				 if(flag=='add'){
+					 swal("恭喜！", "该牌号关注成功", "success");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
-					 alert("关注成功");
 				 }else  if(flag=='del'){
+					 swal("成功！", "你取消对该牌号的关注", "success");
 					 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
-					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").remove(".tag");
-					 alert("取消成功");
+					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
 				 }
 			 }else{
-				 alert("失败");
+				 swal("失败！", "请刷新页面后重试", "error");
 			 }
 		 }
 	});
