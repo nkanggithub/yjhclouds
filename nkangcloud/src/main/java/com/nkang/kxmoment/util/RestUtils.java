@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
@@ -2046,15 +2047,15 @@ public static String regist(WeChatMDLUser user) {
 
    }
 
-    public static String sendNotificationToUser(String openId,String toOpenId,Notification note){
+    public static String sendNotificationToUser(String openId,String toOpenId,ArticleMessage am){
     	String result ="";
     	String str="";
-    	if("".equals(note.getWebUrl())||""==note.getWebUrl()){
-    			str="{\"title\":\""+note.getTitle()+"\",\"description\":\""+"发布者 - "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+note.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+note.getNum()+"&uid="+openId+"\",\"picurl\":"
+    	if("".equals(am.getWebUrl())||""==am.getWebUrl()){
+    			str="{\"title\":\""+am.getTitle()+"\",\"description\":\""+"发布者 - "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+am.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+am.getNum()+"\",\"picurl\":"
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}else
     	{
-    		str="{\"title\":\""+note.getTitle()+"\",\"description\":\"重庆永佳和塑料有限公司\",\"url\":\""+note.getWebUrl()+"\",\"picurl\":"
+    		str="{\"title\":\""+am.getTitle()+"\",\"description\":\"重庆永佳和塑料有限公司\",\"url\":\""+am.getWebUrl()+"\",\"picurl\":"
 					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
