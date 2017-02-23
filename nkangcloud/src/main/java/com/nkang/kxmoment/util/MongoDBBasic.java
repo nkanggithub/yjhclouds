@@ -497,8 +497,8 @@ public class MongoDBBasic {
             if (null != dbcur) {
             	while(dbcur.hasNext()){
             		DBObject o = dbcur.next();
-            		BasicDBList hist = (BasicDBList) o.get("kmLists");
-            		if(hist != null){
+            		if(o.get("kmLists")!=null){
+            			BasicDBList hist = (BasicDBList) o.get("kmLists");
                 		Object[] kmObjects = hist.toArray();
                 		for(Object dbobj : kmObjects){
                 			if(dbobj instanceof String){
@@ -510,7 +510,7 @@ public class MongoDBBasic {
             }
 	    }
 		catch(Exception e){
-			log.info("updateUser--" + e.getMessage());
+			log.info("queryUserKM--" + e.getMessage());
 		}
 		return kmLists;
 	}
@@ -523,8 +523,8 @@ public class MongoDBBasic {
             if (null != dbcur) {
             	while(dbcur.hasNext()){
             		DBObject o = dbcur.next();
-            		BasicDBList hist = (BasicDBList) o.get("kmLists");
-            		if(hist != null){
+            		if(o.get("kmLists")!=null){
+            			BasicDBList hist = (BasicDBList) o.get("kmLists");
                 		Object[] kmObjects = hist.toArray();
                 		for(Object dbobj : kmObjects){
                 			if(dbobj instanceof String){
@@ -544,7 +544,7 @@ public class MongoDBBasic {
             
 	    }
 		catch(Exception e){
-			log.info("updateUser--" + e.getMessage());
+			log.info("saveUserKM--" + e.getMessage());
 		}
 		return ret;
 	}
