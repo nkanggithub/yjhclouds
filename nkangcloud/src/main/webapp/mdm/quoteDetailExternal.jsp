@@ -170,12 +170,12 @@ function UpdateTag(item,flag,obj){
 		 success:function(result){
 			 if(result==true){
 				 if(flag=='add'){
-					 $(obj).parent(".singleQuote").find(".firstLayer").addClass("attention");
-					 $(obj).parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
+					 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
+					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
 					 alert("关注成功");
 				 }else  if(flag=='del'){
-					 $(obj).parent(".singleQuote").find(".firstLayer").removeClass("attention");
-					 $(obj).parent(".singleQuote").find(".firstLayer").find(".quoteTitle").remove(".tag");
+					 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
+					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").remove(".tag");
 					 alert("取消成功");
 				 }
 			 }else{
