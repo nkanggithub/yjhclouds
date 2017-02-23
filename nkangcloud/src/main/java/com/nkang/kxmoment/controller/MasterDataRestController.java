@@ -1084,7 +1084,7 @@ public class MasterDataRestController {
 			@RequestParam(value="approveBy", required=false) String approveBy,
 			@RequestParam(value="editBy", required=false) String editBy,
 			@RequestParam(value="dateTime", required=false) String dateTime,
-			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
+			@RequestParam(value="suggestPrice", required=false) Double suggestPrice,
 			@RequestParam(value="mongoID", required=false) String mongoID
 			){
 		

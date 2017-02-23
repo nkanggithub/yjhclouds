@@ -6,7 +6,7 @@ public class QuotationList {
 	private String approveBy;
 	private String editBy;
 	private String dateTime;
-	private String suggestPrice;
+	private Double suggestPrice;
 	public String getPlasticItem() {
 		return plasticItem;
 	}
@@ -37,10 +37,10 @@ public class QuotationList {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
-	public String getSuggestPrice() {
+	public Double getSuggestPrice() {
 		return suggestPrice;
 	}
-	public void setSuggestPrice(String suggestPrice) {
+	public void setSuggestPrice(Double suggestPrice) {
 		this.suggestPrice = suggestPrice;
 	}
 

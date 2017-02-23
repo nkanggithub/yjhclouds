@@ -2667,8 +2667,8 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(quotation.getDateTime())){
 				url = url + "&dateTime="+URLEncoder.encode(quotation.getDateTime(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(quotation.getSuggestPrice())){
-				url = url + "&suggestPrice="+URLEncoder.encode(quotation.getSuggestPrice(),"UTF-8");
+			if(quotation.getSuggestPrice()!=null){
+				url = url + "&suggestPrice="+quotation.getSuggestPrice();
 			}
 			
 			if(!StringUtils.isEmpty(mongoID)){
