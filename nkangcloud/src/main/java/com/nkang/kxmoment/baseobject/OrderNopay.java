@@ -12,11 +12,11 @@ public class OrderNopay {
 	//存货编码
 	private String plasticItem;
 	//未发货数量
-	private String unfilledOrderAmount;
+	private Double unfilledOrderAmount;
 	//出库数量
-	private String filledOrderAmount;
+	private Double filledOrderAmount;
 	//未开票数量
-	private String noInvoiceAmount;
+	private Double noInvoiceAmount;
 	private String lastUpdate;
 	
 	public String getCustomerName() {
@@ -49,22 +49,23 @@ public class OrderNopay {
 	public void setPlasticItem(String plasticItem) {
 		this.plasticItem = plasticItem;
 	}
-	public String getUnfilledOrderAmount() {
+
+	public Double getUnfilledOrderAmount() {
 		return unfilledOrderAmount;
 	}
-	public void setUnfilledOrderAmount(String unfilledOrderAmount) {
+	public void setUnfilledOrderAmount(Double unfilledOrderAmount) {
 		this.unfilledOrderAmount = unfilledOrderAmount;
 	}
-	public String getFilledOrderAmount() {
+	public Double getFilledOrderAmount() {
 		return filledOrderAmount;
 	}
-	public void setFilledOrderAmount(String filledOrderAmount) {
+	public void setFilledOrderAmount(Double filledOrderAmount) {
 		this.filledOrderAmount = filledOrderAmount;
 	}
-	public String getNoInvoiceAmount() {
+	public Double getNoInvoiceAmount() {
 		return noInvoiceAmount;
 	}
-	public void setNoInvoiceAmount(String noInvoiceAmount) {
+	public void setNoInvoiceAmount(Double noInvoiceAmount) {
 		this.noInvoiceAmount = noInvoiceAmount;
 	}
 	public String getLastUpdate() {

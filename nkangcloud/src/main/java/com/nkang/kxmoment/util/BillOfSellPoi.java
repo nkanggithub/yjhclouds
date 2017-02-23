@@ -488,14 +488,14 @@ public class BillOfSellPoi {
 						                HSSFCell plasticItem = hssfRow.getCell(4);
 						                xlsDto.setPlasticItem(plasticItem+"");
 						                
-						                HSSFCell unfilledOrderAmount = hssfRow.getCell(5);
-						                xlsDto.setUnfilledOrderAmount(unfilledOrderAmount+"");
+						                Double unfilledOrderAmount = hssfRow.getCell(5).getNumericCellValue();
+						                xlsDto.setUnfilledOrderAmount(unfilledOrderAmount);
 						                
-						                HSSFCell filledOrderAmount = hssfRow.getCell(6);
-						                xlsDto.setFilledOrderAmount(filledOrderAmount+"");
+						                Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
+						                xlsDto.setFilledOrderAmount(filledOrderAmount);
 						                
-						                HSSFCell noInvoiceAmount = hssfRow.getCell(7);
-						                xlsDto.setNoInvoiceAmount(noInvoiceAmount+"");
+						                Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
+						                xlsDto.setNoInvoiceAmount(noInvoiceAmount);
 						                
 						                OrderNopayList.add(xlsDto);
 					            }

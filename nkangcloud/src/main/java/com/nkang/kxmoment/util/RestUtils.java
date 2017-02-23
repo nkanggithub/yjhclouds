@@ -2574,15 +2574,15 @@ public static String regist(WeChatMDLUser user) {
 			if(!StringUtils.isEmpty(orderNopay.getPlasticItem())){
 				url = url + "&plasticItem="+URLEncoder.encode(orderNopay.getPlasticItem(),"UTF-8");
 			}
-			if(!StringUtils.isEmpty(orderNopay.getUnfilledOrderAmount())){
-				url = url + "&unfilledOrderAmount="+URLEncoder.encode(orderNopay.getUnfilledOrderAmount(),"UTF-8");
+			if(orderNopay.getUnfilledOrderAmount()!=null){
+				url = url + "&unfilledOrderAmount="+orderNopay.getUnfilledOrderAmount();
 			}
 			
-			if(!StringUtils.isEmpty(orderNopay.getFilledOrderAmount())){
-				url = url + "&filledOrderAmount="+URLEncoder.encode(orderNopay.getFilledOrderAmount(),"UTF-8");
+			if(orderNopay.getFilledOrderAmount()!=null){
+				url = url + "&filledOrderAmount="+orderNopay.getFilledOrderAmount();
 			}
-			if(!StringUtils.isEmpty(orderNopay.getNoInvoiceAmount())){
-				url = url + "&noInvoiceAmount="+URLEncoder.encode(orderNopay.getNoInvoiceAmount(),"UTF-8");
+			if(orderNopay.getNoInvoiceAmount()!=null){
+				url = url + "&noInvoiceAmount="+orderNopay.getNoInvoiceAmount();
 			}
 		}
 		String message= "errorrrr";

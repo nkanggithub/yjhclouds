@@ -1056,9 +1056,9 @@ public class MasterDataRestController {
 			@RequestParam(value="billID", required=false) String billID,
 			@RequestParam(value="billDate", required=false) String billDate,
 			@RequestParam(value="plasticItem", required=false) String plasticItem,
-			@RequestParam(value="unfilledOrderAmount", required=false) String unfilledOrderAmount,
-			@RequestParam(value="filledOrderAmount", required=false) String filledOrderAmount,
-			@RequestParam(value="noInvoiceAmount", required=false) String noInvoiceAmount
+			@RequestParam(value="unfilledOrderAmount", required=false) Double unfilledOrderAmount,
+			@RequestParam(value="filledOrderAmount", required=false) Double filledOrderAmount,
+			@RequestParam(value="noInvoiceAmount", required=false) Double noInvoiceAmount
 			){
 		
 		OrderNopay orderNopay = new OrderNopay();
@@ -1069,6 +1069,7 @@ public class MasterDataRestController {
 		orderNopay.setPlasticItem(plasticItem);
 		orderNopay.setSalesman(salesman);
 		orderNopay.setUnfilledOrderAmount(unfilledOrderAmount);
+		orderNopay.setUnfilledOrderAmount(filledOrderAmount);
 		String ret = MongoDBBasic.saveOrderNopay(orderNopay);
 		return ret;
 	}
