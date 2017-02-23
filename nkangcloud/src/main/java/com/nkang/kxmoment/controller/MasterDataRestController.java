@@ -585,7 +585,19 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-	
+	@RequestMapping(value = "/queryUserKM")
+	public static List<String> queryUserKM(@RequestParam(value="openid", required=true) String openid) {
+		List<String> res=new ArrayList<String>();
+		res=MongoDBBasic.queryUserKM(openid);
+		return res;
+	}
+	@RequestMapping(value = "/saveUserKM")
+	public static boolean saveUserKM(@RequestParam(value="openid", required=true) String openid,
+			@RequestParam(value="kmItem", required=true) String kmItem) {
+		boolean res=false;
+		res=MongoDBBasic.saveUserKM(openid, kmItem);
+		return res;
+	}
 	@RequestMapping("/CallRegisterUser")
 	public static boolean CallRegisterUser(
 			@RequestParam(value="openid", required=false) String openid,
