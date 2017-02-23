@@ -593,9 +593,10 @@ public class MasterDataRestController {
 	}
 	@RequestMapping(value = "/saveUserKM")
 	public static boolean saveUserKM(@RequestParam(value="openid", required=true) String openid,
-			@RequestParam(value="kmItem", required=true) String kmItem) {
+			@RequestParam(value="kmItem", required=true) String kmItem,
+			@RequestParam(value="flag", required=true) String flag) {
 		boolean res=false;
-		res=MongoDBBasic.saveUserKM(openid, kmItem);
+		res=MongoDBBasic.saveUserKM(openid, kmItem,flag);
 		return res;
 	}
 	@RequestMapping("/CallRegisterUser")
