@@ -176,6 +176,7 @@ color:white;
     width: 100%;
     border-bottom: 1px solid #D3D3D3;
     position:relative;
+    cursor:pointer;
 }
 
 .singleQI span
@@ -370,7 +371,7 @@ display:none;
 
 <div class="row">
   <div id="menu" class="large-12 small-12 columns">
-	<p id="ac" class="selected">图文统计</p>
+	<p id="ac" class="selected" style="border-left:none;">图文统计</p>
 	    <p id="qc">价格趋势</p>
   </div>
   <div id="quotation" style="display:none;">
