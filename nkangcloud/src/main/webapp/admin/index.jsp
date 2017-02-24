@@ -109,6 +109,41 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 	position: relative;
     left: -120px;
 }
+ul li.singleQuote{
+	font-size:18px;
+	border-bottom:1px solid #ccc;
+	padding:20px;
+	padding-bottom:10px;
+	color:#333;
+	line-height: 10px;
+}
+ul li.singleQuote.attention .quoteTitle{
+	color:#0761A5;
+}
+ul li.singleQuote  .quoteTitle .pTag{
+	font-size:11px;
+	background-color:orange;
+	color:#fff;
+	padding:1px 5px;
+	font-weight:normol;
+	font-family:微软雅黑;
+	margin-left:8px;
+}
+ul li.singleQuote input.botton{
+	float:right;
+	padding:5px;
+	color:#fff !important;
+	font-weight:bold !important;
+	background-color:#999;
+	border:0px;
+	margin-top:-20px;
+}
+ul li.singleQuote.attention input.botton{
+	background-color:orange;
+}
+.clear{
+	clear:both;
+}
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 
@@ -152,7 +187,46 @@ $(window).load(function() {
 	
 });
 function showKMPanel(openid){
-	location.href='../mdm/quoteDetailExternal.jsp?UID='+openid;
+	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
+	showCommonPanel();
+	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+			+'<center>正在加载中...</center>'
+			+'<ul id="QuoteList"  data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">'
+			+'	<li class="singleQuote attention">'
+			+'		<div class="quoteTitle">'
+			+'			<span class="pItem">abcad</span>'
+			+'			<span class="pTag">已关注</span>'
+			+'		</div>'
+			+'		<input class="botton" type="button" value="取消"/>'
+			+'       <div class="clear"></div>'
+			+'	</li>'
+			+'	<li class="singleQuote">'
+			+'		<div class="quoteTitle">'
+			+'			<span class="pItem">adfsdsf</span>'
+			+'		</div>'
+			+'		<input class="botton" type="button" value="关注"/>'
+			+'       <div class="clear"></div>'
+			+'	</li>'
+			+'	<li class="singleQuote attention">'
+			+'		<div class="quoteTitle">'
+			+'			<span class="pItem">abcad</span>'
+			+'			<span class="pTag">已关注</span>'
+			+'		</div>'
+			+'		<input class="botton" type="button" value="取消"/>'
+			+'       <div class="clear"></div>'
+			+'	</li>'
+			+'	<li class="singleQuote">'
+			+'		<div class="quoteTitle">'
+			+'			<span class="pItem">adfsdsf</span>'
+			+'		</div>'
+			+'		<input class="botton" type="button" value="关注"/>'
+			+'       <div class="clear"></div>'
+			+'	</li>'
+			+'</ul>'
+	+'						</div>');
+	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+	      $(this).removeClass("bounceInDown animated");
+	 });
 }
 function showUpdateUserPanel(openid){
 	showCommonPanel();
