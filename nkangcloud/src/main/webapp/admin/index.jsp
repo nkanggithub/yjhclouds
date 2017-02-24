@@ -190,7 +190,8 @@ function showKMPanel(openid){
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
 	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-			+'<center>正在加载中...</center>'
+		//	+'<center>正在加载中...</center>'
+			+'<div   data-role="page" style="padding-top:15px" data-theme="c">'
 			+'<ul id="QuoteList"  data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">'
 			+'	<li class="singleQuote attention">'
 			+'		<div class="quoteTitle">'
@@ -223,6 +224,7 @@ function showKMPanel(openid){
 			+'       <div class="clear"></div>'
 			+'	</li>'
 			+'</ul>'
+			+'</div>'
 	+'						</div>');
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
