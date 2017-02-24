@@ -2,8 +2,8 @@
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
+<%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-
 <%	
 List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
 int BJTotalNum=BJtitles.size();
@@ -13,6 +13,7 @@ List<ArticleMessage> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
 int GTTotalNum=GTtitles.size();
 List<ArticleMessage> JStitles =MongoDBBasic.getArticleMessageByType("js");
 int JSTotalNum=JStitles.size();
+List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -160,6 +161,42 @@ border-left:1px solid black;
 {
 background-color:black;
 color:white;
+}
+#quotationList
+{
+
+    margin-top: 10px;
+    border-top: 1px solid #D3D3D3;
+    width: 100%;
+    overflow: scroll;
+
+}
+.singleQI {
+    height: 45px;
+    width: 100%;
+    border-bottom: 1px solid #D3D3D3;
+    position:relative;
+}
+
+.singleQI span
+{
+    height: 100%;
+    line-height: 45px;
+    padding-left: 20px;
+    font-size: 15px;
+    font-weight:bold;
+}
+.singleQI img
+{
+ position: absolute;
+    z-index: 1000;
+    top: 15px;
+    right: 15px;
+    width:10px;
+}
+#chart-container
+{
+display:none;
 }
 </style>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.js"></script>
@@ -338,7 +375,15 @@ color:white;
   </div>
   <div id="quotation" style="display:none;">
   <div class="large-12 small-12 columns">
-<div id="chart-container"></div>
+  
+
+<div id="quotationList" >
+<% for(int i=0;i<ql.size();i++){ %>
+<div class="singleQI"><p style="display:none">0</p>
+<span><%=ql.get(i).getItem() %></span><img class="rightArrow" src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt="" />
+</div><% } %>
+</div>
+ <div id="chart-container"></div> 
   </div></div>
   <div id="article">
   <div class="large-12 small-12 columns">
@@ -415,14 +460,29 @@ var i=$(this).index();
 	$(this).addClass("selected");
 	$(this).siblings().removeClass("selected");
 
-	})
+	});
 	$("#ac").click(function(){
 	$("#article").show();
 	$("#quotation").hide();
 	$(this).addClass("selected");
 	$(this).siblings().removeClass("selected");
 
-	})
+	});
+	$(".singleQI").live("click",function(){
+		var status=$(this).children("p").text();
+		if("0"==status){
+		$("#chart-container").show();
+		$(this).siblings().hide();
+		$(this).children("p").text("1");
+		$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/leftArrow.png");
+		}
+		else if("1"==status){
+			$("#chart-container").hide();
+			$(this).siblings().show();
+			$(this).children("p").text("0");
+			$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/rightArrow.png");
+		}
+	});
 	  
 	  });
 
