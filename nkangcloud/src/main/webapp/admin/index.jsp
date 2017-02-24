@@ -182,8 +182,9 @@ $(window).load(function() {
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var openid=$(this).find("span.openid").text();
-		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
-		$(this).append("<div class='edit km'><p onclick='showKMPanel(\""+openid+"\")'>牌号<br/>管理</p></div>");
+		var name=$(this).find("span.name").text();
+		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+		$(this).append("<div class='edit km'><p onclick='showKMPanel(\""+openid+"\",\""+name+"\")'>牌号<br/>管理</p></div>");
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
@@ -221,10 +222,10 @@ function UpdateTag(openid,item,obj){
 		 }
 	});
 }
-function showKMPanel(openid){
+function showKMPanel(openid,name){
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
-	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<ul id="QuoteList" data-role="listview" style="height:300px;overflow:auto;margin-top:10px;" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
 			+'<center>正在加载中...</center>'
 			+'</ul>'
@@ -311,11 +312,11 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 	 }
 	 $("#QuoteList").html(html);
 }
-function showUpdateUserPanel(openid){
+function showUpdateUserPanel(openid,name){
 	showCommonPanel();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
-	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑人员信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<center>正在加载中...</center>'		
 	+'						</div>');
 	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -738,7 +739,7 @@ jQuery.ajax({
 					+ '" alt="userImage" class="matesUserImage" alt="no_username" /> '
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_text_div">'
-					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span>'
+					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name">'
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
