@@ -193,7 +193,7 @@ function showKMPanel(openid){
 	showCommonPanel();
 	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 		//	+'<center>正在加载中...</center>'
-			+'<form class="ui-listview-filter ui-bar-c ui-listview-filter-inset" role="search"><div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield ui-body-c"><input placeholder="输入牌号" data-type="search" class="ui-input-text ui-body-c"><a href="#" class="ui-input-clear ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-fullsize ui-btn-icon-notext ui-input-clear-hidden" title="clear text" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="delete" data-iconpos="notext" data-theme="c" data-mini="false"><span class="ui-btn-inner"><span class="ui-btn-text">clear text</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a></div></form>'
+		//	+'<ul id="QuoteList" data-role="listview" data-inset="true">'
 			+'<ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
 			+'	<li class="singleQuote attention">'
 			+'		<div class="quoteTitle">'
@@ -230,6 +230,12 @@ function showKMPanel(openid){
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	 });
+	try{
+	 $("#QuoteList").listview(true);
+	 $("#QuoteList").trigger("listviewcreate");
+	}catch (err) {
+	 $("#QuoteList").trigger("listviewcreate");
+	}
 }
 function showUpdateUserPanel(openid){
 	showCommonPanel();
