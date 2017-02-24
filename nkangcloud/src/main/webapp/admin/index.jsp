@@ -135,13 +135,13 @@ ul li.singleQuote input.botton{
 	padding:5px;
 	color:#fff !important;
 	font-weight:bold !important;
+	background-color:#999;
 	border:0px;
 	margin-top:-20px;
 	font-size:18px;
-	background-color:orange;
 }
 ul li.singleQuote.attention input.botton{
-	background-color:#999;
+	background-color:orange;
 }
 .clear{
 	clear:both;
