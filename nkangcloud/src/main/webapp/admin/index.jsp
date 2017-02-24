@@ -118,6 +118,7 @@ ul li.singleQuote{
 	line-height: 10px;
 }
 ul li.singleQuote.attention .quoteTitle{
+	font-size:18px;
 	color:#0761A5;
 }
 ul li.singleQuote  .quoteTitle .pTag{
@@ -137,6 +138,7 @@ ul li.singleQuote input.botton{
 	background-color:#999;
 	border:0px;
 	margin-top:-20px;
+	font-size:18px;
 }
 ul li.singleQuote.attention input.botton{
 	background-color:orange;
@@ -191,8 +193,8 @@ function showKMPanel(openid){
 	showCommonPanel();
 	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 		//	+'<center>正在加载中...</center>'
-			+'<div   data-role="page" style="padding-top:15px" data-theme="c">'
-			+'<ul id="QuoteList"  data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">'
+			+'<form class="ui-listview-filter ui-bar-c ui-listview-filter-inset" role="search"><div class="ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield ui-body-c"><input placeholder="输入牌号" data-type="search" class="ui-input-text ui-body-c"><a href="#" class="ui-input-clear ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-fullsize ui-btn-icon-notext ui-input-clear-hidden" title="clear text" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="delete" data-iconpos="notext" data-theme="c" data-mini="false"><span class="ui-btn-inner"><span class="ui-btn-text">clear text</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a></div></form>'
+			+'<ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
 			+'	<li class="singleQuote attention">'
 			+'		<div class="quoteTitle">'
 			+'			<span class="pItem">abcad</span>'
@@ -224,7 +226,6 @@ function showKMPanel(openid){
 			+'       <div class="clear"></div>'
 			+'	</li>'
 			+'</ul>'
-			+'</div>'
 	+'						</div>');
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
