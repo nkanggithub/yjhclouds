@@ -42,6 +42,7 @@ ul li.singleQuote .firstLayer.attention{
 }
 ul li.singleQuote .firstLayer .quoteTitle{
 	float:left;
+	cursor:pointer;
 }
 ul li.singleQuote .firstLayer .quoteTitle .tag{
 	font-size:11px;
