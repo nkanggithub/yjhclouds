@@ -223,6 +223,8 @@ function UpdateTag(openid,item,obj){
 	});
 }
 function showKMPanel(openid,name){
+	$(".Work_Mates_div_list_div2").removeClass("editBtn");
+	$(".Work_Mates_div_list_div2").remove(".edit");
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
 	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
