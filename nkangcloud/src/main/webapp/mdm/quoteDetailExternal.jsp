@@ -108,6 +108,10 @@ ul li.singleQuote .firstLayer  .change{
 .edit.no{
 background: #999;
 }
+.picClose
+{
+cursor:pointer;
+}
 .edit.no p
 {
 	line-height:20px;
