@@ -112,14 +112,14 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 ul li.singleQuote{
 	font-size:18px;
 	border-bottom:1px solid #ccc;
-	padding:20px;
+	padding:20px 3px;
 	padding-bottom:10px;
-	color:#333;
+	color:#0761A5;
 	line-height: 10px;
 }
 ul li.singleQuote.attention .quoteTitle{
 	font-size:18px;
-	color:#0761A5;
+	color:#333;
 }
 ul li.singleQuote  .quoteTitle .pTag{
 	font-size:11px;
@@ -135,13 +135,13 @@ ul li.singleQuote input.botton{
 	padding:5px;
 	color:#fff !important;
 	font-weight:bold !important;
-	background-color:#999;
 	border:0px;
 	margin-top:-20px;
 	font-size:18px;
+	background-color:orange;
 }
 ul li.singleQuote.attention input.botton{
-	background-color:orange;
+	background-color:#999;
 }
 .clear{
 	clear:both;
@@ -152,6 +152,7 @@ ul li.singleQuote.attention input.botton{
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
 <script type="text/javascript" src="../nkang/jquery.mobile.min.js"></script>
 <script>
+var KMListsArr=new Array();
 $(function(){  
     $('#return-top').hide();  
     $(function(){  
@@ -188,43 +189,44 @@ $(window).load(function() {
 	});
 	
 });
+function UpdateTag(openid,item,obj){
+	var flag='add';
+	if($(obj).val()=="取消"){
+		flag='del';
+	}
+	$.ajax({
+		 url:'../saveUserKM',
+		 type:"POST",
+		 data : {
+			 openid : openid,
+			 kmItem : item,
+			 flag : flag
+		 },
+		 success:function(result){
+			 if(result==true){
+				 if(flag=='add'){
+					 swal("关注成功 ", "恭喜你成功关注该牌号", "success");
+					 $(obj).parent(".singleQuote").removeClass("attention");
+					 $(obj).parent(".singleQuote").find(".quoteTitle").append('<span class="pTag">已关注</span>');
+					 $(obj).parent(".singleQuote").find("input.botton").val("取消");
+				 }else  if(flag=='del'){
+					 swal("取消成功", "你取消了对该牌号的关注", "success");
+					 $(obj).parent(".singleQuote").addClass("attention");
+					 $(obj).parent(".singleQuote").find(".quoteTitle").find(".pTag").remove();
+					 $(obj).parent(".singleQuote").find("input.botton").val("关注");
+				 }
+			 }else{
+				 swal("操作失败", "请刷新页面后重试", "error");
+			 }
+		 }
+	});
+}
 function showKMPanel(openid){
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
 	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑用户关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
-		//	+'<center>正在加载中...</center>'
-		//	+'<ul id="QuoteList" data-role="listview" data-inset="true">'
-			+'<ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
-			+'	<li class="singleQuote attention">'
-			+'		<div class="quoteTitle">'
-			+'			<span class="pItem">abcad</span>'
-			+'			<span class="pTag">已关注</span>'
-			+'		</div>'
-			+'		<input class="botton" type="button" value="取消"/>'
-			+'       <div class="clear"></div>'
-			+'	</li>'
-			+'	<li class="singleQuote">'
-			+'		<div class="quoteTitle">'
-			+'			<span class="pItem">adfsdsf</span>'
-			+'		</div>'
-			+'		<input class="botton" type="button" value="关注"/>'
-			+'       <div class="clear"></div>'
-			+'	</li>'
-			+'	<li class="singleQuote attention">'
-			+'		<div class="quoteTitle">'
-			+'			<span class="pItem">abcad</span>'
-			+'			<span class="pTag">已关注</span>'
-			+'		</div>'
-			+'		<input class="botton" type="button" value="取消"/>'
-			+'       <div class="clear"></div>'
-			+'	</li>'
-			+'	<li class="singleQuote">'
-			+'		<div class="quoteTitle">'
-			+'			<span class="pItem">adfsdsf</span>'
-			+'		</div>'
-			+'		<input class="botton" type="button" value="关注"/>'
-			+'       <div class="clear"></div>'
-			+'	</li>'
+			+'<ul id="QuoteList" data-role="listview" style="height:300px;overflow:auto;margin-top:10px;" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
+			+'<center>正在加载中...</center>'
 			+'</ul>'
 	+'						</div>');
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -236,6 +238,78 @@ function showKMPanel(openid){
 	}catch (err) {
 	 $("#QuoteList").trigger("listviewcreate");
 	}
+	
+	
+	$.ajax({
+		 url:'../queryUserKM',
+		 type:"POST",
+		 data : {
+			 openid : openid
+		 },
+		 success:function(KMLikeArr){
+			 if(KMListsArr.length==0){
+				 	$.ajax({
+					 url:'../getAllQuotations',
+					 type:"POST",
+					 success:function(resData){
+						 KMListsArr=resData;
+					 	if(resData.length)
+						{
+					 		showsingleQuoteDiv(KMListsArr,KMLikeArr,openid);
+						 }
+					 }
+				 });
+			 }else{
+				 showsingleQuoteDiv(KMListsArr,KMLikeArr,openid);
+			 }
+		}
+	});
+}
+function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
+	var NoLikeArr=new Array();
+	var LikeArr=new Array();
+	if(KMLikeArr.length>0){
+			 for(var i=0;i<KMListsArr.length;i++){
+			 		var itemTemp=$.trim(KMListsArr[i].item);
+			 		var index=$.inArray(itemTemp,KMLikeArr);
+			 		if(index>-1){
+			 			KMListsArr[i]["like"]=true;
+			 			LikeArr.push(KMListsArr[i]);
+			 			KMLikeArr.splice(index,1);
+			 		}else{
+			 			NoLikeArr.push(KMListsArr[i]);
+			 		}
+			}
+	}else{
+			NoLikeArr=KMListsArr;
+	}
+	 var data=$.merge(LikeArr, NoLikeArr);   
+	 var html="";
+	 for(var i=0;i<data.length;i++){
+		 if(data[i].item!=""){
+			 var tag='';
+			 var attention='attention';
+			 var button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].item+'\',this)" type="button" value="关注"/>';
+			 if(data[i]["like"]==true){
+				 tag='<span class="pTag">已关注</span>';
+				 attention='';
+				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].item+'\',this)"  type="button" value="取消"/>';
+			 }
+			 if(data[i].quotationPrice=="暂停报价")
+			 {
+				 unit='';
+			 }
+			 html+='	<li class="singleQuote '+attention+'">'
+					+'		<div class="quoteTitle">'
+					+'			<span class="pItem">'+data[i].item+'</span>'
+					+tag
+					+'		</div>'
+					+button
+					+'       <div class="clear"></div>'
+					+'	</li>';
+		 }
+	 }
+	 $("#QuoteList").html(html);
 }
 function showUpdateUserPanel(openid){
 	showCommonPanel();
