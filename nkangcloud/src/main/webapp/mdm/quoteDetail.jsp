@@ -139,9 +139,9 @@ function edit(obj)
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>级别：</p><input id='newGrade' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+categoryGrade+" />"
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>类型：</p><input id='newCategory' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+category+" />"
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>价格：</p><input id='newPrice' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+price+" />"
-    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>可用库存：</p><input id='newInventory' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+inventory+" />"
-    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>已售未下账：</p><input id='newSoldOutOfPay' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+soldOutOfPay+" />"  
-    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>在途：</p><input id='newOnDelivery' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+onDelivery+" />";
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>可用库存：</p><input id='newInventory' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+inventory+"  disabled='true' />"
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>已售未下账：</p><input id='newSoldOutOfPay' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+soldOutOfPay+"  disabled='true' />"  
+    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>在途：</p><input id='newOnDelivery' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+onDelivery+"  disabled='true' />";
 	swal({  
         title:"编辑报价",  
         text:formText,
