@@ -44,7 +44,7 @@ public class PlasticItemService {
 	 * @param itemNo 编号
 	 * @param price 价格
 	 * @param opType 操作价格类型 1:edit	2：approve
-	 * @return
+	 * @return 更新成功返回true， 否则false
 	 */
 	public static boolean updatePriceInfo(String itemNo, Float price, Integer opType) {
 		boolean flag = false;
@@ -83,6 +83,66 @@ public class PlasticItemService {
 		MongoClient.save(item);
 		flag = true;
 		return flag;
+	}
+	
+	/**
+	 * 判断并插入, 如果不存在就插入对象
+	 * @return 插入返回true， 否则false， 参数不对返回null 
+	 */
+	public static Boolean judgeAndInsert(Inventory inventory) {
+		if(inventory==null || inventory.getPlasticItem()==null){
+			return null;
+		}
+		PlasticItem item = getDetailByNo(inventory.getPlasticItem());
+		if(item != null){
+			return false;
+		}
+		item = new PlasticItem();
+		item.setItemNo(inventory.getPlasticItem());
+		item.setPriceStatus(0);
+		// 保存
+		MongoClient.save(item);
+		return true;
+	}
+	
+	/**
+	 * 判断并插入, 如果不存在就插入对象
+	 * @return 插入返回true， 否则false， 参数不对返回null 
+	 */
+	public static Boolean judgeAndInsert(OnDelivery onDelivery) {
+		if(onDelivery==null || onDelivery.getPlasticItem()==null){
+			return null;
+		}
+		PlasticItem item = getDetailByNo(onDelivery.getPlasticItem());
+		if(item != null){
+			return false;
+		}
+		item = new PlasticItem();
+		item.setItemNo(onDelivery.getPlasticItem());
+		item.setPriceStatus(0);
+		// 保存
+		MongoClient.save(item);
+		return true;
+	}
+	
+	/**
+	 * 判断并插入, 如果不存在就插入对象
+	 * @return 插入返回true， 否则false， 参数不对返回null 
+	 */
+	public static Boolean judgeAndInsert(OrderNopay orderNopay) {
+		if(orderNopay==null || orderNopay.getPlasticItem()==null){
+			return null;
+		}
+		PlasticItem item = getDetailByNo(orderNopay.getPlasticItem());
+		if(item != null){
+			return false;
+		}
+		item = new PlasticItem();
+		item.setItemNo(orderNopay.getPlasticItem());
+		item.setPriceStatus(0);
+		// 保存
+		MongoClient.save(item);
+		return true;
 	}
 	
 	@SuppressWarnings("rawtypes")
