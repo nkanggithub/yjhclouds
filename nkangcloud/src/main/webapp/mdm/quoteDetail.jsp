@@ -10,7 +10,7 @@ String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
 
-int special=0;
+int special=1;
 if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){special=1;}
 if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){special=2;}
 
@@ -52,14 +52,14 @@ $(this).addClass("editBtn");
 var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="2"&&status=="0"){
 	$(this).addClass("specialEditBtn");
-$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");}
+$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p></div>");}
 else if($("#isSpecial").val()=="1"||$("#isSpecial").val()=="2"){
-	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:red' onclick='focusThis()'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
-}
+	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+}/* 
 else if($("#isSpecial").val()=="0"){
 	$(this).addClass("noEditBtn");
 	$(this).append("<div class='edit noEdit'><p style='background-color:orange;' onclick='focus(this)'><img src='../mdm/images/focus.png' slt='' />关注</p></div>");
-}
+} */
 $(this).siblings().removeClass("editBtn");
 $(this).siblings().removeClass("specialEditBtn");
 $(this).siblings().removeClass("noEditBtn");
