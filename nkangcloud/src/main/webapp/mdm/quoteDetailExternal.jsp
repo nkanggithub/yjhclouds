@@ -237,6 +237,7 @@ function getAllDatas(){
 						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
 						 var tag='';
 						 var attention='';
+						 var priceStyle="";
 						 var unit='<span class="unit">元/吨</span>';
 						 if(data[i]["like"]==true){
 							 tag='<span class="tag">已关注</span>';
@@ -246,10 +247,15 @@ function getAllDatas(){
 						 {
 							 unit='';
 						 }
+						 var myDate = new Date();
+						 var hour=myDate.getHours();       //获取当前小时数(0-23)
+						 if(hour<11||hour>18){
+							 priceStyle=' style="text-decoration:line-through;" ';
+						 }
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].item+'\')"><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].item+'\')" '+priceStyle+'><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
 							/*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
