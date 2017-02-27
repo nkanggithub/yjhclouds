@@ -733,7 +733,7 @@ jQuery.ajax({
 					lastUpdatedDate=temp.lastUpdatedDate.substring(0,10);
 				}
 				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
-					selfIntro+='<div style="float:right;margin-right:5px;">销售代表:'+temp.selfIntro+'</div>';
+					selfIntro+='<div style="float:right;margin-right:5px;font-size: 13px;color: #2F78C3;">销售代表:'+temp.selfIntro+'</div>';
 				}else{
 					
 				}
