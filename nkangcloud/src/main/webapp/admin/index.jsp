@@ -728,6 +728,10 @@ jQuery.ajax({
 					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">待审核</div>';
 					}
 				}
+				var lastUpdatedDate="暂无互动";
+				if(temp.lastUpdatedDate!=null&&temp.lastUpdatedDate!='null'){
+					lastUpdatedDate=temp.lastUpdatedDate.substring(0,10);
+				}
 				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
 					selfIntro+='<div style="float:right;margin-right:5px;">销售代表:'+temp.selfIntro+'</div>';
 				}else{
@@ -740,12 +744,13 @@ jQuery.ajax({
 						+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
 				}
 				var li='	<li class="Work_Mates_div_list_div2">'
-					+'                                           	 	<div class="Work_Mates_img_div2">'
+					+'                                           	 	<div class="Work_Mates_img_div2" style="margin-top:-10px;margin-bottom:-20px;">'
 					+'                                        			 <img src="'
 					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
 					+ '" alt="userImage" class="matesUserImage" alt="no_username" /> '
+					+'<p style="margin: 0 0 10px;font-size: 12px;text-align: center;color: #375FA7;margin-top: -5px;">'+lastUpdatedDate+'</p>'
 					+'                                         		</div>'
-					+'                                         		<div class="Work_Mates_text_div">'
+					+'                                         		<div class="Work_Mates_text_div" style="margin-left: 80px;">'
 					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name">'
 					+ temp.nickname
 					+ '</span><span class="role">'
