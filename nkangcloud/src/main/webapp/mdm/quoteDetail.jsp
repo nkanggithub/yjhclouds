@@ -10,7 +10,7 @@ String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
 
-int special=1;
+int special=0;
 if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){special=1;}
 if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){special=2;}
 
@@ -270,13 +270,13 @@ window.focusThis=focusThis;
     width:25px;height:auto;position:absolute;top:15px;margin-left: 2px;
     }
 	.edit p
-	{width:50%;
+	{width:100%;
 	height:100%;
 	line-height:130px;
 	float:left;
 	}
 	.specialEdit p
-	{width:33%;
+	{width:50%;
 	float:left;
 	height:100%;}
 .editBtn
@@ -439,8 +439,6 @@ for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
 <input id="status" type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
-<% if(special==1||special==2){ %>
-
 <div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><% if("0".equals(ql.get(i).getApproveStatus())){%><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else if("1".equals(ql.get(i).getApproveStatus())){ %><p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else {%><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span><% }%></p></div>
 
 <div class="secondLayer">
@@ -458,23 +456,8 @@ for(int i=0;i<ql.size();i++){
 <% if(("1").equals(ql.get(i).getApproveStatus())) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
 <% } %>
-<% } else if(special==0){ %>
-
-<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span></p></div>
-
-<div class="secondLayer">
-<div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue">N/A</p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue">N/A</p></div>
-<div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue">N/A</p></div>
-</div>
-<div class="rightPanel">
-</div>
-</div>
-
-<% } %>
+<% }  %>
 </li>
-<%} %>
 </ul>
 </div>
 <!--
