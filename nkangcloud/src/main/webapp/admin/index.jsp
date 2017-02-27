@@ -759,7 +759,7 @@ jQuery.ajax({
 					+'</h2>'
 					+ '<div>'
 					+tagHtml
-					+'</div>'+workDay+'<div>'
+					+'</div>'+workDay+'<div style="margin-top:5px;">'
 					+'													<span class="selfIntro">'+selfIntro+'</span>'
 					+'												</div>'
 					+'                                        		</div>'
