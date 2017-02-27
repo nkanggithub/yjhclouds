@@ -18,11 +18,18 @@ public class WeChatMDLUser extends WeChatUser {
 	public String point;
 	public String IsActive;
 	public String IsAuthenticated;
+	public String lastUpdatedDate;
 	public String IsRegistered;
 	public ArrayList tag;
 	public ArrayList kmLists;
 	public HashMap like;
 	
+	public String getLastUpdatedDate() {
+		return lastUpdatedDate;
+	}
+	public void setLastUpdatedDate(String lastUpdatedDate) {
+		this.lastUpdatedDate = lastUpdatedDate;
+	}
 	public ArrayList getKmLists() {
 		return kmLists;
 	}
