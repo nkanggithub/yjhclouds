@@ -1621,6 +1621,17 @@ public class MongoDBBasic {
                     		Object[] ConObjects = CongratulateHistoryObj.toArray();
                     		weChatMDLUser.setCongratulateNum(ConObjects.length);
                 		}
+                		ArrayList<String> kmLists = new ArrayList<String>();
+                		if(o.get("kmLists")!=null){
+                			BasicDBList hist = (BasicDBList) o.get("kmLists");
+                    		Object[] kmObjects = hist.toArray();
+                    		for(Object dbobj : kmObjects){
+                    			if(dbobj instanceof String){
+                    				kmLists.add((String) dbobj);
+                    			}
+                    		}
+                    		weChatMDLUser.setKmLists(kmLists);
+                		}
                 		Object role = o.get("Role");
             			DBObject roleobj = new BasicDBObject();
             			roleobj = (DBObject)role;
