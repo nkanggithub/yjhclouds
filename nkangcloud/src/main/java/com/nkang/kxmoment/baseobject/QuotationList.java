@@ -7,7 +7,7 @@ public class QuotationList {
 	private String editBy;
 	private String dateTime;
 	private Double suggestPrice;
-	private int type;
+	private int type;// 0:默认值， 1：edit， 2：approve
 	public String getPlasticItem() {
 		return plasticItem;
 	}
