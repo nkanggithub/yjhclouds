@@ -123,15 +123,15 @@ public class QuotationController {
 		
 	}
 	
-/*
-	@RequestMapping("/updateQuotation")
-	public @ResponseBody String updateQuotation(@RequestParam(value="plasticItem", required=false) String plasticItem,
+
+	@RequestMapping("/saveQuotationList")
+	public @ResponseBody String saveQuotationList(@RequestParam(value="plasticItem", required=false) String plasticItem,
 			@RequestParam(value="status", required=false) String status,
 			@RequestParam(value="approveBy", required=false) String approveBy,
 			@RequestParam(value="editBy", required=false) String editBy,
 			@RequestParam(value="dateTime", required=false) String dateTime,
 			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
-			@RequestParam(value="mongoID", required=false) String mongoID
+			@RequestParam(value="type", required=false) int type
 			){
 		
 		QuotationList quotation = new QuotationList();
@@ -140,10 +140,10 @@ public class QuotationController {
 		quotation.setEditBy(editBy);
 		quotation.setPlasticItem(plasticItem);
 		quotation.setStatus(status);
-		quotation.setSuggestPrice(suggestPrice);
+		quotation.setType(type);
 		
-		String ret = MongoDBBasic.UpdateQuotationList(mongoID,quotation);
+		String ret = MongoDBBasic.insertQuotationList(quotation);
 		return ret;
-	}*/
+	}
 	
 }

@@ -3209,7 +3209,7 @@ public class MongoDBBasic {
 	 * chang-zheng
 	 * to save QuotationList
 	 */
-	public static String UpdateQuotationList(QuotationList quotation){
+	public static String insertQuotationList(QuotationList quotation){
 
 		mongoDB = getMongoDB();
 	

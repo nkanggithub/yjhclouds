@@ -1096,7 +1096,7 @@ public class MasterDataRestController {
 		quotation.setStatus(status);
 		quotation.setSuggestPrice(suggestPrice);
 		quotation.setType(type);
-		String ret = MongoDBBasic.UpdateQuotationList(quotation);
+		String ret = MongoDBBasic.insertQuotationList(quotation);
 		return ret;
 	}
 	
