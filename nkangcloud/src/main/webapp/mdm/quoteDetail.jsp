@@ -40,12 +40,12 @@ $(this).removeClass("specialEditBtn");
 $(this).removeClass("noEditBtn");
 $(this).remove(".edit");
 });
-$(".quoteTitle").live("click",function(){
+/* $(".quoteTitle").live("click",function(){
 	$("#pic").css("display","block");
 });
 $(".picClose").live("click",function(){
 	$("#pic").css("display","none");
-});
+}); */
 $(".singleQuote").live("swipeleft",function(){
 	$(this).css("overflow","visible");
 $(this).addClass("editBtn");
@@ -255,17 +255,17 @@ window.focusThis=focusThis;
 .noEdit p{ right: -60px!important;width:100%!important;}
 .noEditBtn{left:-60px!important;}
 .edit
-{width: 120px;
+{width: 60px;
     height: 90px;
     color: white;
     text-align: center;
     position: absolute;
     top: 0px;
-    right: -120px;
+    right: -60px;
 	font-size:14px;
     background: #D3D3D3;
     border-bottom: 1px solid black;}
-    .specialEdit{width:180px;right:-180px;}
+    .specialEdit{width:120px;right:-120px;}
     .specialEdit img,.edit img {
     width:25px;height:auto;position:absolute;top:15px;margin-left: 2px;
     }
@@ -282,11 +282,11 @@ window.focusThis=focusThis;
 .editBtn
 {
 position: relative;
-    left: -120px;
+    left: -60px;
 	}
 .specialEditBtn
 {
-    left: -180px;
+    left: -120px;
 	}	
 *{margin:0;padding:0;}
 .singleQuote
