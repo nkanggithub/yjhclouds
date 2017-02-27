@@ -1078,8 +1078,8 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * FOR saveOrderNopay
 	 */
-	@RequestMapping("/updateQuotationList")
-	public static String updateQuotationList(@RequestParam(value="plasticItem", required=false) String plasticItem,
+	@RequestMapping("/insertQuotationList")
+	public static String insertQuotationList(@RequestParam(value="plasticItem", required=false) String plasticItem,
 			@RequestParam(value="status", required=false) String status,
 			@RequestParam(value="approveBy", required=false) String approveBy,
 			@RequestParam(value="editBy", required=false) String editBy,
