@@ -687,6 +687,11 @@ jQuery.ajax({
 				}
 				
 				
+				if(temp.kmLists!=null&&temp.kmLists!='null'&&temp.kmLists!=''){
+					infoPer+=10;
+				}
+				
+				
 				if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
 					selfIntro="电话:"+temp.phone;
 					infoPer+=40;
