@@ -175,8 +175,8 @@ public class MongoClient {
 				dbObj.put("_id", new ObjectId(idtmp));
 				dbObj.removeField("id");
 			}
-			WriteResult result = collection.save(dbObj);
-			id = result.getUpsertedId().toString();
+			collection.save(dbObj);
+			id = dbObj.get("_id").toString();;
 		} catch (Exception e) {
 			logger.error("save error.", e);
 			id = null;
