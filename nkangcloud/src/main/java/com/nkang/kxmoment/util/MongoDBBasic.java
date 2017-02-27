@@ -3083,6 +3083,9 @@ public class MongoDBBasic {
 				insertQuery.put("lastUpdate",cursqlTS.toString());
 				
 				writeResult=mongoDB.getCollection(collectionInventory).insert(insertQuery);
+				if(writeResult==null){
+					writeResult=mongoDB.getCollection(collectionInventory).insert(insertQuery);
+				}
 				ret="insert Inventory ok  -->" + writeResult;
 			}else{
 				if(inventory.getRepositoryName()==null){
@@ -3140,7 +3143,6 @@ public class MongoDBBasic {
 	 */
 	public static String saveOnDelivery(OnDelivery onDelivery){
 		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
 		String ret="Quotation fail";
 		if(onDelivery!=null){
 			if(mongoDB == null){
@@ -3207,7 +3209,7 @@ public class MongoDBBasic {
 	 * chang-zheng
 	 * to save QuotationList
 	 */
-	public static String UpdateQuotationList(String mongoID,QuotationList quotation){
+	public static String UpdateQuotationList(QuotationList quotation){
 
 		mongoDB = getMongoDB();
 	
@@ -3217,15 +3219,15 @@ public class MongoDBBasic {
 				mongoDB = getMongoDB();
 			}
 			DBObject queryresult = null;
-			if(!StringUtils.isEmpty(mongoID) ){
+			/*if(!StringUtils.isEmpty(mongoID) ){
 				DBObject Query = new BasicDBObject();
 				Query.put("_id", mongoID);
 				queryresult = mongoDB.getCollection(collectionQuotationList).findOne(Query);
-			}
+			}*/
 			WriteResult writeResult;
 			DBObject insertQuery = new BasicDBObject();
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			if(queryresult!=null && queryresult.get("status")!="Y"){
+			/*if(queryresult!=null && queryresult.get("status")!="Y"){
 				insertQuery.put("plasticItem", queryresult.get("plasticItem"));
 				insertQuery.put("status", quotation.getStatus());
 				insertQuery.put("approveBy",quotation.getApproveBy());
@@ -3239,7 +3241,7 @@ public class MongoDBBasic {
 				writeResult=mongoDB.getCollection(collectionQuotationList).update(new BasicDBObject().append("_id", mongoID), doc);
 				
 				ret="update QuotationList ok  -->" + writeResult;
-			}else{
+			}else{*/
 				insertQuery.put("plasticItem", quotation.getPlasticItem());
 				insertQuery.put("status", quotation.getStatus());
 				insertQuery.put("approveBy", quotation.getApproveBy());
@@ -3247,9 +3249,10 @@ public class MongoDBBasic {
 				insertQuery.put("dateTime",quotation.getDateTime());
 				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
 				insertQuery.put("lastUpdate",cursqlTS.toString());
+				insertQuery.put("type",quotation.getType());
 				writeResult=mongoDB.getCollection(collectionQuotationList).insert(insertQuery);
 				ret="insert quotation ok  -->" + writeResult;
-			}
+			//}
 			
 				
 		}

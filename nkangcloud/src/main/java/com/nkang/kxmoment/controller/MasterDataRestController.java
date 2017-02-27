@@ -1085,7 +1085,7 @@ public class MasterDataRestController {
 			@RequestParam(value="editBy", required=false) String editBy,
 			@RequestParam(value="dateTime", required=false) String dateTime,
 			@RequestParam(value="suggestPrice", required=false) Double suggestPrice,
-			@RequestParam(value="mongoID", required=false) String mongoID
+			@RequestParam(value="type", required=false) int type
 			){
 		
 		QuotationList quotation = new QuotationList();
@@ -1095,8 +1095,8 @@ public class MasterDataRestController {
 		quotation.setPlasticItem(plasticItem);
 		quotation.setStatus(status);
 		quotation.setSuggestPrice(suggestPrice);
-		
-		String ret = MongoDBBasic.UpdateQuotationList(mongoID,quotation);
+		quotation.setType(type);
+		String ret = MongoDBBasic.UpdateQuotationList(quotation);
 		return ret;
 	}
 	

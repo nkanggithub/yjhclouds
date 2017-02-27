@@ -7,6 +7,7 @@ public class QuotationList {
 	private String editBy;
 	private String dateTime;
 	private Double suggestPrice;
+	private int type;
 	public String getPlasticItem() {
 		return plasticItem;
 	}
@@ -43,5 +44,12 @@ public class QuotationList {
 	public void setSuggestPrice(Double suggestPrice) {
 		this.suggestPrice = suggestPrice;
 	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	
 
 }

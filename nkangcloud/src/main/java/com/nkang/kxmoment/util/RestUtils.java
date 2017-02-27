@@ -2647,10 +2647,10 @@ public static String regist(WeChatMDLUser user) {
     /*
      * chang-zheng
      */
-    public static String callUpdateQuotationList(String mongoID,QuotationList quotation) throws UnsupportedEncodingException {
+    public static String callUpdateQuotationList(QuotationList quotation) throws UnsupportedEncodingException {
 
 
-		String url = "http://"+Constants.baehost+"/updateQuotationList?";
+		String url = "http://"+Constants.baehost+"/insertQuotationList?";
 		if(quotation != null){
 			if(!StringUtils.isEmpty(quotation.getPlasticItem())){
 				url = url + "plasticItem="+URLEncoder.encode(quotation.getPlasticItem(),"UTF-8");
@@ -2670,10 +2670,8 @@ public static String regist(WeChatMDLUser user) {
 			if(quotation.getSuggestPrice()!=null){
 				url = url + "&suggestPrice="+quotation.getSuggestPrice();
 			}
+				url = url + "&type="+quotation.getType();
 			
-			if(!StringUtils.isEmpty(mongoID)){
-				url = url + "&mongoID="+URLEncoder.encode(mongoID,"UTF-8");
-			}
 		}
 		String message= "errorrrr";
 		try {
