@@ -20,8 +20,15 @@ public class WeChatMDLUser extends WeChatUser {
 	public String IsAuthenticated;
 	public String IsRegistered;
 	public ArrayList tag;
+	public ArrayList kmLists;
 	public HashMap like;
 	
+	public ArrayList getKmLists() {
+		return kmLists;
+	}
+	public void setKmLists(ArrayList kmLists) {
+		this.kmLists = kmLists;
+	}
 	public Role getRoleObj() {
 		return roleObj;
 	}
