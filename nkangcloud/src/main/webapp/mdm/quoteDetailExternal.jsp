@@ -237,7 +237,7 @@ function getAllDatas(){
 						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
 						 var tag='';
 						 var attention='';
-						 var priceStyle="";
+						 var priceStyle='';
 						 var unit='<span class="unit">元/吨</span>';
 						 if(data[i]["like"]==true){
 							 tag='<span class="tag">已关注</span>';
@@ -248,8 +248,9 @@ function getAllDatas(){
 							 unit='';
 						 }
 						 var myDate = new Date();
-						 var hour=myDate.getHours();       //获取当前小时数(0-23)
-						 if(hour<11||hour>18){
+						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
+						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
+						 if(nowHour<10||nowHour>=18){
 							 priceStyle=' style="text-decoration:line-through;" ';
 						 }
 						 html+='<li class="singleQuote">'
