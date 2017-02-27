@@ -2647,7 +2647,7 @@ public static String regist(WeChatMDLUser user) {
     /*
      * chang-zheng
      */
-    public static String callUpdateQuotationList(QuotationList quotation) throws UnsupportedEncodingException {
+    public static String callInsertQuotationList(QuotationList quotation) throws UnsupportedEncodingException {
 
 
 		String url = "http://"+Constants.baehost+"/insertQuotationList?";
