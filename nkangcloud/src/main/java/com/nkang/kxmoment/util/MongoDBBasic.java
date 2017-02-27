@@ -1608,6 +1608,9 @@ public class MongoDBBasic {
                 		if(o.get("CurLNG") != null){
                 			weChatMDLUser.setLng(o.get("CurLNG").toString());
                 		}
+                		if(o.get("LastUpdatedDate") != null){
+                			weChatMDLUser.setLastUpdatedDate(o.get("LastUpdatedDate").toString());
+                		}
                 		if(o.get("HeadUrl") != null){
                 			weChatMDLUser.setHeadimgurl(o.get("HeadUrl").toString());
                 		}
