@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,137 @@ public class PlasticItemService {
 			logger.error("save fail.", e);
 		}
 		return id;
+	}
+	
+	/**
+	 * 修改价格信息
+	 * @param itemNo 编号
+	 * @param price 价格
+	 * @param opType 操作价格类型 1:edit	2：approve
+	 * @return
+	 */
+	public static boolean updatePriceInfo(String itemNo, Float price, Integer opType) {
+		boolean flag = false;
+		if(itemNo==null || opType==null){
+			return flag;
+		}
+		PlasticItem item = getDetailByNo(itemNo);
+		if(item==null){
+			return flag;
+		}
+		if(price != null){
+			float prePrice = item.getPrice();
+			if(prePrice >= 0){
+				// 计算差价
+				float diffPrice = price - prePrice;
+				item.setDiffPrice(diffPrice);
+			}
+			// 更新价格
+			item.setPrice(price);	
+		}
+		// 价格状态，0:initial; 1:edit; 2:approve
+		Integer priceStatus;
+		switch (opType) {
+		case 1:
+			priceStatus = 1;
+			break;
+		case 2:
+			priceStatus = 2;
+			break;
+		default:
+			priceStatus = 0;
+			break;
+		}
+		item.setPriceStatus(priceStatus);
+		// 保存
+		MongoClient.save(item);
+		flag = true;
+		return flag;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Map<String, Object> priceList(String itemNo) {
+		Map<String, Object> dataSource = null;
+		if(itemNo == null || itemNo.length() == 0){
+			return null;
+		}
+		dataSource = new HashMap<String, Object>();
+		// chart initial
+		Map<String, Object> chart = new HashMap<String, Object>();
+		chart.put("theme", "fint");
+		chart.put("xaxisname", itemNo);
+		chart.put("yaxisname", "");
+		chart.put("numberSuffix","");
+		int subIndex = itemNo.lastIndexOf("-");
+		// 设置主副标题
+		String caption = itemNo.substring(0, subIndex>0?subIndex:itemNo.length());
+		String subcaption = itemNo.substring(subIndex>0?subIndex:0, itemNo.length());
+		chart.put("caption", caption);
+		chart.put("subcaption", "("+ subcaption +")");
+		chart.put("showvalues", "0");
+		chart.put("plottooltext", "$seriesname); $value");
+		//Error bar configuration
+		chart.put("halferrorbar", "0");
+		chart.put("errorBarColor", "#990000");
+		chart.put("errorBarAlpha", "50");
+		chart.put("errorBarThickness", "4");
+		chart.put("errorBarWidth", "8");
+		dataSource.put("chart", chart);
+		// categories
+		Map[] categories = new Map[1];
+		Map<String, Object> category = new HashMap<String, Object>(); 
+		categories[0] = category;
+		List<Map<String, Object>> categoryList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "Jan");
+		categoryList.add(ctgMap);
+		ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "Feb");
+		categoryList.add(ctgMap);
+		ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "Mar");
+		categoryList.add(ctgMap);
+		ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "Apl");
+		categoryList.add(ctgMap);
+		ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "May");
+		categoryList.add(ctgMap);
+		ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", "Jun");
+		categoryList.add(ctgMap);
+		category.put("category", categoryList);
+		dataSource.put("categories", categories);
+		// dataset
+		List<Map> dataset = new ArrayList<Map>();
+		Map<String, Object> dataMap;
+		List<Map> dataList;
+		// 定价
+		dataMap = new HashMap<String, Object>();
+		dataMap.put("seriesname", "定价");
+		dataList =  new ArrayList<Map>();
+		for(int i=0; i<11; i++){
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("value", 16700+i*100);
+			data.put("errorvalue", "");
+			dataList.add(data);
+		}
+		dataMap.put("data", dataList);
+		dataset.add(dataMap);
+		// 
+		dataMap = new HashMap<String, Object>();
+		dataMap.put("seriesname", "发布价");
+		dataList =  new ArrayList<Map>();
+		for(int i=0; i<11; i++){
+			Map<String, Object> data = new HashMap<String, Object>();
+			data.put("value", 15700+i*100);
+			data.put("errorvalue", "");
+			dataList.add(data);
+		}
+		dataMap.put("data", dataList);
+		dataset.add(dataMap);
+		dataSource.put("dataset", dataset);
+		return dataSource;
 	}
 	
 	/**
@@ -177,6 +309,27 @@ public class PlasticItemService {
 		PlasticItem item = null;
 		try {
 			item = MongoClient.getOneById(id, PlasticItem.class);
+		} catch (Exception e) {
+			logger.error("Get Detail fail.", e);
+			item = null;
+		}
+		return item;
+	}
+	
+	/**
+	 * 根据编号获取对象
+	 * @param itemNo
+	 * @return
+	 */
+	public static PlasticItem getDetailByNo(String itemNo) {
+		PlasticItem item = null;
+		if(itemNo==null || itemNo.length()==0){
+			return item;
+		}
+		try {
+			DBObject query = new BasicDBObject();
+			query.put("itemNo", itemNo);
+			item = MongoClient.getOne(query, PlasticItem.class);
 		} catch (Exception e) {
 			logger.error("Get Detail fail.", e);
 			item = null;

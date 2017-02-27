@@ -19,6 +19,8 @@ public class PlasticItem {
 	private float price;
 	// 变化价格
 	private float diffPrice;
+	// 价格状态，0:initial; 1:edit; 2:approve
+	private Integer priceStatus;
 	// 关注者ID
 	private List<Object> followers;
 	// 库存ID
@@ -72,6 +74,12 @@ public class PlasticItem {
 	}
 	public void setDiffPrice(float diffPrice) {
 		this.diffPrice = diffPrice;
+	}
+	public Integer getPriceStatus() {
+		return priceStatus;
+	}
+	public void setPriceStatus(Integer priceStatus) {
+		this.priceStatus = priceStatus;
 	}
 	public List<Object> getFollowers() {
 		return followers;
