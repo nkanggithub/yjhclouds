@@ -12,21 +12,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.nkang.kxmoment.baseobject.OrderNopay;
-import com.nkang.kxmoment.util.BillOfSellPoi;
-import com.nkang.kxmoment.util.FileOperateUtil;
-import com.nkang.kxmoment.util.RestUtils;
 
 @Controller
 @RequestMapping("/fileUpload")
@@ -35,6 +28,33 @@ public class fileUploadController {
 	@ResponseBody
 	public String readXlsOfOrderNopay(HttpServletRequest request){
 		
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+	    factory.setSizeThreshold(1024 * 1024);
+	    ServletFileUpload upload = new ServletFileUpload(factory);
+	    upload.setFileSizeMax(1024 * 1024 * 2);
+	    upload.setHeaderEncoding("utf-8");
+	    upload.setSizeMax(1024 * 1024 * 4);
+
+		 List<FileItem> fileList = null;
+		    try {
+		        fileList = upload.parseRequest(new ServletRequestContext(request));
+		        if(fileList != null){
+		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
+		            for(FileItem item:fileList){
+		            	System.out.println(item.getName());
+		                if(!item.isFormField() && item.getSize() > 0){
+		                    item.write(new File(fileurl+item.getName()));
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+			return "ok";
+
+	}
+/*//		, @RequestParam("file") CommonsMultipartFile file
+//		System.out.println(file.getOriginalFilename());
 		try {
 			 init(request);
 			FileOperateUtil.upload(request);
@@ -49,5 +69,5 @@ public class fileUploadController {
 	            FileOperateUtil.FILEDIR = request.getSession().getServletContext().getRealPath("/") + "file/";
 	        }
 	    }
-
+*/
 }
