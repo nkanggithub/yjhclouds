@@ -239,6 +239,19 @@ public class MasterDataRestController {
 		}
 		return String.valueOf(result);
 	}
+	@RequestMapping("/removeWechatUser")
+	public String updateWechatUser(	@RequestParam(value="openid", required=false) String openid)
+	{
+		boolean result=false;
+		try{
+			result = MongoDBBasic.removeUser(openid);
+			result = true;
+		}
+		catch(Exception e){
+			result = false;
+		}
+		return String.valueOf(result);
+	}
 	@RequestMapping("/callUpdateClientMeta")
 	public String callUpdateClientMeta(	@RequestParam(value="ClientCode", required=true) String ClientCode,
 									@RequestParam(value="ClientLogo", required=false) String ClientLogo,
