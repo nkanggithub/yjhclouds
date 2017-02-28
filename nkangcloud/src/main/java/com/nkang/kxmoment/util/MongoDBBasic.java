@@ -1591,8 +1591,9 @@ public class MongoDBBasic {
 			}
 			else{
 				BasicDBObject sort=new BasicDBObject();
-				sort.put("LastUpdatedDate", 1);
+				sort.put("IsActive", -1);
 				sort.put("IsRegistered", -1);
+				sort.put("LastUpdatedDate", 1);
 				/*sort.put("Teamer.registerDate", 1);
 				sort.put("IsActive", -1);
 				sort.put("Created", 1);*/
