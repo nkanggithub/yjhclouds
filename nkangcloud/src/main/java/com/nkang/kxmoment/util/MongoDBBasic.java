@@ -1591,9 +1591,11 @@ public class MongoDBBasic {
 			}
 			else{
 				BasicDBObject sort=new BasicDBObject();
-				sort.put("Teamer.registerDate", 1);
+				sort.put("LastUpdatedDate", 1);
+				sort.put("IsRegistered", -1);
+				/*sort.put("Teamer.registerDate", 1);
 				sort.put("IsActive", -1);
-				sort.put("Created", 1);
+				sort.put("Created", 1);*/
 				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
 			}
             if (null != queryresults) {
@@ -1706,8 +1708,8 @@ public class MongoDBBasic {
                 				int  day=(int) ((s2-s1)/1000/60/60/24)+1;
                 				weChatMDLUser.setWorkDay(day);
             				}
-            				BasicDBList hist = (BasicDBList) teamobj.get("tag");
-                    		if(hist != null){
+            				if(teamobj.get("tag") != null){
+            					BasicDBList hist = (BasicDBList) teamobj.get("tag");
                     			ArrayList list=new ArrayList();
                         		Object[] tagObjects = hist.toArray();
                         		for(Object dbobj : tagObjects){
