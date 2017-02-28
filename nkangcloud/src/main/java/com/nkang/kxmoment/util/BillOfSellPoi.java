@@ -445,10 +445,10 @@ public class BillOfSellPoi {
 				return OnDeliveryList;
 	 }
 	 
-	 public List<OrderNopay> readXlsOfOrderNopay(InputStream is) throws FileNotFoundException{
+	 public List<OrderNopay> readXlsOfOrderNopay() throws FileNotFoundException{
 		// String urlString = "C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS";
 			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
-			// InputStream is = new FileInputStream(url);
+			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS");
 
 		        HSSFWorkbook hssfWorkbook;
 				try {
