@@ -18,6 +18,7 @@ import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 
 public class BillOfSellPoi {
+	
 	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
 		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/AAA.XLS");
@@ -444,9 +445,10 @@ public class BillOfSellPoi {
 				return OnDeliveryList;
 	 }
 	 
-	 public List<OrderNopay> readXlsOfOrderNopay() throws FileNotFoundException{
+	 public List<OrderNopay> readXlsOfOrderNopay(InputStream is) throws FileNotFoundException{
+		// String urlString = "C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS";
 			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
-			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS");
+			// InputStream is = new FileInputStream(url);
 
 		        HSSFWorkbook hssfWorkbook;
 				try {

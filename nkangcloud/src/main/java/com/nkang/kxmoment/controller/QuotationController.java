@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
+import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.util.MongoDBBasic;
 
@@ -133,7 +134,7 @@ public class QuotationController {
 			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
 			@RequestParam(value="type", required=false) int type
 			){
-		
+		PlasticItem pi = new PlasticItem();
 		QuotationList quotation = new QuotationList();
 		quotation.setApproveBy(approveBy);
 		quotation.setDateTime(dateTime);
@@ -142,6 +143,9 @@ public class QuotationController {
 		quotation.setStatus(status);
 		quotation.setType(type);
 		
+		if(type==1){
+			
+		}
 		String ret = MongoDBBasic.insertQuotationList(quotation);
 		return ret;
 	}

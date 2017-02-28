@@ -49,6 +49,7 @@ import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.OrganizationSearch4Solr;
+import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.CommenJsonUtil;
@@ -74,12 +75,16 @@ public class testMain{
 	private static Logger log=Logger.getLogger(testMain.class);
 	private static Timer timer= new Timer();
 	public static void main(String[] args) throws Exception {
+		QuotationList ql = new QuotationList();
+		String ret = RestUtils.callInsertQuotationList(ql);
+		
+	}
 		
 		/*java.sql.Timestamp sqlTS = null;;
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
 		System.out.println(cursqlTS);
 	}*/
-		
+		/*
 		BillOfSellPoi bos = new BillOfSellPoi();
 		RestUtils.deleteDB("OrderNopay");
 		List<OrderNopay> OrderNopayS;
@@ -99,9 +104,9 @@ public class testMain{
 			System.out.println(e.getMessage());
 		}
 		
-	
-	
-		/*
+	}
+	*/
+	/*	
 	BillOfSellPoi bos = new BillOfSellPoi();
 	List<Inventory> Inventorys;
 	String rett = RestUtils.deleteDB("Inventory");
@@ -120,10 +125,10 @@ public class testMain{
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		System.out.println(e.getMessage());
-	}*/
+	}
 	
 }
-	
+	*/
 		
 /*		Location lt = new Location();
 		lt.setChengDu("23.8");
