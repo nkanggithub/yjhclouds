@@ -32,6 +32,7 @@ import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -1026,6 +1027,8 @@ public class MasterDataRestController {
 		it.setWaitDeliverAmount(waitDeliverAmount);
 		
 		String ret = MongoDBBasic.saveInventory(it);
+		// 判断并插入
+		PlasticItemService.judgeAndInsert(it);
 		return ret;
 	}
 	
@@ -1056,6 +1059,8 @@ public class MasterDataRestController {
 		onDelivery.setProvider(provider);
 		onDelivery.setTaxRate(taxRate);
 		String ret = MongoDBBasic.saveOnDelivery(onDelivery);
+		// 判断并插入
+		PlasticItemService.judgeAndInsert(onDelivery);
 		return ret;
 	}
 	
@@ -1084,6 +1089,8 @@ public class MasterDataRestController {
 		orderNopay.setUnfilledOrderAmount(unfilledOrderAmount);
 		orderNopay.setUnfilledOrderAmount(filledOrderAmount);
 		String ret = MongoDBBasic.saveOrderNopay(orderNopay);
+		// 判断并插入
+		PlasticItemService.judgeAndInsert(orderNopay);
 		return ret;
 	}
 	

@@ -16,6 +16,7 @@ import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
+import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoDBBasic;
 
 @Controller
@@ -126,27 +127,26 @@ public class QuotationController {
 	
 
 	@RequestMapping("/saveQuotationList")
-	public @ResponseBody String saveQuotationList(@RequestParam(value="plasticItem", required=false) String plasticItem,
+	public @ResponseBody String saveQuotationList(@RequestParam(value="plasticItem", required=true) String plasticItem,
 			@RequestParam(value="status", required=false) String status,
 			@RequestParam(value="approveBy", required=false) String approveBy,
 			@RequestParam(value="editBy", required=false) String editBy,
 			@RequestParam(value="dateTime", required=false) String dateTime,
-			@RequestParam(value="suggestPrice", required=false) String suggestPrice,
+			@RequestParam(value="suggestPrice", required=false) Double suggestPrice,
 			@RequestParam(value="type", required=false) int type
 			){
-		PlasticItem pi = new PlasticItem();
 		QuotationList quotation = new QuotationList();
 		quotation.setApproveBy(approveBy);
 		quotation.setDateTime(dateTime);
 		quotation.setEditBy(editBy);
 		quotation.setPlasticItem(plasticItem);
+		quotation.setSuggestPrice(suggestPrice);
 		quotation.setStatus(status);
 		quotation.setType(type);
 		
-		if(type==1){
-			
-		}
 		String ret = MongoDBBasic.insertQuotationList(quotation);
+		// 更新价格
+		PlasticItemService.updatePriceInfo(plasticItem, Float.parseFloat(suggestPrice+""), type);
 		return ret;
 	}
 	
