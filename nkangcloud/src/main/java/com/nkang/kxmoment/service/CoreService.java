@@ -479,14 +479,14 @@ public class CoreService
 					else if (eventKey.equals("storagenav")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("永佳和塑胶有限公司仓库导航");
+						article.setTitle("重庆永佳和塑胶有限公司[电话：023-68698689]");
 						article.setDescription("永佳和塑胶有限公司仓库为您导航");
 						article.setPicUrl(inventoryPic);
-						article.setUrl("https://m.amap.com/"); //http://map.baidu.com/mobile
+						article.setUrl("http://m.amap.com/search/mapview/keywords=%E7%99%BE%E7%A7%91%E5%A4%A7%E5%8E%A6(%E6%B8%9D%E5%B7%9E%E8%B7%AF)&city=500107&poiid=B00170238E"); //http://map.baidu.com/mobile
 						articleList.add(article);
 						
 						Article articlenav1 = new Article();
-						articlenav1.setTitle("公运库[TEL:68526840]\n工作时间8:30-17:30"); //九龙坡区铁路村198号
+						articlenav1.setTitle("重庆公运库[TEL:68526840]\n工作时间8:30-17:30"); //九龙坡区铁路村198号
 						articlenav1.setDescription("公运库-电话68526840");
 						articlenav1.setPicUrl(navPic);
 						articlenav1.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E5%85%AC%E8%B7%AF%E8%BF%90%E8%BE%93(%E9%9B%86%E5%9B%A2)%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%E7%AC%AC%E4%BA%8C%E5%88%86%E5%85%AC%E5%8F%B8&city=500107&poiid=B00179776F");
@@ -507,31 +507,24 @@ public class CoreService
 						articleList.add(articlenav4);
 						
 						Article articlenav3 = new Article();
-						articlenav3.setTitle("直发库");
-						articlenav3.setDescription("直发库");
+						articlenav3.setTitle("重庆铁风库[TEL:023-65731195]\n工作时间8:30-18:30");
+						articlenav3.setDescription("重庆铁风库");
 						articlenav3.setPicUrl(navPic);
-						articlenav3.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav3.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E8%A5%BF%E9%83%A8%E7%89%A9%E6%B5%81%E5%9B%AD&city=500106&poiid=B0FFF3P6P9");
 						articleList.add(articlenav3);
-						
-						Article articlenav5 = new Article();
-						articlenav5.setTitle("铁风库");
-						articlenav5.setDescription("铁风库");
-						articlenav5.setPicUrl(navPic);
-						articlenav5.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
-						articleList.add(articlenav5);
-						
+												
 						Article articlenav6 = new Article();
-						articlenav6.setTitle("成都宏达库");
+						articlenav6.setTitle("成都宏达库[TEL:1354806412]\n工作时间8:30-18:30");
 						articlenav6.setDescription("成都宏达库");
 						articlenav6.setPicUrl(navPic);
-						articlenav6.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav6.setUrl("http://m.amap.com/search/mapview/keywords=%E9%BE%99%E6%BD%AD%E5%AF%BA&city=510108&poiid=B001C7X2EA");
 						articleList.add(articlenav6);
 						
 						Article articlenav7 = new Article();
-						articlenav7.setTitle("成都力庆库");
+						articlenav7.setTitle("成都力庆库[TEL:028-84898380]\n工作时间8:30-18:30");
 						articlenav7.setDescription("成都力庆库");
 						articlenav7.setPicUrl(navPic);
-						articlenav7.setUrl("http://map.baidu.com/mobile/webapp/index/index#search/search/qt=s&wd=%E5%85%AC%E8%BF%90%E6%B8%9D%E8%A5%BF%E7%89%A9%E6%B5%81%E4%B8%AD%E5%BF%83&c=132&searchFlag=bigBox&version=5&exptype=dep&src_from=webapp_all_bigbox&wd2=%E9%87%8D%E5%BA%86%E5%B8%82%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA&sug_forward=9f97b1c5c690087bb64f5467&src=1/vt=map");
+						articlenav7.setUrl("http://m.amap.com/search/mapview/keywords=%E6%88%90%E9%83%BD%E5%B8%82%E9%BE%99%E6%B3%89%E9%A9%BF%E5%8C%BA%E6%96%87%E5%AE%89%E8%A1%971%E5%8F%B7&cluster_state=5&pagenum=1");
 						articleList.add(articlenav7);
 						
 						newsMessage.setArticleCount(articleList.size());
