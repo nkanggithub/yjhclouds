@@ -295,7 +295,7 @@ public class CoreService
 						article.setTitle("胖和欢迎您随时砸单");
 						article.setDescription("我的应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?");
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("胖和微应用");
@@ -304,6 +304,16 @@ public class CoreService
 						article2.setUrl("http://"+Constants.baehost+"/mdm/profile.jsp?UID=" + fromUserName);
 						articleList.add(article2);
 						
+						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
+						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
+						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
+							Article article3 = new Article();
+							article3.setTitle("胖和微管理");
+							article3.setDescription("Administration");
+							article3.setPicUrl("http://"+Constants.baehost+"/mdm/images/yjhadmin.jpg");
+							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
+							articleList.add(article3);
+						}
 						
 						Article article4 = new Article();
 						article4.setTitle("U8登录");
@@ -333,21 +343,25 @@ public class CoreService
 						article7.setUrl("https://udh.yonyouup.com/login");
 						articleList.add(article7);
 						
-						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
-						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
-						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
-							Article article3 = new Article();
-							article3.setTitle("胖和微管理");
-							article3.setDescription("Administration");
-							article3.setPicUrl("http://"+Constants.baehost+"/mdm/images/yjhadmin.jpg");
-							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
-							articleList.add(article3);
-						}
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
 					else if(eventKey.equals("MYRECOG")){
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("永佳和业绩");
+						article.setDescription("永佳和业绩");
+						article.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg");
+						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp");
+						articleList.add(article);
+						
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					
+					}
+					/*else if(eventKey.equals("MYRECOGNITION")){
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("我的胖和业绩");
@@ -400,7 +414,7 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-					}
+					}*/
 					else if(eventKey.equals("MYFACE")){
 						articleList.clear();
 						Article article = new Article();
