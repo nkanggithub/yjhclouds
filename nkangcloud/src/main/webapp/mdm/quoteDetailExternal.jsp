@@ -359,7 +359,7 @@ function getAllDatas(){
 						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
 						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
 						 if(nowHour<10||nowHour>=18){
-							 priceStyle=' style="text-decoration:line-through;" ';
+							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
 						 }
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
