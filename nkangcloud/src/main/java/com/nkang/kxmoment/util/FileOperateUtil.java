@@ -35,7 +35,7 @@ import com.nkang.kxmoment.controller.MasterDataRestController;
 
 
 public class FileOperateUtil {
-	static String ny="Y";
+	static String ny="N";
 	public static String DBOperateOrderNopay(String url){
 		
 	 	String message="";
@@ -59,19 +59,29 @@ public class FileOperateUtil {
   				if("Y".equals(ny)){
   					
   					ret = MongoDBBasic.saveOrderNopay(ol);
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  						ret = MongoDBBasic.saveOrderNopay(ol);
+  	  				}
+  	  				if("failed".equals(ret)){
+  	  					failnum = failnum + total+",";
+  	  					fail++;
+  	  				}else{
+  	  					success++;
+  	  				}
+  	  				
   				}else{
   					
   					ret = RestUtils.callsaveOrderNopay(ol);
-  				}
-  				
-  				if("failed".equals(ret)||"Read timed out".equals(ret)){
-  					ret=RestUtils.callsaveOrderNopay(ol);
-  				}
-  				if("failed".equals(ret)){
-  					failnum = failnum + total+",";
-  					fail++;
-  				}else{
-  					success++;
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  	  					ret=RestUtils.callsaveOrderNopay(ol);
+  	  				}
+  	  				if("failed".equals(ret)){
+  	  					failnum = failnum + total+",";
+  	  					fail++;
+  	  				}else{
+  	  					success++;
+  	  				}
+  	  				
   				}
   				
   				 System.out.println(total+"----"+ret);
@@ -99,23 +109,43 @@ public static String DBOperateInventory(String url){
 		int success=0;
 		int fail=0;
 		String failnum=null;
+		String ret;
 		BillOfSellPoi bos = new BillOfSellPoi();
   		RestUtils.deleteDB("Inventory");
   		List<Inventory> Inventorys;
-  	
+  		if("Y".equals(ny)){
+  			MongoDBBasic.DeleteDB("Inventory");
+  		}else {
+  			RestUtils.deleteDB("Inventory");
+		}
   		try {
   			Inventorys = bos.readXlsOfInventory(url);
   			for(Inventory ol : Inventorys){
   				total++;
-  				String ret = RestUtils.callsaveInventory(ol);
-  				if("failed".equals(ret)||"Read timed out".equals(ret)){
-  					ret=RestUtils.callsaveInventory(ol);
-  				}
-  				if("failed".equals(ret)){
-  					failnum = failnum + total+",";
-  					fail++;
+  				
+  				if("Y".equals(ny)){
+  					ret = MongoDBBasic.saveInventory(ol);
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  	  					ret=MongoDBBasic.saveInventory(ol);
+  	  				}
+  	  				if("failed".equals(ret)){
+  	  					failnum = failnum + total+",";
+  	  					fail++;
+  	  				}else{
+  	  					success++;
+  	  				}
   				}else{
-  					success++;
+  					
+  					ret = RestUtils.callsaveInventory(ol);
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  	  					ret=RestUtils.callsaveInventory(ol);
+  	  				}
+  	  				if("failed".equals(ret)){
+  	  					failnum = failnum + total+",";
+  	  					fail++;
+  	  				}else{
+  	  					success++;
+  	  				}
   				}
   				
   				 System.out.println(total+"----"+ret);
@@ -144,24 +174,45 @@ public static String DBOperateOnDelivery(String url){
 	int success=0;
 	int fail=0;
 	String failnum=null;
+	String ret ;
 	BillOfSellPoi bos = new BillOfSellPoi();
 		RestUtils.deleteDB("OnDelivery");
 		List<OnDelivery> OnDeliverys;
-	
+		if("Y".equals(ny)){
+  			MongoDBBasic.DeleteDB("OnDelivery");
+  		}else {
+  			RestUtils.deleteDB("OnDelivery");
+		}
 		try {
 			OnDeliverys = bos.readXlsOfOnDelivery(url);
 			for(OnDelivery ol : OnDeliverys){
 				total++;
-				String ret = RestUtils.callsaveOnDelivery(ol);
-				if("failed".equals(ret)||"Read timed out".equals(ret)){
-					ret=RestUtils.callsaveOnDelivery(ol);
-				}
-				if("failed".equals(ret)||"Read timed out".equals(ret)){
-					failnum = failnum + total+",";
-					fail++;
-				}else{
-					success++;
-				}
+				
+  				if("Y".equals(ny)){
+  					ret = MongoDBBasic.saveOnDelivery(ol);
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  						ret=MongoDBBasic.saveOnDelivery(ol);
+  					}
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  						failnum = failnum + total+",";
+  						fail++;
+  					}else{
+  						success++;
+  					}
+  					
+  				}else{
+  					ret = RestUtils.callsaveOnDelivery(ol);
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  						ret=RestUtils.callsaveOnDelivery(ol);
+  					}
+  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+  						failnum = failnum + total+",";
+  						fail++;
+  					}else{
+  						success++;
+  					}
+  					
+  				}
 				
 				 System.out.println(total+"----"+ret);
 				 //System.out.println(oq.info());
@@ -184,6 +235,12 @@ public static String DBOperateOnDelivery(String url){
 	
 	
 	
+
+
+
+
+
+
 	public static String FILEDIR = null;
     /**
      * 上传
