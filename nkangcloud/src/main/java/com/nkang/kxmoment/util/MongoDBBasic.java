@@ -3316,7 +3316,13 @@ public class MongoDBBasic {
 				insertQuery.put("type",quotation.getType());
 				writeResult=mongoDB.getCollection(collectionQuotationList).insert(insertQuery);
 				ret="insert quotation ok  -->" + writeResult;
-			//}
+				
+				Float price = null;
+				if(quotation.getSuggestPrice() != null){
+					price = Float.parseFloat(quotation.getSuggestPrice()+"");
+				}
+				// 更新价格
+				PlasticItemService.updatePriceInfo(quotation.getPlasticItem(), price, quotation.getType());
 			
 				
 		}
