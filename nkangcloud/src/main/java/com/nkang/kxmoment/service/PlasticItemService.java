@@ -1,6 +1,10 @@
 package com.nkang.kxmoment.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +13,15 @@ import org.apache.log4j.Logger;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.GroupCommand;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.PlasticItem;
+import com.nkang.kxmoment.baseobject.QuotationList;
+import com.nkang.kxmoment.util.DateUtil;
 import com.nkang.kxmoment.util.MongoClient;
 
 /**
@@ -145,88 +153,85 @@ public class PlasticItemService {
 		return true;
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map<String, Object> priceList(String itemNo) {
 		Map<String, Object> dataSource = null;
 		if(itemNo == null || itemNo.length() == 0){
 			return null;
 		}
+		// 分割多个itemNo
+		String[] itemNoArr = itemNo.split(",");
+		// 开始日期
+		Calendar beginDateCal = Calendar.getInstance();
+		beginDateCal.add(Calendar.DATE, -30);
+		Date beginTime = beginDateCal.getTime();
+		Date endTime = null;
+		// 统计价格趋势
+		List<Object[]> resultList = statPriceTrend(itemNoArr, beginTime, endTime);
+		if(resultList == null || resultList.size() == 0){
+			return dataSource;
+		}
 		dataSource = new HashMap<String, Object>();
 		// chart initial
 		Map<String, Object> chart = new HashMap<String, Object>();
 		chart.put("theme", "fint");
-		chart.put("xaxisname", itemNo);
 		chart.put("yaxisname", "");
 		chart.put("numberSuffix","");
-		int subIndex = itemNo.lastIndexOf("-");
+		int subIndex = itemNo.indexOf("-");
 		// 设置主副标题
-		String caption = itemNo.substring(0, subIndex>0?subIndex:itemNo.length());
-		String subcaption = itemNo.substring(subIndex>0?subIndex:0, itemNo.length());
+		String caption = "价格变化";
+		String subcaption = "";
+		if(itemNoArr.length==1){
+			chart.put("xaxisname", itemNo);
+			caption = itemNo.substring(0, subIndex>0?subIndex:itemNo.length()) + "价格变化";
+			subcaption = "("+ itemNo.substring(subIndex>0?subIndex+1:0, itemNo.length()) +")";
+		}
 		chart.put("caption", caption);
-		chart.put("subcaption", "("+ subcaption +")");
+		chart.put("subcaption", subcaption);
 		chart.put("showvalues", "0");
-		chart.put("plottooltext", "$seriesname); $value");
+		chart.put("plottooltext", "$seriesname, $value");
 		//Error bar configuration
 		chart.put("halferrorbar", "0");
 		chart.put("errorBarColor", "#990000");
 		chart.put("errorBarAlpha", "50");
 		chart.put("errorBarThickness", "4");
 		chart.put("errorBarWidth", "8");
-		dataSource.put("chart", chart);
 		// categories
 		Map[] categories = new Map[1];
 		Map<String, Object> category = new HashMap<String, Object>(); 
 		categories[0] = category;
-		List<Map<String, Object>> categoryList = new ArrayList<Map<String,Object>>();
-		Map<String, Object> ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "Jan");
-		categoryList.add(ctgMap);
-		ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "Feb");
-		categoryList.add(ctgMap);
-		ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "Mar");
-		categoryList.add(ctgMap);
-		ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "Apl");
-		categoryList.add(ctgMap);
-		ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "May");
-		categoryList.add(ctgMap);
-		ctgMap = new HashMap<String, Object>();
-		ctgMap.put("label", "Jun");
-		categoryList.add(ctgMap);
+		List<Map<String, Object>> categoryList = new ArrayList<Map<String, Object>>();
 		category.put("category", categoryList);
-		dataSource.put("categories", categories);
 		// dataset
-		List<Map> dataset = new ArrayList<Map>();
-		Map<String, Object> dataMap;
-		List<Map> dataList;
-		// 定价
-		dataMap = new HashMap<String, Object>();
-		dataMap.put("seriesname", "定价");
-		dataList =  new ArrayList<Map>();
-		for(int i=0; i<11; i++){
+		Map<String, Map> dataset = new HashMap<String, Map>();
+		for(Object[] rO : resultList){
+			String day = (String)rO[0];
+			String itemNo2 = (String)rO[1];
+			Double price = (Double)rO[2];
+			Map<String, Object> dataMap = dataset.get(itemNo2);
+			List<Map> dataList = null;
+			if(dataMap == null){
+				dataMap = new HashMap<String, Object>();
+				dataMap.put("seriesname", itemNo2);
+				dataList = new ArrayList<Map>();
+				dataMap.put("data", dataList);
+				dataset.put(itemNo2, dataMap);
+			}else{
+				dataList = (List<Map>)dataMap.get("data");
+			}
+			// 横轴标题(日期(天))
+			Map<String, Object> ctgMap = new HashMap<String, Object>();
+			ctgMap.put("label", day);
+			categoryList.add(ctgMap);
+			// 纵轴值（每日合计价格）
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("value", 16700+i*100);
+			data.put("value", price);
 			data.put("errorvalue", "");
 			dataList.add(data);
 		}
-		dataMap.put("data", dataList);
-		dataset.add(dataMap);
-		// 
-		dataMap = new HashMap<String, Object>();
-		dataMap.put("seriesname", "发布价");
-		dataList =  new ArrayList<Map>();
-		for(int i=0; i<11; i++){
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("value", 15700+i*100);
-			data.put("errorvalue", "");
-			dataList.add(data);
-		}
-		dataMap.put("data", dataList);
-		dataset.add(dataMap);
-		dataSource.put("dataset", dataset);
+		dataSource.put("chart", chart);
+		dataSource.put("categories", categories);
+		dataSource.put("dataset", dataset.values());
 		return dataSource;
 	}
 	
@@ -289,7 +294,6 @@ public class PlasticItemService {
 				+ "}";
 		// 分组统计
 		BasicDBList resultList = (BasicDBList) MongoClient.groupBy(key, cond, initial, reduce, Inventory.class);
-		resultList.size();
 		for(int i=0; i<resultList.size(); i++){
 			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
 			String itemNo = dbObject.getString("plasticItem");
@@ -318,7 +322,6 @@ public class PlasticItemService {
 				+ "}";
 		// 分组统计
 		BasicDBList resultList = (BasicDBList) MongoClient.groupBy(key, cond, initial, reduce, OrderNopay.class);
-		resultList.size();
 		for(int i=0; i<resultList.size(); i++){
 			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
 			String itemNo = dbObject.getString("plasticItem");
@@ -347,7 +350,6 @@ public class PlasticItemService {
 				+ "}";
 		// 分组统计
 		BasicDBList resultList = (BasicDBList) MongoClient.groupBy(key, cond, initial, reduce, OnDelivery.class);
-		resultList.size();
 		for(int i=0; i<resultList.size(); i++){
 			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
 			String itemNo = dbObject.getString("plasticItem");
@@ -360,6 +362,84 @@ public class PlasticItemService {
 		}
 	}
 
+	/**
+	 * 统计价格趋势
+	 * @param itemNo 变化
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @return
+	 */
+	private static List<Object[]> statPriceTrend(String[] itemNoArr, Date beginTime, Date endTime) {
+		List<Object[]> result = null;
+		DBCollection coll = MongoClient.getCollection(QuotationList.class);
+		// 按时间分组
+		String keyf = "function(doc){"
+				+ "  var date = doc.dateTime.substring(0,10);" // 截取时间 yyyy-MM-dd
+				+ "  return {'day':date, 'itemNo': doc.plasticItem};"
+				+ "}";
+		// 条件
+		DBObject condition = new BasicDBObject();
+		condition.put("plasticItem", new BasicDBObject("$in", itemNoArr));
+		if(beginTime != null){
+			DBObject condDate = new BasicDBObject();
+			String beginTimeStr = DateUtil.date2Str(beginTime, "yyyy-MM-dd HH:mm:ss.S");
+			condDate.put("$gt", beginTimeStr);
+			condition.put("dateTime", condDate);
+		}
+		if(endTime != null){
+			DBObject condDate = new BasicDBObject();
+			String endTimeStr = DateUtil.date2Str(endTime, "yyyy-MM-dd HH:mm:ss.S");
+			condDate.put("$gt", endTimeStr);
+			condition.put("dateTime", new BasicDBObject().put("$lt", endTimeStr));
+		}
+		// 初始
+		DBObject initial = new BasicDBObject();
+		initial.put("sumPrice", 0);
+		String reduce = "function(curr, result) {"
+				+ "  if(curr.dateTime && curr.suggestPrice){"
+				+ "    result.sumPrice += curr.suggestPrice;"
+				+ "  }"
+				+ "}";
+		// 最后处理
+		String finalize = null;
+		GroupCommand cmd = new GroupCommand(coll, keyf, condition, initial, reduce, finalize);
+		BasicDBList resultList = (BasicDBList)coll.group(cmd);
+		if(resultList != null && resultList.size() > 0){
+			result = new ArrayList<Object[]>();
+		}
+		for(int i=0; i<resultList.size(); i++){
+			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
+			String day = dbObject.getString("day");
+			String itemNo = dbObject.getString("itemNo");
+			Double sumPrice = dbObject.getDouble("sumPrice");
+			Object[] rObjects = {day, itemNo, sumPrice};
+			result.add(rObjects);
+		}
+		// 按时间排序
+		Collections.sort(result, new Comparator<Object[]>() {
+			public int compare(Object[] arg0, Object[] arg1) {
+				String dayStr0 = (String) arg0[0];
+				Date day0 = DateUtil.str2Date(dayStr0, "yyyy-MM-dd");
+				String dayStr1 = (String) arg1[0];
+				Date day1 = DateUtil.str2Date(dayStr1, "yyyy-MM-dd");
+				if (day0.getTime() > day1.getTime()) {
+					return 1;
+				} else if (day0.getTime() == day1.getTime()) {
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+		});
+		if(result.size()>5){
+			for(Object[] objs : result){
+				String dayStr = (String) objs[0];
+				objs[0] = dayStr.substring(5, 10);  //截取部分 MM-dd
+			}	
+		}
+		return result;
+	}
+	
 	/**
 	 * get detail
 	 * @param id
