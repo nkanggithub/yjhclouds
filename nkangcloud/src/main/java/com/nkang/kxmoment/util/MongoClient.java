@@ -320,6 +320,37 @@ public class MongoClient {
 	
 	/**
 	 * 查询列表
+	 * @param query 查询条件
+	 * @param page 页码
+	 * @param count 每页条数
+	 * @param orderBy 排序
+	 * @param clazz 转换类型
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "hiding" })
+	public static <T> List<T> findList(Integer page, Integer count, DBObject orderBy, Class clazz) {
+		// 集合名
+		return findList(null, null, null, page, count, orderBy, clazz);
+	}
+	
+	/**
+	 * 查询列表
+	 * @param query 查询条件
+	 * @param page 页码
+	 * @param count 每页条数
+	 * @param orderBy 排序
+	 * @param clazz 转换类型
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "hiding" })
+	public static <T> List<T> findList(DBObject query, 
+			Integer page, Integer count, DBObject orderBy, Class clazz) {
+		// 集合名
+		return findList(null, null, query, page, count, orderBy, clazz);
+	}
+	
+	/**
+	 * 查询列表
 	 * @param propertyName 字段名
 	 * @param query 查询条件
 	 * @param page 页码
