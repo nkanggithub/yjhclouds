@@ -270,7 +270,7 @@ public class CoreService
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
-						if(MongoDBBasic.checkUserAuth(fromUserName, "isInternalSeniorMgt") || MongoDBBasic.checkUserAuth(fromUserName, "isInternalImtMgt") || MongoDBBasic.checkUserAuth(fromUserName, "isITOperations") || MongoDBBasic.checkUserAuth(fromUserName, "isInternalQuoter")){
+						if(MongoDBBasic.checkUserRole(fromUserName, "Internal")){
 							Article articleForInternal = new Article();
 							articleForInternal.setTitle("报价管理");
 							articleForInternal.setDescription("报价管理");
