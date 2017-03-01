@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form id="file_upload" name="file_upload" action="/nkangcloud/fileUpload/uploadOrderNopay" enctype="multipart/form-data" method="post">
+<form id="file_upload" name="file_upload" action="../fileUpload/uploadOrderNopay" enctype="multipart/form-data" method="post">
 <input type="file" name="file">
 <input type="submit"/>
 
