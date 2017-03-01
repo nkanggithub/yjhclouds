@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpRequest;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -145,8 +146,12 @@ public class QuotationController {
 		quotation.setType(type);
 		
 		String ret = MongoDBBasic.insertQuotationList(quotation);
+		Float price = null;
+		if(suggestPrice != null){
+			price = Float.parseFloat(suggestPrice+"");
+		}
 		// 更新价格
-		PlasticItemService.updatePriceInfo(plasticItem, Float.parseFloat(suggestPrice+""), type);
+		PlasticItemService.updatePriceInfo(plasticItem, price, type);
 		return ret;
 	}
 	
