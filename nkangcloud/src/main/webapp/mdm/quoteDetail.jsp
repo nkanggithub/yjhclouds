@@ -1,13 +1,14 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,org.json.JSONObject"%>
-<%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
+<%@ page import="com.nkang.kxmoment.baseobject.PlasticItem"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="com.nkang.kxmoment.service.PlasticItemService"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
 String AccessKey = RestUtils.callGetValidAccessKey();
-List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
+List<PlasticItem> ql=PlasticItemService.findList(1,9999);
 String uid = request.getParameter("UID");
 
 int special=0;
@@ -47,13 +48,15 @@ $(".picClose").live("click",function(){
 	$("#pic").css("display","none");
 }); */
 $(".singleQuote").live("swipeleft",function(){
-	$(this).css("overflow","visible");
-$(this).addClass("editBtn");
 var status=$(this).find("#status").val();
-if($("#isSpecial").val()=="2"&&status=="0"){
+if($("#isSpecial").val()=="2"&&status=="1"){
+	$(this).css("overflow","visible");
+	$(this).addClass("editBtn");
 	$(this).addClass("specialEditBtn");
 $(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p></div>");}
 else if($("#isSpecial").val()=="1"||$("#isSpecial").val()=="2"){
+	$(this).css("overflow","visible");
+	$(this).addClass("editBtn");
 	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 }/* 
 else if($("#isSpecial").val()=="0"){
@@ -69,17 +72,22 @@ function approve(obj)
 {
 	var item=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
 	 $.ajax({
-		 url:'../updateStatus',
+		 url:'../saveQuotationList',
 		 type:"POST",
 		 data:{
-			 item:item,
-			 approveStatus:"1"
+			 plasticItem:item,
+			 approveBy:$("#UID").val(),
+			 type:2
 		 },
 		 success: function(data) {
 			 swal("Success", "该审核已被您批准通过", "success");
 			 $.ajax({
-				 url:'../getAllQuotations',
+				 url:'../PlasticItem/findList',
 				 type:"POST",
+				 data:{
+					 page:1,
+					 count:9999
+				 },
 				 success:function(data){
 					 if(data)
 						 {
@@ -88,11 +96,11 @@ function approve(obj)
 						 var priceColor="";
 						 for(var i=0;i<data.length;i++){
 							
-							 if(data[i].approveStatus=="0"){
+							 if(data[i].priceStatus==0){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
-							 else if(data[i].approveStatus=="1"){
+							 else if(data[i].priceStatus==1){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 							 }
@@ -103,13 +111,13 @@ function approve(obj)
 								
 							
 							 html+="<li class='singleQuote'>"
-								 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
+								 +"<input id='status' type='hidden' value='"+data[i].priceStatus+"' />"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].itemNo+"</span></p>"+priceColor+data[i].price+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
-								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
-								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].soldOutOfPay+"</p></div>"
-								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
+								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].inventorysAvailableAmountSum+"</p></div>"
+								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
+								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 								 +"</div>"
 								 +"<div class='rightPanel'>"
 								 +"</div></div>"
@@ -125,7 +133,7 @@ function approve(obj)
 	}
 function edit(obj)
 {
-	var isUpdatePrice="0";
+	var isUpdatePrice=0;
 	var price=$(obj).parent(".edit").siblings(".firstLayer").children(".quotePrice").find("span").text();
 	var inventory=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#inventoryValue").text();
 	var soldOutOfPay=$(obj).parent(".edit").siblings(".secondLayer").children(".leftPanel").find("#soldOutOfPayValue").text();
@@ -156,77 +164,82 @@ function edit(obj)
 			if (inputValue === false){ return false; }
 			else{
 				if($("#newPrice").val().trim()!==price)
-					{isUpdatePrice="1";}
-				 $.ajax({
-					 url:'../updateQuotationByItem',
+					{isUpdatePrice=1;}
+				if(isUpdatePrice==0){
+
+					 swal("Error", "您未进行修改", "error");
+				}
+				else{$.ajax({
+					 url:'../saveQuotationList',
 					 type:"POST",
 					 data:{
-						 item:$("#newItem").val(),
-						 categoryGrade:$("#newGrade").val(),
-						 category:$("#newCategory").val(),
-						 quotationPrice:$("#newPrice").val(),
-						 avaliableInventory:$("#newInventory").val(),
-						 soldOutOfPay:$("#newSoldOutOfPay").val(),
-						 onDelivery:$("#newOnDelivery").val(),
-						 isUpdatePrice:isUpdatePrice
+						 plasticItem:item,
+						 editBy:$("#UID").val(),
+						 type:1,
+						 suggestPrice:$("#newPrice").val().trim()
 					 },
-					 success: function(data) {
-						 $(obj).parent().parent().removeClass("editBtn");
-						 $(obj).parent().parent().remove(".edit");
-						 swal("Success", "报价更新成功", "success");
-						 $.ajax({
-							 url:'../getAllQuotations',
-							 type:"POST",
-							 success:function(data){
-								 if(data)
-									 {
-									 var html="";
-									 var status="";
-									 var priceColor="";
-									 for(var i=0;i<data.length;i++){
-										/*  if(data[i].category!=""){
-											 category="[<span id='category'>"+data[i].category+"</span>]";
-										 } */
-										/*  if(data[i].categoryGrade!=""){
-											 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
-										 } */
-										 if(data[i].approveStatus=="0"){
-											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
-											 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
+				 success: function(data) {
+					 $(obj).parent().parent().removeClass("editBtn");
+					 $(obj).parent().parent().remove(".edit");
+					 swal("Success", "报价更新成功", "success");
+					 $.ajax({
+						 url:'../PlasticItem/findList',
+						 type:"POST",
+						 data:{
+							 page:1,
+							 count:9999
+						 },
+						 success:function(data){
+							 if(data)
+								 {
+								 var html="";
+								 var status="";
+								 var priceColor="";
+								 for(var i=0;i<data.length;i++){
+									/*  if(data[i].category!=""){
+										 category="[<span id='category'>"+data[i].category+"</span>]";
+									 } */
+									/*  if(data[i].categoryGrade!=""){
+										 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
+									 } */
+									 if(data[i].priceStatus==0){
+										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+										 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
+									 }
+									 else if(data[i].priceStatus==1){
+										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+										 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
+									 }
+									 else
+										 {
+										 priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
 										 }
-										 else if(data[i].approveStatus=="1"){
-											 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
-											 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
-										 }
-										 else
-											 {
-											 priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
-											 }
-											
 										
-										 html+="<li class='singleQuote'>"
-											 +"<input id='status' type='hidden' value='"+data[i].approveStatus+"' />"
-											 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].item+"</span></p>"+priceColor+data[i].quotationPrice+"</span></p></div>"
-											 +"<div class='secondLayer'>"
-											 +"<div class='leftPanel'>"
-											 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].avaliableInventory+"</p></div>"
-											 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].soldOutOfPay+"</p></div>"
-											 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDelivery+"</p></div>"
-											 +"</div>"
-											 +"<div class='rightPanel'>"
-											 +"</div></div>"
-											 +status +"</li>"; 
-											 status="";
-									 }
-									 $("#QuoteList").html(html);
-									 }
+									
+									 html+="<li class='singleQuote'>"
+										 +"<input id='status' type='hidden' value='"+data[i].priceStatus+"' />"
+										 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].itemNo+"</span></p>"+priceColor+data[i].price+"</span></p></div>"
+										 +"<div class='secondLayer'>"
+										 +"<div class='leftPanel'>"
+										 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].inventorysAvailableAmountSum+"</p></div>"
+										 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
+										 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDeliveryNotInInRepositorySum+"</p></div>"
+										 +"</div>"
+										 +"<div class='rightPanel'>"
+										 +"</div></div>"
+										 +status +"</li>"; 
+										 status="";
 								 }
-							 });
-					 },
-					 error:function(data){
-						 
-					 }
-					 });
+								 $("#QuoteList").html(html);
+								 }
+							 }
+						 });
+				 },
+				 error:function(data){
+					 
+				 }
+				 });}
+					 
 			}});
 	}
 window.edit=edit;
@@ -417,6 +430,7 @@ line-height:22px;}
 </style>
 </head>
 <body>
+<input id="UID" type="hidden" value="<%=uid %>" />
 <div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >
 <img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM" alt=""/>
  <img class="picClose" style="position:absolute;top:10px;right:10px;width:15px;height:auto;" src="../MetroStyleFiles/Close2.png" alt=""/> 
@@ -438,26 +452,33 @@ line-height:22px;}
 for(int i=0;i<ql.size();i++){
 %>
 <li class="singleQuote">
-<input id="status" type="hidden" value="<%=ql.get(i).getApproveStatus() %>"/>
-<div class="firstLayer"><p class="quoteTitle"><span id="item"><%=ql.get(i).getItem() %></span></p><% if("0".equals(ql.get(i).getApproveStatus())){%><p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else if("1".equals(ql.get(i).getApproveStatus())){ %><p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getQuotationPrice() %></span></p><%} else {%><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getQuotationPrice() %></span><% }%></p></div>
-
+<input id="status" type="hidden" value="<%=ql.get(i).getPriceStatus()%>"/>
+<div class="firstLayer">
+<p class="quoteTitle"><span id="item"><%=ql.get(i).getItemNo() %></span></p>
+<% if(ql.get(i).getPriceStatus()==1){%>
+<p class="quotePrice"  style="color:red">￥<span><%=ql.get(i).getPrice() %></span></p>
+<%} else if(ql.get(i).getPriceStatus()==2){ %>
+<p class="quotePrice"  style="color:green">￥<span><%=ql.get(i).getPrice() %></span></p>
+<%} else {%><p class="quotePrice"  style="color:#D3D3D3">￥<span><%=ql.get(i).getPrice() %></span></p><% }%>
+</div>
 <div class="secondLayer">
 <div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getAvaliableInventory() %></p></div>
-<div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue"><%=ql.get(i).getSoldOutOfPay() %></p></div>
-<div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDelivery() %></p></div>
+<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getInventorysAvailableAmountSum() %></p></div>
+<div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue"><%=ql.get(i).getOrderNopaynoInvoiceAmountSum() %></p></div>
+<div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDeliveryNotInInRepositorySum() %></p></div>
 </div>
 <div class="rightPanel">
 </div>
 </div>
-<% if(("0").equals(ql.get(i).getApproveStatus())) {%>
+<% if(ql.get(i).getPriceStatus()==1) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
 <% } %>
-<% if(("1").equals(ql.get(i).getApproveStatus())) {%>
+<% if(ql.get(i).getPriceStatus()==2) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
 <% } %>
-<% }  %>
 </li>
+<% }  %>
+
 </ul>
 </div>
 <!--
