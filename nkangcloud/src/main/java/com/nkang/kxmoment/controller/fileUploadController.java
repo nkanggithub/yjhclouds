@@ -20,6 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.OnDelivery;
+import com.nkang.kxmoment.util.BillOfSellPoi;
+import com.nkang.kxmoment.util.RestUtils;
+
 
 @Controller
 @RequestMapping("/fileUpload")
@@ -36,17 +40,53 @@ public class fileUploadController {
 	    upload.setSizeMax(1024 * 1024 * 4);
 
 		 List<FileItem> fileList = null;
+		 String url = null ;
 		    try {
+		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
 		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
+		        	 
 		            for(FileItem item:fileList){
 		            	System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
-		                    item.write(new File(fileurl+item.getName()));
+		                	url = fileurl+item.getName();
+		                    item.write(new File(url));
+		                    
 		                }
 		            }
+		            
+		            BillOfSellPoi bos = new BillOfSellPoi();
+		    		RestUtils.deleteDB("OnDelivery");
+		    		List<OnDelivery> onDelivery;
+		    		int x=0;
+		    		try {
+		    			onDelivery = bos.readXlsOfOnDelivery(url);
+		    			for(OnDelivery ol : onDelivery){
+		    				x++;
+		    				String ret = RestUtils.callsaveOnDelivery(ol);
+		    				if("failed".equals(ret)){
+		    					ret=RestUtils.callsaveOnDelivery(ol);
+		    				}
+		    				 System.out.println(x+"----"+ret);
+		    				 //System.out.println(oq.info());
+		    			}
+		    			
+		    		} catch (IOException e) {
+		    			// TODO Auto-generated catch block
+		    			e.printStackTrace();
+		    			System.out.println(e.getMessage());
+		    		}finally{
+		    			File file = new File(url); 
+
+		    			if (file.exists()) { 
+
+		    			    file.delete(); 
+
+		    			}
+		    		}
 		        }
+		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
