@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nkang.kxmoment.baseobject.OnDelivery;
+import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.RestUtils;
 
@@ -62,16 +63,16 @@ public class fileUploadController {
 		            }
 		            
 		            BillOfSellPoi bos = new BillOfSellPoi();
-		    		RestUtils.deleteDB("OnDelivery");
-		    		List<OnDelivery> onDelivery;
+		    		RestUtils.deleteDB("OrderNopay");
+		    		List<OrderNopay> OrderNopays;
 		    	
 		    		try {
-		    			onDelivery = bos.readXlsOfOnDelivery(url);
-		    			for(OnDelivery ol : onDelivery){
+		    			OrderNopays = bos.readXlsOfOrderNopay(url);
+		    			for(OrderNopay ol : OrderNopays){
 		    				total++;
-		    				String ret = RestUtils.callsaveOnDelivery(ol);
+		    				String ret = RestUtils.callsaveOrderNopay(ol);
 		    				if("failed".equals(ret)){
-		    					ret=RestUtils.callsaveOnDelivery(ol);
+		    					ret=RestUtils.callsaveOrderNopay(ol);
 		    				}
 		    				if("failed".equals(ret)){
 		    					failnum = failnum + total+",";
@@ -90,11 +91,8 @@ public class fileUploadController {
 		    			System.out.println(e.getMessage());
 		    		}finally{
 		    			File file = new File(url); 
-
 		    			if (file.exists()) { 
-
 		    			    file.delete(); 
-
 		    			}
 		    		}
 		        }
