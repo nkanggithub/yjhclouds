@@ -146,13 +146,21 @@ public class QuotationController {
 		quotation.setType(type);
 		
 		String ret = MongoDBBasic.insertQuotationList(quotation);
-		Float price = null;
-		if(suggestPrice != null){
-			price = Float.parseFloat(suggestPrice+"");
-		}
-		// 更新价格
-		PlasticItemService.updatePriceInfo(plasticItem, price, type);
+		
 		return ret;
+	}
+	
+	
+	@RequestMapping("/pushPlasticItem")
+	public @ResponseBody List<PlasticItem> getPushPlasticItem(@RequestParam(value="openid", required=true) String openid){
+		 List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
+		List<String> itemsList = new ArrayList<String>();
+		itemsList=MongoDBBasic.queryUserKM(openid); 
+		for(String str : itemsList){
+			plasticItemlist.add(PlasticItemService.getDetailByNo(str));
+		}
+		return plasticItemlist;
+		
 	}
 	
 }
