@@ -38,7 +38,7 @@ public class PlasticItemController {
 			
 		}
 		return respParms;
-	} 
+	}
 
 	@RequestMapping("/findList")
 	@ResponseBody
@@ -46,6 +46,17 @@ public class PlasticItemController {
 		allowCrossDomain(request, response);
 		Map<String, Object> respParms = new HashMap<String, Object>();
 		List<PlasticItem> list = PlasticItemService.findList(page, count);
+		respParms.put("code", "200");
+		respParms.put("data", list);
+		return respParms;
+	}
+
+	@RequestMapping("/findList4DiffPrice")
+	@ResponseBody
+	public Map<String, Object> findList4DiffPrice(HttpServletRequest request, HttpServletResponse response, Integer page, Integer count){
+		allowCrossDomain(request, response);
+		Map<String, Object> respParms = new HashMap<String, Object>();
+		List<PlasticItem> list = PlasticItemService.findList4DiffPrice(page, count);
 		respParms.put("code", "200");
 		respParms.put("data", list);
 		return respParms;

@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -31,6 +32,7 @@ import com.nkang.kxmoment.util.MongoClient;
  */
 public class PlasticItemService {
 	private static Logger logger = Logger.getLogger(PlasticItemService.class);
+	private static DecimalFormat fnum = new DecimalFormat("#####0.00");
 	
 	/**
 	 * Save or Update(if exists id)
@@ -65,7 +67,7 @@ public class PlasticItemService {
 		}
 		if(price != null){
 			float prePrice = item.getPrice();
-			if(prePrice >= 0){
+			if(prePrice > 0){
 				// 计算差价
 				float diffPrice = price - prePrice;
 				item.setDiffPrice(diffPrice);
@@ -87,6 +89,7 @@ public class PlasticItemService {
 			break;
 		}
 		item.setPriceStatus(priceStatus);
+		item.setUpdateAt(new Date());
 		// 保存
 		MongoClient.save(item);
 		flag = true;
@@ -108,6 +111,7 @@ public class PlasticItemService {
 		item = new PlasticItem();
 		item.setItemNo(inventory.getPlasticItem());
 		item.setPriceStatus(0);
+		item.setCreateAt(new Date());
 		// 保存
 		MongoClient.save(item);
 		return true;
@@ -242,18 +246,25 @@ public class PlasticItemService {
 	public static List<PlasticItem> findList(Integer page, Integer count) {
 		List<PlasticItem> list = null;
 		try {
-			list = MongoClient.findList(page, count, PlasticItem.class);
+			DBObject orderBy = new BasicDBObject();
+			orderBy.put("updateAt", -1);
+			list = MongoClient.findList(page, count, orderBy, PlasticItem.class);
 			if(list == null){
 				return null;
 			}
 			Map<String, PlasticItem> itemMap = new HashMap<String, PlasticItem>();
 			// 编号列表
 			for (PlasticItem plasticItem : list) {
+				// 四舍五入长度，5位小数
+				String priceStr = fnum.format(plasticItem.getPrice());
+				plasticItem.setPrice(Float.valueOf(priceStr));
+				String diffPriceStr = fnum.format(plasticItem.getDiffPrice());
+				plasticItem.setDiffPrice(Float.valueOf(diffPriceStr));
+				// // 清空不需要的值
 				plasticItem.setInventorys(null);
 				plasticItem.setOnDeliverys(null);
 				plasticItem.setOrderNopays(null);
 				plasticItem.setFollowers(null);
-				plasticItem.setQuotations(null);
 				String itemNo = plasticItem.getItemNo();
 //				itemNoList.add(itemNo);
 				itemMap.put(itemNo, plasticItem);
@@ -265,6 +276,40 @@ public class PlasticItemService {
 			sumOrderNopay(itemMap);
 			// 在途情况统计
 			sumOnDelivery(itemMap);
+		} catch (Exception e) {
+			logger.error("Find KM List fail.", e);
+			list = null;
+		}
+		return list;
+	}
+	
+	/**
+	 * Get PlasticItem list for show diffrence price
+	 * @return
+	 */
+	public static List<PlasticItem> findList4DiffPrice(Integer page, Integer count) {
+		List<PlasticItem> list = null;
+		try {
+			DBObject query = new BasicDBObject();
+			query.put("priceStatus", 2);
+			DBObject orderBy = new BasicDBObject();
+			orderBy.put("updateAt", -1);
+			list = MongoClient.findList(query, page, count, orderBy, PlasticItem.class);
+			if(list == null){
+				return null;
+			}
+			for (PlasticItem plasticItem : list) {
+				// 四舍五入长度，5位小数
+				String priceStr = fnum.format(plasticItem.getPrice());
+				plasticItem.setPrice(Float.valueOf(priceStr));
+				String diffPriceStr = fnum.format(plasticItem.getDiffPrice());
+				plasticItem.setDiffPrice(Float.valueOf(diffPriceStr));
+				// // 清空不需要的值
+				plasticItem.setInventorys(null);
+				plasticItem.setOnDeliverys(null);
+				plasticItem.setOrderNopays(null);
+				plasticItem.setFollowers(null);
+			}
 		} catch (Exception e) {
 			logger.error("Find KM List fail.", e);
 			list = null;
@@ -300,7 +345,12 @@ public class PlasticItemService {
 			PlasticItem item = itemMap.get(itemNo);
 			if(item != null){
 				Double sum = dbObject.getDouble("availableAmountSum");
-				sum = !Double.isNaN(sum) ? sum : 0;
+				if(!Double.isNaN(sum)){
+					String sumStr = fnum.format(sum);
+					sum = Double.valueOf(sumStr);
+				}else{
+					sum = 0d;
+				}
 				item.setInventorysAvailableAmountSum(sum);
 			}
 		}
@@ -328,7 +378,12 @@ public class PlasticItemService {
 			PlasticItem item = itemMap.get(itemNo);
 			if(item != null){
 				Double sum = dbObject.getDouble("notInInRepositorySum");
-				sum = !Double.isNaN(sum) ? sum : 0;
+				if(!Double.isNaN(sum)){
+					String sumStr = fnum.format(sum);
+					sum = Double.valueOf(sumStr);
+				}else{
+					sum = 0d;
+				}
 				item.setOrderNopaynoInvoiceAmountSum(sum);
 			}
 		}
@@ -356,7 +411,12 @@ public class PlasticItemService {
 			PlasticItem item = itemMap.get(itemNo);
 			if(item != null){
 				Double sum = dbObject.getDouble("noInvoiceAmountSum");
-				sum = !Double.isNaN(sum) ? sum : 0;
+				if(!Double.isNaN(sum)){
+					String sumStr = fnum.format(sum);
+					sum = Double.valueOf(sumStr);
+				}else{
+					sum = 0d;
+				}
 				item.setOnDeliveryNotInInRepositorySum(sum);
 			}
 		}
