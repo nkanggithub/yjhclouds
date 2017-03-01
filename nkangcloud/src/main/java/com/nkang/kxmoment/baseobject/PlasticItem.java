@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.baseobject;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,9 +36,11 @@ public class PlasticItem {
 	private List<Object> orderNopays;
 	// 已售未出货最大可用值
 	private double orderNopaynoInvoiceAmountSum;
+	// 创建时间
+	private Date createAt;
+	// 修改时间
+	private Date updateAt;
 	
-	// 报价信息ID
-	private List<Object> quotations;
 	
 	public String getId() {
 		return id;
@@ -118,16 +121,22 @@ public class PlasticItem {
 	public void setOrderNopays(List<Object> orderNopays) {
 		this.orderNopays = orderNopays;
 	}
-	public List<Object> getQuotations() {
-		return quotations;
-	}
-	public void setQuotations(List<Object> quotations) {
-		this.quotations = quotations;
-	}
 	public double getOrderNopaynoInvoiceAmountSum() {
 		return orderNopaynoInvoiceAmountSum;
 	}
 	public void setOrderNopaynoInvoiceAmountSum(double orderNopaynoInvoiceAmountSum) {
 		this.orderNopaynoInvoiceAmountSum = orderNopaynoInvoiceAmountSum;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
 	}
 }
