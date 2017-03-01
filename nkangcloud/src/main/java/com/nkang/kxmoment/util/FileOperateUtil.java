@@ -46,17 +46,21 @@ public class FileOperateUtil {
 		BillOfSellPoi bos = new BillOfSellPoi();
   		
   		List<OrderNopay> OrderNopays;
-  	
+  		if("Y".equals(ny)){
+  			MongoDBBasic.DeleteDB("OrderNopay");
+  		}else {
+  			RestUtils.deleteDB("OrderNopay");
+		}
   		try {
   			OrderNopays = bos.readXlsOfOrderNopay(url);
   			for(OrderNopay ol : OrderNopays){
   				total++;
   				String ret;
   				if("Y".equals(ny)){
-  					MongoDBBasic.DeleteDB("OrderNopay");
+  					
   					ret = MongoDBBasic.saveOrderNopay(ol);
   				}else{
-  					RestUtils.deleteDB("OrderNopay");
+  					
   					ret = RestUtils.callsaveOrderNopay(ol);
   				}
   				
