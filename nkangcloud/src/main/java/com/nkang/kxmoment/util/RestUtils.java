@@ -2541,12 +2541,12 @@ public static String regist(WeChatMDLUser user) {
 	           message = new String(jsonBytes, "UTF-8");
 	           is.close();
 	       } catch (Exception e) {
-	    	   System.out.println("error:::" + message + " failed http ---------" + url);
-	    	   System.out.println(e.getMessage());
+	    	  // System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   //System.out.println(e.getMessage());
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
-		 System.out.println(url);
+		 //System.out.println(url);
 		return message;
     
     }

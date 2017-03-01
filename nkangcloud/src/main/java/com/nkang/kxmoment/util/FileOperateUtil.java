@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 public class FileOperateUtil {
-    public static String FILEDIR = null;
+	public static String FILEDIR = null;
     /**
      * 上传
      * @param request
@@ -98,4 +98,3 @@ public class FileOperateUtil {
         }
     }   
 }
-

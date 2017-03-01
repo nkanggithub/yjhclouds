@@ -378,9 +378,13 @@ public class BillOfSellPoi {
 				return inventoryList;
 	 }
 	 
-	 public List<OnDelivery> readXlsOfOnDelivery() throws FileNotFoundException{
+	 public List<OnDelivery> readXlsOfOnDelivery(String url) throws FileNotFoundException{
 			List<OnDelivery> OnDeliveryList = new ArrayList<OnDelivery>();
-			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OnDelivery.XLS");
+			// InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OnDelivery.XLS");
+			while (url==null) {
+				return null;
+			}
+			InputStream is = new FileInputStream(url);
 
 		        HSSFWorkbook hssfWorkbook;
 				try {
@@ -493,8 +497,11 @@ public class BillOfSellPoi {
 						                Double unfilledOrderAmount = hssfRow.getCell(5).getNumericCellValue();
 						                xlsDto.setUnfilledOrderAmount(unfilledOrderAmount);
 						                
-						                Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
-						                xlsDto.setFilledOrderAmount(filledOrderAmount);
+						                if(hssfRow.getCell(6)!=null){
+						                	 Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
+								                xlsDto.setFilledOrderAmount(filledOrderAmount);
+						                }
+						               
 						                
 						                Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
 						                xlsDto.setNoInvoiceAmount(noInvoiceAmount);

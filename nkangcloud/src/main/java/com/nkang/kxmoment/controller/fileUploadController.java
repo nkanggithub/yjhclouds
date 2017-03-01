@@ -40,13 +40,18 @@ public class fileUploadController {
 	    upload.setSizeMax(1024 * 1024 * 4);
 
 		 List<FileItem> fileList = null;
-		 String url = null ;
+		 	String url = null ;
+		 	String message="";
+			int total=0;
+    		int success=0;
+    		int fail=0;
+    		String failnum=null;
 		    try {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
 		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
-		        	 
+		        	
 		            for(FileItem item:fileList){
 		            	System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
@@ -59,16 +64,23 @@ public class fileUploadController {
 		            BillOfSellPoi bos = new BillOfSellPoi();
 		    		RestUtils.deleteDB("OnDelivery");
 		    		List<OnDelivery> onDelivery;
-		    		int x=0;
+		    	
 		    		try {
 		    			onDelivery = bos.readXlsOfOnDelivery(url);
 		    			for(OnDelivery ol : onDelivery){
-		    				x++;
+		    				total++;
 		    				String ret = RestUtils.callsaveOnDelivery(ol);
 		    				if("failed".equals(ret)){
 		    					ret=RestUtils.callsaveOnDelivery(ol);
 		    				}
-		    				 System.out.println(x+"----"+ret);
+		    				if("failed".equals(ret)){
+		    					failnum = failnum + total+",";
+		    					fail++;
+		    				}else{
+		    					success++;
+		    				}
+		    				
+		    				 System.out.println(total+"----"+ret);
 		    				 //System.out.println(oq.info());
 		    			}
 		    			
@@ -90,7 +102,8 @@ public class fileUploadController {
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
-			return "ok";
+		    message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
+			return message;
 
 	}
 /*//		, @RequestParam("file") CommonsMultipartFile file
