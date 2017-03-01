@@ -54,6 +54,7 @@ import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.service.PlasticItemService;
 
 public class MongoDBBasic { 
 	private static Logger log = Logger.getLogger(MongoDBBasic.class);
@@ -3189,6 +3190,8 @@ public class MongoDBBasic {
 				doc.put("$set", insertQuery);
 				writeResult=mongoDB.getCollection(collectionInventory).update(new BasicDBObject().append("plasticItem", inventory.getPlasticItem()), doc);
 				ret="update Inventory ok  -->" + writeResult;
+				// 判断并插入
+				PlasticItemService.judgeAndInsert(inventory);
 			}
 		}
 		return ret;
@@ -3223,6 +3226,8 @@ public class MongoDBBasic {
 				//mongoDB.getCollection(collectionOnDelivery).remove(query);
 				writeResult=mongoDB.getCollection(collectionOnDelivery).insert(insertQuery);
 				ret="insert onDelivery ok  -->" + writeResult;
+				// 判断并插入
+				PlasticItemService.judgeAndInsert(onDelivery);
 		}
 		return ret;
 	}
@@ -3257,6 +3262,8 @@ public class MongoDBBasic {
 				//mongoDB.getCollection(collectionorderNopay).remove(query);
 				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
 				ret="insert orderNopay ok  -->" + writeResult;
+				// 判断并插入
+				PlasticItemService.judgeAndInsert(orderNopay);
 		}
 		return ret;
 	

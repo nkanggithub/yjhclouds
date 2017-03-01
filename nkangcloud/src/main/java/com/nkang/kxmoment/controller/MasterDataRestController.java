@@ -1027,8 +1027,6 @@ public class MasterDataRestController {
 		it.setWaitDeliverAmount(waitDeliverAmount);
 		
 		String ret = MongoDBBasic.saveInventory(it);
-		// 判断并插入
-		PlasticItemService.judgeAndInsert(it);
 		return ret;
 	}
 	
@@ -1059,8 +1057,6 @@ public class MasterDataRestController {
 		onDelivery.setProvider(provider);
 		onDelivery.setTaxRate(taxRate);
 		String ret = MongoDBBasic.saveOnDelivery(onDelivery);
-		// 判断并插入
-		PlasticItemService.judgeAndInsert(onDelivery);
 		return ret;
 	}
 	
@@ -1089,8 +1085,6 @@ public class MasterDataRestController {
 		orderNopay.setUnfilledOrderAmount(unfilledOrderAmount);
 		orderNopay.setUnfilledOrderAmount(filledOrderAmount);
 		String ret = MongoDBBasic.saveOrderNopay(orderNopay);
-		// 判断并插入
-		PlasticItemService.judgeAndInsert(orderNopay);
 		return ret;
 	}
 	
