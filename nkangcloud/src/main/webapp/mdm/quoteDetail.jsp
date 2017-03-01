@@ -94,13 +94,13 @@ function approve(obj)
 						 var html="";
 						 var status="";
 						 var priceColor="";
-						 for(var i=0;i<data.length;i++){
+						 for(var i=0;i<data.data.length;i++){
 							
-							 if(data[i].priceStatus==0){
+							 if(data.data[i].priceStatus==1){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
-							 else if(data[i].priceStatus==1){
+							 else if(data.data[i].priceStatus==2){
 								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 								 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 							 }
@@ -111,13 +111,13 @@ function approve(obj)
 								
 							
 							 html+="<li class='singleQuote'>"
-								 +"<input id='status' type='hidden' value='"+data[i].priceStatus+"' />"
-								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].itemNo+"</span></p>"+priceColor+data[i].price+"</span></p></div>"
+								 +"<input id='status' type='hidden' value='"+data.data[i].priceStatus+"' />"
+								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
-								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].inventorysAvailableAmountSum+"</p></div>"
-								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
-								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDeliveryNotInInRepositorySum+"</p></div>"
+								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
+								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 								 +"</div>"
 								 +"<div class='rightPanel'>"
 								 +"</div></div>"
@@ -195,18 +195,18 @@ function edit(obj)
 								 var html="";
 								 var status="";
 								 var priceColor="";
-								 for(var i=0;i<data.length;i++){
+								 for(var i=0;i<data.data.length;i++){
 									/*  if(data[i].category!=""){
 										 category="[<span id='category'>"+data[i].category+"</span>]";
 									 } */
 									/*  if(data[i].categoryGrade!=""){
 										 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
 									 } */
-									 if(data[i].priceStatus==0){
+									 if(data.data[i].priceStatus==1){
 										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
 										 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 									 }
-									 else if(data[i].priceStatus==1){
+									 else if(data.data[i].priceStatus==2){
 										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
 										 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
 									 }
@@ -217,13 +217,13 @@ function edit(obj)
 										
 									
 									 html+="<li class='singleQuote'>"
-										 +"<input id='status' type='hidden' value='"+data[i].priceStatus+"' />"
-										 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data[i].itemNo+"</span></p>"+priceColor+data[i].price+"</span></p></div>"
+										 +"<input id='status' type='hidden' value='"+data.data[i].priceStatus+"' />"
+										 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 										 +"<div class='secondLayer'>"
 										 +"<div class='leftPanel'>"
-										 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data[i].inventorysAvailableAmountSum+"</p></div>"
-										 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
-										 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data[i].onDeliveryNotInInRepositorySum+"</p></div>"
+										 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+										 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
+										 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 										 +"</div>"
 										 +"<div class='rightPanel'>"
 										 +"</div></div>"
