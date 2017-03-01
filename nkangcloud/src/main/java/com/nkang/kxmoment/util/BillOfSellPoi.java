@@ -266,7 +266,7 @@ public class BillOfSellPoi {
 		 if(date!=null){
 			 String[] strarray=date.split("-");
 			 if(strarray!=null && strarray.length>1){
-	/*			 switch (strarray[1]) {
+				 switch (strarray[1]) {
 					case "一月": 
 						str = "01";
 						break;
@@ -306,7 +306,7 @@ public class BillOfSellPoi {
 					default:
 						str = " ";
 						break;
-					}*/
+					}
 					date = strarray[0]+"-"+str+"-"+strarray[2];
 			 }
 		 }
@@ -314,10 +314,10 @@ public class BillOfSellPoi {
 		 return date;
 	 }
 	 
-	 public List<Inventory> readXlsOfInventory() throws FileNotFoundException{
+	 public List<Inventory> readXlsOfInventory(String url) throws FileNotFoundException{
 			List<Inventory> inventoryList = new ArrayList<Inventory>();
-			 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/Inventory.XLS");
-
+			// InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/Inventory.XLS");
+			InputStream is = new FileInputStream(url);
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
@@ -325,24 +325,14 @@ public class BillOfSellPoi {
 					Inventory xlsDto = null;
 
 					// 循环工作表Sheet
-
 					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-				
 				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           
-				            // 循环行Row
-			
 					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-				
 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-				
 					                if (hssfRow == null) {
-				
 					                    continue;
-				
 					                }
 					                xlsDto = new Inventory();
-//					                // 循环列Cell
 //						            for (int cellNum = 0; cellNum <=6; cellNum++) {
 //						            	
 						                HSSFCell repositoryName = hssfRow.getCell(0);
@@ -354,19 +344,25 @@ public class BillOfSellPoi {
 						                HSSFCell unit = hssfRow.getCell(2);
 						                xlsDto.setUnit(unit+"");
 						                
-						               // HSSFCell inventoryAmount = hssfRow.getCell(3);
-						                Double inventoryAmount = hssfRow.getCell(3).getNumericCellValue(); 
-						                xlsDto.setInventoryAmount(inventoryAmount);
+						                if(hssfRow.getCell(3)!=null){
+						                	 Double inventoryAmount = hssfRow.getCell(3).getNumericCellValue(); 
+								                xlsDto.setInventoryAmount(inventoryAmount);
+						                }
+						               
+						                if(hssfRow.getCell(4)!=null){
+							                Double waitDeliverAmount = hssfRow.getCell(4).getNumericCellValue();
+							                xlsDto.setWaitDeliverAmount(waitDeliverAmount);
+						                }
 						                
-						                Double waitDeliverAmount = hssfRow.getCell(4).getNumericCellValue();
-						                xlsDto.setWaitDeliverAmount(waitDeliverAmount);
+						                if(hssfRow.getCell(5)!=null){
+							                Double reserveDeliverAmount = hssfRow.getCell(5).getNumericCellValue();
+							                xlsDto.setReserveDeliverAmount(reserveDeliverAmount);
+						                }
 						                
-						                Double reserveDeliverAmount = hssfRow.getCell(5).getNumericCellValue();
-						                xlsDto.setReserveDeliverAmount(reserveDeliverAmount);
-						                
-						                Double availableAmount = hssfRow.getCell(6).getNumericCellValue();
-						                xlsDto.setAvailableAmount(availableAmount);
-						                
+						                if(hssfRow.getCell(6)!=null){
+							                Double availableAmount = hssfRow.getCell(6).getNumericCellValue();
+							                xlsDto.setAvailableAmount(availableAmount);
+						                }
 						                inventoryList.add(xlsDto);
 //						            }
 					            }
@@ -385,60 +381,52 @@ public class BillOfSellPoi {
 				return null;
 			}
 			InputStream is = new FileInputStream(url);
-
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
-				
 					OnDelivery xlsDto = null;
-
 					// 循环工作表Sheet
-
 					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-				
 				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           
 				            // 循环行Row
-			
 					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-				
 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-				
 					                if (hssfRow == null) {
-				
 					                    continue;
-				
 					                }
 					                xlsDto = new OnDelivery();
 //					                // 循环列Cell
 						                HSSFCell billID = hssfRow.getCell(2);
 						                xlsDto.setBillID(billID+"");
-						                
 						                HSSFCell date = hssfRow.getCell(3);
 						                xlsDto.setDate(TransitionDate(date+""));
-						                
 						                HSSFCell provider = hssfRow.getCell(4);
 						                xlsDto.setProvider(provider+"");
-						                
 						                HSSFCell plasticItem = hssfRow.getCell(5);
 						                xlsDto.setPlasticItem(plasticItem+"");
 						                
-						               // HSSFCell amount = hssfRow.getCell(6);
-						                Double amount=hssfRow.getCell(6).getNumericCellValue();
-						                xlsDto.setAmount(amount);
+						                if(hssfRow.getCell(6)!=null){
+							                Double amount=hssfRow.getCell(6).getNumericCellValue();
+							                xlsDto.setAmount(amount);
+						                }
 						                
-						                Double originalPrice = hssfRow.getCell(7).getNumericCellValue();;
-						                xlsDto.setOriginalPrice(originalPrice);
+						                if(hssfRow.getCell(7)!=null){
+							                Double originalPrice = hssfRow.getCell(7).getNumericCellValue();;
+							                xlsDto.setOriginalPrice(originalPrice);
+						                }
 						                
-						                Double taxRate = hssfRow.getCell(8).getNumericCellValue();;
-						                xlsDto.setTaxRate(taxRate);
+						                if(hssfRow.getCell(8)!=null){
+							                Double taxRate = hssfRow.getCell(8).getNumericCellValue();;
+							                xlsDto.setTaxRate(taxRate);
+						                }
 						                
 						                HSSFCell billType = hssfRow.getCell(9);
 						                xlsDto.setBillType(billType+"");
 						                
-						                Double notInInRepository = hssfRow.getCell(10).getNumericCellValue();;
-						                xlsDto.setNotInInRepository(notInInRepository);
-						                
+						                if(hssfRow.getCell(10)!=null){
+							                Double notInInRepository = hssfRow.getCell(10).getNumericCellValue();;
+							                xlsDto.setNotInInRepository(notInInRepository);
+						                }
 						                OnDeliveryList.add(xlsDto);
 					            }
 					    }
@@ -457,28 +445,17 @@ public class BillOfSellPoi {
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
-				
 					OrderNopay xlsDto = null;
-
 					// 循环工作表Sheet
-
 					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-				
 				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           
 				            // 循环行Row
-			
 					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-				
 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-				
 					                if (hssfRow == null) {
-				
 					                    continue;
-				
 					                }
 					                xlsDto = new OrderNopay();
-//					                // 循环列Cell
 						                HSSFCell customerNameString = hssfRow.getCell(0);
 						                xlsDto.setCustomerName(customerNameString+"");
 						                

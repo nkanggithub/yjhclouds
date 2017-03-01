@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.util.BillOfSellPoi;
+import com.nkang.kxmoment.util.FileOperateUtil;
 import com.nkang.kxmoment.util.RestUtils;
 
 
@@ -31,7 +32,7 @@ import com.nkang.kxmoment.util.RestUtils;
 public class fileUploadController {
 	@RequestMapping(value = "/uploadOrderNopay", produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String readXlsOfOrderNopay(HttpServletRequest request){
+	public String readXlsOfOrderNopay(HttpServletRequest request,HttpServletResponse response){
 		
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 	    factory.setSizeThreshold(1024 * 1024);
@@ -41,12 +42,8 @@ public class fileUploadController {
 	    upload.setSizeMax(1024 * 1024 * 4);
 
 		 List<FileItem> fileList = null;
-		 	String url = null ;
-		 	String message="";
-			int total=0;
-    		int success=0;
-    		int fail=0;
-    		String failnum=null;
+		 	String url = null;
+		 	String message = "fail";
 		    try {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
@@ -54,53 +51,32 @@ public class fileUploadController {
 		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
 		        	
 		            for(FileItem item:fileList){
+		            	String filename="";
 		            	System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
 		                	url = fileurl+item.getName();
 		                    item.write(new File(url));
-		                    
+		                    int dot = item.getName().lastIndexOf('.');   
+				            if ((dot >-1) && (dot < (item.getName().length()))) {   
+				            	filename=item.getName().substring(0, dot); 
+				            }  
+		                    if("OrderNopay".equals(filename)){
+		                    	 message=FileOperateUtil.DBOperateOrderNopay(url);
+		                    }
+		                    if("OnDelivery".equals(filename)){
+		                    	 message=FileOperateUtil.DBOperateOnDelivery(url);
+		                    }
+		                    if("Inventory".equals(filename)){
+		                    	 message=FileOperateUtil.DBOperateInventory(url);
+		                    }
 		                }
 		            }
-		            
-		            BillOfSellPoi bos = new BillOfSellPoi();
-		    		RestUtils.deleteDB("OrderNopay");
-		    		List<OrderNopay> OrderNopays;
-		    	
-		    		try {
-		    			OrderNopays = bos.readXlsOfOrderNopay(url);
-		    			for(OrderNopay ol : OrderNopays){
-		    				total++;
-		    				String ret = RestUtils.callsaveOrderNopay(ol);
-		    				if("failed".equals(ret)){
-		    					ret=RestUtils.callsaveOrderNopay(ol);
-		    				}
-		    				if("failed".equals(ret)){
-		    					failnum = failnum + total+",";
-		    					fail++;
-		    				}else{
-		    					success++;
-		    				}
-		    				
-		    				 System.out.println(total+"----"+ret);
-		    				 //System.out.println(oq.info());
-		    			}
-		    			
-		    		} catch (IOException e) {
-		    			// TODO Auto-generated catch block
-		    			e.printStackTrace();
-		    			System.out.println(e.getMessage());
-		    		}finally{
-		    			File file = new File(url); 
-		    			if (file.exists()) { 
-		    			    file.delete(); 
-		    			}
-		    		}
 		        }
 		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
-		    message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
+
 			return message;
 
 	}
