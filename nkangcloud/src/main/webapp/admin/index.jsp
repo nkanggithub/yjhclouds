@@ -326,32 +326,30 @@ function showUpdateUserPanel(openid,name){
 	 });
 	jQuery.ajax({
 		type : "GET",
-		url : "../userProfile/getMDLUserLists",
+		url : "../CallGetWeChatUserFromMongoDB",
 		data : {
-			UID : openid
+			openid : openid
 		},
 		cache : false,
 		success : function(data) {
-			data = data.replace(/:null/g, ':""');
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
 			if (data.length > 0) {
-				var isExternalUpStream=jsons.results[0].roleObj.externalUpStream;
-				var isExternalCustomer=jsons.results[0].roleObj.externalCustomer;
-				var isExternalPartner=jsons.results[0].roleObj.externalPartner;
-				var isExternalCompetitor=jsons.results[0].roleObj.externalCompetitor;
-				var isInternalSeniorMgt=jsons.results[0].roleObj.internalSeniorMgt;
-				var isInternalImtMgt=jsons.results[0].roleObj.internalImtMgt;
-				var isInternalQuoter=jsons.results[0].roleObj.internalQuoter;
-				var isITOperations=jsons.results[0].roleObj.itoperations;
-				var IsRegistered=jsons.results[0].IsRegistered;
-				var registerDate=jsons.results[0].registerDate.replace(/\//g,"-");
-				var realName=jsons.results[0].realName;
-				var phone=jsons.results[0].phone;
-				var email=jsons.results[0].email;
-				var role=jsons.results[0].role;
-				var companyName=jsons.results[0].companyName;
-				var selfIntro=jsons.results[0].selfIntro;
+				var isExternalUpStream=data[0].roleObj.externalUpStream;
+				var isExternalCustomer=data[0].roleObj.externalCustomer;
+				var isExternalPartner=data[0].roleObj.externalPartner;
+				var isExternalCompetitor=data[0].roleObj.externalCompetitor;
+				var isInternalSeniorMgt=data[0].roleObj.internalSeniorMgt;
+				var isInternalImtMgt=data[0].roleObj.internalImtMgt;
+				var isInternalQuoter=data[0].roleObj.internalQuoter;
+				var isITOperations=data[0].roleObj.itoperations;
+				var IsRegistered=data[0].IsRegistered==null?'false':data[0].IsRegistered;
+				var IsActived=data[0].isActive==null?'false':data[0].isActive;
+				var registerDate=data[0].registerDate==null?'':data[0].registerDate.replace(/\//g,"-");
+				var realName=data[0].realName==null?'':data[0].realName;
+				var phone=data[0].phone==null?'':data[0].phone;
+				var email=data[0].email==null?'':data[0].email;
+				var role=data[0].role==null?'':data[0].role;
+				var companyName=data[0].companyName==null?'':data[0].companyName;
+				var selfIntro=data[0].selfIntro==null?'':data[0].selfIntro;
 				$("#UpdateUserPartDiv").html('<form id="atest">'
 			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-20px;">'
@@ -403,12 +401,18 @@ function showUpdateUserPanel(openid,name){
 			            +'													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;"  value="'+registerDate+'">'
 			            +'													    </td>'
 			            +'												    </tr>'
-			            +'												    <tr>'
 			            +'												        <td>确认注册:</td>'
 			            +'												        <td  align="left" class="tdText">'
 			            +'												        	<input type="radio" name="isRegistered" value="true"  '+(IsRegistered=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" '+(IsRegistered!="true"?'checked="checked"':'')+' value="false"/>否'
 			            +'												        </td>'
 			            +'												    </tr> '
+			            +'												    <tr>'
+			            +'												        <td>聊天组:</td>'
+			            +'												        <td  align="left" class="tdText">'
+			            +'												        	<input type="radio" name="isActived" value="true"  '+(IsActived=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" '+(IsActived!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        </td>'
+			            +'												    </tr> '
+			            +'												    <tr>'
 			            +'												 </table>'
 			            +'												 </form>'
 			            +'												 <button class="btnAthena EbtnLess" style="background-color:#005CA1;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
@@ -609,15 +613,14 @@ function getMDLUserLists() {
 	var NoRoleList=0;
 jQuery.ajax({
 		type : "GET",
-		url : "../userProfile/getMDLUserLists",
+		url : "../CallGetWeChatUserFromMongoDB",
 		data : {},
 		cache : false,
 		success : function(data) {
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
 			var ul = "",regNumber=0;
-			for (var i = jsons.results.length-1; i >0 ; i--) {
-				var temp = jsons.results[i];
+			//for (var i = data.length-1; i >0 ; i--) {
+			for (var i = 0; i < data.length ; i++) {
+				var temp = data[i];
 				var selfIntro="";
 				var companyName=temp.companyName;
 				var companyRole=temp.role;
@@ -743,6 +746,10 @@ jQuery.ajax({
 					congratulate='<div style="float:right;"><img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
 						+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
 				}
+				var nameColor='';
+				if(temp.isActive=='true'){
+					nameColor=' style="color:#1D40BF;" ';
+				}
 				var li='	<li class="Work_Mates_div_list_div2">'
 					+'                                           	 	<div class="Work_Mates_img_div2" style="margin-top:-10px;margin-bottom:-20px;">'
 					+'                                        			 <img src="'
@@ -751,7 +758,7 @@ jQuery.ajax({
 					+'<p style="margin: 0 0 10px;font-size: 12px;text-align: center;color: #375FA7;margin-top: -5px;">'+lastUpdatedDate+'</p>'
 					+'                                         		</div>'
 					+'                                         		<div class="Work_Mates_text_div" style="margin-left: 80px;">'
-					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name">'
+					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name" '+nameColor+' >'
 					+ temp.nickname
 					+ '</span><span class="role">'
 					+companyName+'</span>'
@@ -800,7 +807,7 @@ jQuery.ajax({
 			                "showLegend": "1",
 			                "legendShadow": "0",
 			                "legendBorderAlpha": "0",
-			                "defaultCenterLabel": "总人数: "+jsons.results.length+"人",
+			                "defaultCenterLabel": "总人数: "+data.length+"人",
 			                "centerLabel": " $label",
 			                "centerLabelBold": "1",
 			                "showTooltip": "0",
@@ -867,101 +874,95 @@ function updateUserInfo(openId){
 	jQuery
 	.ajax({
 		type : "GET",
-		url : "../userProfile/getMDLUserLists",
+		url : "../CallGetWeChatUserFromMongoDB",
 		data : {
-			UID : openId
-			
+			openid : openId
 		},
 		cache : false,
 		success : function(data) {
-			data = data.replace(/:null/g, ':"未注册"');
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
-			if (jsons.results.length > 0) {
+			if (data.length > 0) {
 				//*  update data start */
-				data = data.replace(/:"未编辑"/g, ':"未注册"');
-				jsons = eval('(' + data + ')');
-				if(jsons.results[0].roleObj.externalUpStream){
+				if(data[0].roleObj.externalUpStream){
 					$("#atest input[name='role'][value='isExternalUpStream']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isExternalUpStream']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.externalCustomer){
+				if(data[0].roleObj.externalCustomer){
 					$("#atest input[name='role'][value='isExternalCustomer']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isExternalCustomer']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.externalPartner){
+				if(data[0].roleObj.externalPartner){
 					$("#atest input[name='role'][value='isExternalPartner']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isExternalPartner']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.externalCompetitor){
+				if(data[0].roleObj.externalCompetitor){
 					$("#atest input[name='role'][value='isExternalCompetitor']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isExternalCompetitor']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.internalSeniorMgt){
+				if(data[0].roleObj.internalSeniorMgt){
 					$("#atest input[name='role'][value='isInternalSeniorMgt']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isInternalSeniorMgt']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.internalImtMgt){
+				if(data[0].roleObj.internalImtMgt){
 					$("#atest input[name='role'][value='isInternalImtMgt']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isInternalImtMgt']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.internalBizEmp){
+				if(data[0].roleObj.internalBizEmp){
 					$("#atest input[name='role'][value='isInternalBizEmp']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isInternalBizEmp']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.internalNonBizEmp){
+				if(data[0].roleObj.internalNonBizEmp){
 					$("#atest input[name='role'][value='isInternalNonBizEmp']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isInternalNonBizEmp']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.internalQuoter){
+				if(data[0].roleObj.internalQuoter){
 					$("#atest input[name='role'][value='isInternalQuoter']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isInternalQuoter']").removeAttr("checked");
 				}
-				if(jsons.results[0].roleObj.itoperations){
+				if(data[0].roleObj.itoperations){
 					$("#atest input[name='role'][value='isITOperations']").attr("checked","true");
 				}else{
 					$("#atest input[name='role'][value='isITOperations']").removeAttr("checked");
 				}
-				$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+				$("#atest input[name='companyName']").val(data[0].companyName);
 				
-				if(jsons.results[0].IsActive !="未注册"){
-					 jsons.results[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
+				if(data[0].IsActive !=null){
+					 data[0].IsActive=="true"?$("input[name='isActived']").eq(0).attr("checked","true"):$("input[name='isActived']").eq(1).attr("checked","true");
 				}
-				if(jsons.results[0].IsAuthenticated !="未注册"){
-					jsons.results[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
+				if(data[0].IsAuthenticated !="未注册"){
+					data[0].IsAuthenticated=="true" ? $("input[name='isAuthenticated']").eq(0).attr("checked","true"):$("input[name='isAuthenticated']").eq(1).attr("checked","true");
 				}
-				if(jsons.results[0].IsRegistered !="未注册"){
-					jsons.results[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
+				if(data[0].IsRegistered !="未注册"){
+					data[0].IsRegistered=="true"?$("input[name='isRegistered']").eq(0).attr("checked","true"):$("input[name='isRegistered']").eq(1).attr("checked","true");
 				}
-			    if(jsons.results[0].registerDate !="未注册"){
-			    	$("#registerDate").val(jsons.results[0].registerDate.replace(/\//g,"-"));
+			    if(data[0].registerDate !="未注册"){
+			    	$("#registerDate").val(data[0].registerDate.replace(/\//g,"-"));
 			    } 
-			    if(jsons.results[0].realName !="未注册"){
-			    	$("#atest input[name='realName']").val(jsons.results[0].realName);
+			    if(data[0].realName !="未注册"){
+			    	$("#atest input[name='realName']").val(data[0].realName);
 			    }else{
 			    	$("#atest input[name='realName']").val("");
 			    }
-			    if(jsons.results[0].phone !="未注册"){
-			    	$("#atest input[name='phone']").val(jsons.results[0].phone);
+			    if(data[0].phone !="未注册"){
+			    	$("#atest input[name='phone']").val(data[0].phone);
 			    }else{
 			    	$("#atest input[name='phone']").val("");
 			    }
-			    if(jsons.results[0].email !="未注册"){
-			    	$("#atest input[name='email']").val(jsons.results[0].email);
+			    if(data[0].email !="未注册"){
+			    	$("#atest input[name='email']").val(data[0].email);
 			    }else{
 			    	$("#atest input[name='email']").val("");
 			    }
-			    if(jsons.results[0].companyName !="未注册"){
-			    	$("#atest input[name='companyName']").val(jsons.results[0].companyName);
+			    if(data[0].companyName !="未注册"){
+			    	$("#atest input[name='companyName']").val(data[0].companyName);
 			    }else{
 			    	$("#atest input[name='companyName']").val("");
 			    }
