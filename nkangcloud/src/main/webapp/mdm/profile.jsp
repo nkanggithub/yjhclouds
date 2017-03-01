@@ -195,7 +195,7 @@ $(window).load(function() {
 		var stockUrl = "http://hq.sinajs.cn/list=gb_$ixic,gb_$dji,gb_$inx,gb_hpe,gb_hpq,gb_csc";
 		checkReg();
 		getStockData(stockUrl);
-		getMDLUserLists();
+		//getMDLUserLists();
 		getCompanyInfo();
 		getRealName();
 		getAllRegisterUsers();
@@ -287,7 +287,7 @@ function toLike(likeToName,ToOpenId){
 	        	if(textStatus=='success'){
 	        		swal("Congratulations！", "今天你成功Like了"+likeToName, "success"); 
 	        		$("span.like").text(parseInt($("span.like").text())+1);
-	        		getMDLUserLists();
+	        	//	getMDLUserLists();
 	        	}else{
 	        		swal("服务器繁忙！", "", "error"); 
 	        	}
@@ -1576,10 +1576,17 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-stock.png" />
 														<h4>股票</h4>
 												</td>
-												<td><img onclick="mesSend()" src="../MetroStyleFiles/menu-technology.png" />
-													<h4>消息推送</h4></td>
+												
+													<td> <!-- onclick="signaturePanel()"  -->
+												 <a href="Signature.jsp?UID=<%=uid%>">
+												<img 
+														src="../MetroStyleFiles/menu-pen.png" /></a>
+														<h4>电子签名</h4>
+												</td>
 											</tr>
 											<tr>
+											<td><img onclick="mesSend()" src="../MetroStyleFiles/menu-technology.png" />
+													<h4>消息推送</h4></td>
 												<td>		<img  onclick="recognizationPanel()"
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>奖项管理</h4>
@@ -1588,14 +1595,8 @@ function getNowFormatDate() {
 														src="../MetroStyleFiles/menu-price.png" />
 														<h4>胖和数据</h4></a>
 												</td>
-												<td> <!-- onclick="signaturePanel()"  -->
-												 <a href="Signature.jsp?UID=<%=uid%>">
-												<img 
-														src="../MetroStyleFiles/menu-pen.png" /></a>
-														<h4>电子签名</h4>
-												</td>
-												<td><a href="quoteDetail.jsp"><img src="../MetroStyleFiles/menu-develop.png" />
-													<h4>开发中</h4></a></td>
+												<td><a href="quoteDetail.jsp"><img src="../MetroStyleFiles/Add1.png" />
+													<h4>更多应用</h4></a></td>
 											</tr>
 											<%-- <tr>
 											<td>
