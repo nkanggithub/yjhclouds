@@ -35,7 +35,7 @@ import com.nkang.kxmoment.controller.MasterDataRestController;
 
 
 public class FileOperateUtil {
-	static String ny="Y";
+	static String ny="N";
 	public static String DBOperateOrderNopay(String url){
 		
 	 	String message="";
@@ -44,7 +44,7 @@ public class FileOperateUtil {
 		int fail=0;
 		String failnum=null;
 		BillOfSellPoi bos = new BillOfSellPoi();
-  		RestUtils.deleteDB("OrderNopay");
+  		
   		List<OrderNopay> OrderNopays;
   	
   		try {
@@ -56,6 +56,7 @@ public class FileOperateUtil {
   					MongoDBBasic.DeleteDB("OrderNopay");
   					ret = MongoDBBasic.saveOrderNopay(ol);
   				}else{
+  					RestUtils.deleteDB("OrderNopay");
   					ret = RestUtils.callsaveOrderNopay(ol);
   				}
   				
