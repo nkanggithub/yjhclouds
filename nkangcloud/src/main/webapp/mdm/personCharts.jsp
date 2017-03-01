@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%String num = request.getParameter("num"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,7 +23,7 @@ FusionCharts.ready(function () {
         dataFormat: 'json',
         dataSource: {
     "chart": {
-        "caption": "附近人员【32/170】分布情况",
+        "caption": "附近人员【<%=num%>/170】分布情况",
         "bgcolor": "FFFFFF",
         "radarfillcolor": "FFFFFF",
         "plotfillalpha": "5",
