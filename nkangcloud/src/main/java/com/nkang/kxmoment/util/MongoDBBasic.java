@@ -279,6 +279,60 @@ public class MongoDBBasic {
 		}
 		return false;
 	}
+	public static boolean checkUserRole(String OpenID,String role){
+		mongoDB = getMongoDB();
+	    try{
+	    	BasicDBList condList = new BasicDBList();
+	    	if("Internal".equals(role)){
+	    		DBObject query1 = new BasicDBObject();
+		    	query1.put("Role.isInternalSeniorMgt", true);
+		    	condList.add(query1);
+		    	
+		    	DBObject query2 = new BasicDBObject();
+		    	query2.put("Role.isInternalImtMgt", true);
+		    	condList.add(query2);
+		    	
+		    	DBObject query3 = new BasicDBObject();
+		    	query3.put("Role.isITOperations", true);
+		    	condList.add(query3);
+		    	
+		    	DBObject query4 = new BasicDBObject();
+		    	query4.put("Role.isInternalQuoter", true);
+		    	condList.add(query4);
+		    	
+	    	}else if("External".equals(role)){
+	    		DBObject query1 = new BasicDBObject();
+		    	query1.put("Role.isExternalUpStream", true);
+		    	condList.add(query1);
+		    	
+		    	DBObject query2 = new BasicDBObject();
+		    	query2.put("Role.isExternalCustomer", true);
+		    	condList.add(query2);
+		    	
+		    	DBObject query3 = new BasicDBObject();
+		    	query3.put("Role.isExternalPartner", true);
+		    	condList.add(query3);
+		    	
+		    	DBObject query4 = new BasicDBObject();
+		    	query4.put("Role.isExternalCompetitor", true);
+		    	condList.add(query4);
+	    	}else{
+	    		return false;
+	    	}
+	    	BasicDBObject searchCond = new BasicDBObject();
+	    	searchCond.put("$or", condList);
+	    	searchCond.put("OpenID", OpenID);
+	    	
+	    	DBObject queryresult = mongoDB.getCollection(wechat_user).findOne(searchCond);
+	    	if(queryresult != null){
+	    		return true;
+	    	}
+	    }
+		catch(Exception e){
+			log.info("queryEmail--" + e.getMessage());
+		}
+		return false;
+	}
 	public static boolean checkUserAuth(String OpenID,String RoleName){
 		mongoDB = getMongoDB();
 	    try{
