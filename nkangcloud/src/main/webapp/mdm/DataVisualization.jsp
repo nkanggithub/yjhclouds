@@ -204,7 +204,7 @@ display:none;
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.powercharts.js"></script>
 	<script type="text/javascript" src="../Jsp/JS/fusioncharts.theme.fint.js"></script>
 
-    <script>
+<!--     <script>
     FusionCharts.ready(function () {
         var estProcChart = new FusionCharts({
             type: 'errorline',
@@ -359,7 +359,7 @@ display:none;
         }).render();
         
     });
-    </script>
+    </script> -->
 </head>
 <body>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
@@ -473,6 +473,18 @@ var i=$(this).index();
 		var status=$(this).children("p").text();
 		if("0"==status){
 		$("#chart-container").show();
+		var params=$(this).children("span").text();
+		  FusionCharts.ready(function () {
+		        var estProcChart = new FusionCharts({
+		            type: 'errorline',
+		            renderAt: 'chart-container',
+		            width: '380',
+		            height: '350',
+		            dataFormat: 'jsonurl',
+		            dataSource: '../PlasticItem/priceList'+params
+		        }).render();
+		        
+		    });
 		$(this).siblings().hide();
 		$(this).children("p").text("1");
 		$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/leftArrow.png");
