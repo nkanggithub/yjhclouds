@@ -39,7 +39,7 @@ public class PlasticItemController {
 		}
 		return respParms;
 	} 
-	
+
 	@RequestMapping("/findList")
 	@ResponseBody
 	public Map<String, Object> findList(HttpServletRequest request, HttpServletResponse response, Integer page, Integer count){
@@ -49,6 +49,21 @@ public class PlasticItemController {
 		respParms.put("code", "200");
 		respParms.put("data", list);
 		return respParms;
+	}
+
+	/**
+	 * 价格列表
+	 * @param request
+	 * @param response
+	 * @param itemNo
+	 * @return
+	 */
+	@RequestMapping("/priceList")
+	@ResponseBody
+	public Map<String, Object> priceList(HttpServletRequest request, HttpServletResponse response, String itemNo){
+		allowCrossDomain(request, response);
+		Map<String, Object> dataSource = PlasticItemService.priceList(itemNo);
+		return dataSource;
 	}
 	
 	@RequestMapping("/getDetail")
