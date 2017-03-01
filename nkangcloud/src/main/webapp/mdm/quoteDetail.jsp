@@ -144,8 +144,6 @@ function edit(obj)
 /* 	if(categoryGrade==""){categoryGrade="&nbsp";}
 	if(category==""){category="&nbsp";} */
 	var formText="<p style='width:40%;float:left;height:40px;line-height:40px;'>牌号：</p><input id='newItem' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+item+" disabled='true'/>"
-    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>级别：</p><input id='newGrade' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+categoryGrade+" />"
-    +"<p style='width:40%;float:left;height:40px;line-height:40px;'>类型：</p><input id='newCategory' onfocus='textClear(this)' onblur='textReturn(this)' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+category+" />"
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>价格：</p><input id='newPrice' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+price+" />"
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>可用库存：</p><input id='newInventory' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+inventory+"  disabled='true' />"
     +"<p style='width:40%;float:left;height:40px;line-height:40px;'>已售未下账：</p><input id='newSoldOutOfPay' style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+soldOutOfPay+"  disabled='true' />"  
@@ -157,7 +155,8 @@ function edit(obj)
         showConfirmButton:"true", 
 		showCancelButton: true,   
 		closeOnConfirm: false,  
-        confirmButtonText:"OK",  
+        confirmButtonText:"提交",  
+        cancelButtonText:"取消",
         animation:"slide-from-top"  
       }, 
 		function(inputValue){
@@ -447,7 +446,7 @@ line-height:22px;}
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
- <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px">
+ <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号[<%=ql.size() %>]" data-inset="true" style="margin-top:15px">
 <%
 for(int i=0;i<ql.size();i++){
 %>
