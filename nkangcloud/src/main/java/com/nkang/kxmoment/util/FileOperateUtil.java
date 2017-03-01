@@ -35,7 +35,7 @@ import com.nkang.kxmoment.controller.MasterDataRestController;
 
 
 public class FileOperateUtil {
-	static String ny="N";
+	static String ny="Y";
 	public static String DBOperateOrderNopay(String url){
 		
 	 	String message="";
