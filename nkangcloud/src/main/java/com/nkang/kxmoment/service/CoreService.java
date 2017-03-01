@@ -593,8 +593,8 @@ public class CoreService
 						Article article = new Article();
 						article.setTitle(NearByOpptsExt.size() + " 个永佳和竞争者在您附近");
 						article.setDescription(NearByOpptsExt.size() +"个永佳和竞争者在您附近\n" + addr);
-						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=01590000009v2eJ&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/index.jsp");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnElT&oid=00D90000000pkXM");
+						article.setUrl("http://"+Constants.baehost+"/mdm/personCharts.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
