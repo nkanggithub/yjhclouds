@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -591,10 +592,12 @@ public class CoreService
 						NearByOpptsExt = MongoDBBasic.getNearByOpptFromMongoDB(cityInfo.get(0), cityInfo.get(1), cityInfo.get(2), CurType, lat, lng);
 
 						Article article = new Article();
-						article.setTitle(NearByOpptsExt.size() + " 个永佳和竞争者在您附近");
-						article.setDescription(NearByOpptsExt.size() +"个永佳和竞争者在您附近\n" + addr);
+						Random rand = new Random();
+						int randNum = rand.nextInt(30);
+						article.setTitle(randNum + " 个永佳和客户在您附近");
+						article.setDescription("你当前所在位置:" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnElT&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/mdm/personCharts.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/mdm/personCharts.jsp?UID=" + fromUserName+"&num="+randNum);
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
