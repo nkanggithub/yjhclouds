@@ -343,8 +343,10 @@ function getAllDatas(){
 		 		}
 				var data=$.merge(LikeArr, NoLikeArr);   
 				 var html="";
+				 var totalNum=0;
 				 for(var i=0;i<data.length;i++){
 					 if(data[i].item!=""){
+						 totalNum++;
 						 var random=parseInt(Math.random()*(11),10);
 						 var priceColor="lose";
 						 var change='';
@@ -390,6 +392,8 @@ function getAllDatas(){
 					 }
 				 }
 				 $("#QuoteList").html(html);
+				 
+				 $("input.ui-input-text.ui-body-c").attr("placeholder","输入牌号[牌号总数:"+totalNum+"]");
 				 }
 			 }
 		 });
