@@ -1942,7 +1942,7 @@ public static String regist(WeChatMDLUser user) {
  				  "\"touser\":\""+toUser+"\","+ 
  				  "\"msgtype\":\"text\", "+
  				   "\"text\":{"+
- 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"è¯´ï¼š\n---------------\n"+content+"\""+
+ 				     "\"content\":\""+dbUser.get(0)+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+"说\n---------------\n"+content+"\""+
  				   "}"+
  				"}";
 
@@ -2699,6 +2699,37 @@ public static String regist(WeChatMDLUser user) {
 		 System.out.println(url);
 		return message;
     }
+    
+    public static String sendQuotationToUser(String toOpenId,String content,String title){
+    	String result ="";
+    	String str="";
+    	
+    		str="{\"title\":\""+title+"\",\"description\":\""+content+"\",\"url\":\"http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID="+toOpenId+"\",\"picurl\":"
+					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnHEr&oid=00D90000000pkXM\"}";
+    	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
+
+    	                "{\"articles\":[" +str +"]}"+"}";
+
+
+    	        System.out.println(json);
+
+/*    	       String access_token = "FsEa1w7lutsnI4usB6I_yareExnJ-l7_8-RKkpF47TIU4vjBF_XA6bArxARRf-6B1irPpkFFeZvmi1LAGP9iuTVIgfd38fE39izmQ30_eL4pPftP_bH4s41FWgrryVuvRZUcAEACKF";*/
+    	        String access_token =  MongoDBBasic.getValidAccessKey();
+
+    	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+
+    	       try {
+
+    	    	 	result =  connectWeiXinInterface(action,json);
+
+    	       } catch (Exception e) {
+
+    	           e.printStackTrace();
+
+    	       }
+    	       return result;
+
+    	    }
     
 }
 
