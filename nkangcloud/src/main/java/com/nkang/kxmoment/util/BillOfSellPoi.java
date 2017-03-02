@@ -262,11 +262,37 @@ public class BillOfSellPoi {
 
 	 public String TransitionDate(String date){
 		 String str = "";
-		
 		 if(date!=null){
 			 String[] strarray=date.split("-");
 			 if(strarray!=null && strarray.length>1){
-				 switch (strarray[1]) {
+				 if("一月".equals(strarray[1])){
+					 str = "01";
+				 }else if("二月".equals(strarray[1])){
+					 str = "01";
+				 }else if("三月".equals(strarray[1])){
+					 str = "01";
+				 }else if("四月".equals(strarray[1])){
+					 str = "01";
+				 }else if("五月".equals(strarray[1])){
+					 str = "01";
+				 }else if("六月".equals(strarray[1])){
+					 str = "01";
+				 }else if("七月".equals(strarray[1])){
+					 str = "01";
+				 }else if("八月".equals(strarray[1])){
+					 str = "01";
+				 }else if("九月".equals(strarray[1])){
+					 str = "01";
+				 }else if("十月".equals(strarray[1])){
+					 str = "01";
+				 }else if("十一月".equals(strarray[1])){
+					 str = "01";
+				 }else if("十二月".equals(strarray[1])){
+					 str = "01";
+				 }else{
+					 str = " ";
+				 }
+				/* switch (strarray[1]) {
 					case "一月": 
 						str = "01";
 						break;
@@ -306,7 +332,7 @@ public class BillOfSellPoi {
 					default:
 						str = " ";
 						break;
-					}
+					}*/
 					date = strarray[0]+"-"+str+"-"+strarray[2];
 			 }
 		 }
