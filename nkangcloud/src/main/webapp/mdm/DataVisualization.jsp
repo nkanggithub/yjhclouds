@@ -472,19 +472,19 @@ var i=$(this).index();
 	$(".singleQI").live("click",function(){
 		var status=$(this).children("p").text();
 		if("0"==status){
+			var params=$(this).children("span").text();
+			  FusionCharts.ready(function () {
+			        var estProcChart = new FusionCharts({
+			            type: 'errorline',
+			            renderAt: 'chart-container',
+			            width: '380',
+			            height: '350',
+			            dataFormat: 'jsonurl',
+			            dataSource: '../PlasticItem/priceList'+params
+			        }).render();
+			        
+			    });
 		$("#chart-container").show();
-		var params=$(this).children("span").text();
-		  FusionCharts.ready(function () {
-		        var estProcChart = new FusionCharts({
-		            type: 'errorline',
-		            renderAt: 'chart-container',
-		            width: '380',
-		            height: '350',
-		            dataFormat: 'jsonurl',
-		            dataSource: '../PlasticItem/priceList'+params
-		        }).render();
-		        
-		    });
 		$(this).siblings().hide();
 		$(this).children("p").text("1");
 		$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/leftArrow.png");
