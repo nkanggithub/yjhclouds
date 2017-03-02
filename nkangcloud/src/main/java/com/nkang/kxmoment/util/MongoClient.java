@@ -394,8 +394,8 @@ public class MongoClient {
 		DBCollection collection = db.getCollection(collName);
 		// 初始化查询条件
 //		query = query!=null ? query : new BasicDBObject();
-		page = page != null && page > 0 ? page-1 : 0;
 		count = count != null && count > 0 ? count : 10;
+		page = page != null && page > 0 ? (page-1)*count : 0;
 		// 查询
 		DBCursor cursor = collection.find(query).skip(page).limit(count).sort(orderBy);
 		if(cursor != null && cursor.length() > 0){
