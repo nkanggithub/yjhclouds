@@ -88,6 +88,17 @@ public class PlasticItemController {
 		return respParms;
 	}
 	
+	@RequestMapping("/getDetailByNo")
+	@ResponseBody
+	public Map<String, Object> getDetailByNo(HttpServletRequest request, HttpServletResponse response, String itemNo){
+		allowCrossDomain(request, response);
+		Map<String, Object> respParms = new HashMap<String, Object>();
+		PlasticItem item = PlasticItemService.getDetailByNo(itemNo);
+		respParms.put("code", "200");
+		respParms.put("data", item);
+		return respParms;
+	}
+	
 	private void allowCrossDomain(HttpServletRequest request, HttpServletResponse response) {
 		// 跨域访问设置
 		response.setHeader("Access-Control-Allow-Origin", "*");
