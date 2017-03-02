@@ -73,21 +73,5 @@ public class fileUploadController {
 			return message;
 
 	}
-/*//		, @RequestParam("file") CommonsMultipartFile file
-//		System.out.println(file.getOriginalFilename());
-		try {
-			 init(request);
-			FileOperateUtil.upload(request);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "ok";
-	}
-	private void init(HttpServletRequest request) {
-	        if(FileOperateUtil.FILEDIR == null){
-	            FileOperateUtil.FILEDIR = request.getSession().getServletContext().getRealPath("/") + "file/";
-	        }
-	    }
-*/
+
 }
