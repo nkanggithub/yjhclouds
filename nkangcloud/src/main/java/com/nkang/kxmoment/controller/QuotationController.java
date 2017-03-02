@@ -19,6 +19,7 @@ import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoDBBasic;
+import com.nkang.kxmoment.util.RestUtils;
 
 @Controller
 public class QuotationController {
@@ -157,9 +158,37 @@ public class QuotationController {
 		List<String> itemsList = new ArrayList<String>();
 		itemsList=MongoDBBasic.queryUserKM(openid); 
 		for(String str : itemsList){
+			System.out.println("str-----------------------"+str);
 			plasticItemlist.add(PlasticItemService.getDetailByNo(str));
 		}
 		return plasticItemlist;
+		
+	}
+	
+	@RequestMapping("/sendQuotationMessage")
+	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=true) String title){
+		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
+			if("".equals(title)||title==null){
+				title="报价更新啦！！";
+			}
+			List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+			List<String> itemsList = new ArrayList<String>();
+             for(int i=0;i<allUser.size();i++){
+     			itemsList=MongoDBBasic.queryUserKM(allUser.get(i)); 
+     			String content="您所关注的牌号快览\n";
+     			for(String str : itemsList){
+     				System.out.println("str-----------------------"+str);
+     				if(PlasticItemService.getDetailByNo(str)!=null){
+     			//	plasticItemlist.add();
+     				content+="["+PlasticItemService.getDetailByNo(str).getItemNo()+"-￥"+PlasticItemService.getDetailByNo(str).getPrice()+"]\n";
+     				}
+     			}
+     			
+            	 RestUtils.sendQuotationToUser(allUser.get(i),content,title);
+            	 content="";
+            }
+		
+		return "OK--";
 		
 	}
 	
