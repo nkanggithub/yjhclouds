@@ -159,7 +159,7 @@ public class PlasticItemService {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map<String, Object> priceList(String itemNo) {
-		Map<String, Object> dataSource = null;
+		Map<String, Object> dataSource = new HashMap<String, Object>();
 		if(itemNo == null || itemNo.length() == 0){
 			return null;
 		}
@@ -175,7 +175,6 @@ public class PlasticItemService {
 		if(resultList == null || resultList.size() == 0){
 			return dataSource;
 		}
-		dataSource = new HashMap<String, Object>();
 		// chart initial
 		Map<String, Object> chart = new HashMap<String, Object>();
 		chart.put("theme", "fint");
