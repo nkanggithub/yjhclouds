@@ -32,33 +32,33 @@ if (session.getAttribute("location") == null) {
     <div class="container">
         <div id="load">
             <div class="border1">
-                <div class="pointer pointerAnim"></div>
+                <div class="pointer"></div>
                 <div class="user">
-                    <span class="userOne shadow" style="display: inline;">
+                    <span class="userOne">
                         <img src="1.jpg" width="100%">
                     </span>
-                    <span class="userTwo shadow" style="display: inline;">
+                    <span class="userTwo">
                         <img src="2.jpg" width="100%">
                     </span>
-                    <span class="userThree shadow" style="display: inline;">
+                    <span class="userThree">
                         <img src="3.jpg" width="100%">
                     </span>
-                    <span class="userFour shadow" style="display: inline;">
+                    <span class="userFour">
                         <img src="4.jpg" width="100%">
                     </span>
-                    <span class="userFive shadow" style="display: inline;">
+                    <span class="userFive">
                         <img src="5.jpg" width="100%">
                     </span>
-                    <span class="userSix shadow" style="display: inline;">
+                    <span class="userSix">
                         <img src="6.jpg" width="100%">
                     </span>
-                    <span class="userSeven shadow" style="display: inline;">
+                    <span class="userSeven">
                         <img src="7.jpg" width="100%">
                     </span>
-                    <span class="userEight shadow" style="display: inline;">
+                    <span class="userEight">
                         <img src="8.jpg" width="100%">
                     </span>
-                    <span class="userNine shadow" style="display: inline;">
+                    <span class="userNine">
                         <img src="9.jpg" width="100%">
                     </span>
                 </div>
@@ -72,24 +72,31 @@ if (session.getAttribute("location") == null) {
                     </div>
                 </div>
             </div>
-            <a href="../personCharts.jsp"><button class="btn">停止扫描</button></a>
+            <button class="btn">开始扫描</button>
         </div>
     </div>
     <script>
+	var flag=true;
         $(".btn").click(function () {
-            $(".pointer").addClass("pointerAnim"); 
-            var timeout = 1000; 
-            var index = 0;
-            var addClass;
-            addClass = setInterval(function(){
-                if(index >= $(".user span").length){
-                    index = 0;
-                    addClass = clearInterval(addClass);  
-                    $(".user span").removeClass("flip").addClass("shadow")
-                }else {
-                    $(".user span").eq(index++).fadeIn(timeout).addClass("flip")
-                }
-            },timeout);
+			if(flag==true){
+				flag=false;
+				$(".btn").html("停止扫描");
+				$(".pointer").addClass("pointerAnim");  //添加雷达旋转动画
+				var timeout = 1000;  //每隔1000ms
+				var index = 0;
+				var addClass;
+				addClass = setInterval(function(){
+					if(index >= $(".user span").length){
+						index = 0;
+						addClass = clearInterval(addClass);  //结束循环
+						$(".user span").removeClass("flip").addClass("shadow")
+					}else {
+						$(".user span").eq(index++).fadeIn(timeout).addClass("flip")
+					}
+				},timeout);
+			}else{
+				window.location.href="../personCharts.jsp";
+			}
         })
     </script>
 
