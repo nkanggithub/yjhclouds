@@ -594,10 +594,11 @@ public class CoreService
 						Article article = new Article();
 						Random rand = new Random();
 						int randNum = rand.nextInt(30);
-						article.setTitle(randNum + " 个永佳和客户在您附近");
+						article.setTitle("点击扫描你附近的永佳和客户");
 						article.setDescription("你当前所在位置:" + addr);
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnElT&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/mdm/personCharts.jsp?UID=" + fromUserName+"&num="+randNum);
+					//	article.setUrl("http://"+Constants.baehost+"/mdm/personCharts.jsp?UID=" + fromUserName+"&num="+randNum);
+						article.setUrl("http://"+Constants.baehost+"/mdm/scan/scan.jsp?UID=" + fromUserName+"&num="+randNum);
 						articleList.add(article);
 						int opptCount = 7;
 						if(NearByOpptsExt.size() < opptCount ){
