@@ -15,7 +15,7 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 <!Doctype html>
 <html>
 <head>
-<title>重庆永佳和</title>
+<title>重庆永佳和实时报价</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <link rel="stylesheet" href="../nkang/jquery.mobile.min.css" />
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
