@@ -72,13 +72,13 @@ ul li.singleQuote .firstLayer .quotePrice{
 	color:#333;
 }
 ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
-	color:#EC4848;
+	color:red;
 }
 ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
 	color:red;
 }
 ul li.singleQuote .firstLayer .quotePrice.low,ul li.singleQuote .firstLayer  .change.low{
-	color:#0853A0;
+	color:green;
 }
 ul li.singleQuote .firstLayer .quotePrice.lose,ul li.singleQuote .firstLayer  .change.lose{
 	color:#bbb;
@@ -342,7 +342,18 @@ function getAllDatas(){
 				 var html="";
 				 for(var i=0;i<data.length;i++){
 					 if(data[i].item!=""){
-						 var priceColor=(data[i].quotationPrice=="暂停报价"?"lose":"high");
+						 var random=parseInt(Math.random()*(11),10);
+						 var priceColor="lose";
+						 var change='';
+						 if(data[i].quotationPrice=="暂停报价"){
+							 priceColor="lose";
+						 }else if(random<=5){
+							 priceColor="low";
+							 change='		<span class="change low">-'+random+'&nbsp;<b>↓</b></span>';
+						 }else{
+							 priceColor="high";
+							 change='		<span class="change high">+'+random+'&nbsp;<b>↑</b></span>';
+						 }
 						 var tag='';
 						 var attention='';
 						 var priceStyle='';
@@ -360,12 +371,14 @@ function getAllDatas(){
 						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
 						 if(nowHour<10||nowHour>=18){
 							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
+							 change='';
 						 }
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
 							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].item+'\')" '+priceStyle+'><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
-							/*  +'		<span class="change high">+10</span>' */
+			  				 + change
+							 /*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
 							 +'	</div>'
 							 +'</li>'; 
