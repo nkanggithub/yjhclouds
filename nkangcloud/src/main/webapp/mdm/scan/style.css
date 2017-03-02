@@ -1,0 +1,821 @@
+/*
+Theme Name: MiGong
+Theme URI: www.migong.org
+Description: Design & Coding Is Ming By MiGong
+Version: 1.0
+Author: Ming
+Author URI: www.migong.org
+Tags: Ming,MiGong
+*/
+body { padding-top: 70px; }
+#menu-home li a:hover {
+    background-color: #eee;
+    text-decoration: none;
+}
+/* 导航样式 */
+.menu{
+    float: left;
+}
+.menu li{
+    float: left;
+    display: block;
+    position: relative;
+    list-style: outside none none;
+}
+.menu li a{
+    color: #777;
+    padding: 15px;
+    line-height: 20px;
+    display: block;
+    text-decoration: none;
+}
+.menu li a:hover{
+    color: #333;
+    text-decoration: none;
+}
+.hover{
+    background-color: #e7e7e7;
+    color: #555;
+}
+
+/* Tag 样式 */
+.label-default a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* 随机Tag 颜色 */
+.tags1{background-color:#337ab7;}
+.tags2{background-color:#5cb85c;}
+.tags3{background-color:#5bc0de;}
+.tags4{background-color:#f0ad4e;}
+.tags5{background-color:#d9534f;}
+
+/* 文章页 */
+article{
+    overflow: hidden;
+}
+
+article a{
+    position: relative;
+    text-decoration: none;
+}
+
+article a:after{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15px;
+    background-color: #ccc;
+    opacity: .5;
+    width: 0;
+    height: 2px;
+    -webkit-transition: width .3s;
+       -moz-transition: width .3s;
+        -ms-transition: width .3s;
+         -o-transition: width .3s;
+            transition: width .3s;
+}
+
+article a:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15px;
+    background-color: #ccc;
+    opacity: .5;
+    width: 0;
+    height: 2px;
+    -webkit-transition: width .3s;
+       -moz-transition: width .3s;
+        -ms-transition: width .3s;
+         -o-transition: width .3s;
+            transition: width .3s;
+}
+article a:hover::before,article a:hover::after{width:50%};
+
+/* 面包屑 */
+.current{
+    color: #777;
+}
+
+/* 三层 box-shadow */
+
+.breadcrumb,#follow,.tab-content>.active{
+    box-shadow: 0 0.0625em 0.1875em 0 rgba(0, 0, 0, 0.1), 0 0.5em 0 -0.25em #f2f2f2, 0 0.5em 0.1875em -0.25em rgba(0, 0, 0, 0.1), 0 1em 0 -0.5em #e5e5e5, 0 1em 0.1875em -0.5em rgba(0, 0, 0, 0.1);
+}
+
+/* 文章分类名 hover */
+
+.text-left{
+    border-radius: 4px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.text-left a{
+    text-decoration: none;
+}
+
+
+
+.text-left:hover {
+    background-color: #eee;
+    text-decoration: none;
+}
+
+
+
+/* 侧边栏最新文章 */
+
+#follow li{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 侧边栏标签 */
+
+#tags a{
+    border-radius: 0.25em;
+    color: #fff;
+    display: inline;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.2em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: #337ab7;
+    text-decoration: none;
+}
+
+/* 侧边栏分类 */
+
+.cat-item{
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+    width:50%;
+    float:left;
+    border-bottom: 1px solid #ccc;
+}
+
+.cat-item:last-child {
+    border-bottom: 0px none;
+}
+
+/* 侧边栏，分类第一个圆角默认样式 */
+
+.cat-item:first-child {
+    border-top: 0px none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/* 侧边栏，分类最后一个圆角默认样式 */
+.cat-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-bottom: 0;
+}
+
+/* 侧边栏存档 */
+.archive li{
+    list-style: none;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+    width: 50%;
+    float: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.archive li:last-child {
+    border-bottom: 0px none;
+}
+
+/* 侧边栏，存档第一个圆角默认样式 */
+.archive li:first-child {
+    border-top: 0px none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+/* 侧边栏，存档最后一个圆角默认样式 */
+
+.archive li:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-bottom: 0;
+}
+
+/* 侧边栏边框 Tab 共用*/
+
+.sidebarBorder{
+    padding-top: 20px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* 评论者头像 */
+
+.comment img{
+    border-radius: 50%;
+}
+
+.input-group{
+    margin-bottom: 15px;
+}
+
+/* 清除首页 顶部导航,分类名,评论 ol ul li 样式 */
+
+.post-categories,.menu{
+    list-style: none;
+    display: inline-block;
+    margin: 0px; 
+    padding: 0px;
+}
+
+.post-categories li,.menu li{
+    list-style: none;
+    display: inline-block;
+}
+
+.comment_list_ol,.comment_list_ol li{
+    list-style: none;
+    display: block;
+    margin: 0px; 
+    padding: 0px;
+}
+
+small li a{
+    color: #777;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+}
+
+/* Category Tag 字体位置 */
+
+.glyphicon-bookmark,.glyphicon-tags{
+    margin-right: 5px;
+    top: 3px;
+    color: #777;
+}
+
+/* 文章 Demo */
+
+.demo{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+    margin: 5px 0px;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-transform: none;
+}
+
+.BackTop{
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+}
+
+/* 首页内容块最大高度 */
+
+.col-sm-6{
+    max-height:303px;
+}
+
+/* 聊天机器人 */
+
+#chatContent li{
+    list-style: none;
+    display: inline-block;
+    margin: 0px;
+    min-height: 35px;
+}
+
+.meContent,.robotContent{
+    border:1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.robot,.me{
+    width:100%;
+}
+
+
+.robotContent,.robot span{
+    float: left;
+}
+
+.meContent,.me span{
+    float: right;
+}
+
+
+#biaoqing img{
+    cursor: pointer;
+}
+
+.robotImg{
+    margin-right: 5px;
+}
+
+.meImg{
+    margin-left: 5px;
+}
+
+.meImg,.robotImg{
+    padding: 8px;
+}
+
+.BackTop{
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+}
+
+.randomPostsTitle{
+    position: absolute;
+}
+
+/* 标题或描述溢出隐藏 */
+
+.caption h3,.caption p,h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 首页 and Loop 缩略图高度 */
+.wp-post-image{
+    max-height: 150px;
+}
+
+/* 搜索按钮 */
+.search-icon {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+.circle {
+    position: relative;
+    display: block;
+    height: 20px;
+    width: 20px;
+    background-color: #F8F8F8;
+    border-radius: 50px;
+    z-index: 0;
+    border: 3px solid #ccc;
+    -webkit-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+       -moz-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+        -ms-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+         -o-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+            transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: 1;
+
+}
+
+.handle {
+    position: absolute;
+    background-color: #ccc;
+    top: 14px;
+    left: 3px;
+    width: 30px;
+    height: 4px;
+    display: block;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    float: right;
+    border-radius: 2px;
+}
+
+.handle:after {
+    content: "";
+    background-color: #ccc;
+    width: 30px;
+    height: 4px;
+    display: block;
+    float: right;
+    border-radius: 2px;
+    -webkit-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+       -moz-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+        -ms-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+         -o-transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+            transition: all 0.6s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+}
+
+.open .circle {
+    -webkit-transform:scale(0.02);
+       -moz-transform:scale(0.02);
+        -ms-transform:scale(0.02);
+         -o-transform:scale(0.02);
+            transform: scale(0.02);
+
+    -webkit-transform-origin: 20% 20%;
+       -moz-transform-origin: 20% 20%;
+        -ms-transform-origin: 20% 20%;
+         -o-transform-origin: 20% 20%;
+            transform-origin: 20% 20%;
+    background: #ccc;
+    border-color: #ccc;
+}
+
+.open .handle:after {
+    -webkit-transform-origin: center center;
+       -moz-transform-origin: center center;
+        -ms-transform-origin: center center;
+         -o-transform-origin: center center;
+            transform-origin: center center;
+
+    -webkit-transform: rotate(90deg);
+       -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+         -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+}
+
+.searchNone{
+    display: none;
+}
+
+.searchBlock{
+    display: inline-block;
+}
+
+#search{
+    max-width: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-width: 0px;
+    -webkit-transition: all 0.5s;
+       -moz-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+         -o-transition: all 0.5s;
+            transition: all 0.5s;
+}
+
+/* 搜索按钮 End */
+
+/* ico 图标果冻动画 */
+.glyphicon:hover{
+    color:tomato;
+    cursor:pointer;
+    
+    -webkit-transition:all .5s ease-in;
+       -moz-transition:all .5s ease-in;
+        -ms-transition:all .5s ease-in;
+         -o-transition:all .5s ease-in;
+            transition:all .5s ease-in;
+    
+    -webkit-animation-name:jello;
+       -moz-animation-name:jello;
+        -ms-animation-name:jello;
+         -o-animation-name:jello;
+            animation-name:jello;
+    
+    -webkit-animation-duration:1s;
+       -moz-animation-duration:1s;
+        -ms-animation-duration:1s;
+         -o-animation-duration:1s;
+            animation-duration:1s;
+
+    -webkit-animation-fill-mode:both;
+       -moz-animation-fill-mode:both;
+        -ms-animation-fill-mode:both;
+         -o-animation-fill-mode:both;
+            animation-fill-mode:both;
+
+    -webkit-transform-origin:center;
+       -moz-transform-origin:center;
+        -ms-transform-origin:center;
+         -o-transform-origin:center;
+            transform-origin:center;
+}
+
+@-webkit-keyframes jello{
+    11.1% {-webkit-transform:none;}
+    22.2% {-webkit-transform:skewX(-12.5deg) skewY(-12.5deg);}
+    33.3% {-webkit-transform:skewX(6.25deg) skewY(6.25deg);}
+    44.4% {-webkit-transform:skewX(-3.125deg) skewY(-3.125deg);}
+    55.5% {-webkit-transform:skewX(1.5625deg) skewY(1.5625deg);}
+    66.6% {-webkit-transform:skewX(-.78125deg) skewY(-.78125deg);}
+    77.7% {-webkit-transform:skewX(.39063deg) skewY(.39063deg);}
+    88.8% {-webkit-transform:skewX(-.19531deg) skewY(-.19531deg);}
+    100% {-webkit-transform:none;}
+}
+
+@-moz-keyframes jello{
+    11.1% {-moz-transform:none}
+    22.2% {-moz-transform:skewX(-12.5deg) skewY(-12.5deg)}
+    33.3% {-moz-transform:skewX(6.25deg) skewY(6.25deg)}
+    44.4% {-moz-transform:skewX(-3.125deg) skewY(-3.125deg)}
+    55.5% {-moz-transform:skewX(1.5625deg) skewY(1.5625deg)}
+    66.6% {-moz-transform:skewX(-.78125deg) skewY(-.78125deg)}
+    77.7% {-moz-transform:skewX(.39063deg) skewY(.39063deg)}
+    88.8% {-moz-transform:skewX(-.19531deg) skewY(-.19531deg)}
+    100% {-moz-transform:none}
+}
+
+@-ms-keyframes jello{
+    11.1% {-ms-transform:none}
+    22.2% {-ms-transform:skewX(-12.5deg) skewY(-12.5deg)}
+    33.3% {-ms-transform:skewX(6.25deg) skewY(6.25deg)}
+    44.4% {-ms-transform:skewX(-3.125deg) skewY(-3.125deg)}
+    55.5% {-ms-transform:skewX(1.5625deg) skewY(1.5625deg)}
+    66.6% {-ms-transform:skewX(-.78125deg) skewY(-.78125deg)}
+    77.7% {-ms-transform:skewX(.39063deg) skewY(.39063deg)}
+    88.8% {-ms-transform:skewX(-.19531deg) skewY(-.19531deg)}
+    100% {-ms-transform:none}
+}
+
+@-o-keyframes jello{
+    11.1% {-o-transform:none}
+    22.2% {-o-transform:skewX(-12.5deg) skewY(-12.5deg)}
+    33.3% {-o-transform:skewX(6.25deg) skewY(6.25deg)}
+    44.4% {-o-transform:skewX(-3.125deg) skewY(-3.125deg)}
+    55.5% {-o-transform:skewX(1.5625deg) skewY(1.5625deg)}
+    66.6% {-o-transform:skewX(-.78125deg) skewY(-.78125deg)}
+    77.7% {-o-transform:skewX(.39063deg) skewY(.39063deg)}
+    88.8% {-o-transform:skewX(-.19531deg) skewY(-.19531deg)}
+    100% {-o-transform:none}
+}
+
+@keyframes jello{
+    11.1% {transform:none}
+    22.2% {transform:skewX(-12.5deg) skewY(-12.5deg)}
+    33.3% {transform:skewX(6.25deg) skewY(6.25deg)}
+    44.4% {transform:skewX(-3.125deg) skewY(-3.125deg)}
+    55.5% {transform:skewX(1.5625deg) skewY(1.5625deg)}
+    66.6% {transform:skewX(-.78125deg) skewY(-.78125deg)}
+    77.7% {transform:skewX(.39063deg) skewY(.39063deg)}
+    88.8% {transform:skewX(-.19531deg) skewY(-.19531deg)}
+    100% {transform:none}
+}
+
+/* ico 图标果冻动画 End */
+
+/* 底部弹跳动画 */
+
+.modal-body{
+    position: relative;
+}
+
+.modal-body:before{
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    content: "";
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    bottom: 100px;
+    background-color: tomato;
+    -webkit-animation: loader-bottom-bounce .6s ease-in infinite;
+       -moz-animation: loader-bottom-bounce .6s ease-in infinite;
+        -ms-animation: loader-bottom-bounce .6s ease-in infinite;
+         -o-animation: loader-bottom-bounce .6s ease-in infinite;
+            animation: loader-bottom-bounce .6s ease-in infinite;
+
+    -webkit-animation-direction: alternate;
+       -moz-animation-direction: alternate;
+        -ms-animation-direction: alternate;
+         -o-animation-direction: alternate;
+            animation-direction: alternate;
+}
+
+
+
+@-webkit-keyframes loader-bottom-bounce{
+    0%{height:24px;-webkit-transform:translateY(0);}
+    85%{height:20px;width:20px}
+    100%{height:10px;width:24px;-webkit-transform:translateY(100px);}
+}
+
+@-moz-keyframes loader-bottom-bounce{
+    0%{height:24px;-moz-transform:translateY(0)}
+    85%{height:20px;width:20px}
+    100%{height:10px;width:24px;-moz-transform:translateY(100px)}
+}
+
+@-ms-keyframes loader-bottom-bounce{
+    0%{height:24px;-ms-transform:translateY(0)}
+    85%{height:20px;width:20px}
+    100%{height:10px;width:24px;-ms-transform:translateY(100px)}
+}
+
+@-o-keyframes loader-bottom-bounce{
+    0%{height:24px;-o-transform:translateY(0)}
+    85%{height:20px;width:20px}
+    100%{height:10px;width:24px;-o-transform:translateY(100px)}
+}
+
+@keyframes loader-bottom-bounce{
+    0%{height:24px;transform:translateY(0)}
+    85%{height:20px;width:20px}
+    100%{height:10px;width:24px;transform:translateY(100px)}
+}
+
+/* 底部弹跳动画 End */
+
+/* 可拖拽iPhone Demo */
+
+#frame{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    cursor: grab;
+    cursor: -webkit-grab;
+    z-index: 999;
+}
+
+.phone{
+    position: relative;
+    margin: 55px auto 0 auto;
+    width: 395px;
+    height: 813px;
+    background-image: url("images/phone.png");
+    background-repeat: no-repeat;
+    background-position: -395px 0px;
+    background-size: 300% auto;
+}
+
+.phoneContent{
+    position: absolute;
+    top: 117px;
+    left: 37px;
+    width: 321px;
+    height: 569px;
+    overflow: hidden;
+}
+
+#refreshBtn{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ccc;
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    margin-left: -30px;
+    border-radius: 50%;
+}
+
+/* 可拖拽iPhone Demo End */
+
+.thumbnail,.navbar-default,.pagination{
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+
+/* 随机文章动画效果 */
+
+.list-group-item figcaption img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.list-group-item figcaption{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.list-group-item figcaption p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #777;
+    padding: 20px 2.5em;
+    margin: 25px auto;
+    text-align: center;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+       -moz-transition: opacity 0.35s,    -moz-transform 0.35s;
+        -ms-transition: opacity 0.35s,     -ms-transform 0.35s;
+         -o-transition: opacity 0.35s,      -o-transform 0.35s;
+            transition: opacity 0.35s,         transform 0.35s;
+
+    -webkit-transform: translate3d(0,20px,0);
+       -moz-transform: translate3d(0,20px,0);
+        -ms-transform: translate3d(0,20px,0);
+         -o-transform: translate3d(0,20px,0);
+            transform: translate3d(0,20px,0);
+}
+
+.list-group-item:hover img {
+    opacity: 0.4;
+}
+
+.list-group-item figcaption::before,
+.list-group-item figcaption::after {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+       -moz-transition: opacity 0.35s,    -moz-transform 0.35s;
+        -ms-transition: opacity 0.35s,     -ms-transform 0.35s;
+         -o-transition: opacity 0.35s,      -o-transform 0.35s;
+            transition: opacity 0.35s,         transform 0.35s;
+}
+
+.list-group-item figcaption::before {
+    border-top: 1px solid #777;
+    border-bottom: 1px solid #777;
+    -webkit-transform: scale(0,1);
+       -moz-transform: scale(0,1);
+        -ms-transform: scale(0,1);
+         -o-transform: scale(0,1);
+            transform: scale(0,1);
+}
+
+.list-group-item figcaption::after {
+    border-right: 1px solid #777;
+    border-left: 1px solid #777;
+    -webkit-transform: scale(1,0);
+       -moz-transform: scale(1,0);
+        -ms-transform: scale(1,0);
+         -o-transform: scale(1,0);
+            transform: scale(1,0);
+}
+
+.list-group-item:hover figcaption::before,
+.list-group-item:hover figcaption::after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+        -ms-transform: scale(1);
+         -o-transform: scale(1);
+            transform: scale(1);
+}
+
+.list-group-item:hover p {
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+       -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+         -o-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+}
+
+/* 随机文章动画效果 End */
+
+/* 公用 Style */
+
+.fl{
+    float:left;
+}
+
+.fr{
+    float:right;
+}
+
+
+.mtb{
+    margin:15px auto;
+}
+
+/* 点亮技能名称 Style */
+
+.sr-only{
+    position: relative;
+}
+/* 七牛 AD */
+.qiniu{padding: 10px 5px;}
