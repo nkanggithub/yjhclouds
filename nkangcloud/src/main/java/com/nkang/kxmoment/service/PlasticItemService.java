@@ -464,9 +464,10 @@ public class PlasticItemService {
 		String finalize = null;
 		GroupCommand cmd = new GroupCommand(coll, keyf, condition, initial, reduce, finalize);
 		BasicDBList resultList = (BasicDBList)coll.group(cmd);
-		if(resultList != null && resultList.size() > 0){
-			result = new ArrayList<Object[]>();
+		if(resultList == null || resultList.size()==0){
+			return result;
 		}
+		result = new ArrayList<Object[]>();
 		for(int i=0; i<resultList.size(); i++){
 			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
 			String day = dbObject.getString("day");
