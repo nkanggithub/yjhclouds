@@ -74,7 +74,7 @@ ul li.singleQuote .firstLayer .quotePrice{
 ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
 	color:red;
 }
-ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.normal{
+ul li.singleQuote .firstLayer .quotePrice.normal,ul li.singleQuote .firstLayer  .change.normal{
 	color:#333;
 }
 ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
