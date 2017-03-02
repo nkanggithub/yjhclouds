@@ -319,16 +319,17 @@ function getAllDatas(){
 		 },
 		 success:function(KMLikeArr){
 		 	$.ajax({
-			 url:'../getAllQuotations',
+			 url:'../PlasticItem/findList?page=1&count=999',
 			 type:"POST",
-			 success:function(resData){
+			 success:function(res){
+			 var resData=res.data;
 			 if(resData.length)
 			{
 				var NoLikeArr=new Array();
 				var LikeArr=new Array();
 				if(KMLikeArr.length>0){
 						 for(var i=0;i<resData.length;i++){
-						 		var itemTemp=$.trim(resData[i].item);
+						 		var itemTemp=$.trim(resData[i].itemNo);
 						 		var index=$.inArray(itemTemp,KMLikeArr);
 						 		if(index>-1){
 						 			resData[i]["like"]=true;
@@ -345,21 +346,20 @@ function getAllDatas(){
 				 var html="";
 				 var totalNum=0;
 				 for(var i=0;i<data.length;i++){
-					 if(data[i].item!=""){
+					 if(data[i].itemNo!=""){
 						 totalNum++;
-						 var random=parseInt(Math.random()*(11),10);
 						 var priceColor="lose";
 						 var change='';
-						 if(data[i].quotationPrice=="暂停报价"){
+						 if(data[i].price=="暂停报价"||data[i].price==0){
 							 priceColor="lose";
-						 }else if(random==0){
+						 }else if(data[i].diffPrice==0){
 							 priceColor="normal";
-						 }else if(random<=5){
+						 }else if(data[i].diffPrice<0){
 							 priceColor="low";
-							 change='		<span class="change low">-'+random+'&nbsp;<b>↓</b></span>';
-						 }else if(random>5){
+							 change='		<span class="change low">'+data[i].diffPrice+'&nbsp;<b>↓</b></span>';
+						 }else if(data[i].diffPrice>0){
 							 priceColor="high";
-							 change='		<span class="change high">+'+random+'&nbsp;<b>↑</b></span>';
+							 change='		<span class="change high">'+data[i].diffPrice+'&nbsp;<b>↑</b></span>';
 						 }
 						 var tag='';
 						 var attention='';
@@ -369,21 +369,22 @@ function getAllDatas(){
 							 tag='<span class="tag">已关注</span>';
 							 attention='attention';
 						 }
-						 if(data[i].quotationPrice=="暂停报价")
-						 {
-							 unit='';
-						 }
 						 var myDate = new Date();
 						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
 						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
-						 if(nowHour<10||nowHour>=18){
+						 if(nowHour<10||nowHour>=18||data[i].priceStatus==1){
 							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
 							 change='';
 						 }
+						 
+						 if(data[i].priceStatus==0){
+							 data[i].price="暂停报价";
+							 unit='';
+						 }
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
-							 +'		<div class="quoteTitle"><span class="item">'+data[i].item+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].item+'\')" '+priceStyle+'><span class="price">'+data[i].quotationPrice+'</span>'+unit+'</div>'
+							 +'		<div class="quoteTitle"><span class="item">'+data[i].itemNo+'</span>'+tag+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].itemNo+'\')" '+priceStyle+'><span class="price">'+data[i].price+'</span>'+unit+'</div>'
 			  				 + change
 							 /*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
@@ -393,7 +394,7 @@ function getAllDatas(){
 				 }
 				 $("#QuoteList").html(html);
 				 
-				 $("input.ui-input-text.ui-body-c").attr("placeholder","输入牌号[牌号总数:"+totalNum+"]");
+				 $("input.ui-input-text.ui-body-c").attr("placeholder","输入牌号【"+totalNum+"个牌号供您查询】");
 				 }
 			 }
 		 });
