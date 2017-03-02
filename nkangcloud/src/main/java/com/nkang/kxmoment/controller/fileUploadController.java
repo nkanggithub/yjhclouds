@@ -67,6 +67,7 @@ public class fileUploadController {
 		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
+		        log.info(e.getMessage());
 		    }
 
 			return message;
