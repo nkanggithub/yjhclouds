@@ -74,6 +74,9 @@ ul li.singleQuote .firstLayer .quotePrice{
 ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
 	color:red;
 }
+ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.normal{
+	color:#333;
+}
 ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
 	color:red;
 }
@@ -347,10 +350,12 @@ function getAllDatas(){
 						 var change='';
 						 if(data[i].quotationPrice=="暂停报价"){
 							 priceColor="lose";
+						 }else if(random==0){
+							 priceColor="normal";
 						 }else if(random<=5){
 							 priceColor="low";
 							 change='		<span class="change low">-'+random+'&nbsp;<b>↓</b></span>';
-						 }else{
+						 }else if(random>5){
 							 priceColor="high";
 							 change='		<span class="change high">+'+random+'&nbsp;<b>↑</b></span>';
 						 }
