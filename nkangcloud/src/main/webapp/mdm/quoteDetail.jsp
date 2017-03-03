@@ -446,7 +446,7 @@ line-height:22px;}
 				</div>
 <!--<input class="searchBox" id='hy' />-->
 <div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
- <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号[<%=ql.size() %>]" data-inset="true" style="margin-top:15px">
+ <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号[<%=ql.size() %>个牌号供您查询]" data-inset="true" style="margin-top:15px">
 <%
 for(int i=0;i<ql.size();i++){
 %>
