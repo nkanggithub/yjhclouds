@@ -5,7 +5,7 @@ import java.util.Date;
 public class Visited {
 	String openid;
 	int visitedNum;
-	Date date;
+	String date;
 	public String getOpenid() {
 		return openid;
 	}
@@ -18,10 +18,10 @@ public class Visited {
 	public void setVisitedNum(int visitedNum) {
 		this.visitedNum = visitedNum;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
