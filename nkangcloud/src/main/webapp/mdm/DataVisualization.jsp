@@ -19,7 +19,7 @@ List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>永佳和塑料有限公司-数据可视化</title>
+    <title>永佳和塑胶有限公司-数据可视化</title>
     <link href="../Jsp/JS/pizzaChart/css/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <link href="../Jsp/JS/pizzaChart/css/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <script src="../Jsp/JS/pizzaChart/js/custom.modernizr.js"></script>
