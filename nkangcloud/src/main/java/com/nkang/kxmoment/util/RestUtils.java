@@ -2055,7 +2055,7 @@ public static String regist(WeChatMDLUser user) {
     					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}else
     	{
-    		str="{\"title\":\""+am.getTitle()+"\",\"description\":\"重庆永佳和塑料有限公司\",\"url\":\""+am.getWebUrl()+"\",\"picurl\":"
+    		str="{\"title\":\""+am.getTitle()+"\",\"description\":\"重庆永佳和塑胶有限公司\",\"url\":\""+am.getWebUrl()+"\",\"picurl\":"
 					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
