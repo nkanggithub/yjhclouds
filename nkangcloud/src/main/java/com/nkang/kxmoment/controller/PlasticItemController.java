@@ -16,7 +16,7 @@ import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoClient;
 
 /**
- * 塑料库存信息 Controller
+ * 塑胶库存信息 Controller
  * @author cqdxk
  *
  */
