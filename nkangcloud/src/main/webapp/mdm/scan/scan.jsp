@@ -95,7 +95,7 @@ if (session.getAttribute("location") == null) {
 					}
 				},timeout);
 			}else{
-				window.location.href="../personCharts.jsp?openid="<%=uid%>;
+				window.location.href="../personCharts.jsp?openid=<%=uid %>";
 			}
         })
     </script>
