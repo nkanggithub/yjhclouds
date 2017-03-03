@@ -266,7 +266,7 @@ public class CoreService
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("胖和欢迎您随时砸单");
-						article.setDescription("永佳和塑料有限公司");
+						article.setDescription("永佳和塑胶有限公司");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwEg&oid=00D90000000pkXM");
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
@@ -460,15 +460,15 @@ public class CoreService
 						articleList.add(article);
 
 						Article articlesub1 = new Article();
-						articlesub1.setTitle("厦门永佳和塑料有限公司");
-						articlesub1.setDescription("厦门永佳和塑料有限公司");
+						articlesub1.setTitle("厦门永佳和塑胶有限公司");
+						articlesub1.setDescription("厦门永佳和塑胶有限公司");
 						articlesub1.setPicUrl(xiamenlogo);
 						articlesub1.setUrl("http://mp.weixin.qq.com/s/YXlFOaGXo7QqZy4gyu0tDg");
 						articleList.add(articlesub1);
 						
 						Article articlesub2 = new Article();
-						articlesub2.setTitle("重庆永佳和塑料有限公司");
-						articlesub2.setDescription("重庆永佳和塑料有限公司");
+						articlesub2.setTitle("重庆永佳和塑胶有限公司");
+						articlesub2.setDescription("重庆永佳和塑胶有限公司");
 						articlesub2.setPicUrl(chongqinglogo);
 						articlesub2.setUrl("http://mp.weixin.qq.com/s/RpBKLRYhKUJ_2QFpaK3RkQ");
 						articleList.add(articlesub2);
