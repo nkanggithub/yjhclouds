@@ -150,7 +150,7 @@ font-weight:bold;
 }
 #menu p
 {
-width:50%;
+width:33%;
 height:100%;
 float:left;
 text-align:center;
@@ -373,6 +373,7 @@ display:none;
   <div id="menu" class="large-12 small-12 columns">
 	<p id="ac" class="selected" style="border-left:none;">图文统计</p>
 	    <p id="qc">价格趋势</p>
+	    <p id="vc">报价阅读</p>
   </div>
   <div id="quotation" style="display:none;">
   <div class="large-12 small-12 columns">
@@ -434,6 +435,7 @@ display:none;
   </div>
   </div>
 </div>
+<div id="quoteVisited"></div>
 </div>
 
 
@@ -457,6 +459,7 @@ var i=$(this).index();
     });
 	$("#qc").click(function(){
 	$("#article").hide();
+	$("#quoteVisited").hide();
 	$("#quotation").show();
 	$(this).addClass("selected");
 	$(this).siblings().removeClass("selected");
@@ -465,10 +468,19 @@ var i=$(this).index();
 	$("#ac").click(function(){
 	$("#article").show();
 	$("#quotation").hide();
+	$("#quoteVisited").hide();
 	$(this).addClass("selected");
 	$(this).siblings().removeClass("selected");
 
 	});
+	$("#vc").click(function(){
+		$("#article").hide();
+		$("#quoteVisited").show();
+		$("#quotation").hide();
+		$(this).addClass("selected");
+		$(this).siblings().removeClass("selected");
+
+		});
 	$(".singleQI").live("click",function(){
 		var status=$(this).children("p").text();
 		if("0"==status){
@@ -480,7 +492,7 @@ var i=$(this).index();
 			            width: '380',
 			            height: '350',
 			            dataFormat: 'jsonurl',
-			            dataSource: '../PlasticItem/priceList'+params
+			            dataSource: '../PlasticItem/priceList?itemNo='+params
 			        }).render();
 			        
 			    });
