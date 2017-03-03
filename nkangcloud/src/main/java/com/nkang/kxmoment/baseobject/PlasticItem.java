@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 塑料库存
+ * 塑胶库存
  * @author cqdxk
  *
  */
