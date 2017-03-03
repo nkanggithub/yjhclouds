@@ -433,7 +433,7 @@ public class PlasticItemService {
 		DBCollection coll = MongoClient.getCollection(QuotationList.class);
 		// 按时间分组
 		String keyf = "function(doc){"
-				+ "  var date = doc.dateTime.substring(0,10);" // 截取时间 yyyy-MM-dd
+				+ "  var date = doc.lastUpdate.substring(0,10);" // 截取时间 yyyy-MM-dd
 				+ "  return {'day':date, 'itemNo': doc.plasticItem};"
 				+ "}";
 		// 条件
@@ -443,19 +443,19 @@ public class PlasticItemService {
 			DBObject condDate = new BasicDBObject();
 			String beginTimeStr = DateUtil.date2Str(beginTime, "yyyy-MM-dd HH:mm:ss.S");
 			condDate.put("$gt", beginTimeStr);
-			condition.put("dateTime", condDate);
+			condition.put("lastUpdate", condDate);
 		}
 		if(endTime != null){
 			DBObject condDate = new BasicDBObject();
 			String endTimeStr = DateUtil.date2Str(endTime, "yyyy-MM-dd HH:mm:ss.S");
 			condDate.put("$gt", endTimeStr);
-			condition.put("dateTime", new BasicDBObject().put("$lt", endTimeStr));
+			condition.put("lastUpdate", new BasicDBObject().put("$lt", endTimeStr));
 		}
 		// 初始
 		DBObject initial = new BasicDBObject();
 		initial.put("sumPrice", 0);
 		String reduce = "function(curr, result) {"
-				+ "  if(curr.dateTime && curr.suggestPrice){"
+				+ "  if(curr.lastUpdate && curr.suggestPrice){"
 				+ "    result.sumPrice += curr.suggestPrice;"
 				+ "  }"
 				+ "}";
