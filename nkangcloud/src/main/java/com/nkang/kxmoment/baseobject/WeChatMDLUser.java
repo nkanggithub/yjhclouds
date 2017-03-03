@@ -9,6 +9,7 @@ public class WeChatMDLUser extends WeChatUser {
 	public String companyName;
 	public String registerDate;
 	public int workDay;
+	public double distance;
 	public int CongratulateNum;
 	public String role;
 	public Role roleObj;
@@ -23,7 +24,13 @@ public class WeChatMDLUser extends WeChatUser {
 	public ArrayList tag;
 	public ArrayList kmLists;
 	public HashMap like;
-	
+
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 	public String getLastUpdatedDate() {
 		return lastUpdatedDate;
 	}
