@@ -187,7 +187,7 @@ $(function(){
 	});
 });
 function ToCharPage(item){
-	location.href="priceCharts.jsp?item="+item;
+	location.href="priceCharts.jsp?itemNo="+item;
 	//showKMPanel(item);
 }
 function showKMPanel(item){
