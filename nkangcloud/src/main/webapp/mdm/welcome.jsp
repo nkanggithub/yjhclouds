@@ -7,7 +7,7 @@ String baehosthost = Constants.baehost;
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>永佳和塑料有限公司</title>
+    <title>永佳和塑胶有限公司</title>
     <link href="../Jsp/CSS/common.css" type="text/css" rel="stylesheet">
     <link href="../Jsp/CSS/style_360_2.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="../Jsp/CSS/layer.css" id="layui_layer_skinlayercss">
@@ -78,7 +78,7 @@ String baehosthost = Constants.baehost;
         <div class="brand">
         	<div class="page page1" id="pageD0" style="height: 870px;">
         		<p class="tip-t">您刚好需要<br>我正好专业</p>
-        		<p class="tip-b">中国塑料领跑者</p>
+        		<p class="tip-b">中国塑胶领跑者</p>
         		<div class="img-wrap">
         			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM82&oid=00D90000000pkXM" width="100%" height="330px">
         		</div>
