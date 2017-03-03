@@ -252,9 +252,10 @@ function showKMPanel(openid,name){
 		 success:function(KMLikeArr){
 			 if(KMListsArr.length==0){
 				 	$.ajax({
-					 url:'../getAllQuotations',
+					 url:'../PlasticItem/findList?page=1&count=999',
 					 type:"POST",
-					 success:function(resData){
+					 success:function(res){
+						 var resData=res.data;
 						 KMListsArr=resData;
 					 	if(resData.length)
 						{
@@ -273,7 +274,7 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 	var LikeArr=new Array();
 	if(KMLikeArr.length>0){
 			 for(var i=0;i<KMListsArr.length;i++){
-			 		var itemTemp=$.trim(KMListsArr[i].item);
+			 		var itemTemp=$.trim(KMListsArr[i].itemNo);
 			 		var index=$.inArray(itemTemp,KMLikeArr);
 			 		if(index>-1){
 			 			KMListsArr[i]["like"]=true;
@@ -289,14 +290,14 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 	 var data=$.merge(LikeArr, NoLikeArr);   
 	 var html="";
 	 for(var i=0;i<data.length;i++){
-		 if(data[i].item!=""){
+		 if(data[i].itemNo!=""){
 			 var tag='';
 			 var attention='attention';
-			 var button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].item+'\',this)" type="button" value="关注"/>';
+			 var button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].itemNo+'\',this)" type="button" value="关注"/>';
 			 if(data[i]["like"]==true){
 				 tag='<span class="pTag">已关注</span>';
 				 attention='';
-				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].item+'\',this)"  type="button" value="取消"/>';
+				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].itemNo+'\',this)"  type="button" value="取消"/>';
 			 }
 			 if(data[i].quotationPrice=="暂停报价")
 			 {
@@ -304,7 +305,7 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 			 }
 			 html+='	<li class="singleQuote '+attention+'">'
 					+'		<div class="quoteTitle">'
-					+'			<span class="pItem">'+data[i].item+'</span>'
+					+'			<span class="pItem">'+data[i].itemNo+'</span>'
 					+tag
 					+'		</div>'
 					+button
