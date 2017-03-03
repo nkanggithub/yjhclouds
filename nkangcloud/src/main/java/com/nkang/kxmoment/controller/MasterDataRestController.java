@@ -37,6 +37,7 @@ import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
+import com.nkang.kxmoment.util.StringUtils;
 
 
 @RestController
@@ -585,7 +586,7 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-	
+
 	@RequestMapping("/CallGetWeChatUserFromMongoDB")
 	public static List<WeChatMDLUser> CallGetWeChatUserFromMongoDB(
 			@RequestParam(value="openid", required=false) String openid
@@ -598,6 +599,36 @@ public class MasterDataRestController {
 			//ret.add(e.getMessage());
 		}
 		return ret;
+	}
+	
+
+	@RequestMapping("/CallGetWeChatUserDistanceList")
+	public static List<WeChatMDLUser> CallGetWeChatUserDistanceList(
+			@RequestParam(value="openid", required=true) String openid
+			){
+		GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(openid);
+		String lat = geol.getLAT();
+		String lng = geol.getLNG();
+		String addr = geol.getFAddr();
+		
+		
+		
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+		try{
+			ret = MongoDBBasic.getWeChatUserFromMongoDB(null);
+		}		
+		catch(Exception e){
+			//ret.add(e.getMessage());
+		}
+		
+		List<WeChatMDLUser> resultList  = new ArrayList<WeChatMDLUser>();
+		for(WeChatMDLUser temp : ret){
+			if(!StringUtils.isEmpty(temp.getLat())&&!StringUtils.isEmpty(temp.getLng())&&!openid.equals(temp.getOpenid())){
+				temp.setDistance(RestUtils.GetDistance(Double.parseDouble(lng), Double.parseDouble(lat), Double.parseDouble( temp.getLng()),Double.parseDouble( temp.getLat())));
+				resultList.add(temp);
+			}
+		}
+		return resultList;
 	}
 	@RequestMapping(value = "/queryUserKM")
 	public static List<String> queryUserKM(@RequestParam(value="openid", required=true) String openid) {
