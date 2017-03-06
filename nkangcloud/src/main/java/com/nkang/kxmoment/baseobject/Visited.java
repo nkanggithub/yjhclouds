@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Visited {
 	String openid;
+	String pageName;
 	int visitedNum;
 	String date;
 	public String getOpenid() {
@@ -11,6 +12,13 @@ public class Visited {
 	}
 	public void setOpenid(String openid) {
 		this.openid = openid;
+	}
+	
+	public String getPageName() {
+		return pageName;
+	}
+	public void setPageName(String pageName) {
+		this.pageName = pageName;
 	}
 	public int getVisitedNum() {
 		return visitedNum;
