@@ -622,11 +622,19 @@ public class MasterDataRestController {
 		for(WeChatMDLUser temp : ret){
 			if(!StringUtils.isEmpty(temp.getLat())&&!StringUtils.isEmpty(temp.getLng())&&!openid.equals(temp.getOpenid())){
 				temp.setDistance(RestUtils.GetDistance(Double.parseDouble(lng), Double.parseDouble(lat), Double.parseDouble( temp.getLng()),Double.parseDouble( temp.getLat())));
-				for(int i=0;i<lList.size();i++){
-					if(temp.getDistance()<lList.get(i).getDistance()){
-						lList.add(i, temp);
-						break;
+				int num=lList.size();
+				if(num==0){
+					lList.add(temp);
+				}else{
+					for(int i=0;i<lList.size();i++){
+						if(temp.getDistance()<lList.get(i).getDistance()){
+							lList.add(i, temp);
+							break;
+						}
 					}
+				}
+				if(num==lList.size()){
+					lList.add(temp);
 				}
 			}
 		}
