@@ -52,6 +52,7 @@ import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
+import com.nkang.kxmoment.baseobject.Visited;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.service.PlasticItemService;
@@ -72,6 +73,7 @@ public class MongoDBBasic {
 	private static String collectionOnDelivery = "OnDelivery";
 	private static String collectionOrderNopay = "OrderNopay";
 	private static String collectionQuotationList = "QuotationList";
+	private static String collectionVisited = "Visited";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -3623,6 +3625,52 @@ public class MongoDBBasic {
 		}
 		return vLists;
 	}*/
+	
+	/*
+	 * CHANG -ZHENG
+	 *
+	 * for Visited
+	 **/
+	public static String updateVisited(String openid,String date){
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		
+		DBObject query = new BasicDBObject();
+		query.put("openid", openid);
+		query.put("date", date);
+		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
+		if(visited!=null){
+			query.put("visitedNum", (int)visited.get("visited")+1);
+		}else{
+			query.put("visitedNum", 1);
+		}
+		mongoDB.getCollection(collectionVisited).insert(query);
+		return "";
+	}
+	
+	/*
+	 * CHANG -ZHENG
+	 *
+	 * for Visited
+	 **/
+	public static Visited getVisited(String openid,String date){
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		
+		DBObject query = new BasicDBObject();
+		query.put("openid", openid);
+		query.put("date", date);
+		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
+		Visited vit = new Visited();
+		if(visited!=null){
+			vit.setDate(date);
+			vit.setOpenid(openid);
+			vit.setVisitedNum((int)visited.get("visitedNum"));
+		}
+		return vit;
+		}
 	
 }
 					
