@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -181,9 +182,21 @@ public class QuotationController {
 		
 		return MongoDBBasic.getVisited(openid,date); 
 	}
-	@RequestMapping("/getVisitedbTotalNumByDate")
-	public @ResponseBody int getVisitedByDate(@RequestParam(value="date")String date){
+	@RequestMapping("/getVisitedDetail")
+	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="date")String date){
 		
-		return MongoDBBasic.getVisitedbTotalNumByDate(date); 
+		return MongoDBBasic.getVisitedDetail(date); 
+	}
+	
+	@RequestMapping("/getVisitedAllDate")
+	public @ResponseBody List<String> getVisitedAllDate(){
+		
+		return MongoDBBasic.getVisitedAllDate(); 
+	}
+	
+	@RequestMapping("/getVisitedbTotalNumByDate")
+	public @ResponseBody  Map<String,String> getVisitedbTotalNumByDate(){
+		List<String> dates = MongoDBBasic.getVisitedAllDate();
+		return MongoDBBasic.getVisitedbTotalNumByDate(dates); 
 	}
 }
