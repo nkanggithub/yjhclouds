@@ -435,7 +435,9 @@ display:none;
   </div>
   </div>
 </div>
-<div id="quoteVisited"></div>
+<div id="quoteVisited">
+<div id="chart-container2"></div>
+</div>
 </div>
 
 
@@ -479,7 +481,161 @@ var i=$(this).index();
 		$("#quotation").hide();
 		$(this).addClass("selected");
 		$(this).siblings().removeClass("selected");
-
+		 FusionCharts.ready(function () {
+		        var estProcChart = new FusionCharts({
+		            type: 'errorline',
+		            renderAt: 'chart-container2',
+		            width: '380',
+		            height: '350',
+		            dataFormat: 'jsonurl',
+		            dataSource: {
+		                "chart": {
+		                    "theme": "fint",
+		                    "xaxisname": "ABS-02152A",
+		                    "yaxisname": "",
+		                    "numberSuffix":"",
+		                    "caption": "报价阅读统计",
+		                    "subcaption": "(02152A)",
+		                    "showvalues": "0",
+		                    "plottooltext": "$seriesname, $value",
+		                    //Error bar configuration
+		                    "halferrorbar": "0",
+		                    "errorBarColor": "#990000",
+		                    "errorBarAlpha": "50",
+		                    "errorBarThickness": "4",
+		                    "errorBarWidth": "8"
+		                },
+		                "categories": [
+		                    {
+		                        "category": [
+		                            { "label": "Jan" },
+		                            { "label": "Feb" }, 
+		                            { "label": "Mar" },
+		                            { "label": "Apl" },
+		                            { "label": "May" },
+		                            { "label": "Jun" }, 
+		                            { "label": "Jul" },
+		                            { "label": "Aug" },
+		                            { "label": "Sep" },
+		                            { "label": "Oct" }, 
+		                            { "label": "Nov" },
+		                            { "label": "Dec" }
+		                        ]
+		                    }
+		                ],
+		                "dataset": [
+		                    {
+		                        "seriesname": "定价",
+		                        "data": [
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": "50"
+		                            }, 
+		                            {
+		                                "value": "16750",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16900",
+		                                "errorvalue": ""
+		                            },
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16750",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16900",
+		                                "errorvalue": ""
+		                            }
+		                            ,
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16750",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16700",
+		                                "errorvalue": ""
+		                            }, 
+		                            {
+		                                "value": "16900",
+		                                "errorvalue": ""
+		                            }
+		                        ]
+		                    }, {
+		                        "seriesname": "发布价",
+		                        "data": [
+		                                 {
+		                                     "value": "16300",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "16950",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17000",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17300",
+		                                     "errorvalue": ""
+		                                 },
+		                                 {
+		                                     "value": "16300",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "16950",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17000",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17300",
+		                                     "errorvalue": ""
+		                                 },
+		                                 {
+		                                     "value": "16300",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "16950",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17000",
+		                                     "errorvalue": ""
+		                                 }, 
+		                                 {
+		                                     "value": "17300",
+		                                     "errorvalue": ""
+		                                 }
+		                        ]
+		                    }
+		                ]
+		            }
+		        }).render();
+		        
+		    });
+	$("#chart-container2").show();
 		});
 	$(".singleQI").live("click",function(){
 		var status=$(this).children("p").text();
