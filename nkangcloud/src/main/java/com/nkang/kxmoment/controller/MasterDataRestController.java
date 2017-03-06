@@ -1,12 +1,10 @@
 package com.nkang.kxmoment.controller;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,14 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Inventory;
-import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
@@ -32,8 +32,6 @@ import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
-import com.nkang.kxmoment.service.PlasticItemService;
-import com.nkang.kxmoment.util.BillOfSellPoi;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -620,15 +618,19 @@ public class MasterDataRestController {
 		catch(Exception e){
 			//ret.add(e.getMessage());
 		}
-		
-		List<WeChatMDLUser> resultList  = new ArrayList<WeChatMDLUser>();
+		LinkedList<WeChatMDLUser> lList = new LinkedList<WeChatMDLUser>();
 		for(WeChatMDLUser temp : ret){
 			if(!StringUtils.isEmpty(temp.getLat())&&!StringUtils.isEmpty(temp.getLng())&&!openid.equals(temp.getOpenid())){
 				temp.setDistance(RestUtils.GetDistance(Double.parseDouble(lng), Double.parseDouble(lat), Double.parseDouble( temp.getLng()),Double.parseDouble( temp.getLat())));
-				resultList.add(temp);
+				for(int i=0;i<lList.size();i++){
+					if(temp.getDistance()<lList.get(i).getDistance()){
+						lList.add(i, temp);
+						break;
+					}
+				}
 			}
 		}
-		return resultList;
+		return lList;
 	}
 	@RequestMapping(value = "/queryUserKM")
 	public static List<String> queryUserKM(@RequestParam(value="openid", required=true) String openid) {
