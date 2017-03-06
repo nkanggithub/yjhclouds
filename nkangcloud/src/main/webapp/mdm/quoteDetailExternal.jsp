@@ -6,9 +6,6 @@
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
-
-pageContext.setAttribute("path", request.getContextPath());
-
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
@@ -208,21 +205,19 @@ function showKMPanel(item){
 			+'				</div>'); */
 			+'<div class="title"><center>'+item+'的价格趋势分析</center></div>'
 			+'	<div class="chart-box">'
-			+'		<div id="chart-container">FusionCharts will render here</div>'
+			+'		<div id="chart-container" style="text-align: center;overflow-x: auto;">FusionCharts will render here</div>'
 			+'	</div>');
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	 });
-	var params = location.search;
-	params = "?page=1&count=999&itemNo=ABS-777E";
     FusionCharts.ready(function () {
-        var estProcChart = new FusionCharts({
+        var testProcChart = new FusionCharts({
             type: 'errorline',
             renderAt: 'chart-container',
             width: '380',
             height: '350',
             dataFormat: 'jsonurl',
-            dataSource: '${path}/PlasticItem/priceList'+params
+            dataSource: '../PlasticItem/priceList?page=1&count=999&itemNo='+item
         }).render();
         
     });
