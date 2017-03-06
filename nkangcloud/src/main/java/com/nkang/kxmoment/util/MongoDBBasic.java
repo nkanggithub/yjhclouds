@@ -3654,7 +3654,8 @@ public class MongoDBBasic {
 	 *
 	 * for Visited
 	 **/
-	public static Visited getVisited(String openid,String date){
+	public static List<Visited> getVisited(String openid,String date){
+		List<Visited> vitlist = new ArrayList<Visited>();
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
@@ -3668,9 +3669,32 @@ public class MongoDBBasic {
 			vit.setDate(date);
 			vit.setOpenid(openid);
 			vit.setVisitedNum((int)visited.get("visitedNum"));
+			vitlist.add(vit);
 		}
-		return vit;
+		return vitlist;
 		}
-	
+	/*
+	 * CHANG -ZHENG
+	 *
+	 * for Visiteds
+	 **/
+	public static int getVisitedbListByDate(String date){
+		List<Visited> vitlist = new ArrayList<Visited>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		int totalNum=0;
+		DBObject query = new BasicDBObject();
+		query.put("date", date);
+		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
+		if(visiteds.hasNext()) {
+		       DBObject obj = visiteds.next();
+		       if(obj.get("date")!=null && obj.get("visitedNum")!=null){
+		    	   int vitnum = (int) obj.get("visitedNum");
+		    	   totalNum = totalNum + vitnum;
+		       }
+		    }
+		return totalNum;
+		}
 }
 					
