@@ -3679,7 +3679,6 @@ public class MongoDBBasic {
 	 * for Visiteds
 	 **/
 	public static int getVisitedbListByDate(String date){
-		List<Visited> vitlist = new ArrayList<Visited>();
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
