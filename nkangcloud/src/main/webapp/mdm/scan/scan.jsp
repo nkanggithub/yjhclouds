@@ -76,28 +76,61 @@ if (session.getAttribute("location") == null) {
         </div>
     </div>
     <script>
-	var flag=true;
-        $(".btn").click(function () {
-			if(flag==true){
-				flag=false;
-				$(".btn").html("停止扫描");
-				$(".pointer").addClass("pointerAnim");  //添加雷达旋转动画
-				var timeout = 1000;  //每隔1000ms
-				var index = 0;
-				var addClass;
-				addClass = setInterval(function(){
-					if(index >= $(".user span").length){
-						index = 0;
-						addClass = clearInterval(addClass);  //结束循环
-						$(".user span").removeClass("flip").addClass("shadow")
-					}else {
-						$(".user span").eq(index++).fadeIn(timeout).addClass("flip")
-					}
-				},timeout);
-			}else{
-				window.location.href="../personCharts.jsp?openid=<%=uid %>";
+    
+    
+    
+    jQuery.ajax({
+		type : "GET",
+		url : "../../CallGetWeChatUserDistanceList?openid=<%=uid %>",
+		cache : false,
+		success : function(data) {
+			for (var i = 0; i < data.length ; i++) {
+				var temp = data[i];
+				if(i==0){
+					$("span.userOne img").attr("src",temp.headimgurl);
+				}else if(i==1){
+					$("span.userTwo img").attr("src",temp.headimgurl);
+				}else if(i==2){
+					$("span.userThree img").attr("src",temp.headimgurl);
+				}else if(i==3){
+					$("span.userFour img").attr("src",temp.headimgurl);
+				}else if(i==4){
+					$("span.userFive img").attr("src",temp.headimgurl);
+				}else if(i==5){
+					$("span.userSix img").attr("src",temp.headimgurl);
+				}else if(i==6){
+					$("span.userSeven img").attr("src",temp.headimgurl);
+				}else if(i==7){
+					$("span.userEight img").attr("src",temp.headimgurl);
+				}else if(i==8){
+					$("span.userNine img").attr("src",temp.headimgurl);
+				}
 			}
-        })
+		}
+	});
+    
+    
+    
+    
+    $(".btn").html("停止扫描");
+	$(".pointer").addClass("pointerAnim");  //添加雷达旋转动画
+	var timeout = 1000;  //每隔1000ms
+	var index = 0;
+	var addClass;
+	addClass = setInterval(function(){
+		if(index >= $(".user span").length){
+			index = 0;
+			addClass = clearInterval(addClass);  //结束循环
+			$(".user span").removeClass("flip").addClass("shadow")
+		}else {
+			$(".user span").eq(index++).fadeIn(timeout).addClass("flip")
+		}
+	},timeout);
+	
+	
+       $(".btn").click(function () {
+			window.location.href="../personCharts.jsp?openid=<%=uid %>";
+       });
     </script>
 
 </body></html>
