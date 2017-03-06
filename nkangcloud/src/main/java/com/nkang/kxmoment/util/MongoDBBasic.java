@@ -3678,22 +3678,67 @@ public class MongoDBBasic {
 	 *
 	 * for Visiteds
 	 **/
-	public static int getVisitedbTotalNumByDate(String date){
+	public static Map<String,String> getVisitedbTotalNumByDate(List<String> date){
+		HashMap<String,String> map = new HashMap<String,String>();
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
-		int totalNum=0;
+		for(String str : date){
+			int totalNum=0;
+			DBObject query = new BasicDBObject();
+			query.put("date", str);
+			DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
+			if(visiteds.hasNext()) {
+			       DBObject obj = visiteds.next();
+			       if(obj.get("date")!=null && obj.get("visitedNum")!=null){
+			    	   int vitnum = (int) obj.get("visitedNum");
+			    	   totalNum = totalNum + vitnum;
+			       }
+			    }
+			map.put(str, totalNum+"");
+		}
+		return map;
+	}
+	
+	/*
+	 * CHANG -ZHENG
+	 *
+	 * for Visiteds get dates
+	 **/
+	public static List<String> getVisitedAllDate(){
+		HashMap<String,String> map = new HashMap<String,String>();
+		List<String> dates = new ArrayList<String>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find();
+		if(visiteds.hasNext()) {
+		       DBObject obj = visiteds.next();
+		       if(obj.get("date")!=null){
+		    	   String date = (String)obj.get("date");
+		    	   dates.add(date);
+		       }
+		    }
+		return dates;
+	}
+	
+	public static List<Visited> getVisitedDetail(String date){
+		List<Visited> vitlist = new ArrayList<Visited>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
 		DBObject query = new BasicDBObject();
 		query.put("date", date);
 		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
+		Visited vit = new Visited();
 		if(visiteds.hasNext()) {
 		       DBObject obj = visiteds.next();
-		       if(obj.get("date")!=null && obj.get("visitedNum")!=null){
-		    	   int vitnum = (int) obj.get("visitedNum");
-		    	   totalNum = totalNum + vitnum;
-		       }
+		       vit.setDate(date);
+			   vit.setOpenid(obj.get("openid")+"");
+			   vit.setVisitedNum((int)obj.get("visitedNum"));
+			   vitlist.add(vit);
 		    }
-		return totalNum;
-		}
+		return vitlist;
+	}
 }
 					
