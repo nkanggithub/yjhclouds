@@ -3641,11 +3641,16 @@ public class MongoDBBasic {
 		query.put("date", date);
 		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 		if(visited!=null){
-			query.put("visitedNum", Integer.parseInt(visited.get("visitedNum")+""+1));
+			String num = visited.get("visitedNum")+"";
+			query.put("visitedNum", Integer.parseInt(num)+1);
+			DBObject doc = new BasicDBObject();
+			doc.put("$set", query);  
+			mongoDB.getCollection(collectionVisited).update(query, doc);
 		}else{
 			query.put("visitedNum", 1);
+			mongoDB.getCollection(collectionVisited).insert(query);
 		}
-		mongoDB.getCollection(collectionVisited).insert(query);
+		
 		return "";
 	}
 	
