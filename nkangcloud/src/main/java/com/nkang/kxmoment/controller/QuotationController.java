@@ -181,7 +181,7 @@ public class QuotationController {
 		
 		return MongoDBBasic.getVisited(openid,date); 
 	}
-	@RequestMapping("/getVisitedByDate")
+	@RequestMapping("/getVisitedbTotalNumByDate")
 	public @ResponseBody int getVisitedByDate(@RequestParam(value="date")String date){
 		
 		return MongoDBBasic.getVisitedbTotalNumByDate(date); 
