@@ -3678,7 +3678,7 @@ public class MongoDBBasic {
 	 *
 	 * for Visiteds
 	 **/
-	public static int getVisitedbListByDate(String date){
+	public static int getVisitedbTotalNumByDate(String date){
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
