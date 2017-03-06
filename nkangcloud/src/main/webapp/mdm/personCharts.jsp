@@ -79,8 +79,11 @@ jQuery.ajax({
 					companyRole="【"+companyRole+"】";
 				}
 				companyName+=companyRole;
-				
-				workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+temp.distance+'km</div>';
+				if(temp.distance<1){
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+temp.distance*1000+'m</div>';
+				}else{
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+temp.distance+'km</div>';
+				}
 				var lastUpdatedDate="暂无互动";
 				if(temp.lastUpdatedDate!=null&&temp.lastUpdatedDate!='null'){
 					lastUpdatedDate=temp.lastUpdatedDate.substring(0,10);
