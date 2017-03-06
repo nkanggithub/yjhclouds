@@ -176,11 +176,14 @@ public class QuotationController {
 		return openid;
 	}
 	
-	@RequestMapping("/getVisited")
-	public @ResponseBody Visited getVisited(@RequestParam(value="openid") String openid){
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String date = df.format(new Date());
+	@RequestMapping("/getVisitedByOpenid")
+	public @ResponseBody List<Visited> getVisitedByOpenid(@RequestParam(value="openid") String openid,@RequestParam(value="date")String date ){
 		
 		return MongoDBBasic.getVisited(openid,date); 
+	}
+	@RequestMapping("/getVisitedByDate")
+	public @ResponseBody int getVisitedByDate(@RequestParam(value="date")String date){
+		
+		return MongoDBBasic.getVisitedbTotalNumByDate(date); 
 	}
 }
