@@ -3,6 +3,7 @@ package com.nkang.kxmoment.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Visited;
+import com.nkang.kxmoment.baseobject.Visitedreturn;
 import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoDBBasic;
 
@@ -170,10 +172,10 @@ public class QuotationController {
 	
 
 	@RequestMapping("/insertVisited")
-	public @ResponseBody String insertVisited(@RequestParam(value="openid") String openid){
+	public @ResponseBody String insertVisited(@RequestParam(value="openid") String openid,@RequestParam(value="pageName") String pageName){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String date = df.format(new Date());
-		MongoDBBasic.updateVisited(openid,date); 
+		MongoDBBasic.updateVisited(openid,date,pageName); 
 		return openid;
 	}
 	
@@ -198,5 +200,31 @@ public class QuotationController {
 	public @ResponseBody  Map<String,String> getVisitedbTotalNumByDate(){
 		List<String> dates = MongoDBBasic.getVisitedAllDate();
 		return MongoDBBasic.getVisitedbTotalNumByDate(dates); 
+	}
+	
+	@RequestMapping("/getVisitedbTotalNumPage")
+	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
+		Map<String,Visitedreturn> mapret = new HashMap<String,Visitedreturn>();
+		 Map<String,List<Visited>> maps = new HashMap<String, List<Visited>>();
+		List<String> dates = MongoDBBasic.getVisitedAllDate();
+		maps=MongoDBBasic.getVisitedByDate(dates); 
+		
+		for(String date : dates){
+			int page1Num=0;
+			int page2Num=0;
+			Visitedreturn vrtn = new Visitedreturn();
+			List<Visited> visiteds = maps.get(date);
+			for(Visited vis : visiteds){
+				if(vis.getPageName().equals("page1")){
+					page1Num=page1Num+vis.getVisitedNum();
+				}else{
+					page2Num = page2Num+vis.getVisitedNum();
+				}
+			}
+			vrtn.setPage1Num(page1Num);
+			vrtn.setPage2Num(page2Num);
+			mapret.put(date, vrtn);
+		}
+		return mapret;
 	}
 }
