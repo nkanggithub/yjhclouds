@@ -3641,7 +3641,7 @@ public class MongoDBBasic {
 		query.put("date", date);
 		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 		if(visited!=null){
-			query.put("visitedNum", (int)visited.get("visited")+1);
+			query.put("visitedNum", Integer.parseInt(visited.get("visitedNum")+""+1));
 		}else{
 			query.put("visitedNum", 1);
 		}
@@ -3668,7 +3668,7 @@ public class MongoDBBasic {
 		if(visited!=null){
 			vit.setDate(date);
 			vit.setOpenid(openid);
-			vit.setVisitedNum((int)visited.get("visitedNum"));
+			vit.setVisitedNum(Integer.parseInt(visited.get("visitedNum")+""));
 			vitlist.add(vit);
 		}
 		return vitlist;
@@ -3691,7 +3691,7 @@ public class MongoDBBasic {
 			if(visiteds.hasNext()) {
 			       DBObject obj = visiteds.next();
 			       if(obj.get("date")!=null && obj.get("visitedNum")!=null){
-			    	   int vitnum = (int) obj.get("visitedNum");
+			    	   int vitnum = Integer.parseInt(obj.get("visitedNum")+"");
 			    	   totalNum = totalNum + vitnum;
 			       }
 			    }
@@ -3735,7 +3735,7 @@ public class MongoDBBasic {
 		       DBObject obj = visiteds.next();
 		       vit.setDate(date);
 			   vit.setOpenid(obj.get("openid")+"");
-			   vit.setVisitedNum((int)obj.get("visitedNum"));
+			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
 			   vitlist.add(vit);
 		    }
 		return vitlist;
