@@ -1,7 +1,5 @@
 package com.nkang.kxmoment.baseobject;
 
-import java.util.Date;
-
 public class Visited {
 	String openid;
 	String pageName;
