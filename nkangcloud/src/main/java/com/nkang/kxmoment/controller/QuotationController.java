@@ -226,6 +226,7 @@ public class QuotationController {
 			mapret.put(date, vrtn);
 			page1Num=0;
 			page2Num=0;
+			visiteds.clear();
 		}
 		return mapret;
 	}
