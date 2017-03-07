@@ -390,6 +390,32 @@ public class PlasticItemService {
 	}
 	
 	/**
+	 * Get PlasticItem list which are not approved
+	 * @return
+	 */
+	public static int findListWithOutApprove(){
+		List<PlasticItem> list = null;
+		int ret = 0;
+		try {
+			DBObject query = new BasicDBObject();
+			query.put("priceStatus", 1);
+			DBObject orderBy = new BasicDBObject();
+			orderBy.put("updateAt", -1);
+			list = MongoClient.findList(query, 1, 999, orderBy, PlasticItem.class);
+			if(list == null){
+				ret =  0;
+			}
+			else{
+				ret =  list.size();
+			}
+		} catch (Exception e) {
+			logger.error("Find KM List fail.", e);
+			list = null;
+		}
+		return ret;
+	}
+	
+	/**
 	 * Get PlasticItem list for show diffrence price
 	 * @return
 	 */

@@ -303,7 +303,13 @@ public class MongoDBBasic {
 		    	query4.put("Role.isInternalQuoter", true);
 		    	condList.add(query4);
 		    	
-	    	}else if("External".equals(role)){
+	    	}else if("InternalApprover".equals(role)){
+	    		DBObject query1 = new BasicDBObject();
+		    	query1.put("Role.isInternalSeniorMgt", true);
+		    	condList.add(query1);
+		    	
+	    	}
+	    	else if("External".equals(role)){
 	    		DBObject query1 = new BasicDBObject();
 		    	query1.put("Role.isExternalUpStream", true);
 		    	condList.add(query1);
