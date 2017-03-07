@@ -229,7 +229,7 @@ public class QuotationController {
 		return mapret;
 	}
 	@RequestMapping("/sendQuotationMessage")
-	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=true) String title){
+	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=false) String title,@RequestParam(value="img", required=true) String img){
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
 			if("".equals(title)||title==null){
 				title="报价更新啦";
@@ -247,7 +247,7 @@ public class QuotationController {
      				}
      			}
      			
-            	 RestUtils.sendQuotationToUser(allUser.get(i),content,title);
+            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,title);
             	 content="";
             }
 		
