@@ -3778,8 +3778,9 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		query.put("date", date);
 		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
-		Visited vit = new Visited();
+		
 		if(visiteds.hasNext()) {
+			Visited vit = new Visited();
 		       DBObject obj = visiteds.next();
 		       vit.setDate(date);
 			   vit.setOpenid(obj.get("openid")+"");
