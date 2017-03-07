@@ -29,6 +29,16 @@ wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	<script type="text/javascript" src="../Jsp/JS/fusioncharts.theme.fint.js"></script>
 <style>
 #echarts{height: 350px;width:750px;}
+span.chartButton.now {
+    background-color: #005CA1;
+}
+span.chartButton {
+    cursor: pointer;
+    padding: 8px 20px;
+    background-color: #ccc;
+    font-weight: bold;
+    color: #fff;
+}
 #data_model_div
 {
     position: fixed;
@@ -195,7 +205,7 @@ function ToCharPage(item){
 }
 function showKMPanel(item){
 	showCommonPanel();
-	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:9999;top:100px;width:80%;margin-left:10%;">'
+	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:9999;top:100px;width:100%">'
 	//+'<legend>编辑关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			/* +'<div class="title">'+item+'的价格趋势分析</div>'
 			+'	<div class="subtext">2016-12-30 - 2017-02-23</div>'
@@ -205,22 +215,41 @@ function showKMPanel(item){
 			+'				</div>'); */
 			+'<div class="title"><center>'+item+'的价格趋势分析</center></div>'
 			+'	<div class="chart-box">'
-			+'		<div id="chart-container" style="text-align: center;overflow-x: auto;">FusionCharts will render here</div>'
-			+'	</div>');
+			+'		<div id="chart-container" style="text-align: center;overflow-x: auto;"></div>'
+			+'	</div>'
+			+'<div style="text-align:center;margin-top:20px;"><span class="chartButton now">周</span><span class="chartButton">月</span></div>');
 	$('#UpdateUserKmPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 	      $(this).removeClass("bounceInDown animated");
 	 });
-    FusionCharts.ready(function () {
-        var testProcChart = new FusionCharts({
-            type: 'errorline',
-            renderAt: 'chart-container',
-            width: '380',
-            height: '350',
-            dataFormat: 'jsonurl',
-            dataSource: '../PlasticItem/priceList?page=1&count=999&itemNo='+item
-        }).render();
-        
-    });
+	 FusionCharts.ready(function () { 
+	        var testProcChart = new FusionCharts({
+	            type: 'errorline',
+	            renderAt: 'chart-container',
+	            width: '380',
+	            height: '350',
+	            dataFormat: 'jsonurl',
+	            dataSource: '../PlasticItem/priceList?page=1&type=W&count=999&itemNo='+item
+	        }).render();
+	    });
+	$('span.chartButton').click(function(){
+		var text=$(this).text();
+		$(this).addClass("now");
+		$(this).siblings().removeClass("now");
+		var type="W";
+		if(text=="月"){
+			type="M";
+		}
+	    FusionCharts.ready(function () { 
+	        var testProcChart = new FusionCharts({
+	            type: 'errorline',
+	            renderAt: 'chart-container',
+	            width: '380',
+	            height: '350',
+	            dataFormat: 'jsonurl',
+	            dataSource: '../PlasticItem/priceList?page=1&type='+type+'&count=999&itemNo='+item
+	        }).render();
+	    });
+	});
 }
 function showCommonPanel()
 {
