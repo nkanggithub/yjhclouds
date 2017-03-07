@@ -209,22 +209,23 @@ public class QuotationController {
 		 Map<String,List<Visited>> maps = new HashMap<String, List<Visited>>();
 		List<String> dates = MongoDBBasic.getVisitedAllDate();
 		maps=MongoDBBasic.getVisitedByDate(dates); 
-		
+		int page1Num=0;
+		int page2Num=0;
 		for(String date : dates){
-			int page1Num=0;
-			int page2Num=0;
 			Visitedreturn vrtn = new Visitedreturn();
 			List<Visited> visiteds = maps.get(date);
 			for(Visited vis : visiteds){
 				if(vis.getPageName().equals("page1")){
-					page1Num=page1Num+vis.getVisitedNum();
-				}else{
+					page1Num = page1Num+vis.getVisitedNum();
+				}else if(vis.getPageName().equals("page2")){
 					page2Num = page2Num+vis.getVisitedNum();
 				}
 			}
 			vrtn.setPage1Num(page1Num);
 			vrtn.setPage2Num(page2Num);
 			mapret.put(date, vrtn);
+			page1Num=0;
+			page2Num=0;
 		}
 		return mapret;
 	}
