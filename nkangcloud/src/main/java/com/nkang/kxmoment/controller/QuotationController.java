@@ -206,14 +206,13 @@ public class QuotationController {
 	@RequestMapping("/getVisitedbTotalNumPage")
 	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
 		Map<String,Visitedreturn> mapret = new HashMap<String,Visitedreturn>();
-		 Map<String,List<Visited>> maps = new HashMap<String, List<Visited>>();
 		List<String> dates = MongoDBBasic.getVisitedAllDate();
-		maps=MongoDBBasic.getVisitedByDate(dates); 
+		//Map<String,List<Visited>> maps = MongoDBBasic.getVisitedByDate(dates); 
 		int page1Num=0;
 		int page2Num=0;
 		for(String date : dates){
 			Visitedreturn vrtn = new Visitedreturn();
-			List<Visited> visiteds = maps.get(date);
+			List<Visited> visiteds = MongoDBBasic.getVisitedDetail(date);
 			for(Visited vis : visiteds){
 				if(vis.getPageName().equals("page1")){
 					page1Num = page1Num+vis.getVisitedNum();
