@@ -67,13 +67,14 @@ public class PlasticItemController {
 	 * @param request
 	 * @param response
 	 * @param itemNo
+	 * @param type
 	 * @return
 	 */
 	@RequestMapping("/priceList")
 	@ResponseBody
-	public Map<String, Object> priceList(HttpServletRequest request, HttpServletResponse response, String itemNo){
+	public Map<String, Object> priceList(HttpServletRequest request, HttpServletResponse response, String itemNo, String type){
 		allowCrossDomain(request, response);
-		Map<String, Object> dataSource = PlasticItemService.priceList(itemNo);
+		Map<String, Object> dataSource = PlasticItemService.priceList(itemNo, type);
 		return dataSource;
 	}
 	

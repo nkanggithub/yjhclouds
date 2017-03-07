@@ -32,8 +32,9 @@ import com.nkang.kxmoment.util.MongoClient;
  */
 public class PlasticItemService {
 	private static Logger logger = Logger.getLogger(PlasticItemService.class);
-	private static DecimalFormat fnum = new DecimalFormat("#####0.00");
-	
+	private static DecimalFormat fnum = new DecimalFormat("#####0.0000");
+
+	private static int oneDayTimestamp = 1000*60*60*24; //一天的时间戳
 	/**
 	 * Save or Update(if exists id)
 	 * @param kmVo
@@ -158,16 +159,34 @@ public class PlasticItemService {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Map<String, Object> priceList(String itemNo) {
+	public static Map<String, Object> priceList(String itemNo, String type) {
 		Map<String, Object> dataSource = new HashMap<String, Object>();
 		if(itemNo == null || itemNo.length() == 0){
 			return null;
 		}
 		// 分割多个itemNo
 		String[] itemNoArr = itemNo.split(",");
+		// 当前时间
+		Calendar currDateCal = Calendar.getInstance();
+		// 去除十分秒
+		currDateCal.set(Calendar.HOUR_OF_DAY, 0);
+		currDateCal.set(Calendar.MINUTE, 0);
+		currDateCal.set(Calendar.SECOND, 0);
+		currDateCal.set(Calendar.MILLISECOND, 0);
 		// 开始日期
 		Calendar beginDateCal = Calendar.getInstance();
-		beginDateCal.add(Calendar.DATE, -30);
+		if(type != null && type.equalsIgnoreCase("M")){
+			// 查看过去月变化
+			beginDateCal.add(Calendar.DATE, -29);
+		}else{
+			// 查看过去周变化
+			beginDateCal.add(Calendar.DATE, -6);
+		}
+		// 去除十分秒
+		beginDateCal.set(Calendar.HOUR_OF_DAY, 0);
+		beginDateCal.set(Calendar.MINUTE, 0);
+		beginDateCal.set(Calendar.SECOND, 0);
+		beginDateCal.set(Calendar.MILLISECOND, 0);
 		Date beginTime = beginDateCal.getTime();
 		Date endTime = null;
 		// 统计价格趋势
@@ -207,8 +226,11 @@ public class PlasticItemService {
 		category.put("category", categoryList);
 		// dataset
 		Map<String, Map> dataset = new HashMap<String, Map>();
-		for(Object[] rO : resultList){
+		for(int i=0; i<resultList.size(); i++){
+			Object[] rO = resultList.get(i);
 			String day = (String)rO[0];
+			// 当条数据时间
+			Date currDay = DateUtil.str2Date(day, "yyyy-MM-dd");
 			String itemNo2 = (String)rO[1];
 			Double price = (Double)rO[2];
 			Map<String, Object> dataMap = dataset.get(itemNo2);
@@ -221,6 +243,18 @@ public class PlasticItemService {
 				dataset.put(itemNo2, dataMap);
 			}else{
 				dataList = (List<Map>)dataMap.get("data");
+				if(dataList.size()>0){
+					int lastIdx = dataList.size();
+					// 上一条数据时间
+					Map<String, Object> lastDateM = categoryList.get(lastIdx-1);
+					String lastDayStr = (String)lastDateM.get("label");
+					Date lastDay = DateUtil.str2Date(lastDayStr, "yyyy-MM-dd");
+					// 如果数据间隔时间大于一天，则补充以前数据时间
+					if(currDay.getTime() - lastDay.getTime() > oneDayTimestamp){
+						// 填充上一数据前空白数据
+						utilFillGapStatPriceData(categoryList, lastIdx, dataList, lastDay, currDay);
+					}
+				}
 			}
 			// 横轴标题(日期(天))
 			Map<String, Object> ctgMap = new HashMap<String, Object>();
@@ -231,11 +265,56 @@ public class PlasticItemService {
 			data.put("value", price);
 			data.put("errorvalue", "");
 			dataList.add(data);
+			if(resultList.size()>1 && i >= resultList.size()-1
+					&& currDateCal.getTimeInMillis() - currDay.getTime() > oneDayTimestamp){
+				int lastIdx = dataList.size();
+				// 填充当前时间前空白数据
+				utilFillGapStatPriceData(categoryList, lastIdx, dataList, currDay, currDateCal.getTime());
+			}
 		}
 		dataSource.put("chart", chart);
 		dataSource.put("categories", categories);
 		dataSource.put("dataset", dataset.values());
 		return dataSource;
+	}
+
+	/**
+	 * 填充报表中空白没有数据的时间点
+	 * @param categoryList 标题列表
+	 * @param index 数据所在index
+	 * @param dataList 数据列表
+	 * @param lastDay 前一天数据时间
+	 * @param currDay 当前数据时间
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static void utilFillGapStatPriceData(
+			List<Map<String, Object>> categoryList, int index,
+			List<Map> dataList, Date lastDay, Date currDay) {
+		Calendar lastDayCal = Calendar.getInstance();
+		lastDayCal.setTime(lastDay);
+		//上一时间第二天
+		lastDayCal.add(Calendar.DATE, 1);
+		String nextLastDayStr = DateUtil.date2Str(lastDayCal.getTime(), "yyyy-MM-dd");
+		// 上一条数据值
+		Map<String, Object> lastDataM = dataList.get(index-1);
+		// 上一条数据价格
+		Double lastPrice = (Double) lastDataM.get("value");
+		// 横轴标题(日期(天))
+		Map<String, Object> ctgMap = new HashMap<String, Object>();
+		ctgMap.put("label", nextLastDayStr);
+		categoryList.add(index, ctgMap);
+		// 纵轴值（每日合计价格）
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("value", lastPrice);
+		data.put("errorvalue", "");
+		dataList.add(index, data);
+		
+		lastDay = lastDayCal.getTime();
+		// 如果数据间隔时间大于一天，则补充以前数据时间
+		if(currDay.getTime() - lastDay.getTime() > oneDayTimestamp){
+			// 填充上一数据前空白数据
+			utilFillGapStatPriceData(categoryList, index+1, dataList, lastDay, currDay);
+		}
 	}
 	
 	/**
@@ -442,13 +521,13 @@ public class PlasticItemService {
 		if(beginTime != null){
 			DBObject condDate = new BasicDBObject();
 			String beginTimeStr = DateUtil.date2Str(beginTime, "yyyy-MM-dd HH:mm:ss.S");
-			condDate.put("$gt", beginTimeStr);
+			condDate.put("$gte", beginTimeStr);
 			condition.put("lastUpdate", condDate);
 		}
 		if(endTime != null){
 			DBObject condDate = new BasicDBObject();
 			String endTimeStr = DateUtil.date2Str(endTime, "yyyy-MM-dd HH:mm:ss.S");
-			condDate.put("$gt", endTimeStr);
+			condDate.put("$gte", endTimeStr);
 			condition.put("lastUpdate", new BasicDBObject().put("$lt", endTimeStr));
 		}
 		// 初始
@@ -491,12 +570,12 @@ public class PlasticItemService {
 				}
 			}
 		});
-		if(result.size()>5){
+		/*if(result.size()>5){
 			for(Object[] objs : result){
 				String dayStr = (String) objs[0];
 				objs[0] = dayStr.substring(5, 10);  //截取部分 MM-dd
 			}	
-		}
+		}*/
 		return result;
 	}
 	
