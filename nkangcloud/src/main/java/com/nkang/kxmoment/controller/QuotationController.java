@@ -234,7 +234,7 @@ public class QuotationController {
 			if("".equals(title)||title==null){
 				title="报价更新啦";
 			}
-			List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
+			List<String> allUser = MongoDBBasic.getAllOpenIDByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
              for(int i=0;i<allUser.size();i++){
      			itemsList=MongoDBBasic.queryUserKM(allUser.get(i)); 
@@ -251,7 +251,7 @@ public class QuotationController {
             	 content="";
             }
 		
-		return "OK--";
+		return allUser.size()+"";
 		
 	}
 }
