@@ -3642,11 +3642,13 @@ public class MongoDBBasic {
 		query.put("pageName", pageName);
 		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 		if(visited!=null){
-			String num = visited.get("visitedNum")+"";
+			//String num = visited.get("visitedNum")+"";
 			BasicDBObject doc = new BasicDBObject();
-			DBObject update = new BasicDBObject();
-			update.put("visitedNum", Integer.parseInt(num)+1);
-			doc.put("$set", update);  
+			BasicDBObject update = new BasicDBObject();
+			//update.put("visitedNum", Integer.parseInt(num)+1);
+			update.append("visitedNum",1);
+			doc.put("$inc", update);
+			//doc.put("$set", update);  
 			mongoDB.getCollection(collectionVisited).update(query, doc);
 		}else{
 			query.put("visitedNum", 1);
