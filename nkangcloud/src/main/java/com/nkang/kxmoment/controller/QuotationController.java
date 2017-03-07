@@ -176,8 +176,8 @@ public class QuotationController {
 	public @ResponseBody String insertVisited(@RequestParam(value="openid") String openid,@RequestParam(value="pageName") String pageName){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String date = df.format(new Date());
-		MongoDBBasic.updateVisited(openid,date,pageName); 
-		return openid;
+		String str = MongoDBBasic.updateVisited(openid,date,pageName); 
+		return str;
 	}
 	
 	@RequestMapping("/getVisitedByOpenid")
