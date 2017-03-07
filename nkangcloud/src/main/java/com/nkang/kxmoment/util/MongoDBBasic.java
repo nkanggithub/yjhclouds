@@ -3644,7 +3644,7 @@ public class MongoDBBasic {
 		if(visited!=null){
 			String num = visited.get("visitedNum")+"";
 			query.put("visitedNum", Integer.parseInt(num)+1);
-			DBObject doc = new BasicDBObject();
+			BasicDBObject doc = new BasicDBObject();
 			doc.put("$set", query);  
 			mongoDB.getCollection(collectionVisited).update(query, doc);
 		}else{
