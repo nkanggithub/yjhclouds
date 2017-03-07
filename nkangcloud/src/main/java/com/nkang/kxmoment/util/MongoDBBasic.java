@@ -3631,7 +3631,7 @@ public class MongoDBBasic {
 	 *
 	 * for Visited
 	 **/
-	public static String updateVisited(String openid,String date){
+	public static String updateVisited(String openid,String date,String pageName){
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
@@ -3639,6 +3639,7 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		query.put("openid", openid);
 		query.put("date", date);
+		query.put("pageName", pageName);
 		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 		if(visited!=null){
 			String num = visited.get("visitedNum")+"";
@@ -3705,6 +3706,31 @@ public class MongoDBBasic {
 		return map;
 	}
 	
+	public static Map<String,List<Visited>> getVisitedByDate(List<String> date){
+		HashMap<String,List<Visited>> map = new HashMap<String,List<Visited>>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		List<Visited> vtlist = new ArrayList<Visited>();
+		for(String str : date){ 
+			DBObject query = new BasicDBObject();
+			query.put("date", str);
+			DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
+			
+			if(visiteds.hasNext()) {
+			       DBObject obj = visiteds.next();
+			       Visited vit = new Visited();
+			       vit.setDate(str);
+					vit.setOpenid(obj.get("openid")+"");
+					vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
+					vit.setPageName(obj.get("pageName")+"");
+					vtlist.add(vit);
+					
+			    }
+			map.put(str, vtlist);
+		}
+		return map;
+	}
 	/*
 	 * CHANG -ZHENG
 	 *
