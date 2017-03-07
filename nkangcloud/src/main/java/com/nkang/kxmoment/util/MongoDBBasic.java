@@ -3643,8 +3643,8 @@ public class MongoDBBasic {
 		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 		if(visited!=null){
 			String num = visited.get("visitedNum")+"";
-			query.put("visitedNum", Integer.parseInt(num)+1);
 			BasicDBObject doc = new BasicDBObject();
+			doc.put("visitedNum", Integer.parseInt(num)+1);
 			doc.put("$set", query);  
 			mongoDB.getCollection(collectionVisited).update(query, doc);
 		}else{
