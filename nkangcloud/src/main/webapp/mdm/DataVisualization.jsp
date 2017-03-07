@@ -147,6 +147,7 @@ font-weight:bold;
     margin-top: 20px;
     border-radius: 5px;
 	font-size:14px;
+	overflow:hidden;
 }
 #menu p
 {
@@ -198,6 +199,38 @@ color:white;
 #chart-container
 {
 display:none;
+}
+.singleV{
+    height: 45px;
+    border-bottom: 1px solid #F0F0F0;
+    width: 100%;
+    position:relative;
+}
+.singleV img{
+    border-radius: 25px;
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+}
+.VNickName{
+    width: 30%;
+    margin-left: 18%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 45px;
+    float: left;
+        color: #9A9A9A;
+}
+.visitedNum{
+    width: 47%;
+    margin-right: 5%;
+    float: left;
+    line-height: 45px;
+    text-align: right;
+        font-size: 14px;
+    color: #d3d3d3;
 }
 </style>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.js"></script>
@@ -437,6 +470,10 @@ display:none;
 </div>
 <div id="quoteVisited">
 <div id="chart-container2"></div>
+<div id="visitedDetail" style="display:none;">
+<div class="singleV"><img src="http://wx.qlogo.cn/mmopen/n9YXnhMMNEs6JWHqXo8R0ShpiaxJlMdiajn0ibOYfAstcVmiboEmftCPyfzqG7U5wwZze3pUDkAPY2KbUYdMqprYI5srFSZL13Zm/0" /><p class="VNickName">潘嗒嗒</p><p class="visitedNum">34</p></div>
+<div class="singleV"><img src="http://wx.qlogo.cn/mmopen/n9YXnhMMNEs6JWHqXo8R0ShpiaxJlMdiajn0ibOYfAstcVmiboEmftCPyfzqG7U5wwZze3pUDkAPY2KbUYdMqprYI5srFSZL13Zm/0" /><p class="VNickName">潘吨儿</p><p class="visitedNum">189</p></div>
+</div>
 </div>
 </div>
 
@@ -481,21 +518,21 @@ var i=$(this).index();
 		$("#quotation").hide();
 		$(this).addClass("selected");
 		$(this).siblings().removeClass("selected");
-		 FusionCharts.ready(function () {
+		  FusionCharts.ready(function () {
 		        var estProcChart = new FusionCharts({
 		            type: 'errorline',
 		            renderAt: 'chart-container2',
 		            width: '380',
 		            height: '350',
-		            dataFormat: 'jsonurl',
+		            dataFormat: 'json',
 		            dataSource: {
 		                "chart": {
 		                    "theme": "fint",
-		                    "xaxisname": "ABS-02152A",
+		                    "xaxisname": "",
 		                    "yaxisname": "",
 		                    "numberSuffix":"",
 		                    "caption": "报价阅读统计",
-		                    "subcaption": "(02152A)",
+		                    "subcaption": "(最近十天访问量)",
 		                    "showvalues": "0",
 		                    "plottooltext": "$seriesname, $value",
 		                    //Error bar configuration
@@ -517,115 +554,52 @@ var i=$(this).index();
 		                            { "label": "Jul" },
 		                            { "label": "Aug" },
 		                            { "label": "Sep" },
-		                            { "label": "Oct" }, 
-		                            { "label": "Nov" },
-		                            { "label": "Dec" }
+		                            { "label": "Oct" }
 		                        ]
 		                    }
 		                ],
 		                "dataset": [
 		                    {
-		                        "seriesname": "定价",
-		                        "data": [
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": "50"
-		                            }, 
-		                            {
-		                                "value": "16750",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16900",
-		                                "errorvalue": ""
-		                            },
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16750",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16900",
-		                                "errorvalue": ""
-		                            }
-		                            ,
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16750",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16700",
-		                                "errorvalue": ""
-		                            }, 
-		                            {
-		                                "value": "16900",
-		                                "errorvalue": ""
-		                            }
-		                        ]
-		                    }, {
-		                        "seriesname": "发布价",
+		                        "seriesname": "访问量",
 		                        "data": [
 		                                 {
-		                                     "value": "16300",
+		                                     "value": "5",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "16950",
+		                                     "value": "20",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "17000",
+		                                     "value": "53",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "17300",
+		                                     "value": "18",
 		                                     "errorvalue": ""
 		                                 },
 		                                 {
-		                                     "value": "16300",
+		                                     "value": "82",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "16950",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "17000",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "17300",
+		                                     "value": "16",
 		                                     "errorvalue": ""
 		                                 },
 		                                 {
-		                                     "value": "16300",
+		                                     "value": "32",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "16950",
+		                                     "value": "76",
+		                                     "errorvalue": ""
+		                                 },
+		                                 {
+		                                     "value": "42",
 		                                     "errorvalue": ""
 		                                 }, 
 		                                 {
-		                                     "value": "17000",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "17300",
+		                                     "value": "19",
 		                                     "errorvalue": ""
 		                                 }
 		                        ]
@@ -635,8 +609,16 @@ var i=$(this).index();
 		        }).render();
 		        
 		    });
+		  
 	$("#chart-container2").show();
+	$("#chart-container2 circle").css("cursor","pointer");
+	 $(document).on("click","#chart-container2 circle",function(){
+		 console.log("....."+$(this).index());
+		 $("#visitedDetail").show();
+	 });
+	 
 		});
+
 	$(".singleQI").live("click",function(){
 		var status=$(this).children("p").text();
 		if("0"==status){
@@ -664,6 +646,8 @@ var i=$(this).index();
 			$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/rightArrow.png");
 		}
 	});
+	
+
 	  
 	  });
 

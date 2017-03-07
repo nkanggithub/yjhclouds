@@ -454,11 +454,45 @@ function postRecognition(){
 }
 function closeQuotation()
 {
-	$("#fastPush").hide();
+	//$("#fastPush").hide();
 	}
 function showFastPost()
 {
-	$("#fastPush").show();
+	//$("#fastPush").show();
+	swal({  
+        title:"确定一键智能发布吗",  
+        text:"",
+        html:"true",
+        showConfirmButton:"true", 
+		showCancelButton: true,   
+		closeOnConfirm: false,  
+        confirmButtonText:"提交",  
+        cancelButtonText:"取消",
+        animation:"slide-from-top"  
+      }, 
+		function(inputValue){
+			if (inputValue === false){
+			$("#commonPush").show();
+			 return false;}
+			else{
+				$.ajax({
+			        cache: false,
+			        type: "POST",
+			        url:"../sendQuotationMessage",
+			        data:{
+			        	openid:$("#uid").val(),
+			        	title:$("#notificationTitle").val()
+			        },
+			        async: true,
+			        error: function(request) {
+			            alert("Connection error");
+			        },
+			        success: function(data) {
+			        	swal("恭喜！", "您的报价发布成功", "success");
+			        	hideBouncePanel();
+			        }
+			    });
+			}});
 	}
 function postNotification(){
 	var type=$("#notificationType option:selected").val();
@@ -682,11 +716,11 @@ function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
 			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
-			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:100%!important;text-align:center!important'>不想再写了？点击我<span style='text-decoration: underline;'>一键发布</span>吧</p></div>"
-			+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='bj'>报价</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
+			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:100%!important;text-align:center!important;background-color: #005CA1;color: white;'>不想再写了？点击我一键智能发布吧</p></div>"
+			+"  <div id='commonPush' style='display:none'><div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='bj'>报价</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' placeholder='请输入网页链接' class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon'><textarea id='content' style='height:180px;width:95%;line-height:20px' placeholder='请输入内容' class='input-xlarge bsBtn'></textarea></div>"
-			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postNotification()' name='doublebutton-0' class='btn'>提交</button></div>"
+			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postNotification()' name='doublebutton-0' class='btn'>提交</button></div></div>"
 			+"	</div>"
 			+"<div id='footer'><span class='clientCopyRight'><nobr>"+copyRight+"</nobr></span></div>");
 	$('#sendR').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
