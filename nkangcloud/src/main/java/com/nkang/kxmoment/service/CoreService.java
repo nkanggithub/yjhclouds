@@ -273,7 +273,18 @@ public class CoreService
 						
 						if(MongoDBBasic.checkUserRole(fromUserName, "Internal")){
 							Article articleForInternal = new Article();
-							articleForInternal.setTitle("报价管理");
+							int itemNeedApprove = PlasticItemService.findListWithOutApprove();
+							boolean InternalApprover = MongoDBBasic.checkUserRole(fromUserName, "InternalApprover");
+							String itemNeedApproveStr = "";
+							if(itemNeedApprove != 0){
+								if(InternalApprover){
+									itemNeedApproveStr = "【" + String.valueOf(itemNeedApprove)+"个牌号需要您审批】";
+								}
+								else{
+									itemNeedApproveStr = "【您有" + String.valueOf(itemNeedApprove)+"个牌号正在审批】";
+								}
+							}
+							articleForInternal.setTitle("报价管理" + itemNeedApproveStr);
 							articleForInternal.setDescription("报价管理");
 							articleForInternal.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFt&oid=00D90000000pkXM"); //big data
 							articleForInternal.setUrl("http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=" + fromUserName);
