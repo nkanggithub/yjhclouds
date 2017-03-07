@@ -461,9 +461,9 @@ public class PlasticItemService {
 		DBObject cond = new BasicDBObject();
 		cond.put("plasticItem", new BasicDBObject("$in", itemMap.keySet().toArray()));
 		DBObject initial = new BasicDBObject();
-		initial.put("notInInRepositorySum", 0);
+		initial.put("noInvoiceAmountSum", 0);
 		String reduce = "function( curr, result ) {"
-				+ "  result.notInInRepositorySum += curr.notInInRepository;"
+				+ "  result.noInvoiceAmountSum += curr.noInvoiceAmount;"
 				+ "}";
 		// 分组统计
 		BasicDBList resultList = (BasicDBList) MongoClient.groupBy(key, cond, initial, reduce, OrderNopay.class);
@@ -472,7 +472,7 @@ public class PlasticItemService {
 			String itemNo = dbObject.getString("plasticItem");
 			PlasticItem item = itemMap.get(itemNo);
 			if(item != null){
-				Double sum = dbObject.getDouble("notInInRepositorySum");
+				Double sum = dbObject.getDouble("noInvoiceAmountSum");
 				if(!Double.isNaN(sum)){
 					String sumStr = fnum.format(sum);
 					sum = Double.valueOf(sumStr);
@@ -494,9 +494,9 @@ public class PlasticItemService {
 		DBObject cond = new BasicDBObject();
 		cond.put("plasticItem", new BasicDBObject("$in", itemMap.keySet().toArray()));
 		DBObject initial = new BasicDBObject();
-		initial.put("noInvoiceAmountSum", 0);
+		initial.put("notInInRepositorySum", 0);
 		String reduce = "function( curr, result ) {"
-				+ "  result.noInvoiceAmountSum += curr.noInvoiceAmount;"
+				+ "  result.notInInRepositorySum += curr.notInInRepository;"
 				+ "}";
 		// 分组统计
 		BasicDBList resultList = (BasicDBList) MongoClient.groupBy(key, cond, initial, reduce, OnDelivery.class);
@@ -505,7 +505,7 @@ public class PlasticItemService {
 			String itemNo = dbObject.getString("plasticItem");
 			PlasticItem item = itemMap.get(itemNo);
 			if(item != null){
-				Double sum = dbObject.getDouble("noInvoiceAmountSum");
+				Double sum = dbObject.getDouble("notInInRepositorySum");
 				if(!Double.isNaN(sum)){
 					String sumStr = fnum.format(sum);
 					sum = Double.valueOf(sumStr);
