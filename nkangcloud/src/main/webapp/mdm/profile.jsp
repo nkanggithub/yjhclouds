@@ -876,7 +876,7 @@ function register() {
 					$("#info_username span").html(jsons.results[0].realName+'<span style="font-size:13px;">&nbsp;&nbsp;&nbsp;&nbsp;['+jsons.results[0].role+']&nbsp;</span>'+'<img onclick="showRegister()" src="../MetroStyleFiles/edit.png" style="height: 20px; cursor: pointer;padding-left:5px;"/>');
 					$("#info_all").css('display','table');
 					$("#info_phone").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].phone);
-					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].groupid);
+					$("#info_group").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].companyName);
 					$("#info_email").html("&nbsp;&nbsp;&nbsp;&nbsp;"+jsons.results[0].email);
 					$("#info_selfIntro").text(jsons.results[0].selfIntro);
 					$('#UserInfo').modal('show');
