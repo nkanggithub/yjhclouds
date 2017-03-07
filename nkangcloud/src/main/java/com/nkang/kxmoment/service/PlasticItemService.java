@@ -211,7 +211,7 @@ public class PlasticItemService {
 		chart.put("caption", caption);
 		chart.put("subcaption", subcaption);
 		chart.put("showvalues", "0");
-		chart.put("plottooltext", "$seriesname, $value");
+		chart.put("plottooltext", "$seriesname, $label, $value");
 		//Error bar configuration
 		chart.put("halferrorbar", "0");
 		chart.put("errorBarColor", "#990000");
