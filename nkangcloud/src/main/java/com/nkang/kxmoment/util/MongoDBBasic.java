@@ -3635,27 +3635,32 @@ public class MongoDBBasic {
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
-		
-		DBObject query = new BasicDBObject();
-		query.put("openid", openid);
-		query.put("date", date);
-		query.put("pageName", pageName);
-		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
-		if(visited!=null){
-			//String num = visited.get("visitedNum")+"";
-			BasicDBObject doc = new BasicDBObject();
-			BasicDBObject update = new BasicDBObject();
-			//update.put("visitedNum", Integer.parseInt(num)+1);
-			update.append("visitedNum",1);
-			doc.put("$inc", update);
-			//doc.put("$set", update);  
-			mongoDB.getCollection(collectionVisited).update(query, doc);
-		}else{
-			query.put("visitedNum", 1);
-			mongoDB.getCollection(collectionVisited).insert(query);
+		String ret="ok";
+		try{
+			DBObject query = new BasicDBObject();
+			query.put("openid", openid);
+			query.put("date", date);
+			query.put("pageName", pageName);
+			DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
+			if(visited!=null){
+				//String num = visited.get("visitedNum")+"";
+				BasicDBObject doc = new BasicDBObject();
+				BasicDBObject update = new BasicDBObject();
+				//update.put("visitedNum", Integer.parseInt(num)+1);
+				update.append("visitedNum",1);
+				doc.put("$inc", update);
+				//doc.put("$set", update);  
+				mongoDB.getCollection(collectionVisited).update(query, doc);
+			}else{
+				query.put("visitedNum", 1);
+				mongoDB.getCollection(collectionVisited).insert(query);
+			}
+			
+		}catch (Exception e){
+			ret=e.getMessage();
 		}
 		
-		return "";
+		return ret;
 	}
 	
 	/*
