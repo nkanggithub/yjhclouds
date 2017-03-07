@@ -3745,20 +3745,29 @@ public class MongoDBBasic {
 	 * for Visiteds get dates
 	 **/
 	public static List<String> getVisitedAllDate(){
-		HashMap<String,String> map = new HashMap<String,String>();
-		List<String> dates = new ArrayList<String>();
+		//HashMap<String,String> map = new HashMap<String,String>();
+//		List<String> dates = new ArrayList<String>();
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
-		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find();
-		if(visiteds.hasNext()) {
-		       DBObject obj = visiteds.next();
-		       if(obj.get("date")!=null){
-		    	   String date = (String)obj.get("date");
-		    	   dates.add(date);
-		       }
-		    }
-		return dates;
+		DBObject query = new BasicDBObject();
+		//DBCursor visiteds ;
+		@SuppressWarnings("unchecked")
+		List<String> visiteds = mongoDB.getCollection(collectionVisited).distinct("date",query);
+//		if(visiteds.hasNext()) {
+//		       DBObject obj = visiteds.next();
+//		       if(obj.get("date")!=null){
+//		    	   String date = (String)obj.get("date");
+//		    	   dates.add(date);
+//		       }
+//		    }
+//		if(visiteds!=null){
+//			for(int i=0; i<visiteds.size();i++){
+//	    		Locale obj = new Locale("", visiteds.get(i).toString());
+//			}
+//		}
+//		
+		return visiteds;
 	}
 	
 	public static List<Visited> getVisitedDetail(String date){
