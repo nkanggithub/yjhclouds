@@ -560,10 +560,13 @@ public class PlasticItemService {
 		}
 		// 初始
 		DBObject initial = new BasicDBObject();
-		initial.put("sumPrice", 0);
+		initial.put("lastPrice", 0);
 		String reduce = "function(curr, result) {"
 				+ "  if(curr.lastUpdate && curr.suggestPrice){"
-				+ "    result.sumPrice += curr.suggestPrice;"
+				+ "    if(!result.lastUpdate || result.lastUpdate < curr.lastUpdate){"
+				+ "      result.lastUpdate = curr.lastUpdate;"
+				+ "      result.lastPrice = curr.suggestPrice;"
+				+ "    }"
 				+ "  }"
 				+ "}";
 		// 最后处理
@@ -578,7 +581,7 @@ public class PlasticItemService {
 			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
 			String day = dbObject.getString("day");
 			String itemNo = dbObject.getString("itemNo");
-			Double sumPrice = dbObject.getDouble("sumPrice");
+			Double sumPrice = dbObject.getDouble("lastPrice");
 			Object[] rObjects = {day, itemNo, sumPrice};
 			result.add(rObjects);
 		}
