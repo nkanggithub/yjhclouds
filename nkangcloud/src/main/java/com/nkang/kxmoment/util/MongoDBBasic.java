@@ -3767,6 +3767,7 @@ public class MongoDBBasic {
 		       vit.setDate(date);
 			   vit.setOpenid(obj.get("openid")+"");
 			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
+			   vit.setPageName(obj.get("pageName")+"");
 			   vitlist.add(vit);
 		    }
 		return vitlist;
