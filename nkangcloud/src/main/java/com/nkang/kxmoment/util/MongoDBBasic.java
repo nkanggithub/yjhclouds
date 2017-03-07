@@ -3685,12 +3685,15 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		query.put("openid", openid);
 		query.put("date", date);
-		DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
-		Visited vit = new Visited();
-		if(visited!=null){
+		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
+		
+		while(visiteds.hasNext()){
+			Visited vit = new Visited();
+			DBObject obj = visiteds.next();
 			vit.setDate(date);
 			vit.setOpenid(openid);
-			vit.setVisitedNum(Integer.parseInt(visited.get("visitedNum")+""));
+			vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
+			vit.setPageName(obj.get("pageName")+"");
 			vitlist.add(vit);
 		}
 		return vitlist;
