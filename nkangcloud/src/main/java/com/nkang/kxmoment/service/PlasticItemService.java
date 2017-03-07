@@ -226,6 +226,7 @@ public class PlasticItemService {
 		category.put("category", categoryList);
 		// dataset
 		Map<String, Map> dataset = new HashMap<String, Map>();
+		Map<String, Double> beginTimeMaxDatePriceMap = null;
 		for(int i=0; i<resultList.size(); i++){
 			Object[] rO = resultList.get(i);
 			String day = (String)rO[0];
@@ -241,6 +242,22 @@ public class PlasticItemService {
 				dataList = new ArrayList<Map>();
 				dataMap.put("data", dataList);
 				dataset.put(itemNo2, dataMap);
+				if(i==0 && currDay.getTime() > beginDateCal.getTimeInMillis()){
+					if(beginTimeMaxDatePriceMap == null){
+						beginTimeMaxDatePriceMap = statBeginTimeMaxDatePrice(itemNoArr, beginTime);	
+					}
+					Double lastPrice = beginTimeMaxDatePriceMap.get(itemNo2);
+					lastPrice = lastPrice!=null ? lastPrice : 0;
+					// 横轴标题(日期(天))
+					Map<String, Object> ctgMap = new HashMap<String, Object>();
+					ctgMap.put("label", DateUtil.date2Str(beginDateCal.getTime(), "yyyy-MM-dd"));
+					categoryList.add(ctgMap);
+					// 纵轴值（每日合计价格）
+					Map<String, Object> data = new HashMap<String, Object>();
+					data.put("value", lastPrice);
+					data.put("errorvalue", "");
+					dataList.add(data);
+				}
 			}else{
 				dataList = (List<Map>)dataMap.get("data");
 				if(dataList.size()>0){
@@ -577,6 +594,57 @@ public class PlasticItemService {
 			}	
 		}*/
 		return result;
+	}
+	
+	/**
+	 * 统计开始时间前最大时间的价格
+	 * @param itemNo 变化
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @return
+	 */
+	private static Map<String, Double> statBeginTimeMaxDatePrice(String[] itemNoArr, Date beginTime) {
+		Map<String, Double> priceMap = new HashMap<String, Double>();
+		DBCollection coll = MongoClient.getCollection(QuotationList.class);
+		// 按时间分组
+		String keyf = "function(doc){"
+				+ "  var date = doc.lastUpdate.substring(0,10);" // 截取时间 yyyy-MM-dd
+				+ "  return {'itemNo': doc.plasticItem};"
+				+ "}";
+		// 条件
+		DBObject condition = new BasicDBObject();
+		condition.put("plasticItem", new BasicDBObject("$in", itemNoArr));
+		if(beginTime != null){
+			DBObject condDate = new BasicDBObject();
+			String beginTimeStr = DateUtil.date2Str(beginTime, "yyyy-MM-dd HH:mm:ss.S");
+			condDate.put("$lt", beginTimeStr);
+			condition.put("lastUpdate", condDate);
+		}
+		// 初始
+		DBObject initial = new BasicDBObject();
+		initial.put("price", 0);
+		String reduce = "function(curr, result) {"
+				+ "  if(curr.lastUpdate && curr.suggestPrice){"
+				+ "    if(!result.lastUpdate || result.lastUpdate < curr.lastUpdate){"
+				+ "      result.lastUpdate = curr.lastUpdate;"
+				+ "      result.price = curr.suggestPrice;"
+				+ "    }"
+				+ "  }"
+				+ "}";
+		// 最后处理
+		String finalize = null;
+		GroupCommand cmd = new GroupCommand(coll, keyf, condition, initial, reduce, finalize);
+		BasicDBList resultList = (BasicDBList)coll.group(cmd);
+		if(resultList == null || resultList.size()==0){
+			return priceMap;
+		}
+		for(int i=0; i<resultList.size(); i++){
+			BasicDBObject dbObject = (BasicDBObject) resultList.get(i);
+			String itemNo = dbObject.getString("itemNo");
+			Double price = dbObject.getDouble("price");
+			priceMap.put(itemNo, price);
+		}
+		return priceMap;
 	}
 	
 	/**
