@@ -488,7 +488,7 @@ function showFastPost()
 			            alert("Connection error");
 			        },
 			        success: function(data) {
-			        	swal("恭喜！", "您的报价发布成功", "success");
+			        	swal("恭喜！", "您的报价已成功推送到"+data+"个人", "success");
 			        	hideBouncePanel();
 			        }
 			    });
