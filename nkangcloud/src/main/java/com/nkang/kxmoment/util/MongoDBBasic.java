@@ -2551,7 +2551,15 @@ public class MongoDBBasic {
 				
 			return dbuser;
 		}
-		
+		public static List<String> getAllOpenIDByIsRegistered(){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("IsRegistered", "true");
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID",query);
+				
+			return dbuser;
+		}
 		/*
 		 * chang-zheng to update user CongratulateHistory
 		 */
