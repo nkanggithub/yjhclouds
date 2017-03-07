@@ -2700,12 +2700,12 @@ public static String regist(WeChatMDLUser user) {
 		return message;
     }
     
-    public static String sendQuotationToUser(String toOpenId,String content,String title){
+    public static String sendQuotationToUser(String toOpenId,String content,String img,String title){
     	String result ="";
     	String str="";
     	
     		str="{\"title\":\""+title+"\",\"description\":\""+content+"\",\"url\":\"http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID="+toOpenId+"\",\"picurl\":"
-					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnHEr&oid=00D90000000pkXM\"}";
+					+ "\""+img+"\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
     	                "{\"articles\":[" +str +"]}"+"}";
