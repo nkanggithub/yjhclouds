@@ -118,6 +118,21 @@ input#search:focus {
     -webkit-filter: drop-shadow(30px 0 #fff);
     filter: drop-shadow(20px 0);   
 }
+.imgSelect{
+height:100%;
+width:24%;
+position:relative;
+float:left;
+}
+.imgSelect img{
+width: 100%;height:100%;}
+.imgCB
+{
+position: absolute;
+bottom: 2px;
+right: 2px;
+width: 15px;
+height: 15px;}
 </style>
 
 
@@ -156,6 +171,10 @@ var LastToLikeDate="",lastLikeTo="";
 var HpLogoSrc="",copyRight="",clientThemeColor="";
 getLogo();
 $(window).load(function() {
+	
+	$(".imgSelect input").live("click",function(){
+		$(this).parent().siblings().find("input").attr("checked", false);
+	})
 	$('head').append("<style>.naviArrow.is-selected::after{content: ''; display: block;width: 0;height: 0;border-left: .9em solid transparent;border-right: .9em solid transparent;border-top: .9em solid "+clientThemeColor+";position: relative;top: 0px;left: 50%;-webkit-transform: translateX(-50%); -ms-transform: translateX(-50%);transform: translateX(-50%);}</style>");
 	$("#navSupport").on("click",function(){
 		$(this).append("<a class='naviArrow is-selected'></a>").css("border-top","10px solid "+clientThemeColor);
@@ -459,6 +478,7 @@ function closeQuotation()
 function showFastPost()
 {
 	//$("#fastPush").show();
+	var img=$(".imgSelect input[type='checkbox']:checked").siblings("img").attr("src");
 	swal({  
         title:"确定一键智能发布吗",  
         text:"",
@@ -481,7 +501,8 @@ function showFastPost()
 			        url:"../sendQuotationMessage",
 			        data:{
 			        	openid:$("#uid").val(),
-			        	title:$("#notificationTitle").val()
+			        	title:$("#notificationTitle").val(),
+			        	img:img
 			        },
 			        async: true,
 			        error: function(request) {
@@ -716,6 +737,7 @@ function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
 			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
+			+"  <div class='rcommon' style='height:80px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='../mdm/images/priceincrease.gif'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='../mdm/images/quotation.gif'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='../mdm/images/orderplease.gif'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='../mdm/images/delivering.gif'></div></div>"
 			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:100%!important;text-align:center!important;background-color: #005CA1;color: white;'>不想再写了？点击我一键智能发布吧</p></div>"
 			+"  <div id='commonPush' style='display:none'><div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='bj'>报价</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' placeholder='请输入网页链接' class='input-xlarge bsBtn'></div>"
