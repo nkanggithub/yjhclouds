@@ -3710,7 +3710,7 @@ public class MongoDBBasic {
 			DBObject query = new BasicDBObject();
 			query.put("date", str);
 			DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
-			if(visiteds.hasNext()) {
+			while(visiteds.hasNext()) {
 			       DBObject obj = visiteds.next();
 			       if(obj.get("date")!=null && obj.get("visitedNum")!=null){
 			    	   int vitnum = Integer.parseInt(obj.get("visitedNum")+"");
@@ -3733,7 +3733,7 @@ public class MongoDBBasic {
 			query.put("date", str);
 			DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
 			
-			if(visiteds.hasNext()) {
+			while(visiteds.hasNext()) {
 			       DBObject obj = visiteds.next();
 			       Visited vit = new Visited();
 			       vit.setDate(str);
@@ -3762,19 +3762,13 @@ public class MongoDBBasic {
 		//DBCursor visiteds ;
 		@SuppressWarnings("unchecked")
 		List<String> visiteds = mongoDB.getCollection(collectionVisited).distinct("date",query);
-//		if(visiteds.hasNext()) {
+//		while(visiteds.hasNext()) {
 //		       DBObject obj = visiteds.next();
 //		       if(obj.get("date")!=null){
 //		    	   String date = (String)obj.get("date");
 //		    	   dates.add(date);
 //		       }
 //		    }
-//		if(visiteds!=null){
-//			for(int i=0; i<visiteds.size();i++){
-//	    		Locale obj = new Locale("", visiteds.get(i).toString());
-//			}
-//		}
-//		
 		return visiteds;
 	}
 	
@@ -3787,7 +3781,7 @@ public class MongoDBBasic {
 		query.put("date", date);
 		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
 		
-		if(visiteds.hasNext()) {
+		while(visiteds.hasNext()) {
 			Visited vit = new Visited();
 		       DBObject obj = visiteds.next();
 		       vit.setDate(date);
