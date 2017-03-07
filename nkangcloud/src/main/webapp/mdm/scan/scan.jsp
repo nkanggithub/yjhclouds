@@ -73,6 +73,7 @@ ul li.Work_Mates_div_list_div2 {
 	var index = 0;
 	var addClass;
 	var flag=true;
+	var flagButton=true;
 	var data;
 	addClass = setInterval(function(){
 		if(flag){
@@ -137,11 +138,16 @@ ul li.Work_Mates_div_list_div2 {
 		}
 	},timeout);
        $(".btn").click(function () {
-			//window.location.href="../personCharts.jsp?openid=<%=uid %>";
-			$('body').html('<div id="chart-container"></div>'
-					+'<ul class="Work_Mates_div2" id="Work_Mates_div" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="margin-top:15px">'
+       	if(flagButton){
+       		flagButton=false;
+       	   //window.location.href="../personCharts.jsp?openid=<%=uid %>";
+         	$(".pointer").removeClass("pointerAnim");  //删除雷达旋转动画
+         	addClass = clearInterval(addClass);  //结束循环
+			$(".user span").removeClass("shadow").addClass("flip");
+			$(".btn").html("查看扫描结果");
+			$('body').append('<a name="result"></a>:<div id="chart-container"></div>'
+					+'<h2 style="text-align:center;background-color:#fff;font-size:16px;padding:15px 0px;">附近人员列表</h2><ul class="Work_Mates_div2" id="Work_Mates_div" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入关键字" data-inset="true" style="background-color:#fff;">'
 					+'</ul>');
-			$('body').css("background-color","#fff");
 			
 			
 			
@@ -332,9 +338,9 @@ ul li.Work_Mates_div_list_div2 {
 				}
 				companyName+=companyRole;
 				if(temp.distance<1){
-					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+temp.distance*1000+'m</div>';
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;opacity:0.85;">'+temp.distance*1000+'m</div>';
 				}else{
-					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+temp.distance+'km</div>';
+					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-25px;opacity:0.85;">'+temp.distance+'km</div>';
 				}
 				var li='	<li class="Work_Mates_div_list_div2">'
 					+'                                           	 	<div class="Work_Mates_img_div2">'
@@ -358,11 +364,9 @@ ul li.Work_Mates_div_list_div2 {
 			$("#Work_Mates_div").html(ul);
 			
 			
-			
-			
-			
-			
-			
+			}else{
+				window.location.href="#result";
+			}
        });
     </script>
 
