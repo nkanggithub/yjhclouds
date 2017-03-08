@@ -516,6 +516,7 @@ function showFastPost()
 			}});
 	}
 function postNotification(){
+	var img=$(".imgSelect input[type='checkbox']:checked").siblings("img").attr("src");
 	var type=$("#notificationType option:selected").val();
 	$.ajax({
         cache: false,
@@ -526,6 +527,7 @@ function postNotification(){
         	title:$("#notificationTitle").val(),
         	url:$("#notificationURL").val(),
         	type:type,
+        	img:img,
         	content:$("#content").val()
         	
         },
