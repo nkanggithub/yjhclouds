@@ -1,15 +1,18 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.nkang.kxmoment.baseobject.GeoLocation"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
-
-
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
+MongoDBBasic.updateVisited(uid,"profile",currentDate);
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
