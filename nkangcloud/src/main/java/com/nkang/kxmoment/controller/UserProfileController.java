@@ -247,6 +247,7 @@ public class UserProfileController {
 			HttpServletResponse response ){
 		ArticleMessage am=new ArticleMessage();
 		String openid=request.getParameter("openId");
+		String img = request.getParameter("img");
 		int num=MongoDBBasic.getArticleMessageMaxNum()+1;
 		System.out.println("new Article num--------------"+num);
 		am.setNum(num+"");
@@ -258,12 +259,9 @@ public class UserProfileController {
 		am.setVisitedNum("0");
 		am.setTime(new Date().toLocaleString());
 		MongoDBBasic.saveArticleMessage(am);
-		List<String> openIDs=new ArrayList<String>();
-		openIDs.add(openid);
-		openIDs.add("oij7nt5yOIOqcn58N8JnzP8RRVao");
-		openIDs.add("oij7nt5GgpKftiaoMSKD68MTLXpc");
-			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendNotificationToUser(openid,openIDs.get(i),am);
+		List<String> allUser = MongoDBBasic.getAllOpenIDByIsRegistered();
+			for(int i=0;i<allUser.size();i++){
+				RestUtils.sendNotificationToUser(openid,allUser.get(i),img,am);
 			}
 		
 		return "ok"+num;
