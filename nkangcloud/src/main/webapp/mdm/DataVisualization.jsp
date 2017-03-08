@@ -1,9 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
+<%@ page import="com.nkang.kxmoment.baseobject.Visited"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
-<%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
+<%@ page import="com.nkang.kxmoment.baseobject.PlasticItem"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="com.nkang.kxmoment.service.PlasticItemService"%>
+
 <%	
 List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
 int BJTotalNum=BJtitles.size();
@@ -13,7 +16,12 @@ List<ArticleMessage> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
 int GTTotalNum=GTtitles.size();
 List<ArticleMessage> JStitles =MongoDBBasic.getArticleMessageByType("js");
 int JSTotalNum=JStitles.size();
-List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
+List<PlasticItem> ql=PlasticItemService.findList(1,9999);
+List<String> dates=MongoDBBasic.getVisitedAllDate();
+List<Integer> scanNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"scan");
+List<Integer> profileNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"profile");
+List<Integer> quoteNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"quoteDetailExternal");
+
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -415,7 +423,7 @@ display:none;
 <div id="quotationList" >
 <% for(int i=0;i<ql.size();i++){ %>
 <div class="singleQI"><p style="display:none">0</p>
-<span><%=ql.get(i).getItem() %></span><img class="rightArrow" src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt="" />
+<span><%=ql.get(i).getItemNo() %></span><img class="rightArrow" src="../Jsp/JS/pizzaChart/img/rightArrow.png" alt="" />
 </div><% } %>
 </div>
  <div id="chart-container"></div> 
@@ -545,63 +553,71 @@ var i=$(this).index();
 		                "categories": [
 		                    {
 		                        "category": [
-		                            { "label": "Jan" },
-		                            { "label": "Feb" }, 
-		                            { "label": "Mar" },
-		                            { "label": "Apl" },
-		                            { "label": "May" },
-		                            { "label": "Jun" }, 
-		                            { "label": "Jul" },
-		                            { "label": "Aug" },
-		                            { "label": "Sep" },
-		                            { "label": "Oct" }
+		                             <%  for(int i=0;i<dates.size();i++){ 
+		                            	 if(i==dates.size()-1){%>
+		                            	 { "label":" <%=dates.get(i)%>" }
+		                            	 <%}else{%>
+		                            { "label": "<%=dates.get(i)%>" },
+		                            <%}%>
+		                            <%}%>
+		                            
 		                        ]
 		                    }
 		                ],
 		                "dataset": [
 		                    {
-		                        "seriesname": "访问量",
+		                        "seriesname": "扫描",
 		                        "data": [
-		                                 {
-		                                     "value": "5",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "20",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "53",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "18",
-		                                     "errorvalue": ""
-		                                 },
-		                                 {
-		                                     "value": "82",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "16",
-		                                     "errorvalue": ""
-		                                 },
-		                                 {
-		                                     "value": "32",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "76",
-		                                     "errorvalue": ""
-		                                 },
-		                                 {
-		                                     "value": "42",
-		                                     "errorvalue": ""
-		                                 }, 
-		                                 {
-		                                     "value": "19",
-		                                     "errorvalue": ""
-		                                 }
+		                                 <%  for(int i=0;i<scanNumList.size();i++){ 
+			                            	 if(i==scanNumList.size()-1){%>
+			                            	 {
+			                                     "value": "<%=scanNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 }
+			                            	 <%}else{%>
+			                            	 {
+			                                     "value": "<%=scanNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 },
+			                            <%}%>
+			                            <%}%>
+		                                
+		                        ]
+		                    },{
+		                        "seriesname": "报价",
+		                        "data": [
+		                                 <%  for(int i=0;i<quoteNumList.size();i++){ 
+			                            	 if(i==quoteNumList.size()-1){%>
+			                            	 {
+			                                     "value": "<%=quoteNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 }
+			                            	 <%}else{%>
+			                            	 {
+			                                     "value": "<%=quoteNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 },
+			                            <%}%>
+			                            <%}%>
+		                                
+		                        ]
+		                    },{
+		                        "seriesname": "主页",
+		                        "data": [
+		                                 <%  for(int i=0;i<profileNumList.size();i++){ 
+			                            	 if(i==profileNumList.size()-1){%>
+			                            	 {
+			                                     "value":" <%=profileNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 }
+			                            	 <%}else{%>
+			                            	 {
+			                                     "value":"<%=profileNumList.get(i)%>",
+			                                     "errorvalue": ""
+			                                 },
+			                            <%}%>
+			                            <%}%>
+		                                
 		                        ]
 		                    }
 		                ]
