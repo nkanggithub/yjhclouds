@@ -186,9 +186,9 @@ public class QuotationController {
 		return MongoDBBasic.getVisited(openid,date); 
 	}
 	@RequestMapping("/getVisitedDetail")
-	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="date")String date){
+	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="date")String date,@RequestParam(value="pageName")String pageName){
 		
-		return MongoDBBasic.getVisitedDetail(date); 
+		return MongoDBBasic.getVisitedDetail(date,pageName); 
 	}
 	
 	@RequestMapping("/getVisitedAllDate")
@@ -200,10 +200,12 @@ public class QuotationController {
 	@RequestMapping("/getVisitedbTotalNumByDate")
 	public @ResponseBody  Map<String,String> getVisitedbTotalNumByDate(){
 		List<String> dates = MongoDBBasic.getVisitedAllDate();
+		
 		return MongoDBBasic.getVisitedbTotalNumByDate(dates); 
 	}
 	
-	@RequestMapping("/getVisitedbTotalNumPage")
+
+/*	@RequestMapping("/getVisitedbTotalNumPage")
 	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
 		Map<String,Visitedreturn> mapret = new HashMap<String,Visitedreturn>();
 		List<String> dates = MongoDBBasic.getVisitedAllDate();
@@ -228,7 +230,7 @@ public class QuotationController {
 			visiteds.clear();
 		}
 		return mapret;
-	}
+	}*/
 	@RequestMapping("/sendQuotationMessage")
 	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=false) String title,@RequestParam(value="img", required=true) String img){
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
