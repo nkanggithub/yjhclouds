@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
@@ -53,6 +54,7 @@ import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Role;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.Visited;
+import com.nkang.kxmoment.baseobject.Visitedreturn;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.service.PlasticItemService;
@@ -3756,6 +3758,22 @@ public class MongoDBBasic {
 		}
 		return map;
 	}
+
+	public static List<Integer> getTotalVisitedNumByPage(List<String> dates,String page)
+	{
+		int num=0;
+		List<Integer> numList=new ArrayList<Integer>();
+		List<Visited> data=new ArrayList<Visited>();
+		for(int i=0;i<dates.size();i++){
+			data=MongoDBBasic.getVisitedDetail(dates.get(i),page);
+			for(int j=0;j<data.size();j++){
+				num+=data.get(i).getVisitedNum();
+			}
+			numList.add(num);
+			num=0;
+		}
+		return numList;
+	}
 	/*
 	 * CHANG -ZHENG
 	 *
@@ -3781,15 +3799,16 @@ public class MongoDBBasic {
 		return visiteds;
 	}
 	
-	public static List<Visited> getVisitedDetail(String date){
+	public static List<Visited> getVisitedDetail(String date,String pageName){
 		List<Visited> vitlist = new ArrayList<Visited>();
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
 		DBObject query = new BasicDBObject();
 		query.put("date", date);
+		query.put("pageName", pageName);
 		DBCursor visiteds = mongoDB.getCollection(collectionVisited).find(query);
-		
+		if (null != visiteds) {
 		while(visiteds.hasNext()) {
 			Visited vit = new Visited();
 		       DBObject obj = visiteds.next();
@@ -3798,6 +3817,13 @@ public class MongoDBBasic {
 			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
 			   vit.setPageName(obj.get("pageName")+"");
 			   vitlist.add(vit);
+		    }}else{
+		    	Visited vit = new Visited();
+			       vit.setDate(date);
+				   vit.setOpenid("");
+				   vit.setVisitedNum(0);
+				   vit.setPageName(pageName);
+				   vitlist.add(vit);
 		    }
 		return vitlist;
 	}
