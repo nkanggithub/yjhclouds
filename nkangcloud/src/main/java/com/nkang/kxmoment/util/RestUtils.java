@@ -2047,16 +2047,16 @@ public static String regist(WeChatMDLUser user) {
 
    }
 
-    public static String sendNotificationToUser(String openId,String toOpenId,ArticleMessage am){
+    public static String sendNotificationToUser(String openId,String toOpenId,String img,ArticleMessage am){
     	String result ="";
     	String str="";
     	if("".equals(am.getWebUrl())||""==am.getWebUrl()){
     			str="{\"title\":\""+am.getTitle()+"\",\"description\":\""+"发布者 - "+MongoDBBasic.getRegisterUserByOpenID(openId).get(0)+":"+am.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+am.getNum()+"\",\"picurl\":"
-    					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
+    					+ "\""+img+"\"}";
     	}else
     	{
     		str="{\"title\":\""+am.getTitle()+"\",\"description\":\"重庆永佳和塑胶有限公司\",\"url\":\""+am.getWebUrl()+"\",\"picurl\":"
-					+ "\"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlTWX&oid=00D90000000pkXM\"}";
+					+ "\""+img+"\"}";
     	}
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
