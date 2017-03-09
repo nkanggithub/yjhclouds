@@ -15,7 +15,7 @@ String uid = request.getParameter("UID");
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
-MongoDBBasic.updateVisited(uid,currentDate,"scan");
+
 WeChatUser wcu;
 session.setAttribute("UID", uid);
 if (session.getAttribute("location") == null) {
@@ -25,6 +25,7 @@ if (session.getAttribute("location") == null) {
 } else {
 	wcu = (WeChatUser) session.getAttribute("wcu");
 }
+MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">

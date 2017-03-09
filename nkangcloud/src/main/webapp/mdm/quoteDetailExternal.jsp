@@ -13,9 +13,9 @@ String uid = request.getParameter("UID");
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
-MongoDBBasic.updateVisited(uid,currentDate,"quoteDetailExternal");
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+MongoDBBasic.updateVisited(uid,currentDate,"quoteDetailExternal",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <!Doctype html>
 <html>
