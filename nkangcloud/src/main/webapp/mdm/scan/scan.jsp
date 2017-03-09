@@ -12,10 +12,6 @@
 
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
-SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-Date date=new Date();
-String currentDate = format.format(date);
-
 WeChatUser wcu;
 session.setAttribute("UID", uid);
 if (session.getAttribute("location") == null) {
@@ -25,7 +21,7 @@ if (session.getAttribute("location") == null) {
 } else {
 	wcu = (WeChatUser) session.getAttribute("wcu");
 }
-MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
+//MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
@@ -73,6 +69,19 @@ ul li.Work_Mates_div_list_div2 {
         </div>
     </div>
     <script>
+    $(document).ready(function (){ 
+    	jQuery.ajax({
+    		type : "POST",
+    		url : "../../insertVisited",
+    		data : {openid:"<%=uid %>",
+    			pageName:"scan",
+    			imgUrl:"<%=wcu.getHeadimgurl() %>",
+    			nickName:"<%=wcu.getNickname() %>"},
+    		cache : false,
+    		success : function(resData) {
+    		}
+        });
+    });
     $(".btn").html("停止扫描");
 	$(".pointer").addClass("pointerAnim");  //添加雷达旋转动画
 	var timeout = 1000;  //每隔1000ms
@@ -84,7 +93,7 @@ ul li.Work_Mates_div_list_div2 {
 	addClass = setInterval(function(){
 		if(flag){
 			 jQuery.ajax({
-					type : "GET",
+					type : "POST",
 					url : "../../CallGetWeChatUserDistanceList?openid=<%=uid %>",
 					cache : false,
 					success : function(resData) {
