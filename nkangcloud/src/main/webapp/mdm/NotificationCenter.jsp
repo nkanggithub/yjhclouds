@@ -31,7 +31,7 @@ n.setTime("2017/2/10 16:42"); */
 </head>
 <body style="padding:0px;margin:0px;">
 <div id="recognitionCenter" style="position:absolute;width:100%;height:auto;"> 
-<div style="height:70px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #56B39D"><img style='position:absolute;top:20px;left:20px;width:60px;height:auto' src='' alt='Logo' class='HpLogo'></div>
+<div style="height:70px;font-family: HP Simplified, Arial, Sans-Serif;border-bottom:5px solid #0067B6"><img style='position:absolute;top:20px;left:10px;width:90px;height:auto' src='' alt='Logo' class='HpLogo'></div>
 <div style="position:absolute;top:100px;width:80%;left:10%;height:30px;">
 <p style="text-align:center;"><%=n.getTitle() %></p>
 </div>
