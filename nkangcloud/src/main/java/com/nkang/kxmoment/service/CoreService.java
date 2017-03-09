@@ -661,7 +661,48 @@ public class CoreService
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 					}
-					else if (eventKey.equals("nboppt")) {// Partner
+					else if(eventKey.equals("nboppt")){
+						articleList.clear();
+						Article article = new Article();
+						article.setTitle("老司机们和胖和一起谈技术");
+						article.setDescription("老司机们和胖和一起谈技术");
+						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaWR&oid=00D90000000pkXM");
+						article.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaWR&oid=00D90000000pkXM");
+						articleList.add(article);
+
+						Article articlesub1 = new Article();
+						articlesub1.setTitle("中石化");
+						articlesub1.setDescription("中石化");
+						articlesub1.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");//zhong shi hua
+						articlesub1.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");
+						articleList.add(articlesub1);
+						
+						Article articlesub2 = new Article();
+						articlesub2.setTitle("中石油");
+						articlesub2.setDescription("中石油");
+						articlesub2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaV9&oid=00D90000000pkXM"); //zhong shi you
+						articlesub2.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaV9&oid=00D90000000pkXM");
+						articleList.add(articlesub2);
+						
+						Article articlesub3 = new Article();
+						articlesub3.setTitle("奇美实业");
+						articlesub3.setDescription("奇美实业");
+						articlesub3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM"); // chemei
+						articlesub3.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM");
+						articleList.add(articlesub3);
+						
+						Article articlesub4 = new Article();
+						articlesub4.setTitle("埃克森美孚");
+						articlesub4.setDescription("埃克森美孚");
+						articlesub4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
+						articlesub4.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
+						articleList.add(articlesub4);
+						
+						newsMessage.setArticleCount(articleList.size());
+						newsMessage.setArticles(articleList);
+						respXml = MessageUtil.newsMessageToXml(newsMessage);
+					}
+					/*else if (eventKey.equals("nboppt")) {// Partner
 						String CurType = "";
 						GeoLocation geol = MongoDBBasic.getDBUserGeoInfo(fromUserName);
 						String lat = geol.getLAT();
@@ -694,7 +735,7 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
-					}
+					}*/
 
 				} else if (eventType.equals(MessageUtil.EVENT_TYPE_SCAN_TEXT)) {
 					String eventKey = requestObject.element("EventKey").getText();
