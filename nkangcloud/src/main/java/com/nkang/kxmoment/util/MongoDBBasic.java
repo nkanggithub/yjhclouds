@@ -3809,8 +3809,10 @@ public class MongoDBBasic {
 				finalVisiteds.add(visiteds.get(i));
 			}
 		}else{
+			SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 			Date date=new Date();
-			finalVisiteds.add(finalVisiteds.get(0));
+			String currentDate = format.format(date);
+			finalVisiteds.add(currentDate);
 			for(int i=-6;i<0;i++){
 				finalVisiteds.add(beforNumDay(date,i));
 			}
@@ -3824,7 +3826,17 @@ public class MongoDBBasic {
 //		    }
 		return finalVisiteds;
 	}
-	
+	public static List<String> getLastestDate(int day){
+		SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+		Date date=new Date();
+		List<String> finalVisiteds =new ArrayList<String>();
+		String currentDate = format.format(date);
+		finalVisiteds.add(currentDate);
+		for(int i=day;i<0;i++){
+			finalVisiteds.add(beforNumDay(date,i));
+		}
+		return finalVisiteds;
+	}
 	  public static String beforNumDay(Date date, int day) {
 	        Calendar c = Calendar.getInstance();
 	        c.setTime(date);
