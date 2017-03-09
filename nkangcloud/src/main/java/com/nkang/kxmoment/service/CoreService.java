@@ -558,7 +558,7 @@ public class CoreService
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
 						
 					}
-					else if(eventKey.equals("nboppt")){
+					else if(eventKey.equals("techcomm")){
 						articleList.clear();
 						Article article = new Article();
 						article.setTitle("老司机们和胖和一起谈技术");
