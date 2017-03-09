@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" pageEncoding="UTF-8"%>
  <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.baseobject.OnlineQuotation"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
@@ -9,6 +10,10 @@
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+MongoDBBasic.updateVisited(uid,currentDate,"quoteDetailExternal");
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 %>
