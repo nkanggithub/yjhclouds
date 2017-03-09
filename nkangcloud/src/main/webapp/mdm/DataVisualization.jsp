@@ -479,8 +479,6 @@ display:none;
 <div id="quoteVisited">
 <div id="chart-container2"></div>
 <div id="visitedDetail" style="display:none;">
-<div class="singleV"><img src="http://wx.qlogo.cn/mmopen/n9YXnhMMNEs6JWHqXo8R0ShpiaxJlMdiajn0ibOYfAstcVmiboEmftCPyfzqG7U5wwZze3pUDkAPY2KbUYdMqprYI5srFSZL13Zm/0" /><p class="VNickName">潘嗒嗒</p><p class="visitedNum">34</p></div>
-<div class="singleV"><img src="http://wx.qlogo.cn/mmopen/n9YXnhMMNEs6JWHqXo8R0ShpiaxJlMdiajn0ibOYfAstcVmiboEmftCPyfzqG7U5wwZze3pUDkAPY2KbUYdMqprYI5srFSZL13Zm/0" /><p class="VNickName">潘吨儿</p><p class="visitedNum">189</p></div>
 </div>
 </div>
 </div>
@@ -630,7 +628,39 @@ var i=$(this).index();
 	$("#chart-container2 circle").css("cursor","pointer");
 	 $(document).on("click","#chart-container2 circle",function(){
 		 console.log("....."+$(this).index());
-		 $("#visitedDetail").show();
+		 var index=$(this).index();
+		 
+		 var detail=$("#fusioncharts-tooltip-element").children("span").text();
+		 var details=detail.split(",");
+		 var pageName="";
+		 if(details[0]=="报价"){pageName="quoteDetailExternal";}
+		 if(details[0]=="扫描"){pageName="scan";}
+		 if(details[0]=="主页"){pageName="profile";}
+		 $.ajax({
+				type : "post",
+				url : "../getVisitedDetail",
+				data:{
+					pageName:pageName,
+					dateIndex:index
+				},
+				cache : false,
+				success : function(data) {
+					if(data){
+					var html="";
+					
+				for(var i=0;i<data.length;i++)
+				{
+					if(data[i].visitedNum!=0)
+					{
+						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+"</p></div>";
+					};
+				}
+				$("#visitedDetail").html(html);
+				$("#visitedDetail").show();
+					}
+		 }
+				
+		 });
 	 });
 	 
 		});
