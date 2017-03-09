@@ -289,17 +289,40 @@ public class PlasticItemService {
 					utilFillGapStatPriceData(categoryList, lastIdx, dataList, currDay, currDateCal.getTime());	
 				}else{
 					// 上一条数据时间
-					Map<String, Object> lastDateM = categoryList.get(0);
+					/*Map<String, Object> lastDateM = categoryList.get(0);
 					String lastDayStr = (String)lastDateM.get("label");
 					Date lastDay = DateUtil.str2Date(lastDayStr, "yyyy-MM-dd");
+					
+					
+					Map<String, Object> lastDateM2 = categoryList.get(1);
+					String lastDayStr2 = (String)lastDateM2.get("label");
+					Date lastDay2 = DateUtil.str2Date(lastDayStr2, "yyyy-MM-dd");
+					
+					
 					// 如果数据间隔时间大于一天，则补充以前数据时间
-					if(currDay.getTime() - lastDay.getTime() > oneDayTimestamp){
+					if(lastDay2.getTime() - lastDay.getTime() > oneDayTimestamp){
 						// 填充上一数据前空白数据
-						utilFillGapStatPriceData(categoryList, 1, dataList, lastDay, currDay);
-					}
+						utilFillGapStatPriceData(categoryList, 1, dataList, lastDay, lastDay2);
+					}*/
 				}
 			}
+			Map<String, Object> lastDateM = categoryList.get(0);
+			String lastDayStr = (String)lastDateM.get("label");
+			Date lastDay = DateUtil.str2Date(lastDayStr, "yyyy-MM-dd");
+			
+			
+			Map<String, Object> lastDateM2 = categoryList.get(1);
+			String lastDayStr2 = (String)lastDateM2.get("label");
+			Date lastDay2 = DateUtil.str2Date(lastDayStr2, "yyyy-MM-dd");
+			
+			
+			// 如果数据间隔时间大于一天，则补充以前数据时间
+			if(lastDay2.getTime() - lastDay.getTime() > oneDayTimestamp){
+				// 填充上一数据前空白数据
+				utilFillGapStatPriceData(categoryList, 1, dataList, lastDay, lastDay2);
+			}
 		}
+		
 		dataSource.put("chart", chart);
 		dataSource.put("categories", categories);
 		dataSource.put("dataset", dataset.values());
