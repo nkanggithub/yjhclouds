@@ -779,7 +779,7 @@ function SpeechPanel(){
 }
 function taxPanel(){
 		showCommonPanel();
-		$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>税费计算</legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
+		$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>美金汇率 </legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
 				+'											<tr>'
 				+'												<td>起征点：</td>'
 				+'												<td><input type="text" id="taxstart" value="3500" /></td>'
@@ -1435,13 +1435,13 @@ function stockModule(){
 			+"<div id='stockListHeader' class='modal-header' style='text-align: center;'>"
 			+"<img src='../MetroStyleFiles/Add1.png'"
 			+"style='float: right; height: 20px; cursor: pointer; margin-top: 10px;' onclick='addStock()'/>"
-			+"<h3><b>股票行情</b></h3>"
+			+"<h3><b>期货行情</b></h3>"
 			+"</div>"
 			+"<table width='100%' id='stock' style='margin-bottom: -20px;'>"
 			+"</table>"
 			+"<div id='addStock' style='display:none;margin: 5px;' >"
 			+"<div id='stockTableForm' >"
-			+"<span>请输入股票代码：</span><input type='text' placeholder='股票代码' id='stockcodeKey'  required style='width:100px;'/><input id='addStockBtn' type='button' value='添加' style='margin: 5px;' />"
+			+"<span>请输入期货代码：</span><input type='text' placeholder='期货代码' id='stockcodeKey'  required style='width:100px;'/><input id='addStockBtn' type='button' value='添加' style='margin: 5px;' />"
 			+"</div></div>"
 			+"</div><div id='footer'><span  class='clientCopyRight'><nobr>'"+copyRight+"</nobr></span></div>");
 	$('#allstockcodes').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
@@ -1795,11 +1795,11 @@ function getNowFormatDate() {
 												<!-- <a class="" data-toggle="modal" href="#tax_main_div"> </a> -->
 												<img   onclick="taxPanel()" 
 														src="../MetroStyleFiles/menu-tax.png" />
-														<h4>税费计算</h4>
+														<h4>美金汇率 </h4>
 												</td>
 												<td> <img onclick="stockModule()"
 														src="../MetroStyleFiles/menu-stock.png" />
-														<h4>股票</h4>
+														<h4>期货行情</h4>
 												</td>
 												
 													<td> <!-- onclick="signaturePanel()"  -->
@@ -1865,7 +1865,7 @@ function getNowFormatDate() {
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
 										<h3>
-											<b>税费计算</b>
+											<b>美金汇率 </b>
 										</h3>
 										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
 											aria-hidden="true"
@@ -1911,7 +1911,7 @@ function getNowFormatDate() {
 										<img src="../MetroStyleFiles/Add1.png" 
 											style="float: left; height: 25px; cursor: pointer; margin-top: 0px;" onclick="addStock()"/>
 										<h3>
-											<b>股票行情</b>
+											<b>期货行情</b>
 										</h3>
 										<img id="stockClose" src="../MetroStyleFiles/Close.png" data-dismiss="modal"
 											aria-hidden="true"
@@ -1932,7 +1932,7 @@ function getNowFormatDate() {
 												    <table id="stockTableForm">
 												    <tr>
 												        <td>
-												        	<span>请输入股票代码：</span><input type="text" placeholder="股票代码" id="stockcodeKey"  required style="width:100px;"/><input id="addStockBtn" type="button" value="添加" />
+												        	<span>请输入期货代码：</span><input type="text" placeholder="期货代码" id="stockcodeKey"  required style="width:100px;"/><input id="addStockBtn" type="button" value="添加" />
 												        </td>
 												      </tr>
 												 </table>
