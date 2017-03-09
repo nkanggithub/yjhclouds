@@ -8,14 +8,10 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
 String AccessKey = RestUtils.callGetValidAccessKey();
-List<OnlineQuotation> ql=MongoDBBasic.getAllQuotations();
 String uid = request.getParameter("UID");
-SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-Date date=new Date();
-String currentDate = format.format(date);
 WeChatUser wcu;
 wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
-MongoDBBasic.updateVisited(uid,currentDate,"quoteDetailExternal",wcu.getHeadimgurl(),wcu.getNickname());
+//MongoDBBasic.updateVisited(uid,currentDate,"quoteDetailExternal",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <!Doctype html>
 <html>
@@ -160,6 +156,19 @@ cursor:pointer;
 </style>
 
 <script>
+$(document).ready(function (){ 
+	jQuery.ajax({
+		type : "POST",
+		url : "../../insertVisited",
+		data : {openid:"<%=uid %>",
+			pageName:"quoteDetailExternal",
+			imgUrl:"<%=wcu.getHeadimgurl() %>",
+			nickName:"<%=wcu.getNickname() %>"},
+		cache : false,
+		success : function(resData) {
+		}
+    });
+});
 $(function(){
 	   $(function(){  
 	      	 $(window).scroll(function(){  
