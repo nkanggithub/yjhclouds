@@ -633,7 +633,7 @@ var i=$(this).index();
 		 var detail=$("#fusioncharts-tooltip-element").children("span").text();
 		 var details=detail.split(",");
 		 var pageName="";
-		 if(details[0]=="胖和报价"){pageName="quoteDetailExternal";}
+		 if(details[0]=="实时报价"){pageName="quoteDetailExternal";}
 		 if(details[0]=="发现附近"){pageName="scan";}
 		 if(details[0]=="胖和主页"){pageName="profile";}
 		 $.ajax({
@@ -650,6 +650,8 @@ var i=$(this).index();
 					
 				for(var i=0;i<data.length;i++)
 				{
+					console.log("date========"+data[i].date);
+					console.log("nickName========"+data[i].nickName);
 					if(data[i].visitedNum!=0)
 					{
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+"</p></div>";
