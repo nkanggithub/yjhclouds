@@ -71,13 +71,15 @@ $(this).siblings().remove(".edit");
 function approve(obj)
 {
 	var item=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
-	 $.ajax({
+	var price=$(obj).parent(".edit").siblings(".firstLayer").children(".quotePrice").find("span").text();
+	$.ajax({
 		 url:'../saveQuotationList',
 		 type:"POST",
-		 data:{
+	     data:{
 			 plasticItem:item,
 			 approveBy:$("#UID").val(),
-			 type:2
+			 type:2,
+			 suggestPrice:price
 		 },
 		 success: function(data) {
 			 swal("Success", "该审核已被您批准通过", "success");
