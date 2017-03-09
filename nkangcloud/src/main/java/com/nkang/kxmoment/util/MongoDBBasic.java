@@ -3761,14 +3761,21 @@ public class MongoDBBasic {
 
 	public static List<Integer> getTotalVisitedNumByPage(List<String> dates,String page)
 	{
+		for(int a=0;a<dates.size();a++){
+			System.out.println("dates list-------:"+dates.get(a));
+		}
 		int num=0;
 		List<Integer> numList=new ArrayList<Integer>();
 		List<Visited> data=new ArrayList<Visited>();
 		for(int i=0;i<dates.size();i++){
 			data=MongoDBBasic.getVisitedDetail(dates.get(i),page);
+			System.out.println("data.size():"+data.size());
 			for(int j=0;j<data.size();j++){
-				num+=data.get(i).getVisitedNum();
+				
+				System.out.println("j index-----"+j+"num:---"+data.get(j).getVisitedNum()+"/page:---"+data.get(j).getPageName());
+				num+=data.get(j).getVisitedNum();
 			}
+			System.out.println("num  ====:"+num);
 			numList.add(num);
 			num=0;
 		}
