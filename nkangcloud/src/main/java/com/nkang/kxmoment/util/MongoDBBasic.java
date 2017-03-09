@@ -6,6 +6,7 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -3802,6 +3803,18 @@ public class MongoDBBasic {
 		//DBCursor visiteds ;
 		@SuppressWarnings("unchecked")
 		List<String> visiteds = mongoDB.getCollection(collectionVisited).distinct("date",query);
+		List<String> finalVisiteds =new ArrayList<String>();
+		if(visiteds.size()>7){
+			for(int i=0;i<7;i++){
+				finalVisiteds.add(visiteds.get(i));
+			}
+		}else{
+			Date date=new Date();
+			finalVisiteds.add(finalVisiteds.get(0));
+			for(int i=-6;i<0;i++){
+				finalVisiteds.add(beforNumDay(date,i));
+			}
+		}
 //		while(visiteds.hasNext()) {
 //		       DBObject obj = visiteds.next();
 //		       if(obj.get("date")!=null){
@@ -3809,8 +3822,15 @@ public class MongoDBBasic {
 //		    	   dates.add(date);
 //		       }
 //		    }
-		return visiteds;
+		return finalVisiteds;
 	}
+	
+	  public static String beforNumDay(Date date, int day) {
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(date);
+	        c.add(Calendar.DAY_OF_YEAR, day);
+	        return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+	    }
 	
 	public static List<Visited> getVisitedDetail(String date,String pageName){
 		List<Visited> vitlist = new ArrayList<Visited>();
