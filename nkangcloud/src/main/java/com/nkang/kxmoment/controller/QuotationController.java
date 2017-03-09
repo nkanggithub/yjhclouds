@@ -189,7 +189,7 @@ public class QuotationController {
 	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="pageName")String pageName){
 		
 		int index=Integer.parseInt(dateIndex);
-		String date=MongoDBBasic.getVisitedAllDate().get(index);
+		String date=MongoDBBasic.getLastestDate(-6).get(index);
 		return MongoDBBasic.getVisitedDetail(date,pageName); 
 	}
 	
