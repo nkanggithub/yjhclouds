@@ -264,7 +264,7 @@ public class UserProfileController {
 				RestUtils.sendNotificationToUser(openid,allUser.get(i),img,am);
 			}
 		
-		return "ok"+num;
+		return allUser.size()+"";
 	} 
 		
 	/*chang-zheng
