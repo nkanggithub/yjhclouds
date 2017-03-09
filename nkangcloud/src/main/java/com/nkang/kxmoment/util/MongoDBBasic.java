@@ -3832,7 +3832,7 @@ public class MongoDBBasic {
 		List<String> finalVisiteds =new ArrayList<String>();
 		String currentDate = format.format(date);
 		finalVisiteds.add(currentDate);
-		for(int i=day;i<0;i++){
+		for(int i=-1;i>day-1;i--){
 			finalVisiteds.add(beforNumDay(date,i));
 		}
 		return finalVisiteds;
