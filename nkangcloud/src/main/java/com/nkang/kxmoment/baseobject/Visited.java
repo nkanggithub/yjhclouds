@@ -5,6 +5,20 @@ public class Visited {
 	String pageName;
 	int visitedNum;
 	String date;
+	String imgUrl;
+	String nickName;
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getOpenid() {
 		return openid;
 	}

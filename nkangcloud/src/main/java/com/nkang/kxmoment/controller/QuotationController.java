@@ -173,10 +173,10 @@ public class QuotationController {
 	
 
 	@RequestMapping("/insertVisited")
-	public @ResponseBody String insertVisited(@RequestParam(value="openid") String openid,@RequestParam(value="pageName") String pageName){
+	public @ResponseBody String insertVisited(@RequestParam(value="openid") String openid,@RequestParam(value="pageName") String pageName,@RequestParam(value="imgUrl") String imgUrl,@RequestParam(value="nickName") String nickName){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String date = df.format(new Date());
-		String str = MongoDBBasic.updateVisited(openid,date,pageName); 
+		String str = MongoDBBasic.updateVisited(openid,date,pageName,imgUrl,nickName); 
 		return str;
 	}
 	
@@ -186,8 +186,10 @@ public class QuotationController {
 		return MongoDBBasic.getVisited(openid,date); 
 	}
 	@RequestMapping("/getVisitedDetail")
-	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="date")String date,@RequestParam(value="pageName")String pageName){
+	public @ResponseBody List<Visited> getVisitedByDate(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="pageName")String pageName){
 		
+		int index=Integer.parseInt(dateIndex);
+		String date=MongoDBBasic.getVisitedAllDate().get(index);
 		return MongoDBBasic.getVisitedDetail(date,pageName); 
 	}
 	

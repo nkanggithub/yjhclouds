@@ -3647,7 +3647,7 @@ public class MongoDBBasic {
 	 *
 	 * for Visited
 	 **/
-	public static String updateVisited(String openid,String date,String pageName){
+	public static String updateVisited(String openid,String date,String pageName,String imgUrl,String nickName){
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
@@ -3657,6 +3657,8 @@ public class MongoDBBasic {
 			query.put("openid", openid);
 			query.put("date", date);
 			query.put("pageName", pageName);
+			query.put("imgUrl", imgUrl);
+			query.put("nickName", nickName);
 			DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 			if(visited!=null){
 				//String num = visited.get("visitedNum")+"";
@@ -3702,6 +3704,8 @@ public class MongoDBBasic {
 			vit.setOpenid(openid);
 			vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
 			vit.setPageName(obj.get("pageName")+"");
+			vit.setImgUrl(obj.get("imgUrl")+"");
+			vit.setNickName(obj.get("nickName")+"");
 			vitlist.add(vit);
 		}
 		return vitlist;
@@ -3751,6 +3755,8 @@ public class MongoDBBasic {
 					vit.setOpenid(obj.get("openid")+"");
 					vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
 					vit.setPageName(obj.get("pageName")+"");
+					vit.setImgUrl(obj.get("imgUrl")+"");
+					vit.setNickName(obj.get("nickName")+"");
 					vtlist.add(vit);
 					
 			    }
@@ -3823,6 +3829,8 @@ public class MongoDBBasic {
 			   vit.setOpenid(obj.get("openid")+"");
 			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
 			   vit.setPageName(obj.get("pageName")+"");
+				vit.setImgUrl(obj.get("imgUrl")+"");
+				vit.setNickName(obj.get("nickName")+"");
 			   vitlist.add(vit);
 		    }}else{
 		    	Visited vit = new Visited();
@@ -3830,6 +3838,8 @@ public class MongoDBBasic {
 				   vit.setOpenid("");
 				   vit.setVisitedNum(0);
 				   vit.setPageName(pageName);
+					vit.setImgUrl("");
+					vit.setNickName("");
 				   vitlist.add(vit);
 		    }
 		return vitlist;
