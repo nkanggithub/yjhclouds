@@ -414,7 +414,7 @@ display:none;
   <div id="menu" class="large-12 small-12 columns">
 	<p id="ac" class="selected" style="border-left:none;">图文统计</p>
 	    <p id="qc">价格趋势</p>
-	    <p id="vc">报价阅读</p>
+	    <p id="vc">到访分析</p>
   </div>
   <div id="quotation" style="display:none;">
   <div class="large-12 small-12 columns">
