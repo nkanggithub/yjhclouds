@@ -537,8 +537,8 @@ var i=$(this).index();
 		                    "xaxisname": "",
 		                    "yaxisname": "",
 		                    "numberSuffix":"",
-		                    "caption": "报价阅读统计",
-		                    "subcaption": "(最近十天访问量)",
+		                    "caption": "胖和阅读统计",
+		                    "subcaption": "(最近七天访问量)",
 		                    "showvalues": "0",
 		                    "plottooltext": "$seriesname, $value",
 		                    //Error bar configuration
@@ -564,7 +564,7 @@ var i=$(this).index();
 		                ],
 		                "dataset": [
 		                    {
-		                        "seriesname": "扫描",
+		                        "seriesname": "发现附近",
 		                        "data": [
 		                                 <%  for(int i=0;i<scanNumList.size();i++){ 
 			                            	 if(i==scanNumList.size()-1){%>
@@ -582,7 +582,7 @@ var i=$(this).index();
 		                                
 		                        ]
 		                    },{
-		                        "seriesname": "报价",
+		                        "seriesname": "实时报价",
 		                        "data": [
 		                                 <%  for(int i=0;i<quoteNumList.size();i++){ 
 			                            	 if(i==quoteNumList.size()-1){%>
@@ -600,7 +600,7 @@ var i=$(this).index();
 		                                
 		                        ]
 		                    },{
-		                        "seriesname": "主页",
+		                        "seriesname": "胖和主页",
 		                        "data": [
 		                                 <%  for(int i=0;i<profileNumList.size();i++){ 
 			                            	 if(i==profileNumList.size()-1){%>
@@ -633,9 +633,9 @@ var i=$(this).index();
 		 var detail=$("#fusioncharts-tooltip-element").children("span").text();
 		 var details=detail.split(",");
 		 var pageName="";
-		 if(details[0]=="报价"){pageName="quoteDetailExternal";}
-		 if(details[0]=="扫描"){pageName="scan";}
-		 if(details[0]=="主页"){pageName="profile";}
+		 if(details[0]=="胖和报价"){pageName="quoteDetailExternal";}
+		 if(details[0]=="发现附近"){pageName="scan";}
+		 if(details[0]=="胖和主页"){pageName="profile";}
 		 $.ajax({
 				type : "post",
 				url : "../getVisitedDetail",
