@@ -339,7 +339,7 @@ public class PlasticItemService {
 		
 		lastDay = lastDayCal.getTime();
 		// 如果数据间隔时间大于一天，则补充以前数据时间
-		if(lastDay.getTime() - currDay.getTime()> oneDayTimestamp){
+		if(currDay.getTime() - lastDay.getTime() > oneDayTimestamp){
 			// 填充上一数据前空白数据
 			utilFillGapStatPriceData(categoryList, index+1, dataList, lastDay, currDay);
 		}
