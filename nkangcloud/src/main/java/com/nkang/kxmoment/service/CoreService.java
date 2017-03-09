@@ -561,12 +561,12 @@ public class CoreService
 					else if(eventKey.equals("techcomm")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("老司机们和胖和一起谈技术");
+						article.setTitle("老司机们和胖和一起谈技术,指点江山");
 						article.setDescription("老司机们和胖和一起谈技术");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaWR&oid=00D90000000pkXM");
 						article.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaWR&oid=00D90000000pkXM");
 						articleList.add(article);
-
+						
 						Article articlesub1 = new Article();
 						articlesub1.setTitle("中石化");
 						articlesub1.setDescription("中石化");
@@ -598,6 +598,8 @@ public class CoreService
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
 						respXml = MessageUtil.newsMessageToXml(newsMessage);
+
+						
 					}
 					else if (eventKey.equals("nbcust")) {// Customer
 						String CurType = "customer";
