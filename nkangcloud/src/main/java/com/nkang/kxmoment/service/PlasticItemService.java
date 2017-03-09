@@ -68,7 +68,7 @@ public class PlasticItemService {
 		}
 		if(price != null){
 			float prePrice = item.getPrice();
-			if(prePrice > 0){
+			if(prePrice > 0 && opType!=2){
 				// 计算差价
 				float diffPrice = price - prePrice;
 				item.setDiffPrice(diffPrice);
