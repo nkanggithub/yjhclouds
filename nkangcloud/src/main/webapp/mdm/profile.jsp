@@ -12,7 +12,7 @@ Date date=new Date();
 String currentDate = format.format(date);
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
-MongoDBBasic.updateVisited(uid,"profile",currentDate);
+MongoDBBasic.updateVisited(uid,currentDate,"profile");
 String curLoc=null;
 String city=null;
 WeChatUser wcu;
