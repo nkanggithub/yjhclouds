@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.PlasticItem;
@@ -206,6 +207,11 @@ public class QuotationController {
 		return MongoDBBasic.getVisitedbTotalNumByDate(dates); 
 	}
 	
+	@RequestMapping("/getInventoryDetailByItem")
+	public @ResponseBody List<Inventory> getInventoryDetailByItem(@RequestParam(value="item")String item){
+		
+		return MongoDBBasic.getInventoryDetailByItem(item); 
+	}
 
 /*	@RequestMapping("/getVisitedbTotalNumPage")
 	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
