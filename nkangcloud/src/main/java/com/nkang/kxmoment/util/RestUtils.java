@@ -1,6 +1,7 @@
 package com.nkang.kxmoment.util;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,6 +42,7 @@ import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.QuotationList;
+import com.nkang.kxmoment.baseobject.Rate;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 
@@ -2730,6 +2732,74 @@ public static String regist(WeChatMDLUser user) {
     	       return result;
 
     	    }
+    
+    /*
+     * chang-zheng
+     */
+    public static List<Rate> callGetRate() throws UnsupportedEncodingException {
+    	List<Rate> lt = new ArrayList<Rate>();
+
+		String url = "";
+//				"http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.xchange where pair in ("+ 
+//				"\""
+//				+ "USDEUR"
+//				+ "\""
+//				+ ")&env=store://datatables.org/alltableswithkeys";
+		
+		//url="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDEUR%22,%20%22USDJPY%22,%20%22USDBGN%22,%20%22USDCZK%22,%20%22USDDKK%22,%20%22USDGBP%22,%20%22USDHUF%22,%20%22USDLTL%22,%20%22USDLVL%22,%20%22USDPLN%22,%20%22USDRON%22,%20%22USDSEK%22,%20%22USDCHF%22,%20%22USDNOK%22,%20%22USDHRK%22,%20%22USDRUB%22,%20%22USDTRY%22,%20%22USDAUD%22,%20%22USDBRL%22,%20%22USDCAD%22,%20%22USDCNY%22,%20%22USDHKD%22,%20%22USDIDR%22,%20%22USDILS%22,%20%22USDINR%22,%20%22USDKRW%22,%20%22USDMXN%22,%20%22USDMYR%22,%20%22USDNZD%22,%20%22USDPHP%22,%20%22USDSGD%22,%20%22USDTHB%22,%20%22USDZAR%22,%20%22USDISK%22)&env=store://datatables.org/alltableswithkeys";
+		url="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDCNY%22,%20%22USDEUR%22,%20%22USDBGN%22,%20%22USDCZK%22,%20%22USDDKK%22,%20%22USDGBP%22,%20%22USDHUF%22)&env=store://datatables.org/alltableswithkeys";
+		String message= "";
+		try {
+	           URL urlGet = new URL(url);
+	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+	           http.setRequestMethod("PUT"); //must be get request
+	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+	           http.setDoOutput(true);
+	           http.setDoInput(true);
+	           http.setRequestProperty("Content-Type","text/json/xml");
+	          // http.setRequestProperty("Content-Length","0");
+	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
+	           DataOutputStream os = new DataOutputStream( http.getOutputStream() );
+	           os.write( "".getBytes("UTF-8"), 0, 0);
+	           os.flush();
+	           os.close();
+	           http.connect();
+	           InputStream is = http.getInputStream();
+	           int size = is.available();
+	           byte[] jsonBytes = new byte[size];
+	           is.read(jsonBytes);
+	          // message = new String(jsonBytes, "UTF-8");
+	           
+	           message = new String(jsonBytes, "UTF-8");
+	          // JSONArray jsonarray = JSONArray.fromObject(message);
+	           is.close();
+	       } catch (Exception e) {
+	    	   System.out.println("error:::" + message + " failed http ---------" + url);
+	    	   System.out.println(e.getMessage());
+	    	   log.error("callSaveBills faild",e);
+	    	   return lt;
+	       } 
+		
+		String str1 = message.split("results")[1];
+		
+		System.out.println(str1);
+		String[] str_Rates = str1.split("</rate>");
+		System.out.println(str_Rates.length);
+		for(int i=0;i<str_Rates.length-1;i++){
+			String str_Name;
+			String str_Rate;
+			//String str_date;
+			Rate rt = new Rate();
+			str_Name = str_Rates[i].toString().split("</Name>")[0];
+			str_Rate=str_Rates[i].toString().split("</Rate>")[0];
+			rt.setName(str_Name.split("<Name>")[1]);
+			rt.setRate(str_Rate.split("<Rate>")[1]);
+			lt.add(rt);
+		}
+		return lt;
+    }
+    
     
 }
 
