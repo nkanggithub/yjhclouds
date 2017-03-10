@@ -377,7 +377,7 @@ function showUpdateUserPanel(openid,name){
 			            +'														<option value="胡贵花">胡贵花</option>'
 			            +'														<option value="王总">王总</option>'
 			            +'														<option value="邓立铭">邓立铭</option>'
-			            +'														<option value="赫海涛">赫海涛</option>'
+			            +'														<option value="赫海涛">郝海涛</option>'
 			            +'														<option value="罗成洪">罗成洪</option>'
 			            +'														<option value="罗浩">罗浩</option>'
 			            +'														<option value="陈博">陈博</option>'
