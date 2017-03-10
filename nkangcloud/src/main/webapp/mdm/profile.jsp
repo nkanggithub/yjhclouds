@@ -789,7 +789,7 @@ function SpeechPanel(){
 }
 function taxPanel(){
 		showCommonPanel();
-		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:90px;width:80%;height:85%;overflow:scroll;margin-left:10%;">'
+		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:90px;width:96%;height:80%;overflow:scroll;margin-left:2%;">'
 				+'<table class="taxTable">'
 				+'<tr>'
 				+'<th>化学品名</th>'
