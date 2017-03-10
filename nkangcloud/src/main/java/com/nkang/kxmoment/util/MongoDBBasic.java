@@ -3883,7 +3883,7 @@ public class MongoDBBasic {
 			mongoDB = getMongoDB();
 		}
 		DBObject query = new BasicDBObject();
-		query.put("item", item);
+		query.put("plasticItem", item);
 		DBCursor inventorys = mongoDB.getCollection(collectionInventory).find(query);
 		while(inventorys.hasNext()) {
 			Inventory it = new Inventory();
