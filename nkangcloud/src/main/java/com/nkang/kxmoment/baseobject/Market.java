@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Market {
 	ArrayList<String[]>  arrayList=new ArrayList<String[]>();
 	public Market(){
-		arrayList.add(new String[]{"总经理","王总","13606007258"});
+		arrayList.add(new String[]{"总经理","王素萍","13606007258"});
 		arrayList.add(new String[]{"副总经理","邓立铭","13320204222"});
 		arrayList.add(new String[]{"重庆销售","郝海涛","15123331522"});
 		arrayList.add(new String[]{"重庆销售","胡贵花","13996213531"});
