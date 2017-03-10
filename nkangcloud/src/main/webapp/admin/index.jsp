@@ -429,7 +429,7 @@ function showUpdateUserPanel(openid,name){
 			            +'												 </table>'
 			            +'												 </form>'
 			            +'												 <button class="btnAthena EbtnLess" style="background-color:#005CA1;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
-				 $("select[text='selfIntro']").find("option[text='"+selfIntro+"']").attr("selected",true);
+				 $("select[name='selfIntro']").find("option[value='"+selfIntro+"']").attr("selected",true);
 				$("#updateUserInfoBtn").click(function(){
 					var isRegistered = $("input[name='isRegistered']:checked").val();
 					var registerDate = $("#registerDate").val();
