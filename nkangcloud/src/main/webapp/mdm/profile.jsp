@@ -35,6 +35,7 @@ if (session.getAttribute("location") == null) {
 	curLoc = (String) session.getAttribute("location");
 }
 MongoDBBasic.updateVisited(uid,currentDate,"profile",wcu.getHeadimgurl(),wcu.getNickname());
+boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
