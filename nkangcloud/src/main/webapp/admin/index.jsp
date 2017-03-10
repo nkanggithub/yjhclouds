@@ -372,7 +372,19 @@ function showUpdateUserPanel(openid,name){
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td>销售代表:</td>'
-			            +'														<td><input type="text"  placeholder="永佳和销售代表"  name="selfIntro" value="'+selfIntro+'"/></td>'
+			     //       +'														<td><input type="text"  placeholder="代表名-职位-电话号码"  name="selfIntro" value="'+selfIntro+'"/></td>'
+			            +'														<td><select  name="selfIntro">'
+			            +'														<option value="胡贵花">胡贵花</option>'
+			            +'														<option value="王总">王总</option>'
+			            +'														<option value="邓立铭">邓立铭</option>'
+			            +'														<option value="赫海涛">赫海涛</option>'
+			            +'														<option value="罗成洪">罗成洪</option>'
+			            +'														<option value="罗浩">罗浩</option>'
+			            +'														<option value="陈博">陈博</option>'
+			            +'														<option value="段阳">段阳</option>'
+			            +'														<option value="郑仁利">郑仁利</option>'
+			            +'														<option value="罗斯威">罗斯威</option>'
+			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
 			            +'														<td>用户职位:</td>'
@@ -417,6 +429,7 @@ function showUpdateUserPanel(openid,name){
 			            +'												 </table>'
 			            +'												 </form>'
 			            +'												 <button class="btnAthena EbtnLess" style="background-color:#005CA1;margin-left: 90px;margin-top:15px;" id="updateUserInfoBtn">确定</button>');
+				 $("select[text='selfIntro']").find("option[text='"+selfIntro+"']").attr("selected",true);
 				$("#updateUserInfoBtn").click(function(){
 					var isRegistered = $("input[name='isRegistered']:checked").val();
 					var registerDate = $("#registerDate").val();
