@@ -375,7 +375,7 @@ function showUpdateUserPanel(openid,name){
 			     //       +'														<td><input type="text"  placeholder="代表名-职位-电话号码"  name="selfIntro" value="'+selfIntro+'"/></td>'
 			            +'														<td><select  name="selfIntro">'
 			            +'														<option value="胡贵花">胡贵花</option>'
-			            +'														<option value="王总">王总</option>'
+			            +'														<option value="王素萍">王素萍</option>'
 			            +'														<option value="邓立铭">邓立铭</option>'
 			            +'														<option value="赫海涛">郝海涛</option>'
 			            +'														<option value="罗成洪">罗成洪</option>'
