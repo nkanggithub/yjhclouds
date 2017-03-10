@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
+import com.nkang.kxmoment.baseobject.Market;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Visited;
 import com.nkang.kxmoment.baseobject.Visitedreturn;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -242,14 +244,16 @@ public class QuotationController {
 	@RequestMapping("/sendQuotationMessage")
 	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=false) String title,@RequestParam(value="img", required=true) String img){
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
-			if("".equals(title)||title==null){
-				title="报价更新啦";
+		 if("".equals(title)||title==null){
+				title="报价更新啦~";
 			}
-			List<String> allUser = MongoDBBasic.getAllOpenIDByIsRegistered();
+			List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
              for(int i=0;i<allUser.size();i++){
-     			itemsList=MongoDBBasic.queryUserKM(allUser.get(i)); 
-     			String content="您所关注的牌号快览\n";
+     			itemsList=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
+     			String[] aStrings=new Market().getMarket(allUser.get(i).getSelfIntro());
+     			String content="永佳和【"+aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+"】邀您查看您所关注的牌号\n";
+     			if(!itemsList.isEmpty()){
      			for(String str : itemsList){
      				System.out.println("str-----------------------"+str);
      				if(PlasticItemService.getDetailByNo(str)!=null){
@@ -257,8 +261,10 @@ public class QuotationController {
      				content+="["+PlasticItemService.getDetailByNo(str).getItemNo()+"-￥"+PlasticItemService.getDetailByNo(str).getPrice()+"]\n";
      				}
      			}
+     			}
      			
-            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,title);
+     			
+            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,allUser.get(i).getNickname()+","+title);
             	 content="";
             }
 		
