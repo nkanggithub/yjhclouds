@@ -2569,6 +2569,38 @@ public class MongoDBBasic {
 				
 			return dbuser;
 		}
+		public static List<WeChatMDLUser> getAllUserByIsRegistered(){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("IsRegistered", "true");
+			DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query);
+			List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+			if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		WeChatMDLUser weChatMDLUser = new WeChatMDLUser();
+            		DBObject o = queryresults.next();
+            		if(o.get("OpenID") != null){
+            			weChatMDLUser.setOpenid(o.get("OpenID").toString());
+            			if(o.get("NickName") != null){
+                			weChatMDLUser.setNickname(o.get("NickName").toString());
+                		}
+                		Object teamer = o.get("Teamer");
+            			DBObject teamobj = new BasicDBObject();
+            			teamobj = (DBObject)teamer;
+            			if(teamobj != null){
+            				if(teamobj.get("selfIntro") != null){
+            					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
+            				}
+            				if(teamobj.get("realName") != null){
+            					weChatMDLUser.setNickname(teamobj.get("realName").toString());
+            				}
+            			}
+            			ret.add(weChatMDLUser);
+            		}
+            	}
+			}
+			return ret;
+		}
 		/*
 		 * chang-zheng to update user CongratulateHistory
 		 */
