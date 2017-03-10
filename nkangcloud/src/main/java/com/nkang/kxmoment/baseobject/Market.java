@@ -22,6 +22,6 @@ public class Market {
 				return market;
 			}
 		}
-		return new String[]{"重庆销售","胡贵花","13996213531"};
+		return new String[]{"副总经理","邓立铭","13320204222"};
 	}
 }
