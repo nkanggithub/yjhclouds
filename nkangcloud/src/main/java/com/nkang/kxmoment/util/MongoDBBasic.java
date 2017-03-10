@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
+import org.apache.tomcat.util.descriptor.tld.TldRuleSet.Variable;
 import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,7 @@ import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.Location;
+import com.nkang.kxmoment.baseobject.Market;
 import com.nkang.kxmoment.baseobject.MdmDataQualityView;
 import com.nkang.kxmoment.baseobject.MongoClientCollection;
 import com.nkang.kxmoment.baseobject.Notification;
@@ -1642,6 +1644,42 @@ public class MongoDBBasic {
 			log.info("QueryClientMeta--" + e.getMessage());
 		}
 	    return result;
+	}
+	public static HashMap<String, String> getWeChatUserFromOpenID(String OpenID){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		query.put("OpenID", OpenID);
+		HashMap<String, String> res=new HashMap<String, String>();
+		DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+		if (null != queryresults) {
+    		DBObject o = queryresults.next();
+			if(o.get("HeadUrl") != null){
+    			res.put("HeadUrl", o.get("HeadUrl").toString());
+    		}
+			if(o.get("NickName") != null){
+    			res.put("NickName", o.get("NickName").toString());
+    		}
+			Object teamer = o.get("Teamer");
+			DBObject teamobj = new BasicDBObject();
+			teamobj = (DBObject)teamer;
+			if(teamobj != null){
+				if(teamobj.get("realName") != null){
+					res.put("NickName", teamobj.get("realName").toString());
+				}
+			}
+			if(o.get("IsAuthenticated") != null){
+    			res.put("IsAuthenticated", o.get("IsAuthenticated").toString());
+    		}
+			String selfIntro=""; 
+			if(teamobj.get("selfIntro") != null){
+				selfIntro=teamobj.get("selfIntro").toString();
+			}
+			String[] aStrings=new Market().getMarket(selfIntro);
+			res.put("market0", aStrings[0]);
+			res.put("market1", aStrings[1]);
+			res.put("market2", aStrings[2]);
+		}
+		return res;
 	}
 	@SuppressWarnings("unchecked")
 	public static List<WeChatMDLUser> getWeChatUserFromMongoDB(String OpenID) {
