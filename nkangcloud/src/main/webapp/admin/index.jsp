@@ -432,7 +432,7 @@ function showUpdateUserPanel(openid,name){
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
-			            +'												        <td>确认注册:</td>'
+			            +'												        <td>VIP客户:</td>'
 			            +'												        <td  align="left" class="tdText">'
 			            +'												        	<input type="radio" name="isAuthenticated" value="true"  '+(IsAuthenticated=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" '+(IsAuthenticated!="true"?'checked="checked"':'')+' value="false"/>否'
 			            +'												        </td>'
