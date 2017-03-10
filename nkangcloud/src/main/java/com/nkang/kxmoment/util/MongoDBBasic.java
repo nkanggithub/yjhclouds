@@ -6,7 +6,6 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -3803,20 +3802,6 @@ public class MongoDBBasic {
 		//DBCursor visiteds ;
 		@SuppressWarnings("unchecked")
 		List<String> visiteds = mongoDB.getCollection(collectionVisited).distinct("date",query);
-		List<String> finalVisiteds =new ArrayList<String>();
-		if(visiteds.size()>7){
-			for(int i=0;i<7;i++){
-				finalVisiteds.add(visiteds.get(i));
-			}
-		}else{
-			SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-			Date date=new Date();
-			String currentDate = format.format(date);
-			finalVisiteds.add(currentDate);
-			for(int i=-6;i<0;i++){
-				finalVisiteds.add(beforNumDay(date,i));
-			}
-		}
 //		while(visiteds.hasNext()) {
 //		       DBObject obj = visiteds.next();
 //		       if(obj.get("date")!=null){
@@ -3824,25 +3809,8 @@ public class MongoDBBasic {
 //		    	   dates.add(date);
 //		       }
 //		    }
-		return finalVisiteds;
+		return visiteds;
 	}
-	public static List<String> getLastestDate(int day){
-		SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-		Date date=new Date();
-		List<String> finalVisiteds =new ArrayList<String>();
-		String currentDate = format.format(date);
-		finalVisiteds.add(currentDate);
-		for(int i=-1;i>day-1;i--){
-			finalVisiteds.add(beforNumDay(date,i));
-		}
-		return finalVisiteds;
-	}
-	  public static String beforNumDay(Date date, int day) {
-	        Calendar c = Calendar.getInstance();
-	        c.setTime(date);
-	        c.add(Calendar.DAY_OF_YEAR, day);
-	        return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
-	    }
 	
 	public static List<Visited> getVisitedDetail(String date,String pageName){
 		List<Visited> vitlist = new ArrayList<Visited>();
@@ -3864,7 +3832,8 @@ public class MongoDBBasic {
 				vit.setImgUrl(obj.get("imgUrl")+"");
 				vit.setNickName(obj.get("nickName")+"");
 			   vitlist.add(vit);
-		    }}else{
+		    }
+		}else{
 		    	Visited vit = new Visited();
 			       vit.setDate(date);
 				   vit.setOpenid("");
@@ -3876,5 +3845,30 @@ public class MongoDBBasic {
 		    }
 		return vitlist;
 	}
+	
+	
+	public static List<Inventory> getInventoryDetailByItem(String item){
+		List<Inventory> Inventorys = new ArrayList<Inventory>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		DBObject query = new BasicDBObject();
+		query.put("item", item);
+		DBCursor inventorys = mongoDB.getCollection(collectionInventory).find(query);
+		while(inventorys.hasNext()) {
+			Inventory it = new Inventory();
+			   DBObject obj = inventorys.next();
+		       it.setPlasticItem(obj.get("plasticItem")+"");
+		       it.setRepositoryName(obj.get("repositoryName")+"");
+		       it.setWaitDeliverAmount(Double.parseDouble(obj.get("waitDeliverAmount")+""));
+		       it.setAvailableAmount(Double.parseDouble(obj.get("availableAmount")+""));
+		       it.setInventoryAmount(Double.parseDouble(obj.get("inventoryAmount")+""));
+		       it.setLastUpdate(obj.get("lastUpdate")+"");
+		       it.setReserveDeliverAmount(Double.parseDouble(obj.get("reserveDeliverAmount")+""));
+		       it.setUnit(obj.get("unit")+"");
+		       Inventorys.add(it);
+		}
+		return Inventorys;
+	}
 }
-					
+		       
