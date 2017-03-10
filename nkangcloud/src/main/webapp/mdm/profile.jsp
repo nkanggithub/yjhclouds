@@ -36,6 +36,7 @@ if (session.getAttribute("location") == null) {
 }
 MongoDBBasic.updateVisited(uid,currentDate,"profile",wcu.getHeadimgurl(),wcu.getNickname());
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
+boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -391,6 +392,13 @@ function getLogo(){
 			}
 		}
 	});
+}
+function noAuth(flag){
+	if(flag==1){
+		swal("你没有权限哦", "只有高级管理和拥有信息发布的权限的员工才能访问该模块！", "error");
+	}else{
+		swal("你没有权限哦", "只有高级管理才能访问该模块！", "error");
+	}
 }
 function checkReg() {
 	jQuery.ajax({
@@ -1820,13 +1828,13 @@ function getNowFormatDate() {
 												</td>
 											</tr>
 											<tr>
-											<td><img onclick="mesSend()" src="../MetroStyleFiles/menu-technology.png" />
+											<td><img <%if(isInternalSeniorMgt==true||isInternalImtMgt==true) { %> onclick="mesSend()" <%}else{ %>onclick="noAuth(1)"<%} %> src="../MetroStyleFiles/menu-technology.png" />
 													<h4>消息推送</h4></td>
-												<td>		<img  onclick="recognizationPanel()"
+												<td>		<img <%if(isInternalSeniorMgt==true) { %> onclick="recognizationPanel()"<%}else{ %>onclick="noAuth(2)"<%} %>
 														src="../MetroStyleFiles/menu-recognition.png" />
 														<h4>奖项管理</h4>
 												</td>
-												<td><a href="DataVisualization.jsp"><img  class="mes-openbt" data-mesid="message-tax" 
+												<td> <a <%if(isInternalSeniorMgt==true) { %> href="DataVisualization.jsp"  <%} else{ %>onclick="noAuth(2)"<%} %>><img  class="mes-openbt" data-mesid="message-tax" 
 														src="../MetroStyleFiles/menu-price.png" />
 														<h4>胖和数据</h4></a>
 												</td>
