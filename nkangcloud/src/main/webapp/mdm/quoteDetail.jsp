@@ -68,6 +68,37 @@ $(this).siblings().removeClass("specialEditBtn");
 $(this).siblings().removeClass("noEditBtn");
 $(this).siblings().remove(".edit");
 });
+function getInventoryDetail(itemNo)
+{
+	$.ajax({
+		 url:'../getInventoryDetailByItem',
+		 type:"POST",
+	     data:{
+	    	 item:itemNo
+		 },
+		 success: function(data) {
+			 if(data){
+			 var formText="";
+			 for(var i=0;i<data.length;i++){
+				 formText+="<p style='width:40%;float:left;height:40px;line-height:40px;'>"+data[i].repositoryName+"：</p><input style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+data[i].inventoryAmount+" disabled='true'/>";
+			 }
+			 swal({  
+			        title:"详细库存",  
+			        text:formText,
+			        html:"true",
+			        showConfirmButton:true, 
+					showCancelButton: false,   
+					closeOnConfirm: false,  
+			        confirmButtonText:"确认", 
+			        animation:"slide-from-top"  
+			      }, 
+					function(inputValue){
+			    	  return false;
+			      });
+			 }
+		 }
+	});
+	}
 function approve(obj)
 {
 	var item=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
@@ -117,7 +148,7 @@ function approve(obj)
 								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
-								 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+								 +"<div class='shape quoteInventory ' onclick='getInventoryDetail("+data.data[i].itemNo+")'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
 								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
 								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 								 +"</div>"
@@ -222,7 +253,7 @@ function edit(obj)
 										 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 										 +"<div class='secondLayer'>"
 										 +"<div class='leftPanel'>"
-										 +"<div class='shape quoteInventory '><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+										 +"<div class='shape quoteInventory ' onclick='getInventoryDetail("+data.data[i].itemNo+")'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
 										 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
 										 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 										 +"</div>"
@@ -245,6 +276,7 @@ function edit(obj)
 	}
 window.edit=edit;
 window.approve=approve;
+window.getInventoryDetail=getInventoryDetail;
 function textClear(obj){
 	if($(obj).val()=="/"){
 	$(obj).val("");}
@@ -464,7 +496,7 @@ for(int i=0;i<ql.size();i++){
 </div>
 <div class="secondLayer">
 <div class="leftPanel">
-<div class="shape quoteInventory "><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getInventorysAvailableAmountSum() %></p></div>
+<div class="shape quoteInventory " onclick="getInventoryDetail(<%=ql.get(i).getItemNo() %>)"><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getInventorysAvailableAmountSum() %></p></div>
 <div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue"><%=ql.get(i).getOrderNopaynoInvoiceAmountSum() %></p></div>
 <div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDeliveryNotInInRepositorySum() %></p></div>
 </div>
