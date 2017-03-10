@@ -342,7 +342,9 @@ function showUpdateUserPanel(openid,name){
 				var isInternalImtMgt=data[0].roleObj.internalImtMgt;
 				var isInternalQuoter=data[0].roleObj.internalQuoter;
 				var isITOperations=data[0].roleObj.itoperations;
+				var isInternalNonBizEmp=data[0].roleObj.internalNonBizEmp;
 				var IsRegistered=data[0].IsRegistered==null?'false':data[0].IsRegistered;
+				var IsAuthenticated=data[0].IsAuthenticated==null?'false':data[0].IsAuthenticated;
 				var IsActived=data[0].isActive==null?'false':data[0].isActive;
 				var registerDate=data[0].registerDate==null?'':data[0].registerDate.replace(/\//g,"-");
 				var realName=data[0].realName==null?'':data[0].realName;
@@ -374,16 +376,17 @@ function showUpdateUserPanel(openid,name){
 			            +'														<td>销售代表:</td>'
 			     //       +'														<td><input type="text"  placeholder="代表名-职位-电话号码"  name="selfIntro" value="'+selfIntro+'"/></td>'
 			            +'														<td><select  name="selfIntro">'
-			            +'														<option value="胡贵花">胡贵花</option>'
-			            +'														<option value="王素萍">王素萍</option>'
-			            +'														<option value="邓立铭">邓立铭</option>'
-			            +'														<option value="赫海涛">郝海涛</option>'
-			            +'														<option value="罗成洪">罗成洪</option>'
-			            +'														<option value="罗浩">罗浩</option>'
-			            +'														<option value="陈博">陈博</option>'
-			            +'														<option value="段阳">段阳</option>'
-			            +'														<option value="郑仁利">郑仁利</option>'
-			            +'														<option value="罗斯威">罗斯威</option>'
+			            +'														<option value="">-请选择-</option>'
+			            +'														<option value="王素萍">&nbsp;王素萍</option>'
+			            +'														<option value="邓立铭">&nbsp;邓立铭</option>'
+			            +'														<option value="赫海涛">&nbsp;郝海涛</option>'
+			            +'														<option value="胡贵花">&nbsp;胡贵花</option>'
+			            +'														<option value="罗成洪">&nbsp;罗成洪</option>'
+			            +'														<option value="罗浩">&nbsp;罗浩</option>'
+			            +'														<option value="陈博">&nbsp;陈博</option>'
+			            +'														<option value="段阳">&nbsp;&nbsp;段阳</option>'
+			            +'														<option value="郑仁利">&nbsp;郑仁利</option>'
+			            +'														<option value="罗斯威">&nbsp;罗斯威</option>'
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
@@ -405,6 +408,8 @@ function showUpdateUserPanel(openid,name){
 			            +'															</nobr><br/><nobr>'
 			            +'															<input type="checkbox"  name="role" value="isInternalSeniorMgt"  '+(isInternalSeniorMgt==true?'checked':'')+'/>报价审核'
 			            +'															<input type="checkbox"  name="role" value="isITOperations"  '+(isITOperations==true?'checked':'')+'/>后台管理'
+			            +'															</nobr><br/><nobr>'
+			            +'															<input type="checkbox"  name="role" value="isInternalNonBizEmp"  '+(isInternalNonBizEmp==true?'checked':'')+'/>物流商'
 			            +'															</nobr>'
 			            +'														</td>'
 			            +'													</tr>'
@@ -414,6 +419,7 @@ function showUpdateUserPanel(openid,name){
 			            +'													    	<input name="registerDate" type="date" id="registerDate" required style="text-align: -webkit-center; width: 130px;"  value="'+registerDate+'">'
 			            +'													    </td>'
 			            +'												    </tr>'
+			            +'												    <tr>'
 			            +'												        <td>确认注册:</td>'
 			            +'												        <td  align="left" class="tdText">'
 			            +'												        	<input type="radio" name="isRegistered" value="true"  '+(IsRegistered=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isRegistered" '+(IsRegistered!="true"?'checked="checked"':'')+' value="false"/>否'
@@ -423,6 +429,12 @@ function showUpdateUserPanel(openid,name){
 			            +'												        <td>聊天组:</td>'
 			            +'												        <td  align="left" class="tdText">'
 			            +'												        	<input type="radio" name="isActived" value="true"  '+(IsActived=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isActived" '+(IsActived!="true"?'checked="checked"':'')+' value="false"/>否'
+			            +'												        </td>'
+			            +'												    </tr> '
+			            +'												    <tr>'
+			            +'												        <td>确认注册:</td>'
+			            +'												        <td  align="left" class="tdText">'
+			            +'												        	<input type="radio" name="isAuthenticated" value="true"  '+(IsAuthenticated=="true"?'checked="checked"':'')+' />是&nbsp;&nbsp;&nbsp;<input type="radio" name="isAuthenticated" '+(IsAuthenticated!="true"?'checked="checked"':'')+' value="false"/>否'
 			            +'												        </td>'
 			            +'												    </tr> '
 			            +'												    <tr>'
@@ -687,7 +699,12 @@ jQuery.ajax({
 					role.push("后台管理");
 					temp_B=false;
 				}
-				
+				if(temp.roleObj.internalNonBizEmp){
+					InternalList++;
+					role.push("物流商");
+					temp_B=false;
+				}
+				var isInternalNonBizEmp=data[0].roleObj.internalNonBizEmp;
 				if(temp_B){
 					NoRoleList++;
 					role.push("未分类");
