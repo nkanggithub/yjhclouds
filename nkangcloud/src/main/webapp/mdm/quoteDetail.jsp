@@ -86,14 +86,14 @@ function getInventoryDetail(itemNo)
 			        title:"详细库存",  
 			        text:formText,
 			        html:"true",
-			        showConfirmButton:true, 
-					showCancelButton: false,   
+			        showConfirmButton:false, 
+					showCancelButton: true,   
 					closeOnConfirm: false,  
-			        confirmButtonText:"确认", 
+			        cancelButtonText:"关闭", 
 			        animation:"slide-from-top"  
 			      }, 
 					function(inputValue){
-			    	  return false;
+			    	  if (inputValue === false){ return false; }
 			      });
 			 }
 		 }
