@@ -6,6 +6,7 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -994,8 +995,8 @@ public class MongoDBBasic {
 				dbquery.put("state", pattern);
 			}
 					
-/*	    	DBObject query1 = new BasicDBObject("state", "重庆市");  
-	    	DBObject query2 = new BasicDBObject("state", "重庆");     
+/*	    	DBObject query1 = new BasicDBObject("state", "é‡�åº†å¸‚");  
+	    	DBObject query2 = new BasicDBObject("state", "é‡�åº†");     
 	    	BasicDBList or = new BasicDBList();
 	    	or.add(query1);
 	    	or.add(query2);
@@ -1027,7 +1028,7 @@ public class MongoDBBasic {
 			}
 			
 /*	    	DBObject query1 = new BasicDBObject("state", state);  
-	    	DBObject query2 = new BasicDBObject("state", "重庆");     
+	    	DBObject query2 = new BasicDBObject("state", "é‡�åº†");     
 	    	BasicDBList or = new BasicDBList();
 	    	or.add(query1);
 	    	or.add(query2);
@@ -1272,7 +1273,7 @@ public class MongoDBBasic {
 	
 	/*
 	 * author  chang-zheng
-	 * purpose to get userState list .eg 上海市，重庆市
+	 * purpose to get userState list .eg ä¸Šæµ·å¸‚ï¼Œé‡�åº†å¸‚
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<String> getAllStates(String countryCode){
@@ -1769,8 +1770,8 @@ public class MongoDBBasic {
                 				String dstr=teamobj.get("registerDate").toString();
                 				dstr=dstr.replaceAll("/", "-");
                 				java.util.Date date=sdf.parse(dstr);
-                				long  s1=date.getTime();//将时间转为毫秒
-                				long s2=System.currentTimeMillis();//得到当前的毫秒
+                				long  s1=date.getTime();//å°†æ—¶é—´è½¬ä¸ºæ¯«ç§’
+                				long s2=System.currentTimeMillis();//å¾—åˆ°å½“å‰�çš„æ¯«ç§’
                 				int  day=(int) ((s2-s1)/1000/60/60/24)+1;
                 				weChatMDLUser.setWorkDay(day);
             				}
@@ -3208,7 +3209,7 @@ public class MongoDBBasic {
 				doc.put("$set", insertQuery);
 				writeResult=mongoDB.getCollection(collectionInventory).update(new BasicDBObject().append("plasticItem", inventory.getPlasticItem()), doc);
 				ret="update Inventory ok  -->" + writeResult;
-				// 判断并插入
+				// åˆ¤æ–­å¹¶æ�’å…¥
 				PlasticItemService.judgeAndInsert(inventory);
 			}
 		}
@@ -3244,7 +3245,7 @@ public class MongoDBBasic {
 				//mongoDB.getCollection(collectionOnDelivery).remove(query);
 				writeResult=mongoDB.getCollection(collectionOnDelivery).insert(insertQuery);
 				ret="insert onDelivery ok  -->" + writeResult;
-				// 判断并插入
+				// åˆ¤æ–­å¹¶æ�’å…¥
 				PlasticItemService.judgeAndInsert(onDelivery);
 		}
 		return ret;
@@ -3280,7 +3281,7 @@ public class MongoDBBasic {
 				//mongoDB.getCollection(collectionorderNopay).remove(query);
 				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
 				ret="insert orderNopay ok  -->" + writeResult;
-				// 判断并插入
+				// åˆ¤æ–­å¹¶æ�’å…¥
 				PlasticItemService.judgeAndInsert(orderNopay);
 		}
 		return ret;
@@ -3339,7 +3340,7 @@ public class MongoDBBasic {
 				if(quotation.getSuggestPrice() != null){
 					price = Float.parseFloat(quotation.getSuggestPrice()+"");
 				}
-				// 更新价格
+				// æ›´æ–°ä»·æ ¼
 				PlasticItemService.updatePriceInfo(quotation.getPlasticItem(), price, quotation.getType());
 			
 				
@@ -3802,6 +3803,20 @@ public class MongoDBBasic {
 		//DBCursor visiteds ;
 		@SuppressWarnings("unchecked")
 		List<String> visiteds = mongoDB.getCollection(collectionVisited).distinct("date",query);
+		List<String> finalVisiteds =new ArrayList<String>();
+		if(visiteds.size()>7){
+			for(int i=0;i<7;i++){
+				finalVisiteds.add(visiteds.get(i));
+			}
+		}else{
+			SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+			Date date=new Date();
+			String currentDate = format.format(date);
+			finalVisiteds.add(currentDate);
+			for(int i=-6;i<0;i++){
+				finalVisiteds.add(beforNumDay(date,i));
+			}
+		}
 //		while(visiteds.hasNext()) {
 //		       DBObject obj = visiteds.next();
 //		       if(obj.get("date")!=null){
@@ -3809,8 +3824,25 @@ public class MongoDBBasic {
 //		    	   dates.add(date);
 //		       }
 //		    }
-		return visiteds;
+		return finalVisiteds;
 	}
+	public static List<String> getLastestDate(int day){
+		SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+		Date date=new Date();
+		List<String> finalVisiteds =new ArrayList<String>();
+		String currentDate = format.format(date);
+		finalVisiteds.add(currentDate);
+		for(int i=-1;i>day-1;i--){
+			finalVisiteds.add(beforNumDay(date,i));
+		}
+		return finalVisiteds;
+	}
+	  public static String beforNumDay(Date date, int day) {
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(date);
+	        c.add(Calendar.DAY_OF_YEAR, day);
+	        return new SimpleDateFormat("yyyy-MM-dd").format(c.getTime());
+	    }
 	
 	public static List<Visited> getVisitedDetail(String date,String pageName){
 		List<Visited> vitlist = new ArrayList<Visited>();
@@ -3832,8 +3864,7 @@ public class MongoDBBasic {
 				vit.setImgUrl(obj.get("imgUrl")+"");
 				vit.setNickName(obj.get("nickName")+"");
 			   vitlist.add(vit);
-		    }
-		}else{
+		    }}else{
 		    	Visited vit = new Visited();
 			       vit.setDate(date);
 				   vit.setOpenid("");
@@ -3845,7 +3876,6 @@ public class MongoDBBasic {
 		    }
 		return vitlist;
 	}
-	
 	
 	public static List<Inventory> getInventoryDetailByItem(String item){
 		List<Inventory> Inventorys = new ArrayList<Inventory>();
@@ -3871,4 +3901,4 @@ public class MongoDBBasic {
 		return Inventorys;
 	}
 }
-		       
+					
