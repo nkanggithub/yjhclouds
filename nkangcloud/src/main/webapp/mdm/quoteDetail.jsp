@@ -148,7 +148,7 @@ function approve(obj)
 								 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 								 +"<div class='secondLayer'>"
 								 +"<div class='leftPanel'>"
-								 +"<div class='shape quoteInventory ' onclick='getInventoryDetail("+data.data[i].itemNo+")'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+								 +"<div class='shape quoteInventory ' onclick='getInventoryDetail('"+data.data[i].itemNo+"')'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
 								 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
 								 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 								 +"</div>"
@@ -253,7 +253,7 @@ function edit(obj)
 										 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
 										 +"<div class='secondLayer'>"
 										 +"<div class='leftPanel'>"
-										 +"<div class='shape quoteInventory ' onclick='getInventoryDetail("+data.data[i].itemNo+")'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+										 +"<div class='shape quoteInventory ' onclick='getInventoryDetail('"+data.data[i].itemNo+"')'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
 										 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
 										 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
 										 +"</div>"
@@ -496,7 +496,7 @@ for(int i=0;i<ql.size();i++){
 </div>
 <div class="secondLayer">
 <div class="leftPanel">
-<div class="shape quoteInventory " onclick="getInventoryDetail(<%=ql.get(i).getItemNo() %>)"><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getInventorysAvailableAmountSum() %></p></div>
+<div class="shape quoteInventory " onclick="getInventoryDetail('<%=ql.get(i).getItemNo() %>')"><p>可用库存</p><p id="inventoryValue"><%=ql.get(i).getInventorysAvailableAmountSum() %></p></div>
 <div class="shape soldOutOfPay"><p>已售未下账</p><p id="soldOutOfPayValue"><%=ql.get(i).getOrderNopaynoInvoiceAmountSum() %></p></div>
 <div class="shape onDelivery"><p>在途</p><p id="onDeliveryValue"><%=ql.get(i).getOnDeliveryNotInInRepositorySum() %></p></div>
 </div>
