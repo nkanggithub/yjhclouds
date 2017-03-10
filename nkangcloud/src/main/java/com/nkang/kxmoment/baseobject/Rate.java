@@ -50,5 +50,8 @@ public class Rate {
 	public void setBid(String bid) {
 		this.bid = bid;
 	}
-	
+	public String info(){
+		return "name : "+this.name + "rate : "+rate;
+		
+	}
 }
