@@ -137,8 +137,18 @@ bottom: 2px;
 right: 2px;
 width: 15px;
 height: 15px;}
-
-
+.taxTable{
+font-size:13px;
+}
+.taxTable th{
+text-align:left;
+font-size:15px;
+border:1px solid gray;
+height:30px;
+}
+.taxTable td{
+border:1px solid gray;
+}
 /*ajax*/
 
 .sk-circle {
@@ -779,35 +789,34 @@ function SpeechPanel(){
 }
 function taxPanel(){
 		showCommonPanel();
-		$("body").append('<div id="taxPart" class="bouncePart" style="position:fixed;z-index:10000;top:100px;width:80%;margin-left:10%;"><legend>美金汇率 </legend><table class="tax" style="margin-right:auto;margin-left:auto;">'
-				+'											<tr>'
-				+'												<td>起征点：</td>'
-				+'												<td><input type="text" id="taxstart" value="3500" /></td>'
-				+'											</tr>'
-				+'											<tr>'
-				+'												<td>总工资：</td>'
-				+'												<td><input type="text" id="taxIncome" value=""/></td>'
-				+'											</tr>'
-				+'											<tr>'
-				+'												<td>五险一金：</td>'
-				+'												<td><input type="text" id="payment" value=""/></td>'
-				+'											</tr>'
-				+'											<tr>'
-				+'												<td colspan="2" style="text-align: center; padding: 0px;">'
-				+'													<button class="btnAthena EbtnLess"'
-				+'														style="padding: 0px;background-color:'+clientThemeColor+';"'
-				+'														id="tax_submit_button" onclick="getTax()">计算</button>'
-				+'												</td>'
-				+'											</tr>'
-				+'											<tr>'
-				+'												<td>含税级距计算：</td>'
-				+'												<td><span id="levelcalc"></span></td>'
-				+'											</tr>'
-				+'											<tr>'
-				+'												<td>不含税级距计算：</td>'
-				+'												<td><span id="nolevelcalc"></span></td>'
-				+'											</tr>'
-				+'										</table></div>');
+		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:70px;width:80%;height:85%;overflow:scroll;margin-left:10%;"><legend>美金汇率 </legend>'
+				+'<table class="taxTable">'
+				+'<tr>'
+				+'<th>化学品名</th>'
+				+'<th>2012关税率</th>'
+				+'<th>计算</th></tr>'
+				+'<tr><td style="width:120px;">ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style="width:120px;">6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>AS丙烯腈-苯乙烯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>POM聚甲醛</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>PC聚碳酸酯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>PMMA聚甲基丙烯酸甲酯MMA60% PS40%</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>共聚PP</td><td>0%(台产,新加坡产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>均聚PP</td><td>5%(台产)</td><td>单价*汇率*17%*5</td></tr>'
+				+'<tr><td>HDPE 低压高密度聚乙烯 >=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>LDPE 高压低密度聚乙烯 <0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
+				+'<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>SM 苯乙烯单体</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>PC/ABS (PC含量50%以上)</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'<tr><td>ASA 丙烯腈-苯乙烯-丙烯酸酯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
+				+'</table>'
+				+'</div>'
+				);
 		$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
