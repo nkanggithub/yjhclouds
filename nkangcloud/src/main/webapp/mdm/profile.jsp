@@ -1813,7 +1813,7 @@ function getNowFormatDate() {
 												<!-- <a class="" data-toggle="modal" href="#tax_main_div"> </a> -->
 												<img   onclick="taxPanel()" 
 														src="../MetroStyleFiles/menu-tax.png" />
-														<h4>美金汇率 </h4>
+														<h4>关税汇率 </h4>
 												</td>
 												<td> <img onclick="stockModule()"
 														src="../MetroStyleFiles/menu-stock.png" />
@@ -1883,7 +1883,7 @@ function getNowFormatDate() {
 									aria-hidden="true" data-backdrop="static">
 									<div class="modal-header" style="text-align: center;">
 										<h3>
-											<b>美金汇率 </b>
+											<b>关税汇率 </b>
 										</h3>
 										<img src="../MetroStyleFiles/Close.png" data-dismiss="modal"
 											aria-hidden="true"
