@@ -80,7 +80,7 @@ function getInventoryDetail(itemNo)
 			 if(data){
 			 var formText="";
 			 for(var i=0;i<data.length;i++){
-				 formText+="<p style='width:40%;float:left;height:40px;line-height:40px;'>"+data[i].repositoryName+"：</p><input style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+data[i].inventoryAmount+" disabled='true'/>";
+				 formText+="<p style='width:40%;float:left;height:40px;line-height:40px;'>"+data[i].repositoryName+"：</p><input style='margin-top:0px;width:50%;height:35px;display:block;float:left;' type='text' value="+data[i].availableAmount+" disabled='true'/>";
 			 }
 			 swal({  
 			        title:"详细库存",  
