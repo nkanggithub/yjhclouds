@@ -34,7 +34,8 @@ if (session.getAttribute("location") == null) {
 	wcu = (WeChatUser) session.getAttribute("wcu");
 	curLoc = (String) session.getAttribute("location");
 }
-MongoDBBasic.updateVisited(uid,currentDate,"profile",wcu.getHeadimgurl(),wcu.getNickname());
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"profile",res.get("HeadUrl"),res.get("NickName"));
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 %>
