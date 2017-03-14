@@ -1,5 +1,6 @@
 package com.nkang.kxmoment.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import com.nkang.kxmoment.baseobject.Market;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuotationList;
+import com.nkang.kxmoment.baseobject.Rate;
 import com.nkang.kxmoment.baseobject.Visited;
 import com.nkang.kxmoment.baseobject.Visitedreturn;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
@@ -215,6 +217,23 @@ public class QuotationController {
 		return MongoDBBasic.getInventoryDetailByItem(item); 
 	}
 
+	@RequestMapping("/getRate")
+	public @ResponseBody Double getRate(@RequestParam(value="name")String name){
+		Double rate = 0.0;
+		try {
+			List<Rate> lt = RestUtils.callGetRate();
+			Map<String, String> map = new HashMap<String, String>();
+			for(Rate rt : lt){
+				map.put(rt.getName(), rt.getRate());
+			}
+			rate = Double.valueOf(map.get(name));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rate;
+	}
+	
 /*	@RequestMapping("/getVisitedbTotalNumPage")
 	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
 		Map<String,Visitedreturn> mapret = new HashMap<String,Visitedreturn>();
