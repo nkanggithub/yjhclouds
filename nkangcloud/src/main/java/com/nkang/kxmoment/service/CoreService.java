@@ -146,7 +146,7 @@ public class CoreService
 	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
 	                }
 
-	                textMessage.setContent(allUser.size() + " recevied");
+	                textMessage.setContent(allUser.size() + "人收到该消息");
 	                respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 			}
