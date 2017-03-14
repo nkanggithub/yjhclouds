@@ -647,13 +647,15 @@ var i=$(this).index();
 				success : function(data) {
 					if(data){
 					var html="";
-					
+					var imgUrl="";
 				for(var i=0;i<data.length;i++)
 				{
 					console.log("date========"+data[i].date);
 					console.log("nickName========"+data[i].nickName);
-					if(data[i].visitedNum!=0)
-					{
+					console.log("imgUrl========"+data[i].imgUrl);
+					imgUrl=data[i].imgUrl;
+					if(data[i].visitedNum!=0&&imgUrl!="null")
+					{	
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+"</p></div>";
 					};
 				}
