@@ -44,9 +44,10 @@ public class fileUploadController {
 		        	 log.info("fileurl------"+fileurl);
 		            for(FileItem item:fileList){
 		            	String filename="";
-		            	System.out.println(item.getName());
+		            	//System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
 		                	url = fileurl+item.getName();
+		                	//System.out.println(url);
 		                    item.write(new File(url));
 		                    int dot = item.getName().lastIndexOf('.');   
 				            if ((dot >-1) && (dot < (item.getName().length()))) {   
@@ -67,7 +68,7 @@ public class fileUploadController {
 		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        log.info(e.getMessage());
+		        log.info("fileurl------"+e.getMessage());
 		    }
 
 			return message;
