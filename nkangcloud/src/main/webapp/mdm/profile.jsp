@@ -15,11 +15,11 @@ String uid = request.getParameter("UID");
 
 String curLoc=null;
 String city=null;
-WeChatUser wcu;
+//WeChatUser wcu;
 session.setAttribute("UID", uid);
 if (session.getAttribute("location") == null) {
 	GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
-	wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
+//	wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 	String message = RestUtils.getUserCurLocStrWithLatLng(loc.getLAT(),loc.getLNG());
 	 JSONObject demoJson = new JSONObject(message);
      if(demoJson.has("result")){
@@ -29,9 +29,9 @@ if (session.getAttribute("location") == null) {
      }
 	session.setAttribute("location", curLoc);
 	session.setAttribute("city", city);
-	session.setAttribute("wcu", wcu);
+//	session.setAttribute("wcu", wcu);
 } else {
-	wcu = (WeChatUser) session.getAttribute("wcu");
+//	wcu = (WeChatUser) session.getAttribute("wcu");
 	curLoc = (String) session.getAttribute("location");
 }
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
@@ -1639,10 +1639,10 @@ function getNowFormatDate() {
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"
 						style="font-size: 15px; margin: 0px; padding: 5px 0px;">
-							欢迎 <span class="username colorBlue" id="username"> <%=wcu.getNickname() %>
+							欢迎 <span class="username colorBlue" id="username"> <%=res.get("NickName")  %>
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
-								src="<%=wcu.getHeadimgurl() %>" alt="userImage"
+								src="<%=res.get("HeadUrl") %>" alt="userImage"
 								class="userImage" alt="no_username" onclick="register()" />
 						</a></span></li>
 				</ul>
