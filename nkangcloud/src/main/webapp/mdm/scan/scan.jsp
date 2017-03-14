@@ -20,7 +20,6 @@ if (session.getAttribute("location") == null) {
 	wcu = (WeChatUser) session.getAttribute("wcu");
 } */
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
-HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 //MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
