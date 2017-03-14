@@ -1699,7 +1699,7 @@ function getNowFormatDate() {
 
             	<a stat="sslink-1" href="" target="_blank">
 
-                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakedashboard.jpg" /></div>
+                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakedashboard.png" /></div>
 
             	</a>
 
@@ -1709,7 +1709,7 @@ function getNowFormatDate() {
 
             	<a stat="sslink-2" href="" target="_blank">
 
-                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakepure.jpg" /></div>
+                	<div class="obj-e"><img style="width:100%;height:221px" src="../MetroStyleFiles/image/datalakepure.png" /></div>
 
             	</a>
 
