@@ -126,7 +126,7 @@ input#search:focus {
     filter: drop-shadow(20px 0);   
 }
 .imgSelect{
-height:100%;
+height:50%;
 width:24%;
 position:relative;
 float:left;
@@ -142,6 +142,8 @@ width: 15px;
 height: 15px;}
 .taxTable{
 font-size:13px;
+margin-left:5%;
+width:90%;
 }
 .taxTable th{
 text-align:left;
@@ -420,6 +422,30 @@ function checkReg() {
 			}
 		}
 	});
+}
+function showHGPart(){
+	$("#hanguo").show();
+	$("#taiwan").hide();
+	$("#riben").hide();
+	$("#xinjiapo").hide();
+}
+function showRBPart(){
+	$("#hanguo").hide();
+	$("#taiwan").hide();
+	$("#riben").show();
+	$("#xinjiapo").hide();
+}
+function showXJPPart(){
+	$("#hanguo").hide();
+	$("#taiwan").hide();
+	$("#riben").hide();
+	$("#xinjiapo").show();
+}
+function showTWPart(){
+	$("#hanguo").hide();
+	$("#taiwan").show();
+	$("#riben").hide();
+	$("#xinjiapo").hide();
 }
 function startDictation() {
     if (window.hasOwnProperty('webkitSpeechRecognition')) 
@@ -799,34 +825,103 @@ function SpeechPanel(){
 }
 function taxPanel(){
 		showCommonPanel();
-		$("body").append('<div id="taxPart" class="bouncePart" style="position:absolute;z-index:10000;top:90px;width:96%;height:80%;overflow:scroll;margin-left:2%;">'
-				+'<table class="taxTable">'
-				+'<tr>'
-				+'<th>化学品名</th>'
-				+'<th>2012关税率</th>'
-				+'<th>计算</th></tr>'
-				+'<tr><td style="width:120px;">ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style="width:120px;">6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>AS丙烯腈-苯乙烯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>POM聚甲醛</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>PC聚碳酸酯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>PMMA聚甲基丙烯酸甲酯MMA60% PS40%</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>共聚PP</td><td>0%(台产,新加坡产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>均聚PP</td><td>5%(台产)</td><td>单价*汇率*17%*5</td></tr>'
-				+'<tr><td>HDPE 低压高密度聚乙烯 >=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>LDPE 高压低密度聚乙烯 <0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>'
-				+'<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>SM 苯乙烯单体</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>PC/ABS (PC含量50%以上)</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'<tr><td>ASA 丙烯腈-苯乙烯-丙烯酸酯</td><td>0%(台产)</td><td>单价*汇率*17%</td></tr>'
-				+'</table>'
-				+'</div>'
-				);
+		$("body").append("<div id='taxPart' class='bouncePart form-horizontal' style='position:absolute;z-index:10000;top:90px;width:96%;height:80%;overflow:scroll;margin-left:2%;'>"
+				 +" <ul class='nav nav-tabs' id='myTabs' style='border-bottom: 1px solid #0067B6!important;'>"
+				  +"<li class='active'><a href='#aElements' onclick='showTWPart()'data-toggle='tab'>中国台湾</a></li>"	
+				  +"<li class=''><a href='#bElements' onclick='showXJPPart()' data-toggle='tab'>新加坡</a></li>"
+				+"<li class=''><a href='#cElements' onclick='showRBPart()' data-toggle='tab'>日本</a></li>"
+				+"<li class=''><a href='#dElements' onclick='showHGPart()' data-toggle='tab'>韩国</a></li></ul>"
+				 +" <table class='taxTable' id='taiwan'>"
+				  +"<tbody>"
+				  +"<tr><th>化学品名</th><th>关税率(中国台湾)</th><th>计算</th></tr>"
+				  +"<tr> <td style='width:140px;'>ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style='width:70px;'>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>" 
+				  +"<tr><td>AS丙烯腈-苯乙烯</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>POM聚甲醛</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PC聚碳酸酯</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PMMA聚甲基丙烯酸甲酯MMA60%PS40%</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>共聚PP</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>均聚PP</td><td>5%</td><td>单价*汇率*17%*5</td></tr>"
+				  +"<tr><td>HDPE 低压高密度聚乙烯 &gt;=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LDPE 高压低密度聚乙烯 &lt;0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>SM 苯乙烯单体</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PC/ABS (PC含量50%以上)</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>ASA 丙烯腈-苯乙烯-丙烯酸酯</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				 +" </tbody>"
+				  +"</table>"
+				   
+				 +" <table class='taxTable' id='xinjiapo' style='display:none'>"
+				  +"<tbody>"
+				    +"<tr><th>化学品名</th><th>关税率(新加坡)</th><th>计算</th></tr>"
+				  +"<tr> <td style='width:140px;'>ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style='width:120px;'>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>" 
+				  +"<tr><td>AS丙烯腈-苯乙烯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>POM聚甲醛</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PC聚碳酸酯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PMMA聚甲基丙烯酸甲酯MMA60%PS40%</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>共聚PP</td><td>0%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>均聚PP</td><td>6.5%</td><td>单价*汇率*17%*5</td></tr>"
+				  +"<tr><td>HDPE 低压高密度聚乙烯 &gt;=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LDPE 高压低密度聚乙烯 &lt;0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"</tbody>"
+				  +"</table>"
+				 
+				   +"  <table class='taxTable' id='riben' style='display:none'>"
+				  +"<tbody>"
+				    +"<tr><th>化学品名</th><th>关税率(日本)</th><th>计算</th></tr>"
+				  +"<tr> <td style='width:140px;'>ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style='width:120px;'>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>AS丙烯腈-苯乙烯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>POM聚甲醛</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PC聚碳酸酯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>PMMA聚甲基丙烯酸甲酯MMA60%PS40%</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>共聚PP</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"<tr><td>均聚PP</td><td>6.5%</td><td>单价*汇率*17%*5</td></tr>"
+				  +"<tr><td>HDPE 低压高密度聚乙烯 &gt;=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LDPE 高压低密度聚乙烯 &lt;0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+				  +"<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				  +"</tbody>"
+				+"	 </table>"
+
+				   +"  <table class='taxTable' id='hanguo' style='display:none'>"
+				  +"<tbody>"
+				    +"<tr><th>化学品名</th><th>关税率(韩国)</th><th>计算</th></tr>"
+				    +"<tr> <td style='width:140px;'>ABS丙烯腈-丁二烯-苯乙烯共聚物</td><td style='width:120px;'>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>AS丙烯腈-苯乙烯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+					  +"<tr><td>PS聚苯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>POM聚甲醛</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+					  +"<tr><td>PC聚碳酸酯</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+					  +"<tr><td>PMMA聚甲基丙烯酸甲酯MMA60%PS40%</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+					  +"<tr><td>共聚PP</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+					  +"<tr><td>均聚PP</td><td>6.5%</td><td>单价*汇率*17%*5</td></tr>"
+					  +"<tr><td>HDPE 低压高密度聚乙烯 &gt;=0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>LDPE 高压低密度聚乙烯 &lt;0.94</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>LLDPE 线型低密度聚乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>PVC 聚氯乙烯</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>PA6 PA66 聚酰胺(尼龙)</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>PBT</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>K/Q胶 苯乙烯丁二烯聚合物</td><td>6.5%</td><td>单价*汇率*17%*6.5%</td></tr>"
+					  +"<tr><td>MS 甲基丙烯酸-苯乙烯共聚物</td><td>6.5%</td><td>单价*汇率*17%</td></tr>"
+				 +" </tbody>"
+				+"	 </table>"
+				+"</div>");
 		$('#taxPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		      $(this).removeClass("bounceInDown animated");
 		    });
@@ -890,9 +985,9 @@ function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
 			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
-			+"  <div class='rcommon' style='height:80px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnHEr&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUBS&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUC1&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUD9&oid=00D90000000pkXM'></div></div>"
-			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:100%!important;text-align:center!important;background-color: #005CA1;color: white;'>不想再写了？点击我一键智能发布吧</p></div>"
-			+"  <div id='commonPush' style='display:none'><div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='bj'>报价</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
+			+"  <div class='rcommon' style='height:160px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnHEr&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUBS&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUC1&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUD9&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6l&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6g&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6R&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6M&amp;oid=00D90000000pkXM'></div></div>"
+			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:96%!important;text-align:center!important;background-color: #005CA1;color: white;height:40px;line-height:40px;'>不想再写了？点击我一键智能发布吧</p></div>"
+			+"  <div id='commonPush' style='display:none;margin-top: 10px;'><div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='bj'>报价</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' placeholder='请输入网页链接' class='input-xlarge bsBtn'></div>"
 			+"	<div class='rcommon'><textarea id='content' style='height:180px;width:95%;line-height:20px' placeholder='请输入内容' class='input-xlarge bsBtn'></textarea></div>"
 			+"	<div class='rcommon' style='text-align:center;'><button style='margin-top:20px' onclick='postNotification()' name='doublebutton-0' class='btn'>提交</button></div></div>"
