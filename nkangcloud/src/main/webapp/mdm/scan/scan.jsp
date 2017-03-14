@@ -8,10 +8,8 @@
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
-
-
-String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
+/*String AccessKey = RestUtils.callGetValidAccessKey();
 WeChatUser wcu;
 session.setAttribute("UID", uid);
 if (session.getAttribute("location") == null) {
@@ -20,7 +18,8 @@ if (session.getAttribute("location") == null) {
 	session.setAttribute("wcu", wcu);
 } else {
 	wcu = (WeChatUser) session.getAttribute("wcu");
-}
+} */
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 //MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
 %>
@@ -60,7 +59,7 @@ ul li.Work_Mates_div_list_div2 {
                     <div class="border3">
                         <div class="radar">
                             <span class="avatar">
-                                <img src="<%=wcu.getHeadimgurl() %>" width="100%">
+                                <img src="<%=res.get("HeadUrl")%>" width="100%">
                             </span>
                         </div>
                     </div>
