@@ -21,6 +21,7 @@ if (session.getAttribute("location") == null) {
 } else {
 	wcu = (WeChatUser) session.getAttribute("wcu");
 }
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 //MongoDBBasic.updateVisited(uid,currentDate,"scan",wcu.getHeadimgurl(),wcu.getNickname());
 %>
 <html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -75,8 +76,8 @@ ul li.Work_Mates_div_list_div2 {
     		url : "../../insertVisited",
     		data : {openid:"<%=uid %>",
     			pageName:"scan",
-    			imgUrl:"<%=wcu.getHeadimgurl() %>",
-    			nickName:"<%=wcu.getNickname() %>"},
+    			imgUrl:"<%=res.get("HeadUrl") %>",
+    			nickName:"<%=res.get("NickName") %>"},
     		cache : false,
     		success : function(resData) {
     		}
