@@ -533,7 +533,7 @@ public class CoreService
 						articleList.add(articlenav4);
 						
 						Article articlenav3 = new Article();
-						articlenav3.setTitle("重庆铁风库[TEL:023-65731195]\n工作时间8:30-18:30");
+						articlenav3.setTitle("重庆铁风库[TEL:023-65731195]\n工作时间8:30-17:30");
 						articlenav3.setDescription("重庆铁风库");
 						articlenav3.setPicUrl(navPic);
 						articlenav3.setUrl("https://m.amap.com/search/mapview/keywords=%E9%87%8D%E5%BA%86%E8%A5%BF%E9%83%A8%E7%89%A9%E6%B5%81%E5%9B%AD&city=500106&poiid=B0FFF3P6P9");
