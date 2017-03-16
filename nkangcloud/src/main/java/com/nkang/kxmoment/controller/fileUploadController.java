@@ -73,7 +73,9 @@ public class fileUploadController {
 		                    if("Inventory".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateInventory(is);
 		                    }
-		                    is.close();
+		                    if(is!=null){
+		                    	is.close();
+		                    }
 		                }
 		            }
 		        }
