@@ -46,8 +46,10 @@ public class fileUploadController {
 		        	 String fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
 		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
 		        	 log.info("fileurl------"+fileurl);
-		        	 System.out.println(fileurl+"----"+fileurl2);
-		        	 System.out.println(fileurl3);
+		        	 log.info("fileur2------"+fileurl2);
+		        	 log.info("fileur3------"+fileurl3);
+//		        	 System.out.println(fileurl+"----"+fileurl2);
+//		        	 System.out.println(fileurl3);
 		        	
 		            for(FileItem item:fileList){
 		            	String filename="";
@@ -77,7 +79,7 @@ public class fileUploadController {
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		        log.info("fileurl-===--"+e.getMessage());
-		        message = "fail";
+		        message = "fail--"+e.getMessage();
 		    }
 
 			return message;
