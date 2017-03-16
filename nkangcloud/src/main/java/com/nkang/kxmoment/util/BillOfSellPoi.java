@@ -4,7 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -21,7 +23,7 @@ public class BillOfSellPoi {
 	
 	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
-		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/AAA.XLS");
+		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/yongjiahe/price.XLS");
 
 	        HSSFWorkbook hssfWorkbook;
 			try {
@@ -85,7 +87,6 @@ public class BillOfSellPoi {
 				
 					                HSSFCell soldOutOfPay = hssfRow.getCell(9);
 					                xlsDto.setSoldOutOfPay(soldOutOfPay+"");
-				
 					       //     }
 					            quotationList.add(xlsDto);
 				            }
@@ -340,10 +341,10 @@ public class BillOfSellPoi {
 		 return date;
 	 }
 	 
-	 public List<Inventory> readXlsOfInventory(String url) throws FileNotFoundException{
+	 public List<Inventory> readXlsOfInventory(InputStream is) throws FileNotFoundException{
 			List<Inventory> inventoryList = new ArrayList<Inventory>();
 			// InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/Inventory.XLS");
-			InputStream is = new FileInputStream(url);
+			//InputStream is = new FileInputStream(url);
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
@@ -396,17 +397,27 @@ public class BillOfSellPoi {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}finally{
+					if(is != null){
+						try {
+							is.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
+				
 				return inventoryList;
 	 }
 	 
-	 public List<OnDelivery> readXlsOfOnDelivery(String url) throws FileNotFoundException{
+	 public List<OnDelivery> readXlsOfOnDelivery(InputStream is) throws FileNotFoundException{
 			List<OnDelivery> OnDeliveryList = new ArrayList<OnDelivery>();
 			// InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OnDelivery.XLS");
-			while (url==null) {
-				return null;
-			}
-			InputStream is = new FileInputStream(url);
+//			while (url==null) {
+//				return null;
+//			}
+//			InputStream is = new FileInputStream(url);
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
@@ -459,15 +470,24 @@ public class BillOfSellPoi {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}finally{
+					if(is != null){
+						try {
+							is.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 				return OnDeliveryList;
 	 }
 	 
-	 public List<OrderNopay> readXlsOfOrderNopay(String url) throws FileNotFoundException{
+	 public List<OrderNopay> readXlsOfOrderNopay(InputStream is) throws FileNotFoundException{
 		// String urlString = "C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS";
 			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
 			// InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/HP/MDL/OrderNopay.XLS");
-			InputStream is = new FileInputStream(url);
+			//InputStream is = new FileInputStream(url);
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
@@ -515,9 +535,165 @@ public class BillOfSellPoi {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}finally{
+					if(is != null){
+						try {
+							is.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 				return OrderNopayList;
 	 }
+	 
+	 public Map<String,List> readAllXls(String url) throws FileNotFoundException{
+		 Map<String,List> map = new HashMap<String, List>();
+			List<Inventory> inventoryList = new ArrayList<Inventory>();
+			List<OnDelivery> OnDeliveryList = new ArrayList<OnDelivery>();
+			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
+			InputStream is = new FileInputStream(url);
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+					
+					// 循环工作表Sheet
+					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           
+				            if (hssfSheet == null) {
+				                continue;
+				            }else{
+				            	 if("Inventory".equals(hssfSheet.getSheetName())){
+				            		   for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+								            HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+								            if (hssfRow == null) {
+		 					                    continue;
+		 					                }
+								            Inventory xlsDto = null;
+						            		xlsDto = new Inventory();
+							                HSSFCell repositoryName = hssfRow.getCell(0);
+							                xlsDto.setRepositoryName(repositoryName+"");
+							                
+							                HSSFCell plasticItem = hssfRow.getCell(1);
+							                xlsDto.setPlasticItem(plasticItem+"");
+							                
+							                HSSFCell unit = hssfRow.getCell(2);
+							                xlsDto.setUnit(unit+"");
+							                
+							                if(hssfRow.getCell(3)!=null){
+							                	 Double inventoryAmount = hssfRow.getCell(3).getNumericCellValue(); 
+									                xlsDto.setInventoryAmount(inventoryAmount);
+							                }
+							               
+							                if(hssfRow.getCell(4)!=null){
+								                Double waitDeliverAmount = hssfRow.getCell(4).getNumericCellValue();
+								                xlsDto.setWaitDeliverAmount(waitDeliverAmount);
+							                }
+							                
+							                if(hssfRow.getCell(5)!=null){
+								                Double reserveDeliverAmount = hssfRow.getCell(5).getNumericCellValue();
+								                xlsDto.setReserveDeliverAmount(reserveDeliverAmount);
+							                }
+							                
+							                if(hssfRow.getCell(6)!=null){
+								                Double availableAmount = hssfRow.getCell(6).getNumericCellValue();
+								                xlsDto.setAvailableAmount(availableAmount);
+							                }
+							                inventoryList.add(xlsDto);	
+				            		   }
+				            		   map.put("inventory", inventoryList); 
+				            	 }else if("OnDelivery".equals(hssfSheet.getSheetName())){
+				            		 OnDelivery xlsDto = null;
+				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+		 					                if (hssfRow == null) {
+		 					                    continue;
+		 					                }
+		 					                xlsDto = new OnDelivery();
+		 						                HSSFCell billID = hssfRow.getCell(2);
+		 						                xlsDto.setBillID(billID+"");
+		 						                HSSFCell date = hssfRow.getCell(3);
+		 						                xlsDto.setDate(TransitionDate(date+""));
+		 						                HSSFCell provider = hssfRow.getCell(4);
+		 						                xlsDto.setProvider(provider+"");
+		 						                HSSFCell plasticItem = hssfRow.getCell(5);
+		 						                xlsDto.setPlasticItem(plasticItem+"");
+		 						                
+		 						                if(hssfRow.getCell(6)!=null){
+		 							                Double amount=hssfRow.getCell(6).getNumericCellValue();
+		 							                xlsDto.setAmount(amount);
+		 						                }
+		 						                
+		 						                if(hssfRow.getCell(7)!=null){
+		 							                Double originalPrice = hssfRow.getCell(7).getNumericCellValue();;
+		 							                xlsDto.setOriginalPrice(originalPrice);
+		 						                }
+		 						                
+		 						                if(hssfRow.getCell(8)!=null){
+		 							                Double taxRate = hssfRow.getCell(8).getNumericCellValue();;
+		 							                xlsDto.setTaxRate(taxRate);
+		 						                }
+		 						                
+		 						                HSSFCell billType = hssfRow.getCell(9);
+		 						                xlsDto.setBillType(billType+"");
+		 						                
+		 						                if(hssfRow.getCell(10)!=null){
+		 							                Double notInInRepository = hssfRow.getCell(10).getNumericCellValue();;
+		 							                xlsDto.setNotInInRepository(notInInRepository);
+		 						                }
+		 						                OnDeliveryList.add(xlsDto);  
+				            		 }
+				            		 map.put("OnDelivery", OnDeliveryList);           
+								}else if("OrderNopay".equals(hssfSheet.getSheetName())){
+									OrderNopay xlsDto = null;
+				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+		 					                if (hssfRow == null) {
+		 					                    continue;
+		 					                }
+		 					               xlsDto = new OrderNopay();
+							                HSSFCell customerNameString = hssfRow.getCell(0);
+							                xlsDto.setCustomerName(customerNameString+"");
+							                
+							                HSSFCell salesman = hssfRow.getCell(1);
+							                xlsDto.setSalesman(salesman+"");
+							                
+							                HSSFCell billID = hssfRow.getCell(2);
+							                xlsDto.setBillID(billID+"");
+							                
+							                HSSFCell billDate = hssfRow.getCell(3);
+							                xlsDto.setBillDate(billDate+"");
+							                
+							                HSSFCell plasticItem = hssfRow.getCell(4);
+							                xlsDto.setPlasticItem(plasticItem+"");
+							                
+							                Double unfilledOrderAmount = hssfRow.getCell(5).getNumericCellValue();
+							                xlsDto.setUnfilledOrderAmount(unfilledOrderAmount);
+							                
+							                if(hssfRow.getCell(6)!=null){
+							                	 Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
+									                xlsDto.setFilledOrderAmount(filledOrderAmount);
+							                }
+							               
+							                
+							                Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
+							                xlsDto.setNoInvoiceAmount(noInvoiceAmount);
+							                
+							                OrderNopayList.add(xlsDto);
+				            		 }
+				            		 map.put("OrderNopay", OrderNopayList);     
+								}
+				            }
+				            System.out.println("name-----"+hssfSheet.getSheetName());
+					    }
+				}catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return map;
+	 }
+				
 }
-
 

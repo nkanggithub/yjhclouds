@@ -1,6 +1,7 @@
 package com.nkang.kxmoment.controller;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.nkang.kxmoment.util.FileOperateUtil;
 
@@ -35,32 +37,38 @@ public class fileUploadController {
 
 		 List<FileItem> fileList = null;
 		 	String url = null;
-		 	String message = "fail";
+		 	String message = "begain";
 		    try {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
 		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
+		        	 String fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
+		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
 		        	 log.info("fileurl------"+fileurl);
+		        	 System.out.println(fileurl+"----"+fileurl2);
+		        	 System.out.println(fileurl3);
+		        	
 		            for(FileItem item:fileList){
 		            	String filename="";
 		            	//System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
-		                	url = fileurl+item.getName();
+		                	InputStream is = item.getInputStream();
+		                	//url = fileurl+item.getName();
 		                	//System.out.println(url);
-		                    item.write(new File(url));
+		                   // item.write(new File(url));
 		                    int dot = item.getName().lastIndexOf('.');   
 				            if ((dot >-1) && (dot < (item.getName().length()))) {   
 				            	filename=item.getName().substring(0, dot); 
 				            }  
 		                    if("OrderNopay".equals(filename)){
-		                    	 message=FileOperateUtil.DBOperateOrderNopay(url);
+		                    	 message=FileOperateUtil.DBOperateOrderNopay(is);
 		                    }
 		                    if("OnDelivery".equals(filename)){
-		                    	 message=FileOperateUtil.DBOperateOnDelivery(url);
+		                    	 message=FileOperateUtil.DBOperateOnDelivery(is);
 		                    }
 		                    if("Inventory".equals(filename)){
-		                    	 message=FileOperateUtil.DBOperateInventory(url);
+		                    	 message=FileOperateUtil.DBOperateInventory(is);
 		                    }
 		                }
 		            }
@@ -68,11 +76,21 @@ public class fileUploadController {
 		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        log.info("fileurl------"+e.getMessage());
+		        log.info("fileurl-===--"+e.getMessage());
+		        message = "fail";
 		    }
 
 			return message;
 
 	}
+	
+	private WebApplicationContext getApplicationContext(
+			HttpServletRequest request) {
+		return (WebApplicationContext) request
+				.getSession()
+				.getServletContext()
+				.getAttribute(
+            WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+    }
 
 }

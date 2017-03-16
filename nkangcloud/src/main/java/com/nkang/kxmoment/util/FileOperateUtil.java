@@ -36,7 +36,7 @@ import com.nkang.kxmoment.controller.MasterDataRestController;
 
 public class FileOperateUtil {
 	static String ny="Y";
-	public static String DBOperateOrderNopay(String url){
+	public static String DBOperateOrderNopay(InputStream is){
 		
 	 	String message="";
 		int total=0;
@@ -52,7 +52,7 @@ public class FileOperateUtil {
   			RestUtils.deleteDB("OrderNopay");
 		}
   		try {
-  			OrderNopays = bos.readXlsOfOrderNopay(url);
+  			OrderNopays = bos.readXlsOfOrderNopay(is);
   			for(OrderNopay ol : OrderNopays){
   				total++;
   				String ret;
@@ -93,16 +93,29 @@ public class FileOperateUtil {
   			e.printStackTrace();
   			System.out.println(e.getMessage());
   		}finally{
-  			File file = new File(url); 
-  			if (file.exists()) { 
-  			    file.delete(); 
-  			}
-  		}
+			if(is != null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+//  		finally{
+//  			if(is != null){
+//				is.close();
+//			}
+////  			File file = new File(url); 
+////  			if (file.exists()) { 
+////  			    file.delete(); 
+////  			}
+//  		}
   		message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
 		return message;
 	}
 	
-public static String DBOperateInventory(String url){
+public static String DBOperateInventory(InputStream is){
 		
 	 	String message="";
 		int total=0;
@@ -119,7 +132,7 @@ public static String DBOperateInventory(String url){
   			RestUtils.deleteDB("Inventory");
 		}
   		try {
-  			Inventorys = bos.readXlsOfInventory(url);
+  			Inventorys = bos.readXlsOfInventory(is);
   			for(Inventory ol : Inventorys){
   				total++;
   				
@@ -157,17 +170,21 @@ public static String DBOperateInventory(String url){
   			e.printStackTrace();
   			System.out.println(e.getMessage());
   		}finally{
-  			File file = new File(url); 
-  			if (file.exists()) { 
-  			    file.delete(); 
-  			}
-  		}
+			if(is != null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
   		message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
 		return message;
 	}
 	
 
-public static String DBOperateOnDelivery(String url){
+public static String DBOperateOnDelivery(InputStream is){
 	
  	String message="";
 	int total=0;
@@ -184,7 +201,7 @@ public static String DBOperateOnDelivery(String url){
   			RestUtils.deleteDB("OnDelivery");
 		}
 		try {
-			OnDeliverys = bos.readXlsOfOnDelivery(url);
+			OnDeliverys = bos.readXlsOfOnDelivery(is);
 			for(OnDelivery ol : OnDeliverys){
 				total++;
 				
@@ -223,9 +240,13 @@ public static String DBOperateOnDelivery(String url){
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}finally{
-			File file = new File(url); 
-			if (file.exists()) { 
-			    file.delete(); 
+			if(is != null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
