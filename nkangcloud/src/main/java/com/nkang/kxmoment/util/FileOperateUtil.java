@@ -45,7 +45,7 @@ public class FileOperateUtil {
 		String failnum=null;
 		BillOfSellPoi bos = new BillOfSellPoi();
   		
-  		List<OrderNopay> OrderNopays;
+  		List<OrderNopay> OrderNopays=null;
   		if("Y".equals(ny)){
   			MongoDBBasic.DeleteDB("OrderNopay");
   		}else {
@@ -91,7 +91,8 @@ public class FileOperateUtil {
   		} catch (IOException e) {
   			// TODO Auto-generated catch block
   			e.printStackTrace();
-  			System.out.println(e.getMessage());
+  			message = "OrderNopays =="+OrderNopays.size();
+  			//System.out.println(e.getMessage());
   		}finally{
 			if(is != null){
 				try {
