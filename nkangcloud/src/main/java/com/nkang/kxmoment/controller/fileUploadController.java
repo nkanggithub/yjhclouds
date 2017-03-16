@@ -78,7 +78,7 @@ public class fileUploadController {
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		        log.info("fileurl-===--"+e.getMessage());
-		        message = "fail--"+e.getMessage()+"fileList-size="+ fileList.size();
+		        message = "fail--"+e.getMessage()+"fileList-size="+ fileList.size() +" message="+ message;
 		    }
 
 			return message;
