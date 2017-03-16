@@ -84,7 +84,7 @@ public class FileOperateUtil {
   	  				
   				}
   				
-  				 System.out.println(total+"----"+ret);
+  				// System.out.println(total+"----"+ret);
   				 //System.out.println(oq.info());
   			}
   			
@@ -161,7 +161,7 @@ public static String DBOperateInventory(InputStream is){
   	  				}
   				}
   				
-  				 System.out.println(total+"----"+ret);
+  				// System.out.println(total+"----"+ret);
   				 //System.out.println(oq.info());
   			}
   			
@@ -231,7 +231,7 @@ public static String DBOperateOnDelivery(InputStream is){
   					
   				}
 				
-				 System.out.println(total+"----"+ret);
+				// System.out.println(total+"----"+ret);
 				 //System.out.println(oq.info());
 			}
 			
