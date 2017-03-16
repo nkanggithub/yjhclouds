@@ -38,12 +38,14 @@ public class fileUploadController {
 		 List<FileItem> fileList = null;
 		 	//String url = null;
 		 	String message = "begain--fail";
+//		 	 String fileurl;
+//		 	String fileurl2;
 		    try {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
-//		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
-//		        	 String fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
+//		        	  fileurl=request.getSession().getServletContext().getRealPath("/");
+//		        	  fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
 //		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
 //		        	 log.info("fileurl------"+fileurl);
 //		        	 log.info("fileur2------"+fileurl2);
@@ -78,7 +80,7 @@ public class fileUploadController {
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		        log.info("fileurl-===--"+e.getMessage());
-		        message = "fail--"+e.getMessage()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
+		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
 		    }
 
 			return message;
