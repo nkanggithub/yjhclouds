@@ -73,6 +73,7 @@ public class fileUploadController {
 		                    if("Inventory".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateInventory(is);
 		                    }
+		                    is.close();
 		                }
 		            }
 		        }
@@ -81,6 +82,7 @@ public class fileUploadController {
 		        e.printStackTrace();
 		        log.info("fileurl-===--"+e.getMessage());
 		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
+		    
 		    }
 
 			return message;
