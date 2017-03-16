@@ -36,21 +36,20 @@ public class fileUploadController {
 	    upload.setSizeMax(1024 * 1024 * 4);
 
 		 List<FileItem> fileList = null;
-		 	String url = null;
-		 	String message = "begain";
+		 	//String url = null;
+		 	String message = "begain--fail";
 		    try {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
-		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
-		        	 String fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
-		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
-		        	 log.info("fileurl------"+fileurl);
-		        	 log.info("fileur2------"+fileurl2);
-		        	 log.info("fileur3------"+fileurl3);
+//		        	 String fileurl=request.getSession().getServletContext().getRealPath("/");
+//		        	 String fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
+//		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
+//		        	 log.info("fileurl------"+fileurl);
+//		        	 log.info("fileur2------"+fileurl2);
+//		        	 log.info("fileur3------"+fileurl3);
 //		        	 System.out.println(fileurl+"----"+fileurl2);
 //		        	 System.out.println(fileurl3);
-		        	
 		            for(FileItem item:fileList){
 		            	String filename="";
 		            	//System.out.println(item.getName());
@@ -86,7 +85,7 @@ public class fileUploadController {
 
 	}
 	
-	private WebApplicationContext getApplicationContext(
+/*	private WebApplicationContext getApplicationContext(
 			HttpServletRequest request) {
 		return (WebApplicationContext) request
 				.getSession()
@@ -94,5 +93,5 @@ public class fileUploadController {
 				.getAttribute(
             WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
     }
-
+*/
 }
