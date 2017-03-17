@@ -44,23 +44,11 @@ public class fileUploadController {
 		    	
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
-//		        	  fileurl=request.getSession().getServletContext().getRealPath("/");
-//		        	  fileurl2=request.getSession().getServletContext().getRealPath(request.getRequestURI());
-//		        	 String fileurl3 = this.getApplicationContext(request).getServletContext().getRealPath("/");
-//		        	 log.info("fileurl------"+fileurl);
-//		        	 log.info("fileur2------"+fileurl2);
-//		        	 log.info("fileur3------"+fileurl3);
-//		        	 System.out.println(fileurl+"----"+fileurl2);
-//		        	 System.out.println(fileurl3);
 		            for(FileItem item:fileList){
 		            	String filename="";
-		            	//System.out.println(item.getName());
 		                if(!item.isFormField() && item.getSize() > 0){
 		                	InputStream is = item.getInputStream();
-		                	//url = fileurl+item.getName();
-		                	//System.out.println(url);
-		                   // item.write(new File(url));
-		                    int dot = item.getName().lastIndexOf('.');   
+		                   /* int dot = item.getName().lastIndexOf('.');   
 				            if ((dot >-1) && (dot < (item.getName().length()))) {   
 				            	filename=item.getName().substring(0, dot); 
 				            }  
@@ -72,7 +60,9 @@ public class fileUploadController {
 		                    }
 		                    if("Inventory".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateInventory(is);
-		                    }
+		                    }*/
+		                	message=FileOperateUtil.DBOperateOnExcl(is);
+		                	
 		                    if(is!=null){
 		                    	is.close();
 		                    }

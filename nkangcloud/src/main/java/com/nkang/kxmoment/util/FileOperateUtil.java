@@ -11,19 +11,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
- 
-
-
-
-
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
- 
-
-
-
-
 
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -31,11 +21,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
-import com.nkang.kxmoment.controller.MasterDataRestController;
-
 
 public class FileOperateUtil {
-	static String ny="Y";
+	static String ny="N";
 	public static String DBOperateOrderNopay(InputStream is){
 		
 	 	String message="";
@@ -258,7 +246,154 @@ public static String DBOperateOnDelivery(InputStream is){
 	
 	
 
+public static String DBOperateOnExcl(InputStream is){
+	
+ 	String message="";
+	int OrderNopay_total=0;
+	int OrderNopay_success=0;
+	int OrderNopay_fail=0;
+	String OrderNopay_failnum=null;
+	int OnDelivery_total=0;
+	int OnDelivery_success=0;
+	int OnDelivery_fail=0;
+	String OnDelivery_failnum=null;
+	int Inventory_total=0;
+	int Inventory_success=0;
+	int Inventory_fail=0;
+	String Inventory_failnum=null;
+	String ret ;
+	BillOfSellPoi bos = new BillOfSellPoi();
+		//RestUtils.deleteDB("OnDelivery");
+		Map<String, List> map;
+		try {
+			map = bos.readAllXls(is);
+			 for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
+				 String dBname=(String)iter.next();
+				 System.out.println("name-----"+dBname);
+				 if("Y".equals(ny)){
+						MongoDBBasic.DeleteDB(dBname);
+					}else{
+						 RestUtils.deleteDB(dBname);
+					}
+			 }
+			 
+			 if(map.get("OrderNopay").size()>0){
+				 for(int i=0;i<map.get("OrderNopay").size();i++){
+					 OrderNopay_total++;
+					 OrderNopay on = (OrderNopay)map.get("OrderNopay").get(i);
+					 if("Y".equals(ny)){
+						 ret = MongoDBBasic.saveOrderNopay(on);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  						ret = MongoDBBasic.saveOrderNopay(on);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					OrderNopay_failnum = OrderNopay_failnum + OrderNopay_total+",";
+		  	  					OrderNopay_fail++;
+		  	  				}else{
+		  	  					OrderNopay_success++;
+		  	  				}
+					 }else{
+						 ret = RestUtils.callsaveOrderNopay(on);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  	  					ret=RestUtils.callsaveOrderNopay(on);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					OrderNopay_failnum = OrderNopay_failnum + OrderNopay_total+",";
+		  	  					OrderNopay_fail++;
+		  	  				}else{
+		  	  					OrderNopay_success++;
+		  	  				}
+					 }
+					 
+				 }
+				 message = message+ "（已售未下账）OrderNopay成功导入:"+OrderNopay_success+"条; "+" 导入失败"+OrderNopay_fail+"条; "+ "总共"+OrderNopay_total+"条; "+" 失败具体条数:"+OrderNopay_failnum+"/n"; 
+			 }
+			 if(map.get("OnDelivery").size()>0){
+				 for(int i=0;i<map.get("OnDelivery").size();i++){
+					 OnDelivery_total++;
+					 OnDelivery ol = (OnDelivery)map.get("OnDelivery").get(i);
+					 if("Y".equals(ny)){
+						 ret = MongoDBBasic.saveOnDelivery(ol);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  						 ret = MongoDBBasic.saveOnDelivery(ol);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					OnDelivery_failnum = OnDelivery_failnum + OnDelivery_total+",";
+		  	  					OnDelivery_fail++;
+		  	  				}else{
+		  	  					OnDelivery_success++;
+		  	  				}
+					 }else{
+						 ret = RestUtils.callsaveOnDelivery(ol);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  	  					ret=RestUtils.callsaveOnDelivery(ol);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					OnDelivery_failnum = OnDelivery_failnum + OnDelivery_total+",";
+		  	  					OnDelivery_fail++;
+		  	  				}else{
+		  	  					OnDelivery_success++;
+		  	  				}
+					 }
+					
+				 }
+				 message = message+"（订单）OnDelivery成功导入:"+OnDelivery_success+"条; "+" 导入失败"+OnDelivery_fail+"条; "+ "总共"+OnDelivery_total+"条; "+" 失败具体条数:"+OnDelivery_failnum+"/n"; 
+			 }
+			 if(map.get("Inventory").size()>0){
+				 for(int i=0;i<map.get("Inventory").size();i++){
+					 Inventory_total++;
+					 Inventory on = (Inventory)map.get("Inventory").get(i);
+					 if("Y".equals(ny)){
+						 ret = MongoDBBasic.saveInventory(on);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  						ret = MongoDBBasic.saveInventory(on);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					Inventory_failnum = Inventory_failnum + Inventory_total+",";
+		  	  					Inventory_fail++;
+		  	  				}else{
+		  	  					Inventory_success++;
+		  	  				}
+					 }else{
+						 ret = RestUtils.callsaveInventory(on);
+		  					if("failed".equals(ret)||"Read timed out".equals(ret)){
+		  	  					ret=RestUtils.callsaveInventory(on);
+		  	  				}
+		  	  				if("failed".equals(ret)){
+		  	  					Inventory_failnum = Inventory_failnum + Inventory_total+",";
+		  	  					Inventory_fail++;
+		  	  				}else{
+		  	  					Inventory_success++;
+		  	  				}
+					 }
+					 
+				 }
+				 message = message+ "(库存)Inventory_成功导入:"+Inventory_success+"条; "+" 导入失败"+Inventory_fail+"条; "+ "总共"+Inventory_total+"条; "+" 失败具体条数:"+Inventory_failnum+"/n "; 
+			 }
+			 
+//			 for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
+//				// System.out.println("name-----"+iter.next().toString());
+//				
+//				 
+//			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(is!=null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	return message;
+}
 
+	
 
 
 

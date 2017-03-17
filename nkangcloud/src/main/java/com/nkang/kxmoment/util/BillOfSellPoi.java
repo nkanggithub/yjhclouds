@@ -548,12 +548,12 @@ public class BillOfSellPoi {
 				return OrderNopayList;
 	 }
 	 
-	 public Map<String,List> readAllXls(String url) throws FileNotFoundException{
+	 public Map<String,List> readAllXls(InputStream is) throws FileNotFoundException{
 		 Map<String,List> map = new HashMap<String, List>();
 			List<Inventory> inventoryList = new ArrayList<Inventory>();
 			List<OnDelivery> OnDeliveryList = new ArrayList<OnDelivery>();
 			List<OrderNopay> OrderNopayList = new ArrayList<OrderNopay>();
-			InputStream is = new FileInputStream(url);
+			//InputStream is = new FileInputStream(url);
 		        HSSFWorkbook hssfWorkbook;
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
@@ -603,7 +603,7 @@ public class BillOfSellPoi {
 							                }
 							                inventoryList.add(xlsDto);	
 				            		   }
-				            		   map.put("inventory", inventoryList); 
+				            		   map.put("Inventory", inventoryList); 
 				            	 }else if("OnDelivery".equals(hssfSheet.getSheetName())){
 				            		 OnDelivery xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
@@ -676,7 +676,6 @@ public class BillOfSellPoi {
 							                	 Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
 									                xlsDto.setFilledOrderAmount(filledOrderAmount);
 							                }
-							               
 							                
 							                Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
 							                xlsDto.setNoInvoiceAmount(noInvoiceAmount);
@@ -686,7 +685,7 @@ public class BillOfSellPoi {
 				            		 map.put("OrderNopay", OrderNopayList);     
 								}
 				            }
-				            System.out.println("name-----"+hssfSheet.getSheetName());
+				          //  System.out.println("name-----"+hssfSheet.getSheetName());
 					    }
 				}catch (IOException e) {
 					// TODO Auto-generated catch block

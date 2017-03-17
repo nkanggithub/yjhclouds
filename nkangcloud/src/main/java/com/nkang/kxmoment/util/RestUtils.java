@@ -2548,7 +2548,7 @@ public static String regist(WeChatMDLUser user) {
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
-		 //System.out.println(url);
+		 System.out.println(url);
 		return message;
     
     }
