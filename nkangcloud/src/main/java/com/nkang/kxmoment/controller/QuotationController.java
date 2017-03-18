@@ -264,7 +264,7 @@ public class QuotationController {
 	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=false) String title,@RequestParam(value="img", required=true) String img){
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
 		 if("".equals(title)||title==null){
-				title="报价更新啦~";
+				title="永佳和塑胶报价更新啦~";
 			}
 			List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
@@ -283,7 +283,7 @@ public class QuotationController {
      			}
      			
      			
-            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,allUser.get(i).getNickname()+","+title);
+            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,"【"+allUser.get(i).getNickname()+"】"+","+title);
             	 content="";
             }
 		
