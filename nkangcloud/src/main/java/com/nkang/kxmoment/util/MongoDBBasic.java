@@ -2639,6 +2639,41 @@ public class MongoDBBasic {
 			}
 			return ret;
 		}
+		public static List<WeChatMDLUser> getAllUserByIsInternalSeniorMgt(){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("Role.isInternalSeniorMgt", true);
+			DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query);
+			List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+			if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		WeChatMDLUser weChatMDLUser = new WeChatMDLUser();
+            		DBObject o = queryresults.next();
+            		if(o.get("OpenID") != null){
+            			weChatMDLUser.setOpenid(o.get("OpenID").toString());
+            			if(o.get("NickName") != null){
+                			weChatMDLUser.setNickname(o.get("NickName").toString());
+                		}
+            			if(o.get("HeadUrl") != null){
+                			weChatMDLUser.setHeadimgurl(o.get("HeadUrl").toString());
+                		}
+                		Object teamer = o.get("Teamer");
+            			DBObject teamobj = new BasicDBObject();
+            			teamobj = (DBObject)teamer;
+            			if(teamobj != null){
+            				if(teamobj.get("selfIntro") != null){
+            					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
+            				}
+            				if(teamobj.get("realName") != null){
+            					weChatMDLUser.setNickname(teamobj.get("realName").toString());
+            				}
+            			}
+            			ret.add(weChatMDLUser);
+            		}
+            	}
+			}
+			return ret;
+		}
 		/*
 		 * chang-zheng to update user CongratulateHistory
 		 */
@@ -3838,21 +3873,21 @@ public class MongoDBBasic {
 
 	public static List<Integer> getTotalVisitedNumByPage(List<String> dates,String page)
 	{
-		for(int a=0;a<dates.size();a++){
+		/*for(int a=0;a<dates.size();a++){
 			System.out.println("dates list-------:"+dates.get(a));
-		}
+		}*/
 		int num=0;
 		List<Integer> numList=new ArrayList<Integer>();
 		List<Visited> data=new ArrayList<Visited>();
 		for(int i=0;i<dates.size();i++){
 			data=MongoDBBasic.getVisitedDetail(dates.get(i),page);
-			System.out.println("data.size():"+data.size());
+		//	System.out.println("data.size():"+data.size());
 			for(int j=0;j<data.size();j++){
 				
-				System.out.println("j index-----"+j+"num:---"+data.get(j).getVisitedNum()+"/page:---"+data.get(j).getPageName());
+			//	System.out.println("j index-----"+j+"num:---"+data.get(j).getVisitedNum()+"/page:---"+data.get(j).getPageName());
 				num+=data.get(j).getVisitedNum();
 			}
-			System.out.println("num  ====:"+num);
+		//	System.out.println("num  ====:"+num);
 			numList.add(num);
 			num=0;
 		}
