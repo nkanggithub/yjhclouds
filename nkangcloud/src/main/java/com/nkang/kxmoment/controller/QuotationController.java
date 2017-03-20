@@ -233,7 +233,31 @@ public class QuotationController {
 		}
 		return rate;
 	}
-	
+	@RequestMapping("/getNoVisitedDetail")
+	public @ResponseBody List<WeChatMDLUser> getNoVisitedDetail(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="pageName")String pageName){
+		System.out.println("start to implement getNoVisitedDetail method");
+		List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsInternalSeniorMgt();
+		if(allUser.isEmpty()){
+			System.out.println("no data in allUser Obj");
+		}else
+		{
+			System.out.println("fisrt obj:-----"+allUser.get(1).getNickname());
+		}
+		int index=Integer.parseInt(dateIndex);
+		String date=MongoDBBasic.getLastestDate(-6).get(index);
+		List<Visited> visited= MongoDBBasic.getVisitedDetail(date,pageName); 
+		for(int i=0;i<visited.size();i++){
+			
+			for(int j=0;j<allUser.size();j++){
+			//	System.out.println("visited.get(j).nickName:----"+visited.get(j).getOpenid()+"--"+visited.get(j).getNickName());
+				if(allUser.get(j).getOpenid().equals(visited.get(i).getOpenid())){
+					System.out.println("allUser.get(i).nickName:----"+allUser.get(j).getOpenid()+"--"+allUser.get(j).getNickname());
+					allUser.remove(j);
+					}
+				}
+			}
+		return allUser;
+		}
 /*	@RequestMapping("/getVisitedbTotalNumPage")
 	public @ResponseBody Map<String,Visitedreturn> getVisitedbTotalNumPage(){
 		Map<String,Visitedreturn> mapret = new HashMap<String,Visitedreturn>();
@@ -266,7 +290,7 @@ public class QuotationController {
 		 if("".equals(title)||title==null){
 				title="永佳和塑胶报价更新啦~";
 			}
-			List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
+		    List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
              for(int i=0;i<allUser.size();i++){
      			itemsList=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
