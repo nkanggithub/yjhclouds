@@ -23,7 +23,7 @@ import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
 
 public class FileOperateUtil {
-	static String ny="N";
+	static String ny="Y";
 	public static String DBOperateOrderNopay(InputStream is){
 		
 	 	String message="";
@@ -248,7 +248,7 @@ public static String DBOperateOnDelivery(InputStream is){
 
 public static String DBOperateOnExcl(InputStream is){
 	
- 	String message="";
+ 	String message="Sheet 名称不符 ";
 	int OrderNopay_total=0;
 	int OrderNopay_success=0;
 	int OrderNopay_fail=0;
@@ -267,6 +267,9 @@ public static String DBOperateOnExcl(InputStream is){
 		Map<String, List> map;
 		try {
 			map = bos.readAllXls(is);
+			if(map.isEmpty()){
+				return message;
+			}
 			 for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				 String dBname=(String)iter.next();
 				 System.out.println("name-----"+dBname);
@@ -276,8 +279,8 @@ public static String DBOperateOnExcl(InputStream is){
 						 RestUtils.deleteDB(dBname);
 					}
 			 }
-			 
-			 if(map.get("OrderNopay").size()>0){
+			 message="";
+			 if(map.get("OrderNopay")!=null){
 				 for(int i=0;i<map.get("OrderNopay").size();i++){
 					 OrderNopay_total++;
 					 OrderNopay on = (OrderNopay)map.get("OrderNopay").get(i);
@@ -306,9 +309,10 @@ public static String DBOperateOnExcl(InputStream is){
 					 }
 					 
 				 }
-				 message = message+ "（已售未下账）OrderNopay成功导入:"+OrderNopay_success+"条; "+" 导入失败"+OrderNopay_fail+"条; "+ "总共"+OrderNopay_total+"条; "+" 失败具体条数:"+OrderNopay_failnum+"/n"; 
+				 //" 失败具体条数:"+OrderNopay_failnum+
+				 message = message+ "（已售未下账）OrderNopay成功导入:"+OrderNopay_success+"条; "+" 导入失败"+OrderNopay_fail+"条; "+ "总共"+OrderNopay_total+"条; "+"<br/>"; 
 			 }
-			 if(map.get("OnDelivery").size()>0){
+			 if(map.get("OnDelivery")!=null){
 				 for(int i=0;i<map.get("OnDelivery").size();i++){
 					 OnDelivery_total++;
 					 OnDelivery ol = (OnDelivery)map.get("OnDelivery").get(i);
@@ -337,9 +341,10 @@ public static String DBOperateOnExcl(InputStream is){
 					 }
 					
 				 }
-				 message = message+"（订单）OnDelivery成功导入:"+OnDelivery_success+"条; "+" 导入失败"+OnDelivery_fail+"条; "+ "总共"+OnDelivery_total+"条; "+" 失败具体条数:"+OnDelivery_failnum+"/n"; 
+				 //" 失败具体条数:"+OnDelivery_failnum+
+				 message = message+"（订单）OnDelivery成功导入:"+OnDelivery_success+"条; "+" 导入失败"+OnDelivery_fail+"条; "+ "总共"+OnDelivery_total+"条; "+"<br/>"; 
 			 }
-			 if(map.get("Inventory").size()>0){
+			 if(map.get("Inventory")!=null){
 				 for(int i=0;i<map.get("Inventory").size();i++){
 					 Inventory_total++;
 					 Inventory on = (Inventory)map.get("Inventory").get(i);
@@ -368,7 +373,8 @@ public static String DBOperateOnExcl(InputStream is){
 					 }
 					 
 				 }
-				 message = message+ "(库存)Inventory_成功导入:"+Inventory_success+"条; "+" 导入失败"+Inventory_fail+"条; "+ "总共"+Inventory_total+"条; "+" 失败具体条数:"+Inventory_failnum+"/n "; 
+				 //" 失败具体条数:"+Inventory_failnum+
+				 message = message+ "(库存)Inventory_成功导入:"+Inventory_success+"条; "+" 导入失败"+Inventory_fail+"条; "+ "总共"+Inventory_total+"条; "+"<br/> "; 
 			 }
 			 
 //			 for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
