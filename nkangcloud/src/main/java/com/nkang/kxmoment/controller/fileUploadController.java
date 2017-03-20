@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.nkang.kxmoment.util.FileOperateUtil;
 
@@ -25,9 +26,9 @@ import com.nkang.kxmoment.util.FileOperateUtil;
 public class fileUploadController {
 	private static Logger log=Logger.getLogger(fileUploadController.class);
 	@RequestMapping(value = "/uploadOrderNopay", produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String readXlsOfOrderNopay(HttpServletRequest request,HttpServletResponse response){
-		
+	//@ResponseBody
+	public ModelAndView readXlsOfOrderNopay(HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mView = new ModelAndView("upload");
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 	    factory.setSizeThreshold(1024 * 1024);
 	    ServletFileUpload upload = new ServletFileUpload(factory);
@@ -37,7 +38,7 @@ public class fileUploadController {
 
 		 List<FileItem> fileList = null;
 		 	//String url = null;
-		 	String message = "begain--fail";
+		 	String message = "文件导入失败，请重新导入..";
 //		 	 String fileurl;
 //		 	String fileurl2;
 		    try {
@@ -45,24 +46,24 @@ public class fileUploadController {
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
 		            for(FileItem item:fileList){
-		            	String filename="";
-		                if(!item.isFormField() && item.getSize() > 0){
+		            	//String filename="";
+		            	   if(!item.isFormField() && item.getSize() > 0){
 		                	InputStream is = item.getInputStream();
-		                   /* int dot = item.getName().lastIndexOf('.');   
+		                	/*  int dot = item.getName().lastIndexOf('.');   
 				            if ((dot >-1) && (dot < (item.getName().length()))) {   
 				            	filename=item.getName().substring(0, dot); 
 				            }  
 		                    if("OrderNopay".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateOrderNopay(is);
 		                    }
-		                    if("OnDelivery".equals(filename)){
+		                     if("OnDelivery".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateOnDelivery(is);
 		                    }
 		                    if("Inventory".equals(filename)){
 		                    	 message=FileOperateUtil.DBOperateInventory(is);
 		                    }*/
 		                	message=FileOperateUtil.DBOperateOnExcl(is);
-		                	
+		                	 request.getSession().setAttribute("processSuccMsg", message);
 		                    if(is!=null){
 		                    	is.close();
 		                    }
@@ -77,10 +78,9 @@ public class fileUploadController {
 		    
 		    }
 
-			return message;
+			return mView;
 
 	}
-	
 /*	private WebApplicationContext getApplicationContext(
 			HttpServletRequest request) {
 		return (WebApplicationContext) request
