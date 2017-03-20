@@ -8,8 +8,8 @@
 <%@ page import="com.nkang.kxmoment.service.PlasticItemService"%>
 
 <%	
-List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
-int BJTotalNum=BJtitles.size();
+/* List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
+int BJTotalNum=BJtitles.size(); */
 List<ArticleMessage> HQtitles =MongoDBBasic.getArticleMessageByType("hq");
 int HQTotalNum=HQtitles.size();
 List<ArticleMessage> GTtitles =MongoDBBasic.getArticleMessageByType("gt");
@@ -240,6 +240,29 @@ display:none;
         font-size: 14px;
     color: #d3d3d3;
 }
+.visitedMenu
+{
+height: 30px;
+border-bottom:1px solid #f0f0f0;
+width:100%;
+text-align: center;
+margin-bottom: 5px;
+}
+.visitedMenu p
+{
+ height: 30px;
+ width: 15%;
+ border:1px solid #f0f0f0;
+ border-bottom:none;
+ border-radius: 6px 6px 0px 0px;
+ line-height: 30px;
+ font-size: 14px;
+ float: left;
+}
+.active
+{
+background-color: white;
+}
 </style>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.js"></script>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.powercharts.js"></script>
@@ -407,7 +430,7 @@ display:none;
 	<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 	<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 	<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您 </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="" alt=""/>				
+<!-- 	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您 </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="" alt=""/>	 -->			
 </div>
 
 <div class="row">
@@ -436,7 +459,7 @@ display:none;
   <div class="large-12 small-12 columns">
   <img class="arrow" src="../Jsp/JS/pizzaChart/img/arrow.png" alt=""/>
     <ul data-pie-id="svg2" data-options='{"donut":"true"}'>
-          <li data-value="<%=BJTotalNum %>"><span class="text-left">报价</span><span  id="bjNum" class="text-right"><%=BJTotalNum %></span></li>
+       <%--    <li data-value="<%=BJTotalNum %>"><span class="text-left">报价</span><span  id="bjNum" class="text-right"><%=BJTotalNum %></span></li> --%>
       <li data-value="<%=HQTotalNum %>"><span class="text-left">行情</span><span id="hqNum" class="text-right"><%=HQTotalNum %></span></li>
       <li data-value="<%=GTTotalNum %>"><span class="text-left">沟通</span><span id="gtNum" class="text-right"><%=GTTotalNum %></span></li>
       <li data-value="<%=JSTotalNum %>"><span class="text-left">技术 </span><span id="jsNum" class="text-right"><%=JSTotalNum %></span></li>
@@ -446,14 +469,14 @@ display:none;
 
   <div id="detailPanel" class="large-12 small-12 columns">
     <span class="title">访问量排行榜</span>
-  <div id="BJdetail" class="commonPanel">
+<%--   <div id="BJdetail" class="commonPanel">
   <% for(int i=0;i<BJtitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
   <p class="at"><%=BJtitles.get(i).getTitle() %></p><span><%=BJtitles.get(i).getVisitedNum() %></span></div>
 <% } %>
-  </div>
-    <div id="HQdetail"  class="commonPanel" style="display:none">
+  </div> --%>
+    <div id="HQdetail"  class="commonPanel">
       <% for(int i=0;i<HQtitles.size();i++) {%>
   <div class="singleArticle">
   <p class="rank"><%=i+1 %></p>
@@ -476,10 +499,14 @@ display:none;
   </div>
   </div>
 </div>
-<div id="quoteVisited">
+<div id="quoteVisited" style="display:none">
 <div id="chart-container2"></div>
-<div id="visitedDetail" style="display:none;">
+<div class="visitedMenu">
+    <p id="read" class="active">已读</p><p id="unread" style="border-left: none;">未读</p><p style="border:none;width:27%" id="dateDetail" style="border-left: none;width:20%;"></p>
 </div>
+<div id="visitedDetail" style="display:none;"></div>
+<div id="noVisitedDetail" style="display:none;"></div>
+
 </div>
 </div>
 
@@ -636,8 +663,9 @@ var i=$(this).index();
 		 if(details[0]=="实时报价"){pageName="quoteDetailExternal";}
 		 if(details[0]=="发现附近"){pageName="scan";}
 		 if(details[0]=="胖和主页"){pageName="profile";}
-		 $.ajax({
+	 	 $.ajax({
 				type : "post",
+				async: false,
 				url : "../getVisitedDetail",
 				data:{
 					pageName:pageName,
@@ -659,8 +687,37 @@ var i=$(this).index();
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+"</p></div>";
 					};
 				}
+				$("#dateDetail").text(data[0].date);
 				$("#visitedDetail").html(html);
+				$("#noVisitedDetail").hide();
 				$("#visitedDetail").show();
+				$("#unread").removeClass("active");
+				$("#read").addClass("active");
+					}
+		 }
+				
+		 }); 
+		 $.ajax({
+				type : "post",
+				url : "../getNoVisitedDetail",
+				data:{
+					pageName:pageName,
+					dateIndex:index
+				},
+				cache : false,
+				success : function(data) {
+					if(data){
+					var html="";
+					var imgUrl="";
+				for(var i=0;i<data.length;i++)
+				{
+					
+					console.log("nickName========"+data[i].nickname);
+					console.log("imgUrl========"+data[i].headimgurl);
+						html+="<div class='singleV'><img src='"+data[i].headimgurl+"' /><p class='VNickName'>"+data[i].nickname+"</p></div>";
+					
+				}
+				$("#noVisitedDetail").html(html);
 					}
 		 }
 				
@@ -696,7 +753,19 @@ var i=$(this).index();
 			$(this).children("img").attr("src","../Jsp/JS/pizzaChart/img/rightArrow.png");
 		}
 	});
-	
+	$("#read").on("click",function(){
+		$("#visitedDetail").show();
+		$("#noVisitedDetail").hide();
+		$("#unread").removeClass("active");
+		$("#read").addClass("active");
+		
+	});
+	$("#unread").on("click",function(){
+		$("#visitedDetail").hide();
+		$("#noVisitedDetail").show();
+		$("#read").removeClass("active");
+		$("#unread").addClass("active");
+	});
 
 	  
 	  });
