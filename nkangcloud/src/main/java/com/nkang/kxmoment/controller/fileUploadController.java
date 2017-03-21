@@ -2,6 +2,7 @@ package com.nkang.kxmoment.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,8 +83,9 @@ public class fileUploadController {
 	
 	
 	@RequestMapping(value = "/uploadPlatforRelated", produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String readXlsOfPlatforRelated(HttpServletRequest request,HttpServletResponse response){
+	public ModelAndView readXlsOfPlatforRelated(HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mv=new ModelAndView("MDMDataVisualization");
+	
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 	    factory.setSizeThreshold(1024 * 1024);
 	    ServletFileUpload upload = new ServletFileUpload(factory);
@@ -93,6 +95,7 @@ public class fileUploadController {
 
 		 List<FileItem> fileList = null;
 		 	String message = "文件导入失败，请重新导入..";
+		 	Map map =new HashMap<String,List>();
 		    try {
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
@@ -100,7 +103,7 @@ public class fileUploadController {
 		            	//String filename="";
 		            	   if(!item.isFormField() && item.getSize() > 0){
 		                	InputStream is = item.getInputStream();
-		                	Map map=FileOperateUtil.OperateOnPlatforRelated(is);
+		                	map=FileOperateUtil.OperateOnPlatforRelated(is);
 		                	 message=message+map.get("APJ").toString()+"<br>";
 		                	 message=message+map.get("USA").toString()+"<br>";
 		                	 message=message+map.get("MEXICO").toString()+"<br>";
@@ -119,8 +122,8 @@ public class fileUploadController {
 		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
 		    
 		    }
-
-			return message;
+		    mv.addObject("map", map);
+			return mv;
 
 	}
 	
