@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +23,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
+import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class FileOperateUtil {
-	static String ny="Y";
+	static String ny="N";
 	public static String DBOperateOrderNopay(InputStream is){
 		
 	 	String message="";
@@ -481,5 +484,55 @@ public static String DBOperateOnExcl(InputStream is){
             catch (IOException ex) {
             }
         }
-    }   
+    } 
+    
+    
+    public static Map<String, List> OperateOnPlatforRelated(InputStream is){
+    	Map map = new HashMap<String, List>();
+     	String message="";
+    	BillOfSellPoi bos = new BillOfSellPoi();
+    		try {
+    			PlatforRelated  platforRelated  = bos.platformRelated(is);
+    			List APJlt = new ArrayList<Integer>();
+    			APJlt.add(platforRelated.getDone_APJ());
+    			APJlt.add(platforRelated.getInProgress_APJ());
+    			APJlt.add(platforRelated.getInPlanning_APJ());
+    			List USAlt = new ArrayList<Integer>();
+    			USAlt.add(platforRelated.getDone_USA());
+    			USAlt.add(platforRelated.getInProgress_USA());
+    			USAlt.add(platforRelated.getInPlanning_USA());
+    			
+    			List MEXICOlt = new ArrayList<Integer>();
+    			MEXICOlt.add(platforRelated.getDone_MEXICO());
+    			MEXICOlt.add(platforRelated.getInProgress_MEXICO());
+    			MEXICOlt.add(platforRelated.getInPlanning_MEXICO());
+    			
+    			List EMEAlt = new ArrayList<Integer>();
+    			EMEAlt.add(platforRelated.getDone_EMEA());
+    			EMEAlt.add(platforRelated.getInProgress_EMEA());
+    			EMEAlt.add(platforRelated.getInPlanning_EMEA());
+    			
+    			
+    			map.put("APJ", APJlt);
+    			map.put("USA", USAlt);
+    			map.put("MEXICO", MEXICOlt);
+    			map.put("EMEA", EMEAlt);
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    			System.out.println(e.getMessage());
+    		}finally{
+    			if(is != null){
+    				try {
+    					is.close();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    		}
+    		//message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
+    	return map;
+    }
+
 }

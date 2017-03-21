@@ -18,6 +18,7 @@ import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
+import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class BillOfSellPoi {
 	
@@ -693,6 +694,90 @@ public class BillOfSellPoi {
 				}
 				return map;
 	 }
+	 
+	 public PlatforRelated platformRelated(InputStream is) throws FileNotFoundException{
+			//List<Inventory> inventoryList = new ArrayList<Inventory>();
+		 PlatforRelated platforRelated = new PlatforRelated();
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+					// 循环工作表Sheet
+					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           
+					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+					                if (hssfRow == null) {
+					                    continue;
+					                }
+					                platforRelated.setTotal(platforRelated.getTotal()+1);
+					                HSSFCell assignedTo = hssfRow.getCell(0);
+					                if(assignedTo==null){
+					                	platforRelated.setUnAssinged(platforRelated.getUnAssinged()+1);
+					                	continue;
+					                }else{
+					                	 HSSFCell status = hssfRow.getCell(1);
+							                if(status!=null){
+							                	if("Done".equals(status.toString())){
+							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
+							                			platforRelated.setDone_USA(platforRelated.getDone_USA()+1);
+							                			continue;
+							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
+							                			platforRelated.setDone_MEXICO(platforRelated.getDone_MEXICO()+1);
+							                			continue;
+							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
+							                			platforRelated.setDone_EMEA(platforRelated.getDone_EMEA()+1);
+							                			continue;
+							                		}else {
+							                			platforRelated.setDone_APJ(platforRelated.getDone_APJ()+1);
+													}
+							                		
+							                	}else if("In Testing".equals(status.toString())||"In Progress".equals(status.toString())){
+							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
+							                			continue;
+							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_MEXICO(platforRelated.getInPlanning_MEXICO()+1);
+							                			continue;
+							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_EMEA(platforRelated.getInPlanning_EMEA()+1);
+							                			continue;
+							                		}else {
+							                			platforRelated.setInPlanning_APJ(platforRelated.getInPlanning_APJ()+1);
+													}
+							                	}else if("New".equals(status.toString())){
+							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
+							                			continue;
+							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_MEXICO(platforRelated.getInPlanning_MEXICO()+1);
+							                			continue;
+							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
+							                			platforRelated.setInPlanning_EMEA(platforRelated.getInPlanning_EMEA()+1);
+							                			continue;
+							                		}else {
+							                			platforRelated.setInPlanning_APJ(platforRelated.getInPlanning_APJ()+1);
+													}
+												}
+							                }
+					                }
+					               
+					            }
+					            
+					    }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally{
+					if(is != null){
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				return platforRelated;
+	 } 
 				
 }
 
