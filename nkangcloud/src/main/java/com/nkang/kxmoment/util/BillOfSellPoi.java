@@ -743,7 +743,7 @@ public class BillOfSellPoi {
 							                			platforRelated.setInProgress_EMEA(platforRelated.getInProgress_EMEA()+1);
 							                			continue;
 							                		}else {
-							                			platforRelated.setInPlanning_APJ(platforRelated.getInProgress_APJ()+1);
+							                			platforRelated.setInProgress_APJ(platforRelated.getInProgress_APJ()+1);
 													}
 							                	}else if("New".equals(status.toString())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
