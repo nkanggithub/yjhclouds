@@ -712,13 +712,13 @@ public class BillOfSellPoi {
 					                }
 					                platforRelated.setTotal(platforRelated.getTotal()+1);
 					                HSSFCell assignedTo = hssfRow.getCell(0);
-					                if(assignedTo==null){
+					                if(assignedTo==null || "".equals(assignedTo+"") ){
 					                	platforRelated.setUnAssinged(platforRelated.getUnAssinged()+1);
 					                	continue;
 					                }else{
 					                	 HSSFCell status = hssfRow.getCell(1);
 							                if(status!=null){
-							                	if("Done".equals(status.toString())){
+							                	if("Done".equals(status.toString().trim())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
 							                			platforRelated.setDone_USA(platforRelated.getDone_USA()+1);
 							                			continue;
@@ -732,7 +732,7 @@ public class BillOfSellPoi {
 							                			platforRelated.setDone_APJ(platforRelated.getDone_APJ()+1);
 													}
 							                		
-							                	}else if("In Testing".equals(status.toString())||"In Progress".equals(status.toString())){
+							                	}else if(!"New".equals(status.toString().trim())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
 							                			platforRelated.setInProgress_USA(platforRelated.getInProgress_USA()+1);
 							                			continue;
@@ -745,7 +745,7 @@ public class BillOfSellPoi {
 							                		}else {
 							                			platforRelated.setInProgress_APJ(platforRelated.getInProgress_APJ()+1);
 													}
-							                	}else if("New".equals(status.toString())){
+							                	}else if("New".equals(status.toString().trim())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
 							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
 							                			continue;
@@ -776,6 +776,7 @@ public class BillOfSellPoi {
 						}
 					}
 				}
+				System.out.println(platforRelated.getUnAssinged());
 				return platforRelated;
 	 } 
 				
