@@ -13,7 +13,7 @@ List<Integer> emea=(List<Integer>)map.get("EMEA");
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>永佳和塑胶有限公司-数据可视化</title>
+    <title>数据可视化</title>
     <link href="../Jsp/JS/pizzaChart/css/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <script src="../Jsp/JS/pizzaChart/js/custom.modernizr.js"></script>
 
@@ -27,8 +27,8 @@ List<Integer> emea=(List<Integer>)map.get("EMEA");
         var estProcChart = new FusionCharts({
             type: 'errorline',
             renderAt: 'chart-container',
-            width: '380',
-            height: '350',
+            width: '880',
+            height: '550',
             dataFormat: 'json',
             dataSource: {
                 "chart": {
