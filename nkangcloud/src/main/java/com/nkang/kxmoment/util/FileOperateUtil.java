@@ -487,9 +487,9 @@ public static String DBOperateOnExcl(InputStream is){
     } 
     
     
-    public static Map<String, List> OperateOnPlatforRelated(InputStream is){
+    @SuppressWarnings({ "unchecked", "rawtypes", "unchecked" })
+	public static Map<String, List> OperateOnPlatforRelated(InputStream is){
     	Map map = new HashMap<String, List>();
-     	String message="";
     	BillOfSellPoi bos = new BillOfSellPoi();
     		try {
     			PlatforRelated  platforRelated  = bos.platformRelated(is);
