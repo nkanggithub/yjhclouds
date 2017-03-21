@@ -248,7 +248,7 @@ public static String DBOperateOnDelivery(InputStream is){
 
 public static String DBOperateOnExcl(InputStream is){
 	
- 	String message="Sheet 名称不符 ";
+ 	String message="";
 	int OrderNopay_total=0;
 	int OrderNopay_success=0;
 	int OrderNopay_fail=0;
@@ -268,18 +268,18 @@ public static String DBOperateOnExcl(InputStream is){
 		try {
 			map = bos.readAllXls(is);
 			if(map.isEmpty()){
-				return message;
+				return message="Sheet 名称不符";
 			}
 			 for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				 String dBname=(String)iter.next();
-				 System.out.println("name-----"+dBname);
+				 //System.out.println("name-----"+dBname);
 				 if("Y".equals(ny)){
 						MongoDBBasic.DeleteDB(dBname);
 					}else{
 						 RestUtils.deleteDB(dBname);
 					}
 			 }
-			 message="";
+			
 			 if(map.get("OrderNopay")!=null){
 				 for(int i=0;i<map.get("OrderNopay").size();i++){
 					 OrderNopay_total++;
