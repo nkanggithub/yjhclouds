@@ -734,16 +734,16 @@ public class BillOfSellPoi {
 							                		
 							                	}else if("In Testing".equals(status.toString())||"In Progress".equals(status.toString())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
+							                			platforRelated.setInProgress_USA(platforRelated.getInProgress_USA()+1);
 							                			continue;
 							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_MEXICO(platforRelated.getInPlanning_MEXICO()+1);
+							                			platforRelated.setInProgress_MEXICO(platforRelated.getInProgress_MEXICO()+1);
 							                			continue;
 							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_EMEA(platforRelated.getInPlanning_EMEA()+1);
+							                			platforRelated.setInProgress_EMEA(platforRelated.getInProgress_EMEA()+1);
 							                			continue;
 							                		}else {
-							                			platforRelated.setInPlanning_APJ(platforRelated.getInPlanning_APJ()+1);
+							                			platforRelated.setInPlanning_APJ(platforRelated.getInProgress_APJ()+1);
 													}
 							                	}else if("New".equals(status.toString())){
 							                		if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
