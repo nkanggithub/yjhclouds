@@ -26,7 +26,7 @@ import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class FileOperateUtil {
-	static String ny="N";
+	static String ny="Y";
 	public static String DBOperateOrderNopay(InputStream is){
 		
 	 	String message="";
