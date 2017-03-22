@@ -1,29 +1,40 @@
 package com.nkang.kxmoment.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.baidubce.services.bos.model.PutObjectResponse;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.util.FileOperateUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.ToolUtils;
+import com.nkang.kxmoment.util.BosUtils.MyBosClient;
 
 @Controller
 @RequestMapping("/userProfile")
@@ -248,6 +259,10 @@ public class UserProfileController {
 		ArticleMessage am=new ArticleMessage();
 		String openid=request.getParameter("openId");
 		String img = request.getParameter("img");
+		String imgType = request.getParameter("imgType");
+		if("1".equals(imgType)){
+			img="http://wonderfulcq.bj.bcebos.com/"+img;
+		}
 		int num=MongoDBBasic.getArticleMessageMaxNum()+1;
 		System.out.println("new Article num--------------"+num);
 		am.setNum(num+"");
@@ -284,5 +299,46 @@ public class UserProfileController {
 		return "ok";
 	} 
 	
+	@RequestMapping(value = "/uploadPicture", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String uploadPicture(HttpServletRequest request,HttpServletResponse response){
+	
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+	    factory.setSizeThreshold(1024 * 1024);
+	    ServletFileUpload upload = new ServletFileUpload(factory);
+	    upload.setFileSizeMax(1024 * 1024 * 2);
+	    upload.setHeaderEncoding("utf-8");
+	    upload.setSizeMax(1024 * 1024 * 4);
+
+		 List<FileItem> fileList = null;
+		 	String message = "文件导入失败，请重新导入..";
+		 	Map map =new HashMap<String,List>();
+		 	PutObjectResponse putObjectResponseFromInputStream=null;
+		 	String bk = MyBosClient.client.listBuckets().getBuckets().get(0).getName();
+		    try {
+		        fileList = upload.parseRequest(new ServletRequestContext(request));
+		        if(fileList != null){
+		            for(FileItem item:fileList){
+		            	//String filename="";
+		            	   if(!item.isFormField() && item.getSize() > 0){
+		                	InputStream is = item.getInputStream();
+		                	message=item.getName();
+		                	putObjectResponseFromInputStream = MyBosClient.client.putObject(bk, message, is);
+		                	
+		                    if(is!=null){
+		                    	is.close();
+		                    }
+		                }
+		            }
+		        }
+		           
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
+		    
+		    }
+		    return message;
+
+	}
 
 }
