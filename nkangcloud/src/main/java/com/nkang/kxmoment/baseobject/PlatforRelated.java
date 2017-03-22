@@ -20,6 +20,44 @@ public class PlatforRelated {
 	
 	int unAssinged;
 	int total;
+	
+	int Closed_APJ;
+	int Closed_USA;
+	int Closed_MEXICO;
+	int Closed_EMEA;
+	
+	public int getClosed_APJ() {
+		return Closed_APJ;
+	}
+
+	public void setClosed_APJ(int closed_APJ) {
+		Closed_APJ = closed_APJ;
+	}
+
+	public int getClosed_USA() {
+		return Closed_USA;
+	}
+
+	public void setClosed_USA(int closed_USA) {
+		Closed_USA = closed_USA;
+	}
+
+	public int getClosed_MEXICO() {
+		return Closed_MEXICO;
+	}
+
+	public void setClosed_MEXICO(int closed_MEXICO) {
+		Closed_MEXICO = closed_MEXICO;
+	}
+
+	public int getClosed_EMEA() {
+		return Closed_EMEA;
+	}
+
+	public void setClosed_EMEA(int closed_EMEA) {
+		Closed_EMEA = closed_EMEA;
+	}
+
 	public int getDone_APJ() {
 		return Done_APJ;
 	}

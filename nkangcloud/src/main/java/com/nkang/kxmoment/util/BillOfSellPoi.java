@@ -820,7 +820,66 @@ public class BillOfSellPoi {
 	 } 
 	 
 	
+	 public PlatforRelated uploadReport(InputStream is) throws FileNotFoundException{
+			//List<Inventory> inventoryList = new ArrayList<Inventory>();
+		 PlatforRelated platforRelated = new PlatforRelated();
+		        HSSFWorkbook hssfWorkbook;
+				try {
+					hssfWorkbook = new HSSFWorkbook(is);
+					// 循环工作表Sheet
+					    for (int numSheet = 0; numSheet < 1; numSheet++) {
+				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+				           //System.out.println(hssfSheet.getSheetName());
+					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+					                if (hssfRow == null) {
+					                    continue;
+					                }
+					                platforRelated.setTotal(platforRelated.getTotal()+1);
+					                HSSFCell assignedTo = hssfRow.getCell(7);
+					                if(assignedTo==null || "".equals(assignedTo+"") ){
+					                	platforRelated.setUnAssinged(platforRelated.getUnAssinged()+1);
+					                	continue;
+					                }else{
+					                	 HSSFCell status = hssfRow.getCell(5);
+							                if(status!=null){
+							                	if("Closed".equals(status.toString().trim())){
+							                		if(Jeffrey.contains(assignedTo.toString())){
+							                			platforRelated.setClosed_USA(platforRelated.getClosed_USA()+1);
+							                			continue;
+							                		}else if(Antonio.contains(assignedTo.toString())){
+							                			platforRelated.setClosed_MEXICO(platforRelated.getClosed_MEXICO()+1);
+							                			continue;
+							                		}else if(Nils.contains(assignedTo.toString())){
+							                			platforRelated.setClosed_EMEA(platforRelated.getClosed_EMEA()+1);
+							                			continue;
+							                		}else if(China.contains(assignedTo.toString())){
+							                			platforRelated.setClosed_APJ(platforRelated.getClosed_APJ()+1);
+													}
+												}
+							                }
+					                }
+					               
+					            }
+					            
+					    }
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally{
+					if(is != null){
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				//System.out.println(platforRelated.getClosed_APJ());
+				return platforRelated;
+	 } 
+	 
 	
+	 
 	 public void readAGM(InputStream is) throws FileNotFoundException{
 		 PlatforRelated platforRelated = new PlatforRelated();
 		        HSSFWorkbook hssfWorkbook;

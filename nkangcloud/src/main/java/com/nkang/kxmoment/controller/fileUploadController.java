@@ -175,4 +175,48 @@ public class fileUploadController {
 		//	return message;  
 	}
 	
+	@RequestMapping(value = "/uploadReport", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String readXlsOfuploadReport(HttpServletRequest request,HttpServletResponse response){
+		try {
+			ReadAGM();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+	    factory.setSizeThreshold(1024 * 1024);
+	    ServletFileUpload upload = new ServletFileUpload(factory);
+	    upload.setFileSizeMax(1024 * 1024 * 2);
+	    upload.setHeaderEncoding("utf-8");
+	    upload.setSizeMax(1024 * 1024 * 4);
+
+		 List<FileItem> fileList = null;
+		 	String message = "文件导入失败，请重新导入..";
+		    try {
+		        fileList = upload.parseRequest(new ServletRequestContext(request));
+		        if(fileList != null){
+		            for(FileItem item:fileList){
+		            	//String filename="";
+		            	   if(!item.isFormField() && item.getSize() > 0){
+		                	InputStream is = item.getInputStream();
+		                	message=FileOperateUtil.OperateOnReport(is);
+		                    if(is!=null){
+		                    	is.close();
+		                    }
+		                }
+		            }
+		        }
+		           
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        log.info("fileurl-===--"+e.getMessage());
+		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
+		    
+		    }
+			return message;
+	}
+	
+	
 }

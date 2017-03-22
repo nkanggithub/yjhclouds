@@ -531,7 +531,6 @@ public static String DBOperateOnExcl(InputStream is){
     				}
     			}
     		}
-    		//message = "成功导入:"+success+"条; "+" 导入失败"+fail+"条; "+ "总共"+total+"条; "+" 失败具体条数:"+failnum;
     	return map;
     }
 
@@ -546,5 +545,27 @@ public static String DBOperateOnExcl(InputStream is){
 		}
 		return message;
     	
+    }
+    
+    public static String OperateOnReport(InputStream is){
+    	BillOfSellPoi bos = new BillOfSellPoi();
+    	PlatforRelated  platforRelated=new PlatforRelated();
+    		try {
+    			 platforRelated  = bos.uploadReport(is);
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    			//System.out.println(e.getMessage());
+    		}finally{
+    			if(is != null){
+    				try {
+    					is.close();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+    			}
+    		}
+    	return "APJ:"+ platforRelated.getClosed_APJ()+"<br>"+"USA:"+ platforRelated.getClosed_USA()+"<br>"+"MEXICO:"+ platforRelated.getClosed_MEXICO()+"<br>"+"EMEA:"+ platforRelated.getClosed_EMEA();
     }
 }
