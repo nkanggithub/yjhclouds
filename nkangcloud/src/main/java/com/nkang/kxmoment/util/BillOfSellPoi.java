@@ -21,9 +21,10 @@ import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class BillOfSellPoi {
-	public static List Jeffrey;
-	 public static List Antonio;
-	 public static List Nils;
+	private static List Jeffrey;
+	private static List Antonio;
+	private static List Nils;
+	private static List China;
 	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
 		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/yongjiahe/price.XLS");
@@ -826,6 +827,7 @@ public class BillOfSellPoi {
 		        Jeffrey = new ArrayList<String>();
 		        Antonio = new ArrayList<String>();
 		        Nils = new ArrayList<String>();
+		        China = new ArrayList<String>();
 				try {
 					hssfWorkbook = new HSSFWorkbook(is);
 					// 循环工作表Sheet
@@ -855,6 +857,10 @@ public class BillOfSellPoi {
 							                	if("Nils".equals(representative.toString().trim())){
 							                		Nils.add(people.toString().trim());
 							                		continue;
+							                	}
+							                	if("China".equals(representative.toString().trim())){
+							                		China.add(people.toString().trim());
+							                		
 							                	}
 							                	
 							                }
