@@ -148,9 +148,9 @@ public class fileUploadController {
     }
 */
 
-	@RequestMapping(value = "/ReadAGM", produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String ReadAGM() throws IOException{
+//	@RequestMapping(value = "/ReadAGM", produces = "text/html;charset=UTF-8")
+//	@ResponseBody
+	public void ReadAGM() throws IOException{
 		
 	    String url  = fileUploadController.class.getClassLoader().getResource("AGM_Maping.xls").getPath();
 	    String message="";
@@ -172,7 +172,7 @@ public class fileUploadController {
 				}
 			}
 		}
-			return message;  
+		//	return message;  
 	}
 	
 }
