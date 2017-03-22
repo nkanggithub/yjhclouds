@@ -14,6 +14,7 @@ import org.dom4j.Element;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.baidubce.services.bos.BosClient;
 import com.mongodb.DBObject;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.ExtendedOpportunity;
@@ -30,6 +31,7 @@ import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.Constants;
+import com.nkang.kxmoment.util.BosUtils.MyBosClient;
 
 public class CoreService
 {
@@ -176,6 +178,7 @@ public class CoreService
 			
 			else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
 				respContent = "LINK";
+
 				textMessage.setContent(respContent);
 				respXml = MessageUtil.textMessageToXml(textMessage);
 			}
@@ -362,8 +365,8 @@ public class CoreService
 					else if(eventKey.equals("MYRECOG")){
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("永佳和业绩");
-						article.setDescription("永佳和业绩");
+						article.setTitle("永佳和业绩:");
+						article.setDescription("永佳和业绩:");
 						article.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg");
 						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp");
 						articleList.add(article);
