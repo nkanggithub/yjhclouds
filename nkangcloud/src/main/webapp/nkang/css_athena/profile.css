@@ -450,10 +450,11 @@ canvas{
 	}
 #sendR
 {
-	    width: 80%;
+	    width: 92%;
     position: absolute;
     top: 120px;
-    left: 10%;
+    height:110%;
+    left: 6%;
     z-index: 999;
 }
 
