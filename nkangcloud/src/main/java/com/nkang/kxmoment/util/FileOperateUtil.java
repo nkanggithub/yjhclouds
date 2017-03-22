@@ -520,7 +520,7 @@ public static String DBOperateOnExcl(InputStream is){
     		} catch (IOException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
-    			System.out.println(e.getMessage());
+    			//System.out.println(e.getMessage());
     		}finally{
     			if(is != null){
     				try {
@@ -535,4 +535,16 @@ public static String DBOperateOnExcl(InputStream is){
     	return map;
     }
 
+    public static String readAGM(InputStream is){
+    	BillOfSellPoi bos = new BillOfSellPoi();
+    	String message="";
+    	try {
+    		bos.readAGM(is);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
+    	
+    }
 }
