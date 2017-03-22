@@ -87,6 +87,12 @@ public class fileUploadController {
 	
 	@RequestMapping(value = "/uploadPlatforRelated", produces = "text/html;charset=UTF-8")
 	public ModelAndView readXlsOfPlatforRelated(HttpServletRequest request,HttpServletResponse response){
+		try {
+			ReadAGM();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		ModelAndView mv=new ModelAndView("MDMDataVisualization");
 	
 		DiskFileItemFactory factory = new DiskFileItemFactory();
