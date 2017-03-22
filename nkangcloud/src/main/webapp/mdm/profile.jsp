@@ -73,8 +73,7 @@ boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles//CSS/animation-effects.css"/>
 <link rel="stylesheet" type="text/css" href="../Jsp/CSS/common.css">
 <script type="text/javascript" src="../Jsp/JS/slides.js"></script>
-
-
+<script type="text/javascript" src="../nkang/jquery-form.js"></script>
 <!-- <link rel="stylesheet" href="../Jsp/CSS/w3.css"> -->
 <style>
 	.mySlides {display:none}
@@ -366,6 +365,16 @@ $(window).load(function() {
 		getRealName();
 		getAllRegisterUsers();
 });
+function uploadPic(obj){
+		if($(obj).val()!='') {
+			  $("#submit_form").ajaxSubmit(function(message) {
+				  console.log(message);
+				  $("#hiddenPic").val(message);
+			  } );
+
+		}
+		return false;
+}
 function getLogo(){
 	jQuery.ajax({
 		type : "GET",
@@ -657,6 +666,11 @@ function showFastPost()
 {
 	//$("#fastPush").show();
 	var img=$(".imgSelect input[type='checkbox']:checked").siblings("img").attr("src");
+	var imgType="0";
+	if($("#hiddenPic").val()!=""){
+		img=$("#hiddenPic").val();
+		imgType="1";
+	}
 	swal({  
         title:"确定一键智能发布吗",  
         text:"",
@@ -680,7 +694,8 @@ function showFastPost()
 			        data:{
 			        	openid:$("#uid").val(),
 			        	title:$("#notificationTitle").val(),
-			        	img:img
+			        	img:img,
+			        	imgType:imgType
 			        },
 			        async: true,
 			        error: function(request) {
@@ -695,7 +710,12 @@ function showFastPost()
 	}
 function postNotification(){
 	var img=$(".imgSelect input[type='checkbox']:checked").siblings("img").attr("src");
+	var imgType="0";
 	var type=$("#notificationType option:selected").val();
+	if($("#hiddenPic").val()!=""){
+		img=$("#hiddenPic").val();
+	    imgType="1";
+	}
 	$.ajax({
         cache: false,
         type: "POST",
@@ -706,6 +726,7 @@ function postNotification(){
         	url:$("#notificationURL").val(),
         	type:type,
         	img:img,
+        	imgType:imgType,
         	content:$("#content").val()
         	
         },
@@ -984,7 +1005,8 @@ function signaturePanel(){
 function mesSend(){
 	showCommonPanel();
 	$("body").append("	<div id='sendR'>"
-			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
+			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>图文标题</p><input id='notificationTitle' type='text' placeholder='请输入标题' class='input-xlarge bsBtn'></div>"
+			+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>主题图片</p><form id='submit_form' name='submit_form' action='../userProfile/uploadPicture' enctype='multipart/form-data' method='post'><input id='upload_file' name='upload_file' onchange='uploadPic(this)' type='file' placeholder='请输入标题' class='input-xlarge bsBtn'></form><input id='hiddenPic' type='hidden' /></div>"
 			+"  <div class='rcommon' style='height:160px;margin-bottom: 8px;'><div class='imgSelect'><input type='checkbox' class='imgCB' checked='true'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnHEr&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUBS&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUC1&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUD9&oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6l&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6g&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6R&amp;oid=00D90000000pkXM'></div><div class='imgSelect'><input type='checkbox' class='imgCB'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dnn6M&amp;oid=00D90000000pkXM'></div></div>"
 			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:96%!important;text-align:center!important;background-color: #005CA1;color: white;height:40px;line-height:40px;'>不想再写了？点击我一键智能发布吧</p></div>"
 			+"  <div id='commonPush' style='display:none;margin-top: 10px;'><div class='rcommon'><p class='bsLabel'>图文类型</p><select class='bsBtn' id='notificationType'><option value='js'>技术</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
