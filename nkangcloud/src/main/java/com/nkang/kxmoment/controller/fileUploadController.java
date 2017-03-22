@@ -1,6 +1,9 @@
 package com.nkang.kxmoment.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -138,4 +141,32 @@ public class fileUploadController {
             WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
     }
 */
+
+	@RequestMapping(value = "/ReadAGM", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String ReadAGM() throws IOException{
+		
+	    String url  = fileUploadController.class.getClassLoader().getResource("AGM_Maping.xls").getPath();
+	    String message="";
+	    InputStream is = null;
+		try {
+			is = new FileInputStream(url);
+			
+			 message=FileOperateUtil.readAGM(is);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(is!=null){
+				try {
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+			return message;  
+	}
+	
 }
