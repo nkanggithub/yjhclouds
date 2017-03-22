@@ -1,5 +1,7 @@
 package com.nkang.kxmoment.baseobject;
-
+/*
+ * for AGM_Backlog
+ */
 public class PlatforRelated {
 	int Done_APJ;
 	int Done_USA;
