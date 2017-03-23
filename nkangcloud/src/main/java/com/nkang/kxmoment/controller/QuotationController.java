@@ -310,7 +310,7 @@ public class QuotationController {
      			}
      			
      			
-            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,"【"+allUser.get(i).getNickname()+"】"+","+title);
+            	 RestUtils.sendQuotationToUser(allUser.get(i),content,img,"【"+allUser.get(i).getNickname()+"】"+title);
             	 content="";
             }
 		
