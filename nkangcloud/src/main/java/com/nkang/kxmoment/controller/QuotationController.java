@@ -327,7 +327,7 @@ public class QuotationController {
 		String url="http://wonderful.duapp.com/mdm/quoteDetail.jsp?UID=";
 		int itemNeedApprove = PlasticItemService.findListWithOutApprove();
 		String title=itemNeedApprove+"个牌号需要您审批";
-		String content=itemNeedApprove+"个牌号需要您审批";;
+		String content="";
 		List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsInternalSeniorMgt();
 		 for(int i=0;i<allUser.size();i++){
 			 RestUtils.sendQuotationToUser(allUser.get(i),content," https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Do9zj&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
