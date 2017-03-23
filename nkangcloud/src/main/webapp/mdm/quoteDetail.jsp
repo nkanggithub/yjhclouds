@@ -47,6 +47,19 @@ $(this).remove(".edit");
 $(".picClose").live("click",function(){
 	$("#pic").css("display","none");
 }); */
+
+$("#remindApprover").on("click",function(){
+	$.ajax({
+		 url:'../sendReminderForQuotation',
+		 type:"POST",
+		 success: function(data) {
+			 swal("Success", "您的审批提醒已发送", "success");
+			 $("#remindApprover").css("background-color","#dddddd");
+			 $("#remindApprover").css("color","white");
+			 $("#remindApprover").arrt("disabled","false");
+		 }
+	});
+});
 $(".singleQuote").live("swipeleft",function(){
 var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="2"&&status=="1"){
@@ -463,6 +476,7 @@ line-height:22px;}
 </style>
 </head>
 <body>
+<input id="remindApprover" type="button" value="提醒审批" style="position: absolute;z-index: 1000;right: 5px;top: 120px;width: 70px;height: 25px;background: white;border-style: none;border: 1px solid #f0f0f0;border-radius: 30px;">
 <input id="UID" type="hidden" value="<%=uid %>" />
 <div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >
 <img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM" alt=""/>

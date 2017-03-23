@@ -2702,11 +2702,11 @@ public static String regist(WeChatMDLUser user) {
 		return message;
     }
     
-    public static String sendQuotationToUser(WeChatMDLUser toWeChatMDLUser,String content,String img,String title){
+    public static String sendQuotationToUser(WeChatMDLUser toWeChatMDLUser,String content,String img,String title,String url){
     	String result ="";
     	String str="";
     	
-    		str="{\"title\":\""+title+"\",\"description\":\""+content+"\",\"url\":\"http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID="+toWeChatMDLUser.getOpenid()+"\",\"picurl\":"
+    		str="{\"title\":\""+title+"\",\"description\":\""+content+"\",\"url\":\""+url+toWeChatMDLUser.getOpenid()+"\",\"picurl\":"
 					+ "\""+img+"\"}";
     	        String json = "{\"touser\":\""+toWeChatMDLUser.getOpenid()+"\",\"msgtype\":\"news\",\"news\":" +
 
