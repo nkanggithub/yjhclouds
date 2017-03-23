@@ -56,7 +56,7 @@ $("#remindApprover").on("click",function(){
 			 swal("Success", "您的审批提醒已发送", "success");
 			 $("#remindApprover").css("background-color","#dddddd");
 			 $("#remindApprover").css("color","white");
-			 $("#remindApprover").arrt("disabled","false");
+			 $("#remindApprover").attr("disabled","false");
 		 }
 	});
 });
