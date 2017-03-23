@@ -288,7 +288,8 @@ public class QuotationController {
 	public @ResponseBody String sendQuotationMessage(@RequestParam(value="openid", required=true) String openid,@RequestParam(value="title", required=false) String title,@RequestParam(value="img", required=true) String img,@RequestParam(value="imgType", required=true) String imgType){
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
 		 if("".equals(title)||title==null){
-				title="永佳和塑胶报价更新啦~";
+			 	Date date=new Date();
+				title=date.getDate()+"-永佳和塑胶报价更新啦~";
 			}
 			if("1".equals(imgType)){
 				img="http://wonderfulcq.bj.bcebos.com/"+img;
