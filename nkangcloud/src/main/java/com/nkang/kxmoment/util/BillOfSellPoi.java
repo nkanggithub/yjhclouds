@@ -21,10 +21,10 @@ import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class BillOfSellPoi {
-	private static List Jeffrey;
-	private static List Antonio;
-	private static List Nils;
-	private static List China;
+	private static List<String> Jeffrey;
+	private static List<String> Antonio;
+	private static List<String> Nils;
+	private static List<String> China;
 	public List<OnlineQuotation> readXlsOfQuotations() throws FileNotFoundException{
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
 		 InputStream is = new FileInputStream("C:/Users/pengcha/Desktop/yongjiahe/price.XLS");
@@ -807,6 +807,10 @@ public class BillOfSellPoi {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}finally{
+					Jeffrey.clear();
+					Antonio.clear();
+					Nils.clear();
+					China.clear();
 					if(is != null){
 						try {
 							is.close();
@@ -866,6 +870,10 @@ public class BillOfSellPoi {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}finally{
+					Jeffrey.clear();
+					Antonio.clear();
+					Nils.clear();
+					China.clear();
 					if(is != null){
 						try {
 							is.close();
