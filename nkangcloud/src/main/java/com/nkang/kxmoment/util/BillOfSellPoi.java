@@ -570,7 +570,7 @@ public class BillOfSellPoi {
 				            }else{
 				            	 //if("Inventory".equals(hssfSheet.getSheetName())){
 				            	
-				            	if("库存".equals(hssfSheet.getSheetName())){
+				            	if("库存".equals(hssfSheet.getSheetName().trim())){
 				            		   for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 								            HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 								            if (hssfRow == null) {
@@ -609,7 +609,7 @@ public class BillOfSellPoi {
 							                inventoryList.add(xlsDto);	
 				            		   }
 				            		   map.put("Inventory", inventoryList); 
-				            	 }else if("订货单列表".equals(hssfSheet.getSheetName())){
+				            	 }else if("到货单列表".equals(hssfSheet.getSheetName().trim())){
 				            		 OnDelivery xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -651,7 +651,7 @@ public class BillOfSellPoi {
 		 						                OnDeliveryList.add(xlsDto);  
 				            		 }
 				            		 map.put("OnDelivery", OnDeliveryList);           
-								}else if("订单".equals(hssfSheet.getSheetName())){
+								}else if("订单".equals(hssfSheet.getSheetName().trim())){
 									OrderNopay xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
