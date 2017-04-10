@@ -6,20 +6,20 @@
 <%	
 String uid = request.getParameter("uid");
 String num = request.getParameter("num");
-List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid,num);
+ List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid,num);
 CongratulateHistory ch=new CongratulateHistory();
 if(!chList.isEmpty()){
 	ch=chList.get(0);
-}
-/*
-CongratulateHistory ch=new CongratulateHistory();
+} 
+
+/* CongratulateHistory ch=new CongratulateHistory();
 ch.setComments("thanks");
 ch.setGiftImg("http://wonderfulcq.bj.bcebos.com/IMG_0287.JPG");
 ch.setPoint("200");
 ch.setFrom("panda");
 ch.setTo("潘嗒嗒");
 ch.setUserImg("http://wx.qlogo.cn/mmopen/soSX1MtHexV6ibXOvfzOoePPqRib4AiaVIT1oCZZ7j0oVfacOT4xibmjF2sqHltyu1sXPPfqkwpXxoWDibQxnaX7FupTpHRNj2S8k/0");
-ch.setType(" Bais For Action.");*/
+ch.setType(" Bais For Action."); */
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
@@ -27,12 +27,12 @@ ch.setType(" Bais For Action.");*/
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="description">
 <meta content="" name="hpe">
-<title><%=ch.getFrom() %> must have done something amazing and has been recognized by <%=ch.getTo() %></title>
+<title><%=ch.getTo() %> must have done something amazing and has been recognized by <%=ch.getTo() %></title>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
   </head>
 <body style="margin:0;">
-            <div style="position: absolute;top: 0px;right: 0px;"><p style="margin-right: 10px;margin-top: 20px;"><%=ch.getTo() %></p><img src="<%=ch.getUserImg() %>" alt="" style="border-radius: 25px;height: 35px;width: 35px;position: absolute;right: 8px;top: 45px;"></div>
+            <div style="position: absolute;top: 0px;right: 0px;"><p style="margin-right: 10px;margin-top: 15px;"><%=ch.getTo() %></p><img src="<%=ch.getUserImg() %>" alt="" style="border-radius: 25px;height: 35px;width: 35px;position: absolute;right: 8px;top: 40px;"></div>
             <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border-spacing:0;display:table;">
              <tbody>
               <tr>
@@ -40,8 +40,8 @@ ch.setType(" Bais For Action.");*/
                 <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border-spacing:0">
                  <tbody>
                   <tr>
-                   <td valign="top" style="width:60%"><p class="MsoNormal" style="/* line-height:14.0pt */"><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black"><b><img id="_x0000_i1025" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9IMj&oid=00D90000000pkXM" style="
-    width: 140%;
+                   <td valign="top" style="width:60%"><p class="MsoNormal" style="margin-left:10px;"><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black"><b><img id="_x0000_i1025" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" style="
+    width: 60%;
 "></b>
                       <o:p></o:p></span></p></td>
                   </tr>
