@@ -1776,6 +1776,18 @@ public class MongoDBBasic {
             	while(queryresults.hasNext()){
             		weChatMDLUser = new WeChatMDLUser();
             		DBObject o = queryresults.next();
+            		
+            		ArrayList<String> kmApproveLists=new ArrayList<String>();
+            		if(o.get("kmApproveLists")!=null){
+            			BasicDBList histApprove = (BasicDBList) o.get("kmApproveLists");
+            			Object[] kmApproveObjects = histApprove.toArray();
+            			for(Object dbobj : kmApproveObjects){
+                			if(dbobj instanceof String){
+                				kmApproveLists.add((String) dbobj);
+                			}
+                		}
+            			weChatMDLUser.setKmApproveLists(kmApproveLists);
+            		}
             		if(o.get("OpenID") != null){
             			weChatMDLUser.setOpenid(o.get("OpenID").toString());
                 		if(o.get("CurLAT") != null){
