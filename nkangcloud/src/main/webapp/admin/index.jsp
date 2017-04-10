@@ -128,6 +128,9 @@ ul li.singleQuote  .quoteTitle .pTag{
 	font-family:微软雅黑;
 	margin-left:8px;
 }
+ul li.singleQuote  .quoteTitle .pTag.approve{
+	background-color:#0067B5;
+}
 ul li.singleQuote input.botton{
 	float:right;
 	padding:5px;
@@ -247,7 +250,9 @@ function showKMPanel(openid,name){
 		 data : {
 			 openid : openid
 		 },
-		 success:function(KMLikeArr){
+		 success:function(user){
+			var KMLikeArr=user.kmLists;
+			var KMLikeApproveArr=user.kmApproveLists;
 			 if(KMListsArr.length==0){
 				 	$.ajax({
 					 url:'../PlasticItem/findList?page=1&count=999',
@@ -257,26 +262,32 @@ function showKMPanel(openid,name){
 						 KMListsArr=resData;
 					 	if(resData.length)
 						{
-					 		showsingleQuoteDiv(KMListsArr,KMLikeArr,openid);
+					 		showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
 						 }
 					 }
 				 });
 			 }else{
-				 showsingleQuoteDiv(KMListsArr,KMLikeArr,openid);
+				 showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
 			 }
 		}
 	});
 }
-function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
+function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 	var NoLikeArr=new Array();
 	var LikeArr=new Array();
+	var ApproveArr=new Array();
 	if(KMLikeArr.length>0){
 			 for(var i=0;i<KMListsArr.length;i++){
 			 		var itemTemp=$.trim(KMListsArr[i].itemNo);
 			 		var index=$.inArray(itemTemp,KMLikeArr);
+					var index2=$.inArray(itemTemp,KMLikeApproveArr);
 			 		if(index>-1){
 			 			KMListsArr[i]["like"]=true;
 			 			LikeArr.push(KMListsArr[i]);
+			 			KMLikeArr.splice(index,1);
+			 		}else if(index2>-1){
+			 			KMListsArr[i]["approve"]=true;
+			 			ApproveArr.push(KMListsArr[i]);
 			 			KMLikeArr.splice(index,1);
 			 		}else{
 			 			NoLikeArr.push(KMListsArr[i]);
@@ -285,7 +296,7 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 	}else{
 			NoLikeArr=KMListsArr;
 	}
-	 var data=$.merge(LikeArr, NoLikeArr);   
+	 var data=$.merge($.merge(ApproveArr, LikeArr), NoLikeArr);   
 	 var html="";
 	 for(var i=0;i<data.length;i++){
 		 if(data[i].itemNo!=""){
@@ -296,6 +307,9 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,openid){
 				 tag='<span class="pTag">已关注</span>';
 				 attention='';
 				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].itemNo+'\',this)"  type="button" value="取消"/>';
+			 }
+			 if(data[i]["approve"]==true){
+				 tag='<span class="pTag approve">申请中</span>';
 			 }
 			 if(data[i].quotationPrice=="暂停报价")
 			 {
