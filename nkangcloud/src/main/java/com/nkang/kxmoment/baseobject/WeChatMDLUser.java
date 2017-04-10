@@ -23,8 +23,15 @@ public class WeChatMDLUser extends WeChatUser {
 	public String IsRegistered;
 	public ArrayList tag;
 	public ArrayList kmLists;
+	public ArrayList kmApproveLists;
 	public HashMap like;
 
+	public ArrayList getKmApproveLists() {
+		return kmApproveLists;
+	}
+	public void setKmApproveLists(ArrayList kmApproveLists) {
+		this.kmApproveLists = kmApproveLists;
+	}
 	public double getDistance() {
 		return distance;
 	}
