@@ -653,9 +653,7 @@ public class MongoDBBasic {
             		DBObject o = dbcur.next();
             		if(o.get("kmLists")!=null){
             			BasicDBList hist = (BasicDBList) o.get("kmLists");
-            			BasicDBList histApprove = (BasicDBList) o.get("kmApproveLists");
                 		Object[] kmObjects = hist.toArray();
-                		Object[] kmApproveObjects = histApprove.toArray();
                 		for(Object dbobj : kmObjects){
                 			if(dbobj instanceof String){
                 				if("del".equals(flag)){
@@ -667,6 +665,10 @@ public class MongoDBBasic {
                 				}
                 			}
                 		}
+            		}
+            		if(o.get("kmApproveLists")!=null){
+            			BasicDBList histApprove = (BasicDBList) o.get("kmApproveLists");
+                		Object[] kmApproveObjects = histApprove.toArray();
                 		for(Object dbobj : kmApproveObjects){
                 			if(dbobj instanceof String){
                 				if("add".equals(flag)){
