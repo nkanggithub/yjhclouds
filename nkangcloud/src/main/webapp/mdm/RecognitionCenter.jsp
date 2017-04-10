@@ -27,7 +27,7 @@ ch.setType(" Bais For Action."); */
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="description">
 <meta content="" name="hpe">
-<title><%=ch.getTo() %> 一定对永佳和塑胶作出了卓越的贡献因而被 <%=ch.getTo() %>所表彰了</title>
+<title><%=ch.getTo() %>一定对永佳和塑胶作出了卓越的贡献因而被 <%=ch.getTo() %>所表彰了</title>
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
   </head>
@@ -92,7 +92,7 @@ ch.setType(" Bais For Action."); */
                       <tr>
                        <td width="40%" valign="top" style="width: 40%;padding:0in 7.5pt 0in 7.5pt;"><p class="MsoNormal" align="center" style="text-align:center"><span style="font-size: 30px;font-family:&quot;Arial&quot;,sans-serif;color:black;display: block;margin-top: 40px;"><%=ch.getPoint() %>
                           <o:p></o:p></span></p></td>
-                       <td width="60%" valign="top" style="width: 60.0%;-moz-hyphens: auto;border-collapse:collapse!important;"><p class="MsoNormal" style="line-height:14.0pt;"><strong><span style="font-size: 22px;font-family:&quot;Arial&quot;,sans-serif;color:black;display: block;">永佳和虚拟货币</span></strong><span style="font-size: 13px;font-family:&quot;Arial&quot;,sans-serif;color:black;display: block;line-height: 15px;"><br>已经存入您的账号之中
+                       <td width="60%" valign="top" style="width: 60.0%;-moz-hyphens: auto;border-collapse:collapse!important;"><p class="MsoNormal" style="line-height:14.0pt;"><strong><span style="font-size: 22px;font-family:&quot;Arial&quot;,sans-serif;color:black;display: block;">虚拟货币</span></strong><span style="font-size: 13px;font-family:&quot;Arial&quot;,sans-serif;color:black;display: block;line-height: 15px;"><br>已经存入您的账号之中供您使用
                           <o:p></o:p></span></p></td>
                       </tr>
                      </tbody>
@@ -118,7 +118,7 @@ ch.setType(" Bais For Action."); */
              </tbody>
             </table>
             <p style="margin: 20px;line-height:14.0pt;"><strong><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black">恭喜您, <%=ch.getTo() %>!</span></strong><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black">
-              <o:p></o:p></span></p><p style="margin: 20px;line-height:14.0pt;"><span style="font-size:13px;font-family:&quot;Arial&quot;,sans-serif;color:black"><%=ch.getFrom() %> 给您发来表彰了，感谢您在: <%=ch.getType() %> 给永佳和所作出的贡献.
+              <o:p></o:p></span></p><p style="margin: 20px;line-height:14.0pt;"><span style="font-size:13px;font-family:&quot;Arial&quot;,sans-serif;color:black"><%=ch.getFrom() %>给您发来表彰了，感谢您在: <%=ch.getType() %> 方面为永佳和所作出的贡献.
               <o:p></o:p></span></p>
             <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;display:table;border-spacing: 0;">
              <tbody>
@@ -141,7 +141,7 @@ ch.setType(" Bais For Action."); */
                 </table></td>
               </tr>
              </tbody>
-            </table><p style="margin: 10px;line-height:14.0pt;"><span style="font-size: 15px;font-family:&quot;Arial&quot;,sans-serif;color:black;">以下是您对永佳和所作出的卓越贡献:
+            </table><p style="margin: 10px;line-height:14.0pt;"><span style="font-size: 15px;font-family:&quot;Arial&quot;,sans-serif;color:black;">以下是对您的评价和感谢语:
               <o:p></o:p></span></p>
             <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;display:table;border-spacing: 0">
              <tbody>
@@ -179,7 +179,7 @@ ch.setType(" Bais For Action."); */
                 </table></td>
               </tr>
              </tbody>
-            </table><p style="margin: 10px;margin-bottom: 20px;line-height:14.0pt;"><span style="font-size: 14px;font-family:&quot;Arial&quot;,sans-serif;color:black;">感谢您对永佳和的付出与贡献，请点点击查看详细信息。该信息已经自动发给您的直属经理.
+            </table><p style="margin: 10px;margin-bottom: 20px;line-height:14.0pt;"><span style="font-size: 14px;font-family:&quot;Arial&quot;,sans-serif;color:black;">再次感谢您对永佳和的付出与贡献，请点击查看详细信息。该信息已经自动发给您的直属经理.
               <o:p></o:p></span></p>
             <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;display:table;border-spacing: 0">
              <tbody>
