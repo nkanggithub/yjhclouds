@@ -1085,7 +1085,7 @@ function recognizationPanel(){
 		
 		$("body").append("<div class='TAB2class bouncePart' id='recognizeForm'>"
 				+"	<ul class='nav nav-tabs' id='myTabs'>"
-				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>发送表彰</a></li>"
+				+"	<li id='aaElements' class='active'><a href='#aElements' data-toggle='tab'>发布表彰</a></li>"
 				+"	<li id='bbElements'><a href='#bElements' onclick='getRecognitionInfoByOpenID()' data-toggle='tab'>收到的表彰</a></li></ul>"
 				+"  <div class='tab-content' id='dvTabContent' style='border: 0px;'>"
 				+"	<div class='tab-pane active' id='aElements'>"
@@ -1094,7 +1094,7 @@ function recognizationPanel(){
 				+"	<div class='rcommon'><p class='bsLabel'>接收人</p><select style='border:1px solid #005CA1;' class='bsBtn' id='to'>"+selectContent+"</select></div>"
 				+"	<div class='rcommon' style='height:40px'><p class='bsLabel'>礼物图片</p><form id='submit_gift' name='submit_gift' action='../userProfile/uploadPicture' enctype='multipart/form-data' method='post'><input id='file-1' type='file' name='file-1'  onchange='uploadGiftPic(this)' class='inputfile inputfile-1' data-multiple-caption='{count} files selected' multiple=''><label for='file-1' style='height: 15px;border-radius: 5px;line-height: 10px;text-align: center;width: 62%;'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='17' viewBox='0 0 20 17'><path d='M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z'></path></svg> <span style='color: white;font-size: 16px;'>Choose a file…</span></label></form><input id='hiddenGift' type='hidden' /></div>"
 				+"	<div class='rcommon'><p class='bsLabel'>类型</p><select class='bsBtn'  style='border:1px solid #005CA1;' id='type'><option>Bais For Action</option><option>Innovators at Heart</option><option>Partnership First</option></select></div>"
-				+"	<div class='rcommon'><p class='bsLabel'>Points</p><input id='points' type='text' style='height:35px;border:1px solid #005CA1;' placeholder='请输入points' class='input-xlarge bsBtn'></div>"
+				+"	<div class='rcommon'><p class='bsLabel'>虚拟货币</p><input id='points' type='text' style='height:35px;border:1px solid #005CA1;' placeholder='请输入虚拟货币' class='input-xlarge bsBtn'></div>"
 				+"	<div class='rcommon'><textarea id='comments' style='height:130px;width:95%;line-height:20px;border:1px solid #005CA1;' placeholder='请输入感言' class='input-xlarge bsBtn'></textarea></div>"
 				+"	<div class='rcommon' style='margin-top:100px'><button onclick='postRecognition()' style='height:35px;width:95%;background:#005CA1;text-shadow:none;color:white!important;' name='doublebutton-0' class='btn'>提交</button><div style='position: relative;top: -25px;text-align:left;width:30%;' ></div></div>"
 				+"	</div>"
