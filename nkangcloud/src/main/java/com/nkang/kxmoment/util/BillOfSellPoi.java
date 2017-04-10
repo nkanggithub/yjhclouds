@@ -18,7 +18,6 @@ import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OnlineQuotation;
 import com.nkang.kxmoment.baseobject.OrderNopay;
-import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class BillOfSellPoi {
 	private static List<String> Jeffrey;
@@ -570,6 +569,7 @@ public class BillOfSellPoi {
 				                continue;
 				            }else{
 				            	 //if("Inventory".equals(hssfSheet.getSheetName())){
+				            	
 				            	if("库存".equals(hssfSheet.getSheetName())){
 				            		   for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 								            HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -609,7 +609,7 @@ public class BillOfSellPoi {
 							                inventoryList.add(xlsDto);	
 				            		   }
 				            		   map.put("Inventory", inventoryList); 
-				            	 }else if("到货单列表".equals(hssfSheet.getSheetName())){
+				            	 }else if("订货单列表".equals(hssfSheet.getSheetName())){
 				            		 OnDelivery xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
