@@ -186,13 +186,13 @@ $(function(){
 	            });  
 	   });
 	    
-	   $(".quoteTitle").live("click",function(){
+	/*    $(".quoteTitle").live("click",function(){
 			$("#pic").css("display","block");
 		});
 		$(".picClose").live("click",function(){
 			$("#pic").css("display","none");
 		});
-	   
+	    */
 	   
 	getAllDatas();
 	$(".singleQuote").live("swiperight",function(){
@@ -208,7 +208,12 @@ $(function(){
 		if(tagNum==0){
 			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\',this)">申请<br/>报价</p></div>');
 		}else{
-			$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>关注</p></div>');
+			var tagName=$(this).find('span.tag').text();
+			if(tagName=='已关注'){
+				$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>关注</p></div>');
+			}else{
+				$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>申请</p></div>');
+			}
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
