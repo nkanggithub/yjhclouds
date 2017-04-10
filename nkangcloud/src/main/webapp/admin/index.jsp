@@ -752,7 +752,9 @@ jQuery.ajax({
 				}else{
 					selfIntro="&nbsp;";
 				}
-				
+				if(temp.kmApproveLists!=null&&temp.kmApproveLists!='null'&&temp.kmApproveLists.length>0){
+					selfIntro+='&nbsp;[申请中]'
+				}
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
 				}else{
