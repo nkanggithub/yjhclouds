@@ -301,7 +301,12 @@ function UpdateTag(item,flag,obj){
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
 					 }else  if(flag=='del'){
-						 swal("取消成功", "你取消了对该牌号的关注", "success");
+						 var tagName=$(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").text();
+						 if(tagName=='已关注'){
+							 swal("取消成功", "你取消了对该牌号的关注", "success");
+						 }else{
+							 swal("取消成功", "你取消了对该牌号的申请", "success");
+						 }
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
 					 }
