@@ -7,6 +7,20 @@ public class CongratulateHistory {
 	String comments;
 	String type;
 	String point;
+	String giftImg;
+	String userImg;
+	public String getUserImg() {
+		return userImg;
+	}
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+	public String getGiftImg() {
+		return giftImg;
+	}
+	public void setGiftImg(String giftImg) {
+		this.giftImg = giftImg;
+	}
 	String congratulateDate;
 	
 	public String getNum() {

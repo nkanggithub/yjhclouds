@@ -2469,6 +2469,8 @@ public class MongoDBBasic {
 	    	    	innerInsert.put("comments", conhis.getComments());
 	    	    	innerInsert.put("type", conhis.getType());
 	    	    	innerInsert.put("point", conhis.getPoint());
+	    	    	innerInsert.put("giftImg", conhis.getGiftImg());
+	    	    	innerInsert.put("userImg", conhis.getUserImg());
 	    	    	innerInsert.put("congratulateDate", DateUtil.timestamp2Str(cursqlTS));
 	    	    	arrayHistdbo.add(innerInsert);
 	    	    	update.put("CongratulateHistory", arrayHistdbo);
@@ -2527,6 +2529,8 @@ public class MongoDBBasic {
 	    											ch.setTo(((DBObject)co).get("to").toString());
 	    											ch.setPoint(((DBObject)co).get("point").toString());
 	    											ch.setType(((DBObject)co).get("type").toString());
+	    											ch.setGiftImg(((DBObject)co).get("giftImg").toString());
+	    											ch.setUserImg(((DBObject)co).get("userImg").toString());
 	    											chList.add(ch);
 	                    						}
 	                        					}
@@ -2539,6 +2543,8 @@ public class MongoDBBasic {
     											ch.setTo(((DBObject)co).get("to").toString());
     											ch.setPoint(((DBObject)co).get("point").toString());
     											ch.setType(((DBObject)co).get("type").toString());
+    											ch.setGiftImg(((DBObject)co).get("giftImg").toString());
+    											ch.setUserImg(((DBObject)co).get("userImg").toString());
     											chList.add(ch);
 	                        				}
 	                        				

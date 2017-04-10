@@ -197,20 +197,28 @@ public class UserProfileController {
 		int num=MongoDBBasic.getRecognitionMaxNumByOpenID(openid)+1;
 		String fromOpenid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("from"));
 		CongratulateHistory conhis=new CongratulateHistory();
+		String img="https://myrecognition.int.hpe.com/hpenterprise/images/designtheme/hp2/1/points-link-2.png";
+		System.out.println("request.getParameter('imgType')----"+request.getParameter("imgType"));
+		if("1".equals(request.getParameter("imgType"))){
+			img="http://wonderfulcq.bj.bcebos.com/"+request.getParameter("img");
+		}
 		conhis.setNum(num+"");
 		conhis.setFrom(request.getParameter("from"));
 		conhis.setTo(request.getParameter("to"));
 		conhis.setType(request.getParameter("type"));
 		conhis.setPoint(request.getParameter("points"));
 		conhis.setComments(request.getParameter("comments"));
+		conhis.setUserImg(request.getParameter("userImage"));
+		conhis.setGiftImg(img);
 		conhis.setCongratulateDate(new Date().toLocaleString());
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
-		List<String> openIDs=new ArrayList<String>();
+		List<String> openIDs = MongoDBBasic.getAllOpenIDByIsRegistered();
+/*		List<String> openIDs=new ArrayList<String>();
 		openIDs.add("oqPI_xDdGid-HlbeVKZjpoO5zoKw");
 		openIDs.add("oqPI_xHLkY6wSAJEmjnQPPazePE8");
 		openIDs.add("oqPI_xLq1YEJOczHi4DS2-1U0zqc");
 		openIDs.add("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
-		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");
+		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");*/
 		if("true".equals(request.getParameter("isAll"))){
 			for(int i=0;i<openIDs.size();i++){
 				RestUtils.sendRecognitionToUser(openid,openIDs.get(i),conhis);
@@ -219,7 +227,7 @@ public class UserProfileController {
 			RestUtils.sendRecognitionToUser(openid,openid, conhis);
 			RestUtils.sendRecognitionToUser(openid,fromOpenid, conhis);
 		}
-		return "ok";
+		return openIDs.size()+"";
 	} 
 	@RequestMapping("/getCompanyInfo")
 	public @ResponseBody List<String> getCompanyInfo(HttpServletRequest request,
