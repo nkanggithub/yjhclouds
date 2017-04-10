@@ -80,6 +80,9 @@ ul li.singleQuote .firstLayer .quoteTitle .tag{
 	font-family:微软雅黑;
 	margin-left:8px;
 }
+ul li.singleQuote .firstLayer .quoteTitle .tag.approve{
+	background-color:#0067B5;
+}
 ul li.singleQuote .firstLayer .quotePrice{
 	float:right;
 	color:#333;
@@ -316,7 +319,7 @@ function UpdateTag(item,flag,obj){
 					 if(flag=='add'){
 						 swal("申请成功 ", "恭喜你成功申请该牌号，请耐心等待管理员审核", "success");
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
-						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已申请</span>');
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag approve">已申请</span>');
 					 }else  if(flag=='del'){
 						 swal("取消成功", "你取消了对该牌号的关注", "success");
 						 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
@@ -369,7 +372,7 @@ function getAllDatas(){
 		 		}else{
 		 			NoLikeArr=resData;
 		 		}
-				var data=$.merge($.merge(ApproveArr, LikeArr), NoLikeArr);   
+				var data=$.merge($.merge(LikeArr,ApproveArr), NoLikeArr);   
 				 var html="";
 				 var totalNum=0;
 				 for(var i=0;i<data.length;i++){
