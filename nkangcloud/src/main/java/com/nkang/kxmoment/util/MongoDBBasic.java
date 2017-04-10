@@ -671,11 +671,9 @@ public class MongoDBBasic {
                 		Object[] kmApproveObjects = histApprove.toArray();
                 		for(Object dbobj : kmApproveObjects){
                 			if(dbobj instanceof String){
-                				if("add".equals(flag)){
-                					if(!kmItem.equals((String) dbobj)){
-                						kmApproveSets.add((String) dbobj);
-                					}
-                				}
+            					if(!kmItem.equals((String) dbobj)){
+            						kmApproveSets.add((String) dbobj);
+            					}
                 			}
                 		}
             		}
