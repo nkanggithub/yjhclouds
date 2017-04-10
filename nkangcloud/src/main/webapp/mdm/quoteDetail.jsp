@@ -60,6 +60,74 @@ $("#remindApprover").on("click",function(){
 		 }
 	});
 });
+$("#fastApprover").on("click",function(){
+	var total=0;
+	 $(".waitingApprover").each(function(index){
+		 total=total+1;
+	 var price=$(this).siblings(".waitingPrice").val();
+	// console.log("----"+$(this).val()+"----"+price);
+ 		 $.ajax({
+			 url:'../saveQuotationList',
+			 type:"POST",
+		     data:{
+				 plasticItem:$(this).val(),
+				 approveBy:$("#UID").val(),
+				 type:2,
+				 suggestPrice:price
+			 }, 
+			 success: function(data) {}
+ 		 });
+	 });
+	 $.ajax({
+		 url:'../PlasticItem/findList',
+		 type:"POST",
+		 data:{
+			 page:1,
+			 count:9999
+		 },
+		 success:function(data){
+			 swal("Success", total+"个报价已被您审核通过", "success");
+			 if(data)
+				 {
+				 var html="";
+				 var status="";
+				 var priceColor="";
+				 for(var i=0;i<data.data.length;i++){
+					
+					 if(data.data[i].priceStatus==1){
+						 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+						 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
+					 }
+					 else if(data.data[i].priceStatus==2){
+						 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/approved.png' alt=''/>";
+						 priceColor="<p class='quotePrice' style='color:green'>￥<span>";
+					 }
+					 else
+					 {
+					 priceColor="<p class='quotePrice' style='color:#D3D3D3'>￥<span>";
+					 }
+						
+					
+					 html+="<li class='singleQuote'>"
+						 +"<input id='status' type='hidden' value='"+data.data[i].priceStatus+"' />"
+						 +"<div class='firstLayer'><p class='quoteTitle'><span id='item'>"+data.data[i].itemNo+"</span></p>"+priceColor+data.data[i].price+"</span></p></div>"
+						 +"<div class='secondLayer'>"
+						 +"<div class='leftPanel'>"
+						 +"<div class='shape quoteInventory ' onclick='getInventoryDetail('"+data.data[i].itemNo+"')'><p>可用库存</p><p id='inventoryValue'>"+data.data[i].inventorysAvailableAmountSum+"</p></div>"
+						 +"<div class='shape soldOutOfPay'><p>已售未下账</p><p id='soldOutOfPayValue'>"+data.data[i].orderNopaynoInvoiceAmountSum+"</p></div>"
+						 +"<div class='shape onDelivery'><p class='ui-li-desc'>在途</p><p id='onDeliveryValue'>"+data.data[i].onDeliveryNotInInRepositorySum+"</p></div>"
+						 +"</div>"
+						 +"<div class='rightPanel'>"
+						 +"</div></div>"
+						 +status +"</li>"; 
+						 status="";
+				 }
+				 $("#QuoteList").html(html);
+				 }
+			 }
+		 });
+	 
+});
 $(".singleQuote").live("swipeleft",function(){
 var status=$(this).find("#status").val();
 if($("#isSpecial").val()=="2"&&status=="1"){
@@ -476,7 +544,8 @@ line-height:22px;}
 </style>
 </head>
 <body>
-<input id="remindApprover" type="button" value="提醒审批" style="position: absolute;z-index: 1000;right: 5px;top: 120px;width: 70px;height: 25px;background: white;border-style: none;border: 1px solid #f0f0f0;border-radius: 30px;">
+<input id="remindApprover" type="button" value="提醒审批" style="position: absolute;z-index: 1000;right: 5px;top:100px;width: 70px;height: 25px;background: white;border-style: none;border: 1px solid #f0f0f0;border-radius: 30px;">
+<input id="fastApprover" type="button" value="一键审批" style="position: absolute;z-index: 1000;left: 5px;top: 100px;width: 70px;height: 25px;background: white;border-style: none;border: 1px solid #f0f0f0;border-radius: 30px;">
 <input id="UID" type="hidden" value="<%=uid %>" />
 <div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >
 <img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM" alt=""/>
@@ -493,7 +562,7 @@ line-height:22px;}
 				
 				</div>
 <!--<input class="searchBox" id='hy' />-->
-<div  style="position: absolute; top: 100px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
+<div  style="position: absolute; top: 120px;overflow:hidden" data-role="page" style="padding-top:15px" data-theme="c">
  <ul id="QuoteList" data-role="listview" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号[<%=ql.size() %>个牌号供您查询]" data-inset="true" style="margin-top:15px">
 <%
 for(int i=0;i<ql.size();i++){
@@ -519,6 +588,8 @@ for(int i=0;i<ql.size();i++){
 </div>
 <% if(ql.get(i).getPriceStatus()==1) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/progress.png" alt=""/>
+<input class="waitingApprover" type="hidden" value="<%=ql.get(i).getItemNo() %>"/>
+<input class="waitingPrice" type="hidden" value="<%=ql.get(i).getPrice() %>"/>
 <% } %>
 <% if(ql.get(i).getPriceStatus()==2) {%>
 <img style="position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8" src="../mdm/images/approved.png" alt=""/>
