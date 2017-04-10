@@ -209,6 +209,7 @@ function UpdateTag(openid,item,obj){
 				 if(flag=='add'){
 					 swal("关注成功 ", "恭喜你成功关注该牌号", "success");
 					 $(obj).parent(".singleQuote").removeClass("attention");
+					 $(obj).parent(".singleQuote").find(".quoteTitle").find(".pTag").remove();
 					 $(obj).parent(".singleQuote").find(".quoteTitle").append('<span class="pTag">已关注</span>');
 					 $(obj).parent(".singleQuote").find("input.botton").val("取消");
 				 }else  if(flag=='del'){
