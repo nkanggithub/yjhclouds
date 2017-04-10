@@ -321,7 +321,7 @@ a:hover,a:link {
 }
 
 .imgclass {
-	margin:15px;
+	magain:20px;
 	height: 20px;
 	cursor: pointer;
 }
@@ -452,10 +452,10 @@ canvas{
 {
 	    width: 92%;
     position: absolute;
-    top: 120px;
-    height:120%;
+    top: 100px;
     left: 6%;
     z-index: 999;
+    height:100%;
 }
 
 /* .naviArrow.is-selected::after{

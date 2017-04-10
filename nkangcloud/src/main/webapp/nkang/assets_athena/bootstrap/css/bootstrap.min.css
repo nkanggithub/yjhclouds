@@ -202,7 +202,6 @@ body {
 }
 
 a {
-    color: #08c;
     text-decoration: none;
 }
 
@@ -594,8 +593,6 @@ a {
     }
 
 .container-fluid {
-    padding-right: 30px;
-    padding-left: 30px;
     *zoom: 1;
 }
 
@@ -983,11 +980,14 @@ legend {
         color: #999;
     }
 
-label, input, button, select, textarea {
+ input, button, select, textarea {
     font-size: 14px;
     font-weight: normal;
     line-height: 20px;
 	color:#333333 !important;
+}
+label{
+	color:white !important;
 }
 
 label {
@@ -996,7 +996,7 @@ label {
 }
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-    display: inline-block;
+   
     height: 20px;
     padding: 4px 6px;
     margin-bottom: 10px;
@@ -1147,10 +1147,6 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 
 .input-large {
     width: 210px;
-}
-
-.input-xlarge {
-    width: 270px;
 }
 
 .input-xxlarge {
@@ -4468,10 +4464,8 @@ button.btn, input[type="submit"].btn {
     /*position: fixed;*/
 	position: absolute;
     top: 10%;
-    left: 50%;
     z-index: 1050;
-    width: 560px;
-    margin-left: -280px;
+    width: 100%;
     background-color: #fff;
     border: 1px solid #999;
     border: 1px solid rgba(0,0,0,0.3);
