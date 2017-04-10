@@ -168,7 +168,8 @@ public class QuotationController {
 	public @ResponseBody List<PlasticItem> getPushPlasticItem(@RequestParam(value="openid", required=true) String openid){
 		 List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
 		List<String> itemsList = new ArrayList<String>();
-		itemsList=MongoDBBasic.queryUserKM(openid); 
+		WeChatMDLUser user=MongoDBBasic.queryUserKM(openid); 
+		itemsList=user.getKmLists();
 		for(String str : itemsList){
 			plasticItemlist.add(PlasticItemService.getDetailByNo(str));
 		}
@@ -298,7 +299,8 @@ public class QuotationController {
 			List<String> itemsList = new ArrayList<String>();
 			String url="http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID=";
              for(int i=0;i<allUser.size();i++){
-     			itemsList=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
+            		WeChatMDLUser user=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
+            		itemsList=user.getKmLists();
      			String[] aStrings=new Market().getMarket(allUser.get(i).getSelfIntro());
      			String content="永佳和【"+aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+"】邀您查看您所关注的牌号\n";
      			if(!itemsList.isEmpty()){
