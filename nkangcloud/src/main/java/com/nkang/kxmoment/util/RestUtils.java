@@ -2086,7 +2086,7 @@ public static String regist(WeChatMDLUser user) {
     	    }
     public static String sendRecognitionToUser(String openId,String toOpenId,CongratulateHistory ch){
     	String result ="";
-    			String str="{\"title\":\"Congratulations!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+" must have done something amazing and has been recognized by"+ch.getFrom()+"!!!\",\"url\":\"http://"+Constants.baehost+"/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
+    			String str="{\"title\":\"恭喜!! "+ch.getTo()+" \",\"description\":\""+ch.getTo()+"一定对永佳和塑胶作出了卓越的贡献因而被"+ch.getFrom()+"所表彰了!!!\",\"url\":\"http://"+Constants.baehost+"/mdm/RecognitionCenter.jsp?num="+ch.getNum()+"&uid="+openId+"\",\"picurl\":"
     					+ "\"http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg\"}";
     	        String json = "{\"touser\":\""+toOpenId+"\",\"msgtype\":\"news\",\"news\":" +
 
