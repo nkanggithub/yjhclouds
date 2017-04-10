@@ -10,8 +10,6 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 	out.print("你没有查看该页面的权限！");
 	return;
 }
-
-
 %>
 <!DOCTYPE HTML>
 <html>
@@ -341,6 +339,7 @@ function showUpdateUserPanel(openid,name){
 				var isInternalSeniorMgt=data[0].roleObj.internalSeniorMgt;
 				var isInternalImtMgt=data[0].roleObj.internalImtMgt;
 				var isInternalQuoter=data[0].roleObj.internalQuoter;
+				var isInternalBizEmp=data[0].roleObj.internalBizEmp;
 				var isITOperations=data[0].roleObj.itoperations;
 				var isInternalNonBizEmp=data[0].roleObj.internalNonBizEmp;
 				var IsRegistered=data[0].IsRegistered==null?'false':data[0].IsRegistered;
@@ -404,6 +403,7 @@ function showUpdateUserPanel(openid,name){
 			            +'															<input type="checkbox"  name="role" value="isExternalCompetitor"  '+(isExternalCompetitor==true?'checked':'')+'/>代理商'
 			            +'															</nobr><br/><nobr>'
 			            +'															<input type="checkbox"  name="role" value="isInternalNonBizEmp"  '+(isInternalNonBizEmp==true?'checked':'')+'/>物流商'
+			            +'															<input type="checkbox"  name="role" value="isInternalBizEmp"  '+(isInternalBizEmp==true?'checked':'')+'/>非业务员'
 			            +'															</nobr><br/><nobr>'
 			            +'															<input type="checkbox"  name="role" value="isInternalImtMgt"  '+(isInternalImtMgt==true?'checked':'')+'/>信息发布'
 			            +'															<input type="checkbox"  name="role" value="isInternalQuoter"  '+(isInternalQuoter==true?'checked':'')+'/>报价修改'
@@ -688,7 +688,12 @@ jQuery.ajax({
 					role.push("信息发布");
 					temp_B=false;
 				}
-//				if(temp.roleObj.internalBizEmp|| temp.roleObj.internalNonBizEmp){
+				// temp.roleObj.internalNonBizEmp
+				if(temp.roleObj.internalBizEmp){
+					InternalList++;
+					role.push("非业务员");
+					temp_B=false;
+				}
 				if(temp.roleObj.internalQuoter){
 					InternalList++;
 					role.push("报价修改");
@@ -745,7 +750,7 @@ jQuery.ajax({
 				}
 				companyName+=companyRole;
 				if(role!=null&&role!='null'){
-					for(var j=0;j<role.length&&j<4;j++){
+					for(var j=0;j<role.length;j++){
 							tagHtml+='													<div class="tag" '
 							+(role[j]=='未分类'?'id="tag" ':'')
 							+'>'
