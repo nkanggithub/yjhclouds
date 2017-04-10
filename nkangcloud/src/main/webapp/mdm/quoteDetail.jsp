@@ -95,7 +95,7 @@ $("#fastApprover").on("click",function(){
 				 for(var i=0;i<data.data.length;i++){
 					
 					 if(data.data[i].priceStatus==1){
-						 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+						 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/><input class='waitingApprover' type='hidden' value='"+data.data[i].itemNo+"'/><input class='waitingPrice' type='hidden' value='"+data.data[i].price+"'/>";
 						 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 					 }
 					 else if(data.data[i].priceStatus==2){
@@ -211,7 +211,7 @@ function approve(obj)
 						 for(var i=0;i<data.data.length;i++){
 							
 							 if(data.data[i].priceStatus==1){
-								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+								 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/><input class='waitingApprover' type='hidden' value='"+data.data[i].itemNo+"'/><input class='waitingPrice' type='hidden' value='"+data.data[i].price+"'/>";
 								 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 							 }
 							 else if(data.data[i].priceStatus==2){
@@ -316,7 +316,7 @@ function edit(obj)
 										 grade="<p class='tag tagStyle'>"+data[i].categoryGrade+"</p>";
 									 } */
 									 if(data.data[i].priceStatus==1){
-										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/>";
+										 status="<img style='position:absolute;width:80px;height:auto;top:30px;right:-40px;opacity:0.8' src='../mdm/images/progress.png' alt=''/><input class='waitingApprover' type='hidden' value='"+data.data[i].itemNo+"'/><input class='waitingPrice' type='hidden' value='"+data.data[i].price+"'/>";
 										 priceColor="<p class='quotePrice' style='color:red'>￥<span>"; 
 									 }
 									 else if(data.data[i].priceStatus==2){
