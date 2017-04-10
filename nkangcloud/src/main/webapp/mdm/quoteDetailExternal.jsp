@@ -130,7 +130,7 @@ ul li.singleQuote .firstLayer  .change{
 {
 	width:50%;
 	height:100%;
-	line-height:70px;
+	line-height:20px;
 	margin-right:auto;
 	margin-left:auto;
 	font-weight:bold;
@@ -203,7 +203,7 @@ $(function(){
 		var tagNum=$(this).find('span.tag').length;
 		var item=$(this).find('span.item').text();
 		if(tagNum==0){
-			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\',this)"><img src="../mdm/images/focus.png" />关注</p></div>');
+			$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\',this)">申请<br/>报价</p></div>');
 		}else{
 			$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>关注</p></div>');
 		}
@@ -357,26 +357,35 @@ function getAllDatas(){
 						 var attention='';
 						 var priceStyle='';
 						 var unit='<span class="unit">元/吨</span>';
-						 if(data[i]["like"]==true){
-							 tag='<span class="tag">已关注</span>';
-							 attention='attention';
-						 }
-						 var myDate = new Date();
-						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
-						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
-						 if(nowHour<10||nowHour>=18||data[i].priceStatus==1){
-							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
-							 change='';
-						 }
-						 
 						 if(data[i].priceStatus==0){
 							 data[i].price="暂停报价";
 							 unit='';
 						 }
+						 if(nowHour<10||nowHour>=18||data[i].priceStatus==1){
+							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
+							 change='';
+						 }
+						 var openChart=' onclick="ToCharPage(\''+data[i].itemNo+'\')" ';
+						 if(data[i]["like"]==true){
+							 tag='<span class="tag">已关注</span>';
+							 attention='attention';
+						 }else{
+							 data[i].price="暂无报价";
+							 unit='';
+							 openChart='';
+							 priceColor="lose";
+							 change='';
+							 priceStyle='';
+						 }
+						 var myDate = new Date();
+						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
+						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
+						
+						 
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
 							 +'		<div class="quoteTitle"><span class="item">'+data[i].itemNo+'</span>'+tag+'</div>'
-							 +'		<div class="quotePrice '+priceColor+'" onclick="ToCharPage(\''+data[i].itemNo+'\')" '+priceStyle+'><span class="price">'+data[i].price+'</span>'+unit+'</div>'
+							 +'		<div class="quotePrice '+priceColor+'" '+openChart+' '+priceStyle+'><span class="price">'+data[i].price+'</span>'+unit+'</div>'
 			  				 + change
 							 /*  +'		<span class="change high">+10</span>' */
 							 +'		<div class="clear"></div>'
