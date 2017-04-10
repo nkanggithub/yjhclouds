@@ -569,7 +569,8 @@ public class BillOfSellPoi {
 				            if (hssfSheet == null) {
 				                continue;
 				            }else{
-				            	 if("Inventory".equals(hssfSheet.getSheetName())){
+				            	 //if("Inventory".equals(hssfSheet.getSheetName())){
+				            	if("库存".equals(hssfSheet.getSheetName())){
 				            		   for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 								            HSSFRow hssfRow = hssfSheet.getRow(rowNum);
 								            if (hssfRow == null) {
@@ -608,7 +609,7 @@ public class BillOfSellPoi {
 							                inventoryList.add(xlsDto);	
 				            		   }
 				            		   map.put("Inventory", inventoryList); 
-				            	 }else if("OnDelivery".equals(hssfSheet.getSheetName())){
+				            	 }else if("到货单列表".equals(hssfSheet.getSheetName())){
 				            		 OnDelivery xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -650,7 +651,7 @@ public class BillOfSellPoi {
 		 						                OnDeliveryList.add(xlsDto);  
 				            		 }
 				            		 map.put("OnDelivery", OnDeliveryList);           
-								}else if("OrderNopay".equals(hssfSheet.getSheetName())){
+								}else if("订单".equals(hssfSheet.getSheetName())){
 									OrderNopay xlsDto = null;
 				            		 for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
 		 					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -698,257 +699,6 @@ public class BillOfSellPoi {
 				return map;
 	 }
 	 
-	 public PlatforRelated platformRelated(InputStream is) throws FileNotFoundException{
-			//List<Inventory> inventoryList = new ArrayList<Inventory>();
-		 PlatforRelated platforRelated = new PlatforRelated();
-		        HSSFWorkbook hssfWorkbook;
-				try {
-					hssfWorkbook = new HSSFWorkbook(is);
-					// 循环工作表Sheet
-					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           
-					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-					                if (hssfRow == null) {
-					                    continue;
-					                }
-					                platforRelated.setTotal(platforRelated.getTotal()+1);
-					                HSSFCell assignedTo = hssfRow.getCell(0);
-					                if(assignedTo==null || "".equals(assignedTo+"") ){
-					                	platforRelated.setUnAssinged(platforRelated.getUnAssinged()+1);
-					                	continue;
-					                }else{
-					                	 HSSFCell status = hssfRow.getCell(1);
-							                if(status!=null){
-							                	if("Done".equals(status.toString().trim())){
-							                		if(Jeffrey.contains(assignedTo.toString())){
-							                			platforRelated.setDone_USA(platforRelated.getDone_USA()+1);
-							                			continue;
-							                		}else if(Antonio.contains(assignedTo.toString())){
-							                			platforRelated.setDone_MEXICO(platforRelated.getDone_MEXICO()+1);
-							                			continue;
-							                		}else if(Nils.contains(assignedTo.toString())){
-							                			platforRelated.setDone_EMEA(platforRelated.getDone_EMEA()+1);
-							                			continue;
-							                		}else if(China.contains(assignedTo.toString())){
-							                			platforRelated.setDone_APJ(platforRelated.getDone_APJ()+1);
-													}
-							                		/*if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
-							                			platforRelated.setDone_USA(platforRelated.getDone_USA()+1);
-							                			continue;
-							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
-							                			platforRelated.setDone_MEXICO(platforRelated.getDone_MEXICO()+1);
-							                			continue;
-							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
-							                			platforRelated.setDone_EMEA(platforRelated.getDone_EMEA()+1);
-							                			continue;
-							                		}else {
-							                			platforRelated.setDone_APJ(platforRelated.getDone_APJ()+1);
-													}
-							                		*/
-							                	}else if(!"New".equals(status.toString().trim())&&!"Done".equals(status.toString().trim())){
-							                		if(Jeffrey.contains(assignedTo.toString())){
-							                			platforRelated.setInProgress_USA(platforRelated.getInProgress_USA()+1);
-							                			continue;
-							                		}else if(Antonio.contains(assignedTo.toString())){
-							                			platforRelated.setInProgress_MEXICO(platforRelated.getInProgress_MEXICO()+1);
-							                			continue;
-							                		}else if(Nils.contains(assignedTo.toString())){
-							                			platforRelated.setInProgress_EMEA(platforRelated.getInProgress_EMEA()+1);
-							                			continue;
-							                		}else if(China.contains(assignedTo.toString())){
-							                			platforRelated.setInProgress_APJ(platforRelated.getInProgress_APJ()+1);
-													}
-							                		/*if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
-							                			platforRelated.setInProgress_USA(platforRelated.getInProgress_USA()+1);
-							                			continue;
-							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
-							                			platforRelated.setInProgress_MEXICO(platforRelated.getInProgress_MEXICO()+1);
-							                			continue;
-							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
-							                			platforRelated.setInProgress_EMEA(platforRelated.getInProgress_EMEA()+1);
-							                			continue;
-							                		}else {
-							                			platforRelated.setInProgress_APJ(platforRelated.getInProgress_APJ()+1);
-													}*/
-							                	}else if("New".equals(status.toString().trim())){
-							                		if(Jeffrey.contains(assignedTo.toString())){
-							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
-							                			continue;
-							                		}else if(Antonio.contains(assignedTo.toString())){
-							                			platforRelated.setInPlanning_MEXICO(platforRelated.getInPlanning_MEXICO()+1);
-							                			continue;
-							                		}else if(Nils.contains(assignedTo.toString())){
-							                			platforRelated.setInPlanning_EMEA(platforRelated.getInPlanning_EMEA()+1);
-							                			continue;
-							                		}else if(China.contains(assignedTo.toString())){
-							                			platforRelated.setInPlanning_APJ(platforRelated.getInPlanning_APJ()+1);
-													}
-							                		/*if("Jeremy Clark".equals(assignedTo.toString())||"Samson Jayaraj".equals(assignedTo.toString())||"Andrew Lewis".equals(assignedTo.toString())||"Tommy Lucas".equals(assignedTo.toString())||"Bhavesh Patel".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_USA(platforRelated.getInPlanning_USA()+1);
-							                			continue;
-							                		}else if("Leonardo Vallin Langarica".equals(assignedTo.toString())||"Luis Vasquez-Rodriguez".equals(assignedTo.toString())||"Azucena Rivera".equals(assignedTo.toString())||"Victor Carrillo".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_MEXICO(platforRelated.getInPlanning_MEXICO()+1);
-							                			continue;
-							                		}else if("slawomir zagrodny".equals(assignedTo.toString())||"Wojciech Grusznis".equals(assignedTo.toString())){
-							                			platforRelated.setInPlanning_EMEA(platforRelated.getInPlanning_EMEA()+1);
-							                			continue;
-							                		}else {
-							                			platforRelated.setInPlanning_APJ(platforRelated.getInPlanning_APJ()+1);
-													}*/
-												}
-							                }
-					                }
-					               
-					            }
-					            
-					    }
-				} catch (IOException e) {
-					e.printStackTrace();
-				}finally{
-					Jeffrey.clear();
-					Antonio.clear();
-					Nils.clear();
-					China.clear();
-					if(is != null){
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				//System.out.println(platforRelated.getUnAssinged());
-				return platforRelated;
-	 } 
-	 
-	
-	 public PlatforRelated uploadReport(InputStream is) throws FileNotFoundException{
-			//List<Inventory> inventoryList = new ArrayList<Inventory>();
-		 PlatforRelated platforRelated = new PlatforRelated();
-		        HSSFWorkbook hssfWorkbook;
-				try {
-					hssfWorkbook = new HSSFWorkbook(is);
-					// 循环工作表Sheet
-					    for (int numSheet = 0; numSheet < 1; numSheet++) {
-				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           //System.out.println(hssfSheet.getSheetName());
-					            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-					                if (hssfRow == null) {
-					                    continue;
-					                }
-					                platforRelated.setTotal(platforRelated.getTotal()+1);
-					                HSSFCell assignedTo = hssfRow.getCell(7);
-					                if(assignedTo==null || "".equals(assignedTo+"") ){
-					                	platforRelated.setUnAssinged(platforRelated.getUnAssinged()+1);
-					                	continue;
-					                }else{
-					                	 HSSFCell status = hssfRow.getCell(5);
-							                if(status!=null){
-							                	if("Closed".equals(status.toString().trim())){
-							                		if(Jeffrey.contains(assignedTo.toString())){
-							                			platforRelated.setClosed_USA(platforRelated.getClosed_USA()+1);
-							                			continue;
-							                		}else if(Antonio.contains(assignedTo.toString())){
-							                			platforRelated.setClosed_MEXICO(platforRelated.getClosed_MEXICO()+1);
-							                			continue;
-							                		}else if(Nils.contains(assignedTo.toString())){
-							                			platforRelated.setClosed_EMEA(platforRelated.getClosed_EMEA()+1);
-							                			continue;
-							                		}else if(China.contains(assignedTo.toString())){
-							                			platforRelated.setClosed_APJ(platforRelated.getClosed_APJ()+1);
-													}
-												}
-							                }
-					                }
-					               
-					            }
-					            
-					    }
-				} catch (IOException e) {
-					e.printStackTrace();
-				}finally{
-					Jeffrey.clear();
-					Antonio.clear();
-					Nils.clear();
-					China.clear();
-					if(is != null){
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				//System.out.println(platforRelated.getClosed_APJ());
-				return platforRelated;
-	 } 
-	 
-	
-	 
-	 public void readAGM(InputStream is) throws FileNotFoundException{
-		 PlatforRelated platforRelated = new PlatforRelated();
-		        HSSFWorkbook hssfWorkbook;
-		        Jeffrey = new ArrayList<String>();
-		        Antonio = new ArrayList<String>();
-		        Nils = new ArrayList<String>();
-		        China = new ArrayList<String>();
-				try {
-					hssfWorkbook = new HSSFWorkbook(is);
-					// 循环工作表Sheet
-					    for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
-				            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
-				           
-					            for (int rowNum = 0; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
-					                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-					                
-					                if (hssfRow == null) {
-					                    continue;
-					                }
-					                HSSFCell people = hssfRow.getCell(0);
-					                if(people==null || "".equals(people+"") ){
-					                	continue;
-					                }else{
-					                	 HSSFCell representative = hssfRow.getCell(1);
-							                if(representative!=null && !"".equals(representative+"")){
-							                	if("Jeffrey".equals(representative.toString().trim())){
-							                		Jeffrey.add(people.toString().trim());
-							                		continue;
-							                	}
-							                	if("Antonio".equals(representative.toString().trim())){
-							                		Antonio.add(people.toString().trim());
-							                		continue;
-							                	}
-							                	if("Nils".equals(representative.toString().trim())){
-							                		Nils.add(people.toString().trim());
-							                		continue;
-							                	}
-							                	if("China".equals(representative.toString().trim())){
-							                		China.add(people.toString().trim());
-							                		
-							                	}
-							                	
-							                }
-					                }
-					            }
-					    }
-				}catch (IOException e) {
-					e.printStackTrace();
-				}finally{
-					if(is != null){
-						try {
-							is.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			//	return Jeffrey.toString();
-	 }
-							                		
-							                	
 				
 }
 

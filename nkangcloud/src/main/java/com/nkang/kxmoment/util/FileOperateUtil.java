@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.nkang.kxmoment.baseobject.Inventory;
 import com.nkang.kxmoment.baseobject.OnDelivery;
 import com.nkang.kxmoment.baseobject.OrderNopay;
-import com.nkang.kxmoment.baseobject.PlatforRelated;
 
 public class FileOperateUtil {
 	static String ny="Y";
@@ -313,7 +311,7 @@ public static String DBOperateOnExcl(InputStream is){
 					 
 				 }
 				 //" 失败具体条数:"+OrderNopay_failnum+
-				 message = message+ "（已售未下账）OrderNopay成功导入:"+OrderNopay_success+"条; "+" 导入失败"+OrderNopay_fail+"条; "+ "总共"+OrderNopay_total+"条; "+"<br/>"; 
+				 message = message+ "（订单）OrderNopay成功导入:"+OrderNopay_success+"条; "+" 导入失败"+OrderNopay_fail+"条; "+ "总共"+OrderNopay_total+"条; "+"<br/>"; 
 			 }
 			 if(map.get("OnDelivery")!=null){
 				 for(int i=0;i<map.get("OnDelivery").size();i++){
@@ -345,7 +343,7 @@ public static String DBOperateOnExcl(InputStream is){
 					
 				 }
 				 //" 失败具体条数:"+OnDelivery_failnum+
-				 message = message+"（订单）OnDelivery成功导入:"+OnDelivery_success+"条; "+" 导入失败"+OnDelivery_fail+"条; "+ "总共"+OnDelivery_total+"条; "+"<br/>"; 
+				 message = message+"（到货单列表）OnDelivery成功导入:"+OnDelivery_success+"条; "+" 导入失败"+OnDelivery_fail+"条; "+ "总共"+OnDelivery_total+"条; "+"<br/>"; 
 			 }
 			 if(map.get("Inventory")!=null){
 				 for(int i=0;i<map.get("Inventory").size();i++){
@@ -486,86 +484,4 @@ public static String DBOperateOnExcl(InputStream is){
         }
     } 
     
-    
-    @SuppressWarnings({ "unchecked", "rawtypes", "unchecked" })
-	public static Map<String, List> OperateOnPlatforRelated(InputStream is){
-    	Map map = new HashMap<String, List>();
-    	BillOfSellPoi bos = new BillOfSellPoi();
-    		try {
-    			PlatforRelated  platforRelated  = bos.platformRelated(is);
-    			List APJlt = new ArrayList<Integer>();
-    			APJlt.add(platforRelated.getDone_APJ());
-    			APJlt.add(platforRelated.getInProgress_APJ());
-    			APJlt.add(platforRelated.getInPlanning_APJ());
-    			List USAlt = new ArrayList<Integer>();
-    			USAlt.add(platforRelated.getDone_USA());
-    			USAlt.add(platforRelated.getInProgress_USA());
-    			USAlt.add(platforRelated.getInPlanning_USA());
-    			
-    			List MEXICOlt = new ArrayList<Integer>();
-    			MEXICOlt.add(platforRelated.getDone_MEXICO());
-    			MEXICOlt.add(platforRelated.getInProgress_MEXICO());
-    			MEXICOlt.add(platforRelated.getInPlanning_MEXICO());
-    			
-    			List EMEAlt = new ArrayList<Integer>();
-    			EMEAlt.add(platforRelated.getDone_EMEA());
-    			EMEAlt.add(platforRelated.getInProgress_EMEA());
-    			EMEAlt.add(platforRelated.getInPlanning_EMEA());
-    			
-    			
-    			map.put("APJ", APJlt);
-    			map.put("USA", USAlt);
-    			map.put("MEXICO", MEXICOlt);
-    			map.put("EMEA", EMEAlt);
-    		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    			//System.out.println(e.getMessage());
-    		}finally{
-    			if(is != null){
-    				try {
-    					is.close();
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-    			}
-    		}
-    	return map;
-    }
-
-    public static String readAGM(InputStream is){
-    	BillOfSellPoi bos = new BillOfSellPoi();
-    	String message="";
-    	try {
-    		bos.readAGM(is);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return message;
-    	
-    }
-    
-    public static String OperateOnReport(InputStream is){
-    	BillOfSellPoi bos = new BillOfSellPoi();
-    	PlatforRelated  platforRelated=new PlatforRelated();
-    		try {
-    			 platforRelated  = bos.uploadReport(is);
-    		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    			//System.out.println(e.getMessage());
-    		}finally{
-    			if(is != null){
-    				try {
-    					is.close();
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-    			}
-    		}
-    	return "APJ:"+ platforRelated.getClosed_APJ()+"<br>"+"USA:"+ platforRelated.getClosed_USA()+"<br>"+"MEXICO:"+ platforRelated.getClosed_MEXICO()+"<br>"+"EMEA:"+ platforRelated.getClosed_EMEA();
-    }
 }
