@@ -277,30 +277,57 @@ function hideBouncePanel()
 function UpdateTag(item,flag,obj){
 	$(".singleQuote").removeClass("editBtn");
 	$(".singleQuote").remove(".edit");
-	$.ajax({
-		 url:'../saveUserKM',
-		 type:"POST",
-		 data : {
-			 openid : $("#openid").val(),
-			 kmItem : item,
-			 flag : flag
-		 },
-		 success:function(result){
-			 if(result==true){
-				 if(flag=='add'){
-					 swal("关注成功 ", "恭喜你成功关注该牌号", "success");
-					 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
-					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
-				 }else  if(flag=='del'){
-					 swal("取消成功", "你取消了对该牌号的关注", "success");
-					 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
-					 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
+	if(flag=='del'){
+		$.ajax({
+			 url:'../saveUserKM',
+			 type:"POST",
+			 data : {
+				 openid : $("#openid").val(),
+				 kmItem : item,
+				 flag : flag
+			 },
+			 success:function(result){
+				 if(result==true){
+					 if(flag=='add'){
+						 swal("关注成功 ", "恭喜你成功关注该牌号", "success");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已关注</span>');
+					 }else  if(flag=='del'){
+						 swal("取消成功", "你取消了对该牌号的关注", "success");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
+					 }
+				 }else{
+					 swal("操作失败", "请刷新页面后重试", "error");
 				 }
-			 }else{
-				 swal("操作失败", "请刷新页面后重试", "error");
 			 }
-		 }
-	});
+		});	
+	}else{
+		$.ajax({
+			 url:'../saveUserApproveKM',
+			 type:"POST",
+			 data : {
+				 openid : $("#openid").val(),
+				 kmItem : item,
+				 flag : flag
+			 },
+			 success:function(result){
+				 if(result==true){
+					 if(flag=='add'){
+						 swal("申请成功 ", "恭喜你成功申请该牌号，请耐心等待管理员审核", "success");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").addClass("attention");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").append('<span class="tag">已申请</span>');
+					 }else  if(flag=='del'){
+						 swal("取消成功", "你取消了对该牌号的关注", "success");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").removeClass("attention");
+						 $(obj).parent().parent(".singleQuote").find(".firstLayer").find(".quoteTitle").find(".tag").remove();
+					 }
+				 }else{
+					 swal("操作失败", "请刷新页面后重试", "error");
+				 }
+			 }
+		});	
+	}
 }
 function getAllDatas(){
 	$.ajax({
@@ -309,7 +336,9 @@ function getAllDatas(){
 		 data : {
 			 openid : $("#openid").val()
 		 },
-		 success:function(KMLikeArr){
+		 success:function(user){
+			var KMLikeArr=user.kmLists;
+			var KMLikeApproveArr=user.kmApproveLists;
 		 	$.ajax({
 			 url:'../PlasticItem/findList?page=1&count=999',
 			 type:"POST",
@@ -319,14 +348,20 @@ function getAllDatas(){
 			{
 				var NoLikeArr=new Array();
 				var LikeArr=new Array();
+				var ApproveArr=new Array();
 				if(KMLikeArr.length>0){
 						 for(var i=0;i<resData.length;i++){
 						 		var itemTemp=$.trim(resData[i].itemNo);
 						 		var index=$.inArray(itemTemp,KMLikeArr);
+						 		var index2=$.inArray(itemTemp,KMLikeApproveArr);
 						 		if(index>-1){
 						 			resData[i]["like"]=true;
 						 			LikeArr.push(resData[i]);
 						 			KMLikeArr.splice(index,1);
+						 		}else if(index2>-1){
+						 			resData[i]["approve"]=true;
+						 			ApproveArr.push(resData[i]);
+						 			KMLikeApproveArr.splice(index2,1);
 						 		}else{
 						 			NoLikeArr.push(resData[i]);
 						 		}
@@ -334,7 +369,7 @@ function getAllDatas(){
 		 		}else{
 		 			NoLikeArr=resData;
 		 		}
-				var data=$.merge(LikeArr, NoLikeArr);   
+				var data=$.merge($.merge(ApproveArr, LikeArr), NoLikeArr);   
 				 var html="";
 				 var totalNum=0;
 				 for(var i=0;i<data.length;i++){
@@ -370,6 +405,9 @@ function getAllDatas(){
 							 tag='<span class="tag">已关注</span>';
 							 attention='attention';
 						 }else{
+							 if(data[i]["approve"]==true){
+								 tag='<span class="tag">已申请</span>';
+							 }
 							 data[i].price="暂无报价";
 							 unit='';
 							 openChart='';
