@@ -409,7 +409,7 @@ function getAllDatas(){
 							 attention='attention';
 						 }else{
 							 if(data[i]["approve"]==true){
-								 tag='<span class="tag">已申请</span>';
+								 tag='<span class="tag approve">已申请</span>';
 							 }
 							 data[i].price="暂无报价";
 							 unit='';
