@@ -362,7 +362,7 @@ function getAllDatas(){
 				var NoLikeArr=new Array();
 				var LikeArr=new Array();
 				var ApproveArr=new Array();
-				if(KMLikeArr.length>0){
+				if(KMLikeArr.length>0||KMLikeApproveArr.length>0){
 						 for(var i=0;i<resData.length;i++){
 						 		var itemTemp=$.trim(resData[i].itemNo);
 						 		var index=$.inArray(itemTemp,KMLikeArr);
