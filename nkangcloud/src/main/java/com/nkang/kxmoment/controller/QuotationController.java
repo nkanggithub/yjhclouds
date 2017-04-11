@@ -303,7 +303,8 @@ public class QuotationController {
             		itemsList=user.getKmLists();
      			String[] aStrings=new Market().getMarket(allUser.get(i).getSelfIntro());
      			String content="永佳和【"+aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+"】邀您查看您所关注的牌号\n";
-     			if(!itemsList.isEmpty()){
+     			System.out.println("starting to get the itemsList....");
+     			if(itemsList!=null&&itemsList.size()!=0){
      			for(String str : itemsList){
      				System.out.println("str-----------------------"+str);
      				if(PlasticItemService.getDetailByNo(str)!=null){
