@@ -286,13 +286,17 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 					var index2=$.inArray(itemTemp,KMLikeApproveArr);
 			 		if(index>-1){
 			 			KMListsArr2[i]["like"]=true;
+			 			KMListsArr2[i]["approve"]=false;
 			 			LikeArr.push(KMListsArr2[i]);
 			 			KMLikeArr.splice(index,1);
 			 		}else if(index2>-1){
 			 			KMListsArr2[i]["approve"]=true;
+			 			KMListsArr2[i]["like"]=false;
 			 			ApproveArr.push(KMListsArr2[i]);
 			 			KMLikeApproveArr.splice(index2,1);
 			 		}else{
+			 			KMListsArr2[i]["approve"]=false;
+			 			KMListsArr2[i]["like"]=false;
 			 			NoLikeArr.push(KMListsArr2[i]);
 			 		}
 			}
