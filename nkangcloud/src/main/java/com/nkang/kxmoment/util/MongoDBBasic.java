@@ -597,6 +597,16 @@ public class MongoDBBasic {
 		}
 		return user;
 	}
+	public static int findUserApproveNum(){
+		mongoDB = getMongoDB();
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+		WeChatMDLUser weChatMDLUser = null;
+		DBCursor queryresults=new DBCursor();
+		DBObject query = new BasicDBObject();
+		query.put("kmApproveLists.0",new BasicDBObject().put("$exists", "1"));
+		queryresults = mongoDB.getCollection(wechat_user).find(query).limit();
+		return queryresults.size();
+	}
 	public static boolean saveUserApproveKM(String openid,String kmItem,String flag){
 		kmItem=kmItem.trim();
 		mongoDB = getMongoDB();
