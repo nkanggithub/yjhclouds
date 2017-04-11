@@ -322,11 +322,11 @@ public class CoreService
 						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
 						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
 						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
-							int UserApproveNum=MongoDBBasic.findUserApproveNum();
+							//int UserApproveNum=MongoDBBasic.findUserApproveNum();
 							String title="胖和微管理";
-							if(UserApproveNum>0){
+							/*if(UserApproveNum>0){
 								title+="【"+UserApproveNum+"个人的牌号询价需要审批】";
-							}
+							}*/
 							Article article3 = new Article();
 							article3.setTitle(title);
 							article3.setDescription("Administration");
