@@ -278,25 +278,26 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 	var NoLikeArr=new Array();
 	var LikeArr=new Array();
 	var ApproveArr=new Array();
+	var KMListsArr2=KMListsArr;
 	if(KMLikeArr.length>0||KMLikeApproveArr.length>0){
-			 for(var i=0;i<KMListsArr.length;i++){
-			 		var itemTemp=$.trim(KMListsArr[i].itemNo);
+			 for(var i=0;i<KMListsArr2.length;i++){
+			 		var itemTemp=$.trim(KMListsArr2[i].itemNo);
 			 		var index=$.inArray(itemTemp,KMLikeArr);
 					var index2=$.inArray(itemTemp,KMLikeApproveArr);
 			 		if(index>-1){
-			 			KMListsArr[i]["like"]=true;
-			 			LikeArr.push(KMListsArr[i]);
+			 			KMListsArr2[i]["like"]=true;
+			 			LikeArr.push(KMListsArr2[i]);
 			 			KMLikeArr.splice(index,1);
 			 		}else if(index2>-1){
-			 			KMListsArr[i]["approve"]=true;
-			 			ApproveArr.push(KMListsArr[i]);
+			 			KMListsArr2[i]["approve"]=true;
+			 			ApproveArr.push(KMListsArr2[i]);
 			 			KMLikeApproveArr.splice(index2,1);
 			 		}else{
-			 			NoLikeArr.push(KMListsArr[i]);
+			 			NoLikeArr.push(KMListsArr2[i]);
 			 		}
 			}
 	}else{
-			NoLikeArr=KMListsArr;
+			NoLikeArr=KMListsArr2;
 	}
 	 var data=$.merge($.merge(ApproveArr, LikeArr), NoLikeArr);   
 	 var html="";
