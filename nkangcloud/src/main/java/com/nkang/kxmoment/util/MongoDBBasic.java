@@ -644,6 +644,7 @@ public class MongoDBBasic {
 		kmItem=kmItem.trim();
 		mongoDB = getMongoDB();
 		Boolean ret = false;
+		Boolean isSendMess=false;
 	    try{
 	    	HashSet<String> kmSets = new HashSet<String>();
 	    	HashSet<String> kmApproveSets = new HashSet<String>();
@@ -673,6 +674,10 @@ public class MongoDBBasic {
                 			if(dbobj instanceof String){
             					if(!kmItem.equals((String) dbobj)){
             						kmApproveSets.add((String) dbobj);
+            					}else{
+            						if("add".equals(flag)){
+            							isSendMess=true;
+            						}
             					}
                 			}
                 		}
@@ -689,7 +694,13 @@ public class MongoDBBasic {
 	    	doc.put("$set", update);  
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
             ret = true;
-            
+            if(isSendMess){
+            	WeChatMDLUser toWeChatMDLUser=new WeChatMDLUser();
+            	toWeChatMDLUser.openid=openid;
+            	String content="你所申请的询价牌号【"+kmItem+"】已经通过审核";
+            	RestUtils.sendQuotationToUser(toWeChatMDLUser,content," https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Do9zj&oid=00D90000000pkXM","牌号【"+kmItem+"】已经通过审核","http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID="+openid); 
+            	
+            }
 	    }
 		catch(Exception e){
 			log.info("saveUserKM--" + e.getMessage());
