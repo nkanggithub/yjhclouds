@@ -4080,14 +4080,35 @@ public class MongoDBBasic {
 		while(inventorys.hasNext()) {
 			Inventory it = new Inventory();
 			   DBObject obj = inventorys.next();
-		       it.setPlasticItem(obj.get("plasticItem")+"");
-		       it.setRepositoryName(obj.get("repositoryName")+"");
-		       it.setWaitDeliverAmount(Double.parseDouble(obj.get("waitDeliverAmount")+""));
-		       it.setAvailableAmount(Double.parseDouble(obj.get("availableAmount")+""));
-		       it.setInventoryAmount(Double.parseDouble(obj.get("inventoryAmount")+""));
-		       it.setLastUpdate(obj.get("lastUpdate")+"");
-		       it.setReserveDeliverAmount(Double.parseDouble(obj.get("reserveDeliverAmount")+""));
-		       it.setUnit(obj.get("unit")+"");
+			   if(!StringUtils.isEmpty(obj.get("plasticItem")+"")){
+				   it.setPlasticItem(obj.get("plasticItem")+""); 
+			   }
+			   if(!StringUtils.isEmpty(obj.get("repositoryName")+"")){
+				   it.setRepositoryName(obj.get("repositoryName")+"");
+			   }
+		       if(!StringUtils.isEmpty(obj.get("waitDeliverAmount")+"")){
+		    	   it.setWaitDeliverAmount(Double.parseDouble(obj.get("waitDeliverAmount")+""));
+		       }
+		       if(!StringUtils.isEmpty(obj.get("availableAmount")+"")){
+		    	   it.setAvailableAmount(Double.parseDouble(obj.get("availableAmount")+""));
+		       }
+		      
+		       if(!StringUtils.isEmpty(obj.get("inventoryAmount")+"")){
+		    	   it.setInventoryAmount(Double.parseDouble(obj.get("inventoryAmount")+""));
+		       }
+		      
+		       if(!StringUtils.isEmpty(obj.get("lastUpdate")+"")){
+		    	   it.setLastUpdate(obj.get("lastUpdate")+"");
+		       }
+		     
+		       if(!StringUtils.isEmpty(obj.get("reserveDeliverAmount")+"")){
+		    	   it.setReserveDeliverAmount(Double.parseDouble(obj.get("reserveDeliverAmount")+""));
+		       }
+		     
+		       if(!StringUtils.isEmpty(obj.get("unit")+"")){
+		    	   it.setUnit(obj.get("unit")+"");
+		       }
+		      
 		       Inventorys.add(it);
 		}
 		return Inventorys;
