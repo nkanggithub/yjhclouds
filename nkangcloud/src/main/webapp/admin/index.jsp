@@ -249,7 +249,8 @@ function showKMPanel(openid,name){
 		 url:'../queryUserKM',
 		 type:"POST",
 		 data : {
-			 openid : openid
+			 openid : openid,
+			 random : Math.random()
 		 },
 		 success:function(user){
 			var KMLikeArr=user.kmLists;
@@ -289,7 +290,7 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 			 		}else if(index2>-1){
 			 			KMListsArr[i]["approve"]=true;
 			 			ApproveArr.push(KMListsArr[i]);
-			 			KMLikeArr.splice(index,1);
+			 			KMLikeApproveArr.splice(index,1);
 			 		}else{
 			 			NoLikeArr.push(KMListsArr[i]);
 			 		}
@@ -310,7 +311,8 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].itemNo+'\',this)"  type="button" value="取消"/>';
 			 }
 			 if(data[i]["approve"]==true){
-				 tag='<span class="pTag approve">申请中</span>';
+				 tag='<span class="pTag approve">申请中</span>'; 
+				 button='		<input class="botton" onclick="UpdateTag(\''+openid+'\',\''+data[i].itemNo+'\',this)" type="button" value="关注"/>';
 			 }
 			 if(data[i].quotationPrice=="暂停报价")
 			 {
@@ -747,13 +749,13 @@ jQuery.ajax({
 				
 				
 				if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
-					selfIntro="电话:"+temp.phone;
+					selfIntro='<a href="tel:'+temp.phone+'">电话:'+temp.phone+'</a>';
 					infoPer+=40;
 				}else{
 					selfIntro="&nbsp;";
 				}
 				if(temp.kmApproveLists!=null&&temp.kmApproveLists!='null'&&temp.kmApproveLists.length>0){
-					selfIntro+='&nbsp;[申请中]'
+					selfIntro+='&nbsp;<span style="font-size:1">[询价申请]</span>'
 				}
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
