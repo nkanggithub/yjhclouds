@@ -4086,26 +4086,24 @@ public class MongoDBBasic {
 			   if(!StringUtils.isEmpty(obj.get("repositoryName")+"")){
 				   it.setRepositoryName(obj.get("repositoryName")+"");
 			   }
-		       if(obj.get("waitDeliverAmount")==null||obj.get("waitDeliverAmount")==""){
+		       if(obj.get("waitDeliverAmount")!=null&&obj.get("waitDeliverAmount")!=""){
 		    	   it.setWaitDeliverAmount(Double.parseDouble(obj.get("waitDeliverAmount")+""));
 		       }
-		       if(!StringUtils.isEmpty(obj.get("availableAmount")+"")){
+		       if(obj.get("availableAmount")!=null&&obj.get("availableAmount")!=""){
 		    	   it.setAvailableAmount(Double.parseDouble(obj.get("availableAmount")+""));
 		       }
 		      
-		       if(!StringUtils.isEmpty(obj.get("inventoryAmount")+"")){
+		       if(obj.get("inventoryAmount")!=null&&obj.get("inventoryAmount")!=""){
 		    	   it.setInventoryAmount(Double.parseDouble(obj.get("inventoryAmount")+""));
 		       }
 		      
-		       if(!StringUtils.isEmpty(obj.get("lastUpdate")+"")){
-		    	   it.setLastUpdate(obj.get("lastUpdate")+"");
-		       }
+		       it.setLastUpdate(obj.get("lastUpdate")+"");
 		     
-		       if(!StringUtils.isEmpty(obj.get("reserveDeliverAmount")+"")){
+		       if(obj.get("reserveDeliverAmount")!=null&&obj.get("reserveDeliverAmount")!=""){
 		    	   it.setReserveDeliverAmount(Double.parseDouble(obj.get("reserveDeliverAmount")+""));
 		       }
 		     
-		       if(!StringUtils.isEmpty(obj.get("unit")+"")){
+		       if(obj.get("unit")!=null&&obj.get("unit")!=""){
 		    	   it.setUnit(obj.get("unit")+"");
 		       }
 		      
