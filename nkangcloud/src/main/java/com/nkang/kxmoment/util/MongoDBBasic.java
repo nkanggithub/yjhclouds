@@ -4086,7 +4086,7 @@ public class MongoDBBasic {
 			   if(!StringUtils.isEmpty(obj.get("repositoryName")+"")){
 				   it.setRepositoryName(obj.get("repositoryName")+"");
 			   }
-		       if(!StringUtils.isEmpty(obj.get("waitDeliverAmount")+"")){
+		       if(obj.get("waitDeliverAmount")==null||obj.get("waitDeliverAmount")==""){
 		    	   it.setWaitDeliverAmount(Double.parseDouble(obj.get("waitDeliverAmount")+""));
 		       }
 		       if(!StringUtils.isEmpty(obj.get("availableAmount")+"")){
