@@ -208,7 +208,8 @@ public class UserProfileController {
 		conhis.setType(request.getParameter("type"));
 		conhis.setPoint(request.getParameter("points"));
 		conhis.setComments(request.getParameter("comments"));
-		conhis.setUserImg(request.getParameter("userImage"));
+		HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(openid);
+		conhis.setUserImg(res.get("HeadUrl"));
 		conhis.setGiftImg(img);
 		conhis.setCongratulateDate(new Date().toLocaleString());
 		MongoDBBasic.updateUserCongratulateHistory(openid,conhis);
