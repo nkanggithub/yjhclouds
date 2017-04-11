@@ -601,10 +601,10 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
 		WeChatMDLUser weChatMDLUser = null;
-		DBCursor queryresults=new DBCursor();
+		DBCursor queryresults;
 		DBObject query = new BasicDBObject();
 		query.put("kmApproveLists.0",new BasicDBObject().put("$exists", "1"));
-		queryresults = mongoDB.getCollection(wechat_user).find(query).limit();
+		queryresults = mongoDB.getCollection(wechat_user).find(query);
 		return queryresults.size();
 	}
 	public static boolean saveUserApproveKM(String openid,String kmItem,String flag){
