@@ -279,8 +279,15 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 	var LikeArr=new Array();
 	var ApproveArr=new Array();
 	var KMListsArr2=KMListsArr;
-	if(KMLikeArr.length>0||KMLikeApproveArr.length>0){
-			 for(var i=0;i<KMListsArr2.length;i++){
+	if((KMLikeArr!=null&&KMLikeArr.length>0)||(KMLikeApproveArr!=null&&KMLikeApproveArr.length>0)){
+		if(KMLikeArr==null){
+			KMLikeArr=new Array();
+		}
+		if(KMLikeApproveArr==null){
+			KMLikeApproveArr=new Array();
+		}
+		
+		for(var i=0;i<KMListsArr2.length;i++){
 			 		var itemTemp=$.trim(KMListsArr2[i].itemNo);
 			 		var index=$.inArray(itemTemp,KMLikeArr);
 					var index2=$.inArray(itemTemp,KMLikeApproveArr);
