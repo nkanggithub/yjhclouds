@@ -603,7 +603,7 @@ public class MongoDBBasic {
 		WeChatMDLUser weChatMDLUser = null;
 		DBCursor queryresults;
 		DBObject query = new BasicDBObject();
-		query.put("kmApproveLists.0",new BasicDBObject().put("$exists", "1"));
+		query.put("kmApproveLists.0",new BasicDBObject().put("$exists",true));
 		queryresults = mongoDB.getCollection(wechat_user).find(query);
 		return queryresults.size();
 	}
