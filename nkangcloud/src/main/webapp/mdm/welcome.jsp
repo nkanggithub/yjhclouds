@@ -2,6 +2,7 @@
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%	
 String baehosthost = Constants.baehost;
+String uid = request.getParameter("UID");
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -89,7 +90,7 @@ String baehosthost = Constants.baehost;
         	<div class="page" id="pageD1">
         		<p class="tip-t">匠心沉淀</p>
         		<p class="tip-b">
-        			永佳和塑胶有限公司成立近13年来，不断开拓创新，发展壮大，业务规模不断攀升。近三年来，公司及旗下子公司业务量年均增长率为30%，预计2013年销售额将达到15亿元人民币。良好的经营业绩得益于上下游客户的鼎力支持，也离不开每一位员工的不懈努力和辛勤付出，在此我谨代表公司管理层表示最衷心的感谢。
+        			永佳和塑胶有限公司成立近13年来，不断开拓创新，发展壮大，业务规模不断攀升。近三年来，公司及旗下子公司业务量年均增长率为30%，到2017年突破20亿元人民币。良好的经营业绩得益于上下游客户的鼎力支持，也离不开每一位员工的不懈努力和辛勤付出，在此我谨代表公司管理层表示最衷心的感谢。
         		</p>
         		<div class="step-box">
 
@@ -150,17 +151,17 @@ String baehosthost = Constants.baehost;
         			在这个充满了机遇与挑战的信息时代，我们更要转变观念，勤于思考，善于洞察，秉持诚信，大胆创新。
         		</p>
         		<div class="img-wrap">
-        			<!-- <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM" width="100%"> -->
+        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM" width="100%">
         		</div>
         	</div>
         	<div class="page" style="height:580px;">
         		<p class="tip-t">联系我们</p>
         		<p class="tip-b">
-        			公        司：  厦门永佳和塑胶有限公司<br/>
-联 系  人：  谷成钢 (总经理)<br/>
-电        话：  0592-5691619<br/>
-传        真：  0592-5650851<br/>
-地        址：  厦门市湖里区枋钟路2362号金山财富广场2号楼10层<br/>
+        			公        司：  重庆永佳和塑胶有限公司<br/>
+联 系  人：  王素萍 (总经理)<br/>
+电        话：  023-68698689<br/>
+传        真：  023-68698676<br/>
+地        址：  重庆市九龙坡区渝州路156号6-8(歇台子党校旁边百科大厦6-8)<br/>
         		</p>
         		<div class="img-wrap" style="bottom:20px;">
         			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmM7n&oid=00D90000000pkXM" width="100%">
@@ -198,7 +199,7 @@ String baehosthost = Constants.baehost;
 	            
 	            </div>
 	            <div class="btn-box">
-	                <a href="http://"+<%= baehosthost%> + "/mdm/quoteDetail.jsp"><button class="btn">马上询价</button></a>
+	                <a href="http://"+<%= baehosthost%> + "/mdm/quoteDetailExternal.jsp?UID=<%= uid%>"><button class="btn">马上询价</button></a>
 	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
@@ -206,7 +207,7 @@ String baehosthost = Constants.baehost;
 	            </div>
 	        </div>
 	        <div class="tel-box">
-	            <a href="tel:0592-5691619" style="color:#a0a0a0;">0592-5691619</a>
+	            <a href="tel:023-68698689" style="color:#a0a0a0;">023-68698689</a>
 	        </div>
 	     </div>
     </section>

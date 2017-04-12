@@ -295,7 +295,7 @@ public class CoreService
 						article.setTitle("胖和欢迎您随时砸单");
 						article.setDescription("我的应用");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU0c&oid=00D90000000pkXM");
-						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?");
+						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						Article article2 = new Article();
 						article2.setTitle("胖和微应用");
@@ -358,7 +358,7 @@ public class CoreService
 						article.setTitle("永佳和业绩:");
 						article.setDescription("永佳和业绩:");
 						article.setPicUrl("http://"+Constants.baehost+"/MetroStyleFiles/RecognitionImage.jpg");
-						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp");
+						article.setUrl("http://"+Constants.baehost+"/mdm/welcome.jsp?UID=" + fromUserName);
 						articleList.add(article);
 						
 						newsMessage.setArticleCount(articleList.size());
