@@ -148,10 +148,10 @@ String UID = request.getParameter("UID");
         	<div class="page page3">
         		<p class="tip-t">董事长致词</p>
         		<p class="tip-b">
-        			在这个充满了机遇与挑战的信息时代，我们更要转变观念，勤于思考，善于洞察，秉持诚信，大胆创新。
+        			在这个充满了机遇与挑战的信息时代，我们更要转变观念，勤于思考，善于洞察，秉持诚信，大胆创新。2010年以来，公司通过引进了OA办公系统和U8进销存及客户管理系统，有效推动了制度与流程的规范化，提升了运营效率；通过激励手段的探索和创新，公司设立了合作基金制度，使管理人员和资深员工得以分享公司的经营成果；通过对全国销售网络的重新规划，整合了上海、广州等地的销售团队，制定了武汉、郑州、江西、成都等地的发展计划，明确了以厦门带动华南、重庆覆盖西南、武汉辐射华东及华中的中短期战略布局。这些举措为公司的厚积薄发奠定了重要的基础
         		</p>
         		<div class="img-wrap">
-        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM" width="100%">
+        			<img src="" width="100%">
         		</div>
         	</div>
         	<div class="page" style="height:580px;">
@@ -199,8 +199,7 @@ String UID = request.getParameter("UID");
 	            
 	            </div>
 	            <div class="btn-box">
-	                <a href="http://wonderfulcq.bceapp.com/mdm/quoteDetailExternal.jsp?UID=<%= UID%>" ><button class="btn">马上询价</button></a>
-	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
+	                <a href="http://wonderfulcq.bceapp.com/mdm/quoteDetailExternal.jsp?UID=<%= UID%>" ><button class="btn">马上询价</button></a>     
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
 	                <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EA48E&oid=00D90000000pkXM" width="244" height="114">
