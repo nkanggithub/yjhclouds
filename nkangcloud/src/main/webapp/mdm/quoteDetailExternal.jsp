@@ -362,7 +362,13 @@ function getAllDatas(){
 				var NoLikeArr=new Array();
 				var LikeArr=new Array();
 				var ApproveArr=new Array();
-				if(KMLikeArr.length>0||KMLikeApproveArr.length>0){
+				if((KMLikeArr!=null&&KMLikeArr.length>0)||(KMLikeApproveArr!=null&&KMLikeApproveArr.length>0)){
+					if(KMLikeArr==null){
+						KMLikeArr=new Array();
+					}
+					if(KMLikeApproveArr==null){
+						KMLikeApproveArr=new Array();
+					}
 						 for(var i=0;i<resData.length;i++){
 						 		var itemTemp=$.trim(resData[i].itemNo);
 						 		var index=$.inArray(itemTemp,KMLikeArr);
@@ -401,17 +407,23 @@ function getAllDatas(){
 							 priceColor="high";
 							 change='		<span class="change high">'+data[i].diffPrice+'&nbsp;<b>↑</b></span>';
 						 }
+
 						 var tag='';
 						 var attention='';
 						 var priceStyle='';
 						 var unit='<span class="unit">元/吨</span>';
-						 if(data[i].priceStatus==0){
-							 data[i].price="暂停报价";
-							 unit='';
-						 }
+						 
+						 var myDate = new Date();
+						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
+						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
 						 if(nowHour<10||nowHour>=18||data[i].priceStatus==1){
 							 priceStyle=' style="text-decoration:line-through;color:#aaa;" ';
 							 change='';
+						 }
+						 
+						 if(data[i].priceStatus==0){
+							 data[i].price="暂停报价";
+							 unit='';
 						 }
 						 var openChart=' onclick="ToCharPage(\''+data[i].itemNo+'\')" ';
 						 if(data[i]["like"]==true){
@@ -428,10 +440,7 @@ function getAllDatas(){
 							 change='';
 							 priceStyle='';
 						 }
-						 var myDate = new Date();
-						 var nowHour=myDate.getHours();       //获取当前小时数(0-23)
-						 var nowMinu=myDate.getMinutes();     //获取当前分钟数(0-59)
-						
+						 
 						 
 						 html+='<li class="singleQuote">'
 							 +'	<div class="firstLayer '+attention+'">'
