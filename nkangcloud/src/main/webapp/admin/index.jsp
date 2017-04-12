@@ -676,6 +676,7 @@ jQuery.ajax({
 			//for (var i = data.length-1; i >0 ; i--) {
 			for (var i = 0; i < data.length ; i++) {
 				var temp = data[i];
+				if(temp.openid!=null&&temp.openid!='null'){
 				var selfIntro="";
 				var companyName=temp.companyName;
 				var companyRole=temp.role;
@@ -840,6 +841,7 @@ jQuery.ajax({
 					+'                                                <div class="clear"></div>'
 					+'                                          </li>';
 				ul += li;
+				}
 			}
 			$("#Work_Mates_div").html(ul);
 			$("#syncUser").click(function(){
