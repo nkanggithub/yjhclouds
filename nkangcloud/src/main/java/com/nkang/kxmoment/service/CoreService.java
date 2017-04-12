@@ -25,7 +25,6 @@ import com.nkang.kxmoment.response.Article;
 import com.nkang.kxmoment.response.NewsMessage;
 import com.nkang.kxmoment.response.TextMessage;
 import com.nkang.kxmoment.util.CommenJsonUtil;
-import com.nkang.kxmoment.util.CronJob;
 import com.nkang.kxmoment.util.FaceRecognition;
 import com.nkang.kxmoment.util.MessageUtil;
 import com.nkang.kxmoment.util.MongoDBBasic;
@@ -96,20 +95,6 @@ public class CoreService
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}else if ("K8003".equals(textContent)||"8003".equals(textContent)) {
 					respContent = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM";
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}else if ("SJOB".equals(textContent)) {
-					Calendar date = Calendar.getInstance();
-				    //date.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-				    date.set(Calendar.HOUR, 0);
-				    date.set(Calendar.MINUTE, 5);
-				    date.set(Calendar.SECOND, 0);
-				    date.set(Calendar.MILLISECOND, 0);
-				    // Schedule to run every Sunday in midnight
-				    //timer.schedule(new CronJob(),date.getTime(),1000 * 60 * 60 * 24 * 7);
-				    timer.schedule(new CronJob(), 0 , 5 * 60 * 1000);
-				    log.info("-----Job Started and running----" + timer.toString());
-				    respContent = "started " + timer.toString();
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}

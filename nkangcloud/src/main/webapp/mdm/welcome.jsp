@@ -150,7 +150,7 @@ String baehosthost = Constants.baehost;
         			在这个充满了机遇与挑战的信息时代，我们更要转变观念，勤于思考，善于洞察，秉持诚信，大胆创新。
         		</p>
         		<div class="img-wrap">
-        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000Dmc7A&oid=00D90000000pkXM" width="100%">
+        			<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJSx&oid=00D90000000pkXM" width="100%">
         		</div>
         	</div>
         	<div class="page" style="height:580px;">
@@ -202,7 +202,7 @@ String baehosthost = Constants.baehost;
 	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
-	                <img src="http://mp.weixin.qq.com/mp/qrcode?scene=10000004&size=102&__biz=MjM5MzA1MDIyNg==" width="244" height="114">
+	                <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EA48E&oid=00D90000000pkXM" width="244" height="114">
 	            </div>
 	        </div>
 	        <div class="tel-box">
