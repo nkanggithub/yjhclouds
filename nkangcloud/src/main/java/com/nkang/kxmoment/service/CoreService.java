@@ -251,16 +251,16 @@ public class CoreService
 					if(eventKey.equals("MDLAKE")){ // Data Lake
 						articleList.clear();
 						Article article = new Article();
-						article.setTitle("永佳和大数据");
-						article.setDescription("永佳和大数据");
+						article.setTitle("永佳和行情共享");
+						article.setDescription("永佳和行情共享");
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmMS2&oid=00D90000000pkXM"); //big data
-						article.setUrl("http://"+Constants.baehost+"/mdm/DQNavigate.jsp?UID=" + fromUserName);
+						article.setUrl("http://"+Constants.baehost+"/MetroStyleFiles/image/Maintenace.gif");
 						articleList.add(article);
 						Article article4 = new Article();
-						article4.setTitle("永佳和主数据");
-						article4.setDescription("永佳和主数据");
+						article4.setTitle("永佳和行情共享-正在努力建设中，敬请期待");
+						article4.setDescription("永佳和行情共享");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
-						article4.setUrl("http://"+Constants.baehost+"/DQMenu?UID=" + fromUserName);
+						article4.setUrl("http://"+Constants.baehost+"/MetroStyleFiles/image/Maintenace.gif");
 						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
