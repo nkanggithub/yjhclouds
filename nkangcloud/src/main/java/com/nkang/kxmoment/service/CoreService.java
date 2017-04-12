@@ -325,7 +325,7 @@ public class CoreService
 							int UserApproveNum=MongoDBBasic.findUserApproveNum();
 							String title="胖和微管理";
 							if(UserApproveNum>0){
-								title+="【"+UserApproveNum+"个人的牌号询价需要审批】";
+								title+="【"+UserApproveNum+"人牌号询价中】";
 							}
 							Article article3 = new Article();
 							article3.setTitle(title);
