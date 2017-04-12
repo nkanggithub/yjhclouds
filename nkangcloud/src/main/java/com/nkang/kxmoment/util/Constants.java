@@ -14,6 +14,7 @@ public final class Constants {
 	public static final String GOOGLE_KEY = "AIzaSyB3bZ1N7XRiQu2M4ZB3QQMxd3VVLnzrRK4";
 	public static final String convertString = "<%=value%>";
 	public static final String proxyInfo = "web-proxy.austin.hpecorp.net";
+	//public static final String baehost = "wonderfulcq.bceapp.com";
 	public static final String baehost = "wonderful.duapp.com";
 	public static final String wechatapihost = "api.weixin.qq.com";
 	public static final String baiduapihost = "api.map.baidu.com";
