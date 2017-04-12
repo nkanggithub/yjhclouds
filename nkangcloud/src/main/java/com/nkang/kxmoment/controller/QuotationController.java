@@ -291,7 +291,7 @@ public class QuotationController {
 		// List<PlasticItem>  plasticItemlist = new ArrayList<PlasticItem>();
 		 if("".equals(title)||title==null){
 			 	Date date=new Date();
-				title=date.getDate()+"-永佳和塑胶报价更新啦~";
+				title="永佳和塑胶报价更新啦~";
 			}
 			if("1".equals(imgType)){
 				img="http://wonderfulcq.bj.bcebos.com/"+img;
