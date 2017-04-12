@@ -712,7 +712,7 @@ public class MongoDBBasic {
             	
             	
             	String title=res.get("NickName")+"：您所申请的询价牌号【"+kmItem+"】已通过审核";
-            	RestUtils.sendQuotationToUser(toWeChatMDLUser,"点击查看详细报价信息","https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUBS&oid=00D90000000pkXM",title,"http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID="); 
+            	RestUtils.sendQuotationToUser(toWeChatMDLUser,"点击查看详细报价信息","https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnUBS&oid=00D90000000pkXM",title,"http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID="); 
             	
             }
 	    }

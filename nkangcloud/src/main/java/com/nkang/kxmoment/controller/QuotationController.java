@@ -30,6 +30,7 @@ import com.nkang.kxmoment.baseobject.Visited;
 import com.nkang.kxmoment.baseobject.Visitedreturn;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.service.PlasticItemService;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 
@@ -297,7 +298,7 @@ public class QuotationController {
 			}
 		    List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
-			String url="http://wonderful.duapp.com/mdm/quoteDetailExternal.jsp?UID=";
+			String url="http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID=";
              for(int i=0;i<allUser.size();i++){
             		WeChatMDLUser user=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
             		itemsList=user.getKmLists();
@@ -327,7 +328,7 @@ public class QuotationController {
 	@RequestMapping("/sendReminderForQuotation")
 	public @ResponseBody String sendReminderForQuotation()
 	{
-		String url="http://wonderful.duapp.com/mdm/quoteDetail.jsp?UID=";
+		String url="http://"+Constants.baehost+"/mdm/quoteDetail.jsp?UID=";
 		int itemNeedApprove = PlasticItemService.findListWithOutApprove();
 		String title=itemNeedApprove+"个牌号需要您审批";
 		String content="";
