@@ -77,7 +77,6 @@ public class RestUtils {
 		           JSONObject demoJson = new JSONObject(message);
 		           accessToken = demoJson.getString("access_token");
 		           expires_in = demoJson.getString("expires_in");
-		           //DBUtils.updateAccessKey(accessToken, expires_in);
 		           MongoDBBasic.updateAccessKey(accessToken, expires_in);
 		           is.close();
 		       } catch (Exception e) {
@@ -1676,81 +1675,6 @@ public class RestUtils {
 		return strBuf.toString();  
 	}
 	
-	//Bit Add Start
-		public static String getLocationDetailsforOppt(String Query, String Region, String OpptID, String OpptAddr, String OpsiId, String CityRegion) throws Exception{
-			String StatusMessage = "";
-			if(Query != null){
-				Query = URLEncoder.encode(Query, "UTF-8");
-			}
-			else{
-				Query = "Query";
-			}
-			if(Region != null){
-				Region = URLEncoder.encode(Region, "UTF-8");
-			}
-			else{
-				Region = "China";
-			}
-			
-			String url =  "http://"+Constants.baiduapihost+"/place/v2/search?query=" + Query + "&region=" + Region + "&output=json&ak=" + Constants.BAIDU_APPKEY;
-			try {
-		           URL urlGet = new URL(url);
-		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-		           http.setRequestMethod("GET"); //must be get request
-		           http.setRequestProperty("Content-Type","application/json");
-		           http.setDoOutput(true);
-		           http.setDoInput(true);
-		           if(localInd == "Y"){
-			           System.setProperty("http.proxyHost", Constants.proxyInfo);  
-			           System.setProperty("http.proxyPort", "8080");  
-		           } 
-		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-		           http.connect();
-		           InputStream is = http.getInputStream();
-		           int size = is.available();
-		           byte[] jsonBytes = new byte[size];
-		           is.read(jsonBytes);
-		           String message = new String(jsonBytes, "UTF-8");
-		           JSONObject demoJson = new JSONObject(message);
-		           if(demoJson.has("results")){
-			           JSONArray ResultJA = demoJson.getJSONArray("results");
-			           if(ResultJA.length() > 0){
-			        	   JSONObject placeJO = ResultJA.getJSONObject(0);
-			        	   if(placeJO != null &&placeJO.has("location")){
-			        		   try{
-						           JSONObject locationJO = placeJO.getJSONObject("location");
-						           String lng = locationJO.getString("lng");
-						           String lat = locationJO.getString("lat");
-						           if(lng !="" && lat != ""){
-						        	   DBUtils.updateOppt(lat, lng, OpptID, String.valueOf(ResultJA.length()), OpptAddr, OpsiId, CityRegion);
-						           }
-			        		   }
-			        		   catch(Exception e){
-			        			   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-			        		   }
-			        	   }
-			        	   else{
-			        		   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-			        	   }
-			           }
-			           else{
-			        	   DBUtils.updateOppt("", "", OpptID, String.valueOf(0), OpptAddr, OpsiId, CityRegion);
-			           }
-		           }
-		           else{
-		        	   StatusMessage = demoJson.getString("status");
-		           }
-
-		           is.close();
-		       } catch (Exception e) {
-		    	   System.out.println(new java.sql.Timestamp(new java.util.Date().getTime()) + "Exception Occurs in getLocationDetailsforOppt with OPSI: "+ OpsiId +"---" + e.toString());
-		    	   e.printStackTrace();
-		       }
-			return StatusMessage;
-		}
-		
-		
 public static String regist(WeChatMDLUser user) {
 			
 			String urlStr = "http://"+Constants.baehost+"/CallRegisterUser";
