@@ -660,6 +660,9 @@ function updateLogo(id){
 	});
 }
 function getMDLUserLists() {
+	$("#syncUser").click(function(){
+		syncUser();
+	});
 	var UpStreamList=0;
 	var DownStreamList= 0;
 	var PartnerList= 0;
@@ -844,9 +847,6 @@ jQuery.ajax({
 				}
 			}
 			$("#Work_Mates_div").html(ul);
-			$("#syncUser").click(function(){
-				syncUser();
-			});
 			$("#refreshUser").click(function(){
 				getMDLUserLists();
 			});
