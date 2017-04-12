@@ -432,13 +432,13 @@ function showUpdateUserPanel(openid,name){
 			            +'															<input type="checkbox"  name="role" value="isExternalCompetitor"  '+(isExternalCompetitor==true?'checked':'')+'/>代理商'
 			            +'															</nobr><br/><nobr>'
 			            +'															<input type="checkbox"  name="role" value="isInternalNonBizEmp"  '+(isInternalNonBizEmp==true?'checked':'')+'/>物流商'
-			            +'															<input type="checkbox"  name="role" value="isInternalBizEmp"  '+(isInternalBizEmp==true?'checked':'')+'/>非业务员'
+			            +'															<input type="checkbox"  name="role" value="isInternalBizEmp"  '+(isInternalBizEmp==true?'checked':'')+'/><span style="color:#0761A5">非业务员</span>'
 			            +'															</nobr><br/><nobr>'
-			            +'															<input type="checkbox"  name="role" value="isInternalImtMgt"  '+(isInternalImtMgt==true?'checked':'')+'/>信息发布'
-			            +'															<input type="checkbox"  name="role" value="isInternalQuoter"  '+(isInternalQuoter==true?'checked':'')+'/>报价修改'
+			            +'															<input type="checkbox"  name="role" value="isInternalImtMgt"  '+(isInternalImtMgt==true?'checked':'')+'/><span style="color:#0761A5">信息发布</span>'
+			            +'															<input type="checkbox"  name="role" value="isInternalQuoter"  '+(isInternalQuoter==true?'checked':'')+'/><span style="color:#0761A5">报价修改</span>'
 			            +'															</nobr><br/><nobr>'
-			            +'															<input type="checkbox"  name="role" value="isInternalSeniorMgt"  '+(isInternalSeniorMgt==true?'checked':'')+'/>报价审核'
-			            +'															<input type="checkbox"  name="role" value="isITOperations"  '+(isITOperations==true?'checked':'')+'/>后台管理'
+			            +'															<input type="checkbox"  name="role" value="isInternalSeniorMgt"  '+(isInternalSeniorMgt==true?'checked':'')+'/><span style="color:#0761A5">报价审核</span>'
+			            +'															<input type="checkbox"  name="role" value="isITOperations"  '+(isITOperations==true?'checked':'')+'/><span style="color:#0761A5">后台管理</span>'
 			            +'															</nobr>'
 			            +'														</td>'
 			            +'													</tr>'
@@ -767,7 +767,7 @@ jQuery.ajax({
 					selfIntro="&nbsp;";
 				}
 				if(temp.kmApproveLists!=null&&temp.kmApproveLists!='null'&&temp.kmApproveLists.length>0){
-					selfIntro+='&nbsp;<span style="font-size:1">[询价申请]</span>'
+					selfIntro+='&nbsp;<span style="font-size:13">[询价]</span>'
 				}
 				if(companyName==null||companyName=='null'||companyName==''){
 					companyName="";
