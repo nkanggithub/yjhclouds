@@ -242,7 +242,7 @@ public class CoreService
 						article.setUrl("http://"+Constants.baehost+"/MetroStyleFiles/image/Maintenace.gif");
 						articleList.add(article);
 						Article article4 = new Article();
-						article4.setTitle("永佳和行情共享-正在努力建设中，敬请期待");
+						article4.setTitle("正在努力建设中，敬请期待");
 						article4.setDescription("永佳和行情共享");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article4.setUrl("http://"+Constants.baehost+"/MetroStyleFiles/image/Maintenace.gif");
