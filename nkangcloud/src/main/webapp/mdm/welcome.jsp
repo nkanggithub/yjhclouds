@@ -2,7 +2,7 @@
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%	
 String baehosthost = Constants.baehost;
-String uid = request.getParameter("UID");
+String UID = request.getParameter("UID");
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -199,7 +199,7 @@ String uid = request.getParameter("UID");
 	            
 	            </div>
 	            <div class="btn-box">
-	                <a href="http://"+<%= baehosthost%> + "/mdm/quoteDetailExternal.jsp?UID=<%= uid%>"><button class="btn">马上询价</button></a>
+	                <a href="http://wonderfulcq.bceapp.com/mdm/quoteDetailExternal.jsp?UID=<%= UID%>" ><button class="btn">马上询价</button></a>
 	                <button class="btn share-btn" id="shareF">分享到朋友圈</button>
 	            </div>
 	            <div class="attention-box" style="opacity:.9">
