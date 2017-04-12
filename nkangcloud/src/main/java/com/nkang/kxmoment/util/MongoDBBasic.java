@@ -602,8 +602,8 @@ public class MongoDBBasic {
 		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
 		WeChatMDLUser weChatMDLUser = null;
 		DBCursor queryresults;
-		DBObject query = new BasicDBObject();
-		query.put("kmApproveLists.0",new BasicDBObject().put("$exists",true));
+		BasicDBObject query = new BasicDBObject();
+		query.append("kmApproveLists.0", new BasicDBObject().append("$exists",true));
 		queryresults = mongoDB.getCollection(wechat_user).find(query);
 		return queryresults.size();
 	}
