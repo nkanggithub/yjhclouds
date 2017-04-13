@@ -174,7 +174,7 @@ ul li.Work_Mates_div_list_div2 {
 			        dataFormat: 'json',
 			        dataSource: {
 			    "chart": {
-			        "caption": "附近人员【"+data.length+"/170】分布情况",
+			        "caption": "附近人员【"+data.length+"】分布情况",
 			        "bgcolor": "FFFFFF",
 			        "radarfillcolor": "FFFFFF",
 			        "plotfillalpha": "5",
