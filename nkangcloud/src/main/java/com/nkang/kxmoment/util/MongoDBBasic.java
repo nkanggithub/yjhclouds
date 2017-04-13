@@ -155,6 +155,17 @@ public class MongoDBBasic {
 		}
 	    return validKey;
 	}
+	public static boolean addSkimNum(){
+		boolean result=false;
+		mongoDB = getMongoDB();
+		BasicDBObject doc = new BasicDBObject();
+		BasicDBObject update = new BasicDBObject();
+    	update.append("SkimNum",1);
+		doc.put("$inc", update);
+		WriteResult wr = mongoDB.getCollection(ClientMeta).update(new BasicDBObject().append("Active", "Y"), doc);  
+		result=true;
+		return result;
+}
 	public static ClientMeta QueryClientMeta(){
 		ClientMeta cm = new ClientMeta();
 		mongoDB = getMongoDB();
@@ -169,6 +180,7 @@ public class MongoDBBasic {
 			String clientThemeColor = queryresults.get("ClientThemeColor")==null?"":queryresults.get("ClientThemeColor").toString();
 			String clientStockCode =queryresults.get("ClientCode")==null?"": queryresults.get("ClientCode").toString();
 			String clientActive = queryresults.get("Active")==null?"":queryresults.get("Active").toString();
+			String skimNum = queryresults.get("SkimNum")==null?"":queryresults.get("SkimNum").toString();
 			BasicDBList slide = (BasicDBList) queryresults.get("Slide");
     		if(slide != null){
     			ArrayList list=new ArrayList();
@@ -181,6 +193,7 @@ public class MongoDBBasic {
         		}
         		cm.setSlide(list);
     		}
+    		cm.setSkimNum(skimNum);
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
