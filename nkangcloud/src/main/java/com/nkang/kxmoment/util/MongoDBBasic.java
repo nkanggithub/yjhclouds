@@ -158,10 +158,42 @@ public class MongoDBBasic {
 	public static boolean addSkimNum(){
 		boolean result=false;
 		mongoDB = getMongoDB();
+		
+		Date d = new Date();  
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+        String dateNowStr = sdf.format(d); 
+        
+    	DBObject query = new BasicDBObject();
+		query.put("Active", "Y");
+		DBObject queryresults = mongoDB.getCollection(ClientMeta).findOne(query);
+		BasicDBList skim = (BasicDBList) queryresults.get("SkimNum");
+		ArrayList list1=new ArrayList();
+		if(skim != null){
+    		Object[] tagObjects = list1.toArray();
+    		for(Object dbobj : tagObjects){
+    			if(dbobj instanceof DBObject){
+    				HashMap<String, Object> temp=new HashMap<String, Object>();
+    				temp.put("date", ((DBObject)dbobj).get("date").toString());
+    				if(dateNowStr.equals(((DBObject)dbobj).get("date").toString())){
+    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) +1);
+    					result=true;
+    				}else{
+    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) );
+    				}
+    				list1.add(temp);
+    			}
+    		}
+		}
+		if(!result){
+			HashMap<String, Object> temp=new HashMap<String, Object>();
+			temp.put("date", dateNowStr);
+			temp.put("num", 0);
+			list1.add(temp);
+		}
 		BasicDBObject doc = new BasicDBObject();
 		BasicDBObject update = new BasicDBObject();
-    	update.append("SkimNum",1);
-		doc.put("$inc", update);
+    	update.append("SkimNum",list1);
+		doc.put("$set", update);
 		WriteResult wr = mongoDB.getCollection(ClientMeta).update(new BasicDBObject().append("Active", "Y"), doc);  
 		result=true;
 		return result;
@@ -180,20 +212,32 @@ public class MongoDBBasic {
 			String clientThemeColor = queryresults.get("ClientThemeColor")==null?"":queryresults.get("ClientThemeColor").toString();
 			String clientStockCode =queryresults.get("ClientCode")==null?"": queryresults.get("ClientCode").toString();
 			String clientActive = queryresults.get("Active")==null?"":queryresults.get("Active").toString();
-			String skimNum = queryresults.get("SkimNum")==null?"":queryresults.get("SkimNum").toString();
+			BasicDBList skim = (BasicDBList) queryresults.get("SkimNum");
+			if(skim != null){
+    			ArrayList list1=new ArrayList();
+        		Object[] tagObjects = list1.toArray();
+        		for(Object dbobj : tagObjects){
+        			if(dbobj instanceof DBObject){
+        				HashMap<String, Object> temp=new HashMap<String, Object>();
+        				temp.put("date", ((DBObject)dbobj).get("date").toString());
+        				temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) );
+        				list1.add(temp);
+        			}
+        		}
+        		cm.setSkimNum(list1);
+    		}
 			BasicDBList slide = (BasicDBList) queryresults.get("Slide");
     		if(slide != null){
     			ArrayList list=new ArrayList();
         		Object[] tagObjects = slide.toArray();
         		for(Object dbobj : tagObjects){
         			if(dbobj instanceof DBObject){
-        				HashMap<String, String> temp=new HashMap<String, String>();
         				list.add( ((DBObject)dbobj).get("src").toString());
         			}
         		}
         		cm.setSlide(list);
     		}
-    		cm.setSkimNum(skimNum);
+    		
 			cm.setClientCopyRight(clientCopyRight);
 			cm.setClientLogo(clientLogo);
 			cm.setClientName(clientName);
