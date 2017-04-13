@@ -399,6 +399,7 @@ function getLogo(){
 			HpLogoSrc=jsons.clientLogo;
 			copyRight=jsons.clientCopyRight;
 			clientThemeColor=jsons.clientThemeColor;
+			shim(jsons.SkimNum);
 			$('img.HpLogo').attr('src',HpLogoSrc);
 			$('span.clientCopyRight').text('©'+copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
@@ -417,6 +418,18 @@ function getLogo(){
 			}
 		}
 	});
+}
+function shim(jsons){
+	var table="";
+	for (var i = 0; i < jsons.length; i++) {
+		var tr="<tr>";
+		tr+="	<td>"+jsons[i].date+"</td>";
+		tr+="	<td>"+jsons[i].num+"</td>";
+		tr+="</tr>";
+		table+=tr;
+	}
+	
+	$("#skimHis").html(table);
 }
 function noAuth(flag){
 	if(flag==1){
@@ -1924,7 +1937,7 @@ function getNowFormatDate() {
 						<p class="naviText">微应用</p>
 							</div>
 							<div id="navSupport"   class="navi"><p class="naviText">微表情</p></div>
-								<div id="navMember"  class="navi"><p class="naviText">微成员</p></div>
+								<div id="navMember"  class="navi"><p class="naviText">微流量</p></div>
 							</div>
 							<div class="tab-content" id="dvTabContent" style="border: 0px;margin-top:-30px">
 								<div class="tab-pane" id="BoardContent">
@@ -2297,6 +2310,7 @@ function getNowFormatDate() {
 
 
 								<div class="tab-pane" id="WorkMates">
+								<div id="skimHis"></div>
 									<div class="Work_Mates_div2" id="Work_Mates_div">
 									</div>
 <div id="return-top"><img class="scroll-top" src="../Jsp/PIC/upgrade.png" alt="" width="50px"></div>  
