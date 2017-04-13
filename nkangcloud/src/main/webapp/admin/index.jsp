@@ -346,7 +346,7 @@ function showUpdateUserPanel(openid,name){
 	showCommonPanel();
 	$(".Work_Mates_div_list_div2").removeClass("editBtn");
 	$(".Work_Mates_div_list_div2").remove(".edit");
-	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	$("body").append('<div id="UpdateUserPart" class="bouncePart" style="position:fixed;z-index:999;top:80px;width:80%;margin-left:10%;max-height:450px;overflow:auto;"><legend>编辑【'+name+'】的基本信息</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<center>正在加载中...</center>'		
 	+'						</div>');
 	$('#UpdateUserPart').addClass('form-horizontal bounceInDown animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
