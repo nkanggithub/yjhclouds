@@ -10,17 +10,17 @@ public class ClientMeta {
 	private String clientThemeColor;
 	private String clientStockCode;
 	private String clientActive;
-	private String SkimNum;
+	private ArrayList<?> SkimNum;
 	private ArrayList<?> Slide;
 	
-	public String getSkimNum() {
-		return SkimNum;
-	}
-	public void setSkimNum(String skimNum) {
-		SkimNum = skimNum;
-	}
 	public ArrayList<?> getSlide() {
 		return Slide;
+	}
+	public ArrayList<?> getSkimNum() {
+		return SkimNum;
+	}
+	public void setSkimNum(ArrayList<?> skimNum) {
+		SkimNum = skimNum;
 	}
 	public void setSlide(ArrayList<?> slide) {
 		Slide = slide;
