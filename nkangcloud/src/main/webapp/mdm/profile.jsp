@@ -399,7 +399,7 @@ function getLogo(){
 			HpLogoSrc=jsons.clientLogo;
 			copyRight=jsons.clientCopyRight;
 			clientThemeColor=jsons.clientThemeColor;
-			shim(jsons.SkimNum);
+			skim(jsons.SkimNum);
 			$('img.HpLogo').attr('src',HpLogoSrc);
 			$('span.clientCopyRight').text('©'+copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
@@ -419,16 +419,17 @@ function getLogo(){
 		}
 	});
 }
-function shim(jsons){
+function skim(jsons){
 	var table="";
-	for (var i = 0; i < jsons.length; i++) {
-		var tr="<tr>";
-		tr+="	<td>"+jsons[i].date+"</td>";
-		tr+="	<td>"+jsons[i].num+"</td>";
-		tr+="</tr>";
-		table+=tr;
+	if(jsons!=null&&jsons!='null'){
+		for (var i = 0; i < jsons.length; i++) {
+			var tr="<tr>";
+			tr+="	<td>"+jsons[i].date+"</td>";
+			tr+="	<td>"+jsons[i].num+"</td>";
+			tr+="</tr>";
+			table+=tr;
+		}
 	}
-	
 	$("#skimHis").html(table);
 }
 function noAuth(flag){
