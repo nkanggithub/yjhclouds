@@ -220,7 +220,7 @@ public class MongoDBBasic {
         			if(dbobj instanceof DBObject){
         				HashMap<String, Object> temp=new HashMap<String, Object>();
         				temp.put("date", ((DBObject)dbobj).get("date").toString());
-        				temp.put("num",  ((DBObject)dbobj).get("num").toString() );
+        				temp.put("num",  Integer.parseInt(((DBObject)dbobj).get("num").toString()) );
         				list1.add(temp);
         			}
         		}
