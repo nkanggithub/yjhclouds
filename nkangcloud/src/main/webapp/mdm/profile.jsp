@@ -423,6 +423,7 @@ function skim(jsons){
 	var table="";
 	var skimTotalNum=0;
 	if(jsons!=null&&jsons!='null'){
+		table+="<tr><th>日期</th><th>访问量</th></tr>";
 		for (var i = 0; i < jsons.length; i++) {
 			var tr="<tr>";
 			tr+="	<td width='50%' align='center'>"+jsons[i].date+"</td>";
