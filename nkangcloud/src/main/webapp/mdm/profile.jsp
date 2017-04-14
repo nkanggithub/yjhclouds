@@ -399,7 +399,7 @@ function getLogo(){
 			HpLogoSrc=jsons.clientLogo;
 			copyRight=jsons.clientCopyRight;
 			clientThemeColor=jsons.clientThemeColor;
-			skim(jsons.SkimNum);
+			skim(jsons.skimNum);
 			$('img.HpLogo').attr('src',HpLogoSrc);
 			$('span.clientCopyRight').text('©'+copyRight);
 			$('span.clientSubName').text(jsons.clientSubName);
