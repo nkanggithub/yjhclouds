@@ -215,12 +215,12 @@ public class MongoDBBasic {
 			BasicDBList skim = (BasicDBList) queryresults.get("SkimNum");
 			if(skim != null){
     			ArrayList list1=new ArrayList();
-        		Object[] tagObjects = list1.toArray();
-        		for(Object dbobj : tagObjects){
+        		Object[] sObjects = list1.toArray();
+        		for(Object dbobj : sObjects){
         			if(dbobj instanceof DBObject){
         				HashMap<String, Object> temp=new HashMap<String, Object>();
         				temp.put("date", ((DBObject)dbobj).get("date").toString());
-        				temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) );
+        				temp.put("num",  ((DBObject)dbobj).get("num").toString() );
         				list1.add(temp);
         			}
         		}
@@ -821,6 +821,7 @@ public class MongoDBBasic {
     			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
             }
             ret = true;
+            addSkimNum();
 	    }
 		catch(Exception e){
 			log.info("updateUser--" + e.getMessage());
