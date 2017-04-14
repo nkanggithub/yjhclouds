@@ -215,7 +215,7 @@ public class MongoDBBasic {
 			BasicDBList skim = (BasicDBList) queryresults.get("SkimNum");
 			if(skim != null){
     			ArrayList list1=new ArrayList();
-        		Object[] sObjects = list1.toArray();
+        		Object[] sObjects = skim.toArray();
         		for(Object dbobj : sObjects){
         			if(dbobj instanceof DBObject){
         				HashMap<String, Object> temp=new HashMap<String, Object>();
