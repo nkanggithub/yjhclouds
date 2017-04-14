@@ -169,7 +169,7 @@ public class MongoDBBasic {
 		BasicDBList skim = (BasicDBList) queryresults.get("SkimNum");
 		ArrayList list1=new ArrayList();
 		if(skim != null){
-    		Object[] tagObjects = list1.toArray();
+    		Object[] tagObjects = skim.toArray();
     		for(Object dbobj : tagObjects){
     			if(dbobj instanceof DBObject){
     				HashMap<String, Object> temp=new HashMap<String, Object>();
