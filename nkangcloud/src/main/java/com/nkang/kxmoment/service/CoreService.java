@@ -560,12 +560,26 @@ public class CoreService
 						article.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaWR&oid=00D90000000pkXM");
 						articleList.add(article);
 						
-						Article articlesub1 = new Article();
-						articlesub1.setTitle("中石化");
-						articlesub1.setDescription("中石化");
-						articlesub1.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");//zhong shi hua
-						articlesub1.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");
-						articleList.add(articlesub1);
+						Article articlesub4 = new Article();
+						articlesub4.setTitle("埃克森美孚");
+						articlesub4.setDescription("埃克森美孚");
+						articlesub4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
+						articlesub4.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
+						articleList.add(articlesub4);
+						
+						Article articlesub33 = new Article();
+						articlesub33.setTitle("台湾奇美实业");
+						articlesub33.setDescription("台湾奇美实业");
+						articlesub33.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM"); // chemei
+						articlesub33.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM");
+						articleList.add(articlesub33);
+						
+						Article articlesub3 = new Article();
+						articlesub3.setTitle("镇江奇美实业");
+						articlesub3.setDescription("镇江奇美实业");
+						articlesub3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM"); // chemei
+						articlesub3.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM");
+						articleList.add(articlesub3);
 						
 						Article articlesub2 = new Article();
 						articlesub2.setTitle("中石油");
@@ -574,19 +588,12 @@ public class CoreService
 						articlesub2.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaV9&oid=00D90000000pkXM");
 						articleList.add(articlesub2);
 						
-						Article articlesub3 = new Article();
-						articlesub3.setTitle("奇美实业");
-						articlesub3.setDescription("奇美实业");
-						articlesub3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM"); // chemei
-						articlesub3.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVn&oid=00D90000000pkXM");
-						articleList.add(articlesub3);
-						
-						Article articlesub4 = new Article();
-						articlesub4.setTitle("埃克森美孚");
-						articlesub4.setDescription("埃克森美孚");
-						articlesub4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
-						articlesub4.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaVx&oid=00D90000000pkXM");
-						articleList.add(articlesub4);
+						Article articlesub1 = new Article();
+						articlesub1.setTitle("中石化");
+						articlesub1.setDescription("中石化");
+						articlesub1.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");//zhong shi hua
+						articlesub1.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DnaUp&oid=00D90000000pkXM");
+						articleList.add(articlesub1);
 						
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
