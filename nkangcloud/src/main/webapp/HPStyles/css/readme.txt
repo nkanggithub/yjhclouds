@@ -1,1 +1,0 @@
-hpui-udk-minify.min.css is minified  and combined with font-awesome.css ,style.css and jquery-ui-1.10.2.custom.css
