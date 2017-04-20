@@ -179,7 +179,7 @@ border:1px solid gray;
     margin: 0 auto;
     width: 15%;
     height: 15%;
-    background-color: #333;
+    background-color: white;
     border-radius: 100%;
     -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
             animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
@@ -290,8 +290,10 @@ border:1px solid gray;
 <script>
 $(document).ajaxStart(function () {
 	$(".sk-circle").show();
+	$("#shadow").show();
     }).ajaxStop(function () {
     	$(".sk-circle").hide();
+    	$("#shadow").hide();
     });
   
 $(function(){  
@@ -1815,6 +1817,21 @@ function getNowFormatDate() {
 </script>
 </head>
 <body style="margin: 0px; padding: 0px !important;">
+<div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
+ <div class="sk-circle">
+      <div class="sk-circle1 sk-child"></div>
+      <div class="sk-circle2 sk-child"></div>
+      <div class="sk-circle3 sk-child"></div>
+      <div class="sk-circle4 sk-child"></div>
+      <div class="sk-circle5 sk-child"></div>
+      <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+      <div class="sk-circle8 sk-child"></div>
+      <div class="sk-circle9 sk-child"></div>
+      <div class="sk-circle10 sk-child"></div>
+      <div class="sk-circle11 sk-child"></div>
+      <div class="sk-circle12 sk-child"></div>
+    </div>
 <div id="fastPush" style="display:none;width:70%;position:absolute;left:15%;top:200px;height:100px;z-index:100000;border:1px solid gray;border-radius:5px;background-color:white;">
   <p style="width:100%;text-align:center;margin-top:20px;">确定一键发布吗？</p>
   <button style="margin-top: 20px;position: absolute;bottom: 15px;width: 30%;left: 15%;" onclick="postQuotation()" name="doublebutton-0" class="btn">确定</button>
@@ -2418,20 +2435,6 @@ function getNowFormatDate() {
 		
 </div>
 <!-- END MESSAGE STATION -->
-  <div class="sk-circle">
-      <div class="sk-circle1 sk-child"></div>
-      <div class="sk-circle2 sk-child"></div>
-      <div class="sk-circle3 sk-child"></div>
-      <div class="sk-circle4 sk-child"></div>
-      <div class="sk-circle5 sk-child"></div>
-      <div class="sk-circle6 sk-child"></div>
-      <div class="sk-circle7 sk-child"></div>
-      <div class="sk-circle8 sk-child"></div>
-      <div class="sk-circle9 sk-child"></div>
-      <div class="sk-circle10 sk-child"></div>
-      <div class="sk-circle11 sk-child"></div>
-      <div class="sk-circle12 sk-child"></div>
-    </div>
 	<!-- BEGIN FOOTER -->
 	<div id="footer">
 		<span class="clientCopyRight"><nobr></nobr></span>
