@@ -88,13 +88,16 @@ $(function(){
 	    			cache : false,
 	    			success : function(data) {
 	    				swal("恭喜!", "发布成功", "success");
+	    				var html="";
 	    				$.ajax({
 	    	    			url : "../QueryShortNewsList",
 	    					type:'post',
 	    					success:function(data){
 	    						for (var i = 0; i < data.length; i++) {
-	    							$('.scroller ul').html("<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>");
+	    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
+	    						
 	    						}
+	    						$('.scroller ul').html(html);
 	    					},
 	    					error:function(){
 	    						console.log('error');
