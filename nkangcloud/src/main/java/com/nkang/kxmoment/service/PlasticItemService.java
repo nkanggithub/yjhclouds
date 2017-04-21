@@ -191,8 +191,18 @@ public class PlasticItemService {
 		Date endTime = null;
 		// 统计价格趋势
 		List<Object[]> resultList = statPriceTrend(itemNoArr, beginTime, endTime);
+		Map<String, Double> beginTimeMaxDatePriceMap = null;
 		if(resultList == null || resultList.size() == 0){
-			return dataSource;
+			// 如果没有数据查看最后一条价格数据做为起始数据
+			beginTimeMaxDatePriceMap = statBeginTimeMaxDatePrice(itemNoArr, null);
+			if(beginTimeMaxDatePriceMap.get(itemNo) == null){
+				return dataSource;
+			}
+			resultList = new ArrayList<Object[]>();
+			Double price = (Double)beginTimeMaxDatePriceMap.get(itemNo);
+			String day = DateUtil.date2Str(beginTime, "yyyy-MM-dd");
+			Object[] rObjects = {day, itemNo, price};
+			resultList.add(rObjects);
 		}
 		// chart initial
 		Map<String, Object> chart = new HashMap<String, Object>();
@@ -226,7 +236,6 @@ public class PlasticItemService {
 		category.put("category", categoryList);
 		// dataset
 		Map<String, Map> dataset = new HashMap<String, Map>();
-		Map<String, Double> beginTimeMaxDatePriceMap = null;
 		for(int i=0; i<resultList.size(); i++){
 			Object[] rO = resultList.get(i);
 			String day = (String)rO[0];
