@@ -153,7 +153,9 @@ public class MongoDBBasic {
 	public static ArrayList<ShortNews> queryShortNews(){
 		mongoDB = getMongoDB();
 		ArrayList<ShortNews> result = new ArrayList<ShortNews>();
-		DBCursor dbcur = mongoDB.getCollection(short_news).find();
+		BasicDBObject sort=new BasicDBObject();
+		sort.put("date", -1);
+		DBCursor dbcur = mongoDB.getCollection(short_news).find().sort(sort);
 		StringBuilder  tempStr ;  
 		if (null != dbcur) {
         	while(dbcur.hasNext()){
