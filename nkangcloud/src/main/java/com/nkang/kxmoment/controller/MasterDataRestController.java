@@ -32,6 +32,7 @@ import com.nkang.kxmoment.baseobject.QuotationList;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.baseobject.ShortNews;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -892,7 +893,21 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-	
+	@RequestMapping("/QueryShortNewsList")
+	public static ArrayList<ShortNews> QueryShortNewsList(){
+		ArrayList<ShortNews> cm = new ArrayList<ShortNews>();
+		try{
+			cm = MongoDBBasic.queryShortNews();
+		}		
+		catch(Exception e){
+			cm = null;
+		}
+		return cm;
+	}
+	@RequestMapping("/CallCreateShortNews")
+	public static boolean CallCreateShortNews(@RequestParam(value="content", required=true) String content){
+		return  MongoDBBasic.createShortNews(content);
+	}
 	@RequestMapping("/CallGetUserWithFaceUrl")
 	public static String CallGetUserWithFaceUrl(@RequestParam(value="openid", required=false) String openid){
 		String ret = "";
