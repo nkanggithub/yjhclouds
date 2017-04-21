@@ -37,6 +37,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
+import com.nkang.kxmoment.baseobject.ShortNews;
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
@@ -129,6 +130,44 @@ public class MongoDBBasic {
 		}
 	}
 	
+	public static boolean createShortNews(String content){
+		mongoDB = getMongoDB(); 
+		Boolean ret = false;
+	    try{
+			Date d = new Date();  
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+	        String dateNowStr = sdf.format(d); 
+	        
+	    	DBObject insert = new BasicDBObject();
+	    	insert.put("date",dateNowStr);
+	    	insert.put("content", content);
+	    	mongoDB.getCollection(short_news).insert(insert);
+			ret = true;
+	    }
+		catch(Exception e){
+			log.info("createRoleOfAreaMap--" + e.getMessage());
+		}
+		return ret;
+	}
+	public static ArrayList<ShortNews> queryShortNews(){
+		mongoDB = getMongoDB();
+		ArrayList<ShortNews> result = new ArrayList<ShortNews>();
+		DBCursor dbcur = mongoDB.getCollection(short_news).find();
+        if (null != dbcur) {
+        	while(dbcur.hasNext()){
+        		DBObject o = dbcur.next();
+        		ShortNews temp=new ShortNews();
+        		if(o.get("date")!=null){
+        			temp.setDate(o.get("date").toString());
+        		}
+        		if(o.get("content")!=null){
+        			temp.setContent(o.get("content").toString());
+        		}
+        		result.add(temp);
+        	}
+        }
+		return result;
+	}
 	public static String QueryAccessKey(){
 		String validKey = null;
 		mongoDB = getMongoDB();
