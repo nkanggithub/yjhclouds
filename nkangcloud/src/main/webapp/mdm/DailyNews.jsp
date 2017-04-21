@@ -10,7 +10,7 @@ if(shortNews.size()<5){size=shortNews.size();}
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>数据可视化</title>
+    <title>新闻快讯</title>
 			 <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
 			 <script src="../Jsp/JS/iscroll.js"></script>
 			  <script src="../Jsp/JS/avgrund.js"></script>
