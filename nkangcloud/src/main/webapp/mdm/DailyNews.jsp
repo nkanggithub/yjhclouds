@@ -10,7 +10,7 @@ if(shortNews.size()<5){size=shortNews.size();}
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>新闻快讯</title>
+    <title>永佳和行情实况</title>
 			 <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
 			 <script src="../Jsp/JS/iscroll.js"></script>
 			  <script src="../Jsp/JS/avgrund.js"></script>
@@ -34,7 +34,7 @@ if(shortNews.size()<5){size=shortNews.size();}
 		</aside>
 
 <div style="padding-left: 10px;height: 70px;border-bottom: 4px solid black;padding-top: 10px;">
-<img src="../mdm/images/logo.png" alt="" style="width:60%;">
+<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="" style="width:40%;height:85%;">
 </div>
 <div id="wrapper">
 <div class="box scroller">
