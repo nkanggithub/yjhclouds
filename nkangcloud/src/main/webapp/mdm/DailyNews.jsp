@@ -89,7 +89,7 @@ $(function(){
 	    			success : function(data) {
 	    				swal("恭喜!", "发布成功", "success");
 	    				$.ajax({
-	    	    			url : "../CallCreateShortNews",
+	    	    			url : "../QueryShortNewsList",
 	    					type:'post',
 	    					success:function(data){
 	    						for (var i = 0; i < data.length; i++) {
@@ -140,7 +140,7 @@ var size=<%=size %>;
 		function pullUpAction(){
 			setTimeout(function(){
 		/* 		$.ajax({
-	    			url : "../CallCreateShortNews",
+	    			url : "../QueryShortNewsList",
 					type:'post',
 					success:function(data){
 						for (var i = size; i < data.length; i++) {
