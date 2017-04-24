@@ -29,8 +29,9 @@ import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
 import com.nkang.kxmoment.baseobject.Notification;
+import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
-import com.nkang.kxmoment.util.FileOperateUtil;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.ToolUtils;
@@ -348,6 +349,21 @@ public class UserProfileController {
 		    }
 		    return message;
 
+	}
+	@RequestMapping("/sendNewsToAll")
+	public @ResponseBody String sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
+	{
+		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
+		String title="行情实时概况";
+		String content=request.getParameter("content");
+		if(request.getParameter("content").length()>200){
+			content=content.substring(0,180)+"...";
+		}
+		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
+		 for(int i=0;i<allUser.size();i++){
+			 RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+		 }
+		 return "ok";
 	}
 
 }
