@@ -245,7 +245,7 @@ public class CoreService
 						article4.setTitle("新闻快讯");
 						article4.setDescription("永佳和行情共享");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
-						article4.setUrl("http://"+Constants.baehost+"/mdm/DailyNews.jsp");
+						article4.setUrl("http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=" + fromUserName);
 						articleList.add(article4);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
