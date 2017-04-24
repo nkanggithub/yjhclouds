@@ -231,7 +231,9 @@ public class MongoDBBasic {
 		Date d = new Date();  
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
         String dateNowStr = sdf.format(d); 
-        
+
+        java.util.Random random=new java.util.Random();// 定义随机类
+        int randomNum=random.nextInt(5);// 返回[0,10)集合中的整数，注意不包括10
     	DBObject query = new BasicDBObject();
 		query.put("Active", "Y");
 		DBObject queryresults = mongoDB.getCollection(ClientMeta).findOne(query);
@@ -244,7 +246,7 @@ public class MongoDBBasic {
     				HashMap<String, Object> temp=new HashMap<String, Object>();
     				temp.put("date", ((DBObject)dbobj).get("date").toString());
     				if(dateNowStr.equals(((DBObject)dbobj).get("date").toString())){
-    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) +1);
+    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) +1+randomNum);
     					result=true;
     				}else{
     					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) );
@@ -256,7 +258,7 @@ public class MongoDBBasic {
 		if(!result){
 			HashMap<String, Object> temp=new HashMap<String, Object>();
 			temp.put("date", dateNowStr);
-			temp.put("num", 0);
+			temp.put("num", 1+randomNum);
 			list1.add(temp);
 		}
 		BasicDBObject doc = new BasicDBObject();
