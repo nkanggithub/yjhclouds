@@ -5,6 +5,7 @@
 <%
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
+int length = shortNews.size();
 String uid = request.getParameter("UID");
 if(shortNews.size()<5){size=shortNews.size();}
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
@@ -13,7 +14,7 @@ boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>永佳和行情实况</title>
+    <title>永佳和行情实况直播-<%= shortNews.get(0).getContent()%></title>
 			 <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
 			 <script src="../Jsp/JS/iscroll.js"></script>
 			  <script src="../Jsp/JS/avgrund.js"></script>
