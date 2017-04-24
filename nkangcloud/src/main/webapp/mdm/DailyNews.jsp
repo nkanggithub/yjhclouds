@@ -33,8 +33,8 @@ if(shortNews.size()<5){size=shortNews.size();}
 
 		</aside>
 
-<div style="padding-left: 10px;height: 70px;border-bottom: 4px solid black;padding-top: 10px;">
-<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="" style="width:40%;height:85%;">
+<div style="padding-left: 10px;height: 70px;border-bottom: 4px solid #0066FF;padding-top: 10px;">
+<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="" style="width:200px;height:85%;">
 </div>
 <div id="wrapper">
 <div class="box scroller">
