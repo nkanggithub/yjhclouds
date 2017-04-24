@@ -116,7 +116,7 @@ $(function(){
 	    			},
 	    			cache : false,
 	    			success : function(data) {
-	    				swal("恭喜!", "新闻推送成功", "success");
+	    				swal("恭喜!", data+"个人已收到您的新闻推送~", "success");
 	    			
 	    			}
 	    			});	    	
