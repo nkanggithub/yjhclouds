@@ -157,6 +157,7 @@ $(document).ajaxStart(function () {
 </script>
 </head>
 <body style="margin:0px">
+<img src = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAc05&oid=00D90000000pkXM" hidden="hidden">
 <div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
  <div class="sk-circle">
       <div class="sk-circle1 sk-child"></div>
