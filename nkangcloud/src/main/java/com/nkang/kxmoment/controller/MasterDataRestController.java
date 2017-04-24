@@ -904,6 +904,23 @@ public class MasterDataRestController {
 		}
 		return cm;
 	}
+	@RequestMapping("/QueryShortNewsList2")
+	public static ArrayList<ShortNews> QueryShortNewsList2(@RequestParam(value="startNumber", required=true) int startNumber,@RequestParam(value="pageSize", required=true) int pageSize){
+		ArrayList<ShortNews> cm = new ArrayList<ShortNews>();
+		if(startNumber<1){
+			startNumber=0;
+		}
+		if(pageSize<1){
+			pageSize=5;
+		}
+		try{
+			cm = MongoDBBasic.queryShortNews(startNumber,pageSize);
+		}		
+		catch(Exception e){
+			cm = null;
+		}
+		return cm;
+	}
 	@RequestMapping("/CallCreateShortNews")
 	public static boolean CallCreateShortNews(@RequestParam(value="content", required=true) String content){
 		return  MongoDBBasic.createShortNews(content);
