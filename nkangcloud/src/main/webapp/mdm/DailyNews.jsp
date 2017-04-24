@@ -83,87 +83,44 @@ $(function(){
 	      }, 
 			function(inputValue){
 	    	  if (inputValue === false){ return false; }
-	    		swal({  
-	    	        title:"发送图文消息吗",  
-	    	        text:"",
-	    	        html:"true",
-	    	        showConfirmButton:"true", 
-	    			showCancelButton: true,   
-	    			closeOnConfirm: false,  
-	    	        confirmButtonText:"提交",  
-	    	        cancelButtonText:"取消",
-	    	        animation:"slide-from-top"  
-	    	      }, 
-	    			function(inputValue){
-	    				if (inputValue === false){
-	    			    	  $.ajax({
-	    			    			type : "post",
-	    			    			url : "../CallCreateShortNews",
-	    			    			data:{
-	    			    				content:$("#news").val()
-	    			    			},
-	    			    			cache : false,
-	    			    			success : function(data) {
-	    			    				swal("恭喜!", "发布新闻成功!", "success");
-	    			    				var html="";
-	    			    				$.ajax({
-	    			    	    			url : "../QueryShortNewsList",
-	    			    					type:'post',
-	    			    					success:function(data){
-	    			    						for (var i = 0; i < data.length; i++) {
-	    			    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
-	    			    						
-	    			    						}
-	    			    						$('.scroller ul').html(html);
-	    			    					},
-	    			    					error:function(){
-	    			    						console.log('error');
-	    			    					}
-	    			    				});
-	    			    			}
-	    			    			});
-	    				 return false;}
-	    				else{
-	    			    	  $.ajax({
-	    			    			type : "post",
-	    			    			url : "../CallCreateShortNews",
-	    			    			data:{
-	    			    				content:$("#news").val()
-	    			    			},
-	    			    			cache : false,
-	    			    			success : function(data) {
-	    			    				var html="";
-	    			    				$.ajax({
-	    			    	    			url : "../QueryShortNewsList",
-	    			    					type:'post',
-	    			    					success:function(data){
-	    			    						for (var i = 0; i < data.length; i++) {
-	    			    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
-	    			    						
-	    			    						}
-	    			    						$('.scroller ul').html(html);
-	    			    					},
-	    			    					error:function(){
-	    			    						console.log('error');
-	    			    					}
-	    			    				});
-	    			    			}
-	    			    			});
-	    			    	  $.ajax({
-	    			    			type : "post",
-	    			    			url : "../userProfile/sendNewsToAll",
-	    			    			data:{
-	    			    				content:$("#news").val()
-	    			    			},
-	    			    			cache : false,
-	    			    			success : function(data) {
-	    			    				swal("恭喜!", "图文推送成功", "success");
-	    			    			
-	    			    			}
-	    			    			});
-	    			    	  
-	    				}});
-
+	    	  $.ajax({
+	    			type : "post",
+	    			url : "../CallCreateShortNews",
+	    			data:{
+	    				content:$("#news").val()
+	    			},
+	    			cache : false,
+	    			success : function(data) {
+	    				var html="";
+	    				$.ajax({
+	    	    			url : "../QueryShortNewsList",
+	    					type:'post',
+	    					success:function(data){
+	    						for (var i = 0; i < data.length; i++) {
+	    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
+	    						
+	    						}
+	    						$('.scroller ul').html(html);
+	    					},
+	    					error:function(){
+	    						console.log('error');
+	    					}
+	    				});
+	    			}
+	    			});
+	    	  $.ajax({
+	    			type : "post",
+	    			url : "../userProfile/sendNewsToAll",
+	    			data:{
+	    				content:$("#news").val()
+	    			},
+	    			cache : false,
+	    			success : function(data) {
+	    				swal("恭喜!", "新闻推送成功", "success");
+	    			
+	    			}
+	    			});	    	
+	    			    	 		
 	      });
 
 	}
