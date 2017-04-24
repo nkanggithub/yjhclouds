@@ -15,11 +15,10 @@ boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>永佳和行情实况直播-<%= shortNews.get(0).getContent()%></title>
-			 <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
-			 <script src="../Jsp/JS/iscroll.js"></script>
-			  <script src="../Jsp/JS/avgrund.js"></script>
+ <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
+ <script src="../Jsp/JS/iscroll.js"></script>
+  <script src="../Jsp/JS/avgrund.js"></script>
 <link rel="stylesheet" href="../Jsp/CSS/about.css">
-
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <style>
@@ -144,6 +143,18 @@ boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
   40% {
     -webkit-transform: scale(1);
             transform: scale(1); } }
+#footer {
+    background: #DCD9D9;
+    bottom: 0;
+    color: #757575;
+    font-size: 12px;
+    padding: 10px 1%;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 1002;
+    left: 0;
+}
 </style>
 <script type="text/javascript">
 $(document).ajaxStart(function () {
@@ -324,5 +335,21 @@ var size=<%=size %>;
 			myscroll.destroy();
 		}
 
+		
+		jQuery.ajax({
+			type : "GET",
+			url : "../QueryClientMeta",
+			data : {},
+			cache : false,
+			success : function(data) {
+				var jsons = eval(data);
+				$('img.HpLogo').attr('src',jsons.clientLogo);
+				$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
+				$('span.clientSubName').text(jsons.clientSubName);
+				$('h2.clientName').text(jsons.clientName);
+			}
+		});
+
 	</script>
+	<div id="footer"><span class="clientCopyRight">©</span></div>
 </body></html>
