@@ -681,9 +681,11 @@ public class BillOfSellPoi {
 							                	 Double filledOrderAmount = hssfRow.getCell(6).getNumericCellValue();
 									                xlsDto.setFilledOrderAmount(filledOrderAmount);
 							                }
-							                
-							                Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
-							                xlsDto.setNoInvoiceAmount(noInvoiceAmount);
+							                if(hssfRow.getCell(7)!=null){
+							                	 Double noInvoiceAmount = hssfRow.getCell(7).getNumericCellValue();
+									                xlsDto.setNoInvoiceAmount(noInvoiceAmount);
+							                }
+							               
 							                
 							                OrderNopayList.add(xlsDto);
 				            		 }
