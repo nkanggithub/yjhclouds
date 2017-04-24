@@ -33,6 +33,7 @@ import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
 import com.nkang.kxmoment.baseobject.ShortNews;
+import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
@@ -922,8 +923,29 @@ public class MasterDataRestController {
 		return cm;
 	}
 	@RequestMapping("/CallCreateShortNews")
-	public static boolean CallCreateShortNews(@RequestParam(value="content", required=true) String content){
-		return  MongoDBBasic.createShortNews(content);
+	public @ResponseBody int CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent){
+		MongoDBBasic.createShortNews(reqContent);
+		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
+		String title="";
+		String content="";
+		if(reqContent.length()>100){
+			title=reqContent.substring(0,90)+"..";
+			if(reqContent.length()>200){
+			content=reqContent.substring(0,180)+"...";
+			}
+		}
+		else
+		{
+			title=reqContent;
+			content=reqContent;
+		}
+		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
+		 for(int i=0;i<allUser.size();i++){
+			 RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+		 }
+		
+		
+		 return allUser.size();
 	}
 	@RequestMapping("/CallGetUserWithFaceUrl")
 	public static String CallGetUserWithFaceUrl(@RequestParam(value="openid", required=false) String openid){
