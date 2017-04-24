@@ -239,6 +239,7 @@ $(function(){
 	    			},
 	    			cache : false,
 	    			success : function(data) {
+	    				swal("恭喜!", data+"个人已收到您的新闻推送~", "success");
 	    				var html="";
 	    				$.ajax({
 	    	    			url : "../QueryShortNewsList",
@@ -256,18 +257,7 @@ $(function(){
 	    				});
 	    			}
 	    			});
-	    	  $.ajax({
-	    			type : "post",
-	    			url : "../userProfile/sendNewsToAll",
-	    			data:{
-	    				content:$("#news").val()
-	    			},
-	    			cache : false,
-	    			success : function(data) {
-	    				swal("恭喜!", data+"个人已收到您的新闻推送~", "success");
-	    			
-	    			}
-	    			});	    	
+	    	
 	    			    	 		
 	      });
 
