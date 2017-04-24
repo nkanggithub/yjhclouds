@@ -351,19 +351,19 @@ public class UserProfileController {
 
 	}
 	@RequestMapping("/sendNewsToAll")
-	public @ResponseBody String sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
+	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
 	{
 		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
 		String title="行情实时概况";
 		String content=request.getParameter("content");
-		if(request.getParameter("content").length()>200){
-			content=content.substring(0,180)+"...";
+		if(request.getParameter("content").length()>100){
+			content=content.substring(0,90)+"...";
 		}
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
 		 for(int i=0;i<allUser.size();i++){
 			 RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
 		 }
-		 return "ok";
+		 return allUser.size();
 	}
 
 }
