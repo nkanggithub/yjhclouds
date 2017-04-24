@@ -354,10 +354,19 @@ public class UserProfileController {
 	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
 	{
 		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
-		String title="行情实时概况";
-		String content=request.getParameter("content");
+		String title="";
+		String reqContent=request.getParameter("content");
+		String content="";
 		if(request.getParameter("content").length()>100){
-			content=content.substring(0,90)+"...";
+			title=reqContent.substring(0,90)+"..";
+			if(request.getParameter("content").length()>200){
+			content=reqContent.substring(0,180)+"...";
+			}
+		}
+		else
+		{
+			title=reqContent;
+			content=reqContent;
 		}
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
 		 for(int i=0;i<allUser.size();i++){
