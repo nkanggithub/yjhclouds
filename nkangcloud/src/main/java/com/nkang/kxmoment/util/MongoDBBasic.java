@@ -174,6 +174,30 @@ public class MongoDBBasic {
         }
 		return result;
 	}
+	public static ArrayList<ShortNews> queryShortNews(int startNumber,int pageSize){
+		mongoDB = getMongoDB();
+		ArrayList<ShortNews> result = new ArrayList<ShortNews>();
+		BasicDBObject sort=new BasicDBObject();
+		sort.put("date", -1);
+		DBCursor dbcur = mongoDB.getCollection(short_news).find().sort(sort).skip(startNumber).limit(pageSize);
+		StringBuilder  tempStr ;  
+        if (null != dbcur) {
+        	while(dbcur.hasNext()){
+        		DBObject o = dbcur.next();
+        		ShortNews temp=new ShortNews();
+        		if(o.get("date")!=null){
+        			tempStr = new StringBuilder (o.get("date").toString());  
+        			tempStr.insert(tempStr.length()-9, "<br/>");
+        			temp.setDate(tempStr.toString());
+        		}
+        		if(o.get("content")!=null){
+        			temp.setContent(o.get("content").toString());
+        		}
+        		result.add(temp);
+        	}
+        }
+		return result;
+	}
 	public static String QueryAccessKey(){
 		String validKey = null;
 		mongoDB = getMongoDB();
