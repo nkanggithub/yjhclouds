@@ -154,7 +154,7 @@ var size=<%=size %>;
 					pullUpAction();}
 					else
 						{
-						$('.more span').text('已到底部...');
+						$('.more span').text('我是有底线的...');
 						}
 				}
 				
