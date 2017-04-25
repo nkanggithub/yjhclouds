@@ -241,8 +241,16 @@ public class CoreService
 						article.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmMS2&oid=00D90000000pkXM"); //big data
 						article.setUrl("http://"+Constants.baehost+"/MetroStyleFiles/image/Maintenace.gif");
 						articleList.add(article);
+						
+						Article article3 = new Article();
+						article3.setTitle("行情共享");
+						article3.setDescription("永佳和行情共享");
+						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
+						article3.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
+						articleList.add(article3);
+						
 						Article article4 = new Article();
-						article4.setTitle("新闻快讯");
+						article4.setTitle("行情发布");
 						article4.setDescription("永佳和行情共享");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article4.setUrl("http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=" + fromUserName);
