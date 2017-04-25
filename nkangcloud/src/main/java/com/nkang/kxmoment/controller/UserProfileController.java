@@ -353,7 +353,7 @@ public class UserProfileController {
 	@RequestMapping("/sendNewsToAll")
 	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
 	{
-		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
+		String url="http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp?UID=";
 		String title="";
 		String reqContent=request.getParameter("content");
 		String content="";
