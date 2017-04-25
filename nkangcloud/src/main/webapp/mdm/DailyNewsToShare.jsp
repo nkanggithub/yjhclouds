@@ -5,170 +5,36 @@
 <%
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
-if(shortNews.size()<5){size=shortNews.size();}
+int realSize=shortNews.size();
+if(shortNews.size()<=5){size=shortNews.size();}
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>永佳和行情实况</title>
-			 <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
-			 <script src="../Jsp/JS/iscroll.js"></script>
-			  <script src="../Jsp/JS/avgrund.js"></script>
+    <title>永佳和行情实况直播-<%= shortNews.get(0).getContent()%></title>
+ <script src="../mdm/uploadfile_js/jquery-1.11.2.min.js"></script>
+ <script src="../Jsp/JS/iscroll.js"></script>
+  <script src="../Jsp/JS/avgrund.js"></script>
 <link rel="stylesheet" href="../Jsp/CSS/about.css">
-
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 <style>
-/*ajax*/
-
-.sk-circle {
-  margin: 40px auto;
-  width: 40px;
-  height: 40px;
-      position: absolute;
-    top: 38%;
-    left: 45%;
-    display:none;
-    z-index:100000;
-     }
-  .sk-circle .sk-child {
+#footer {
+    background: #DCD9D9;
+    bottom: 0;
+    color: #757575;
+    font-size: 12px;
+    padding: 10px 1%;
+    position: fixed;
+    text-align: center;
     width: 100%;
-    height: 100%;
-    position: absolute;
+    z-index: 1002;
     left: 0;
-    top: 0; }
-  .sk-circle .sk-child:before {
-    content: '';
-    display: block;
-    margin: 0 auto;
-    width: 15%;
-    height: 15%;
-    background-color: white;
-    border-radius: 100%;
-    -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
-            animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
-  .sk-circle .sk-circle2 {
-    -webkit-transform: rotate(30deg);
-        -ms-transform: rotate(30deg);
-            transform: rotate(30deg); }
-  .sk-circle .sk-circle3 {
-    -webkit-transform: rotate(60deg);
-        -ms-transform: rotate(60deg);
-            transform: rotate(60deg); }
-  .sk-circle .sk-circle4 {
-    -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-            transform: rotate(90deg); }
-  .sk-circle .sk-circle5 {
-    -webkit-transform: rotate(120deg);
-        -ms-transform: rotate(120deg);
-            transform: rotate(120deg); }
-  .sk-circle .sk-circle6 {
-    -webkit-transform: rotate(150deg);
-        -ms-transform: rotate(150deg);
-            transform: rotate(150deg); }
-  .sk-circle .sk-circle7 {
-    -webkit-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-            transform: rotate(180deg); }
-  .sk-circle .sk-circle8 {
-    -webkit-transform: rotate(210deg);
-        -ms-transform: rotate(210deg);
-            transform: rotate(210deg); }
-  .sk-circle .sk-circle9 {
-    -webkit-transform: rotate(240deg);
-        -ms-transform: rotate(240deg);
-            transform: rotate(240deg); }
-  .sk-circle .sk-circle10 {
-    -webkit-transform: rotate(270deg);
-        -ms-transform: rotate(270deg);
-            transform: rotate(270deg); }
-  .sk-circle .sk-circle11 {
-    -webkit-transform: rotate(300deg);
-        -ms-transform: rotate(300deg);
-            transform: rotate(300deg); }
-  .sk-circle .sk-circle12 {
-    -webkit-transform: rotate(330deg);
-        -ms-transform: rotate(330deg);
-            transform: rotate(330deg); }
-  .sk-circle .sk-circle2:before {
-    -webkit-animation-delay: -1.1s;
-            animation-delay: -1.1s; }
-  .sk-circle .sk-circle3:before {
-    -webkit-animation-delay: -1s;
-            animation-delay: -1s; }
-  .sk-circle .sk-circle4:before {
-    -webkit-animation-delay: -0.9s;
-            animation-delay: -0.9s; }
-  .sk-circle .sk-circle5:before {
-    -webkit-animation-delay: -0.8s;
-            animation-delay: -0.8s; }
-  .sk-circle .sk-circle6:before {
-    -webkit-animation-delay: -0.7s;
-            animation-delay: -0.7s; }
-  .sk-circle .sk-circle7:before {
-    -webkit-animation-delay: -0.6s;
-            animation-delay: -0.6s; }
-  .sk-circle .sk-circle8:before {
-    -webkit-animation-delay: -0.5s;
-            animation-delay: -0.5s; }
-  .sk-circle .sk-circle9:before {
-    -webkit-animation-delay: -0.4s;
-            animation-delay: -0.4s; }
-  .sk-circle .sk-circle10:before {
-    -webkit-animation-delay: -0.3s;
-            animation-delay: -0.3s; }
-  .sk-circle .sk-circle11:before {
-    -webkit-animation-delay: -0.2s;
-            animation-delay: -0.2s; }
-  .sk-circle .sk-circle12:before {
-    -webkit-animation-delay: -0.1s;
-            animation-delay: -0.1s; }
-
-@-webkit-keyframes sk-circleBounceDelay {
-  0%, 80%, 100% {
-    -webkit-transform: scale(0);
-            transform: scale(0); }
-  40% {
-    -webkit-transform: scale(1);
-            transform: scale(1); } }
-
-@keyframes sk-circleBounceDelay {
-  0%, 80%, 100% {
-    -webkit-transform: scale(0);
-            transform: scale(0); }
-  40% {
-    -webkit-transform: scale(1);
-            transform: scale(1); } }
+}
 </style>
-<script type="text/javascript">
-$(document).ajaxStart(function () {
-	$(".sk-circle").show();
-	$("#shadow").show();
-    }).ajaxStop(function () {
-    	$(".sk-circle").hide();
-    	$("#shadow").hide();
-    });
-  
-</script>
 </head>
 <body style="margin:0px">
-<div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
- <div class="sk-circle">
-      <div class="sk-circle1 sk-child"></div>
-      <div class="sk-circle2 sk-child"></div>
-      <div class="sk-circle3 sk-child"></div>
-      <div class="sk-circle4 sk-child"></div>
-      <div class="sk-circle5 sk-child"></div>
-      <div class="sk-circle6 sk-child"></div>
-      <div class="sk-circle7 sk-child"></div>
-      <div class="sk-circle8 sk-child"></div>
-      <div class="sk-circle9 sk-child"></div>
-      <div class="sk-circle10 sk-child"></div>
-      <div class="sk-circle11 sk-child"></div>
-      <div class="sk-circle12 sk-child"></div>
-    </div>
-    
+<img src = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAc05&oid=00D90000000pkXM" hidden="hidden">
 		<aside style="margin-top:50px;height:400px;position:absolute;width:80%;left:5%;top:80px;" id="default-popup" class="avgrund-popup">
 
 			<h2 id="title" style="margin-bottom:10px;"></h2>
@@ -241,10 +107,16 @@ $(function(){
 	    	    			url : "../QueryShortNewsList",
 	    					type:'post',
 	    					success:function(data){
-	    						for (var i = 0; i < data.length; i++) {
+	    						var temp=5;
+	    						if(data.length<=5){
+	    							temp=data.length;
+	    						}
+	    						for (var i = 0; i < temp; i++) {
 	    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
 	    						
 	    						}
+	    						realSize=data.length;
+	    						size=temp;
 	    						$('.scroller ul').html(html);
 	    					},
 	    					error:function(){
@@ -253,8 +125,6 @@ $(function(){
 	    				});
 	    			}
 	    			});
-	    	
-	    			    	 		
 	      });
 
 	}
@@ -263,6 +133,7 @@ $(function(){
 	window.publishNews=publishNews;
 });
 
+var realSize=<%=realSize %>;
 var size=<%=size %>;
 		var myscroll = new iScroll("wrapper",{
 			onScrollMove:function(){
@@ -277,9 +148,14 @@ var size=<%=size %>;
 			},
 			onScrollEnd:function(){
 				if ($('.pull_icon').hasClass('flip')) {
+					if(size<realSize){
 					$('.pull_icon').addClass('loading');
 					$('.more span').text('加载中...');
-					pullUpAction();
+					pullUpAction();}
+					else
+						{
+						$('.more span').text('已到底部...');
+						}
 				}
 				
 			},
@@ -292,24 +168,24 @@ var size=<%=size %>;
 		
 		function pullUpAction(){
 			setTimeout(function(){
-		/* 		$.ajax({
-	    			url : "../QueryShortNewsList",
+		 		$.ajax({
+	    			url : "../QueryShortNewsList2",
 					type:'post',
+					data:{
+						startNumber:size,
+						pageSize:5
+					},
 					success:function(data){
-						for (var i = size; i < data.length; i++) {
+						for (var i = 0; i < data.length; i++) {
 							$('.scroller ul').append("<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>");
 						}
+						size=size+data.length;
 						myscroll.refresh();
 					},
 					error:function(){
 						console.log('error');
 					},
-				}); */
-			
-				<%for(int i=size ;i<shortNews.size();i++){%>
-				$('.scroller ul').append("<li><span>"+"<%=shortNews.get(i).getDate()%>"+"</span><p><span onClick='javascript:openDialog(this);'>"+"<%=shortNews.get(i).getContent()%>"+" </span></p></li>");
-				<%}%>
-				
+				});
 				myscroll.refresh();
 			}, 1000)
 		}
@@ -318,5 +194,21 @@ var size=<%=size %>;
 			myscroll.destroy();
 		}
 
+		
+		jQuery.ajax({
+			type : "GET",
+			url : "../QueryClientMeta",
+			data : {},
+			cache : false,
+			success : function(data) {
+				var jsons = eval(data);
+				$('img.HpLogo').attr('src',jsons.clientLogo);
+				$('span.clientCopyRight').text('©'+jsons.clientCopyRight);
+				$('span.clientSubName').text(jsons.clientSubName);
+				$('h2.clientName').text(jsons.clientName);
+			}
+		});
+
 	</script>
+	<div id="footer"><span class="clientCopyRight">©</span></div>
 </body></html>
