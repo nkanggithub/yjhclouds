@@ -5,9 +5,9 @@
 <%
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
-int length = shortNews.size();
+int realSize=shortNews.size();
+if(shortNews.size()<=5){size=shortNews.size();}
 String uid = request.getParameter("UID");
-if(shortNews.size()<5){size=shortNews.size();}
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 %>
@@ -258,10 +258,16 @@ $(function(){
 	    	    			url : "../QueryShortNewsList",
 	    					type:'post',
 	    					success:function(data){
-	    						for (var i = 0; i < data.length; i++) {
+	    						var temp=5;
+	    						if(data.length<=5){
+	    							temp=data.length;
+	    						}
+	    						for (var i = 0; i < temp; i++) {
 	    							html+="<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
 	    						
 	    						}
+	    						realSize=data.length;
+	    						size=temp;
 	    						$('.scroller ul').html(html);
 	    					},
 	    					error:function(){
@@ -270,8 +276,6 @@ $(function(){
 	    				});
 	    			}
 	    			});
-	    	
-	    			    	 		
 	      });
 
 	}
@@ -280,6 +284,7 @@ $(function(){
 	window.publishNews=publishNews;
 });
 
+var realSize=<%=realSize %>;
 var size=<%=size %>;
 		var myscroll = new iScroll("wrapper",{
 			onScrollMove:function(){
@@ -294,9 +299,14 @@ var size=<%=size %>;
 			},
 			onScrollEnd:function(){
 				if ($('.pull_icon').hasClass('flip')) {
+					if(size<realSize){
 					$('.pull_icon').addClass('loading');
 					$('.more span').text('加载中...');
-					pullUpAction();
+					pullUpAction();}
+					else
+						{
+						$('.more span').text('已到底部...');
+						}
 				}
 				
 			},
@@ -309,24 +319,24 @@ var size=<%=size %>;
 		
 		function pullUpAction(){
 			setTimeout(function(){
-		/* 		$.ajax({
-	    			url : "../QueryShortNewsList",
+		 		$.ajax({
+	    			url : "../QueryShortNewsList2",
 					type:'post',
+					data:{
+						startNumber:size,
+						pageSize:5
+					},
 					success:function(data){
-						for (var i = size; i < data.length; i++) {
+						for (var i = 0; i < data.length; i++) {
 							$('.scroller ul').append("<li><span>"+data[i].date+"</span><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>");
 						}
+						size=size+data.length;
 						myscroll.refresh();
 					},
 					error:function(){
 						console.log('error');
 					},
-				}); */
-			
-				<%for(int i=size ;i<shortNews.size();i++){%>
-				$('.scroller ul').append("<li><span>"+"<%=shortNews.get(i).getDate()%>"+"</span><p><span onClick='javascript:openDialog(this);'>"+"<%=shortNews.get(i).getContent()%>"+" </span></p></li>");
-				<%}%>
-				
+				});
 				myscroll.refresh();
 			}, 1000)
 		}
