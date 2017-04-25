@@ -14,7 +14,7 @@ body{font:normal 14px/24px "Helvetica Neue",Helvetica,STheiti,"Microsoft Yahei",
 
 .box { width:115%;margin:18px auto 0 auto; margin-left:-15%;text-align:right;}
 
-.event_list { width:100%;background:url('../../mdm/images/dian3.png') 35% 0 repeat-y;margin:10px 0 20px 0; }
+.event_list { width:100%;background:url('../../mdm/images/dian3.png') 35% 0 repeat-y;margin:10px 0 -10px 0; }
 .event_list h3 { margin:0 0 10px 132px;font-size:24px;font-family:Georgia;color:#0066ff;padding-left:25px;background:url('../img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
 .event_list li { background:url('../../mdm/images/jian.png') 36% -41px no-repeat; height:120px;}
 .event_list li span { width:32%;text-align:right;display:block;float:left;margin-top:10px;height:70px;overflow : hidden;
