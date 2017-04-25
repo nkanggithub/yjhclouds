@@ -233,7 +233,7 @@ public class MongoDBBasic {
         String dateNowStr = sdf.format(d); 
 
         java.util.Random random=new java.util.Random();// 定义随机类
-        int randomNum=random.nextInt(5);// 返回[0,10)集合中的整数，注意不包括10
+        int randomNum=random.nextInt(3);// 返回[0,10)集合中的整数，注意不包括10
     	DBObject query = new BasicDBObject();
 		query.put("Active", "Y");
 		DBObject queryresults = mongoDB.getCollection(ClientMeta).findOne(query);
