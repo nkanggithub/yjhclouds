@@ -925,7 +925,7 @@ public class MasterDataRestController {
 	@RequestMapping("/CallCreateShortNews")
 	public @ResponseBody int CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent){
 		MongoDBBasic.createShortNews(reqContent);
-		String url="http://"+Constants.baehost+"/mdm/DailyNews.jsp?UID=";
+		String url="http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp?UID=";
 		String title="";
 		String content="";
 		if(reqContent.length()>100){
