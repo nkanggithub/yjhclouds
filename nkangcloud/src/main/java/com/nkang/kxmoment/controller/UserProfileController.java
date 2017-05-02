@@ -324,7 +324,7 @@ public class UserProfileController {
 		 	String message = "文件导入失败，请重新导入..";
 		 	Map map =new HashMap<String,List>();
 		 	PutObjectResponse putObjectResponseFromInputStream=null;
-		 	String bk = MyBosClient.client.listBuckets().getBuckets().get(0).getName();
+		 	String bk = MyBosClient.client.listBuckets().getBuckets().get(1).getName();
 		    try {
 		        fileList = upload.parseRequest(new ServletRequestContext(request));
 		        if(fileList != null){
@@ -344,8 +344,7 @@ public class UserProfileController {
 		           
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		   //     message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
-		    
+		        message = "fail--"+e.toString()+"  fileList-size="+ fileList.size() +" message="+ message+" item.isFormField() ="+fileList.get(0).isFormField()+" && item.getSize()="+ fileList.get(0).getSize();
 		    }
 		    return message;
 
