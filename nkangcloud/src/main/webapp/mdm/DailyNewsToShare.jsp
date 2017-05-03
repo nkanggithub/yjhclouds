@@ -3,6 +3,7 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
 <%
+MongoDBBasic.addSkimNum();
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
 int realSize=shortNews.size();
