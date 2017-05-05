@@ -849,6 +849,24 @@ public class MongoDBBasic {
 		}
 		return ret;
 	}
+	public static boolean updateUser(String OpenID){
+		mongoDB = getMongoDB();
+		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
+		Boolean ret = false;
+	    try{
+            BasicDBObject doc = new BasicDBObject();  
+	    	DBObject update = new BasicDBObject();
+	    	update.put("LastUpdatedDate", DateUtil.timestamp2Str(cursqlTS));
+	    	doc.put("$set", update);  
+			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", OpenID), doc);
+            ret = true;
+            addSkimNum();
+	    }
+		catch(Exception e){
+			log.info("updateUser--" + e.getMessage());
+		}
+		return ret;
+	}
 	public static boolean updateUser(String OpenID, String Lat, String Lng, WeChatUser wcu){
 		mongoDB = getMongoDB();
 		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
