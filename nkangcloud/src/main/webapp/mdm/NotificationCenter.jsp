@@ -5,6 +5,7 @@
 <%@ page import="java.util.List"%>
 <%	
 String uid = request.getParameter("uid");
+MongoDBBasic.updateUser(uid);
 String num = request.getParameter("num");
 List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
 MongoDBBasic.updateVisitedNumber(num);
