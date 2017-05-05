@@ -77,26 +77,6 @@ public class CoreService
 					respContent = RestUtils.createMenu(AccessKey);
 					textMessage.setContent(respContent);
 					respXml = MessageUtil.textMessageToXml(textMessage);
-				}else if ("syncUser".equals(textContent)) {
-					boolean res;
-					int sucNum=0;
-					String akey=RestUtils.getAccessKey();
-					List<String> IdLists=RestUtils.getWeChatUserListID(akey);
-					MongoDBBasic.delNullUser();
-					for (int i = 0; i < IdLists.size(); i++) {
-						WeChatUser user=RestUtils.getWeChatUserInfo(akey,IdLists.get(i).replaceAll("\"",""));
-						res=MongoDBBasic.syncWechatUserToMongo(user);
-						if(res==true){
-							sucNum++;
-						}
-					}
-					respContent = sucNum+"条数据同步成功!";
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
-				}else if ("K8003".equals(textContent)||"8003".equals(textContent)) {
-					respContent = "https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmjQs&oid=00D90000000pkXM";
-					textMessage.setContent(respContent);
-					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 				else if ("TJOB".equals(textContent)) {
 					timer.purge();
