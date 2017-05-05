@@ -10,6 +10,7 @@ if(shortNews.size()<=5){size=shortNews.size();}
 String uid = request.getParameter("UID");
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
+MongoDBBasic.updateUser(uid);
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
