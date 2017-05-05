@@ -9,6 +9,7 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
 <%	
 String uid = request.getParameter("UID");
+MongoDBBasic.updateUser(uid);
 /*String AccessKey = RestUtils.callGetValidAccessKey();
 WeChatUser wcu;
 session.setAttribute("UID", uid);
