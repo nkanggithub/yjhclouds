@@ -10,6 +10,7 @@ if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCa
 	out.print("你没有查看该页面的权限！");
 	return;
 }
+MongoDBBasic.updateUser(uid);
 %>
 <!DOCTYPE HTML>
 <html>
