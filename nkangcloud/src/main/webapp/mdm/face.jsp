@@ -1,6 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%
 String uid = request.getParameter("UID");
+MongoDBBasic.updateUser(uid);
 %>
 <!doctype html>
 <html lang="en">
