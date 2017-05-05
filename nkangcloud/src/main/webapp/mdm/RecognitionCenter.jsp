@@ -6,6 +6,8 @@
 <%	
 String uid = request.getParameter("uid");
 String num = request.getParameter("num");
+
+MongoDBBasic.updateUser(uid);
  List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid,num);
 CongratulateHistory ch=new CongratulateHistory();
 if(!chList.isEmpty()){

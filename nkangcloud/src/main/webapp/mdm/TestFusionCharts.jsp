@@ -3,6 +3,10 @@
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%
+MongoDBBasic.addSkimNum();
+%>
 <%pageContext.setAttribute("path", request.getContextPath());%>
 <%	
 /* String AccessKey = RestUtils.callGetValidAccessKey();

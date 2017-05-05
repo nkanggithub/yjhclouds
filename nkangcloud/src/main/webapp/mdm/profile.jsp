@@ -13,6 +13,7 @@ String currentDate = format.format(date);
 String AccessKey = RestUtils.callGetValidAccessKey();
 String uid = request.getParameter("UID");
 
+MongoDBBasic.updateUser(uid);
 String curLoc=null;
 String city=null;
 //WeChatUser wcu;

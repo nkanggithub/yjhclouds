@@ -1,8 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%	
 String baehosthost = Constants.baehost;
 String UID = request.getParameter("UID");
+MongoDBBasic.updateUser(UID);
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -11,6 +11,7 @@ String AccessKey = RestUtils.callGetValidAccessKey();
 List<PlasticItem> ql=PlasticItemService.findList(1,9999);
 String uid = request.getParameter("UID");
 
+MongoDBBasic.updateUser(uid);
 int special=0;
 if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){special=1;}
 if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){special=2;}

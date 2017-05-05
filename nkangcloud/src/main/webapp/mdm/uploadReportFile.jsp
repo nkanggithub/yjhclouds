@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%
+MongoDBBasic.addSkimNum();
+%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
