@@ -22,6 +22,7 @@ List<Integer> scanNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"scan");
 List<Integer> profileNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"profile");
 List<Integer> quoteNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"quoteDetailExternal");
 
+MongoDBBasic.addSkimNum();
 %> 
 <!DOCTYPE html>
 <html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
