@@ -1,8 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="java.util.List"%>
 <%
+MongoDBBasic.addSkimNum();
 Map map = (HashMap<String,List>)request.getAttribute("map");
 List<Integer> apj=(List<Integer>)map.get("APJ");
 List<Integer> usa=(List<Integer>)map.get("USA");
