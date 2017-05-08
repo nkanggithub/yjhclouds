@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.apache.tomcat.util.descriptor.tld.TldRuleSet.Variable;
+import org.bson.types.ObjectId;
 import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -169,6 +170,7 @@ public class MongoDBBasic {
         		if(o.get("content")!=null){
         			temp.setContent(o.get("content").toString());
         		}
+        		temp.setMongoID(o.get("_id").toString());
         		result.add(temp);
         	}
         }
@@ -193,11 +195,28 @@ public class MongoDBBasic {
         		if(o.get("content")!=null){
         			temp.setContent(o.get("content").toString());
         		}
+        		temp.setMongoID(o.get("_id").toString());
         		result.add(temp);
         	}
         }
 		return result;
 	}
+	
+	public static boolean deleteShortNews(String id){
+		Boolean ret = false;
+	    try{
+			DBObject removeQuery = new BasicDBObject();
+			removeQuery.put("_id", new ObjectId(id));
+			mongoDB.getCollection(short_news).remove(removeQuery);
+			ret = true;
+	    }
+		catch(Exception e){
+			log.info("remove--" + e.getMessage());
+		}
+		return ret;
+		
+	}
+	
 	public static String QueryAccessKey(){
 		String validKey = null;
 		mongoDB = getMongoDB();
