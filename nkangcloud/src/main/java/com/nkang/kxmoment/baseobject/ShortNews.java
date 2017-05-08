@@ -1,19 +1,19 @@
 package com.nkang.kxmoment.baseobject;
 
 public class ShortNews {
-	public String id;
+	public String mongoID;
 	public String date;
 	public String content;
 	public String getDate() {
 		return date;
 	}
 	
-	public String getId() {
-		return id;
+	public String getMongoID() {
+		return mongoID;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMongoID(String mongoID) {
+		this.mongoID = mongoID;
 	}
 
 	public void setDate(String date) {
