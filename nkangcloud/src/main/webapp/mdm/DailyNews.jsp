@@ -208,7 +208,7 @@ $(document).ajaxStart(function () {
 	<ul class="event_list">
 
 <%for(int i=0;i<size;i++){ %>
-		<li><span><%=shortNews.get(i).getDate() %></span><p><span onClick="javascript:openDialog(this);"><%=shortNews.get(i).getContent() %> </span></p></li>
+		<li><span><%=shortNews.get(i).getDate() %><br></span><%if(isInternalSeniorMgt==true||isInternalImtMgt==true) { %><button style="position:absolute;top:65px;left:70px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;" onclick="javascript:deleteNews('<%=shortNews.get(i).getMongoID() %>');">删除新闻</button><% } %><p><span onClick="javascript:openDialog(this);"><%=shortNews.get(i).getContent() %> </span></p></li>
 <%} %>
 	</ul>
 	<div class="more"><i class="pull_icon"></i><span>上拉加载...</span></div>
@@ -228,6 +228,41 @@ $(function(){
 	function closeDialog() {
 
 		Avgrund.hide();
+
+	}
+	function deleteNews(obj) {
+  	  $.ajax({
+			type : "post",
+			url : "../deleteShortNews",
+			data:{
+				id:obj
+			},
+			cache : false,
+			success : function(data) {
+				swal("恭喜!", "删除成功", "success");
+				var html="";
+				$.ajax({
+	    			url : "../QueryShortNewsList",
+					type:'post',
+					success:function(data){
+						var temp=5;
+						if(data.length<=5){
+							temp=data.length;
+						}
+						for (var i = 0; i < temp; i++) {
+							html+="<li><span>"+data[i].date+"</span><button style='position:absolute;top:65px;left:70px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;' onclick=\"javascript:deleteNews(\'"+data[i].mongoID+"\');\">删除新闻</button><p><span onClick='javascript:openDialog(this);'>"+data[i].content+" </span></p></li>";
+						
+						}
+						realSize=data.length;
+						size=temp;
+						$('.scroller ul').html(html);
+					},
+					error:function(){
+						console.log('error');
+					}
+				});
+			}
+			});
 
 	}
 	function publishNews() {
@@ -283,6 +318,7 @@ $(function(){
 	window.openDialog=openDialog;
 	window.closeDialog=closeDialog;
 	window.publishNews=publishNews;
+	window.deleteNews=deleteNews;
 });
 
 var realSize=<%=realSize %>;
@@ -295,7 +331,7 @@ var size=<%=size %>;
 					$('.more span').text('释放加载...');
 				}else{
 					$('.pull_icon').removeClass('flip loading');
-					$('.more span').text('上拉加载...')
+					$('.more span').text('上拉加载...');
 				}
 			},
 			onScrollEnd:function(){
