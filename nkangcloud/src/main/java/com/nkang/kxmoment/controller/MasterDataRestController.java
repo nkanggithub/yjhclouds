@@ -922,6 +922,13 @@ public class MasterDataRestController {
 		}
 		return cm;
 	}
+	
+	@RequestMapping("/deleteShortNews")
+	public static boolean deleteShortNewsbyID(@RequestParam(value="id", required=true) String id){
+		return MongoDBBasic.deleteShortNews(id);
+	}
+	
+	
 	@RequestMapping("/CallCreateShortNews")
 	public @ResponseBody int CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent){
 		MongoDBBasic.createShortNews(reqContent);
