@@ -246,7 +246,7 @@ public class MongoDBBasic {
     				HashMap<String, Object> temp=new HashMap<String, Object>();
     				temp.put("date", ((DBObject)dbobj).get("date").toString());
     				if(dateNowStr.equals(((DBObject)dbobj).get("date").toString())){
-    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) +1+randomNum);
+    					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) +1);
     					result=true;
     				}else{
     					temp.put("num", Integer.parseInt( ((DBObject)dbobj).get("num").toString() ) );
@@ -258,7 +258,7 @@ public class MongoDBBasic {
 		if(!result){
 			HashMap<String, Object> temp=new HashMap<String, Object>();
 			temp.put("date", dateNowStr);
-			temp.put("num", 1+randomNum);
+			temp.put("num", 1);
 			list1.add(temp);
 		}
 		BasicDBObject doc = new BasicDBObject();
