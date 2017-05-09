@@ -6,6 +6,7 @@
 <%@ page import="com.nkang.kxmoment.baseobject.PlasticItem"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.service.PlasticItemService"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <%	
 /* List<ArticleMessage> BJtitles =MongoDBBasic.getArticleMessageByType("bj");
@@ -18,9 +19,16 @@ List<ArticleMessage> JStitles =MongoDBBasic.getArticleMessageByType("js");
 int JSTotalNum=JStitles.size();
 List<PlasticItem> ql=PlasticItemService.findList(1,9999);
 List<String> dates=MongoDBBasic.getLastestDate(-6);
-List<Integer> scanNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"scan");
-List<Integer> profileNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"profile");
-List<Integer> quoteNumList=MongoDBBasic.getTotalVisitedNumByPage(dates,"quoteDetailExternal");
+ArrayList<Map> visitedPageList=MongoDBBasic.QueryVisitPageAttention();
+List<List<Integer>> visitedList=new ArrayList<List<Integer>>();
+for(int i=0;i<visitedPageList.size();i++){
+	visitedList.add(MongoDBBasic.getTotalVisitedNumByPage(dates,visitedPageList.get(i).get("realName").toString()));
+}
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);;
+MongoDBBasic.updateVisited("12345",currentDate,"DataVisualization","","Visitor");
+
 
 MongoDBBasic.addSkimNum();
 %> 
@@ -591,63 +599,30 @@ var i=$(this).index();
 		                    }
 		                ],
 		                "dataset": [
-		                    {
-		                        "seriesname": "发现附近",
-		                        "data": [
-		                                 <%  for(int i=0;i<scanNumList.size();i++){ 
-			                            	 if(i==scanNumList.size()-1){%>
-			                            	 {
-			                                     "value": "<%=scanNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 }
-			                            	 <%}else{%>
-			                            	 {
-			                                     "value": "<%=scanNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 },
-			                            <%}%>
-			                            <%}%>
-		                                
-		                        ]
-		                    },{
-		                        "seriesname": "实时报价",
-		                        "data": [
-		                                 <%  for(int i=0;i<quoteNumList.size();i++){ 
-			                            	 if(i==quoteNumList.size()-1){%>
-			                            	 {
-			                                     "value": "<%=quoteNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 }
-			                            	 <%}else{%>
-			                            	 {
-			                                     "value": "<%=quoteNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 },
-			                            <%}%>
-			                            <%}%>
-		                                
-		                        ]
-		                    },{
-		                        "seriesname": "胖和主页",
-		                        "data": [
-		                                 <%  for(int i=0;i<profileNumList.size();i++){ 
-			                            	 if(i==profileNumList.size()-1){%>
-			                            	 {
-			                                     "value":" <%=profileNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 }
-			                            	 <%}else{%>
-			                            	 {
-			                                     "value":"<%=profileNumList.get(i)%>",
-			                                     "errorvalue": ""
-			                                 },
-			                            <%}%>
-			                            <%}%>
-		                                
-		                        ]
-		                    }
-		                ]
-		            }
+		                            <% for(int i=0;i<visitedList.size();i++){%>
+				                    {
+				                        "seriesname": "<%=visitedPageList.get(i).get("descName").toString()%>",
+				                        "data": [
+				                                 <%  for(int j=0;j<visitedList.get(i).size();j++){ 
+					                            	 if(i==visitedList.get(i).size()-1){%>
+					                            	 {
+					                                     "value": "<%=visitedList.get(i).get(j)%>",
+					                                     "errorvalue": ""
+					                                 }
+					                            	 <%}else{%>
+					                            	 {
+					                                     "value": "<%=visitedList.get(i).get(j)%>",
+					                                     "errorvalue": ""
+					                                 },
+					                            <%}%>
+					                            <%}%>
+				                                
+				                        ]
+				                    }
+				                    <% if(i<visitedList.size()-1){%>, <%}%>
+				                    <% }%>
+				                ]
+				            }
 		        }).render();
 		        
 		    });
@@ -660,16 +635,12 @@ var i=$(this).index();
 		 
 		 var detail=$("#fusioncharts-tooltip-element").children("span").text();
 		 var details=detail.split(",");
-		 var pageName="";
-		 if(details[0]=="实时报价"){pageName="quoteDetailExternal";}
-		 if(details[0]=="发现附近"){pageName="scan";}
-		 if(details[0]=="胖和主页"){pageName="profile";}
 	 	 $.ajax({
 				type : "post",
 				async: false,
 				url : "../getVisitedDetail",
 				data:{
-					pageName:pageName,
+					pageName:details[0],
 					dateIndex:index
 				},
 				cache : false,
