@@ -26,7 +26,7 @@ for(int i=0;i<visitedPageList.size();i++){
 }
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
-String currentDate = format.format(date);;
+String currentDate = format.format(date);
 MongoDBBasic.updateVisited("12345",currentDate,"DataVisualization","","Visitor");
 
 
