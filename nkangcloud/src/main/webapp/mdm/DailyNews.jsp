@@ -2,6 +2,7 @@
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
@@ -11,6 +12,12 @@ String uid = request.getParameter("UID");
 boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 MongoDBBasic.updateUser(uid);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"DailyNews",res.get("HeadUrl"),res.get("NickName"));
+
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
