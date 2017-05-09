@@ -7,6 +7,7 @@
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%					
 MdmDataQualityView mqv = new MdmDataQualityView();
 mqv= RestUtils.callGetDataQualityReport();
@@ -16,6 +17,11 @@ GeoLocation loc = RestUtils.callGetDBUserGeoInfo(uid);
 WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 String curLoc = RestUtils.getUserCurLocWithLatLng(loc.getLAT() , loc.getLNG()); 
 MongoDBBasic.updateUser(uid);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"DQDashBoard",res.get("HeadUrl"),res.get("NickName"));
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
