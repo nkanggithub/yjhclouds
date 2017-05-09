@@ -2,12 +2,17 @@
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%
 MongoDBBasic.addSkimNum();
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
 int realSize=shortNews.size();
 if(shortNews.size()<=5){size=shortNews.size();}
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+MongoDBBasic.updateVisited("12345",currentDate,"DailyNewsToShare","","Visitor");
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
