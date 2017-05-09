@@ -6,6 +6,7 @@
 <%@ page import="com.nkang.kxmoment.service.PlasticItemService"%>
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ClientMeta"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%	
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<PlasticItem> ql=PlasticItemService.findList(1,9999);
@@ -18,6 +19,11 @@ if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){special=2;}
 
 //WeChatUser wcu = RestUtils.getWeChatUserInfo(AccessKey, uid);
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateUser(uid);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+MongoDBBasic.updateVisited(uid,currentDate,"quoteDetail",res.get("HeadUrl"),res.get("NickName"));
 %>  
 <!Doctype html>
 <html>

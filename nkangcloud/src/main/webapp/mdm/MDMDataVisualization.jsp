@@ -2,8 +2,16 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="java.util.List"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.*"%>
 <%
+String uid = request.getParameter("UID");
+MongoDBBasic.updateUser(uid);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"MDMDataVisualization",res.get("HeadUrl"),res.get("NickName"));
 MongoDBBasic.addSkimNum();
 Map map = (HashMap<String,List>)request.getAttribute("map");
 List<Integer> apj=(List<Integer>)map.get("APJ");

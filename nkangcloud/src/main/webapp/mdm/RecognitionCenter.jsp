@@ -2,11 +2,16 @@
 <%@ page import="com.nkang.kxmoment.baseobject.CongratulateHistory"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%	
 String uid = request.getParameter("uid");
 String num = request.getParameter("num");
-
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"RecognitionCenter",res.get("HeadUrl"),res.get("NickName"));
 MongoDBBasic.updateUser(uid);
  List<CongratulateHistory> chList=MongoDBBasic.getRecognitionInfoByOpenID(uid,num);
 CongratulateHistory ch=new CongratulateHistory();

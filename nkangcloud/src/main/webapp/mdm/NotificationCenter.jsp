@@ -2,10 +2,16 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%	
 String uid = request.getParameter("uid");
 MongoDBBasic.updateUser(uid);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"NotificationCenter",res.get("HeadUrl"),res.get("NickName"));
 String num = request.getParameter("num");
 List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
 MongoDBBasic.updateVisitedNumber(num);

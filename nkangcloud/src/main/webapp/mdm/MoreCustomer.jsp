@@ -7,8 +7,17 @@
 <%@ page import="com.nkang.kxmoment.baseobject.WeChatUser"%>
 <%@ page import="com.nkang.kxmoment.util.Constants"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ExtendedOpportunity"%>
-<%					
-String fromUserName = request.getParameter("UID"); 
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.*"%>
+<%
+String fromUserName = request.getParameter("UID");
+MongoDBBasic.updateUser(fromUserName);
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(fromUserName);
+MongoDBBasic.updateVisited(fromUserName,currentDate,"MoreCustomer",res.get("HeadUrl"),res.get("NickName"));
 String CurType = "customer";
 int curNum = 0;
 %>
