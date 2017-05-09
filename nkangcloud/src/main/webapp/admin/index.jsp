@@ -108,19 +108,65 @@ MongoDBBasic.updateUser(uid);
 	position: relative;
     left: -120px;
 }
+
+.singleQuote .edit
+{
+	width: 60px;
+    height: 100%;
+    color: #fff;
+    font-family:微软雅黑;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: -45px;
+	font-size:14px;
+    background: orange;
+    border-bottom: 1px solid #ccc;
+}
+.singleQuote .edit img {
+    width:25px;height:auto;position:absolute;top:8px;margin-left: 2px;
+}
+.singleQuote .edit p
+{
+	width:50%;
+	height:100%;
+	line-height:90px;
+	margin-right:auto;
+	margin-left:auto;
+	font-weight:bold;
+}
+.singleQuote .edit.no{
+background: #999;
+}
+.singleQuote .picClose
+{
+cursor:pointer;
+}
+.singleQuote  .edit.no p
+{
+	line-height:25px;
+	padding-top:5px;
+}
+.singleQuote.editBtn
+{
+	position: relative;
+    left: -60px;
+}
 ul li.singleQuote{
 	font-size:18px;
 	border-bottom:1px solid #ccc;
-	padding:20px 3px;
-	padding-bottom:10px;
-	color:#0761A5;
-	line-height: 10px;
-}
-ul li.singleQuote.attention .quoteTitle{
-	font-size:18px;
+	padding:20px;
 	color:#333;
+	width:100%;
 }
-ul li.singleQuote  .quoteTitle .pTag{
+ul li.singleQuote .firstLayer.attention{
+	color:#0761A5;
+}
+ul li.singleQuote .firstLayer .quoteTitle{
+	float:left;
+	cursor:pointer;
+}
+ul li.singleQuote .firstLayer .quoteTitle .tag2{
 	font-size:11px;
 	background-color:orange;
 	color:#fff;
@@ -129,21 +175,31 @@ ul li.singleQuote  .quoteTitle .pTag{
 	font-family:微软雅黑;
 	margin-left:8px;
 }
-ul li.singleQuote  .quoteTitle .pTag.approve{
-	background-color:#0067B5;
-}
-ul li.singleQuote input.botton{
+ul li.singleQuote .firstLayer .quotePrice{
 	float:right;
-	padding:5px;
-	color:#fff !important;
-	font-weight:bold !important;
-	background-color:#999;
-	border:0px;
-	margin-top:-20px;
-	font-size:18px;
+	color:#333;
 }
-ul li.singleQuote.attention input.botton{
-	background-color:orange;
+ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
+	color:red;
+}
+ul li.singleQuote .firstLayer .quotePrice.normal,ul li.singleQuote .firstLayer  .change.normal{
+	color:#333;
+}
+ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
+	color:red;
+}
+ul li.singleQuote .firstLayer .quotePrice.low,ul li.singleQuote .firstLayer  .change.low{
+	color:green;
+}
+ul li.singleQuote .firstLayer .quotePrice.lose,ul li.singleQuote .firstLayer  .change.lose{
+	color:#bbb;
+}
+ul li.singleQuote .firstLayer  .change{
+	font-size:10px;
+	float:right;
+	margin-top:-35px;
+	position:relative;
+	clear:both;
 }
 .clear{
 	clear:both;
@@ -172,7 +228,9 @@ $(function(){
     });
 
 var clientThemeColor,HpLogoSrc,LogoData;
+var likePageNum=0;
 $(window).load(function() {
+	getVisitPage();
 	getLogoLists();
 	getMDLUserLists();
 	$(".Work_Mates_div_list_div2").live("swiperight",function(){
@@ -190,8 +248,116 @@ $(window).load(function() {
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
+	$(".singleQuote").live("swiperight",function(){
+		$(this).css("overflow","hidden");
+		$(this).removeClass("editBtn");
+		$(this).find(".edit").remove();
+	}); 
+	$(".singleQuote").live("swipeleft",function(){
+		$(this).siblings().removeClass("editBtn");
+		$(this).siblings().find(".edit").remove();
+		
+		
+		var priceNum=$(this).find('span.price').length;
+		if(priceNum==0){
+			$(this).css("overflow","visible");
+			$(this).addClass("editBtn");
+			var tagNum=$(this).find('span.tag2').length;
+			var item=$(this).find('span.id').text();
+			if(tagNum==0){
+				$(this).append('<div class="edit"><p onclick="UpdateTag(\''+item+'\',\'add\',this)"><img src="../mdm/images/focus.png" />关注</p></div>');
+			}else{
+				$(this).append('<div class="edit no"><p onclick="UpdateTag(\''+item+'\',\'del\',this)">取消<br/>关注</p></div>');
+			}
+		}
+	});
 	
 });
+function UpdateTag(item,flag,obj){
+	var tempObj=$(obj).parent().parent(".singleQuote");
+	$(".singleQuote").removeClass("editBtn");
+	$(".singleQuote").find(".edit").remove();
+    if(likePageNum>=4&&flag=='add'){
+		 swal("操作失败", "最多只能关注四个页面", "error");
+	}else{ 
+		$.ajax({
+			 url:'../updateVisitPage',
+			 type:"POST",
+			 data : {
+				 realName : item,
+				 flag : flag
+			 },
+			 success:function(result){
+				 if(result==true){
+					 if(flag=='add'){
+						 context='恭喜你成功关注该项';
+						 if(RoleObj[item]!=null&&RoleObj[item].length>0){
+							 var context='';
+							 for(var i=0;i<RoleObj[item].length;i++){
+								 if(context!='')context+='，';
+								 context+=AreaObj[RoleObj[item][i]];
+							 }
+							 context='推荐您关注【'+context+'】技术领域';
+						 }
+						 swal("关注成功 ",context, "success");
+						 likePageNum++;
+						 tempObj.find(".firstLayer").addClass("attention");
+						 tempObj.find(".firstLayer").find(".quoteTitle").append('<span class="tag2">已关注</span>');
+					 }else  if(flag=='del'){
+						 swal("取消成功","你取消了对该项的关注", "success");
+						 likePageNum--;
+						 tempObj.find(".firstLayer").removeClass("attention");
+						 tempObj.find(".firstLayer").find(".quoteTitle").find(".tag2").remove();
+					 }
+				 }else{
+					 swal("操作失败", "请刷新页面后重试", "error");
+				 }
+			 }
+		});	
+	 } 
+}
+function getVisitPage() {
+	jQuery.ajax({
+		type : "GET",
+		url : "../QueryVisitPage",
+		data : {},
+		cache : false,
+		success : function(data) {
+			var jsons = data;
+			var ul="";
+			likePageNum=0;
+			for (var i = 0; i < jsons.length; i++) {
+				var temp=jsons[i];
+				 var priceColor="lose";
+				 var tag='';
+				 var attention='';
+				 var priceStyle='';
+				 var onclick='';
+				 var unit='<span class="price2"></span><span class="unit"></span>';
+				 if(temp.attention=="1"){
+					 tag='<span class="tag2">已关注</span>';
+					 attention='attention';
+					 likePageNum++;
+				 }
+				 var li='<li class="singleQuote">'
+					 +'	<div class="firstLayer '+attention+'">'
+					 +'		<div class="quoteTitle"><span class="id" style="display:none;">'+temp.realName+'</span><span class="item2" '+onclick+'>'+temp.descName+'</span>'+tag+'</div>'
+					 +'		<div class="quotePrice '+priceColor+'" '+priceStyle+'>'+unit+'</div>'
+					 /*  +'		<span class="change high">+10</span>' */
+					 +'		<span class="recommendArea" style="display:none;"></span>'
+					 +'		<div class="clear"></div>'
+					 +'	</div>'
+					 +'</li>'; 
+				if(tag==''){
+					ul+=li;
+				}else{
+					ul=li+ul;
+				}
+			}
+			 $("#visit_div").html(ul);
+		}
+	});
+}
 function UpdateTag(openid,item,obj){
 	var flag='add';
 	if($(obj).val()=="取消"){
@@ -1102,6 +1268,8 @@ function updateUserInfo(openId){
 				style="border-color: rgb(0, 179, 136);">
 				<li class="active"><a href="#WorkMates" data-toggle="tab"
 					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">人员管理</a></li>
+				<li><a href="#visitManage" data-toggle="tab"
+					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">到访管理</a></li>
 				<li><a href="#logoElements" data-toggle="tab"
 					style="border-right-color: rgb(0, 179, 136); border-top-color: rgb(0, 179, 136); border-left-color: rgb(0, 179, 136);">版权管理</a></li>
 			</ul>
@@ -1111,6 +1279,12 @@ function updateUserInfo(openId){
 					<!-- start logoElements-->
 					<div class="Work_Mates_div2" id="Logo_div">
 					</div>
+					<!-- end logoElements-->
+				</div>
+				<div class="tab-pane" id="visitManage">
+					<!-- start visitManage-->
+					<ul id="visit_div" style="width:100%;margin-left:-15px;">
+					</ul>
 					<!-- end logoElements-->
 				</div>
 								<div id="updateUserInfoForm" class="modal hide fade" tabindex="-1"
