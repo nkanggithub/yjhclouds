@@ -12,7 +12,7 @@ if(shortNews.size()<=5){size=shortNews.size();}
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
-MongoDBBasic.updateVisited("12345",currentDate,"DailyNewsToShare","","Visitor");
+MongoDBBasic.updateVisited("12345",currentDate,"DailyNewsToShare","../mdm/images/People.png","访问者");
 %>
 <!DOCTYPE html>
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
