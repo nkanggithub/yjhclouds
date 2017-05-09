@@ -1,5 +1,17 @@
 <%@ page language="java" pageEncoding="UTF-8"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.*" %>
+<%-- <%@ page import="com.nkang.kxmoment.util.DBUtils"%> --%>
+<%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%
+String uid = request.getParameter("UID"); 
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+MongoDBBasic.updateVisited(uid,currentDate,"DQMenu",res.get("HeadUrl"),res.get("NickName"));
+%>
 <!DOCTYPE html>
 <html class=" js csstransitions">
 <head>
