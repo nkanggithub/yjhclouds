@@ -1,7 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.*" %>
 <%
 MongoDBBasic.addSkimNum();
+SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+Date date=new Date();
+String currentDate = format.format(date);
+MongoDBBasic.updateVisited("12345",currentDate,"DataVisualization","","Visitor");
+
 %>
 <!doctype html>
 <html lang="en">
