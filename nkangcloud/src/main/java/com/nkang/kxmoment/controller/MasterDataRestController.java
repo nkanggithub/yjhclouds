@@ -905,6 +905,39 @@ public class MasterDataRestController {
 		}
 		return cm;
 	}
+	@RequestMapping("/QueryVisitPage")
+	public static ArrayList<Map> QueryVisitPage(){
+		ArrayList<Map> result = new ArrayList<Map>();
+		try{
+			result = MongoDBBasic.QueryVisitPage();
+		}		
+		catch(Exception e){
+			result = null;
+		}
+		return result;
+	}
+	@RequestMapping("/QueryVisitPageAttention")
+	public static ArrayList<Map> QueryVisitPageAttention(){
+		ArrayList<Map> result = new ArrayList<Map>();
+		try{
+			result = MongoDBBasic.QueryVisitPageAttention();
+		}		
+		catch(Exception e){
+			result = null;
+		}
+		return result;
+	}
+	@RequestMapping("/updateVisitPage")
+	public static boolean updateVisitPage(@RequestParam(value="realName", required=true) String realName,@RequestParam(value="flag", required=true) String flag){
+		boolean ret = false;
+		try{
+			ret =  MongoDBBasic.updateVisitPage(realName,flag);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
 	@RequestMapping("/QueryShortNewsList2")
 	public static ArrayList<ShortNews> QueryShortNewsList2(@RequestParam(value="startNumber", required=true) int startNumber,@RequestParam(value="pageSize", required=true) int pageSize){
 		ArrayList<ShortNews> cm = new ArrayList<ShortNews>();
