@@ -191,7 +191,7 @@ public class UserProfileController {
 	
 	@RequestMapping("/userCongratulate")
 	public @ResponseBody String updateUserCongratulateHistory(HttpServletRequest request,
-			HttpServletResponse response ){
+			HttpServletResponse response ) throws JSONException{
 		//String openid=request.getParameter("openID");
 
 		String openid=MongoDBBasic.getRegisterUserByrealName(request.getParameter("to"));
@@ -221,15 +221,21 @@ public class UserProfileController {
 		openIDs.add("oqPI_xLq1YEJOczHi4DS2-1U0zqc");
 		openIDs.add("oqPI_xACjXB7pVPGi5KH9Nzqonj4");
 		openIDs.add("oqPI_xHQJ7iVbPzkluyE6qDPE6OM");*/
+		int realReceiver=0;
 		if("true".equals(request.getParameter("isAll"))){
-			for(int i=0;i<openIDs.size();i++){
-				RestUtils.sendRecognitionToUser(openid,openIDs.get(i),conhis);
-			}
+	           String status="";
+	        for(int i=0;i<openIDs.size();i++){
+	           status=RestUtils.sendRecognitionToUser(openid,openIDs.get(i),conhis);
+	          if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+	       	   realReceiver++;
+	          }
+	        }
 		}else{
 			RestUtils.sendRecognitionToUser(openid,openid, conhis);
 			RestUtils.sendRecognitionToUser(openid,fromOpenid, conhis);
+			realReceiver=2;
 		}
-		return openIDs.size()+"";
+		return realReceiver+"";
 	} 
 	@RequestMapping("/getCompanyInfo")
 	public @ResponseBody List<String> getCompanyInfo(HttpServletRequest request,
@@ -265,7 +271,7 @@ public class UserProfileController {
 	
 	@RequestMapping("/addNotification")
 	public @ResponseBody String addNotification(HttpServletRequest request,
-			HttpServletResponse response ){
+			HttpServletResponse response ) throws JSONException{
 		ArticleMessage am=new ArticleMessage();
 		String openid=request.getParameter("openId");
 		String img = request.getParameter("img");
@@ -285,11 +291,16 @@ public class UserProfileController {
 		am.setTime(new Date().toLocaleString());
 		MongoDBBasic.saveArticleMessage(am);
 		List<String> allUser = MongoDBBasic.getAllOpenIDByIsRegistered();
+		 int realReceiver=0;
+         String status="";
 			for(int i=0;i<allUser.size();i++){
-				RestUtils.sendNotificationToUser(openid,allUser.get(i),img,am);
+				status=RestUtils.sendNotificationToUser(openid,allUser.get(i),img,am);
+				 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+	              	   realReceiver++;
+	                 }
 			}
 		
-		return allUser.size()+"";
+		return realReceiver+"";
 	} 
 		
 	/*chang-zheng
@@ -350,7 +361,7 @@ public class UserProfileController {
 
 	}
 	@RequestMapping("/sendNewsToAll")
-	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response)
+	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response) throws JSONException
 	{
 		String url="http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp?UID=";
 		String title="";
@@ -368,10 +379,15 @@ public class UserProfileController {
 			content=reqContent;
 		}
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
+		int realReceiver=0;
+        String status="";
 		 for(int i=0;i<allUser.size();i++){
-			 RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+			 status=RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+			 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+            	   realReceiver++;
+               }
 		 }
-		 return allUser.size();
+		 return realReceiver;
 	}
 
 }
