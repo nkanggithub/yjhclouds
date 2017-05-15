@@ -101,6 +101,19 @@ public class CoreService
 						textMessage.setContent(respContent);
 						respXml = MessageUtil.textMessageToXml(textMessage);
 					}
+					else if (textContent.contains("trigger:")) {
+						String content= textContent.split(":")[1];
+						int realReceiver=0;
+	                    String status="";
+	                    List<String> toUser=MongoDBBasic.getAllOpenID();
+	                    status=RestUtils.sendTextMessageToUser(content, toUser);
+	                   if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+	                	   realReceiver=toUser.size();
+	                   }
+	                 
+		                textMessage.setContent(realReceiver + "人收到该消息");
+		                respXml = MessageUtil.textMessageToXml(textMessage);
+					}
 				else {
 					List<String> allUser = MongoDBBasic.getAllOpenIDByIsActivewithIsRegistered();
 	                for(int i=0;i<allUser.size();i++){
@@ -109,11 +122,15 @@ public class CoreService
 	                     }
 	                }
 	                    
-	                 for(int i=0;i<allUser.size();i++){
-	                    RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
-	                }
-
-	                textMessage.setContent(allUser.size() + "人收到该消息");
+	                int realReceiver=0;
+                    String status="";
+                 for(int i=0;i<allUser.size();i++){
+                    status=RestUtils.sendTextMessageToUserOnlyByCustomInterface(textContent,allUser.get(i),fromUserName);
+                   if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+                	   realReceiver++;
+                   }
+                 }
+	                textMessage.setContent(allUser.size()+"("+realReceiver+")" + " 人收到该消息");
 	                respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 			}
