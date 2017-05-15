@@ -4394,5 +4394,11 @@ public class MongoDBBasic {
 		}
 		return Inventorys;
 	}
+	public static List<String> getAllOpenID(){
+		mongoDB = getMongoDB();
+		@SuppressWarnings("unchecked")
+		List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID");
+		return dbuser;
+	}
 }
 					
