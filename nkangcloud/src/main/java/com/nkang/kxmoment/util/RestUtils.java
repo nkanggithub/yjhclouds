@@ -1859,8 +1859,7 @@ public static String regist(WeChatMDLUser user) {
 	
 	
 	
-    public static List<String> sendTextMessageToUserOnlyByCustomInterface(String content,String toUser,String fromUsersOpenID){
- 	        List<String> result = new ArrayList<String>();
+    public static String sendTextMessageToUserOnlyByCustomInterface(String content,String toUser,String fromUsersOpenID){
  	       List<String> dbUser =  MongoDBBasic.getRegisterUserByOpenID(fromUsersOpenID);
  	       Date date=new Date();
  			 String json = 
@@ -1877,12 +1876,10 @@ public static String regist(WeChatMDLUser user) {
            String access_token = MongoDBBasic.getValidAccessKey();
 
  	       String action = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
-
- 	       result.add(action);
- 	       result.add(json);
+ 	       String result="";
  	       try {
 
- 	    	 	connectWeiXinInterface(action,json);
+ 	    	 result = connectWeiXinInterface(action,json);
 
  	       } catch (Exception e) {
 
@@ -2723,7 +2720,14 @@ public static String regist(WeChatMDLUser user) {
 		}
 		return lt;
     }
-    
+    public static String getValueFromJson(String originalMsg,String key) throws JSONException
+    {
+	   System.out.println("originalMsg--------"+originalMsg);
+		String newString=originalMsg.substring(7,originalMsg.length());
+    	JSONObject demoJson = new JSONObject(newString);
+    	System.out.println("status key--------"+demoJson.getString(key));
+        return demoJson.getString(key);
+    }
     
 }
 
