@@ -109,7 +109,7 @@ MongoDBBasic.updateUser(uid);
     left: -120px;
 }
 
-.singleQuote .edit
+.singleQuote2 .edit
 {
 	width: 60px;
     height: 100%;
@@ -123,10 +123,10 @@ MongoDBBasic.updateUser(uid);
     background: orange;
     border-bottom: 1px solid #ccc;
 }
-.singleQuote .edit img {
+.singleQuote2 .edit img {
     width:25px;height:auto;position:absolute;top:8px;margin-left: 2px;
 }
-.singleQuote .edit p
+.singleQuote2 .edit p
 {
 	width:50%;
 	height:100%;
@@ -135,38 +135,38 @@ MongoDBBasic.updateUser(uid);
 	margin-left:auto;
 	font-weight:bold;
 }
-.singleQuote .edit.no{
+.singleQuote2 .edit.no{
 background: #999;
 }
-.singleQuote .picClose
+.singleQuote2 .picClose
 {
 cursor:pointer;
 }
-.singleQuote  .edit.no p
+.singleQuote2  .edit.no p
 {
 	line-height:25px;
 	padding-top:5px;
 }
-.singleQuote.editBtn
+.singleQuote2.editBtn
 {
 	position: relative;
     left: -60px;
 }
-ul li.singleQuote{
+ul li.singleQuote2{
 	font-size:18px;
 	border-bottom:1px solid #ccc;
 	padding:20px;
 	color:#333;
 	width:100%;
 }
-ul li.singleQuote .firstLayer.attention{
+ul li.singleQuote2 .firstLayer.attention{
 	color:#0761A5;
 }
-ul li.singleQuote .firstLayer .quoteTitle{
+ul li.singleQuote2 .firstLayer .quoteTitle{
 	float:left;
 	cursor:pointer;
 }
-ul li.singleQuote .firstLayer .quoteTitle .tag2{
+ul li.singleQuote2 .firstLayer .quoteTitle .tag2{
 	font-size:11px;
 	background-color:orange;
 	color:#fff;
@@ -175,26 +175,26 @@ ul li.singleQuote .firstLayer .quoteTitle .tag2{
 	font-family:微软雅黑;
 	margin-left:8px;
 }
-ul li.singleQuote .firstLayer .quotePrice{
+ul li.singleQuote2 .firstLayer .quotePrice{
 	float:right;
 	color:#333;
 }
-ul li.singleQuote .firstLayer .quotePrice.high,ul li.singleQuote .firstLayer  .change.high{
+ul li.singleQuote2 .firstLayer .quotePrice.high,ul li.singleQuote2 .firstLayer  .change.high{
 	color:red;
 }
-ul li.singleQuote .firstLayer .quotePrice.normal,ul li.singleQuote .firstLayer  .change.normal{
+ul li.singleQuote2 .firstLayer .quotePrice.normal,ul li.singleQuote2 .firstLayer  .change.normal{
 	color:#333;
 }
-ul li.singleQuote .firstLayer.attention .quotePrice.high,ul li.singleQuote .firstLayer.attention  .change.high{
+ul li.singleQuote2 .firstLayer.attention .quotePrice.high,ul li.singleQuote2 .firstLayer.attention  .change.high{
 	color:red;
 }
-ul li.singleQuote .firstLayer .quotePrice.low,ul li.singleQuote .firstLayer  .change.low{
+ul li.singleQuote2 .firstLayer .quotePrice.low,ul li.singleQuote2 .firstLayer  .change.low{
 	color:green;
 }
-ul li.singleQuote .firstLayer .quotePrice.lose,ul li.singleQuote .firstLayer  .change.lose{
+ul li.singleQuote2 .firstLayer .quotePrice.lose,ul li.singleQuote2 .firstLayer  .change.lose{
 	color:#bbb;
 }
-ul li.singleQuote .firstLayer  .change{
+ul li.singleQuote2 .firstLayer  .change{
 	font-size:10px;
 	float:right;
 	margin-top:-35px;
@@ -248,12 +248,12 @@ $(window).load(function() {
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
 	});
-	$(".singleQuote").live("swiperight",function(){
+	$(".singleQuote2").live("swiperight",function(){
 		$(this).css("overflow","hidden");
 		$(this).removeClass("editBtn");
 		$(this).find(".edit").remove();
 	}); 
-	$(".singleQuote").live("swipeleft",function(){
+	$(".singleQuote2").live("swipeleft",function(){
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().find(".edit").remove();
 		
@@ -274,9 +274,9 @@ $(window).load(function() {
 	
 });
 function UpdateTag(item,flag,obj){
-	var tempObj=$(obj).parent().parent(".singleQuote");
-	$(".singleQuote").removeClass("editBtn");
-	$(".singleQuote").find(".edit").remove();
+	var tempObj=$(obj).parent().parent(".singleQuote2");
+	$(".singleQuote2").removeClass("editBtn");
+	$(".singleQuote2").find(".edit").remove();
     if(likePageNum>=4&&flag=='add'){
 		 swal("操作失败", "最多只能关注四个页面", "error");
 	}else{ 
@@ -339,7 +339,7 @@ function getVisitPage() {
 					 attention='attention';
 					 likePageNum++;
 				 }
-				 var li='<li class="singleQuote">'
+				 var li='<li class="singleQuote2">'
 					 +'	<div class="firstLayer '+attention+'">'
 					 +'		<div class="quoteTitle"><span class="id" style="display:none;">'+temp.realName+'</span><span class="item2" '+onclick+'>'+temp.descName+'</span>'+tag+'</div>'
 					 +'		<div class="quotePrice '+priceColor+'" '+priceStyle+'>'+unit+'</div>'
