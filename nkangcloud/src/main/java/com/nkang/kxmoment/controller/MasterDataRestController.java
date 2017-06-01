@@ -3,6 +3,7 @@ package com.nkang.kxmoment.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +30,7 @@ import com.nkang.kxmoment.baseobject.OrderNopay;
 import com.nkang.kxmoment.baseobject.OrgCountryCode;
 import com.nkang.kxmoment.baseobject.OrgOtherPartySiteInstance;
 import com.nkang.kxmoment.baseobject.QuotationList;
+import com.nkang.kxmoment.baseobject.QuoteVisit;
 import com.nkang.kxmoment.baseobject.Teamer;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
@@ -1266,5 +1268,39 @@ public class MasterDataRestController {
 		String wr = MongoDBBasic.DeleteDB(dbName)+"";
 		return wr;
 	}
+	
+	
+	@RequestMapping("/visitedDetailByTime")
+	public static Map<String,List> visitedDetailByTime(@RequestParam(value="t", required=true) String type,@RequestParam(value="dt", required=false) String dateTime){
+		Map<String, List> result=new HashMap<String,List>();
+		
+		if("w".equals(type)){
+			List<QuoteVisit> temp=new ArrayList<QuoteVisit>();
+			List<QuoteVisit> finnal=new ArrayList<QuoteVisit>();
+			int currentDate=Integer.parseInt(RestUtils.getWeekOfDate(new Date()));
+			int index=currentDate*(-1)+1;
+			System.out.println("dateIndex~~~"+index);
+			for(int i=index;i<=0;i++){
+				System.out.println("implement index processing...."+RestUtils.getFreeDate(i));
+				temp.addAll(MongoDBBasic.getVisitedDetailByWeek(RestUtils.getFreeDate(i)));
+				for(int j=0;j<temp.size();j++){
+					System.out.println("detail["+RestUtils.getFreeDate(i)+"]~~~"+temp.get(j).getName()+"=="+temp.get(j).getTotalVisited());
+				}
+			}			
+			MongoDBBasic.combVisitedDetail(temp, finnal);
+			String time=RestUtils.getFreeDate(index)+"~"+RestUtils.getFreeDate(0);
+			result.put(time, finnal);
+			return result;
+		}
+		else if("m".equals(type))
+		{
+			System.out.println("dateTime----"+dateTime);
+			List<QuoteVisit> qvs=MongoDBBasic.getVisitedDetailByMonth(dateTime);
+			result.put(dateTime,qvs);
+		}
+		return result;
+		
+	}
+	
 }
 		
