@@ -38,6 +38,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
+import com.nkang.kxmoment.baseobject.QuoteVisit;
 import com.nkang.kxmoment.baseobject.ShortNews;
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
@@ -4458,6 +4459,78 @@ public class MongoDBBasic {
 		@SuppressWarnings("unchecked")
 		List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("OpenID");
 		return dbuser;
+	}
+	
+	public static List<QuoteVisit> getVisitedDetailByWeek(String date) {
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		query.put("date", date);
+		query.put("pageName", "quoteDetail");
+		List<QuoteVisit> quoteVisit = new ArrayList<QuoteVisit>();
+		DBCursor queryresults = mongoDB.getCollection(collectionVisited).find(
+				query);
+		System.out.println("implement mongo query....");
+		if (null != queryresults) {
+			while(queryresults.hasNext()){
+			DBObject o = queryresults.next();
+			QuoteVisit qv;
+			if (o.get("nickName") != null) {
+				qv = new QuoteVisit();
+				qv.setName(o.get("nickName").toString());
+				System.out.println("realName==="+o.get("nickName").toString());
+				qv.setTotalVisited(o.get("visitedNum").toString());
+				System.out.println("realvisited==="+o.get("visitedNum").toString());
+				quoteVisit.add(qv);
+			}
+		}
+		}
+		List<QuoteVisit> quoteVisitCount = new ArrayList<QuoteVisit>();
+		combVisitedDetail(quoteVisit,quoteVisitCount);
+		return quoteVisitCount;
+	}
+	public static void combVisitedDetail(List<QuoteVisit> before,List<QuoteVisit> after){
+        for (QuoteVisit qv : before) {  
+            boolean state = false;  
+            for (QuoteVisit qvs : after) {  
+                if(qvs.getName().equals(qv.getName())){  
+                    int count = Integer.parseInt(qvs.getTotalVisited());  
+                    count += Integer.parseInt(qv.getTotalVisited());
+                    qvs.setTotalVisited(count+"");
+                    state = true;  
+                }  
+            }  
+            if(!state){  
+            	after.add(qv);  
+            }  
+        }
+	}
+	public static List<QuoteVisit> getVisitedDetailByMonth(String month) {
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		Pattern pattern = Pattern.compile("^.*" + month + ".*$",
+				Pattern.CASE_INSENSITIVE);
+		query.put("date", pattern);
+		query.put("pageName", "quoteDetail");
+		List<QuoteVisit> quoteVisit = new ArrayList<QuoteVisit>();
+		DBCursor queryresults = mongoDB.getCollection(collectionVisited).find(
+				query);
+		if (null != queryresults) {
+			while(queryresults.hasNext()){
+			DBObject o = queryresults.next();
+			QuoteVisit qv;
+			if (o.get("nickName") != null) {
+				qv = new QuoteVisit();
+				qv.setName(o.get("nickName").toString());
+				System.out.println("realName==="+o.get("nickName").toString());
+				qv.setTotalVisited(o.get("visitedNum").toString());
+				System.out.println("realvisited==="+o.get("visitedNum").toString());
+				quoteVisit.add(qv);
+			}
+		}
+		}
+		List<QuoteVisit> quoteVisitCount = new ArrayList<QuoteVisit>();
+		combVisitedDetail(quoteVisit,quoteVisitCount);
+		return quoteVisitCount;
 	}
 }
 					
