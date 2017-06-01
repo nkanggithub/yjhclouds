@@ -15,7 +15,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -2727,6 +2729,25 @@ public static String regist(WeChatMDLUser user) {
     	JSONObject demoJson = new JSONObject(newString);
     	System.out.println("status key--------"+demoJson.getString(key));
         return demoJson.getString(key);
+    }
+    
+    public static String getFreeDate(int num){
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");  
+        Date date=new Date();  
+        Calendar calendar = Calendar.getInstance();  
+        calendar.setTime(date);  
+        calendar.add(Calendar.DAY_OF_MONTH, num);  
+        date = calendar.getTime();  
+       return sdf.format(date).toString(); 
+	}
+    public static String getWeekOfDate(Date dt) {
+        String[] weekDays = {"7", "1", "2", "3", "4", "5", "6"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
     }
     
 }
