@@ -4510,7 +4510,7 @@ public class MongoDBBasic {
 		Pattern pattern = Pattern.compile("^.*" + month + ".*$",
 				Pattern.CASE_INSENSITIVE);
 		query.put("date", pattern);
-		query.put("pageName", "quoteDetail");
+		query.put("pageName", "quoteDetailExternal");
 		List<QuoteVisit> quoteVisit = new ArrayList<QuoteVisit>();
 		DBCursor queryresults = mongoDB.getCollection(collectionVisited).find(
 				query);
