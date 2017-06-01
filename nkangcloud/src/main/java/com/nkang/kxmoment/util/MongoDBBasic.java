@@ -4465,7 +4465,7 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		query.put("date", date);
-		query.put("pageName", "quoteDetail");
+		query.put("pageName", "quoteDetailExternal");
 		List<QuoteVisit> quoteVisit = new ArrayList<QuoteVisit>();
 		DBCursor queryresults = mongoDB.getCollection(collectionVisited).find(
 				query);
