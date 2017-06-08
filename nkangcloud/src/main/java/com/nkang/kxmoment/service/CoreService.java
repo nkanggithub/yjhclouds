@@ -248,6 +248,13 @@ public class CoreService
 						article3.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
 						articleList.add(article3);
 						
+						Article article31 = new Article();
+						article31.setTitle("石化厂装置动态");
+						article31.setDescription("石化厂装置动态");
+						article31.setPicUrl("https://ap1.salesforce.com/sfc/p/90000000pkXM/a/90000000LMKF/wgjJF1TI2zoulkPUwVmKyvGKKnt8hDOqKZFgwBcnqc4");
+						article31.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
+						articleList.add(article31);
+						
 						if(MongoDBBasic.checkUserRole(fromUserName, "Internal")){
 							Article article4 = new Article();
 							article4.setTitle("行情发布");
