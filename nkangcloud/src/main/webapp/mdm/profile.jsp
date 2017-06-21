@@ -50,7 +50,7 @@ boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
 <meta content="" name="wonderful" />
 <link rel="icon" type="image/x-icon" href="../webitem/yjh.ico">
 <link rel="short icon" type="image/x-icon" href="../webitem/yjh.ico">
-
+<link rel="stylesheet" type="text/css" href="../nkang/css_athena/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/bootstrap/css/bootstrap-responsive.min.css"/>
 <link rel="stylesheet" type="text/css" href="../nkang/assets_athena/font-awesome/css/font-awesome.css"/>
@@ -1247,10 +1247,9 @@ function register() {
 		}
 	});
 	}
-	
 function showRegister(){
-	$('#UserInfo').modal('hide');
-	$('#registerform').modal('show');
+//	$('#UserInfo').modal('hide');
+//	$('#registerform').modal('show');
 	$.ajax({
 		type : "GET",
 		url : "../userProfile/getMDLUserLists",
@@ -1259,98 +1258,116 @@ function showRegister(){
 		},
 		cache : false,
 		success : function(data) {
-			data = data.replace(/:null/g, ':"未注册"');
-			data = '{"results":' + data + '}';
-			var jsons = eval('(' + data + ')');
-			if (jsons.results.length > 0) {
-				if(jsons.results[0].companyName !="未注册"){
-					$("#companyname").val(jsons.results[0].companyName);
-				}
-				if(jsons.results[0].realName !="未注册"){
-					$("#realname").val(jsons.results[0].realName);
-				}
-				if(jsons.results[0].phone !="未注册"){
-					$("#phone").val(jsons.results[0].phone);
-				}
-				if(jsons.results[0].email !="未注册"){
-					$("#email").val(jsons.results[0].email);
-				}
-				/* $("#roleSelect option[value='"+jsons.results[0].role+"']").attr("selected",true);
-			    var count=$("#roleSelect option").length;
-			    for(var i=0;i<count;i++)  
-			       {           if($("#roleSelect").get(0).options[i].text == jsons.results[0].role)  
-			          {  
-			              $("#roleSelect").get(0).options[i].selected = true;  
-			            
-			              break;  
-			          }  
-			      }
-			    count=$("#groupSelect option").length;
-			    for(var i=0;i<count;i++)  
-			       {           if($("#groupSelect").get(0).options[i].text == jsons.results[0].groupid)  
-			          {  
-			              $("#groupSelect").get(0).options[i].selected = true;  
-			            
-			              break;  
-			          }  
-			      }
-			    if(jsons.results[0].tag!="未注册"){
-					for(var j=0;j<jsons.results[0].tag.length;j++){
-						var tag=jsons.results[0].tag[j];
-						for (var key in tag) { 
-							if(key=="java"){
-								$113("#javatag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="html"){
-								$113("#htmltag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="webservice"){
-								$113("#webservicetag").slider("setValue",tag[key]);
-							} 
-							
-							if(key =="etl"){
-								$113("#etltag").slider("setValue",tag[key]);
-							}
-						}
+			if(data){ 
+				var realName="";
+				var phone="";
+				var email="";
+				var selfIntro="";
+			   data = data.replace(/:null/g, ':"未注册"');
+				data = '{"results":' + data + '}';
+				var jsons = eval('(' + data + ')');
+				if (jsons.results.length > 0) {
+					if(jsons.results[0].realName !="未注册"){
+						realName=jsons.results[0].realName; 
+						 $(".registerArea").show();
 					}
+					
+					if(jsons.results[0].phone !="未注册"){
+						phone=jsons.results[0].phone;
+					}
+					if(jsons.results[0].email !="未注册"){
+						email=jsons.results[0].email;
+					}
+					 if(jsons.results[0].selfIntro !="未注册"){
+							selfIntro=jsons.results[0].selfIntro;
+					    }
+					
 				}
+				 
+				$("#realname").val(realName);
+				$("#phone").val(phone);
+				$("#email").val(email);
+				$("#selfIntro").val(selfIntro);
+			} 
+
+
 			    
-			    if(jsons.results[0].selfIntro !="未注册"){
-					$("#selfIntro").val(jsons.results[0].selfIntro);
-			    } */
-			}
-		}
-	});
-	$("#registerBtn").click(function(){
+			   
+			} 
+	 }); 
+}
+function MathRand() 
+{ 
+var Num=""; 
+for(var i=0;i<6;i++) 
+{ 
+Num+=Math.floor(Math.random()*10); 
+} 
+return Num;
+} 
+var code="";
+function sendValidateCode(phone){
+	var phone = $("#phone").val();
+	 var phoneFilter = /^1[0-9]{10}/;
+	if(""==phone||!phoneFilter.test(phone)){
+		 swal("发送失败!", "请输入正确的号码信息", "error");
+		 return;
+	}else{
+	code=MathRand();
+	$.ajax({
+        cache: false,
+        type: "POST",
+        url:"../sendValidateCode",
+        data:{
+        	phone:phone,
+        	code:code	
+        },
+        async: true,
+        error: function(request) {
+            alert("Connection error");
+        },
+        success: function(data) {
+        	if(data=="OK"){
+        	swal("恭喜!", "已收到您的请求，请耐心等候", "success");
+        	}
+        }
+    });}
+	}
+function returnRegisterBack()
+{
+	$(".registerArea").hide();
+	}
+	 function updateInfo(){
 		var uid = $("#uid").val();
-		var companyname = $("#companyname").val();
 		var name = $("#realname").val();
 		var phone = $("#phone").val();
 		var email = $("#email").val();
+		var validateCode = $("#validateCode").val();
 		//var suppovisor = $("#suppovisor").val();
-		/* var role = $("#roleSelect option:selected").val();
-		var group = $("#groupSelect option:selected").val();
-		var javatag = $("#javatag").val();
-		var htmltag = $("#htmltag").val();
+		//var role = $("#roleSelect option:selected").val();
+		//var group = $("#groupSelect option:selected").val();
+		/* var javatag = $("#javatag").val();
+		var htmltag = $("#htmltag").val(); 
 		var webservicetag = $("#webservicetag").val();
-		var etltag = $("#etltag").val();
-		var selfIntro = $("#selfIntro").val(); */
+	    var etltag = $("#etltag").val(); */
+		var selfIntro = $("#selfIntro").val();
 		
 		 var emailFilter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		 var phoneFilter = /^1[0-9]{10}/;
 		 if (name.replace(/(^ *)|( *$)/g,'')==''){
-			 swal("Registered fail!", "Pls input your correct name information.", "error");
+			 swal("注册失败!", "请输入正确的姓名信息！", "error");
 		 }else if (!phoneFilter.test(phone)){
-			 swal("Registered fail!", "Pls input your correct phone information.", "error");
+			 swal("注册失败!", "请输入正确的电话信息！", "error");
 		 }else if (!emailFilter.test(email)){
-			 swal("Registered fail!", "Pls input your correct E-mail information.", "error");
+			 swal("注册失败!", "请输入正确的邮箱信息！", "error");
+		 }else if (selfIntro==''){
+			 swal("注册失败!", "请输入您的个人介绍信息！", "error");
+		 }else if(validateCode==""||validateCode!=code){
+				 swal("注册失败!", "请输入验证码或验证码不正确！", "error");
 		 }else{
 			$.ajax({
 				url:"../regist",
-				data:{uid:uid,companyname:companyname,name:name,telephone:phone,email:email
-					},//role:role,group:group,javatag:javatag,htmltag:htmltag,webservicetag:webservicetag,etltag:etltag,selfIntro:selfIntro
+				data:{uid:uid,name:name,telephone:phone,email:email,selfIntro:selfIntro},
 				type:"POST",
 				dataType:"json",
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -1359,17 +1376,16 @@ function showRegister(){
 				success:function(result) {
 					if(result){
 						$('#registerform').modal('hide');
-						swal("Registered successfully!", "Congratulations!", "success"); 
+						swal("注册成功!", "恭喜!", "success"); 
 						$("#realName").val(name);
+						returnRegisterBack();
 					} else {
-						swal("Registered fail!", "Pls input your correct information.", "error");
+						swal("注册失败!", "请输入正确的个人信息", "error");
 					}
 				}
 			});
 		}
-	});
-	
-}
+	};
 
 function getUserInfo(username, headimgurl, openId) {
 			$("#info_interact").css("display","block");
@@ -1818,6 +1834,33 @@ function getNowFormatDate() {
 </script>
 </head>
 <body style="margin: 0px; padding: 0px !important;">
+  <div class="registerArea" >
+    <div class="register_title"><i class="fa fa-angle-left fa-lg return" onclick="returnRegisterBack()"></i>会员注册</div>
+<div id="fillPanel">
+<div class="singleInput">
+<p class="icon">  <i class="fa fa-user fa-lg" style="font-size:23px;"></i></p>
+<p class="inputArea"><input id="realname" type="text" placeholder="请输入你的姓名" /></p>
+</div>
+<div class="singleInput">
+<p class="icon">  <i class="fa fa-mobile fa-lg" style="margin-left:3px;"></i></p>
+<p class="inputArea">  <input id="phone" type="text" placeholder="请输入你的手机号" /></p>
+</div>
+<div class="singleInput" id="codePanel">
+<p class="icon">  <i class="fa fa-check fa-lg" style="font-size:21px;"></i></p>
+<p class="inputArea"><input id="validateCode" type="text" placeholder="请输入你的验证码"/> </p>
+<p class="sendCode" onclick="sendValidateCode()">发送验证码</p>
+</div>
+<div class="singleInput">
+<p class="icon">  <i class="fa fa-envelope-o fa-lg" style="font-size:21px;"></i></p>
+<p class="inputArea"><input id="email" type="text" placeholder="请输入你的邮箱地址"/> </p>
+</div>
+<div class="singleInput">
+<p class="icon">  <i class="fa fa-pencil fa-lg" style="font-size:21px;"></i></p>
+<p class="inputArea"><input id="selfIntro" type="text" placeholder="请输入你的个人简介"/> </p>
+</div>
+</div>
+<div class="register_btn" onclick="updateInfo()">提交</div>
+  </div>
 <div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
  <div class="sk-circle">
       <div class="sk-circle1 sk-child"></div>
@@ -1860,7 +1903,7 @@ function getNowFormatDate() {
 						</span>
 					</a> <span><a style="float: right;"> <img id="userImage"
 								src="<%=res.get("HeadUrl") %>" alt="userImage"
-								class="userImage" alt="no_username" onclick="register()" />
+								class="userImage" alt="no_username" onclick="showRegister()" />
 						</a></span></li>
 				</ul>
 			</div>
@@ -2441,6 +2484,5 @@ function getNowFormatDate() {
 		<span class="clientCopyRight"><nobr></nobr></span>
 	</div>
 	<!-- END FOOTER -->
-			 <script src="../mdm/uploadfile_js/custom-file-input.js"></script>
 </body>
 </html>
