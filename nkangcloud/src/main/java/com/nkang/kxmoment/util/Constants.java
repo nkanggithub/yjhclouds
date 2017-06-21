@@ -15,14 +15,14 @@ public final class Constants {
 	public static final String convertString = "<%=value%>";
 	public static final String proxyInfo = "web-proxy.austin.hpecorp.net";
 	public static final String baehost = "wonderfulcq.bceapp.com";
-	//public static final String baehost = "wonderful.duapp.com";
 	public static final String wechatapihost = "api.weixin.qq.com";
 	public static final String baiduapihost = "api.map.baidu.com";
-	//web-proxy.austin.hpecorp.net:8080
-	// WESK: HYAMgd0odZSpLS8kmrGnoMezFoCTdxFQtWEnZL7lMIz
-	//https://shenan.duapp.com/coreServlet
-
 	public static final String bucketName = "wonderfulcq";
+	
+	public static final String ucpass_accountSid = "e332d0755b9060b20ecb53a244ec7015";
+	public static final String ucpass_token = "6dc9593907118f61208d1c1531337bc0";
+	public static final String ucpass_appId = "740e03bf3e384c69937c7a286085dca8";
+	
 	
 	/**
 	 * MongoDB 

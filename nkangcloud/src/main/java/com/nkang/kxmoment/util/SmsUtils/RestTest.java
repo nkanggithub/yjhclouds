@@ -153,7 +153,7 @@ public class RestTest {
 	 * @throws IOException 
 	 * @method main
 	 */
-	public static void mmm(String[] args){
+	public static void main(String[] args){
 	
 		System.out.println("开始测试...");
 //		String jsonStr="{\"client\":\"1\"}";
@@ -161,9 +161,9 @@ public class RestTest {
 //		System.out.println(obj.getInt("client"));
 		
 		
-		String templateId="62080";
+		String templateId="76167"; //pricing changes
 		String to="15123944895";
-		String para="";
+		String para="康宁,永佳和 ‘王素萍-总经理-13606007258’ 邀您查看您所关注的牌号 PC/ABS-385KZ￥25500；您可访问‘重庆永佳和’微信公众号查看更多报价与资讯";
 		testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
 		
 		System.out.println("...完成！");

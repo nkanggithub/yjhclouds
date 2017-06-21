@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Properties;
 
-import org.apache.commons.lang.StringUtils;
+
+/*import org.apache.commons.lang.StringUtils;*/
 import org.apache.log4j.Logger;
+
+import com.nkang.kxmoment.util.StringUtils;
 
 public class SysConfig {
 	private Properties props = null;// config.properties
@@ -62,7 +65,7 @@ public class SysConfig {
 
 	public String getProperty(String key) {
 		String tmp = props.getProperty(key);
-		if (StringUtils.isNotEmpty(tmp)) {
+		if (!StringUtils.isEmpty(tmp)) {
 			return tmp.trim();
 		}
 		return tmp;
@@ -70,7 +73,7 @@ public class SysConfig {
 
 	public String getProperty(String key, String defaultValue) {
 		String tmp = props.getProperty(key, defaultValue);
-		if (StringUtils.isNotEmpty(tmp)) {
+		if (!StringUtils.isEmpty(tmp)) {
 			return tmp.trim();
 		}
 		return tmp;
@@ -78,7 +81,7 @@ public class SysConfig {
 
 	public int getPropertyInt(String key) {
 		String tmp = props.getProperty(key);
-		if (StringUtils.isNotEmpty(tmp)) {
+		if (!StringUtils.isEmpty(tmp)) {
 			return Integer.parseInt(tmp.trim());
 		}
 		return 0;
@@ -87,7 +90,7 @@ public class SysConfig {
 
 	public int getPropertyInt(String key, int defaultValue) {
 		String tmp = props.getProperty(key);
-		if (StringUtils.isNotEmpty(tmp)) {
+		if (!StringUtils.isEmpty(tmp)) {
 			return Integer.parseInt(tmp.trim());
 		}
 		return defaultValue;
@@ -95,7 +98,7 @@ public class SysConfig {
 
 	public long getPropertyLong(String key, long defaultValue) {
 		String tmp = props.getProperty(key);
-		if (StringUtils.isNotEmpty(tmp)) {
+		if (!StringUtils.isEmpty(tmp)) {
 			return Integer.parseInt(tmp.trim());
 		}
 		return defaultValue;
