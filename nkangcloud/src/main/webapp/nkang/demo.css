@@ -80,3 +80,102 @@ to {width:100%;}
 #recognizationx
 {width:100%;
 height:auto;}
+
+*{margin:0;padding:0;}
+.registerArea{
+  padding:1%;
+  position: absolute;
+  top:0px;
+  left:0px;
+  width: 98%;
+  display:none;
+    z-index: 1000;
+height: 100%;
+    background: white;
+}
+form.ui-listview-filter  input.ui-body-c {
+    width: 96%;
+    border-radius: 30px;
+    height: 30px;
+    padding-left: 2%;
+    box-shadow: none;
+    outline: none;
+    border: 1px solid black;
+}
+form.ui-listview-filter  div.ui-body-c{
+    width: 96%;
+    padding: 0;
+    padding-left: 2%;
+    border-radius: 30px;
+}
+.register_title{
+  background: black;
+  color:white;
+  text-align: center;
+  height:40px;
+  line-height: 40px;
+  position: relative;
+}
+.register_btn
+{
+  margin-top: 10px;
+  background: black;
+  color:white;
+  text-align: center;
+  height:33px;
+  line-height: 33px;
+
+}
+.singleInput{
+  position: relative;
+  padding-left:3%;
+  width: 97%;
+  margin-top: 5px;
+border-bottom: 1px solid black;
+height: 35px;
+overflow: hidden;
+}
+.return
+{
+  position: absolute;
+  left:10px;
+  top:5px;
+  font-size:35px!important;
+}
+.singleInput input
+{
+  border:none;
+  height: 28px;
+    width: 80%;
+    margin-top: 5px;
+    text-align: left;
+    line-height: 28px;
+    outline: none;
+}
+.singleInput i{
+  font-size:35px;
+  line-height: 35px;
+}
+.icon
+{
+  width:15%;
+  float:left;
+}
+.inputArea
+{
+  width:75%;
+  float:left;
+}
+.sendCode{
+  height:25px;
+  margin-top: 3px;
+  position: absolute;
+  right:5px;
+  font-size: 13px;
+  width:90px;
+  border:1px solid black;
+  color:white;
+  background-color: black;
+  line-height: 25px;
+  text-align: center;
+}
