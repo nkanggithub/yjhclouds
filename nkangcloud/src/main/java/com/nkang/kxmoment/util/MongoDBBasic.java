@@ -898,6 +898,9 @@ public class MongoDBBasic {
         				if(teamobj.get("realName") != null){
         					user.setNickname(teamobj.get("realName").toString());
         				}
+        				if(teamobj.get("phone") != null){
+        					user.setPhone(teamobj.get("phone").toString());
+        				}
         			}
             	}
             }
