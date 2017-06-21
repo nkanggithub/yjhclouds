@@ -674,7 +674,7 @@ public class MasterDataRestController {
 			@RequestParam(value="email", required=false) String email,
 			@RequestParam(value="phone", required=false) String phone,
 			@RequestParam(value="name", required=false) String name,
-			@RequestParam(value="companyname", required=false) String companyname
+			@RequestParam(value="selfIntro", required=false) String selfIntro
 			//@RequestParam(value="role", required=false) String role,
 			//@RequestParam(value="selfIntro", required=false) String selfIntro,
 			//@RequestParam(value="group", required=false) String groupid,
@@ -687,7 +687,7 @@ public class MasterDataRestController {
 		teamer.setRegisterDate(registerDate);
 		teamer.setEmail(email);
 		teamer.setPhone(phone);
-		teamer.setCompanyName(companyname);
+		teamer.setSelfIntro(selfIntro);
 		teamer.setRealName(name);
 		//teamer.setRole(role);
 		//teamer.setGroupid(groupid);
