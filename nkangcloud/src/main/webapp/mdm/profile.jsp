@@ -1270,6 +1270,7 @@ function showRegister(){
 					if(jsons.results[0].realName !="未注册"){
 						realName=jsons.results[0].realName; 
 						 $(".registerArea").show();
+						 $("#validateCode").val("");
 					}
 					
 					if(jsons.results[0].phone !="未注册"){
