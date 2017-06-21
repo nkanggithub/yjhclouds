@@ -98,7 +98,7 @@ public class CoreService
 							String templateId="77308"; //pricing changes
 							String to=user.getPhone();
 							nameList+=(" "+user.getRealName());
-							String para = user.getRealName() + ",永佳和 " + aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+",您所关注的牌号"+PlasticItemService.getDetailByNo(itemsList.get(0)).getItemNo()+"等；\r\n详询<重庆永佳和>微信公众号查看更多报价与资讯";
+							String para = user.getRealName() + ",永佳和 " + aStrings[1]+"-"+aStrings[0]+" "+aStrings[2]+",您所关注的牌号"+PlasticItemService.getDetailByNo(itemsList.get(0)).getItemNo()+"等；\r\n详询重庆永佳和微信公众号查看更多报价与资讯";
 							log.info("-----------------to:"+to+"para:"+para);
 							RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
 						}
