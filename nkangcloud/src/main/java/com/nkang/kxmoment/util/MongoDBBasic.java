@@ -745,7 +745,7 @@ public class MongoDBBasic {
             		DBObject o = dbcur.next();
             		DBObject dbo = new BasicDBObject();
             		dbo.put("Teamer.openid", teamer.getOpenid()); 
-            		dbo.put("Teamer.companyname", teamer.getCompanyName()); 
+            		dbo.put("Teamer.selfIntro", teamer.getSelfIntro()); 
             		//dbo.put("Teamer.groupid", teamer.getGroupid()); 
             		dbo.put("Teamer.realName", teamer.getRealName()); 
         			dbo.put("Teamer.email", teamer.getEmail());
