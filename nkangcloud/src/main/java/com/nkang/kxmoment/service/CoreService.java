@@ -251,8 +251,8 @@ public class CoreService
 						Article article31 = new Article();
 						article31.setTitle("石化厂装置动态");
 						article31.setDescription("石化厂装置动态");
-						article31.setPicUrl("https://ap1.salesforce.com/sfc/p/90000000pkXM/a/90000000LMKF/wgjJF1TI2zoulkPUwVmKyvGKKnt8hDOqKZFgwBcnqc4");
-						article31.setUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000ECl9d&oid=00D90000000pkXM");
+						article31.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000ECl9d&oid=00D90000000pkXM");
+						article31.setUrl("https://ap1.salesforce.com/sfc/p/90000000pkXM/a/90000000LMKF/wgjJF1TI2zoulkPUwVmKyvGKKnt8hDOqKZFgwBcnqc4");
 						articleList.add(article31);
 						
 						if(MongoDBBasic.checkUserRole(fromUserName, "Internal")){
