@@ -86,7 +86,7 @@ public class CoreService
 					ArrayList<String> openidList=new ArrayList<String>();
 					String nameList="";
 					openidList.add("oij7nt5GgpKftiaoMSKD68MTLXpc");//康宁
-					//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
+					openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
 					//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
 					
 					for(String openid:openidList){
