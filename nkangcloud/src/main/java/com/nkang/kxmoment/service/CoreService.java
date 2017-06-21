@@ -96,7 +96,7 @@ public class CoreService
 						if(itemsList!=null&&itemsList.size()>0){
 			     			String[] aStrings=new Market().getMarket(user.getSelfIntro());
 							String templateId="77308"; //pricing changes
-							String to="15123944895";
+							String to=user.getPhone();
 							nameList+=("  "+user.getRealName());
 							String para=user.getRealName()+",永佳和 ‘"+aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+"’ 邀您查看您所关注的牌号"+PlasticItemService.getDetailByNo(itemsList.get(0)).getItemNo()+"等；\r\n诚邀您访问‘重庆永佳和’微信公众号查看更多报价与资讯";
 							RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
