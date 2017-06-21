@@ -40,6 +40,7 @@ import com.nkang.kxmoment.util.DBUtils;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.StringUtils;
+import com.nkang.kxmoment.util.SmsUtils.RestTest;
 
 
 @RestController
@@ -1301,6 +1302,11 @@ public class MasterDataRestController {
 		return result;
 		
 	}
-	
+	@RequestMapping("/sendValidateCode")
+	public String sendValidateCode(@RequestParam(value="phone")String phone,@RequestParam(value="code")String code){
+		
+		RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, "76162",phone,code);
+		return "OK";
+	}
 }
 		
