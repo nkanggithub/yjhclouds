@@ -551,7 +551,7 @@ public class MongoDBBasic {
 	    	}
 	    }
 		catch(Exception e){
-			log.info("queryWeChatUser--" + e.getMessage());
+
 		}
 		return ret;
 	}
@@ -688,7 +688,7 @@ public class MongoDBBasic {
 	    	result=true;
 	    }
 		catch(Exception e){
-			log.info("queryWeChatUser--" + e.getMessage());
+
 		}
 		return result;
 	}

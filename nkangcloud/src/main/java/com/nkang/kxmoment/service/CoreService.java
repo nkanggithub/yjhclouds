@@ -86,8 +86,8 @@ public class CoreService
 					ArrayList<String> openidList=new ArrayList<String>();
 					String nameList="";
 					openidList.add("oij7nt5GgpKftiaoMSKD68MTLXpc");//康宁
-					openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
-					openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
+					//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
+					//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
 					
 					for(String openid:openidList){
 						WeChatMDLUser user=MongoDBBasic.queryUserKM(openid);
@@ -97,14 +97,14 @@ public class CoreService
 			     			String[] aStrings=new Market().getMarket(user.getSelfIntro());
 							String templateId="77308"; //pricing changes
 							String to=user.getPhone();
-							nameList+=("  "+user.getRealName());
+							nameList+=(" "+user.getRealName());
 							String para=user.getRealName()+",永佳和 ‘"+aStrings[1]+"-"+aStrings[0]+"-"+aStrings[2]+"’,您所关注的牌号"+PlasticItemService.getDetailByNo(itemsList.get(0)).getItemNo()+"等；\r\n诚邀您访问‘重庆永佳和’微信公众号查看更多报价与资讯";
-							log.info("to:"+to+"para:"+para);
+							log.info("-----------------to:"+to+"para:"+para);
 							RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
 						}
 					}
 					
-					textMessage.setContent("邀请短信已发送给："+nameList);
+					textMessage.setContent("短信已发送给："+nameList);
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 				else if ("TJOB".equals(textContent)) {
