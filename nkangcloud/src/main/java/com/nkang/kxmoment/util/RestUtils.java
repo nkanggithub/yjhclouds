@@ -1699,15 +1699,16 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getRegisterDate()!=null&&!"".equals(user.getRegisterDate())){
 				arr.add("registerDate="+user.getRegisterDate());
 			}
+			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
+				arr.add("selfIntro="+user.getSelfIntro());
+			}
 			/*if(user.getRole()!=null&&!"".equals(user.getRole())){
 				arr.add("role="+user.getRole());
 			}
 			if(user.getGroupid()!=null&&!"".equals(user.getGroupid())){
 				arr.add("group="+user.getGroupid());
 			}
-			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
-				arr.add("selfIntro="+user.getSelfIntro());
-			}
+			
 			//Skill = html:45,java:50
 			ArrayList list = user.getTag();
 			String skill = "";
