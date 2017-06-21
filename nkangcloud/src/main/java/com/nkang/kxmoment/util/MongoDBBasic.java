@@ -888,6 +888,17 @@ public class MongoDBBasic {
                 		}
                 		user.setKmApproveLists(kmApproveLists);
             		}
+            		Object teamer = o.get("Teamer");
+        			DBObject teamobj = new BasicDBObject();
+        			teamobj = (DBObject)teamer;
+        			if(teamobj != null){
+        				if(teamobj.get("selfIntro") != null){
+        					user.setSelfIntro(teamobj.get("selfIntro").toString());
+        				}
+        				if(teamobj.get("realName") != null){
+        					user.setNickname(teamobj.get("realName").toString());
+        				}
+        			}
             	}
             }
 	    }
