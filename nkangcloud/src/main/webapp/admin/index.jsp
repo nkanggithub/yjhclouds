@@ -108,7 +108,46 @@ MongoDBBasic.updateUser(uid);
 	position: relative;
     left: -120px;
 }
-
+form.ui-listview-filter input.ui-body-c{
+	border:0px;
+}
+ul li.singleQuote{
+	font-size:18px;
+	border-bottom:1px solid #ccc;
+	padding:20px 3px;
+	padding-bottom:10px;
+	color:#0761A5;
+	line-height: 10px;
+}
+ul li.singleQuote.attention .quoteTitle{
+	font-size:18px;
+	color:#333;
+}
+ul li.singleQuote  .quoteTitle .pTag{
+	font-size:11px;
+	background-color:orange;
+	color:#fff;
+	padding:1px 5px;
+	font-weight:normol;
+	font-family:微软雅黑;
+	margin-left:8px;
+}
+ul li.singleQuote  .quoteTitle .pTag.approve{
+	background-color:#0067B5;
+}
+ul li.singleQuote input.botton{
+	float:right;
+	padding:5px;
+	color:#fff !important;
+	font-weight:bold !important;
+	background-color:#999;
+	border:0px;
+	margin-top:-20px;
+	font-size:18px;
+}
+ul li.singleQuote.attention input.botton{
+	background-color:orange;
+}
 .singleQuote2 .edit
 {
 	width: 60px;
