@@ -1125,7 +1125,7 @@ function mesSend(){
 			+"	<div class='rcommon' onclick='showFastPost()' style='height:40px;cursor:pointer;'><p class='bsLabel' style='width:96%!important;text-align:center!important;background-color: #005CA1;color: white;height:40px;line-height:40px;border-radius:5px;'>不想再写了？点击我一键智能发布吧</p></div>"
 			<%if(isInternalSeniorMgt==true) { 
 			%>
-			+"<div style='text-align:center;'><img onclick='sendSMS()' style='height:70px;margin-top:20px;cursor:pointer;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EDQRU&oid=00D90000000pkXM'></div>"
+			+"<img onclick='sendSMS()' style='width:100px;cursor:pointer;position: fixed;bottom: 40px;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EDQRU&amp;oid=00D90000000pkXM'>"
 			<% } %>
 			+"  <div id='commonPush' style='display:none;margin-top: 10px;'><div class='rcommon'><p class='bsLabel'>图文类型</p><select class='bsBtn' id='notificationType' style='border: 1px solid #005CA1;'><option value='js'>技术</option><option value='gt'>沟通</option><option value='hq'>行情</option></select></div>"
 			+"	<div class='rcommon'><p class='bsLabel'>网页链接</p><input id='notificationURL' type='text' style='width:75%;height:35px;border:1px solid #005CA1' placeholder='不想输入网络链接？那直接填内容吧'  class='input-xlarge bsBtn'></div>"
