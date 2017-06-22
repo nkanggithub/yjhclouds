@@ -68,6 +68,8 @@ public class UserProfileController {
 	@ResponseBody
 	public String sendSMS(HttpServletRequest request,
 			HttpServletResponse response) {
+		
+		// List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 		ArrayList<String> openidList=new ArrayList<String>();
 		String nameList="";
 		Double PriceSum=0.00;
