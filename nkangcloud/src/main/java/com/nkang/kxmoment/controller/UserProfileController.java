@@ -68,8 +68,6 @@ public class UserProfileController {
 	@ResponseBody
 	public String sendSMS(HttpServletRequest request,
 			HttpServletResponse response) {
-		
-		// List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 		ArrayList<String> openidList=new ArrayList<String>();
 		String nameList="";
 		Double PriceSum=0.00;
@@ -77,6 +75,10 @@ public class UserProfileController {
 		//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
 		//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
 		
+		
+		/* List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
+			for(WeChatMDLUser user:allUser){
+				String openid=user.getOpenid();*/
 		for(String openid:openidList){
 			WeChatMDLUser user=MongoDBBasic.queryUserKM(openid);
 			List<String> itemsList = new ArrayList<String>();
