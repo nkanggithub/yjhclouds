@@ -28,14 +28,17 @@ import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.ClientMeta;
 import com.nkang.kxmoment.baseobject.CongratulateHistory;
 import com.nkang.kxmoment.baseobject.GeoLocation;
+import com.nkang.kxmoment.baseobject.Market;
 import com.nkang.kxmoment.baseobject.Notification;
 import com.nkang.kxmoment.baseobject.WeChatMDLUser;
 import com.nkang.kxmoment.baseobject.WeChatUser;
+import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.Constants;
 import com.nkang.kxmoment.util.MongoDBBasic;
 import com.nkang.kxmoment.util.RestUtils;
 import com.nkang.kxmoment.util.ToolUtils;
 import com.nkang.kxmoment.util.BosUtils.MyBosClient;
+import com.nkang.kxmoment.util.SmsUtils.RestTest;
 
 @Controller
 @RequestMapping("/userProfile")
@@ -61,6 +64,50 @@ public class UserProfileController {
 //		WeChatUser user=RestUtils.getWeChatUserInfo(akey, IdLists.get(0).replaceAll("\"",""));
 //		return IdLists.get(0)+"==========="+user.toString();
 	}
+	@RequestMapping(value = "/sendSMS", produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String sendSMS(HttpServletRequest request,
+			HttpServletResponse response) {
+		ArrayList<String> openidList=new ArrayList<String>();
+		String nameList="";
+		Double PriceSum=0.00;
+		openidList.add("oij7nt5GgpKftiaoMSKD68MTLXpc");//康宁
+		//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
+		//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
+		
+		for(String openid:openidList){
+			WeChatMDLUser user=MongoDBBasic.queryUserKM(openid);
+			List<String> itemsList = new ArrayList<String>();
+			itemsList=user.getKmLists();
+			if(itemsList!=null&&itemsList.size()>0){
+     			String[] aStrings=new Market().getMarket(user.getSelfIntro());
+				String templateId="77308"; //pricing changes
+				String to=user.getPhone();
+				nameList+=(" "+user.getRealName());
+				String priceStr="";
+				for(int i=0;i<itemsList.size();i++){
+					if(priceStr!=""){
+						priceStr+=";";
+					}
+					priceStr=priceStr+PlasticItemService.getDetailByNo(itemsList.get(i)).getItemNo()+"￥"+PlasticItemService.getDetailByNo(itemsList.get(i)).getPrice();
+					if(i==1){
+						break;
+					}
+				}
+				String text="尊敬的{1}，胖和发现您很久没有和我们互动了，{2}邀您查看{3}。退订回TD";
+				String para = user.getRealName() + "," + aStrings[1]+"-"+aStrings[0]+" "+aStrings[2]+",您所关注的牌号"+priceStr+"。详询<重庆永佳和>微信公众号查看更多报价与资讯";
+				int SmsLength=((para+text).length()-11);
+				Double smsPrice=0.055+0.055;
+				if(SmsLength-67*2>0){
+					smsPrice+=0.055;
+				}
+				PriceSum+=smsPrice;
+				RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
+			}
+		}
+		return "短信已发送给："+nameList+";总共消费："+String.format("%.3f", PriceSum)+"元";
+	}
+	
 	@RequestMapping(value = "/getWeather", produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getWeather(HttpServletRequest request,
