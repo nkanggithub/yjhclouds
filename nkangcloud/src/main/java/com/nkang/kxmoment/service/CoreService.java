@@ -85,9 +85,11 @@ public class CoreService
 				}else if ("sendSMS".equals(textContent)) {
 					ArrayList<String> openidList=new ArrayList<String>();
 					String nameList="";
+					Double PriceSum=0.00;
 					openidList.add("oij7nt5GgpKftiaoMSKD68MTLXpc");//康宁
-					openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
+					//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
 					//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
+					
 					
 					for(String openid:openidList){
 						WeChatMDLUser user=MongoDBBasic.queryUserKM(openid);
@@ -98,13 +100,30 @@ public class CoreService
 							String templateId="77308"; //pricing changes
 							String to=user.getPhone();
 							nameList+=(" "+user.getRealName());
-							String para = user.getRealName() + ",永佳和 " + aStrings[1]+"-"+aStrings[0]+" "+aStrings[2]+",您所关注的牌号"+PlasticItemService.getDetailByNo(itemsList.get(0)).getItemNo()+"等；\r\n详询重庆永佳和微信公众号查看更多报价与资讯";
-							log.info("-----------------to:"+to+"para:"+para);
+							String priceStr="";
+							for(int i=0;i<itemsList.size();i++){
+								if(priceStr!=""){
+									priceStr+=";";
+								}
+								priceStr=priceStr+PlasticItemService.getDetailByNo(itemsList.get(i)).getItemNo()+"￥"+PlasticItemService.getDetailByNo(itemsList.get(i)).getPrice();
+								if(i==1){
+									break;
+								}
+							}
+							String text="尊敬的{1}，胖和发现您很久没有和我们互动了，{2}邀您查看{3}。退订回TD";
+							String para = user.getRealName() + "," + aStrings[1]+"-"+aStrings[0]+" "+aStrings[2]+",您所关注的牌号"+priceStr+"。详询<重庆永佳和>微信公众号查看更多报价与资讯";
+							int SmsLength=((para+text).length()-11);
+							Double smsPrice=0.055+0.055;
+							if(SmsLength-67*2>0){
+								smsPrice+=0.055;
+							}
+							PriceSum+=smsPrice;
+							log.info("-----------------sms.length():"+((para+text).length()-11));
 							RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
 						}
 					}
 					
-					textMessage.setContent("短信已发送给："+nameList);
+					textMessage.setContent("短信已发送给："+nameList+";总共消费："+String.format("%.3f", PriceSum)+"元");
 					respXml = MessageUtil.textMessageToXml(textMessage);
 				}
 				else if ("TJOB".equals(textContent)) {
