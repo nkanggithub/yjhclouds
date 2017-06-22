@@ -75,7 +75,7 @@ public class UserProfileController {
 		//openidList.add("oij7nt60inaYfekRpCpSIVnhjwVU");//邓立铭
 		//openidList.add("oij7nt2wV7C_dYVLxJvFJgOG9GpQ");//王素萍
 		
-		
+		int userNum=0;
 		/* List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			for(WeChatMDLUser user:allUser){
 				String openid=user.getOpenid();*/
@@ -107,9 +107,14 @@ public class UserProfileController {
 				}
 				PriceSum+=smsPrice;
 				RestTest.testTemplateSMS(true, Constants.ucpass_accountSid,Constants.ucpass_token,Constants.ucpass_appId, templateId,to,para);
+				userNum++;
 			}
 		}
-		return "短信已发送给："+nameList+";总共消费："+String.format("%.3f", PriceSum)+"元";
+		if(userNum>5){
+			return "短信已发送给"+userNum+"人;总共消费："+String.format("%.3f", PriceSum)+"元";
+		}else{
+			return "短信已发送给："+nameList+";总共消费："+String.format("%.3f", PriceSum)+"元";
+		}
 	}
 	
 	@RequestMapping(value = "/getWeather", produces = "text/html;charset=UTF-8")
