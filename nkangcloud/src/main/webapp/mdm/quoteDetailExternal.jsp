@@ -14,7 +14,7 @@ SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo");
 String state=(String)request.getAttribute("state");
 String name = "";
 String headImgUrl ="";
-String uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+String uid="";
 HashMap<String, String> res=new HashMap<String, String>();
 String CompanyTelPhone="重庆永佳和塑胶有限公司【副总经理】邓立铭(电话：<a href='tel:13320204222'>13320204222</a>)";
 if(null != user) {
@@ -41,6 +41,7 @@ res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 			res.put("IsAuthenticated","false");
 		}
 	}else{
+		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
 		res=new HashMap<String, String>();
 		res.put("IsAuthenticated","false");
 	}
