@@ -2076,9 +2076,9 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		query.put("OpenID", OpenID);
 		HashMap<String, String> res=new HashMap<String, String>();
-		DBCursor queryresults = mongoDB.getCollection(wechat_user).find(query).limit(1);
+		DBObject queryresults = mongoDB.getCollection(wechat_user).findOne(query);
 		if (null != queryresults) {
-    		DBObject o = queryresults.next();
+    		DBObject o = queryresults;
 			if(o.get("HeadUrl") != null){
     			res.put("HeadUrl", o.get("HeadUrl").toString());
     		}
