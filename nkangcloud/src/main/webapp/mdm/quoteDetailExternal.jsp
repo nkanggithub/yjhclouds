@@ -18,11 +18,11 @@ String uid="";
 HashMap<String, String> res=new HashMap<String, String>();
 String CompanyTelPhone="重庆永佳和塑胶有限公司【副总经理】邓立铭(电话：<a href='tel:13320204222'>13320204222</a>)";
 if(null != user) {
-	//String uid = request.getParameter("UID");
+
 	uid = user.getOpenId();
 	name = user.getNickname();
-	headImgUrl = user.getHeadImgUrl();
-	//MongoDBBasic.updateUser(uid);
+	headImgUrl = user.getHeadImgUrl(); 
+	
 	res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 	if(res!=null){
 		if(res.get("HeadUrl")!=null){
