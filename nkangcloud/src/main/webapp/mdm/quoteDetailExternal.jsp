@@ -30,11 +30,14 @@ if(null != user) {
 		}
 		if(res.get("NickName")!=null){
 			name=res.get("NickName");
+		}else{
+			uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+			res=new HashMap<String, String>();
+			res.put("IsAuthenticated","false");
 		}
 		if(res.get("market0")!=null){
 			CompanyTelPhone="重庆永佳和塑胶有限公司【"+res.get("market0")+"】"+res.get("market1") +"(电话：<a href='tel:"+res.get("market2") +"'>"+res.get("market2")+"</a>)";
-		}
-		if(res.get("market0")==null){
+		}else{
 			res=new HashMap<String, String>();
 			res.put("IsAuthenticated","false");
 		}
