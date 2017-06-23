@@ -42,8 +42,8 @@ if(null != user) {
 		headImgUrl = user.getHeadImgUrl(); 
 	}
 
-	out.print("UID:");
-	out.print("<br/>name:");
+	out.print("UID:"+uid);
+	out.print("<br/>name:"+name);
 	out.print("<br/>headImgUrl:"+headImgUrl);
 	
 }else{
