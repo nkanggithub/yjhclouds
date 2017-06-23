@@ -18,19 +18,18 @@ String uid="";
 HashMap<String, String> res=new HashMap<String, String>();
 String CompanyTelPhone="重庆永佳和塑胶有限公司【副总经理】邓立铭(电话：<a href='tel:13320204222'>13320204222</a>)";
 if(null != user) {
-
-	uid = user.getOpenId();
-	name = user.getNickname();
-	headImgUrl = user.getHeadImgUrl(); 
-	
-	res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+	res=MongoDBBasic.getWeChatUserFromOpenID(user.getOpenId());
 	if(res!=null){
 		if(res.get("HeadUrl")!=null){
+			uid = user.getOpenId();
 			headImgUrl=res.get("HeadUrl");
 		}
 		if(res.get("NickName")!=null){
+			uid = user.getOpenId();
 			name=res.get("NickName");
 		}else{
+			name = user.getNickname();
+			headImgUrl = user.getHeadImgUrl(); 
 			uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
 			res=new HashMap<String, String>();
 			res.put("IsAuthenticated","false");
@@ -42,6 +41,8 @@ if(null != user) {
 			res.put("IsAuthenticated","false");
 		}
 	}else{
+		name = user.getNickname();
+		headImgUrl = user.getHeadImgUrl(); 
 		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
 		res=new HashMap<String, String>();
 		res.put("IsAuthenticated","false");
