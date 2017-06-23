@@ -15,10 +15,9 @@ String state=(String)request.getAttribute("state");
 String name = "";
 String headImgUrl ="";
 String uid="";
-HashMap<String, String> res=new HashMap<String, String>();
 String CompanyTelPhone="重庆永佳和塑胶有限公司【副总经理】邓立铭(电话：<a href='tel:13320204222'>13320204222</a>)";
 if(null != user) {
-	res=MongoDBBasic.getWeChatUserFromOpenID(user.getOpenId());
+	HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(user.getOpenId());
 	if(res!=null){
 		if(res.get("HeadUrl")!=null){
 			uid = user.getOpenId();
@@ -33,21 +32,14 @@ if(null != user) {
 			name = user.getNickname();
 			headImgUrl = user.getHeadImgUrl(); 
 			uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
-			res=new HashMap<String, String>();
-			res.put("IsAuthenticated","false");
 		}
 		if(res.get("market0")!=null){
 			CompanyTelPhone="重庆永佳和塑胶有限公司【"+res.get("market0")+"】"+res.get("market1") +"(电话：<a href='tel:"+res.get("market2") +"'>"+res.get("market2")+"</a>)";
-		}else{
-			res=new HashMap<String, String>();
-			res.put("IsAuthenticated","false");
 		}
 	}else{
+		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
 		name = user.getNickname();
 		headImgUrl = user.getHeadImgUrl(); 
-		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
-		res=new HashMap<String, String>();
-		res.put("IsAuthenticated","false");
 	}
 }else{
 	out.print("用户不同意授权,未获取到用户信息！");
@@ -200,19 +192,6 @@ cursor:pointer;
 </style>
 
 <script>
-<%-- $(document).ready(function (){ 
-	jQuery.ajax({
-		type : "POST",
-		url : "../../insertVisited",
-		data : {openid:"<%=uid %>",
-			pageName:"quoteDetailExternal",
-			imgUrl:"<%=headImgUrl %>",
-			nickName:"<%=name %>"},
-		cache : false,
-		success : function(resData) {
-		}
-    });
-}); --%>
 $(function(){
 	   $(function(){  
 	      	 $(window).scroll(function(){  
@@ -519,7 +498,7 @@ function getAllDatas(){
 					<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 					<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 					<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
-					<p style="position: absolute;right: 10px;top: 0px;font-size: 15px;">欢迎您,<% if("true".equals(res.get("IsAuthenticated"))){ %><img style="height:20px;vertical-align: sub;padding-left: 5px;padding-right: 3px;" src="images/VIP.png"/><%} %><%=name %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=headImgUrl%>" alt=""/>
+					<p style="position: absolute;right: 10px;top: 0px;font-size: 15px;">欢迎您,<%=name %></p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="<%=headImgUrl%>" alt=""/>
 				<input id="openid" type="hidden" value="<%=uid%>"/>
 				<marquee direction="left" scrollamount="6" onmouseover="this.stop()" onmouseout="this.start()" style="margin-top:-10px;">
 <nobr><span style="font-size:12px;"><%=CompanyTelPhone %></span></nobr></marquee>
