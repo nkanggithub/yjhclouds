@@ -41,13 +41,6 @@ if(null != user) {
 		name = user.getNickname();
 		headImgUrl = user.getHeadImgUrl(); 
 	}
-
-	out.println("uid:"+uid);
-	out.println("name:"+name);
-	out.println("headImgUrl:"+headImgUrl);
-	out.println("CompanyTelPhone"+CompanyTelPhone);
-	
-	return;
 }else{
 	out.print("用户不同意授权,未获取到用户信息！");
 	return;
