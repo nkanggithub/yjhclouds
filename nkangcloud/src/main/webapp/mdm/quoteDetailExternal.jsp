@@ -23,6 +23,8 @@ if(null != user) {
 		if(res.get("HeadUrl")!=null){
 			uid = user.getOpenId();
 			headImgUrl=res.get("HeadUrl");
+		}else{
+			headImgUrl = user.getHeadImgUrl(); 
 		}
 		if(res.get("NickName")!=null){
 			uid = user.getOpenId();
