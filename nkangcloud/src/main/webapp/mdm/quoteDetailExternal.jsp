@@ -22,10 +22,8 @@ if(null != user) {
 	uid = user.getOpenId();
 	name = user.getNickname();
 	headImgUrl = user.getHeadImgUrl();
-	
-	
-//MongoDBBasic.updateUser(uid);
-res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+	//MongoDBBasic.updateUser(uid);
+	res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 	if(res!=null){
 		if(res.get("HeadUrl")!=null){
 			headImgUrl=res.get("HeadUrl");
