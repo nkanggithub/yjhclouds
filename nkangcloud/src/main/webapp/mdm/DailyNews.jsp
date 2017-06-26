@@ -250,10 +250,10 @@ $(document).ajaxStart(function () {
 		</aside>
 
 <div style="padding-left: 10px;height: 70px;border-bottom: 4px solid #0066FF;padding-top: 10px;">
-<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="" style="width:160px;height:85%;">
+<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="" style="height:50px;width:auto;padding-top:5px;padding-bottom:5px;">
 <div style="width:100%;text-align:right;margin-top:-80px;">
 <ul class="nav pull-right top-menu" style="list-style: none;">
-					<li class="dropdown"><a href="#" class="dropdown-toggle ui-link" data-toggle="dropdown" style="padding:5px;
+					<li class="dropdown"><a href="#" class="dropdown-toggle ui-link" data-toggle="dropdown" style="padding:3px;
     text-decoration: none;
     text-shadow: 0 1px 0 #fff;display: block;color:#777;font-weight:700;">
 					欢迎您：<span class="username colorBlue" id="username" style="color:#2489ce;"><%=name %></span>
