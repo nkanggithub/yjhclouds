@@ -1,22 +1,61 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="com.nkang.kxmoment.util.OAuthUitl.SNSUserInfo,java.lang.*"%>
 <%@ page import="java.util.*,org.json.JSONObject"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ShortNews"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
+//获取由OAuthServlet中传入的参数
+SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
+String state=(String)request.getAttribute("state");
+String name = "";
+String headImgUrl ="";
+String uid="";
+String openid="";
+if(null != user) {
+	openid=user.getOpenId();
+	HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(user.getOpenId());
+	if(res!=null){
+		if(res.get("HeadUrl")!=null){
+			uid = user.getOpenId();
+			headImgUrl=res.get("HeadUrl");
+		}else{
+			headImgUrl = user.getHeadImgUrl(); 
+		}
+		if(res.get("NickName")!=null){
+			uid = user.getOpenId();
+			name=res.get("NickName");
+		}else{
+			name = user.getNickname();
+			headImgUrl = user.getHeadImgUrl(); 
+			uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+		}
+	}else{
+		name = user.getNickname();
+		headImgUrl = user.getHeadImgUrl(); 
+		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
+	}
+}
+
+
+
+
+
 ArrayList<ShortNews> shortNews=MongoDBBasic.queryShortNews();
 int size=5;
 int realSize=shortNews.size();
 if(shortNews.size()<=5){size=shortNews.size();}
-String uid = request.getParameter("UID");
-boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
-boolean isInternalImtMgt=MongoDBBasic.checkUserAuth(uid, "isInternalImtMgt");
-MongoDBBasic.updateUser(uid);
+boolean isInternalSeniorMgt=false;
+boolean isInternalImtMgt=false;
+if(uid.equals(openid)){
+	isInternalSeniorMgt=MongoDBBasic.checkUserAuth(openid, "isInternalSeniorMgt");
+	isInternalImtMgt=MongoDBBasic.checkUserAuth(openid, "isInternalImtMgt");
+	MongoDBBasic.updateUser(openid);
+}
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
-HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
-MongoDBBasic.updateVisited(uid,currentDate,"DailyNews",res.get("HeadUrl"),res.get("NickName"));
+MongoDBBasic.updateVisited(openid,currentDate,"DailyNews",headImgUrl,name);
 
 %>
 <!DOCTYPE html>
