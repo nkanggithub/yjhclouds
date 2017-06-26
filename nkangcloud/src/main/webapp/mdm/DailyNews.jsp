@@ -232,7 +232,11 @@ $(document).ajaxStart(function () {
       <div class="sk-circle12 sk-child"></div>
     </div>
 <%if(isInternalSeniorMgt==true||isInternalImtMgt==true) { %>
-<button style="position: absolute;top: 40px;right: 20px;padding: 4px 8px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;" onClick="javascript:publishNews();">发布新闻</button><% } %>
+<img onClick="javascript:publishNews();" style='width:100px;cursor:pointer;position: fixed;bottom: 40px;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUPTk&oid=00D90000000pkXM'>
+<!-- 
+<button style="position: absolute;top: 40px;right: 20px;padding: 4px 8px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;" onClick="javascript:publishNews();">发布新闻</button>
+ -->
+ <% } %>
 		<aside style="margin-top:50px;height:400px;position:absolute;width:80%;left:5%;top:80px;" id="default-popup" class="avgrund-popup">
 
 			<h2 id="title" style="margin-bottom:10px;"></h2>
