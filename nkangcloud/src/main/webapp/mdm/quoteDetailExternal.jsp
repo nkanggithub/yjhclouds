@@ -200,7 +200,7 @@ cursor:pointer;
 </style>
 
 <script>
-<%-- $(document).ready(function (){ 
+ $(document).ready(function (){ 
 	jQuery.ajax({
 		type : "POST",
 		url : "../../insertVisited",
@@ -212,7 +212,7 @@ cursor:pointer;
 		success : function(resData) {
 		}
     });
-}); --%>
+}); 
 $(function(){
 	   $(function(){  
 	      	 $(window).scroll(function(){  
