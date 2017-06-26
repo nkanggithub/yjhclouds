@@ -15,7 +15,7 @@ import com.nkang.kxmoment.util.BosUtils.MyBosClient;
 
 public class testMain{
 
-	public static void main(String[] args) throws Exception {
+	public static void mains(String[] args) throws Exception {
 
 	    File file = new File("C:\\USVISANK.jpg");
 	    // 获取数据流
