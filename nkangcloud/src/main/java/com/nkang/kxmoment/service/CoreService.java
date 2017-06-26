@@ -347,7 +347,7 @@ public class CoreService
 						articleforCustomer.setDescription("实时报价");
 						articleforCustomer.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFj&oid=00D90000000pkXM"); //big data
 						//articleforCustomer.setUrl("http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID=" + fromUserName);
-						articleforCustomer.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa0a9bfa29863d87&redirect_uri=http%3A%2F%2Fwonderfulcq.bceapp.com%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+						articleforCustomer.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
 						articleList.add(articleforCustomer);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);
