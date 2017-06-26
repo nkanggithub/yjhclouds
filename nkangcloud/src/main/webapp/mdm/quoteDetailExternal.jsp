@@ -15,9 +15,11 @@ String state=(String)request.getAttribute("state");
 String name = "";
 String headImgUrl ="";
 String uid="";
+String openid="";
 HashMap<String, String> res=new HashMap<String, String>();
 String CompanyTelPhone="重庆永佳和塑胶有限公司【副总经理】邓立铭(电话：<a href='tel:13320204222'>13320204222</a>)";
 if(null != user) {
+	openid=user.getOpenId();
 	res=MongoDBBasic.getWeChatUserFromOpenID(user.getOpenId());
 	if(res!=null){
 		if(res.get("HeadUrl")!=null){
@@ -204,7 +206,7 @@ cursor:pointer;
 	jQuery.ajax({
 		type : "POST",
 		url : "../../insertVisited",
-		data : {openid:"<%=uid %>",
+		data : {openid:"<%=openid %>",
 			pageName:"quoteDetailExternal",
 			imgUrl:"<%=headImgUrl %>",
 			nickName:"<%=name %>"},
