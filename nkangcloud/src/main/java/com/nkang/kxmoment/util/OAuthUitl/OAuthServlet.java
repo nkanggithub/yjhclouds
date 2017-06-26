@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.nkang.kxmoment.util.Constants;
+
 //import com.souvc.weixin.pojo.SNSUserInfo;
 //import com.souvc.weixin.pojo.WeixinOauth2Token;
 //import com.souvc.weixin.util.AdvancedUtil;
@@ -50,7 +52,7 @@ public class OAuthServlet implements Filter  {
         	 // 用户同意授权
             if (!"authdeny".equals(code)) {
                 // 获取网页授权access_token
-                WeixinOauth2Token weixinOauth2Token = AdvancedUtil.getOauth2AccessToken("wxaa0a9bfa29863d87", "7b2fbfc81353fed1f7fc046129dc671d", code);
+            	WeixinOauth2Token weixinOauth2Token = AdvancedUtil.getOauth2AccessToken(Constants.APP_ID, Constants.APPSECRET, code);
                 // 网页授权接口访问凭证
                 if(weixinOauth2Token!=null){
                 	 String accessToken = weixinOauth2Token.getAccessToken();
