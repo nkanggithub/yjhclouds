@@ -291,7 +291,9 @@ public class CoreService
 						article3.setTitle("行情共享");
 						article3.setDescription("永佳和行情共享");
 						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
-						article3.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
+						//article3.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
+						article3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNewsToShare.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+						
 						articleList.add(article3);
 						
 						Article article31 = new Article();
