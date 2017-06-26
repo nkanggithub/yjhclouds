@@ -303,7 +303,7 @@ public class QuotationController {
 			}
 		    List<WeChatMDLUser> allUser = MongoDBBasic.getAllUserByIsRegistered();
 			List<String> itemsList = new ArrayList<String>();
-			String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxaa0a9bfa29863d87&redirect_uri=http%3A%2F%2Fwonderfulcq.bceapp.com%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect&UID=";
+			String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect&UID=";
              for(int i=0;i<allUser.size();i++){
             		WeChatMDLUser user=MongoDBBasic.queryUserKM(allUser.get(i).getOpenid());
             		itemsList=user.getKmLists();
