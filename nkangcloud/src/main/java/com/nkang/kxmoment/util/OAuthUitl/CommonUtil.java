@@ -34,7 +34,6 @@ public class CommonUtil{
     public static JSONObject httpsRequest(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
         try {
-        	log.info("start call AccessToken........");
             // 创建SSLContext对象，并使用我们指定的信任管理器初始化
             TrustManager[] tm = { new MyX509TrustManager() };
             SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
@@ -69,7 +68,6 @@ public class CommonUtil{
             while ((str = bufferedReader.readLine()) != null) {
                 buffer.append(str);
             }
-            log.info("buffer........"+buffer);
             // 释放资源
             bufferedReader.close();
             inputStreamReader.close();
