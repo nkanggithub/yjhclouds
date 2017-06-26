@@ -49,20 +49,15 @@ public class OAuthServlet implements Filter  {
         if(code!=null&&code!=""){
         	 // 用户同意授权
             if (!"authdeny".equals(code)) {
-            	log.info("Start call weixinOauth2Token .......");
                 // 获取网页授权access_token
                 WeixinOauth2Token weixinOauth2Token = AdvancedUtil.getOauth2AccessToken("wxaa0a9bfa29863d87", "7b2fbfc81353fed1f7fc046129dc671d", code);
-                log.info("end call weixinOauth2Token .......=="+weixinOauth2Token.getAccessToken());
                 // 网页授权接口访问凭证
                 if(weixinOauth2Token!=null){
                 	 String accessToken = weixinOauth2Token.getAccessToken();
-                	  log.info("accessToken .--->"+accessToken);
                 	 // 用户标识
                      String openId = weixinOauth2Token.getOpenId();
-                     log.info("openId .--->"+openId);
                      // 获取用户信息
                      SNSUserInfo snsUserInfo = AdvancedUtil.getSNSUserInfo(accessToken, openId);
-                     log.info("snsUserInfo .--->"+snsUserInfo.getOpenId());
                      // 设置要传递的参数
                      request.setAttribute("snsUserInfo", snsUserInfo);
                      request.setAttribute("state", state);
