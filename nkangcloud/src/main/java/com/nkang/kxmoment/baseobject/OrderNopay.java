@@ -77,7 +77,8 @@ public class OrderNopay {
 	public String info(){
 		return customerName + "\n"
 				+billID + "\n"
-				+noInvoiceAmount + "\n";
+				+noInvoiceAmount + "\n"
+				+salesman + "\n";
 		
 	}
 }
