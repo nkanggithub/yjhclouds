@@ -256,7 +256,7 @@ function uploadPic(obj){
       <div class="sk-circle11 sk-child"></div>
       <div class="sk-circle12 sk-child"></div>
     </div>
-<div id="data_model_div" style="z-index:999;" class=""><a href="http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9IMj&amp;oid=00D90000000pkXM" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #000000;"></div></div>
+<div id="data_model_div" style="z-index:999;" class=""><a href="http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #000000;"></div></div>
 <div id='sendR'>
 <div class='rcommon' style='height:45px'>
 <p class='bsLabel'>图文标题</p>
@@ -270,7 +270,7 @@ function uploadPic(obj){
 </div> 
 <div class="rcommon"><textarea id="content" style="height:180px;width:95%;line-height:20px;border:1px solid black" placeholder="请输入内容" class="input-xlarge bsBtn"></textarea></div>
 <div class='rcommon' >
-<button style='margin-top:20px;width:95%;background:black;text-shadow:none;color:white!important;' onclick='uploadNews()' name='doublebutton-0' class='btn'>提交</button>
+<button style='margin-top:20px;width:95%;background:#005CA1;text-shadow:none;color:white!important;' onclick='uploadNews()' name='doublebutton-0' class='btn'>提交</button>
 </div>
 </div>
 <div id='footer'><span class='clientCopyRight'><nobr></nobr></span></div>
