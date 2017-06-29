@@ -4232,6 +4232,38 @@ public class MongoDBBasic {
 		return ret;
 	}
 	
+	public static String updateShared(String openid, String date,
+			String pageName, String imgUrl, String nickName) {
+		if (mongoDB == null) {
+			mongoDB = getMongoDB();
+		}
+		String ret = "ok";
+		try {
+			DBObject query = new BasicDBObject();
+			query.put("openid", openid);
+			query.put("date", date);
+			query.put("pageName", pageName);
+			query.put("imgUrl", imgUrl);
+			query.put("nickName", nickName);
+			DBObject visited = mongoDB.getCollection(collectionVisited)
+					.findOne(query);
+			if (visited != null) {
+				BasicDBObject doc = new BasicDBObject();
+				BasicDBObject update = new BasicDBObject();
+				update.append("sharedNum", 1);
+				doc.put("$inc", update);
+				mongoDB.getCollection(collectionVisited).update(query, doc);
+			} else {
+				query.put("sharedNum", 1);
+				mongoDB.getCollection(collectionVisited).insert(query);
+			}
+
+		} catch (Exception e) {
+			ret = e.getMessage();
+		}
+
+		return ret;
+	}
 	/*
 	 * CHANG -ZHENG
 	 *

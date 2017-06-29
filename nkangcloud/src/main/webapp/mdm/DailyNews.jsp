@@ -7,7 +7,7 @@
 <%
 //获取由OAuthServlet中传入的参数
 SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
-String state=(String)request.getAttribute("state");
+String originalUid=(String)request.getAttribute("state");
 String name = "";
 String headImgUrl ="";
 String uid="";
@@ -35,6 +35,18 @@ if(null != user) {
 		headImgUrl = user.getHeadImgUrl(); 
 		uid="oij7nt5GgpKftiaoMSKD68MTLXpc";
 	}
+	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+	Date date=new Date();
+	String currentDate = format.format(date);
+	if(openid.equals(originalUid)){
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"DailyNews",user.getHeadImgUrl(),name);
+	}
+	else
+	{
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"DailyNews",user.getHeadImgUrl(),name);
+		HashMap<String, String> resOriginal=MongoDBBasic.getWeChatUserFromOpenID(originalUid);
+		MongoDBBasic.updateShared(originalUid,currentDate,"DailyNews",resOriginal.get("HeadUrl"),resOriginal.get("NickName"));
+		}
 }
 
 
@@ -52,10 +64,6 @@ if(uid.equals(openid)){
 	isInternalImtMgt=MongoDBBasic.checkUserAuth(openid, "isInternalImtMgt");
 	MongoDBBasic.updateUser(openid);
 }
-SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-Date date=new Date();
-String currentDate = format.format(date);
-MongoDBBasic.updateVisited(openid,currentDate,"DailyNews",headImgUrl,name);
 
 %>
 <!DOCTYPE html>
@@ -233,6 +241,7 @@ $(document).ajaxStart(function () {
     </div>
 <%if(isInternalSeniorMgt==true||isInternalImtMgt==true) { %>
 <img onClick="javascript:publishNews();" style='width:100px;cursor:pointer;position: fixed;bottom: 50px;z-index: 1002;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUPTk&oid=00D90000000pkXM'>
+<a href="uploadArticle.jsp?UID=<%=uid%>"><img style="width: 70px;cursor:pointer;position: fixed;bottom: 50px;right: 0px;z-index: 1002;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUSZR&oid=00D90000000pkXM"></a>
 <!-- 
 <button style="position: absolute;top: 40px;right: 20px;padding: 4px 8px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;" onClick="javascript:publishNews();">发布新闻</button>
  -->

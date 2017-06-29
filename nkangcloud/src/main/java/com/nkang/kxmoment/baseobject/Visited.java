@@ -7,6 +7,13 @@ public class Visited {
 	String date;
 	String imgUrl;
 	String nickName;
+	int sharedNum;
+	public int getSharedNum() {
+		return sharedNum;
+	}
+	public void setSharedNum(int sharedNum) {
+		this.sharedNum = sharedNum;
+	}
 	public String getImgUrl() {
 		return imgUrl;
 	}

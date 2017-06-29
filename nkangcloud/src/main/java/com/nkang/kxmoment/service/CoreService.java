@@ -293,7 +293,7 @@ public class CoreService
 					//	article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DlU1k&oid=00D90000000pkXM");
 						article3.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM");
 						//article3.setUrl("http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp");
-						article3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+						article3.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
 						
 						articleList.add(article3);
 						
@@ -351,7 +351,7 @@ public class CoreService
 						articleforCustomer.setDescription("实时报价");
 						articleforCustomer.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmwFj&oid=00D90000000pkXM"); //big data
 						//articleforCustomer.setUrl("http://"+Constants.baehost+"/mdm/quoteDetailExternal.jsp?UID=" + fromUserName);
-						articleforCustomer.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+						articleforCustomer.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FquoteDetailExternal.jsp&response_type=code&scope=snsapi_userinfo&state="+fromUserName+"#wechat_redirect");
 						articleList.add(articleforCustomer);
 						newsMessage.setArticleCount(articleList.size());
 						newsMessage.setArticles(articleList);

@@ -11,7 +11,7 @@
 
 //获取由OAuthServlet中传入的参数
 SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
-String state=(String)request.getAttribute("state");
+String originalUid=(String)request.getAttribute("state");
 String name = "";
 String headImgUrl ="";
 String uid="";
@@ -51,6 +51,18 @@ if(null != user) {
 		res=new HashMap<String, String>();
 		res.put("IsAuthenticated","false");
 	}
+	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+	Date date=new Date();
+	String currentDate = format.format(date);
+	if(openid.equals(originalUid)){
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"quoteDetailExternal",user.getHeadImgUrl(),name);
+	}
+	else
+	{
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"quoteDetailExternal",user.getHeadImgUrl(),name);
+		HashMap<String, String> resOriginal=MongoDBBasic.getWeChatUserFromOpenID(originalUid);
+		MongoDBBasic.updateShared(originalUid,currentDate,"quoteDetailExternal",resOriginal.get("HeadUrl"),resOriginal.get("NickName"));
+		}
 }else{
 	out.print("用户不同意授权,未获取到用户信息！");
 	return;
@@ -202,19 +214,7 @@ cursor:pointer;
 </style>
 
 <script>
- $(document).ready(function (){ 
-	jQuery.ajax({
-		type : "POST",
-		url : "../../insertVisited",
-		data : {openid:"<%=openid %>",
-			pageName:"quoteDetailExternal",
-			imgUrl:"<%=headImgUrl %>",
-			nickName:"<%=name %>"},
-		cache : false,
-		success : function(resData) {
-		}
-    });
-}); 
+
 $(function(){
 	   $(function(){  
 	      	 $(window).scroll(function(){  

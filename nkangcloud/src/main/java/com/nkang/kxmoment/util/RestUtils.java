@@ -2826,7 +2826,68 @@ public static String regist(WeChatMDLUser user) {
 		}
 		return result;
 	}
+	public static String uploadNews(String mediaID, String title, String content) {
+		// public static String uploadNews(){
 
+		String result = "";
+		String str = "{\"articles\": [{\"thumb_media_id\":\"" + mediaID
+				+ "\",\"author\":\"\",\"title\":\"" + title
+				+ "\",\"content_source_url\":\"\",\"content\":\"" + content
+				+ "\",\"digest\":\"\",\"show_cover_pic\":1}]}";
+		// System.out.println(str);
+		// str="{\"articles\": [{\"thumb_media_id\":\"IvZtXKL8uF5UzX8mSLO66rSHyrGxrmR0OiG4-FXb8v8eNbqVIkANc5Lv0oFJaUn5\",\"author\":\"panda\",\"title\":\"test\",\"content_source_url\":\"www.qq.com\",\"content\":\"test for send message\",\"digest\":\"test for..\",\"show_cover_pic\":1}]}";
+	//	 String access_token ="YRJm7nuItwIjgXFjTUVRBZjw33Z4IVywsR4tLjQG2OFyvtMR1cF5hWyG4w2YmVSgsYUXNPmemrBBob169vmjtwxYUVScYpfTJ2q6xJOtxiDZRp4auQepY0SjEv7p7vu8GEYfAHAWUO";
+		String access_token = MongoDBBasic.getValidAccessKey();
+
+		String action = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token="
+				+ access_token;
+
+		try {
+
+			result = connectWeiXinInterface(action, str);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return result;
+
+	}
+
+	public static String sendMass(List<String> toUser,String articleID) {
+		String userList = "";
+			for (int i = 0; i < toUser.size(); i++) {
+
+				if (i == toUser.size() - 1) {
+					userList = userList + toUser.get(i);
+				} else {
+					userList = userList + toUser.get(i) + "\",\"";
+				}
+			}
+
+		
+		String result = "";
+		String str = "{\"touser\":[\""+userList+"\"],\"mpnews\":{\"media_id\":\""+articleID+"\"},\"msgtype\":\"mpnews\",\"send_ignore_reprint\":0}";
+	//	String access_token = "pf5FTC-pcwohGiVQQDdsZ317Hs2hmtsyQ21q-i5MTvRen-HTBNqobJt0Og9ibm-7UYlTladJiwr4adDPGRAMn4xMyhGOwF6CstUbUe35myGFqy6Ls4bxr_F5qbH81lOBZDLfAGAQUC";
+		 String access_token = MongoDBBasic.getValidAccessKey(); 
+
+		String action = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token="
+				+ access_token;
+
+		try {
+
+			result = connectWeiXinInterface(action, str);
+			System.out.println("图文消息发送成功。。。");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+		return result;
+
+	}
 }
 
 

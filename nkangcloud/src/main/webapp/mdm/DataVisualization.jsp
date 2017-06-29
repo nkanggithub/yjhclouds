@@ -648,6 +648,7 @@ var i=$(this).index();
 					if(data){
 					var html="";
 					var imgUrl="";
+					var sharedNum="";
 				for(var i=0;i<data.length;i++)
 				{
 					console.log("date========"+data[i].date);
@@ -656,8 +657,12 @@ var i=$(this).index();
 					imgUrl=data[i].imgUrl;
 					if(data[i].visitedNum!=0&&imgUrl!="null")
 					{	
-						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+"</p></div>";
+						if(data[i].sharedNum!=0){
+							sharedNum="("+data[i].sharedNum+")";
+						}
+						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+sharedNum+"</p></div>";
 					};
+					sharedNum="";
 				}
 				$("#dateDetail").text(data[0].date);
 				$("#visitedDetail").html(html);
