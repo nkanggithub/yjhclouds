@@ -256,7 +256,7 @@ function uploadPic(obj){
       <div class="sk-circle11 sk-child"></div>
       <div class="sk-circle12 sk-child"></div>
     </div>
-<div id="data_model_div" style="z-index:999;" class=""><a href="http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #000000;"></div></div>
+<div id="data_model_div" style="z-index:999;" class=""><a href="http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID=<%=uid%>"><i class="icon" style="position:absolute;top:20px;left:20px;z-index:100;"><img class="exit" src="../MetroStyleFiles/EXIT1.png" style="width: 30px; height: 30px; "></i></a>	<img style="position:absolute;top:8px;right:20px;z-index:100;" class="HpLogo" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" alt="Logo"><div style="width:100%;height: 74px;background: white;position:absolute;border-bottom: 4px solid #005CA1;"></div></div>
 <div id='sendR'>
 <div class='rcommon' style='height:45px'>
 <p class='bsLabel'>图文标题</p>
@@ -265,7 +265,7 @@ function uploadPic(obj){
 <div class='rcommon' style='height:45px'>
 <p class='bsLabel'>主题图片</p>
 <form id='submit_form' name='submit_form' action='../fileUpload/uploadImg' enctype='multipart/form-data' method='post'><input id='file-1' type='file' name='file-1'  onchange='uploadPic(this)' class='inputfile inputfile-1' data-multiple-caption='{count} files selected' multiple=''>
-<label for='file-1' style='height: 15px;border-radius: 5px;line-height: 10px;text-align: center;width: 64%;'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='17' viewBox='0 0 20 17'><path d='M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z'></path></svg> <span id='picName' style='color: white;font-size: 16px;'>Choose a file…</span></label></form>
+<label for='file-1' style='height: 15px;border-radius: 5px;line-height: 10px;text-align: center;width: 64%;'><svg xmlns='http://www.w3.org/2000/svg' width='20' height='17' viewBox='0 0 20 17'><path d='M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z'></path></svg> <span id='picName' style='color: white;font-size: 16px;'>请选择一张图片…</span></label></form>
 <input id='hiddenMediaID' type='hidden' />
 </div> 
 <div class="rcommon"><textarea id="content" style="height:180px;width:95%;line-height:20px;border:1px solid black" placeholder="请输入内容" class="input-xlarge bsBtn"></textarea></div>
