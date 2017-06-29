@@ -240,8 +240,8 @@ $(document).ajaxStart(function () {
       <div class="sk-circle12 sk-child"></div>
     </div>
 <%if(isInternalSeniorMgt==true||isInternalImtMgt==true) { %>
-<img onClick="javascript:publishNews();" style='width:100px;cursor:pointer;position: fixed;bottom: 50px;z-index: 1002;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUPTk&oid=00D90000000pkXM'>
-<a href="uploadArticle.jsp?UID=<%=uid%>"><img style="width: 70px;cursor:pointer;position: fixed;bottom: 50px;right: 0px;z-index: 1002;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUSZR&oid=00D90000000pkXM"></a>
+<img onClick="javascript:publishNews();" style='width:70px;cursor:pointer;position: fixed;bottom: 50px;z-index: 1002;' src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUPTk&oid=00D90000000pkXM'>
+<a href="uploadArticle.jsp?UID=<%=uid%>"><img style="width: 70px;cursor:pointer;position: fixed;bottom: 50px;right: 0px;z-index: 1002;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUYNH&oid=00D90000000pkXM"></a>
 <!-- 
 <button style="position: absolute;top: 40px;right: 20px;padding: 4px 8px;background: white;border-style: none;border: 1px solid black;border-radius: 5px;" onClick="javascript:publishNews();">发布新闻</button>
  -->
