@@ -658,7 +658,7 @@ var i=$(this).index();
 					if(data[i].visitedNum!=0&&imgUrl!="null")
 					{	
 						if(data[i].sharedNum!=0){
-							sharedNum="("+data[i].sharedNum+")";
+							sharedNum="【分享阅读"+data[i].sharedNum+"次】";
 						}
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+sharedNum+"</p></div>";
 					};

@@ -4442,6 +4442,12 @@ public class MongoDBBasic {
 		       vit.setDate(date);
 			   vit.setOpenid(obj.get("openid")+"");
 			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
+			   if(obj.get("sharedNum")!=null){
+					vit.setSharedNum(Integer.parseInt(obj.get("sharedNum") + ""));
+				}
+				else {
+					vit.setSharedNum(0);
+				}
 			   vit.setPageName(obj.get("pageName")+"");
 				vit.setImgUrl(obj.get("imgUrl")+"");
 				vit.setNickName(obj.get("nickName")+"");
