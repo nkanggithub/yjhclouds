@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -966,7 +967,7 @@ public class MasterDataRestController {
 	
 	
 	@RequestMapping("/CallCreateShortNews")
-	public @ResponseBody int CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent){
+	public @ResponseBody String CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent) throws JSONException{
 		MongoDBBasic.createShortNews(reqContent);
 		//String url="http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp?UID=";
 		String url="";
@@ -983,14 +984,19 @@ public class MasterDataRestController {
 			title=reqContent;
 			content=reqContent;
 		}
+		int realReceiver=0;
+        String status="";
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
 		 for(int i=0;i<allUser.size();i++){
 			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect&UID=";
-			 RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+			 status=RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
+			 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
+	          	   realReceiver++;
+	             }
 		 }
 		
 		
-		 return allUser.size();
+		 return realReceiver+" of "+allUser.size()+"";
 	}
 	@RequestMapping("/CallGetUserWithFaceUrl")
 	public static String CallGetUserWithFaceUrl(@RequestParam(value="openid", required=false) String openid){
