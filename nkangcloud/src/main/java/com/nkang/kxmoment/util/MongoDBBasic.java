@@ -4085,27 +4085,77 @@ public class MongoDBBasic {
 		List<ArticleMessage> amList = new ArrayList<ArticleMessage>();
 		ArticleMessage am = null;
 		DBCursor queryresults;
-		try{
+		try {
+			if ("".equals(num)) {
+				BasicDBObject sort = new BasicDBObject();
+				sort.put("_id", -1);
+				queryresults = mongoDB.getCollection(Article_Message).find()
+						.sort(sort);
+			} else {
 				DBObject query = new BasicDBObject();
 				query.put("num", num);
-				queryresults = mongoDB.getCollection(Article_Message).find(query).limit(1);
-			if (null != queryresults) {
-            	while(queryresults.hasNext()){
-				DBObject o = queryresults.next();
-				am=new ArticleMessage();
-				am.setNum(o.get("num") == null ? "" : o.get("num").toString());
-				am.setContent(o.get("content") == null ? "" : o.get("content").toString());
-				am.setTime(o.get("time") == null ? "" : o.get("time").toString());
-				am.setTitle(o.get("title") == null ? "" : o.get("title").toString());
-				am.setVisitedNum(o.get("visitedNum") == null ? "" : o.get("visitedNum").toString());
-				amList.add(am);
-            	}
+				queryresults = mongoDB.getCollection(Article_Message)
+						.find(query).limit(1);
 			}
-		}catch(Exception e){
+			if (null != queryresults) {
+				while (queryresults.hasNext()) {
+					DBObject o = queryresults.next();
+					am = new ArticleMessage();
+					am.setNum(o.get("num") == null ? "" : o.get("num")
+							.toString());
+					am.setContent(o.get("content") == null ? "" : o.get(
+							"content").toString());
+					am.setTime(o.get("time") == null ? "" : o.get("time")
+							.toString());
+					am.setTitle(o.get("title") == null ? "" : o.get("title")
+							.toString());
+					am.setVisitedNum(o.get("visitedNum") == null ? "" : o.get(
+							"visitedNum").toString());
+					am.setPicture(o.get("picture") == null ? "" : o.get(
+							"picture").toString());
+					amList.add(am);
+					System.out.println("am.getPicture()---------"
+							+ am.getPicture());
+				}
+			}
+		} catch (Exception e) {
 			log.info("getArcticleMessageByNum--" + e.getMessage());
 		}
 		return amList;
 	}
+	public static ArrayList<ArticleMessage> queryArticleMessage(
+			int startNumber, int pageSize) {
+		mongoDB = getMongoDB();
+		ArrayList<ArticleMessage> result = new ArrayList<ArticleMessage>();
+		BasicDBObject sort = new BasicDBObject();
+		sort.put("_id", -1);
+		DBCursor dbcur = mongoDB.getCollection(Article_Message).find()
+				.sort(sort).skip(startNumber).limit(pageSize);
+		if (null != dbcur) {
+			while (dbcur.hasNext()) {
+				DBObject o = dbcur.next();
+				ArticleMessage temp = new ArticleMessage();
+				if (o.get("time") != null) {
+					temp.setTime(o.get("time").toString());
+				}
+				if (o.get("content") != null) {
+					temp.setContent(o.get("content").toString());
+				}
+				if (o.get("num") != null) {
+					temp.setNum(o.get("num").toString());
+				}
+				if (o.get("title") != null) {
+					temp.setTitle(o.get("title").toString());
+				}
+				if (o.get("picture") != null) {
+					temp.setTitle(o.get("picture").toString());
+				}
+				result.add(temp);
+			}
+		}
+		return result;
+	}
+
 	public static boolean updateVisitedNumber(String num){
 		mongoDB = getMongoDB();
 		Boolean ret = false;

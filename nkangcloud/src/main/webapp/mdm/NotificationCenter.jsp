@@ -5,13 +5,9 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%	
-String uid = request.getParameter("uid");
-MongoDBBasic.updateUser(uid);
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
-HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
-MongoDBBasic.updateVisited(uid,currentDate,"NotificationCenter",res.get("HeadUrl"),res.get("NickName"));
 String num = request.getParameter("num");
 List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
 MongoDBBasic.updateVisitedNumber(num);
@@ -44,8 +40,8 @@ n.setTime("2017/2/10 16:42"); */
                 <table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%;border-collapse:collapse;border-spacing:0">
                  <tbody>
                   <tr>
-                   <td valign="top" style="width:60%"><p class="MsoNormal" style="/* line-height:14.0pt */"><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black"><b><img id="_x0000_i1025" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000E9IMj&oid=00D90000000pkXM" style="
-    width: 140%;
+                   <td valign="top" style="width:60%"><p class="MsoNormal" style="/* line-height:14.0pt */"><span style="font-size:11.0pt;font-family:&quot;Arial&quot;,sans-serif;color:black"><b><img id="_x0000_i1025" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" style="
+    width: 60%;
 "></b>
                       <o:p></o:p></span></p></td>
                   </tr>

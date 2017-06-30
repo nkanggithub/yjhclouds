@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nkang.kxmoment.baseobject.ArticleMessage;
 import com.nkang.kxmoment.baseobject.BillOfSell;
 import com.nkang.kxmoment.baseobject.ClientInformation;
 import com.nkang.kxmoment.baseobject.ClientMeta;
@@ -964,7 +965,23 @@ public class MasterDataRestController {
 	public static boolean deleteShortNewsbyID(@RequestParam(value="id", required=true) String id){
 		return MongoDBBasic.deleteShortNews(id);
 	}
-	
+	@RequestMapping("/QueryArticleMessage")
+	public static ArrayList<ArticleMessage> QueryArticleMessage(@RequestParam(value="startNumber", required=false) int startNumber,@RequestParam(value="pageSize", required=false) int pageSize){
+		ArrayList<ArticleMessage> am = new ArrayList<ArticleMessage>();
+		if(startNumber<1){
+			startNumber=0;
+		}
+		if(pageSize<1){
+			pageSize=5;
+		}
+		try{
+			am = MongoDBBasic.queryArticleMessage(startNumber,pageSize);
+		}		
+		catch(Exception e){
+			am = null;
+		}
+		return am;
+	}
 	
 	@RequestMapping("/CallCreateShortNews")
 	public @ResponseBody String CallCreateShortNews(@RequestParam(value="content", required=true) String reqContent) throws JSONException{
