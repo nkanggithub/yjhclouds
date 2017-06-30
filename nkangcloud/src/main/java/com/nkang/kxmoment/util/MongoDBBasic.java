@@ -4441,7 +4441,12 @@ public class MongoDBBasic {
 		       DBObject obj = visiteds.next();
 		       vit.setDate(date);
 			   vit.setOpenid(obj.get("openid")+"");
-			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));
+			   if(obj.get("visitedNum")!=null){
+			   vit.setVisitedNum(Integer.parseInt(obj.get("visitedNum")+""));}
+			   else
+			   {
+				   vit.setVisitedNum(0);
+			   }
 			   if(obj.get("sharedNum")!=null){
 					vit.setSharedNum(Integer.parseInt(obj.get("sharedNum") + ""));
 				}

@@ -420,7 +420,7 @@ public class UserProfileController {
 	public @ResponseBody int sendNewsToAll(HttpServletRequest request,HttpServletResponse response) throws JSONException
 	{
 		//String url="http://"+Constants.baehost+"/mdm/DailyNewsToShare.jsp?UID=";
-		String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect&UID=";
+		String url="";
 		
 		String title="";
 		String reqContent=request.getParameter("content");
@@ -440,6 +440,7 @@ public class UserProfileController {
 		int realReceiver=0;
         String status="";
 		 for(int i=0;i<allUser.size();i++){
+			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect&UID=";
 			 status=RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
 			 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
             	   realReceiver++;
