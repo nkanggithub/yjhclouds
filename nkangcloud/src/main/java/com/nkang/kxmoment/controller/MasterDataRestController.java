@@ -943,6 +943,27 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
+	@RequestMapping("/saveArticleMessageSignUp")
+	public static boolean saveArticleMessageSignUp(@RequestParam(value="num", required=true) String num,@RequestParam(value="name", required=true) String name,@RequestParam(value="phone", required=true) String phone){
+		boolean ret = false;
+		try{
+			ret =  MongoDBBasic.saveArticleMessageSignUp(num,name,phone);
+		}		
+		catch(Exception e){
+			ret = false;
+		}
+		return ret;
+	}
+	@RequestMapping("/updateUserPoint")
+	public static int updateUserPoint(@RequestParam(value="fromUserName", required=true) String fromUserName,@RequestParam(value="randomNum", required=true) int randomNum){
+		int ret = 0;
+		try{
+			ret =  MongoDBBasic.updateUserPoint(fromUserName, randomNum);
+		}		
+		catch(Exception e){
+		}
+		return ret;
+	}
 	@RequestMapping("/QueryShortNewsList2")
 	public static ArrayList<ShortNews> QueryShortNewsList2(@RequestParam(value="startNumber", required=true) int startNumber,@RequestParam(value="pageSize", required=true) int pageSize){
 		ArrayList<ShortNews> cm = new ArrayList<ShortNews>();
