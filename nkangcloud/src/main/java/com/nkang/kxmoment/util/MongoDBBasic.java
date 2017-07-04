@@ -116,7 +116,44 @@ public class MongoDBBasic {
 		}	
 		return AccessKey;
 	}
-	
+	public static boolean saveArticleMessageSignUp(String num,String name,String phone) {
+		mongoDB = getMongoDB();
+		if (num != null) {
+			if (mongoDB == null) {
+				mongoDB = getMongoDB();
+			}
+			DBObject queryresult = mongoDB.getCollection(Article_Message).findOne(new BasicDBObject().append("num", num));
+			ArrayList<Map> list = new ArrayList<Map>();
+			if (queryresult != null) {
+				if(queryresult.get("signUp")!=null){
+					BasicDBList signUpList = (BasicDBList) queryresult.get("signUp");
+					Object[] signUpObjects = signUpList.toArray();
+					for (Object dbobj : signUpObjects) {
+						if (dbobj instanceof DBObject) {
+							HashMap<String,String> temp = new HashMap<String,String>();
+							temp.put("name",((DBObject) dbobj).get("name").toString());
+							temp.put("phone",((DBObject) dbobj).get("phone").toString());
+							if(!phone.equals(temp.get("phone"))){
+								list.add(temp);
+							}
+						}
+					}
+				}
+			}
+			HashMap<String,String> temp = new HashMap<String,String>();
+			temp.put("name",name);
+			temp.put("phone",phone);
+			list.add(temp);
+			
+			BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("signUp", list);
+			doc.put("$set", update);
+			WriteResult wr = mongoDB.getCollection(Article_Message).update(
+					new BasicDBObject().append("num", num), doc);
+		}
+		return true;
+	}
 	public static void updateAccessKey(String key, String expiresIn){
 		try{
 			mongoDB = getMongoDB();
