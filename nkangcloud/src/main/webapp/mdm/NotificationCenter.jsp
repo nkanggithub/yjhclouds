@@ -30,6 +30,8 @@ n.setTime("2017/2/10 16:42"); */
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../nkang/css_athena/style.css"/>
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
+<script	src="../MetroStyleFiles/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
 
 </head>
 <body style="margin:0;">
