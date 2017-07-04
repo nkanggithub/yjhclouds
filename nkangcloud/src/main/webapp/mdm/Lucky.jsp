@@ -116,7 +116,7 @@ $(document).ready(function(){
 				     		type : "POST",
 				     		url : "../updateUserPoint",
 				     		data : {
-				     			fromUserName:<%=uid %>,
+				     			fromUserName:'<%=uid %>',
 				     			randomNum:parseInt(txt.substr(0,1))
 				     		},
 				     		cache : false,
