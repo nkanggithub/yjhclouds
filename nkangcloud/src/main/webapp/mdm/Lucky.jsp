@@ -107,6 +107,7 @@ $(document).ready(function(){
 				if($("#LuckyNum").text()=='0'){
 					alert("你已经没有抽奖机会了,明天再来吧!");
 				}else{
+					$("#LuckyNum").text(0);
 					if(txt=='谢谢参与'){
 						alert("很遗憾，明天再来吧！");
 					}else{
@@ -125,7 +126,6 @@ $(document).ready(function(){
 				     	}); 
 						//$("#pointSum").text(parseInt($("#pointSum").text())+parseInt(txt.substr(0,1)));
 					}
-					$("#LuckyNum").text(0);
 				}
 				turnplate.bRotate = !turnplate.bRotate;
 			}
