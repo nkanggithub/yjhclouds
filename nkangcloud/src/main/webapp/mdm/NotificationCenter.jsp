@@ -1,13 +1,55 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="com.nkang.kxmoment.util.OAuthUitl.SNSUserInfo,java.lang.*"%>
 <%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%	
-SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
-Date date=new Date();
-String currentDate = format.format(date);
+//获取由OAuthServlet中传入的参数
+SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
+String originalUid=(String)request.getAttribute("state");
+String name = "";
+String phone = "";
+String headImgUrl ="";
+boolean isFollow=false;
+if(null != user) {
+	//String uid = request.getParameter("UID");
+	String uid = user.getOpenId();
+	name = user.getNickname();
+	headImgUrl = user.getHeadImgUrl();
+	HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
+	if(res!=null){
+		isFollow=true;
+		if(res.get("HeadUrl")!=null){
+			headImgUrl=res.get("HeadUrl");
+		}
+		if(res.get("NickName")!=null){
+			name=res.get("NickName");
+		}
+		if(res.get("phone")!=null){
+			phone=res.get("phone");
+		}
+	}
+	
+	SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+	Date date=new Date();
+	String currentDate = format.format(date);
+	if(uid.equals(originalUid)){
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"NotificationCenter",user.getHeadImgUrl(),name);
+	}
+	else
+	{
+		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"NotificationCenter",user.getHeadImgUrl(),name);
+		HashMap<String, String> resOriginal=MongoDBBasic.getWeChatUserFromOpenID(originalUid);
+		MongoDBBasic.updateShared(originalUid,currentDate,"NotificationCenter",resOriginal.get("HeadUrl"),resOriginal.get("NickName"));
+		}
+}
+
+
+//SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
+//Date date=new Date();
+//String currentDate = format.format(date);
 String num = request.getParameter("num");
 List<ArticleMessage> nList=MongoDBBasic.getArticleMessageByNum(num);
 MongoDBBasic.updateVisitedNumber(num);
@@ -35,7 +77,19 @@ n.setTime("2017/2/10 16:42"); */
 
 </head>
 <body style="margin:0;">
-
+<div style="width:100%;text-align:right;right:0px;position: absolute;margin-top:-10px;"><b>
+<ul class="nav pull-right top-menu" style="list-style: none;">
+					<li class="dropdown"><a href="#" class="dropdown-toggle ui-link" data-toggle="dropdown" style="padding:5px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;display: block;color:#777;font-weight:700;">
+					欢迎您：<span class="username colorBlue" id="username" style="color:#2489ce;"><%=name %></span>
+					</a> <span><a style="float: right;" class="ui-link"> <img id="userImage" src="<%=headImgUrl %>" alt="userImage" class="userImage" style="
+    border-radius: 25px;
+    height: 35px;
+    width: 35px;">
+						</a></span></li>
+				</ul>
+				</b></div>
 
 <%if(n.getTitle().indexOf("邀请函")>0){%>
 				<img id="signUp" style="width: 70px;cursor:pointer;position: fixed;bottom: 50px;right: 0px;z-index: 1002;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EUjnM&oid=00D90000000pkXM">
