@@ -15,9 +15,11 @@ public final class Constants {
 	public static final String convertString = "<%=value%>";
 	public static final String proxyInfo = "web-proxy.austin.hpecorp.net";
 	public static final String baehost = "wonderfulcq.bceapp.com";
+	public static final String clientCode = "YJH";
 	public static final String wechatapihost = "api.weixin.qq.com";
 	public static final String baiduapihost = "api.map.baidu.com";
 	public static final String bucketName = "wonderfulcq";
+	public static final String bosDomain = "gz.bcebos.com";
 	
 	public static final String ucpass_accountSid = "e332d0755b9060b20ecb53a244ec7015";
 	public static final String ucpass_token = "6dc9593907118f61208d1c1531337bc0";
