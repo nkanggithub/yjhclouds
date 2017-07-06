@@ -2828,13 +2828,14 @@ public static String regist(WeChatMDLUser user) {
 		}
 		return result;
 	}
-	public static String uploadNews(String mediaID, String title, String content) {
+	public static String uploadNews(String mediaID, String title, String content,String url) {
 		// public static String uploadNews(){
 
 		String result = "";
 		String str = "{\"articles\": [{\"thumb_media_id\":\"" + mediaID
 				+ "\",\"author\":\"\",\"title\":\"" + title
-				+ "\",\"content_source_url\":\"\",\"content\":\"" + content
+				+ "\",\"content_source_url\":\""+url
+				+"\",\"content\":\"" + content
 				+ "\",\"digest\":\"\",\"show_cover_pic\":1}]}";
 		// System.out.println(str);
 		// str="{\"articles\": [{\"thumb_media_id\":\"IvZtXKL8uF5UzX8mSLO66rSHyrGxrmR0OiG4-FXb8v8eNbqVIkANc5Lv0oFJaUn5\",\"author\":\"panda\",\"title\":\"test\",\"content_source_url\":\"www.qq.com\",\"content\":\"test for send message\",\"digest\":\"test for..\",\"show_cover_pic\":1}]}";

@@ -136,7 +136,8 @@ public class fileUploadController {
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String mediaID=request.getParameter("mediaID");
-		String articleID=RestUtils.uploadNews(mediaID,title,content);   
+		String url=request.getParameter("url");
+		String articleID=RestUtils.uploadNews(mediaID,title,content,url);      
 		articleID=articleID.substring(7, articleID.length());   
         JSONObject resultJSON=JSONObject.parseObject(articleID);
         if(resultJSON!=null){  
