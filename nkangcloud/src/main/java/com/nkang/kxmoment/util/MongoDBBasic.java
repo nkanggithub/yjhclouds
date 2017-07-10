@@ -2130,18 +2130,18 @@ public class MongoDBBasic {
 				if(teamobj.get("realName") != null){
 					res.put("NickName", teamobj.get("realName").toString());
 				}
+				String selfIntro=""; 
+				if(teamobj.get("selfIntro") != null){
+					selfIntro=teamobj.get("selfIntro").toString();
+				}
+				String[] aStrings=new Market().getMarket(selfIntro);
+				res.put("market0", aStrings[0]);
+				res.put("market1", aStrings[1]);
+				res.put("market2", aStrings[2]);
 			}
 			if(o.get("IsAuthenticated") != null){
     			res.put("IsAuthenticated", o.get("IsAuthenticated").toString());
     		}
-			String selfIntro=""; 
-			if(teamobj.get("selfIntro") != null){
-				selfIntro=teamobj.get("selfIntro").toString();
-			}
-			String[] aStrings=new Market().getMarket(selfIntro);
-			res.put("market0", aStrings[0]);
-			res.put("market1", aStrings[1]);
-			res.put("market2", aStrings[2]);
 		}
 		return res;
 	}
