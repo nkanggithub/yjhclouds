@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.nkang.kxmoment.util.Constants;
+
 //import com.souvc.weixin.pojo.SNSUserInfo;
 //import com.souvc.weixin.pojo.WeixinOauth2Token;
 //import com.souvc.weixin.util.AdvancedUtil;
@@ -57,8 +59,8 @@ public class OAuthServlet implements Filter  {
         	 // 用户同意授权
         	//log.info("Start call weixinOauth2Token .......");
             // 获取网页授权access_token
-            WeixinOauth2Token weixinOauth2Token = AdvancedUtil.getOauth2AccessToken("wx19c8fd43a7b6525d", "513c09d69e91abb862e178536f2021a4", code);
-            //log.info("end call weixinOauth2Token .......=="+weixinOauth2Token.getAccessToken());
+        	WeixinOauth2Token weixinOauth2Token = AdvancedUtil.getOauth2AccessToken(Constants.APP_ID, Constants.APPSECRET, code);
+             //log.info("end call weixinOauth2Token .......=="+weixinOauth2Token.getAccessToken());
             // 网页授权接口访问凭证
             if(weixinOauth2Token!=null){
             	 String accessToken = weixinOauth2Token.getAccessToken();
@@ -94,7 +96,7 @@ public class OAuthServlet implements Filter  {
     	 log.info("===============url:"+uri+value);
     	 uri=java.net.URLEncoder.encode(uri+value, "utf-8");
     	 log.info("===============encode(uri):"+uri);
-    	((HttpServletResponse) response).sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx19c8fd43a7b6525d&redirect_uri=http%3A%2F%2Fshenan.duapp.com"+uri+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+    	((HttpServletResponse) response).sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+uri+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
     	}
         
         log.info("end doFilter.......");
