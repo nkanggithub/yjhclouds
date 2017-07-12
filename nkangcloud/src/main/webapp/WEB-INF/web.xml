@@ -36,7 +36,10 @@
   <filter-mapping> 
   <filter-name>filter</filter-name> 
   
-  <url-pattern>*.jsp</url-pattern> 
+  <url-pattern>/mdm/NotificationCenter.jsp</url-pattern> 
+  <url-pattern>/mdm/Lucky.jsp</url-pattern> 
+  <url-pattern>/mdm/DailyNews.jsp</url-pattern> 
+  <url-pattern>/mdm/DQDashBoard.jsp</url-pattern> 
  </filter-mapping>      
 	<!-- <servlet>
 		<description>spring mvc servlet</description>
