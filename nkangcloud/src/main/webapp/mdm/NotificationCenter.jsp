@@ -320,6 +320,8 @@ wx.config({
 			 alert("发送失败!请输入正确的号码信息");
 			 return;
 		}else{
+       	$("#sendCode").attr("disable","true");
+       	$("#sendCode").css("background-color","#ccc");
 		code=MathRand();
 		$.ajax({
 	        cache: false,
@@ -336,8 +338,6 @@ wx.config({
 	        success: function(data) {
 	        	if(data=="OK"){
 	        	alert("验证码已发送至"+phone+",请耐心等候");
-	        	$("#sendCode").attr("disable","true");
-	        	$("#sendCode").css("background-color","#ccc");
 	        	}
 	        }
 	    });}
