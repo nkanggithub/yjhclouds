@@ -3,7 +3,7 @@
 <%@ page import="com.nkang.kxmoment.baseobject.ArticleMessage"%>
 <%@ page import="com.nkang.kxmoment.util.RestUtils"%>
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
-<%@ page import="java.util.*"%>
+<%@ page import="java.util.*,com.nkang.kxmoment.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%	
 //获取由OAuthServlet中传入的参数
@@ -41,9 +41,11 @@ if(null != user) {
 	else
 	{
 		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"NotificationCenter",user.getHeadImgUrl(),name);
+		if(!"STATE".equals(originalUid)){
 		HashMap<String, String> resOriginal=MongoDBBasic.getWeChatUserFromOpenID(originalUid);
 		MongoDBBasic.updateShared(originalUid,currentDate,"NotificationCenter",resOriginal.get("HeadUrl"),resOriginal.get("NickName"));
 		}
+	}
 }
 
 
@@ -61,7 +63,8 @@ n.setTime("2017/2/10 16:42"); */
 	n=nList.get(0);
 }
  
- 
+
+String ticket=RestUtils.getTicket();
 %>
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -74,7 +77,88 @@ n.setTime("2017/2/10 16:42"); */
 <script type="text/javascript" src="../Jsp/JS/jquery-1.8.0.js"></script>
 <script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
-
+<script type="text/javascript" src="../Jsp/JS/jquery.sha1.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript">
+var url = window.location.href;
+if(url.indexOf('#')!=-1){
+	url=url.substr(0,(url.indexOf('#')-1));
+}
+var string1='jsapi_ticket=<%=ticket%>'
+	+'&noncestr=Wm3WZYTPz0wzccnW&timestamp=1414587457&url='+url;
+var signature=$.sha1(string1);
+wx.config({
+        debug: false,
+        appId: '<%=Constants.APP_ID%>'+'',
+        timestamp: 1414587457,
+        nonceStr: 'Wm3WZYTPz0wzccnW'+'',
+        signature: signature+'',
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo'
+          ]
+    });
+ wx.ready(function () {
+	/*  wx.checkJsApi({
+            jsApiList: [
+                'getLocation',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ],
+            success: function (res) {
+                alert(JSON.stringify(res));
+            }
+     }); */
+     var shareTitle="<%=n.getTitle()%>";
+     var shareDesc="<%= n.getContent().substring(0,50) %>";
+     var shareImgUrl="<%=n.getPicture()%>";
+	//----------“分享给朋友”
+     wx.onMenuShareAppMessage({
+         title: shareTitle, // 分享标题
+         desc: shareDesc, // 分享描述
+         link: url, // 分享链接
+         imgUrl: shareImgUrl, // 分享图标
+         type: '', // 分享类型,music、video或link，不填默认为link
+         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+         success: function () { 
+             // 用户确认分享后执行的回调函数、
+            // alert("用户成功分享了该网页");
+         },
+         cancel: function () { 
+             // 用户取消分享后执行的回调函数
+           //  alert("用户取消了分享");
+         },
+         fail: function (res) {
+          //   alert(JSON.stringify(res));
+         }
+     });
+     //------------"分享到朋友圈"
+     wx.onMenuShareTimeline({
+         title: shareTitle, // 分享标题
+         link:url, // 分享链接
+         imgUrl: shareImgUrl, // 分享图标
+         success: function () { 
+             // 用户确认分享后执行的回调函数
+          //   alert("用户成功分享了该网页");
+         },
+         cancel: function () { 
+             // 用户取消分享后执行的回调函数
+         //    alert("用户取消了分享");
+         },
+         fail: function (res) {
+          //   alert(JSON.stringify(res));
+         }
+     });
+     wx.error(function(res){
+         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+         alert("errorMSG:"+res);
+     });
+ });
+</script>
 </head>
 <body style="margin:0;">
 <div style="width:100%;text-align:right;right:0px;position: absolute;margin-top:-10px;"><b>
