@@ -88,7 +88,47 @@ public class RestUtils {
 		       } 
 			return accessToken;
 	}
-
+	public static String getTicket() {
+		String ticket = MongoDBBasic.getTicket();
+		if(ticket!=null){
+			return ticket;
+		}else{
+		String url = "https://" + Constants.wechatapihost
+				+ "/cgi-bin/ticket/getticket?access_token="+MongoDBBasic.QueryAccessKey()
+				+ "&type=jsapi";
+		try {
+			URL urlGet = new URL(url);
+			HttpURLConnection http = (HttpURLConnection) urlGet
+					.openConnection();
+			http.setRequestMethod("GET"); // must be get request
+			http.setRequestProperty("Content-Type",
+					"application/x-www-form-urlencoded");
+			http.setDoOutput(true);
+			http.setDoInput(true);
+			if (localInd == "Y") {
+				System.setProperty("http.proxyHost", Constants.proxyInfo);
+				System.setProperty("http.proxyPort", "8080");
+			}
+			System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
+			System.setProperty("sun.net.client.defaultReadTimeout", "30000");
+			http.connect();
+			InputStream is = http.getInputStream();
+			int size = is.available();
+			byte[] jsonBytes = new byte[size];
+			is.read(jsonBytes);
+			String message = new String(jsonBytes, "UTF-8");
+			JSONObject demoJson = new JSONObject(message);
+			ticket = demoJson.getString("ticket");
+			String expires_in = demoJson.getString("expires_in");
+			// DBUtils.updateAccessKey(accessToken, expires_in);
+			MongoDBBasic.updateTicket(ticket, expires_in);
+			is.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ticket;
+		}
+	}
 	public static List<String> getWeChatUserListID(String akey){
 		List<String> listOfOpenID = new ArrayList<String>();
 		String url = "https://"+Constants.wechatapihost+"/cgi-bin/user/get?access_token="+ akey;
