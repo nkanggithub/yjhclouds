@@ -108,7 +108,49 @@ public class MongoDBBasic {
 
         return mongoDB;
 	}
-	
+	public static String getTicket() {
+		String Ticket=null;
+		try {
+			mongoDB = getMongoDB();
+			DBObject queryresult = mongoDB.getCollection(ClientMeta).findOne(new BasicDBObject().append("ClientCode", "DXC"));
+			if (queryresult != null) {
+				Object WeChatTicket = queryresult.get("WeChatTicket");
+				DBObject o = new BasicDBObject();
+				o = (DBObject) WeChatTicket;
+				if (o != null) {
+					if (o.get("LastUpdated") != null) {
+						long nowDate=new java.util.Date().getTime();
+						long startDate=Long.parseLong(o.get("LastUpdated").toString());
+						if(nowDate-startDate<(7100*1000)){
+							Ticket=o.get("Ticket").toString();
+						}else{
+							Ticket=null;
+						}
+					}
+				}
+			}
+			log.info("getTicket end");
+		} catch (Exception e) {
+			log.info("getTicket--" + e.getMessage());
+		}
+		return Ticket;
+	}
+	public static void updateTicket(String ticket, String expiresIn) {
+		try {
+			mongoDB = getMongoDB();
+			//DBCursor dbcur = mongoDB.getCollection(ClientMeta).find(new BasicDBObject().append("ClientCode", "DXC"));
+			DBObject dbo = new BasicDBObject();
+			dbo.put("WeChatTicket.Ticket",ticket);
+			dbo.put("WeChatTicket.ExpiresIn",Integer.valueOf(expiresIn));
+			dbo.put("WeChatTicket.LastUpdated",new java.util.Date().getTime());
+			BasicDBObject doc = new BasicDBObject();
+			doc.put("$set", dbo);
+			mongoDB.getCollection(ClientMeta).update(new BasicDBObject().append("ClientCode","DXC"), doc);
+			log.info("updateTicket end");
+		} catch (Exception e) {
+			log.info("updateTicket--" + e.getMessage());
+		}
+	}
 	public static String getValidAccessKey(){
 		String AccessKey = QueryAccessKey();
 		if(AccessKey == null){
