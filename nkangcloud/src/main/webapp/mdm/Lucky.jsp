@@ -109,7 +109,8 @@ $(document).ready(function(){
 				}else{
 					$("#LuckyNum").text(0);
 					if(txt=='谢谢参与'){
-						alert("很遗憾，明天再来吧！");
+						alert("运气怎么这么不好呀？再送你一次机会吧！");
+						$("#LuckyNum").text(1);
 					}else{
 						alert("恭喜您，抽中了"+txt+"!");
 						jQuery.ajax({
