@@ -113,9 +113,9 @@ wx.config({
                 alert(JSON.stringify(res));
             }
      }); */
-     var shareTitle="<%=n.getTitle()%>";
-     var shareDesc="<%= n.getContent()%>";
-     var shareImgUrl="<%=n.getPicture()%>";
+     var shareTitle='<%=n.getTitle().replaceAll("\'", "\"")%>';
+     var shareDesc='<%= n.getContent().replaceAll("\n", "<br/>").replaceAll("\'", "\"") %>';
+     var shareImgUrl='<%=n.getPicture().replaceAll("\'", "\"")%>';
 	//----------“分享给朋友”
      wx.onMenuShareAppMessage({
          title: shareTitle, // 分享标题
