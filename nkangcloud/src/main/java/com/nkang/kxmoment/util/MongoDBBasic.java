@@ -108,6 +108,23 @@ public class MongoDBBasic {
 
         return mongoDB;
 	}
+	public static boolean updateArticleMessageByNum(String num) {
+		boolean ret=false;
+		try {
+			mongoDB = getMongoDB();
+			//DBCursor dbcur = mongoDB.getCollection(ClientMeta).find(new BasicDBObject().append("ClientCode", "DXC"));
+			DBObject dbo = new BasicDBObject();
+			dbo.put("isForward","1");
+			BasicDBObject doc = new BasicDBObject();
+			doc.put("$set", dbo);
+			mongoDB.getCollection(Article_Message).update(new BasicDBObject().append("num",num), doc);
+			ret=true;
+			log.info("updateArticleMessageByNum end");
+		} catch (Exception e) {
+			log.info("updateArticleMessageByNum--" + e.getMessage());
+		}
+		return ret;
+	}
 	public static String getTicket() {
 		String Ticket=null;
 		try {
@@ -4036,6 +4053,7 @@ public class MongoDBBasic {
 				insertQuery.put("type",articleMessage.getType());
 				insertQuery.put("content",articleMessage.getContent());
 				insertQuery.put("time",articleMessage.getTime());
+				insertQuery.put("isForward", "0");
 				insertQuery.put("picture",articleMessage.getPicture());
 				insertQuery.put("webUrl",articleMessage.getWebUrl());
 				insertQuery.put("visitedNum",articleMessage.getVisitedNum());
@@ -4151,6 +4169,7 @@ public class MongoDBBasic {
 				am.setTime(o.get("time") == null ? "" : o.get("time").toString());
 				am.setTitle(o.get("title") == null ? "" : o.get("title").toString());
 				am.setVisitedNum(o.get("visitedNum") == null ? "" : o.get("visitedNum").toString());
+				am.setIsForward(o.get("isForward") == null ? "" : o.get("isForward").toString());
 				amList.add(am);
             	}
 			}
@@ -4192,6 +4211,8 @@ public class MongoDBBasic {
 							"visitedNum").toString());
 					am.setPicture(o.get("picture") == null ? "" : o.get(
 							"picture").toString());
+					am.setIsForward(o.get("isForward") == null ? "" : o.get(
+							"isForward").toString());
 					amList.add(am);
 					System.out.println("am.getPicture()---------"
 							+ am.getPicture());
@@ -4228,6 +4249,9 @@ public class MongoDBBasic {
 				}
 				if (o.get("picture") != null) {
 					temp.setTitle(o.get("picture").toString());
+				}
+				if (o.get("isForward") != null) {
+					temp.setIsForward(o.get("isForward").toString());
 				}
 				result.add(temp);
 			}
