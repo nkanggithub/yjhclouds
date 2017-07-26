@@ -11,6 +11,13 @@ public class ArticleMessage {
 	public String picture;
 	public List<String> visited;
 	public String visitedNum;
+	public String isForward;
+	public String getIsForward() {
+		return isForward;
+	}
+	public void setIsForward(String isForward) {
+		this.isForward = isForward;
+	}
 	public String getVisitedNum() {
 		return visitedNum;
 	}
