@@ -48,7 +48,55 @@ import com.nkang.kxmoment.util.SmsUtils.RestTest;
 @RestController
 public class MasterDataRestController {
 	private static Logger log=Logger.getLogger(MasterDataRestController.class);
+	@RequestMapping("/getForwardMessage")
+	public boolean getForwardMessage(@RequestParam(value="num", required=false) String num,@RequestParam(value="type", required=false) String type){
+		if("video".equals(type)){
+			/*List<VideoMessage>  list=MongoDBBasic.getVideoMessageByNum(num);
+			VideoMessage mes=list.get(0);
+			//微信
+			List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
 	
+			String content=mes.getContent();
+			String title=mes.getTitle();
+			String uri=mes.getWebUrl();
+			content+="\n【更多消息请点击微信公众号菜单：\n      发现附近-->往期回顾-->视频消息】";
+			for(int i=0;i<allUser.size();i++){
+			//	if(allUser.get(i).getOpenid().equals("oqPI_xACjXB7pVPGi5KH9Nzqonj4")){
+					log.info("getForwardMessage==========video================send to "+allUser.get(i).getOpenid());
+					RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EVbgB&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,uri);
+			//	}
+			}
+			MongoDBBasic.updateVideoMessageByNum(num);*/
+		}else{
+			List<ArticleMessage>  list=MongoDBBasic.getArticleMessageByNum(num);
+			ArticleMessage mes=list.get(0);
+			//微信
+			List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
+	
+			String content=mes.getContent();
+			content=content.replaceAll("(\r\n|\r|\n|\n\r|<br/>|<br />|<br>|<b>|</b>|\")", "");
+			if(content.length()>200){
+				content=content.substring(0,180);
+			}
+			content+="\n【更多消息请点击微信公众号菜单：\n      发现附近-->往期回顾-->图文消息】";
+			String title=mes.getTitle();
+			String picture="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602667276&di=5ff160cb3a889645ffaf2ba17b4f2071&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F65%2F94%2F64B58PICiVp_1024.jpg";
+			if(mes.getPicture()!=null&&mes.getPicture()!=""){
+				picture=mes.getPicture();
+			}
+			String uri="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx19c8fd43a7b6525d&redirect_uri=http%3A%2F%2Fshenan.duapp.com%2Fmdm%2FNotificationCenter.jsp?num="+num+"&response_type=code&scope=snsapi_userinfo&state=oqPI_xACjXB7pVPGi5KH9Nzqonj4#wechat_redirect";
+			for(int i=0;i<allUser.size();i++){
+				//if(allUser.get(i).getOpenid().equals("oqPI_xACjXB7pVPGi5KH9Nzqonj4")){
+					log.info("getForwardMessage==========mes================send to "+allUser.get(i).getOpenid());
+					log.info("=========picture:"+picture);
+					log.info("=========uri:"+uri);
+					RestUtils.sendQuotationToUser(allUser.get(i),content,picture,"【"+allUser.get(i).getNickname()+"】"+title,uri);
+				//}
+			}
+			MongoDBBasic.updateArticleMessageByNum(num);
+		}
+		return true;
+	}
 	@RequestMapping("/masterdataupsert")
 	public String getMasterData(@RequestParam(value="siteInstanceId", required=false) String siteInstanceId,
 								@RequestParam(value="organizationId", required=false) String organizationId,
