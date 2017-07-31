@@ -42,7 +42,6 @@
   <url-pattern>/mdm/Lucky.jsp</url-pattern> 
   <url-pattern>/mdm/NotificationCenter.jsp</url-pattern> 
   <url-pattern>/mdm/quoteDetailExternal.jsp</url-pattern> 
-  <url-pattern>/mdm/test.jsp</url-pattern> 
  </filter-mapping>      
 	<!-- <servlet>
 		<description>spring mvc servlet</description>
