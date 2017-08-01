@@ -40,6 +40,8 @@ MongoDBBasic.addSkimNum();
     <link href="../Jsp/JS/pizzaChart/css/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <link href="../Jsp/JS/pizzaChart/css/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
 <script src="../Jsp/JS/pizzaChart/js/custom.modernizr.js"></script>
+<link rel="stylesheet" type="text/css" href="../MetroStyleFiles/sweetalert.css"/>
+<script	src="../MetroStyleFiles/sweetalert.min.js"></script>
 <style>
 p{
 margin-bottom:0px;
@@ -658,7 +660,7 @@ var i=$(this).index();
 					if(data[i].visitedNum!=0&&imgUrl!="null")
 					{	
 						if(data[i].sharedNum!=0){
-							sharedNum="【分享阅读"+data[i].sharedNum+"次】";
+							sharedNum="<span onclick='getDetailedShare(\""+data[i].openid+"\",\""+data[i].date+"\",\""+data[i].pageName+"\",\""+data[i].nickName+"\")'>("+data[i].sharedNum+")</span>";
 						}
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+sharedNum+"</p></div>";
 					};
@@ -678,7 +680,7 @@ var i=$(this).index();
 				type : "post",
 				url : "../getNoVisitedDetail",
 				data:{
-					pageName:pageName,
+					pageName:details[0],
 					dateIndex:index
 				},
 				cache : false,
@@ -746,6 +748,45 @@ var i=$(this).index();
 
 	  
 	  });
-
+	function getDetailedShare(openid,date,pageName,nickName){
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "../getSharedDetail",
+			data:{
+				openid:openid,
+				date:date,
+				pageName:pageName,
+				nickName:nickName
+			},
+			cache : false,
+			success : function(data) {
+				if(data){
+					var sharedList="<div style='height:200px;overflow:scroll'>";
+					for(var i=0;i<data.length;i++){
+	  	        		sharedList+="<p style='width:100%;float:left;height:40px;line-height:40px;text-align: center;'>"+data[i]+"</p>";
+	  	        		}
+					sharedList+="</div>";
+	  	  		 swal({  
+	  			        title:"分享列表",  
+	  			        text:sharedList,
+	  			        html:"true",
+	  			        showConfirmButton:false, 
+	  					showCancelButton: true,   
+	  					closeOnConfirm: false,   
+	  			        cancelButtonText:"关闭",
+	  			        confirmButtonColor: "#000",
+	  			        animation:"slide-from-top"  
+	  			      }, 
+	  					function(inputValue){
+	  			    	  if (inputValue === false){ return false; }
+	  			      }
+	  			     );
+				}
+			
+			}
+		});
+	}
+		
   </script>
 </body></html>

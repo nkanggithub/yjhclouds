@@ -84,8 +84,9 @@ public class MasterDataRestController {
 			if(mes.getPicture()!=null&&mes.getPicture()!=""){
 				picture=mes.getPicture();
 			}
-			String uri="http://wonderfulcq.bceapp.com/mdm/NotificationCenter.jsp?num="+num;
+			String uri="";
 			for(int i=0;i<allUser.size();i++){
+				uri="http://wonderfulcq.bceapp.com/mdm/NotificationCenter.jsp?UID="+allUser.get(i).getOpenid()+"&num="+num;
 				//if(allUser.get(i).getOpenid().equals("oqPI_xACjXB7pVPGi5KH9Nzqonj4")){
 					log.info("getForwardMessage==========mes================send to "+allUser.get(i).getOpenid());
 					log.info("=========picture:"+picture);
@@ -1074,7 +1075,7 @@ public class MasterDataRestController {
         String status="";
 		List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
 		 for(int i=0;i<allUser.size();i++){
-			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect&UID=";
+			 url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FDailyNews.jsp?UID="+allUser.get(i).getOpenid()+"&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect&UID=";
 			 status=RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAbWJ&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,url);
 			 if(RestUtils.getValueFromJson(status,"errcode").equals("0")){
 	          	   realReceiver++;
@@ -1395,6 +1396,11 @@ public class MasterDataRestController {
 		}
 		return result;
 		
+	}
+	@RequestMapping("/getSharedDetail")
+	public @ResponseBody List<String> getSharedDetail(@RequestParam(value="openid")String openid,@RequestParam(value="date")String date,
+			@RequestParam(value="pageName")String pageName,@RequestParam(value="nickName")String nickName){
+		return MongoDBBasic.getSharedDetail(openid,date,pageName,nickName); 
 	}
 	@RequestMapping("/sendValidateCode")
 	public String sendValidateCode(@RequestParam(value="phone")String phone,@RequestParam(value="code")String code){

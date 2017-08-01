@@ -2021,7 +2021,7 @@ public static String regist(WeChatMDLUser user) {
     	String result ="";
     	String str="";
     	if("".equals(am.getWebUrl())||""==am.getWebUrl()){
-    			str="{\"title\":\""+am.getTitle()+"\",\"description\":\""+"发布者 - 永佳和:"+am.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?num="+am.getNum()+"\",\"picurl\":"
+    			str="{\"title\":\""+am.getTitle()+"\",\"description\":\""+"发布者 - 永佳和:"+am.getContent()+"\",\"url\":\"http://"+Constants.baehost+"/mdm/NotificationCenter.jsp?UID="+toOpenId+"&num="+am.getNum()+"\",\"picurl\":"
     					+ "\""+img+"\"}";
     	}else
     	{
