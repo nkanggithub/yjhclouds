@@ -660,7 +660,7 @@ var i=$(this).index();
 					if(data[i].visitedNum!=0&&imgUrl!="null")
 					{	
 						if(data[i].sharedNum!=0){
-							sharedNum="<span onclick='getDetailedShare(\""+data[i].openid+"\",\""+data[i].date+"\",\""+data[i].pageName+"\",\""+data[i].nickName+"\")'>分享阅读("+data[i].sharedNum+")</span>";
+							sharedNum="<span onclick='getDetailedShare(\""+data[i].openid+"\",\""+data[i].date+"\",\""+data[i].pageName+"\",\""+data[i].nickName+"\")'>(分享阅读"+data[i].sharedNum+")</span>";
 						}
 						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='visitedNum'>"+data[i].visitedNum+sharedNum+"</p></div>";
 					};
