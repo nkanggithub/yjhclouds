@@ -132,8 +132,8 @@ function forward(num,type){
 <div style="padding-left: 10px;height: 60px;padding-top: 10px;">
 <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&oid=00D90000000pkXM" alt="" style="width:30%;">
 </div>
-<div class="topPic"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490602667276&di=5ff160cb3a889645ffaf2ba17b4f2071&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F15%2F65%2F94%2F64B58PICiVp_1024.jpg" />
-<div class="topPic_title">科技生活，从大数据开始</div></div>
+<div class="topPic"><img src="../MetroStyleFiles/image/datalakepure.png" />
+<div class="topPic_title">市场如水，企业如舟</div></div>
 <div class="navi"><p>图文消息</p><p>XXXX</p></div>
 	<div id="wrapper" style="top:290px;">
 		<div class="scroller">
