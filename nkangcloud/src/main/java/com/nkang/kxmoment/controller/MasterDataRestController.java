@@ -86,7 +86,7 @@ public class MasterDataRestController {
 			}
 			String uri="";
 			for(int i=0;i<allUser.size();i++){
-				uri="http://wonderfulcq.bceapp.com/mdm/NotificationCenter.jsp?UID="+allUser.get(i).getOpenid()+"&num="+num;
+				uri="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constants.APP_ID+"&redirect_uri=http%3A%2F%2F"+Constants.baehost+"%2Fmdm%2FNotificationCenter.jsp?num="+num+"&response_type=code&scope=snsapi_userinfo&state="+allUser.get(i).getOpenid()+"#wechat_redirect";
 				//if(allUser.get(i).getOpenid().equals("oqPI_xACjXB7pVPGi5KH9Nzqonj4")){
 					log.info("getForwardMessage==========mes================send to "+allUser.get(i).getOpenid());
 					log.info("=========picture:"+picture);
