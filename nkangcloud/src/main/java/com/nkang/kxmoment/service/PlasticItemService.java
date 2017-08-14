@@ -362,8 +362,9 @@ public class PlasticItemService {
 		List<PlasticItem> list = null;
 		try {
 			DBObject orderBy = new BasicDBObject();
-			orderBy.put("priceStatus", -1);
-			orderBy.put("price", -1);
+			orderBy.put("orderNum",1);
+			//orderBy.put("priceStatus", -1);
+			//orderBy.put("price", -1);
 			list = MongoClient.findList(page, count, orderBy, PlasticItem.class);
 			if(list == null){
 				return null;
