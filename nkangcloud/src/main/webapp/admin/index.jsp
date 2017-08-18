@@ -621,6 +621,8 @@ function showUpdateUserPanel(openid,name){
 			            +'														<option value="段阳">&nbsp;&nbsp;段阳</option>'
 			            +'														<option value="郑仁利">&nbsp;郑仁利</option>'
 			            +'														<option value="罗斯威">&nbsp;罗斯威</option>'
+			            +'														<option value="温小兵">&nbsp;温小兵</option>'
+			            +'														<option value="马家勇">&nbsp;马家勇</option>'
 			            +'													    </select></td>'
 			            +'													</tr>'
 			            +'													<tr>'
