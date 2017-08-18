@@ -576,12 +576,12 @@ function getAllDatas(){
 							 if(data[i]["approve"]==true){
 								 tag='<span class="tag approve">申请中</span>';
 							 }
-							 /* data[i].price="暂无报价";
+							 data[i].price="暂无报价";
 							 unit='';
 							 openChart='';
 							 priceColor="lose";
 							 change='';
-							 priceStyle=''; */
+							 priceStyle=''; 
 						 }
 						 
 						 
