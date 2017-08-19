@@ -10,6 +10,8 @@ public class Market {
 		arrayList.add(new String[]{"重庆销售","郝海涛","15123331522"});
 		arrayList.add(new String[]{"重庆销售","胡贵花","13996213531"});
 		arrayList.add(new String[]{"重庆销售","罗成洪","13996213513"});
+		arrayList.add(new String[]{"重庆销售","温小兵","18160042561"});
+		arrayList.add(new String[]{"重庆销售","马家勇","17780647932"});
 		arrayList.add(new String[]{"重庆销售","罗浩","13996015042"});
 		arrayList.add(new String[]{"助理总经理","陈博","13883228651"});
 		arrayList.add(new String[]{"助理总经理","段阳","15308228368"});
