@@ -718,6 +718,18 @@ public class MasterDataRestController {
 		res=MongoDBBasic.saveUserKM(openid, kmItem,flag);
 		return res;
 	}
+	@RequestMapping(value = "/saveUserAllKM")
+	public static boolean saveUserAllKM(@RequestParam(value="openid", required=true) String openid) {
+		boolean res=false;
+		res=MongoDBBasic.saveUserAllKM(openid);
+		return res;
+	}
+	@RequestMapping(value = "/saveUserNoKM")
+	public static boolean saveUserNoKM(@RequestParam(value="openid", required=true) String openid) {
+		boolean res=false;
+		res=MongoDBBasic.saveUserNoKM(openid);
+		return res;
+	}
 	@RequestMapping("/CallRegisterUser")
 	public static boolean CallRegisterUser(
 			@RequestParam(value="openid", required=false) String openid,
