@@ -312,7 +312,7 @@ $(window).load(function() {
 	});
 	
 });
-function UpdateTag(item,flag,obj){
+/* function UpdateTag(item,flag,obj){
 	var tempObj=$(obj).parent().parent(".singleQuote2");
 	$(".singleQuote2").removeClass("editBtn");
 	$(".singleQuote2").find(".edit").remove();
@@ -354,7 +354,7 @@ function UpdateTag(item,flag,obj){
 			 }
 		});	
 	 } 
-}
+} */
 function getVisitPage() {
 	jQuery.ajax({
 		type : "GET",
@@ -397,6 +397,94 @@ function getVisitPage() {
 		}
 	});
 }
+function saveUserAllKM(openid){
+	$.ajax({
+		 url:'../saveUserAllKM',
+		 type:"POST",
+		 data : {
+			 openid : openid
+		 },
+		 success:function(result){
+			 if(result==true){
+					swal("关注成功 ", "恭喜你成功关注所有牌号", "success");
+					$.ajax({
+						 url:'../queryUserKM',
+						 type:"POST",
+						 data : {
+							 openid : openid,
+							 random : Math.random()
+						 },
+						 success:function(user){
+							var KMLikeArr=user.kmLists;
+							var KMLikeApproveArr=user.kmApproveLists;
+							 if(KMListsArr.length==0){
+								 	$.ajax({
+									 url:'../PlasticItem/findList?page=1&count=999',
+									 type:"POST",
+									 success:function(res){
+										 var resData=res.data;
+										 KMListsArr=resData;
+									 	if(resData.length)
+										{
+									 		showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
+										 }
+									 }
+								 });
+							 }else{
+								 showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
+							 }
+						}
+					});
+				 }else{
+					 swal("操作失败", "请刷新页面后重试", "error");
+				 }
+		 }
+	});
+}
+function saveUserNoKM(openid){
+	$.ajax({
+		 url:'../saveUserNoKM',
+		 type:"POST",
+		 data : {
+			 openid : openid
+		 },
+		 success:function(result){
+			 if(result==true){
+				swal("取消成功 ", "恭喜你成功取消所有牌号", "success");
+				$.ajax({
+					 url:'../queryUserKM',
+					 type:"POST",
+					 data : {
+						 openid : openid,
+						 random : Math.random()
+					 },
+					 success:function(user){
+						var KMLikeArr=user.kmLists;
+						var KMLikeApproveArr=user.kmApproveLists;
+						 if(KMListsArr.length==0){
+							 	$.ajax({
+								 url:'../PlasticItem/findList?page=1&count=999',
+								 type:"POST",
+								 success:function(res){
+									 var resData=res.data;
+									 KMListsArr=resData;
+								 	if(resData.length)
+									{
+								 		showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
+									 }
+								 }
+							 });
+						 }else{
+							 showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid);
+						 }
+					}
+				});
+			 }else{
+				 swal("操作失败", "请刷新页面后重试", "error");
+			 }
+		 }
+	});
+}
 function UpdateTag(openid,item,obj){
 	var flag='add';
 	if($(obj).val()=="取消"){
@@ -435,7 +523,8 @@ function showKMPanel(openid,name){
 	$(".Work_Mates_div_list_div2").remove(".edit");
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
-	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	//Qing update
+	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><input type="button" onclick="saveUserAllKM(\''+openid+'\')" value="关注全部" style="color:#fff !important;background-color:orange;margin-right:10px;padding:3px 8px;border:0px;font-weight:bold;font-size:15px;"/><input onclick="saveUserNoKM(\''+openid+'\')" type="button" value="取消全部" style="color:#fff !important;background-color:#999;margin-right:10px;padding:3px 8px;border:0px;font-size:15px;font-weight:bold;"/><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<ul id="QuoteList" data-role="listview" style="height:300px;overflow:auto;margin-top:10px;" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
 			+'<center>正在加载中...</center>'
 			+'</ul>'
@@ -485,7 +574,7 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 	var LikeArr=new Array();
 	var ApproveArr=new Array();
 	var KMListsArr2=KMListsArr;
-	if((KMLikeArr!=null&&KMLikeArr.length>0)||(KMLikeApproveArr!=null&&KMLikeApproveArr.length>0)){
+//	if((KMLikeArr!=null&&KMLikeArr.length>0)||(KMLikeApproveArr!=null&&KMLikeApproveArr.length>0)){
 		if(KMLikeArr==null){
 			KMLikeArr=new Array();
 		}
@@ -513,9 +602,9 @@ function showsingleQuoteDiv(KMListsArr,KMLikeArr,KMLikeApproveArr,openid){
 			 			NoLikeArr.push(KMListsArr2[i]);
 			 		}
 			}
-	}else{
+	/* }else{
 			NoLikeArr=KMListsArr2;
-	}
+	} */
 	 var data=$.merge($.merge(ApproveArr, LikeArr), NoLikeArr);   
 	 var html="";
 	 for(var i=0;i<data.length;i++){
