@@ -38,6 +38,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
 import com.nkang.kxmoment.baseobject.ArticleMessage;
+import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.baseobject.QuoteVisit;
 import com.nkang.kxmoment.baseobject.ShortNews;
 import com.nkang.kxmoment.baseobject.BillOfSell;
@@ -1057,6 +1058,36 @@ public class MongoDBBasic {
 		catch(Exception e){
 			log.info("saveUserKM--" + e.getMessage());
 		}
+		return ret;
+	}
+	public static boolean saveUserAllKM(String openid){
+		Boolean ret = false;
+		mongoDB = getMongoDB();
+		List<PlasticItem> list = PlasticItemService.findList(1, 999);
+		HashSet<String> kmSets = new HashSet<String>();
+    	HashSet<String> kmApproveSets = new HashSet<String>();
+		for(PlasticItem temp:list){
+			kmSets.add(temp.getItemNo());
+		}
+		BasicDBObject doc = new BasicDBObject();  
+		DBObject update = new BasicDBObject();
+	    update.put("kmLists",kmSets);
+	    update.put("kmApproveLists",kmApproveSets);
+    	doc.put("$set", update);  
+		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
+        ret = true;
+		return ret;
+	}
+	public static boolean saveUserNoKM(String openid){
+		Boolean ret = false;
+		mongoDB = getMongoDB();
+		BasicDBObject doc = new BasicDBObject();  
+		DBObject update = new BasicDBObject();
+		HashSet<String> kmSets = new HashSet<String>();
+	    update.put("kmLists",kmSets);
+    	doc.put("$set", update);  
+		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
+        ret = true;
 		return ret;
 	}
 	public static boolean saveUserKM(String openid,String kmItem,String flag){
