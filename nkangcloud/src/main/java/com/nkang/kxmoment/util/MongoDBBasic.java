@@ -2991,6 +2991,19 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
 				return dbuser;
 		}
+		public static String getImgPicByRealName(String realName){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("Teamer.realName", realName);
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("HeadUrl",query);
+			if(dbuser.isEmpty()){
+				return "";
+			}
+			else{
+				return dbuser.get(0);
+			}
+		}
 		/*
 		 * Panda
 		 */
@@ -4415,6 +4428,65 @@ public class MongoDBBasic {
 		
 		return ret;
 	}
+	public static List<Visited> getSharedCustomer(String openid,String date,String xsdb){
+		List<Visited> sharedCustomer=new ArrayList<Visited>();
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		try {
+			DBObject query = new BasicDBObject();
+			query.put("openid", openid);
+			query.put("date", date);
+			query.put("pageName", "quoteDetailExternal");
+			DBObject visited = mongoDB.getCollection(collectionVisited)
+				.findOne(query);
+			Visited v;
+			if (visited != null) {
+				if(visited.get("sharedList") != null){
+					BasicDBList hist = (BasicDBList) visited.get("sharedList");
+					Object[] slObjects = hist.toArray();
+					for (Object dbobj : slObjects) {
+						if (dbobj instanceof String) {
+							System.out.println("xsdb1===="+xsdb+"customer1===="+(String) dbobj);
+							if(isCustomer(xsdb,(String) dbobj)){
+								System.out.println("is Customer=======");
+								v=new Visited();
+								v.setImgUrl(getImgPicByRealName((String) dbobj));
+								v.setNickName((String) dbobj);
+								sharedCustomer.add(v);
+							}
+						}
+					}
+				}
+						
+			}
+		}catch (Exception e) {
+		}
+		return sharedCustomer;
+	}
+	public static boolean isCustomer(String xsdb,String customer){
+		boolean isCustomer=false;
+		if(mongoDB==null){
+			mongoDB = getMongoDB();
+		}
+		System.out.println("xsdb2===="+xsdb+"customer2===="+customer);
+		try{
+		DBObject query = new BasicDBObject();
+		query.put("Teamer.realName", customer);
+		query.put("Teamer.selfIntro", xsdb);
+		DBObject dbuser = mongoDB.getCollection(wechat_user).findOne(query);
+		if(dbuser!=null){
+			System.out.println("dbuser is not null");
+			isCustomer=true;
+		}
+		}
+		catch(Exception e)
+		{
+			
+		}
+		return isCustomer;
+	}
+	
 	public static String updateShared(String openid, String date,
 			String pageName, String imgUrl, String nickName,String imgUrl2, String nickName2) {
 		if (mongoDB == null) {

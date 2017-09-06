@@ -3026,9 +3026,9 @@ input[type="file"] {
 /* We add basic fieldset styling */
 /* line 359, ../../../.rbenv/versions/2.0.0-p195/lib/ruby/gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_forms.scss */
 fieldset {
-  border: solid 1px #dddddd;
+/*   border: solid 1px #dddddd;
   padding: 1.25em;
-  margin: 1.125em 0;
+  margin: 1.125em 0; */
 }
 /* line 221, ../../../.rbenv/versions/2.0.0-p195/lib/ruby/gems/2.0.0/gems/zurb-foundation-4.3.2/scss/foundation/components/_forms.scss */
 fieldset legend {

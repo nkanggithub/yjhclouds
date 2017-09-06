@@ -390,10 +390,10 @@ public class CoreService
 						}
 						
 						Article article4 = new Article();
-						article4.setTitle("U8登录");
+						article4.setTitle("客户报价访问统计");
 						article4.setDescription("My Personal Applications");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJXi&oid=00D90000000pkXM");
-						article4.setUrl("https://udh.yonyouup.com/login");
+						article4.setUrl("http://wonderfulcq.bceapp.com/mdm/CustomerVisit.jsp?UID=" + fromUserName);
 						articleList.add(article4);
 						
 						Article article5 = new Article();

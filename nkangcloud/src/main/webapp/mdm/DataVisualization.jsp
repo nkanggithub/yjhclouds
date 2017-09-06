@@ -762,7 +762,7 @@ var i=$(this).index();
 			cache : false,
 			success : function(data) {
 				if(data){
-					var sharedList="<div style='height:200px;overflow:scroll'>";
+					var sharedList="<div style='height:250px;overflow:scroll'>";
 					for(var i=0;i<data.length;i++){
 	  	        		sharedList+="<p style='width:100%;float:left;height:40px;line-height:40px;text-align: center;'>"+data[i]+"</p>";
 	  	        		}

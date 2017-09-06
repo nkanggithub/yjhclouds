@@ -205,7 +205,14 @@ public class QuotationController {
 		String date=MongoDBBasic.getLastestDate(-6).get(index);
 		return MongoDBBasic.getVisitedDetail(date,pn); 
 	}
-	
+	@RequestMapping("/getSharedCustomer")
+	public @ResponseBody List<Visited> getSharedCustomer(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="uid")String uid,@RequestParam(value="nickName")String nickName){
+
+		int index=Integer.parseInt(dateIndex);
+		String date=MongoDBBasic.getLastestDate(-6).get(index);
+		System.out.println("nickName========"+nickName);
+		return MongoDBBasic.getSharedCustomer(uid,date,nickName); 
+	}
 	@RequestMapping("/getVisitedAllDate")
 	public @ResponseBody List<String> getVisitedAllDate(){
 		
