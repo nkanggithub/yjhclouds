@@ -17,6 +17,7 @@ String uid = request.getParameter("UID");
 System.out.println("uid======"+uid);
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 String nickName=res.get("NickName");
+String imgUrl=res.get("HeadUrl");
 
 MongoDBBasic.addSkimNum();
 %> 
@@ -222,13 +223,37 @@ display:none;
     left: 20px;
 }
 .VNickName{
-    width: 30%;
+    /* width: 13%; */
     margin-left: 18%;
     height: 100%;
     font-size: 14px;
     line-height: 45px;
     float: left;
-        color: #9A9A9A;
+    color: #9A9A9A;
+    margin-right: 10px;
+}
+.VPhone{
+     width: 24%; 
+    /* margin-left: 18%; */
+    height: 100%;
+    font-size: 14px;
+    line-height: 45px;
+    float: left;
+    color: #9A9A9A;
+    margin-right: 10px;
+}
+.VCompany{
+	width: 40%;
+    /* margin-left: 18%; */
+    height: 100%;
+    font-size: 14px;
+    line-height: 45px;
+    float: left;
+    color: #9A9A9A;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .visitedNum{
     width: 47%;
@@ -269,13 +294,30 @@ background-color: white;
 
 </head>
 <body>
+<p style="position: absolute;right: 10px;top: 13px;font-size: 15px;">欢迎，<%=nickName%></p>
+<img src="<%=imgUrl%>" style="position: absolute;border-radius: 25px;height: 35px;width: 35px;right: 10px;top: 43px;">
+<select id="xsdbList" style="position: absolute;width: 25%;left: 20px;top: 110px;z-index: 1000;">												
+  <option value="">-请选择-</option>
+  <option value="oij7nt2wV7C_dYVLxJvFJgOG9GpQ">&nbsp;王素萍</option>
+  <option value="oij7nt60inaYfekRpCpSIVnhjwVU">&nbsp;邓立铭</option>
+  <option value="oij7nt0gk8vOYth0_0gzoLwg2YyU">&nbsp;胡贵花</option>
+  <option value="oij7nt82eNsDS6cYo_362sJIBtFs">&nbsp;罗成洪</option>
+  <option value="oij7nt-E02pgCKU2EfHGIAxOF5cA">&nbsp;罗浩</option>
+  <option value="oij7nt2EjSi-GPboZaaODgBfgNT8">&nbsp;陈博</option>
+  <option value="oij7ntyMv00uo_vwhNN5UM2b2uHY">&nbsp;段阳</option>
+  <option value="oij7nt_g_9Nk0AEfRm_pRiKbP1c4">&nbsp;郑仁利</option>
+  <option value="oij7nt9jFLpGhyvkk5BSBM9QThE4">&nbsp;罗斯威</option>
+  <option value="oij7ntyGSa-1ZH8qvv5ykfA5BwKA">&nbsp;温小兵</option>
+  <option value="oij7nt8-8xoKGXWQXoaOnIhT7fis">&nbsp;马家勇</option>
+  <option value="oij7ntxdF2qaQ8pirWJjVL9fI854">&nbsp;郝海涛</option>
+</select>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 	<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 	<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
 	<h2 style="color:#333;font-size:18px;padding:0px;padding-left:5px;font-weight:bold;margin-top:5px;font-family:HP Simplified, Arial, Sans-Serif !important;" class="clientName">永佳和塑胶有限公司</h2>
 <!-- 	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您 </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="" alt=""/>	 -->			
 </div>
-<div id="quoteVisited">
+<div id="quoteVisited" style="margin-top: 30px;">
 <div id="chart-container2"></div>
 <div class="visitedMenu">
     <p id="read" class="active">已读</p><p style="border:none;width:27%" id="dateDetail" style="border-left: none;width:20%;"></p>
@@ -302,6 +344,8 @@ var i=$(this).index();
 	  
     });
 	$(function(){
+		var commonUid='<%=uid%>';
+		var commonName='<%=nickName%>';
 		  FusionCharts.ready(function () {
 		        var estProcChart = new FusionCharts({
 		            type: 'errorline',
@@ -347,12 +391,12 @@ var i=$(this).index();
 				                                 <%  for(int j=0;j<dates.size();j++){ 
 					                            	 if(j==dates.size()-1){%>
 					                            	 {
-					                                     "value": "<%=MongoDBBasic.getSharedCustomer(uid, dates.get(j), nickName).size()%>",
+					                                     "value": "<%=MongoDBBasic.getVisitedCustomerByXSDB(uid, dates.get(j), nickName).size()%>",
 					                                     "errorvalue": ""
 					                                 }
 					                            	 <%}else{%>
 					                            	 {
-					                                     "value": "<%=MongoDBBasic.getSharedCustomer(uid, dates.get(j), nickName).size()%>",
+					                                     "value": "<%=MongoDBBasic.getVisitedCustomerByXSDB(uid, dates.get(j), nickName).size()%>",
 					                                     "errorvalue": ""
 					                                 },
 					                            <%}%>
@@ -371,6 +415,74 @@ var i=$(this).index();
 		  <%}%>
 	$("#chart-container2").show();
 	$("#chart-container2 circle").css("cursor","pointer");
+	$("#xsdbList").on("change",function(){
+		var openId=$(this).val();
+		commonUid=openId;
+		var nickName=$(this).find("option:selected").text().trim();
+		commonName=nickName;
+		console.log("openID--"+openId+"\n nickName--"+nickName);
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "../getSharedCustomerChart",
+			data:{
+				uid:openId,
+				nickName:nickName
+			},
+			cache : false,
+			success : function(data) {
+				FusionCharts.ready(function () {
+			        var estProcChart = new FusionCharts({
+			            type: 'errorline',
+			            renderAt: 'chart-container2',
+			            width: '380',
+			            height: '350',
+			            dataFormat: 'json',
+			            dataSource: {
+			                "chart": {
+			                    "theme": "fint",
+			                    "xaxisname": "",
+			                    "yaxisname": "",
+			                    "numberSuffix":"",
+			                    "caption": "胖和阅读统计",
+			                    "subcaption": "(最近七天访问量)",
+			                    "showvalues": "0",
+			                    "plottooltext": "$seriesname, $value",
+			                    //Error bar configuration
+			                    "halferrorbar": "0",
+			                    "errorBarColor": "#990000",
+			                    "errorBarAlpha": "50",
+			                    "errorBarThickness": "4",
+			                    "errorBarWidth": "8"
+			                },
+			                "categories": [
+			                    {
+			                        "category": [
+			                             <%  for(int i=0;i<dates.size();i++){ 
+			                            	 if(i==dates.size()-1){%>
+			                            	 { "label":" <%=dates.get(i)%>" }
+			                            	 <%}else{%>
+			                            { "label": "<%=dates.get(i)%>" },
+			                            <%}%>
+			                            <%}%>
+			                            
+			                        ]
+			                    }
+			                ],
+			                "dataset":[
+					                    {
+					                        "seriesname": "客户访问量统计",
+					                        "data": data
+					                    }
+					                ]
+			                	}
+			        }).render();
+			});
+		}
+		});
+			
+		
+	});
 	 $(document).on("click","#chart-container2 circle",function(){
 		 console.log("....."+$(this).index());
 		 var index=$(this).index();
@@ -380,11 +492,11 @@ var i=$(this).index();
 	 	 $.ajax({
 				type : "post",
 				async: false,
-				url : "../getSharedCustomer",
+				url : "../getVisitedCustomerByXSDB",
 				data:{
-					uid:'<%=uid %>',
+					uid:commonUid,
 					dateIndex:index,
-					nickName:'<%=nickName%>'
+					nickName:commonName
 				},
 				cache : false,
 				success : function(data) {
@@ -399,7 +511,7 @@ var i=$(this).index();
  					imgUrl=data[i].imgUrl;
 					if(imgUrl!="null")
 					{	 */
-						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p></div>";
+						html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p><p class='VPhone'>"+data[i].phone+"</p><p class='VCompany'>"+data[i].companyName+"</p></div>";
 						//html+="<div class='singleV'><img src='"+data[i].imgUrl+"' /><p class='VNickName'>"+data[i].nickName+"</p></div>";
 						
 					/* }; */

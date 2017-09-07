@@ -213,6 +213,29 @@ public class QuotationController {
 		System.out.println("nickName========"+nickName);
 		return MongoDBBasic.getSharedCustomer(uid,date,nickName); 
 	}
+	@RequestMapping("/getVisitedCustomerByXSDB")
+	public @ResponseBody List<Visited> getVisitedCustomerByXSDB(@RequestParam(value="dateIndex")String dateIndex,@RequestParam(value="uid")String uid,@RequestParam(value="nickName")String nickName){
+
+		int index=Integer.parseInt(dateIndex);
+		String date=MongoDBBasic.getLastestDate(-6).get(index);
+		System.out.println("nickName========"+nickName);
+		return MongoDBBasic.getVisitedCustomerByXSDB(uid,date,nickName); 
+	}
+	
+	@RequestMapping("/getSharedCustomerChart")
+	public @ResponseBody List<Map> getSharedCustomerChart(@RequestParam(value="uid")String uid,@RequestParam(value="nickName")String nickName){
+
+		List<String> dates=MongoDBBasic.getLastestDate(-6);
+		List<Map> dataList = new ArrayList<Map>();
+		Map<String, Object> data;
+		for(int i=0;i<dates.size();i++){
+		data = new HashMap<String, Object>();
+		data.put("value", MongoDBBasic.getVisitedCustomerByXSDB(uid,dates.get(i),nickName).size());
+		data.put("errorvalue", "");
+		dataList.add(data);
+		}
+		return dataList;
+	}
 	@RequestMapping("/getVisitedAllDate")
 	public @ResponseBody List<String> getVisitedAllDate(){
 		

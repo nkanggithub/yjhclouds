@@ -388,14 +388,14 @@ public class CoreService
 							article3.setUrl("http://"+Constants.baehost+"/admin/index.jsp?UID=" + fromUserName);
 							articleList.add(article3);
 						}
-						
+						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)||hardcodeUID2.equalsIgnoreCase(fromUserName)){
 						Article article4 = new Article();
-						article4.setTitle("客户报价访问统计");
+						article4.setTitle("我的客户管理");
 						article4.setDescription("My Personal Applications");
 						article4.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DmJXi&oid=00D90000000pkXM");
 						article4.setUrl("http://wonderfulcq.bceapp.com/mdm/CustomerVisit.jsp?UID=" + fromUserName);
 						articleList.add(article4);
-						
+						}
 						Article article5 = new Article();
 						article5.setTitle("U订货登录");
 						article5.setDescription("My Personal Applications");

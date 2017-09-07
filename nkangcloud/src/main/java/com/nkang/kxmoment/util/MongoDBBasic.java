@@ -2991,12 +2991,12 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
 				return dbuser;
 		}
-		public static String getImgPicByRealName(String realName){
+		public static String getFieldByRealName(String realName,String output){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
 			query.put("Teamer.realName", realName);
 			@SuppressWarnings("unchecked")
-			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("HeadUrl",query);
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct(output,query);
 			if(dbuser.isEmpty()){
 				return "";
 			}
@@ -4451,7 +4451,7 @@ public class MongoDBBasic {
 							if(isCustomer(xsdb,(String) dbobj)){
 								System.out.println("is Customer=======");
 								v=new Visited();
-								v.setImgUrl(getImgPicByRealName((String) dbobj));
+								v.setImgUrl(getFieldByRealName((String) dbobj,"HeadUrl"));
 								v.setNickName((String) dbobj);
 								sharedCustomer.add(v);
 							}
@@ -4463,6 +4463,23 @@ public class MongoDBBasic {
 		}catch (Exception e) {
 		}
 		return sharedCustomer;
+	}
+	public static List<Visited> getVisitedCustomerByXSDB(String openid,String date,String xsdb){
+		List<Visited> visitedCustomerByXSDB=new ArrayList<Visited>();
+		List<Visited> visitedCustomer=getVisitedDetail(date,"quoteDetailExternal");
+		Visited v;
+		for(int i=0;i<visitedCustomer.size();i++){
+		if(isCustomer(xsdb,visitedCustomer.get(i).getNickName())){
+			System.out.println("is Customer=======");
+			v=new Visited();
+			v.setImgUrl(getFieldByRealName(visitedCustomer.get(i).getNickName(),"HeadUrl"));
+			v.setCompanyName(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.companyName"));
+			v.setPhone(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.phone"));
+			v.setNickName(visitedCustomer.get(i).getNickName());
+			visitedCustomerByXSDB.add(v);
+			}
+		}
+		return visitedCustomerByXSDB;
 	}
 	public static boolean isCustomer(String xsdb,String customer){
 		boolean isCustomer=false;

@@ -8,6 +8,20 @@ public class Visited {
 	String imgUrl;
 	String nickName;
 	int sharedNum;
+	String phone;
+	String companyName;
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	public int getSharedNum() {
 		return sharedNum;
 	}
