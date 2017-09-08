@@ -3004,6 +3004,19 @@ public class MongoDBBasic {
 				return dbuser.get(0);
 			}
 		}
+		public static String getFieldByImg(String img,String output){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put("HeadUrl", img);
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct(output,query);
+			if(dbuser.isEmpty()){
+				return "";
+			}
+			else{
+				return dbuser.get(0);
+			}
+		}
 		/*
 		 * Panda
 		 */
@@ -4473,9 +4486,38 @@ public class MongoDBBasic {
 			System.out.println("is Customer=======");
 			v=new Visited();
 			v.setImgUrl(visitedCustomer.get(i).getImgUrl());
-			v.setCompanyName(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.companyName"));
-			v.setPhone(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.phone"));
-			v.setNickName(visitedCustomer.get(i).getNickName());
+			String nickName=visitedCustomer.get(i).getNickName();
+			String companyName="";
+			String phone="";
+			if("".equals(nickName)){
+				v.setNickName("N/A");
+				companyName=getFieldByImg(visitedCustomer.get(i).getImgUrl(),"Teamer.companyName");
+				phone=getFieldByImg(visitedCustomer.get(i).getImgUrl(),"Teamer.phone");
+				if("".equals(companyName)){
+					v.setCompanyName("N/A");
+				}else{
+			v.setCompanyName(companyName);}
+				if("".equals(phone)){
+					v.setPhone("N/A");
+				}else{
+			v.setPhone(phone);
+			}
+				}
+			else
+			{
+				v.setNickName(nickName);
+				companyName=getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.companyName");
+				phone=getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.phone");
+				if("".equals(companyName)){
+					v.setCompanyName("N/A");
+				}else{
+			v.setCompanyName(companyName);}
+				if("".equals(phone)){
+					v.setPhone("N/A");
+				}else{
+			v.setPhone(phone);
+			}
+			}
 			visitedCustomerByXSDB.add(v);
 			}
 		}
