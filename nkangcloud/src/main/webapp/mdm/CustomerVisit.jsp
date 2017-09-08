@@ -9,7 +9,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 
 <%	
-List<String> dates=MongoDBBasic.getLastestDate(-6);
+List<String> dates=MongoDBBasic.getLastestDate(-14);
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
@@ -18,7 +18,7 @@ System.out.println("uid======"+uid);
 HashMap<String, String> res=MongoDBBasic.getWeChatUserFromOpenID(uid);
 String nickName=res.get("NickName");
 String imgUrl=res.get("HeadUrl");
-
+boolean isInternalSeniorMgt=MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt");
 MongoDBBasic.addSkimNum();
 %> 
 <!DOCTYPE html>
@@ -223,7 +223,7 @@ display:none;
     left: 20px;
 }
 .VNickName{
-    /* width: 13%; */
+width: 15%;
     margin-left: 18%;
     height: 100%;
     font-size: 14px;
@@ -231,6 +231,9 @@ display:none;
     float: left;
     color: #9A9A9A;
     margin-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .VPhone{
      width: 24%; 
@@ -243,7 +246,7 @@ display:none;
     margin-right: 10px;
 }
 .VCompany{
-	width: 40%;
+	width: 35%;
     /* margin-left: 18%; */
     height: 100%;
     font-size: 14px;
@@ -287,6 +290,127 @@ margin-bottom: 5px;
 {
 background-color: white;
 }
+/*ajax*/
+
+.sk-circle {
+  margin: 40px auto;
+  width: 40px;
+  height: 40px;
+      position: absolute;
+    top: 38%;
+    left: 45%;
+    display:none;
+     }
+  .sk-circle .sk-child {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .sk-circle .sk-child:before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 15%;
+    background-color: white;
+    border-radius: 100%;
+    -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
+            animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }
+  .sk-circle .sk-circle2 {
+    -webkit-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+            transform: rotate(30deg); }
+  .sk-circle .sk-circle3 {
+    -webkit-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+            transform: rotate(60deg); }
+  .sk-circle .sk-circle4 {
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg); }
+  .sk-circle .sk-circle5 {
+    -webkit-transform: rotate(120deg);
+        -ms-transform: rotate(120deg);
+            transform: rotate(120deg); }
+  .sk-circle .sk-circle6 {
+    -webkit-transform: rotate(150deg);
+        -ms-transform: rotate(150deg);
+            transform: rotate(150deg); }
+  .sk-circle .sk-circle7 {
+    -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+            transform: rotate(180deg); }
+  .sk-circle .sk-circle8 {
+    -webkit-transform: rotate(210deg);
+        -ms-transform: rotate(210deg);
+            transform: rotate(210deg); }
+  .sk-circle .sk-circle9 {
+    -webkit-transform: rotate(240deg);
+        -ms-transform: rotate(240deg);
+            transform: rotate(240deg); }
+  .sk-circle .sk-circle10 {
+    -webkit-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+            transform: rotate(270deg); }
+  .sk-circle .sk-circle11 {
+    -webkit-transform: rotate(300deg);
+        -ms-transform: rotate(300deg);
+            transform: rotate(300deg); }
+  .sk-circle .sk-circle12 {
+    -webkit-transform: rotate(330deg);
+        -ms-transform: rotate(330deg);
+            transform: rotate(330deg); }
+  .sk-circle .sk-circle2:before {
+    -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s; }
+  .sk-circle .sk-circle3:before {
+    -webkit-animation-delay: -1s;
+            animation-delay: -1s; }
+  .sk-circle .sk-circle4:before {
+    -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s; }
+  .sk-circle .sk-circle5:before {
+    -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s; }
+  .sk-circle .sk-circle6:before {
+    -webkit-animation-delay: -0.7s;
+            animation-delay: -0.7s; }
+  .sk-circle .sk-circle7:before {
+    -webkit-animation-delay: -0.6s;
+            animation-delay: -0.6s; }
+  .sk-circle .sk-circle8:before {
+    -webkit-animation-delay: -0.5s;
+            animation-delay: -0.5s; }
+  .sk-circle .sk-circle9:before {
+    -webkit-animation-delay: -0.4s;
+            animation-delay: -0.4s; }
+  .sk-circle .sk-circle10:before {
+    -webkit-animation-delay: -0.3s;
+            animation-delay: -0.3s; }
+  .sk-circle .sk-circle11:before {
+    -webkit-animation-delay: -0.2s;
+            animation-delay: -0.2s; }
+  .sk-circle .sk-circle12:before {
+    -webkit-animation-delay: -0.1s;
+            animation-delay: -0.1s; }
+
+@-webkit-keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes sk-circleBounceDelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
 </style>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.js"></script>
     	<script type="text/javascript" src="../Jsp/JS/fusioncharts.powercharts.js"></script>
@@ -294,8 +418,24 @@ background-color: white;
 
 </head>
 <body>
+<div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
+ <div class="sk-circle">
+      <div class="sk-circle1 sk-child"></div>
+      <div class="sk-circle2 sk-child"></div>
+      <div class="sk-circle3 sk-child"></div>
+      <div class="sk-circle4 sk-child"></div>
+      <div class="sk-circle5 sk-child"></div>
+      <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+      <div class="sk-circle8 sk-child"></div>
+      <div class="sk-circle9 sk-child"></div>
+      <div class="sk-circle10 sk-child"></div>
+      <div class="sk-circle11 sk-child"></div>
+      <div class="sk-circle12 sk-child"></div>
+    </div>
 <p style="position: absolute;right: 10px;top: 13px;font-size: 15px;">欢迎，<%=nickName%></p>
 <img src="<%=imgUrl%>" style="position: absolute;border-radius: 25px;height: 35px;width: 35px;right: 10px;top: 43px;">
+<%if(isInternalSeniorMgt==true) { %> 
 <select id="xsdbList" style="position: absolute;width: 25%;left: 20px;top: 110px;z-index: 1000;">												
   <option value="">-请选择-</option>
   <option value="oij7nt2wV7C_dYVLxJvFJgOG9GpQ">&nbsp;王素萍</option>
@@ -311,6 +451,7 @@ background-color: white;
   <option value="oij7nt8-8xoKGXWQXoaOnIhT7fis">&nbsp;马家勇</option>
   <option value="oij7ntxdF2qaQ8pirWJjVL9fI854">&nbsp;郝海涛</option>
 </select>
+<%} %>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
 	<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000DkptH&amp;oid=00D90000000pkXM" alt="Logo" class="HpLogo" style="display:inline !important;height:35px !important;width:auto !important;float:none;padding:0px;vertical-align:bottom;padding-bottom:10px;">
 	<span class="clientSubName" style="font-size:12px;padding-left:7px;color:#333;">市场如水 企业如舟</span>
@@ -331,6 +472,13 @@ background-color: white;
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <script src="../Jsp/JS/pizzaChart/js/snap.svg.js"></script>
 <script>
+$(document).ajaxStart(function () {
+	$(".sk-circle").show();
+	$("#shadow").show();
+    }).ajaxStop(function () {
+    	$(".sk-circle").hide();
+    	$("#shadow").hide();
+    });
     $(window).load(function() {
 $("svg path").live("click",function(){
 var i=$(this).index();
@@ -360,7 +508,7 @@ var i=$(this).index();
 		                    "yaxisname": "",
 		                    "numberSuffix":"",
 		                    "caption": "胖和阅读统计",
-		                    "subcaption": "(最近七天访问量)",
+		                    "subcaption": "(最近十五天访问量)",
 		                    "showvalues": "0",
 		                    "plottooltext": "$seriesname, $value",
 		                    //Error bar configuration
@@ -445,7 +593,7 @@ var i=$(this).index();
 			                    "yaxisname": "",
 			                    "numberSuffix":"",
 			                    "caption": "胖和阅读统计",
-			                    "subcaption": "(最近七天访问量)",
+			                    "subcaption": "(最近十五天访问量)",
 			                    "showvalues": "0",
 			                    "plottooltext": "$seriesname, $value",
 			                    //Error bar configuration
