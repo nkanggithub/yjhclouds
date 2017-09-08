@@ -4472,7 +4472,7 @@ public class MongoDBBasic {
 		if(isCustomer(xsdb,visitedCustomer.get(i).getNickName())){
 			System.out.println("is Customer=======");
 			v=new Visited();
-			v.setImgUrl(getFieldByRealName(visitedCustomer.get(i).getNickName(),"HeadUrl"));
+			v.setImgUrl(visitedCustomer.get(i).getImgUrl());
 			v.setCompanyName(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.companyName"));
 			v.setPhone(getFieldByRealName(visitedCustomer.get(i).getNickName(),"Teamer.phone"));
 			v.setNickName(visitedCustomer.get(i).getNickName());
