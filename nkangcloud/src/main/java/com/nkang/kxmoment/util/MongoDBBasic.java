@@ -2255,7 +2255,7 @@ public class MongoDBBasic {
 				/*sort.put("Teamer.registerDate", 1);
 				sort.put("IsActive", -1);
 				sort.put("Created", 1);*/
-				queryresults = mongoDB.getCollection(wechat_user).find().limit(500).sort(sort);
+				queryresults = mongoDB.getCollection(wechat_user).find().limit(1000).sort(sort);
 			}
             if (null != queryresults) {
             	while(queryresults.hasNext()){
