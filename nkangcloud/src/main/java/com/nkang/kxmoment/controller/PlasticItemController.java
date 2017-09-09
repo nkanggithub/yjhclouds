@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nkang.kxmoment.baseobject.PlasticItem;
 import com.nkang.kxmoment.service.PlasticItemService;
 import com.nkang.kxmoment.util.MongoClient;
+import com.nkang.kxmoment.util.MongoDBBasic;
 
 /**
  * 塑胶库存信息 Controller
@@ -99,7 +100,24 @@ public class PlasticItemController {
 		respParms.put("data", item);
 		return respParms;
 	}
-	
+	@RequestMapping("/updatePlasticItemType")
+	@ResponseBody
+	public boolean updatePlasticItemType(HttpServletRequest request, HttpServletResponse response, String itemNo,String type){
+		boolean result = MongoDBBasic.updatePlasticItemType(type,itemNo);
+		return result;
+	}
+	@RequestMapping("/getPlasticItemTypeByNo")
+	@ResponseBody
+	public String getPlasticItemTypeByNo(HttpServletRequest request, HttpServletResponse response, String itemNo){
+		String result = MongoDBBasic.getPlasticItemTypeByNo(itemNo);
+		return result;
+	}
+	@RequestMapping("/saveUserAllKMByItemType")
+	@ResponseBody
+	public String saveUserAllKMByItemType(HttpServletRequest request, HttpServletResponse response, String openid,String type){
+		String result = MongoDBBasic.saveUserAllKMByItemType(openid,type);
+		return result;
+	}
 	private void allowCrossDomain(HttpServletRequest request, HttpServletResponse response) {
 		// 跨域访问设置
 		response.setHeader("Access-Control-Allow-Origin", "*");

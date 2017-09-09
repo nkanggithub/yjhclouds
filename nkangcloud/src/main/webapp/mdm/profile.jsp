@@ -1306,7 +1306,6 @@ function showRegister(){
 				if (jsons.results.length > 0) {
 					if(jsons.results[0].realName !="未注册"){
 						realName=jsons.results[0].realName; 
-						 $(".registerArea").show();
 						 $("#validateCode").val("");
 					}
 					
@@ -1326,6 +1325,7 @@ function showRegister(){
 				$("#phone").val(phone);
 				$("#email").val(email);
 				$("#selfIntro").val(selfIntro);
+				 $(".registerArea").show();
 			} 
 
 
@@ -1398,8 +1398,6 @@ function returnRegisterBack()
 			 swal("注册失败!", "请输入正确的电话信息！", "error");
 		 }else if (!emailFilter.test(email)){
 			 swal("注册失败!", "请输入正确的邮箱信息！", "error");
-		 }else if (selfIntro==''){
-			 swal("注册失败!", "请输入您的个人介绍信息！", "error");
 		 }else if(validateCode==""||validateCode!=code){
 				 swal("注册失败!", "请输入验证码或验证码不正确！", "error");
 		 }else{

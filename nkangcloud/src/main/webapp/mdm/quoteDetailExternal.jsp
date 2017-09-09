@@ -70,6 +70,20 @@ if(null != user) {
 	out.print("用户不同意授权,未获取到用户信息！");
 	return;
 }
+String openIdIsExist=MongoDBBasic.getFieldByField("NickName",name,"OpenID");
+String show="none";
+if("".equals(openIdIsExist)){
+	System.out.println("...nickname is null");
+	if("".equals(MongoDBBasic.getFieldByField("Teamer.realName",name,"OpenID"))){
+		System.out.println("...realname is null");
+	show="block";
+	}
+}
+String enableToApply="false";
+String isRegistered=MongoDBBasic.getFieldByField("OpenID",user.getOpenId(),"IsRegistered");
+if("true".equals(isRegistered)){
+	enableToApply="true";
+}
 %>
 <!Doctype html>
 <html>
@@ -343,7 +357,9 @@ $(function(){
 		$(this).removeClass("editBtn");
 		$(this).remove(".edit");
 	}); 
+	var enableToApply=<%=enableToApply%>;
 	$(".singleQuote").live("swipeleft",function(){
+		if("true"==enableToApply){
 		$(this).css("overflow","visible");
 		$(this).addClass("editBtn");
 		var tagNum=$(this).find('span.tag').length;
@@ -360,7 +376,7 @@ $(function(){
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
-	});
+		}});
 });
 function ToCharPage(item){
 	//location.href="priceCharts.jsp?itemNo="+item;
@@ -609,6 +625,8 @@ function getAllDatas(){
 </script>
 </head>
 <body>
+<div id="reminder" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.8);z-index: 9999;display:<%=show%>">
+<img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmW6&amp;oid=00D90000000pkXM" alt="" style="width: 80%;margin-left: 10%;margin-top: 80px;"></div>
 <div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >
 <img style="position:absolute;left:5%;top:5%;width:90%;height:90%;" src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EAc05&oid=00D90000000pkXM" alt=""/>
  <img class="picClose" style="position:absolute;top:10px;right:10px;width:15px;height:auto;" src="../MetroStyleFiles/Close2.png" alt=""/> 

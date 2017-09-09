@@ -84,6 +84,7 @@ public class MongoDBBasic {
 	private static String collectionOrderNopay = "OrderNopay";
 	private static String collectionQuotationList = "QuotationList";
 	private static String collectionVisited = "Visited";
+	private static String Plastic_Item="PlasticItem";
 	public static DB getMongoDB(){
 		if(mongoDB != null){
 			return mongoDB;
@@ -847,6 +848,8 @@ public class MongoDBBasic {
             		dbo.put("Teamer.realName", teamer.getRealName()); 
         			dbo.put("Teamer.email", teamer.getEmail());
         			dbo.put("Teamer.phone", teamer.getPhone());
+        			dbo.put("Teamer.phone", teamer.getPhone());
+        			dbo.put("IsRegistered", "true");
         			//dbo.put("Teamer.role", teamer.getRole());
         			//dbo.put("Teamer.selfIntro", teamer.getSelfIntro());
         			//dbo.put("Teamer.suppovisor", teamer.getSuppovisor()); 
@@ -1076,6 +1079,26 @@ public class MongoDBBasic {
     	doc.put("$set", update);  
 		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
         ret = true;
+		return ret;
+	}
+	
+	public static String saveUserAllKMByItemType(String openid,String type){
+		String ret = "false";
+		mongoDB = getMongoDB();
+		@SuppressWarnings("unchecked")
+		List<String> originlist=queryUserKM(openid).getKmLists();
+		List<String> list=getItemNoByType(type);
+		originlist.addAll(list);
+		HashSet<String> kmSets = new HashSet<String>();
+		for(String temp:originlist){
+			kmSets.add(temp);
+		}
+		BasicDBObject doc = new BasicDBObject();  
+		DBObject update = new BasicDBObject();
+	    update.put("kmLists",kmSets);
+    	doc.put("$set", update);  
+		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
+        ret = "true";
 		return ret;
 	}
 	public static boolean saveUserNoKM(String openid){
@@ -2991,10 +3014,24 @@ public class MongoDBBasic {
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("Teamer.realName",query);
 				return dbuser;
 		}
+		
 		public static String getFieldByRealName(String realName,String output){
 			mongoDB = getMongoDB();
 			DBObject query = new BasicDBObject();
 			query.put("Teamer.realName", realName);
+			@SuppressWarnings("unchecked")
+			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct(output,query);
+			if(dbuser.isEmpty()){
+				return "";
+			}
+			else{
+				return dbuser.get(0);
+			}
+		}
+		public static String getFieldByField(String dbField,String param,String output){
+			mongoDB = getMongoDB();
+			DBObject query = new BasicDBObject();
+			query.put(dbField, param);
 			@SuppressWarnings("unchecked")
 			List<String> dbuser = mongoDB.getCollection(wechat_user).distinct(output,query);
 			if(dbuser.isEmpty()){
@@ -4340,6 +4377,50 @@ public class MongoDBBasic {
 			log.info("saveUserKM--" + e.getMessage());
 		}
 		return ret;
+	}
+	public static boolean updatePlasticItemType(String type,String itemNo){
+		mongoDB = getMongoDB();
+		Boolean ret = false;
+	    try{
+            BasicDBObject doc = new BasicDBObject();
+			DBObject update = new BasicDBObject();
+			update.put("ItemType", type);
+			doc.put("$set", update); 
+			WriteResult wr = mongoDB.getCollection(Plastic_Item).update(new BasicDBObject().append("itemNo", itemNo), doc);     
+			ret = true;
+            
+	    }
+		catch(Exception e){
+			log.info("saveUserKM--" + e.getMessage());
+		}
+		return ret;
+	}
+	public static String getPlasticItemTypeByNo(String itemNo){
+	    	mongoDB = getMongoDB();
+	    	String type="";
+		    try{
+		    	DBCursor dbcur = mongoDB.getCollection(Plastic_Item).find(new BasicDBObject().append("itemNo", itemNo));
+				if(dbcur!=null){
+					while (dbcur.hasNext()) {
+						DBObject objam = dbcur.next();
+						type=objam.get("ItemType") == null ? "" : objam.get("ItemType").toString();
+					}
+				}
+            
+	    }
+		catch(Exception e){
+			log.info("saveUserKM--" + e.getMessage());
+		
+		}
+		return type;
+	}
+	public static List<String> getItemNoByType(String type){
+		mongoDB = getMongoDB();
+		DBObject query = new BasicDBObject();
+		query.put("ItemType", type);
+		@SuppressWarnings("unchecked")
+		List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("itemNo",query);
+			return dbuser;
 	}
 /*	public static boolean updateVisitedHistory(String num,String openId){
 		mongoDB = getMongoDB();

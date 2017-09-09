@@ -11,7 +11,6 @@
 String AccessKey = RestUtils.callGetValidAccessKey();
 List<PlasticItem> ql=PlasticItemService.findList(1,9999);
 String uid = request.getParameter("UID");
-
 MongoDBBasic.updateUser(uid);
 int special=0;
 if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){special=1;}
@@ -141,11 +140,11 @@ if($("#isSpecial").val()=="2"&&status=="1"){
 	$(this).css("overflow","visible");
 	$(this).addClass("editBtn");
 	$(this).addClass("specialEditBtn");
-$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p></div>");}
+$(this).append("<div class='edit specialEdit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p style='background-color:orange;' onclick='approve(this)'><img src='../mdm/images/approve.png' slt='' />批准</p><p  style='background-color:green;' onclick='classify(this)'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmkI&oid=00D90000000pkXM' slt='' />分类</p></div>");}
 else if($("#isSpecial").val()=="1"||$("#isSpecial").val()=="2"){
 	$(this).css("overflow","visible");
 	$(this).addClass("editBtn");
-	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
+	$(this).append("<div class='edit'><p onclick='edit(this)'><img src='../mdm/images/edit.png' slt='' />编辑</p><p  style='background-color:green;' onclick='classify(this)'><img src='https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmkI&oid=00D90000000pkXM' slt='' />分类</p></div>");
 }/* 
 else if($("#isSpecial").val()=="0"){
 	$(this).addClass("noEditBtn");
@@ -186,6 +185,92 @@ function getInventoryDetail(itemNo)
 			 }
 		 }
 	});
+	}
+
+function getItemType(){
+	var itemType="";
+$(".typeInput input:checkbox").each(function(){
+if($(this).is(":checked")){
+	itemType+=$(this).siblings().val()+"|";
+}
+});
+itemType=itemType.substring(0,itemType.length-1);
+return itemType;
+};
+function isInclude(originalType,type){
+	if(""!=originalType){
+		console.log("---------"+originalType.indexOf(type));
+	if(originalType.indexOf(type)>=0){
+		 return "checked='checked'";
+	 }
+	else{
+		return "";
+	}
+	}else
+		{
+		return "";
+		}
+	
+}
+	function classify(obj){
+		var itemNo=$(obj).parent(".edit").siblings(".firstLayer").children(".quoteTitle").find("#item").text();
+		var originalType="";
+		var formText="";
+		 $.ajax({
+			 url:'../PlasticItem/getPlasticItemTypeByNo',
+			 type:"POST",
+			 data:{
+				 itemNo:itemNo
+			 },
+			 success:function(data){
+					 originalType=data;
+						formText="<div class='typePanel'>"
+
+							+"<div class='typeSingle'><div class='typeInput'><input type='checkbox' "+isInclude(originalType,"yj")+" class='typeBox' /><input type='hidden' value='yj' /></div><p class='typeText'>硬胶</p></div>"
+
+							+"<div class='typeSingle'><div class='typeInput'><input type='checkbox'"+isInclude(originalType,"rj")+"  class='typeBox' /><input type='hidden' value='rj' /></div><p class='typeText'>软胶</p></div>"
+
+							+"<div class='typeSingle'><div class='typeInput'><input type='checkbox'"+isInclude(originalType,"gcsl")+"  class='typeBox' /><input type='hidden' value='gcsl' /></div><p class='typeText'>工程塑料</p></div>"
+
+							+"<div class='typeSingle'><div class='typeInput'><input type='checkbox'"+isInclude(originalType,"hot")+"  class='typeBox' /><input type='hidden' value='hot' /></div><p class='typeText'>热门牌号</p></div>"
+
+							+"<div class='typeSingle'><div class='typeInput'><input type='checkbox'"+isInclude(originalType,"other")+"  class='typeBox' /><input type='hidden' value='other' /></div><p class='typeText'>其他</p></div>"
+
+							+"</div>";
+						swal({  
+					        title:"编辑分类",  
+					        text:formText,
+					        html:"true",
+					        showConfirmButton:"true", 
+							showCancelButton: true,   
+							closeOnConfirm: false,  
+					        confirmButtonText:"提交",  
+					        cancelButtonText:"取消",
+					        animation:"slide-from-top"  
+					      }, 
+							function(inputValue){
+								if (inputValue === false){ return false; }
+								else{
+									var itemType=getItemType();
+									 $.ajax({
+										 url:'../PlasticItem/updatePlasticItemType',
+										 type:"POST",
+										 data:{
+											 itemNo:itemNo,
+											 type:itemType
+										 },
+										 success:function(data){
+											 if(data){
+												 swal("Success", "牌号"+itemNo+"分类更新成功", "success");
+											 }
+										 }
+									 });
+								}}
+					      );
+			 }
+		 });
+
+
 	}
 function approve(obj)
 {
@@ -364,6 +449,7 @@ function edit(obj)
 	}
 window.edit=edit;
 window.approve=approve;
+window.classify=classify;
 window.getInventoryDetail=getInventoryDetail;
 function textClear(obj){
 	if($(obj).val()=="/"){
@@ -385,42 +471,74 @@ window.focusThis=focusThis;
 <!--	<link href='css/horsey.css' rel='stylesheet' type='text/css' />
 	<link href='css/example.css' rel='stylesheet' type='text/css' />-->
 <style>
+.typePanel{
+	width: 90%;
+    margin-left: 5%;
+    height: 150px;
+}
+.typeSingle{
+	width: 40%;
+    height: 30px;
+    float: left;
+    text-align: center;
+    margin-left: 10%;
+}
+.typeInput
+{
+	width: 20px;
+    float: left;
+}
+.typeBox
+{
+display: block!important;
+    height: 20px!important;
+    width: 20px!important;
+    margin: 0!important;
+    padding: 0!important;
+	}
+.typeText
+{
+width: 70%!important;
+float: left!important;
+text-align: left!important;
+margin-left: 10px!important;
+}
 .noEdit{width: 60px!important; right: -60px!important;}
 .noEdit p{ right: -60px!important;width:100%!important;}
 .noEditBtn{left:-60px!important;}
 .edit
-{width: 60px;
+{width: 120px;
     height: 90px;
     color: white;
     text-align: center;
     position: absolute;
     top: 0px;
-    right: -60px;
+    right: -120px;
 	font-size:14px;
     background: #D3D3D3;
     border-bottom: 1px solid black;}
-    .specialEdit{width:120px;right:-120px;}
+    .specialEdit{width:180px;right:-180px;}
     .specialEdit img,.edit img {
     width:25px;height:auto;position:absolute;top:15px;margin-left: 2px;
     }
 	.edit p
-	{width:100%;
+	{width:50%;
 	height:100%;
 	line-height:130px;
 	float:left;
 	}
 	.specialEdit p
-	{width:50%;
+	{width:33.3%;
 	float:left;
 	height:100%;}
 .editBtn
 {
 position: relative;
-    left: -60px;
+    left: -120px;
 	}
 .specialEditBtn
 {
-    left: -120px;
+    left: -180px;
 	}	
 *{margin:0;padding:0;}
 .singleQuote
