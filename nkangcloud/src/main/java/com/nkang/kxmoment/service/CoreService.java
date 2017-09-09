@@ -243,6 +243,13 @@ public class CoreService
 					article.setUrl("http://mp.weixin.qq.com/s/KtlqEakeUhJuAun5sbm6og");
 					articleList.add(article);
 
+					Article registerRN = new Article();
+					registerRN.setTitle("立即注册");
+					registerRN.setDescription("立即注册");
+					registerRN.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmlu&oid=00D90000000pkXM");
+					registerRN.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
+					articleList.add(registerRN);
+					
 					Article articleculture = new Article();
 					articleculture.setTitle("企业文化");
 					articleculture.setDescription("企业文化");
@@ -499,8 +506,8 @@ public class CoreService
 						articleList.add(article);
 
 						Article registerRN = new Article();
-						registerRN.setTitle("立即注册");
-						registerRN.setDescription("立即注册");
+						registerRN.setTitle("个人中心");
+						registerRN.setDescription("个人中心");
 						registerRN.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmlu&oid=00D90000000pkXM");
 						registerRN.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
 						articleList.add(registerRN);
