@@ -1396,8 +1396,6 @@ function returnRegisterBack()
 			 swal("注册失败!", "请输入正确的姓名信息！", "error");
 		 }else if (!phoneFilter.test(phone)){
 			 swal("注册失败!", "请输入正确的电话信息！", "error");
-		 }else if (!emailFilter.test(email)){
-			 swal("注册失败!", "请输入正确的邮箱信息！", "error");
 		 }else if(validateCode==""||validateCode!=code){
 				 swal("注册失败!", "请输入验证码或验证码不正确！", "error");
 		 }else{
@@ -1890,10 +1888,10 @@ function getNowFormatDate() {
 <p class="icon">  <i class="fa fa-envelope-o fa-lg" style="font-size:21px;"></i></p>
 <p class="inputArea"><input id="email" type="text" placeholder="请输入你的邮箱地址"/> </p>
 </div>
-<div class="singleInput">
+<!-- <div class="singleInput">
 <p class="icon">  <i class="fa fa-pencil fa-lg" style="font-size:21px;"></i></p>
 <p class="inputArea"><input id="selfIntro" type="text" placeholder="请输入你的个人简介"/> </p>
-</div>
+</div> -->
 </div>
 <div class="register_btn" onclick="updateInfo()">提交</div>
   </div>
