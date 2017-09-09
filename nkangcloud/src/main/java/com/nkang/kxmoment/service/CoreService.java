@@ -247,7 +247,7 @@ public class CoreService
 					registerRN.setTitle("立即注册");
 					registerRN.setDescription("立即注册");
 					registerRN.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmlu&oid=00D90000000pkXM");
-					registerRN.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
+					registerRN.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID="+fromUserName);
 					articleList.add(registerRN);
 					
 					Article articleculture = new Article();
@@ -516,7 +516,7 @@ public class CoreService
 						registerRN2.setTitle("立即注册");
 						registerRN2.setDescription("立即注册");
 						registerRN2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmlu&oid=00D90000000pkXM");
-						registerRN2.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
+						registerRN2.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID="+fromUserName);
 						articleList.add(registerRN);
 						
 						Article articleculture = new Article();
