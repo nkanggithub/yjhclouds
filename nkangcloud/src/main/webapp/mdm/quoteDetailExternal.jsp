@@ -357,7 +357,7 @@ $(function(){
 		$(this).removeClass("editBtn");
 		$(this).remove(".edit");
 	}); 
-	var enableToApply=<%=enableToApply%>;
+	var enableToApply='<%=enableToApply%>';
 	$(".singleQuote").live("swipeleft",function(){
 		if("true"==enableToApply){
 		$(this).css("overflow","visible");
@@ -376,7 +376,11 @@ $(function(){
 		}
 		$(this).siblings().removeClass("editBtn");
 		$(this).siblings().remove(".edit");
-		}});
+		}
+		else{
+			swal("你没有权限哦", "只有注册了才能访问申请报价噢！", "error");
+		}
+			});
 });
 function ToCharPage(item){
 	//location.href="priceCharts.jsp?itemNo="+item;
