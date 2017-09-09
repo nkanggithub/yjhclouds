@@ -512,6 +512,13 @@ public class CoreService
 						registerRN.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
 						articleList.add(registerRN);
 						
+						Article registerRN2 = new Article();
+						registerRN2.setTitle("立即注册");
+						registerRN2.setDescription("立即注册");
+						registerRN2.setPicUrl("https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmlu&oid=00D90000000pkXM");
+						registerRN2.setUrl("http://wonderfulcq.bceapp.com/mdm/profile.jsp?UID"+fromUserName);
+						articleList.add(registerRN);
+						
 						Article articleculture = new Article();
 						articleculture.setTitle("企业文化");
 						articleculture.setDescription("企业文化");
