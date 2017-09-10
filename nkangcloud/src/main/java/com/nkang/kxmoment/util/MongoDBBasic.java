@@ -1087,15 +1087,37 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		@SuppressWarnings("unchecked")
 		List<String> originlist=queryUserKM(openid).getKmLists();
+		System.out.println("search type begin...");
 		List<String> list=getItemNoByType(type);
+		System.out.println("search type end...");
 		originlist.addAll(list);
 		HashSet<String> kmSets = new HashSet<String>();
 		for(String temp:originlist){
 			kmSets.add(temp);
 		}
+		for(String p:kmSets){
+			System.out.println("final item--"+p);
+		}
 		BasicDBObject doc = new BasicDBObject();  
 		DBObject update = new BasicDBObject();
 	    update.put("kmLists",kmSets);
+    	doc.put("$set", update);  
+		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
+        ret = "true";
+		return ret;
+	}
+	public static String removeUserAllKMByItemType(String openid,String type){
+		String ret = "false";
+		mongoDB = getMongoDB();
+		@SuppressWarnings("unchecked")
+		List<String> originlist=queryUserKM(openid).getKmLists();
+		System.out.println("search type begin...");
+		List<String> list=getItemNoByType(type);
+		System.out.println("search type end...");
+		originlist.removeAll(list);
+		BasicDBObject doc = new BasicDBObject();  
+		DBObject update = new BasicDBObject();
+	    update.put("kmLists",originlist);
     	doc.put("$set", update);  
 		WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID",openid), doc);
         ret = "true";
@@ -4419,7 +4441,7 @@ public class MongoDBBasic {
 		DBObject query = new BasicDBObject();
 		query.put("ItemType", type);
 		@SuppressWarnings("unchecked")
-		List<String> dbuser = mongoDB.getCollection(wechat_user).distinct("itemNo",query);
+		List<String> dbuser = mongoDB.getCollection(Plastic_Item).distinct("itemNo",query);
 			return dbuser;
 	}
 /*	public static boolean updateVisitedHistory(String num,String openId){

@@ -112,10 +112,22 @@ public class PlasticItemController {
 		String result = MongoDBBasic.getPlasticItemTypeByNo(itemNo);
 		return result;
 	}
+	@RequestMapping("/getItemNoByType")
+	@ResponseBody
+	public List<String> getItemNoByType(HttpServletRequest request, HttpServletResponse response, String type){
+		List<String> result = MongoDBBasic.getItemNoByType(type);
+		return result;
+	}
 	@RequestMapping("/saveUserAllKMByItemType")
 	@ResponseBody
 	public String saveUserAllKMByItemType(HttpServletRequest request, HttpServletResponse response, String openid,String type){
 		String result = MongoDBBasic.saveUserAllKMByItemType(openid,type);
+		return result;
+	}
+	@RequestMapping("/removeUserAllKMByItemType")
+	@ResponseBody
+	public String removeUserAllKMByItemType(HttpServletRequest request, HttpServletResponse response, String openid,String type){
+		String result = MongoDBBasic.removeUserAllKMByItemType(openid,type);
 		return result;
 	}
 	private void allowCrossDomain(HttpServletRequest request, HttpServletResponse response) {
