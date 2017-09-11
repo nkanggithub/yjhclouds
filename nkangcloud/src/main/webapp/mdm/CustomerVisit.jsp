@@ -10,6 +10,7 @@
 
 <%	
 List<String> dates=MongoDBBasic.getLastestDate(-14);
+List<String> dates2=MongoDBBasic.getLastestDate(-2);
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
 String currentDate = format.format(date);
@@ -418,6 +419,7 @@ background-color: white;
 
 </head>
 <body>
+
 <div id="shadow" style="display:none;width:100%;height:100%;position:absolute;z-index:99999;top:0px;left:0px;opacity:0.4;background:black;"></div>
  <div class="sk-circle">
       <div class="sk-circle1 sk-child"></div>
@@ -436,6 +438,14 @@ background-color: white;
 <p style="position: absolute;right: 10px;top: 13px;font-size: 15px;">欢迎，<%=nickName%></p>
 <img src="<%=imgUrl%>" style="position: absolute;border-radius: 25px;height: 35px;width: 35px;right: 10px;top: 43px;">
 <%if(isInternalSeniorMgt==true) { %> 
+<input type="button" value="查看全部" style="
+     position: absolute;
+    top: 110px;
+    right: 20px;
+    z-index: 100;
+    background: none;
+    border: 1px solid black;
+" id="sa">
 <select id="xsdbList" style="position: absolute;width: 25%;left: 20px;top: 110px;z-index: 1000;">												
   <option value="">-请选择-</option>
   <option value="oij7nt2wV7C_dYVLxJvFJgOG9GpQ">&nbsp;王素萍</option>
@@ -563,6 +573,110 @@ var i=$(this).index();
 		  <%}%>
 	$("#chart-container2").show();
 	$("#chart-container2 circle").css("cursor","pointer");
+	$("#sa").on("click",function(){
+		$.ajax({
+			type : "post",
+			async: false,
+			url : "../getAllSharedCustomerChart",
+			data:{
+				dateNum:-2
+			},
+			cache : false,
+			success : function(data) {
+				FusionCharts.ready(function () {
+			        var estProcChart = new FusionCharts({
+			            type: 'errorline',
+			            renderAt: 'chart-container2',
+			            width: '380',
+			            height: '350',
+			            dataFormat: 'json',
+			            dataSource: {
+			                "chart": {
+			                    "theme": "fint",
+			                    "xaxisname": "",
+			                    "yaxisname": "",
+			                    "numberSuffix":"",
+			                    "caption": "胖和阅读统计",
+			                    "subcaption": "(最近三天访问量)",
+			                    "showvalues": "0",
+			                    "plottooltext": "$seriesname, $value",
+			                    //Error bar configuration
+			                    "halferrorbar": "0",
+			                    "errorBarColor": "#990000",
+			                    "errorBarAlpha": "50",
+			                    "errorBarThickness": "4",
+			                    "errorBarWidth": "8"
+			                },
+			                "categories": [
+			                    {
+			                        "category": [
+			                             <%  for(int i=0;i<dates2.size();i++){ 
+			                            	 if(i==dates2.size()-1){%>
+			                            	 { "label":" <%=dates2.get(i)%>" }
+			                            	 <%}else{%>
+			                            { "label": "<%=dates2.get(i)%>" },
+			                            <%}%>
+			                            <%}%>
+			                            
+			                        ]
+			                    }
+			                ],
+			                "dataset":[
+					                    {
+					                        "seriesname": "王素萍",
+					                        "data": data[0]
+					                    },
+					                    {
+					                        "seriesname": "邓立铭",
+					                        "data": data[1]
+					                    },
+					                    {
+					                        "seriesname": "胡贵花",
+					                        "data": data[2]
+					                    },
+					                    {
+					                        "seriesname": "罗成洪",
+					                        "data": data[3]
+					                    },
+					                    {
+					                        "seriesname": "罗浩",
+					                        "data": data[4]
+					                    },
+					                    {
+					                        "seriesname": "陈博",
+					                        "data": data[5]
+					                    },
+					                    {
+					                        "seriesname": "段阳",
+					                        "data": data[6]
+					                    },
+					                    {
+					                        "seriesname": "郑仁利",
+					                        "data": data[7]
+					                    },
+					                    {
+					                        "seriesname": "罗斯威",
+					                        "data": data[8]
+					                    },
+					                    {
+					                        "seriesname": "温小兵",
+					                        "data": data[9]
+					                    },
+					                    {
+					                        "seriesname": "马家勇",
+					                        "data": data[10]
+					                    },
+					                    {
+					                        "seriesname": "郝海涛",
+					                        "data": data[11]
+					                    }
+					                ]
+			                	}
+			        }).render();
+			});
+		}
+		});
+	});
 	$("#xsdbList").on("change",function(){
 		var openId=$(this).val();
 		commonUid=openId;
