@@ -799,7 +799,7 @@ function showUpdateUserPanel(openid,name){
 			            +'														<option value="">-请选择-</option>'
 			            +'														<option value="王素萍">&nbsp;王素萍</option>'
 			            +'														<option value="邓立铭">&nbsp;邓立铭</option>'
-			            +'														<option value="赫海涛">&nbsp;郝海涛</option>'
+			            +'														<option value="郝海涛">&nbsp;郝海涛</option>'
 			            +'														<option value="胡贵花">&nbsp;胡贵花</option>'
 			            +'														<option value="罗成洪">&nbsp;罗成洪</option>'
 			            +'														<option value="罗浩">&nbsp;罗浩</option>'
