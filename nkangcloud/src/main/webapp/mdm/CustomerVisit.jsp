@@ -470,7 +470,6 @@ background-color: white;
 <!-- 	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您 </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="" alt=""/>	 -->			
 </div>
 <div id="quoteVisited" style="margin-top: 30px;">
-<div id="chart-container2"></div>
 <div class="visitedMenu">
     <p id="read" class="active">已读</p><p style="border:none;width:27%" id="dateDetail" style="border-left: none;width:20%;"></p>
 </div>
@@ -583,7 +582,7 @@ var i=$(this).index();
 			async: false,
 			url : "../getAllSharedCustomerChart",
 			data:{
-				dateNum:-2
+				dateNum:0
 			},
 			cache : false,
 			success : function(data) {
