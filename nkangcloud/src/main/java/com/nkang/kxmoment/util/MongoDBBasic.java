@@ -1299,18 +1299,26 @@ public class MongoDBBasic {
 		try{
 			BasicDBObject doc = new BasicDBObject();
 			DBObject update = new BasicDBObject();
-			update.put("IsActive", user.getIsActive());
-			update.put("IsAuthenticated", user.getIsAuthenticated());
-			update.put("IsRegistered", user.getIsRegistered());
-			update.put("Teamer.registerDate", user.getRegisterDate());
+			if(user.getIsActive()!=null&&!"".equals(user.getIsActive())){
+			update.put("IsActive", user.getIsActive());}
+			if(user.getIsAuthenticated()!=null&&!"".equals(user.getIsAuthenticated())){
+			update.put("IsAuthenticated", user.getIsAuthenticated());}
+			if(user.getIsRegistered()!=null&&!"".equals(user.getIsRegistered())){
+			update.put("IsRegistered", user.getIsRegistered());}
+			if(user.getRegisterDate()!=null&&!"".equals(user.getRegisterDate())){
+			update.put("Teamer.registerDate", user.getRegisterDate());}
 			update.put("Teamer.realName", user.getRealName());
 			update.put("Teamer.companyName", user.getCompanyName());
 			update.put("Teamer.email", user.getEmail());
 			update.put("Teamer.phone", user.getPhone());
-			update.put("Teamer.selfIntro", user.getSelfIntro());
-			update.put("Teamer.role", user.getRole());
+			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
+			update.put("Teamer.selfIntro", user.getSelfIntro());}
+			if(user.getRole()!=null&&!"".equals(user.getRole())){
+			update.put("Teamer.role", user.getRole());}
 			
 			DBObject RoleObj = new BasicDBObject();
+			if(user.getRoleObj()!=null){
+				System.out.print("........db role is not null");
 	    	Role role=user.getRoleObj();
 	    	RoleObj.put("isExternalUpStream", role.isExternalUpStream());
 	    	RoleObj.put("isExternalCustomer", role.isExternalCustomer());
@@ -1322,8 +1330,8 @@ public class MongoDBBasic {
 	    	RoleObj.put("isInternalNonBizEmp", role.isInternalNonBizEmp());
 	    	RoleObj.put("isInternalQuoter", role.isInternalQuoter());
 	    	RoleObj.put("isITOperations", role.isITOperations());
-
-	    	update.put("Role", RoleObj);
+	    	update.put("Role", RoleObj);}
+	    	
 			doc.put("$set", update); 
 			WriteResult wr = mongoDB.getCollection(wechat_user).update(new BasicDBObject().append("OpenID", user.getOpenid()), doc);     
 			ret = true;
@@ -4759,9 +4767,7 @@ public class MongoDBBasic {
 					Object[] slObjects = hist.toArray();
 					for (Object dbobj : slObjects) {
 						if (dbobj instanceof String) {
-							System.out.println("xsdb1===="+xsdb+"customer1===="+(String) dbobj);
 							if(isCustomer(xsdb,(String) dbobj)){
-								System.out.println("is Customer=======");
 								v=new Visited();
 								v.setImgUrl(getFieldByRealName((String) dbobj,"HeadUrl"));
 								v.setNickName((String) dbobj);
@@ -4827,14 +4833,12 @@ public class MongoDBBasic {
 		if(mongoDB==null){
 			mongoDB = getMongoDB();
 		}
-		System.out.println("xsdb2===="+xsdb+"customer2===="+customer);
 		try{
 		DBObject query = new BasicDBObject();
 		query.put("Teamer.realName", customer);
 		query.put("Teamer.selfIntro", xsdb);
 		DBObject dbuser = mongoDB.getCollection(wechat_user).findOne(query);
 		if(dbuser!=null){
-			System.out.println("dbuser is not null");
 			isCustomer=true;
 		}
 		}

@@ -806,11 +806,6 @@ function showUpdateUserPanel(openid,name){
 				            +'														<option value="马家勇">&nbsp;马家勇</option>'
 				            +'													    </select></td>'
 				            +'													</tr>'
-
-				            +'													<tr>'
-				            +'														<td>用户职位:</td>'
-				            +'														<td><input type="text" name="companyRole" value="'+role+'"/></td>'
-				            +'													</tr>'
 				            +'													<tr>'
 				            +'														<td>用户角色:</td>'
 				            +'														<td align="left">'
@@ -875,7 +870,11 @@ function showUpdateUserPanel(openid,name){
 			            +'														<td>公司名称:</td>'
 			            +'														<td><input type="text" name="companyName" value="'+companyName+'"/></td>'
 			            +'													</tr>'
+
 			            +'													<tr>'
+			            +'														<td>用户职位:</td>'
+			            +'														<td><input type="text" name="companyRole" value="'+role+'"/></td>'
+			            +'													</tr>'
 			            +select
 			            +'												 </table>'
 			            +'												 </form>'

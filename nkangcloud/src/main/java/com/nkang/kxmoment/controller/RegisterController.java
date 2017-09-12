@@ -99,8 +99,11 @@ public class RegisterController {
 		String companyName=request.getParameter("companyName");
 		String companyRole=request.getParameter("companyRole");
 		String selfIntro=request.getParameter("selfIntro");
-		Role role=new Role();
+		WeChatMDLUser user = new WeChatMDLUser();
+		
 		if(request.getParameterValues("role")!=null){
+			System.out.print("........role is not null");
+			Role role=new Role();
 			String[] checkbox= request.getParameterValues("role");
 			for(int i =0;i<checkbox.length;i++) //对checkbox进行遍历  
 			{  
@@ -125,9 +128,15 @@ public class RegisterController {
 				}else if(checkbox[i].equals("isITOperations")){
 					role.setITOperations(true);
 				}
-			}  												
+			}  	
+
+
+			user.setRoleObj(role);
 		}
-		WeChatMDLUser user = new WeChatMDLUser();
+		else{
+			System.out.print("........role is null");
+		}
+		
 		user.setRole(companyRole);
 		user.setOpenid(URLEncoder.encode(openId, "UTF-8"));
 		user.setRealName(realName);
@@ -137,7 +146,6 @@ public class RegisterController {
 		user.setIsActive(isActived);
 		user.setIsAuthenticated(isAuthenticated);
 		user.setIsRegistered(isRegistered);
-		user.setRoleObj(role);
 		user.setSelfIntro(selfIntro);
 		if(!StringUtils.isNullOrEmpty(registerDate)){
 			user.setRegisterDate(registerDate);
