@@ -4521,7 +4521,7 @@ public class MongoDBBasic {
 			query.put("openid", openid);
 			query.put("date", date);
 			query.put("pageName", pageName);
-			query.put("imgUrl", imgUrl);
+//			query.put("imgUrl", imgUrl);
 			query.put("nickName", nickName);
 			DBObject visited = mongoDB.getCollection(collectionVisited).findOne(query);
 			if(visited!=null){
@@ -4535,6 +4535,7 @@ public class MongoDBBasic {
 				mongoDB.getCollection(collectionVisited).update(query, doc);
 			}else{
 				query.put("visitedNum", 1);
+				query.put("imgUrl", imgUrl);
 				mongoDB.getCollection(collectionVisited).insert(query);
 			}
 			
