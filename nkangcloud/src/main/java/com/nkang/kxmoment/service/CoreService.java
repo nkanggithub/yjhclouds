@@ -381,7 +381,6 @@ public class CoreService
 						articleList.add(article2);
 						
 						String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
-						String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
 						if(MongoDBBasic.checkUserAuth(fromUserName, "isITOperations")||hardcodeUID.equalsIgnoreCase(fromUserName)){
 							int UserApproveNum=MongoDBBasic.findUserApproveNum();
 							String title="胖和微管理";
