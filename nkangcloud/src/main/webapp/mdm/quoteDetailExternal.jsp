@@ -328,7 +328,12 @@ cursor:pointer;
 <script>
 
 $(function(){
-	   $(function(){  
+	   $(function(){ 
+			setTimeout(function(){//定时器 
+				$("#guide").fadeIn(3000);
+				$("#guide").fadeOut(3000);
+				},
+				500);
 	      	 $(window).scroll(function(){  
 	           	  if($(window).scrollTop()>200){  
 	                 $('#return-top').fadeIn(200);  
@@ -629,6 +634,7 @@ function getAllDatas(){
 </script>
 </head>
 <body>
+	<img id="guide" style="display:none;width: 50%;position: absolute;left: 25%;top: 400px;" src="../mdm/images/swipe_left.png" alt="" />
 <div id="reminder" style="width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.8);z-index: 9999;display:<%=show%>">
 <img src="https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EXmW6&amp;oid=00D90000000pkXM" alt="" style="width: 80%;margin-left: 10%;margin-top: 80px;"></div>
 <div id="pic" style="width:90%;border-radius:10px;background:rgba(0,0,0,0.7);height:80%;position:fixed;left:5%;top:10%;display:none;z-index:9999" >

@@ -441,8 +441,9 @@ background-color: white;
 <input type="button" value="查看全部" style="
      position: absolute;
     top: 110px;
-    right: 20px;
+    right: 30px;
     z-index: 100;
+    height:30px;
     background: none;
     border: 1px solid black;
 " id="sa">
@@ -482,12 +483,15 @@ background-color: white;
 <script type="text/javascript" src="../nkang/jquery-1.8.0.js"></script>
 <script src="../Jsp/JS/pizzaChart/js/snap.svg.js"></script>
 <script>
+
 $(document).ajaxStart(function () {
-	$(".sk-circle").show();
-	$("#shadow").show();
+	$("#sa").attr("disabled","true");
+	$(".sk-circle").css("display","block");
+	$("#shadow").css("display","block");
     }).ajaxStop(function () {
-    	$(".sk-circle").hide();
-    	$("#shadow").hide();
+    	$("#sa").removeAttr("disabled");
+    	$(".sk-circle").css("display","none");
+    	$("#shadow").css("display","none");
     });
     $(window).load(function() {
 $("svg path").live("click",function(){
