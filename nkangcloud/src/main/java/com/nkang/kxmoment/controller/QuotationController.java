@@ -236,6 +236,56 @@ public class QuotationController {
 		}
 		return dataList;
 	}
+	public List<Map> getSharedCustomerChart(String uid,String nickName,List<String> dates){
+
+		List<Map> dataList = new ArrayList<Map>();
+		Map<String, Object> data;
+		for(int i=0;i<dates.size();i++){
+		data = new HashMap<String, Object>();
+		data.put("value", MongoDBBasic.getVisitedCustomerByXSDB(uid,dates.get(i),nickName).size());
+		data.put("errorvalue", "");
+		dataList.add(data);
+		}
+		return dataList;
+	}
+	@RequestMapping("/getAllSharedCustomerChart")
+	public @ResponseBody List<List<Map>> getAllSharedCustomerChart(@RequestParam(value="dateNum")int dateNum){
+		System.out.println("start to implement...");
+		List<String> dates=MongoDBBasic.getLastestDate(dateNum);
+		List<List<Map>> finalData=new ArrayList<List<Map>>();
+		 List<Map> dataList = getSharedCustomerChart("oij7nt2wV7C_dYVLxJvFJgOG9GpQ","王素萍",dates);
+		  List<Map> dataList1 = getSharedCustomerChart("oij7nt60inaYfekRpCpSIVnhjwVU","邓立铭",dates);
+		  List<Map> dataList2 = getSharedCustomerChart("oij7nt0gk8vOYth0_0gzoLwg2YyU","胡贵花",dates);
+		  List<Map> dataList3 = getSharedCustomerChart("oij7nt82eNsDS6cYo_362sJIBtFs","罗成洪",dates);
+		  List<Map> dataList4 = getSharedCustomerChart("oij7nt-E02pgCKU2EfHGIAxOF5cA","罗浩",dates);
+		  List<Map> dataList5 = getSharedCustomerChart("oij7nt2EjSi-GPboZaaODgBfgNT8","陈博",dates);
+		  List<Map> dataList6 = getSharedCustomerChart("oij7ntyMv00uo_vwhNN5UM2b2uHY","段阳",dates);
+		  List<Map> dataList7 = getSharedCustomerChart("oij7nt_g_9Nk0AEfRm_pRiKbP1c4","郑仁利",dates);
+		  List<Map> dataList8 = getSharedCustomerChart("oij7nt9jFLpGhyvkk5BSBM9QThE4","罗斯威",dates);
+		  List<Map> dataList9 = getSharedCustomerChart("oij7ntyGSa-1ZH8qvv5ykfA5BwKA","温小兵",dates);
+		  List<Map> dataList10 = getSharedCustomerChart("oij7nt8-8xoKGXWQXoaOnIhT7fis","马家勇",dates);
+		  List<Map> dataList11 = getSharedCustomerChart("oij7ntxdF2qaQ8pirWJjVL9fI854","郝海涛",dates);
+		  finalData.add(dataList);
+		  finalData.add(dataList1);
+		  finalData.add(dataList2);
+		  finalData.add(dataList3);
+		  finalData.add(dataList4);
+		  finalData.add(dataList5);
+		  finalData.add(dataList6);
+		  finalData.add(dataList7);
+		  finalData.add(dataList8);
+		  finalData.add(dataList9);
+		  finalData.add(dataList10);
+		  finalData.add(dataList11);
+		  for(int i=0;i<dates.size();i++){
+			  System.out.println("date.size"+dates.get(i));
+		  }
+		  for(int i=0;i<finalData.size();i++){
+			  System.out.println("finalData.size"+finalData.get(i).size());
+		  }
+		  System.out.println("end to implement...");
+		return finalData;
+	}
 	@RequestMapping("/getVisitedAllDate")
 	public @ResponseBody List<String> getVisitedAllDate(){
 		
