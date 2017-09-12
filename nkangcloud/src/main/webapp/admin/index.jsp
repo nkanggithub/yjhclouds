@@ -3,13 +3,25 @@
 <%@ page import="com.nkang.kxmoment.util.MongoDBBasic"%>
 <%
 String uid = request.getParameter("UID");
+String realName=MongoDBBasic.getFieldByField("OpenID",uid,"Teamer.realName");
 String hardcodeUID = "oij7nt5GgpKftiaoMSKD68MTLXpc";
 String hardcodeUID2 = "oij7ntwDnybi-9PLvGjuRR_EcJYg";
-if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCase(uid)||hardcodeUID2.equalsIgnoreCase(uid)){
+int status=0;
+String serviceName="CallGetWeChatUserFromMongoDB";
+if(MongoDBBasic.checkUserAuth(uid, "isInternalSeniorMgt")){
+	status=1;
+}
+else{
+	if(MongoDBBasic.checkUserAuth(uid, "isInternalQuoter")){
+		status=2;
+		serviceName="CallGetXSDBWeChatUserFromMongoDB";
+	}
+}
+/* if(MongoDBBasic.checkUserAuth(uid, "isITOperations")||hardcodeUID.equalsIgnoreCase(uid)||hardcodeUID2.equalsIgnoreCase(uid)){
 }else{
 	out.print("你没有查看该页面的权限！");
 	return;
-}
+} */
 MongoDBBasic.updateUser(uid);
 %>
 <!DOCTYPE HTML>
@@ -773,6 +785,27 @@ function showUpdateUserPanel(openid,name){
 				var role=data[0].role==null?'':data[0].role;
 				var companyName=data[0].companyName==null?'':data[0].companyName;
 				var selfIntro=data[0].selfIntro==null?'':data[0].selfIntro;
+				var select="";
+				if(status==1){
+				 select='													<tr>'
+		            +'														<td>销售代表:</td>'
+				     //       +'														<td><input type="text"  placeholder="代表名-职位-电话号码"  name="selfIntro" value="'+selfIntro+'"/></td>'
+				            +'														<td><select  name="selfIntro">'
+				            +'														<option value="">-请选择-</option>'
+				            +'														<option value="王素萍">&nbsp;王素萍</option>'
+				            +'														<option value="邓立铭">&nbsp;邓立铭</option>'
+				            +'														<option value="郝海涛">&nbsp;郝海涛</option>'
+				            +'														<option value="胡贵花">&nbsp;胡贵花</option>'
+				            +'														<option value="罗成洪">&nbsp;罗成洪</option>'
+				            +'														<option value="罗浩">&nbsp;罗浩</option>'
+				            +'														<option value="陈博">&nbsp;陈博</option>'
+				            +'														<option value="段阳">&nbsp;&nbsp;段阳</option>'
+				            +'														<option value="郑仁利">&nbsp;郑仁利</option>'
+				            +'														<option value="罗斯威">&nbsp;罗斯威</option>'
+				            +'														<option value="温小兵">&nbsp;温小兵</option>'
+				            +'														<option value="马家勇">&nbsp;马家勇</option>'
+				            +'													    </select></td>'
+				            +'													</tr>';}
 				$("#UpdateUserPartDiv").html('<form id="atest">'
 			            +'												<input type="hidden" name="uid" id="atest_uid" value="'+openid+'"/>'
 			            +'												<table id="tableForm" style="margin-top:-20px;">'
@@ -793,24 +826,7 @@ function showUpdateUserPanel(openid,name){
 			            +'														<td><input type="text" name="companyName" value="'+companyName+'"/></td>'
 			            +'													</tr>'
 			            +'													<tr>'
-			            +'														<td>销售代表:</td>'
-			     //       +'														<td><input type="text"  placeholder="代表名-职位-电话号码"  name="selfIntro" value="'+selfIntro+'"/></td>'
-			            +'														<td><select  name="selfIntro">'
-			            +'														<option value="">-请选择-</option>'
-			            +'														<option value="王素萍">&nbsp;王素萍</option>'
-			            +'														<option value="邓立铭">&nbsp;邓立铭</option>'
-			            +'														<option value="郝海涛">&nbsp;郝海涛</option>'
-			            +'														<option value="胡贵花">&nbsp;胡贵花</option>'
-			            +'														<option value="罗成洪">&nbsp;罗成洪</option>'
-			            +'														<option value="罗浩">&nbsp;罗浩</option>'
-			            +'														<option value="陈博">&nbsp;陈博</option>'
-			            +'														<option value="段阳">&nbsp;&nbsp;段阳</option>'
-			            +'														<option value="郑仁利">&nbsp;郑仁利</option>'
-			            +'														<option value="罗斯威">&nbsp;罗斯威</option>'
-			            +'														<option value="温小兵">&nbsp;温小兵</option>'
-			            +'														<option value="马家勇">&nbsp;马家勇</option>'
-			            +'													    </select></td>'
-			            +'													</tr>'
+			            +select
 			            +'													<tr>'
 			            +'														<td>用户职位:</td>'
 			            +'														<td><input type="text" name="companyRole" value="'+role+'"/></td>'
@@ -1053,6 +1069,7 @@ function updateLogo(id){
 		}
 	});
 }
+var status=<%=status%>;
 function getMDLUserLists() {
 	$("#syncUser").click(function(){
 		syncUser();
@@ -1063,261 +1080,268 @@ function getMDLUserLists() {
 	var CompetitorList= 0;
 	var InternalList=0;
 	var NoRoleList=0;
-jQuery.ajax({
-		type : "GET",
-		url : "../CallGetWeChatUserFromMongoDB",
-		data : {},
-		cache : false,
-		success : function(data) {
-			var ul = "",regNumber=0;
-			//for (var i = data.length-1; i >0 ; i--) {
-			for (var i = 0; i < data.length ; i++) {
-				var temp = data[i];
-				if(temp.openid!=null&&temp.openid!='null'){
-				var selfIntro="";
-				var companyName=temp.companyName;
-				var companyRole=temp.role;
-				var workDay=temp.workDay;
-				var tag=temp.tag;
-				var tagHtml="";
-				var congratulate="";
-				var role= new Array();
-				var infoPer=0;
-				//************************
-				var temp_B=true;
-				if(temp.roleObj.externalUpStream){
-					UpStreamList++;
-					role.push("上游客户");
-					temp_B=false;
-				}
-				if(temp.roleObj.externalCustomer){
-					DownStreamList++;
-					role.push("下游工厂");
-					temp_B=false;
-				}
-				if(temp.roleObj.externalPartner){
-					PartnerList++;
-					role.push("贸易商");
-					temp_B=false;
-				}
-				if(temp.roleObj.externalCompetitor){
-					CompetitorList++;
-					role.push("代理商");
-					temp_B=false;
-				}
-				if(temp.roleObj.internalSeniorMgt){
-					InternalList++;
-					role.push("报价审核");
-					temp_B=false;
-				}
-				if(temp.roleObj.internalImtMgt){
-					InternalList++;
-					role.push("信息发布");
-					temp_B=false;
-				}
-				// temp.roleObj.internalNonBizEmp
-				if(temp.roleObj.internalBizEmp){
-					InternalList++;
-					role.push("非业务员");
-					temp_B=false;
-				}
-				if(temp.roleObj.internalQuoter){
-					InternalList++;
-					role.push("报价修改");
-					temp_B=false;
-				}
-				if(temp.roleObj.itoperations){
-					InternalList++;
-					role.push("后台管理");
-					temp_B=false;
-				}
-				if(temp.roleObj.internalNonBizEmp){
-					InternalList++;
-					role.push("物流商");
-					temp_B=false;
-				}
-				var isInternalNonBizEmp=data[0].roleObj.internalNonBizEmp;
-				if(temp_B){
-					NoRoleList++;
-					role.push("未分类");
-				}
-				//************************
-				
-				if(temp.openid==$('#uid').val()){
-					LastToLikeDate=temp.like.lastLikeDate;
-					lastLikeTo=temp.like.lastLikeTo;
-				}
-				if(temp.realName!=null&&temp.realName!='null'){
-					temp.nickname=temp.realName;
-					infoPer+=40;
-				}
-				
-				
-				if(temp.kmLists!=null&&temp.kmLists!='null'&&temp.kmLists!=''){
-					infoPer+=10;
-				}
-				
-				
-				if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
-					selfIntro='<a href="tel:'+temp.phone+'">电话:'+temp.phone+'</a>';
-					infoPer+=40;
-				}else{
-					selfIntro="&nbsp;";
-				}
-				if(temp.kmApproveLists!=null&&temp.kmApproveLists!='null'&&temp.kmApproveLists.length>0){
-					selfIntro+='&nbsp;<span style="font-size:13">[询价]</span>'
-				}
-				if(companyName==null||companyName=='null'||companyName==''){
-					companyName="";
-				}else{
-					infoPer+=10;
-				}
-				if(companyRole==null||companyRole=='null'||companyRole==''){
-					companyRole="";
-				}else{
-					companyRole="【"+companyRole+"】";
-				}
-				companyName+=companyRole;
-				if(role!=null&&role!='null'){
-					for(var j=0;j<role.length;j++){
-							tagHtml+='													<div class="tag" '
-							+(role[j]=='未分类'?'id="tag" ':'')
-							+'>'
-							+role[j]
-							+'													</div>';
+
+		jQuery.ajax({
+			type : "POST",
+			url : "../"+'<%=serviceName%>',
+			data : 
+			{
+				xsdb:'<%=realName%>'
+			},
+			cache : false,
+			success : function(data) {
+				var ul = "",regNumber=0;
+				//for (var i = data.length-1; i >0 ; i--) {
+				for (var i = 0; i < data.length ; i++) {
+					var temp = data[i];
+					if(temp.openid!=null&&temp.openid!='null'){
+					var selfIntro="";
+					var companyName=temp.companyName;
+					var companyRole=temp.role;
+					var workDay=temp.workDay;
+					var tag=temp.tag;
+					var tagHtml="";
+					var congratulate="";
+					var role= new Array();
+					var infoPer=0;
+					//************************
+					var temp_B=true;
+					if(temp.roleObj.externalUpStream){
+						UpStreamList++;
+						role.push("上游客户");
+						temp_B=false;
+					}
+					if(temp.roleObj.externalCustomer){
+						DownStreamList++;
+						role.push("下游工厂");
+						temp_B=false;
+					}
+					if(temp.roleObj.externalPartner){
+						PartnerList++;
+						role.push("贸易商");
+						temp_B=false;
+					}
+					if(temp.roleObj.externalCompetitor){
+						CompetitorList++;
+						role.push("代理商");
+						temp_B=false;
+					}
+					if(temp.roleObj.internalSeniorMgt){
+						InternalList++;
+						role.push("报价审核");
+						temp_B=false;
+					}
+					if(temp.roleObj.internalImtMgt){
+						InternalList++;
+						role.push("信息发布");
+						temp_B=false;
+					}
+					// temp.roleObj.internalNonBizEmp
+					if(temp.roleObj.internalBizEmp){
+						InternalList++;
+						role.push("非业务员");
+						temp_B=false;
+					}
+					if(temp.roleObj.internalQuoter){
+						InternalList++;
+						role.push("报价修改");
+						temp_B=false;
+					}
+					if(temp.roleObj.itoperations){
+						InternalList++;
+						role.push("后台管理");
+						temp_B=false;
+					}
+					if(temp.roleObj.internalNonBizEmp){
+						InternalList++;
+						role.push("物流商");
+						temp_B=false;
+					}
+					var isInternalNonBizEmp=data[0].roleObj.internalNonBizEmp;
+					if(temp_B){
+						NoRoleList++;
+						role.push("未分类");
+					}
+					//************************
+					
+					if(temp.openid==$('#uid').val()){
+						LastToLikeDate=temp.like.lastLikeDate;
+						lastLikeTo=temp.like.lastLikeTo;
+					}
+					if(temp.realName!=null&&temp.realName!='null'){
+						temp.nickname=temp.realName;
+						infoPer+=40;
+					}
+					
+					
+					if(temp.kmLists!=null&&temp.kmLists!='null'&&temp.kmLists!=''){
+						infoPer+=10;
+					}
+					
+					
+					if(temp.phone!=null&&temp.phone!='null'&&temp.phone!=''){
+						selfIntro='<a href="tel:'+temp.phone+'">电话:'+temp.phone+'</a>';
+						infoPer+=40;
+					}else{
+						selfIntro="&nbsp;";
+					}
+					if(temp.kmApproveLists!=null&&temp.kmApproveLists!='null'&&temp.kmApproveLists.length>0){
+						selfIntro+='&nbsp;<span style="font-size:13">[询价]</span>'
+					}
+					if(companyName==null||companyName=='null'||companyName==''){
+						companyName="";
+					}else{
+						infoPer+=10;
+					}
+					if(companyRole==null||companyRole=='null'||companyRole==''){
+						companyRole="";
+					}else{
+						companyRole="【"+companyRole+"】";
+					}
+					companyName+=companyRole;
+					if(role!=null&&role!='null'){
+						for(var j=0;j<role.length;j++){
+								tagHtml+='													<div class="tag" '
+								+(role[j]=='未分类'?'id="tag" ':'')
+								+'>'
+								+role[j]
+								+'													</div>';
+						}
+					}
+					if(workDay==null||workDay=='null'||workDay==0){
+						workDay="";
+					}else{
+						regNumber++;
+						workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+workDay+'天</div>';
+						if(temp.IsRegistered!="true"){
+						workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">待审核</div>';
+						}
+					}
+					var lastUpdatedDate="暂无互动";
+					if(temp.lastUpdatedDate!=null&&temp.lastUpdatedDate!='null'){
+						lastUpdatedDate=temp.lastUpdatedDate.substring(0,10);
+					}
+					if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
+						selfIntro+='<div style="float:right;margin-right:5px;font-size: 13px;color: #2F78C3;">销售代表:'+temp.selfIntro+'</div>';
+					}else{
+						
+					}
+					if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
+						
+					}else{
+						congratulate='<div style="float:right;"><img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
+							+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
+					}
+					var nameColor='';
+					if(temp.isActive=='true'){
+						nameColor=' style="color:#1D40BF;" ';
+					}
+					var li='	<li class="Work_Mates_div_list_div2">'
+						+'                                           	 	<div class="Work_Mates_img_div2" style="margin-top:-10px;margin-bottom:-20px;">'
+						+'                                        			 <img src="'
+						+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
+						+ '" alt="userImage" class="matesUserImage" alt="no_username" /> '
+						+'<p style="margin: 0 0 10px;font-size: 12px;text-align: center;color: #375FA7;margin-top: -5px;">'+lastUpdatedDate+'</p>'
+						+'                                         		</div>'
+						+'                                         		<div class="Work_Mates_text_div" style="margin-left: 80px;">'
+						+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name" '+nameColor+' >'
+						+ temp.nickname
+						+ '</span><span class="role">'
+						+companyName+'</span>'
+						+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
+						+'</h2>'
+						+ '<div>'
+						+tagHtml
+						+'</div>'+workDay+'<div style="margin-top:5px;">'
+						+'													<span class="selfIntro">'+selfIntro+'</span>'
+						+'												</div>'
+						+'                                        		</div>'
+						+'                                                <div class="clear"></div>'
+						+'                                          </li>';
+					ul += li;
 					}
 				}
-				if(workDay==null||workDay=='null'||workDay==0){
-					workDay="";
-				}else{
-					regNumber++;
-					workDay='<div style="float:right;background-color:#eee;color:#333;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">'+workDay+'天</div>';
-					if(temp.IsRegistered!="true"){
-					workDay='<div style="float:right;background-color:#eee;color:red;font-size:13px;padding:3px;margin-right:5px;position:relative;margin-top:-28px;opacity:0.85;">待审核</div>';
-					}
-				}
-				var lastUpdatedDate="暂无互动";
-				if(temp.lastUpdatedDate!=null&&temp.lastUpdatedDate!='null'){
-					lastUpdatedDate=temp.lastUpdatedDate.substring(0,10);
-				}
-				if(temp.selfIntro!=null&&temp.selfIntro!='null'&&temp.selfIntro!=''){
-					selfIntro+='<div style="float:right;margin-right:5px;font-size: 13px;color: #2F78C3;">销售代表:'+temp.selfIntro+'</div>';
-				}else{
-					
-				}
-				if(temp.congratulateNum==null||temp.congratulateNum=='null'||temp.congratulateNum==undefined||temp.congratulateNum==0){
-					
-				}else{
-					congratulate='<div style="float:right;"><img src="../MetroStyleFiles/reward.png" style="height:25px;"/>'
-						+ '<span style="font-size:12px;color:#07090B;font-weight:normal;">'+temp.congratulateNum+'</span><div>';
-				}
-				var nameColor='';
-				if(temp.isActive=='true'){
-					nameColor=' style="color:#1D40BF;" ';
-				}
-				var li='	<li class="Work_Mates_div_list_div2">'
-					+'                                           	 	<div class="Work_Mates_img_div2" style="margin-top:-10px;margin-bottom:-20px;">'
-					+'                                        			 <img src="'
-					+ ((temp.headimgurl==null||temp.headimgurl=='')?'../MetroStyleFiles/image/user.jpg':temp.headimgurl)
-					+ '" alt="userImage" class="matesUserImage" alt="no_username" /> '
-					+'<p style="margin: 0 0 10px;font-size: 12px;text-align: center;color: #375FA7;margin-top: -5px;">'+lastUpdatedDate+'</p>'
-					+'                                         		</div>'
-					+'                                         		<div class="Work_Mates_text_div" style="margin-left: 80px;">'
-					+'                                        			 <h2><span class="openid" style="display:none;">'+ temp.openid + '</span><span class="name" '+nameColor+' >'
-					+ temp.nickname
-					+ '</span><span class="role">'
-					+companyName+'</span>'
-					+'<span style="font-size:12px;color:green;float:right;">完善度'+infoPer+'%</span>'
-					+'</h2>'
-					+ '<div>'
-					+tagHtml
-					+'</div>'+workDay+'<div style="margin-top:5px;">'
-					+'													<span class="selfIntro">'+selfIntro+'</span>'
-					+'												</div>'
-					+'                                        		</div>'
-					+'                                                <div class="clear"></div>'
-					+'                                          </li>';
-				ul += li;
-				}
+				if(status!=0){
+				$("#Work_Mates_div").html(ul);}
+				$("#refreshUser").click(function(){
+					getMDLUserLists();
+				});
+				
+				
+				FusionCharts.ready(function () {
+				    var revenueChart = new FusionCharts({
+				        type: 'doughnut2d',
+				        renderAt: 'chart-container',
+				        width: '350',
+				        height: '300',
+				        dataFormat: 'json',
+				        dataSource: {
+				            "chart": {
+				                "caption": "",
+				                "subCaption": "",
+				                "numberSuffix": "人",
+				                "paletteColors": "#8e0000,#8e7080,#0075c2,#1aaf5d,#f2c500,#f45b00",
+				                "bgColor": "#ffffff",
+				                "showBorder": "0",
+				                "use3DLighting": "0",
+				                "showShadow": "0",
+				                "enableSmartLabels": "0",
+				                "startingAngle": "310",
+				                "showLabels": "0",
+				                "showPercentValues": "1",
+				                "showLegend": "1",
+				                "legendShadow": "0",
+				                "legendBorderAlpha": "0",
+				                "defaultCenterLabel": "总人数: "+data.length+"人",
+				                "centerLabel": " $label",
+				                "centerLabelBold": "1",
+				                "showTooltip": "0",
+				                "decimals": "0",
+				                "captionFontSize": "14",
+				                "subcaptionFontSize": "14",
+				                "subcaptionFontBold": "0"
+				            },
+				            "data": [
+				                {
+				                    "label": "上游客户:"+UpStreamList+"人",
+				                    "value": UpStreamList
+				                }, 
+				                {
+				                    "label": "下游工厂:"+DownStreamList+"人",
+				                    "value": DownStreamList
+				                }, 
+				                {
+				                    "label": "贸易商:"+PartnerList+"人",
+				                    "value": PartnerList
+				                }, 
+				                {
+				                    "label": "代理商:"+CompetitorList+"人",
+				                    "value": CompetitorList
+				                }, 
+				                {
+				                    "label": "内部员工:"+InternalList+"人",
+				                    "value": InternalList
+				                }, 
+				                {
+				                    "label": "未分类:"+NoRoleList+"人",
+				                    "value": NoRoleList
+				                }
+				            ],
+				            "events": { 
+				                "beforeLinkedItemOpen": function(eventObj, dataObj) { 
+				                    console.log(eventObj);
+				                    console.log(dataObj);
+				                }
+				            }
+				        }
+				    }).render();
+				    
+				    
+				});
 			}
-			$("#Work_Mates_div").html(ul);
-			$("#refreshUser").click(function(){
-				getMDLUserLists();
-			});
-			
-			
-			FusionCharts.ready(function () {
-			    var revenueChart = new FusionCharts({
-			        type: 'doughnut2d',
-			        renderAt: 'chart-container',
-			        width: '350',
-			        height: '300',
-			        dataFormat: 'json',
-			        dataSource: {
-			            "chart": {
-			                "caption": "",
-			                "subCaption": "",
-			                "numberSuffix": "人",
-			                "paletteColors": "#8e0000,#8e7080,#0075c2,#1aaf5d,#f2c500,#f45b00",
-			                "bgColor": "#ffffff",
-			                "showBorder": "0",
-			                "use3DLighting": "0",
-			                "showShadow": "0",
-			                "enableSmartLabels": "0",
-			                "startingAngle": "310",
-			                "showLabels": "0",
-			                "showPercentValues": "1",
-			                "showLegend": "1",
-			                "legendShadow": "0",
-			                "legendBorderAlpha": "0",
-			                "defaultCenterLabel": "总人数: "+data.length+"人",
-			                "centerLabel": " $label",
-			                "centerLabelBold": "1",
-			                "showTooltip": "0",
-			                "decimals": "0",
-			                "captionFontSize": "14",
-			                "subcaptionFontSize": "14",
-			                "subcaptionFontBold": "0"
-			            },
-			            "data": [
-			                {
-			                    "label": "上游客户:"+UpStreamList+"人",
-			                    "value": UpStreamList
-			                }, 
-			                {
-			                    "label": "下游工厂:"+DownStreamList+"人",
-			                    "value": DownStreamList
-			                }, 
-			                {
-			                    "label": "贸易商:"+PartnerList+"人",
-			                    "value": PartnerList
-			                }, 
-			                {
-			                    "label": "代理商:"+CompetitorList+"人",
-			                    "value": CompetitorList
-			                }, 
-			                {
-			                    "label": "内部员工:"+InternalList+"人",
-			                    "value": InternalList
-			                }, 
-			                {
-			                    "label": "未分类:"+NoRoleList+"人",
-			                    "value": NoRoleList
-			                }
-			            ],
-			            "events": { 
-			                "beforeLinkedItemOpen": function(eventObj, dataObj) { 
-			                    console.log(eventObj);
-			                    console.log(dataObj);
-			                }
-			            }
-			        }
-			    }).render();
-			    
-			    
-			});
-		}
-	});
+		});
+	
+
 }
 function syncUser(){
 	$("#syncUser").attr("src","../MetroStyleFiles/loading.gif");

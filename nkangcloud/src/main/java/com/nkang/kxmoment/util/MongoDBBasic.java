@@ -2281,6 +2281,201 @@ public class MongoDBBasic {
 		return res;
 	}
 	@SuppressWarnings("unchecked")
+	public static List<WeChatMDLUser> getXSDBWeChatUserFromMongoDB(String xsdb) {
+		mongoDB = getMongoDB();
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();
+		WeChatMDLUser weChatMDLUser = null;
+		DBCursor queryresults;
+		try{
+			
+				BasicDBObject query=new BasicDBObject();
+				query.put("Teamer.selfIntro", xsdb);
+/*				sort.put("IsRegistered", -1);
+				sort.put("LastUpdatedDate", 1);*/
+				/*sort.put("Teamer.registerDate", 1);
+				sort.put("IsActive", -1);
+				sort.put("Created", 1);*/
+				queryresults = mongoDB.getCollection(wechat_user).find(query);
+            if (null != queryresults) {
+            	while(queryresults.hasNext()){
+            		weChatMDLUser = new WeChatMDLUser();
+            		DBObject o = queryresults.next();
+            		
+            		ArrayList<String> kmApproveLists=new ArrayList<String>();
+            		if(o.get("kmApproveLists")!=null){
+            			BasicDBList histApprove = (BasicDBList) o.get("kmApproveLists");
+            			Object[] kmApproveObjects = histApprove.toArray();
+            			for(Object dbobj : kmApproveObjects){
+                			if(dbobj instanceof String){
+                				kmApproveLists.add((String) dbobj);
+                			}
+                		}
+            			weChatMDLUser.setKmApproveLists(kmApproveLists);
+            		}
+            		if(o.get("OpenID") != null){
+            			weChatMDLUser.setOpenid(o.get("OpenID").toString());
+                		if(o.get("CurLAT") != null){
+                			weChatMDLUser.setLat(o.get("CurLAT").toString());
+                		}
+                		if(o.get("CurLNG") != null){
+                			weChatMDLUser.setLng(o.get("CurLNG").toString());
+                		}
+                		if(o.get("LastUpdatedDate") != null){
+                			weChatMDLUser.setLastUpdatedDate(o.get("LastUpdatedDate").toString());
+                		}
+                		if(o.get("HeadUrl") != null){
+                			weChatMDLUser.setHeadimgurl(o.get("HeadUrl").toString());
+                		}
+                		if(o.get("NickName") != null){
+                			weChatMDLUser.setNickname(o.get("NickName").toString());
+                		}
+                		Object CongratulateHistory = o.get("CongratulateHistory");
+                		BasicDBList CongratulateHistoryObj = (BasicDBList)CongratulateHistory;
+                		if(CongratulateHistoryObj != null){
+                			ArrayList conList=new ArrayList();
+                    		Object[] ConObjects = CongratulateHistoryObj.toArray();
+                    		weChatMDLUser.setCongratulateNum(ConObjects.length);
+                		}
+                		ArrayList<String> kmLists = new ArrayList<String>();
+                		if(o.get("kmLists")!=null){
+                			BasicDBList hist = (BasicDBList) o.get("kmLists");
+                    		Object[] kmObjects = hist.toArray();
+                    		for(Object dbobj : kmObjects){
+                    			if(dbobj instanceof String){
+                    				kmLists.add((String) dbobj);
+                    			}
+                    		}
+                    		weChatMDLUser.setKmLists(kmLists);
+                		}
+                		Object role = o.get("Role");
+            			DBObject roleobj = new BasicDBObject();
+            			roleobj = (DBObject)role;
+            			Role RoleObj=new Role();
+            			if(roleobj != null){
+            				if(roleobj.get("isExternalUpStream") != null){
+            					RoleObj.setExternalUpStream(Boolean.parseBoolean(roleobj.get("isExternalUpStream").toString()));
+            				}
+            				if(roleobj.get("isExternalCustomer") != null){
+            					RoleObj.setExternalCustomer(Boolean.parseBoolean(roleobj.get("isExternalCustomer").toString()));
+            				}
+            				if(roleobj.get("isExternalPartner") != null){
+            					RoleObj.setExternalPartner(Boolean.parseBoolean(roleobj.get("isExternalPartner").toString()));
+            				}
+            				if(roleobj.get("isExternalCompetitor") != null){
+            					RoleObj.setExternalCompetitor(Boolean.parseBoolean(roleobj.get("isExternalCompetitor").toString()));
+            				}
+            				if(roleobj.get("isInternalSeniorMgt") != null){
+            					RoleObj.setInternalSeniorMgt(Boolean.parseBoolean(roleobj.get("isInternalSeniorMgt").toString()));
+            				}
+            				if(roleobj.get("isInternalImtMgt") != null){
+            					RoleObj.setInternalImtMgt(Boolean.parseBoolean(roleobj.get("isInternalImtMgt").toString()));
+            				}
+            				if(roleobj.get("isInternalBizEmp") != null){
+            					RoleObj.setInternalBizEmp(Boolean.parseBoolean(roleobj.get("isInternalBizEmp").toString()));
+            				}
+            				if(roleobj.get("isInternalNonBizEmp") != null){
+            					RoleObj.setInternalNonBizEmp(Boolean.parseBoolean(roleobj.get("isInternalNonBizEmp").toString()));
+            				}
+            				if(roleobj.get("isInternalQuoter") != null){
+            					RoleObj.setInternalQuoter(Boolean.parseBoolean(roleobj.get("isInternalQuoter").toString()));
+            				}
+            				if(roleobj.get("isITOperations") != null){
+            					RoleObj.setITOperations(Boolean.parseBoolean(roleobj.get("isITOperations").toString()));
+            				}
+            				
+            			}
+                		
+            			weChatMDLUser.setRoleObj(RoleObj);
+            			
+            			
+                		Object teamer = o.get("Teamer");
+            			DBObject teamobj = new BasicDBObject();
+            			teamobj = (DBObject)teamer;
+            			if(teamobj != null){
+            				if(teamobj.get("selfIntro") != null){
+            					weChatMDLUser.setSelfIntro(teamobj.get("selfIntro").toString());
+            				}
+            				if(teamobj.get("phone") != null){
+            					weChatMDLUser.setPhone(teamobj.get("phone").toString());
+            				}
+            				if(teamobj.get("realName") != null){
+            					weChatMDLUser.setRealName(teamobj.get("realName").toString());
+            				}
+            				if(teamobj.get("role") != null){
+            					weChatMDLUser.setRole(teamobj.get("role").toString());
+            				}
+            				if(teamobj.get("companyName") != null){
+                    			weChatMDLUser.setCompanyName(teamobj.get("companyName").toString());
+                    		}
+            				if(teamobj.get("registerDate") != null){
+            					weChatMDLUser.setRegisterDate(teamobj.get("registerDate").toString());
+            					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                				String dstr=teamobj.get("registerDate").toString();
+                				dstr=dstr.replaceAll("/", "-");
+                				java.util.Date date=sdf.parse(dstr);
+                				long  s1=date.getTime();//å°†æ—¶é—´è½¬ä¸ºæ¯«ç§’
+                				long s2=System.currentTimeMillis();//å¾—åˆ°å½“å‰�çš„æ¯«ç§’
+                				int  day=(int) ((s2-s1)/1000/60/60/24)+1;
+                				weChatMDLUser.setWorkDay(day);
+            				}
+            				if(teamobj.get("tag") != null){
+            					BasicDBList hist = (BasicDBList) teamobj.get("tag");
+                    			ArrayList list=new ArrayList();
+                        		Object[] tagObjects = hist.toArray();
+                        		for(Object dbobj : tagObjects){
+                        			if(dbobj instanceof DBObject){
+                        				HashMap<String, String> temp=new HashMap<String, String>();
+                        				temp.put(((DBObject)dbobj).get("key").toString(), ((DBObject)dbobj).get("value").toString());
+                        				list.add(temp);
+                        			}
+                        		}
+                        		weChatMDLUser.setTag(list);
+                    		}
+            			}
+            			Object likeobj = o.get("Like");
+            			DBObject like= new BasicDBObject();
+            			like= (DBObject)likeobj;
+            			HashMap<String, String> likeMap=new HashMap<String, String>();
+            			likeMap.put("number","");
+            			likeMap.put("lastLikeTo","");
+            			likeMap.put("lastLikeDate","");
+            			if(like != null){
+            				if(like.get("number") != null){
+            					likeMap.put("number", like.get("number").toString());
+            				}
+            				if(like.get("lastLikeTo") != null)
+            				{
+            					likeMap.put("lastLikeTo", like.get("lastLikeTo").toString());
+            				}
+            				if(like.get("lastLikeDate") != null)
+            				{
+            					likeMap.put("lastLikeDate", like.get("lastLikeDate").toString());
+            				}
+            			}
+            			weChatMDLUser.setLike(likeMap);
+            			if(o.get("IsActive") != null){
+                			weChatMDLUser.setIsActive(o.get("IsActive").toString());
+                		}
+            			if(o.get("IsAuthenticated") != null){
+                			weChatMDLUser.setIsAuthenticated(o.get("IsAuthenticated").toString());
+                		}
+            			if(o.get("IsRegistered") != null){
+                			weChatMDLUser.setIsRegistered(o.get("IsRegistered").toString());
+                		}
+
+            		}
+            		if(weChatMDLUser != null){
+            			ret.add(weChatMDLUser);
+            		}
+            	}
+            }
+	    }
+		catch(Exception e){
+			log.info("getWeChatUserFromMongoDB--" + e.getMessage());
+		}
+	    return ret;
+	}
+	@SuppressWarnings("unchecked")
 	public static List<WeChatMDLUser> getWeChatUserFromMongoDB(String OpenID) {
 		mongoDB = getMongoDB();
 		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();

@@ -654,6 +654,18 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
+	@RequestMapping("/CallGetXSDBWeChatUserFromMongoDB")
+	public static List<WeChatMDLUser> CallGetXSDBWeChatUserFromMongoDB(
+			@RequestParam(value="xsdb", required=false) String xsdb){
+		List<WeChatMDLUser> ret = new ArrayList<WeChatMDLUser>();;
+		try{
+			ret = MongoDBBasic.getXSDBWeChatUserFromMongoDB(xsdb);
+		}		
+		catch(Exception e){
+			//ret.add(e.getMessage());
+		}
+		return ret;
+	}
 	
 
 	@RequestMapping("/CallGetWeChatUserDistanceList")
