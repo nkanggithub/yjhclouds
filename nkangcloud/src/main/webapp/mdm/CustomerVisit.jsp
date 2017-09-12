@@ -470,6 +470,8 @@ background-color: white;
 <!-- 	<p style="position: absolute;top: 1px;right: 10px;font-size: 15px;">欢迎您 </p><img style="border-radius:25px;height:35px;width:35px;position:absolute;top:36px;right:10px;" src="" alt=""/>	 -->			
 </div>
 <div id="quoteVisited" style="margin-top: 30px;">
+<div id="chart-container2"></div>
+<div id="chart-container3"></div>
 <div class="visitedMenu">
     <p id="read" class="active">已读</p><p style="border:none;width:27%" id="dateDetail" style="border-left: none;width:20%;"></p>
 </div>
@@ -577,19 +579,21 @@ var i=$(this).index();
 	$("#chart-container2").show();
 	$("#chart-container2 circle").css("cursor","pointer");
 	$("#sa").on("click",function(){
+			$("#chart-container2").hide();
+			$("#chart-container3").show();
 		$.ajax({
 			type : "post",
 			async: false,
 			url : "../getAllSharedCustomerChart",
 			data:{
-				dateNum:0
+				dateNum:-2
 			},
 			cache : false,
 			success : function(data) {
 				FusionCharts.ready(function () {
 			        var estProcChart = new FusionCharts({
 			            type: 'errorline',
-			            renderAt: 'chart-container2',
+			            renderAt: 'chart-container3',
 			            width: '380',
 			            height: '350',
 			            dataFormat: 'json',
@@ -681,6 +685,8 @@ var i=$(this).index();
 		});
 	});
 	$("#xsdbList").on("change",function(){
+		$("#chart-container3").hide();
+		$("#chart-container2").show();
 		var openId=$(this).val();
 		commonUid=openId;
 		var nickName=$(this).find("option:selected").text().trim();
