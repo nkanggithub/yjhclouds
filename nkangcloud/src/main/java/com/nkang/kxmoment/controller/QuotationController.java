@@ -265,6 +265,8 @@ public class QuotationController {
 		  List<Map> dataList9 = getSharedCustomerChart("oij7ntyGSa-1ZH8qvv5ykfA5BwKA","温小兵",dates);
 		  List<Map> dataList10 = getSharedCustomerChart("oij7nt8-8xoKGXWQXoaOnIhT7fis","马家勇",dates);
 		  List<Map> dataList11 = getSharedCustomerChart("oij7ntxdF2qaQ8pirWJjVL9fI854","郝海涛",dates);
+		  List<Map> dataList12 = getSharedCustomerChart("oij7nt5GgpKftiaoMSKD68MTLXpc","康宁",dates);
+		  List<Map> dataList13 = getSharedCustomerChart("oij7ntzKTXhhx5vSGE45X_Q2KT_A","天小婷",dates);
 		  finalData.add(dataList);
 		  finalData.add(dataList1);
 		  finalData.add(dataList2);
@@ -277,6 +279,8 @@ public class QuotationController {
 		  finalData.add(dataList9);
 		  finalData.add(dataList10);
 		  finalData.add(dataList11);
+		  finalData.add(dataList12);
+		  finalData.add(dataList13);
 		  for(int i=0;i<dates.size();i++){
 			  System.out.println("date.size"+dates.get(i));
 		  }

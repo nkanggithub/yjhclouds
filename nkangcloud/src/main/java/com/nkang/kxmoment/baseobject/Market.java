@@ -17,6 +17,8 @@ public class Market {
 		arrayList.add(new String[]{"助理总经理","段阳","15308228368"});
 		arrayList.add(new String[]{"采购经理","郑仁利","13883990710"});
 		arrayList.add(new String[]{"采购经理","罗斯威","13883743587"});
+		arrayList.add(new String[]{"重庆销售","康宁","15123944895"});
+		arrayList.add(new String[]{"重庆销售","天小婷","13661995272"});
 	}
 	public String[] getMarket(String name){
 		for(String[] market:arrayList){

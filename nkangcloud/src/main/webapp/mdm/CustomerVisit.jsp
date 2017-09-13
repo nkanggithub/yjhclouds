@@ -461,6 +461,8 @@ background-color: white;
   <option value="oij7ntyGSa-1ZH8qvv5ykfA5BwKA">&nbsp;温小兵</option>
   <option value="oij7nt8-8xoKGXWQXoaOnIhT7fis">&nbsp;马家勇</option>
   <option value="oij7ntxdF2qaQ8pirWJjVL9fI854">&nbsp;郝海涛</option>
+  <option value="oij7ntxdF2qaQ8pirWJjVL9fI854">&nbsp;康宁</option>
+  <option value="oij7ntxdF2qaQ8pirWJjVL9fI854">&nbsp;天小婷</option>
 </select>
 <%} %>
 <div style="padding:10px;padding-top:5px;border-bottom:2px solid #0067B6;position:relative"> 
@@ -677,6 +679,14 @@ var i=$(this).index();
 					                        "seriesname": "郝海涛",
 					                        "data": data[11]
 					                    }
+					                    {
+					                        "seriesname": "康宁",
+					                        "data": data[12]
+					                    },
+					                    {
+					                        "seriesname": "天小婷",
+					                        "data": data[13]
+					                    },
 					                ]
 			                	}
 			        }).render();
