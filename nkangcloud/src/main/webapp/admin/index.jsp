@@ -255,6 +255,12 @@ ul li.singleQuote2 .firstLayer  .change{
 .clear{
 	clear:both;
 }
+#UpdateUserPartDiv form.ui-listview-filter,#UpdateUserPartDiv #QuoteList
+{
+float:left!important;
+width:100%!important;
+}
+
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 
@@ -632,8 +638,9 @@ function showKMPanel(openid,name){
 	/* location.href='../mdm/quoteDetailExternal.jsp?UID='+openid; */
 	showCommonPanel();
 	//Qing update
-	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><input type="button" onclick="saveUserAllKM(\''+openid+'\')" value="关注全部" style="color:#fff !important;background-color:orange;margin-right:10px;padding:3px 8px;border:0px;font-weight:bold;font-size:15px;"/><input onclick="saveUserNoKM(\''+openid+'\')" type="button" value="取消全部" style="color:#fff !important;background-color:#999;margin-right:10px;padding:3px 8px;border:0px;font-size:15px;font-weight:bold;"/><div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
+	$("body").append('<div id="UpdateUserKmPart" class="bouncePart" style="position:fixed;z-index:999;top:100px;width:80%;margin-left:10%;"><legend>编辑【'+name+'】关注的牌号</legend><input type="button" onclick="saveUserAllKM(\''+openid+'\')" value="关注全部" style="color:#fff !important;background-color:orange;margin-right:10px;padding:3px 8px;border:0px;font-weight:bold;font-size:15px;"/><input onclick="saveUserNoKM(\''+openid+'\')" type="button" value="取消全部" style="color:#fff !important;background-color:#999;margin-right:10px;padding:3px 8px;border:0px;font-size:15px;font-weight:bold;"/>'
 			+'<div style="width: 50%;height: 30px;margin-top: 10px;float: left;"><select style="width: 50%;height: 30px;" id="focusS"><option value="yj">硬胶</option><option value="rj">软胶</option><option value="gcsl">工程塑料</option><option value="hot">热门牌号</option><option value="other">其他</option></select><input type="button" value="关注" style="color: #fff !important;background-color: orange;margin-right: 10px;padding: 3px 8px;border: 0px;font-weight: bold;font-size: 15px;width: 50px;margin-left:5px;" id="focusAllType"></div><div style="width: 50%;height: 30px;margin-top: 10px;float: left;"><select style="width: 50%;height: 30px;" id="cancelS"><option value="yj">硬胶</option><option value="rj">软胶</option><option value="gcsl">工程塑料</option><option value="hot">热门牌号</option><option value="other">其他</option></select><input type="button" value="取消" style="margin-left:5px;color: #fff !important;background-color: gray;margin-right: 10px;padding: 3px 8px;border: 0px;font-weight: bold;font-size: 15px;width: 50px;" id="cancelAllType"></div>'
+	        +'<div id="UpdateUserPartDiv" style="margin-top:0px;margin-bottom: -20px;background-color:#fff;">'
 			+'<ul id="QuoteList" data-role="listview" style="height:300px;overflow:auto;margin-top:10px;" data-autodividers="false" data-filter="true" data-filter-placeholder="输入牌号" data-inset="true" style="margin-top:15px" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">'
 			+'<center>正在加载中...</center>'
 			+'</ul>'

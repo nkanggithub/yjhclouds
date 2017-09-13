@@ -4642,7 +4642,8 @@ public class MongoDBBasic {
 	public static List<String> getItemNoByType(String type){
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
-		query.put("ItemType", type);
+		Pattern pattern = Pattern.compile("^.*"+type+".*$", Pattern.CASE_INSENSITIVE);
+		query.put("ItemType", pattern);
 		@SuppressWarnings("unchecked")
 		List<String> dbuser = mongoDB.getCollection(Plastic_Item).distinct("itemNo",query);
 			return dbuser;
