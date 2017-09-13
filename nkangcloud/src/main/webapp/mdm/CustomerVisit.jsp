@@ -9,7 +9,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 
 <%	
-List<String> dates=MongoDBBasic.getLastestDate(-14);
+List<String> dates=MongoDBBasic.getLastestDate(-6);
 List<String> dates2=MongoDBBasic.getLastestDate(-2);
 SimpleDateFormat  format = new SimpleDateFormat("yyyy-MM-dd"); 
 Date date=new Date();
@@ -525,7 +525,7 @@ var i=$(this).index();
 		                    "yaxisname": "",
 		                    "numberSuffix":"",
 		                    "caption": "胖和阅读统计",
-		                    "subcaption": "(最近十五天访问量)",
+		                    "subcaption": "(最近七天访问量)",
 		                    "showvalues": "0",
 		                    "plottooltext": "$seriesname, $value",
 		                    //Error bar configuration
@@ -678,7 +678,7 @@ var i=$(this).index();
 					                    {
 					                        "seriesname": "郝海涛",
 					                        "data": data[11]
-					                    }
+					                    },
 					                    {
 					                        "seriesname": "康宁",
 					                        "data": data[12]
@@ -726,7 +726,7 @@ var i=$(this).index();
 			                    "yaxisname": "",
 			                    "numberSuffix":"",
 			                    "caption": "胖和阅读统计",
-			                    "subcaption": "(最近十五天访问量)",
+			                    "subcaption": "(最近七天访问量)",
 			                    "showvalues": "0",
 			                    "plottooltext": "$seriesname, $value",
 			                    //Error bar configuration
