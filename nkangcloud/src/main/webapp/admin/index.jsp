@@ -260,7 +260,8 @@ ul li.singleQuote2 .firstLayer  .change{
 float:left!important;
 width:100%!important;
 }
-
+#UpdateUserPartDiv{
+height:400px;}
 </style>
 <script src="../Jsp/JS/fusioncharts.js" type="text/javascript"></script>
 
@@ -302,6 +303,14 @@ $(window).load(function() {
 		var openid=$(this).find("span.openid").text();
 		selectedOpenID=openid;
 		var name=$(this).find("span.name").text();
+		if(name.indexOf("'")!=-1)
+			{
+			name=name.replace(/'/g, '');
+			}
+		if(name.indexOf("\"")!=-1)
+		{
+		name=name.replace(/\"/g,""); 
+		}
 		$(this).append("<div class='edit'><p onclick='showUpdateUserPanel(\""+openid+"\",\""+name+"\")'><img src='../mdm/images/edit.png' slt='' />编辑</p></div>");
 		$(this).append("<div class='edit km'><p onclick='showKMPanel(\""+openid+"\",\""+name+"\")'>牌号<br/>管理</p></div>");
 		$(this).siblings().removeClass("editBtn");
