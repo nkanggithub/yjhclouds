@@ -9,8 +9,8 @@
 //获取由OAuthServlet中传入的参数
 SNSUserInfo user = (SNSUserInfo)request.getAttribute("snsUserInfo"); 
 String originalUid=request.getParameter("UID");
-if(request.getParameter("UID")==null&&request.getParameter("UID")==""){
-	originalUid=(String)request.getAttribute("state"); 
+if(request.getParameter("UID")==null||request.getParameter("UID")==""){
+	originalUid=request.getParameter("state"); 
 }
 String name = "";
 String phone = "";
@@ -46,6 +46,11 @@ if(null != user) {
 		MongoDBBasic.updateVisited(user.getOpenId(),currentDate,"NotificationCenter",user.getHeadImgUrl(),name);
 		if(!"STATE".equals(originalUid)){
 		HashMap<String, String> resOriginal=MongoDBBasic.getWeChatUserFromOpenID(originalUid);
+		System.out.println("originalUid:"+originalUid);
+		System.out.println("user.getHeadImgUrl():"+user.getHeadImgUrl());
+		System.out.println("name:"+name);
+		System.out.println("resOriginal.get('HeadUrl')----"+resOriginal.get("HeadUrl"));
+		System.out.println("resOriginal.get('NickName')----"+resOriginal.get("NickName"));
 		MongoDBBasic.updateShared(originalUid,currentDate,"NotificationCenter",user.getHeadImgUrl(),name,resOriginal.get("HeadUrl"),resOriginal.get("NickName"));
 		}
 	}
