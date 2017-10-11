@@ -77,7 +77,6 @@ public class MongoDBBasic {
 	private static String ClientMeta = "Client_Meta";
 	private static String Article_Message = "Article_Message";
 	private static String collectionBill = "SaleBill";
-/*	private static String collectionQuotation = "Quotation";*/
 	private static String short_news = "ShortNews";
 	private static String collectionInventory = "Inventory";
 	private static String collectionOnDelivery = "OnDelivery";
@@ -100,7 +99,7 @@ public class MongoDBBasic {
 
         MongoClient mongoClient = new MongoClient(
         		new ServerAddress(serverName),
-        		// createMongoCRCredential / createScramSha1Credential 
+
         		Arrays.asList(MongoCredential.createMongoCRCredential(usrname, databaseName,passwrd.toCharArray())),
         		new MongoClientOptions.Builder().cursorFinalizerEnabled(false).build());
         mongoClientCollection.setMongoClient(mongoClient);
@@ -850,10 +849,7 @@ public class MongoDBBasic {
         			dbo.put("Teamer.phone", teamer.getPhone());
         			dbo.put("Teamer.phone", teamer.getPhone());
         			dbo.put("IsRegistered", "true");
-        			//dbo.put("Teamer.role", teamer.getRole());
-        			//dbo.put("Teamer.selfIntro", teamer.getSelfIntro());
-        			//dbo.put("Teamer.suppovisor", teamer.getSuppovisor()); 
-        			//dbo.put("Teamer.tag", teamer.getTag()); 
+
         			Object teamer2 = o.get("Teamer");
         			if(teamer2 == null){
             			dbo.put("Teamer.registerDate", teamer.getRegisterDate());
@@ -1248,10 +1244,7 @@ public class MongoDBBasic {
             	String faddr = RestUtils.getUserCurLocWithLatLng(Lat, Lng);
                 BasicDBObject doc = new BasicDBObject();  
     	    	DBObject update = new BasicDBObject();
-//    	    	update.put("OpenID", wcu.getOpenid());
-//    	    	update.put("HeadUrl", wcu.getHeadimgurl());
-//    	    	update.put("NickName", wcu.getNickname());
-//    	    	update.put("Created", DateUtil.timestamp2Str(cursqlTS));
+
     	    	update.put("FormatAddress", faddr);
     	    	update.put("CurLAT", Lat);
     	    	update.put("CurLNG", Lng);
@@ -1563,12 +1556,9 @@ public class MongoDBBasic {
 		@SuppressWarnings("rawtypes")
 		List results;
 	    try{
-	    	//results =  mongoDB.getCollection(collectionMasterDataName).distinct("industrySegmentNames");
+
 	    	BasicDBObject query = new BasicDBObject();
-/*			if(state != "" && state != null && state.toLowerCase() != "null" ){
-				Pattern pattern3 = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE);
-				query.put("state", pattern3);
-			}*/
+
 			query.put("state", state);
 	    	results =  mongoDB.getCollection(collectionMasterDataName).distinct("industrySegmentNames", query);
 	    	for(int i = 0; i < results.size(); i ++){
@@ -1602,13 +1592,6 @@ public class MongoDBBasic {
 				Pattern pattern = Pattern.compile("^.*" + state + ".*$", Pattern.CASE_INSENSITIVE); 
 				dbquery.put("state", pattern);
 			}
-					
-/*	    	DBObject query1 = new BasicDBObject("state", "é‡�åº†å¸‚");  
-	    	DBObject query2 = new BasicDBObject("state", "é‡�åº†");     
-	    	BasicDBList or = new BasicDBList();
-	    	or.add(query1);
-	    	or.add(query2);
-	    	DBObject query = new BasicDBObject("$or", or);*/
 
 	    	results = mongoDB.getCollection(collectionMasterDataName).distinct("cityRegion", dbquery);
 	    	for(int i = 0; i < results.size(); i ++){
@@ -1635,12 +1618,7 @@ public class MongoDBBasic {
 				dbquery.put("state", pattern);
 			}
 			
-/*	    	DBObject query1 = new BasicDBObject("state", state);  
-	    	DBObject query2 = new BasicDBObject("state", "é‡�åº†");     
-	    	BasicDBList or = new BasicDBList();
-	    	or.add(query1);
-	    	or.add(query2);
-	    	DBObject query = new BasicDBObject("$or", or);*/
+
 
 	        if (StringUtils.isLatinString(state)) {
 	        	results = mongoDB.getCollection(collectionMasterDataName).distinct("latinCity", dbquery);
@@ -2132,15 +2110,7 @@ public class MongoDBBasic {
             		if(orgOtherPartySiteInstance != null){
             			opsiList.add(orgOtherPartySiteInstance);
             		}
-/*            		if(!StringUtils.isEmpty(opsi)){
-            			log.info("----3--");
-            			DBObject update = new BasicDBObject();
-            	    	update.put("lat", "111");
-            	    	update.put("lng", "222");
-            			WriteResult wr = mongoDB.getCollection(collectionMasterDataName).update(new BasicDBObject().append("siteInstanceId", opsi), update);
-            			log.info("----4--");
-            			ret = ret + 1;
-            		}*/
+
             	}
             }
 	    }
@@ -2298,11 +2268,7 @@ public class MongoDBBasic {
 			
 				BasicDBObject query=new BasicDBObject();
 				query.put("Teamer.selfIntro", xsdb);
-/*				sort.put("IsRegistered", -1);
-				sort.put("LastUpdatedDate", 1);*/
-				/*sort.put("Teamer.registerDate", 1);
-				sort.put("IsActive", -1);
-				sort.put("Created", 1);*/
+
 				queryresults = mongoDB.getCollection(wechat_user).find(query);
             if (null != queryresults) {
             	while(queryresults.hasNext()){
@@ -3004,15 +2970,7 @@ public class MongoDBBasic {
 				}
 				if (!StringUtils.isEmpty(nonlatinCity) && nonlatinCity.toUpperCase()!="NULL") {
 					if(StringUtils.isLatinString(nonlatinCity)){
-						/*String tempstr="";
-						 String arr[]=nonlatinCity.trim().toLowerCase().split("\\s+");
-						 if(nonlatinCity.length()>0)
-						 for (int i = 0; i < arr.length; i++) {
-						 arr[i]=Character.toUpperCase(arr[i].charAt(0))+arr[i].substring(1);
-						 tempstr = tempstr + arr[i]+" ";
-						 }
-						 nonlatinCity = tempstr.trim();*/
-						//nonlatinCity=nonlatinCity.substring(0,4)+" "+nonlatinCity.substring(4);
+
 						
 						Pattern patternst = Pattern.compile("^.*" + nonlatinCity + ".*$", Pattern.CASE_INSENSITIVE);
 						query_competitor.put("latinCity", patternst);
@@ -3087,11 +3045,7 @@ public class MongoDBBasic {
 					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer")== null ? "" : objOpsi.get("onlyPresaleCustomer").toString());
 					opsi.setStreetAddress1(objOpsi.get("streetAddress1")== null ? "" : objOpsi.get("streetAddress1").toString());
 					opsi.setIndustrySegmentNames(objOpsi.get("industrySegmentNames")== null ? "" : objOpsi.get("industrySegmentNames").toString());
-					/*opsi.setOrganizationExtendedName(objOpsi.get("organizationExtendedName").toString());
-					opsi.setIsCompetitor(objOpsi.get("isCompetitor").toString());
-					opsi.setIncludePartnerOrgIndicator(objOpsi.get("includePartnerOrgIndicator").toString());
-					opsi.setOnlyPresaleCustomer(objOpsi.get("onlyPresaleCustomer").toString());
-					opsi.setStreetAddress1(objOpsi.get("streetAddress1").toString());*/
+
 					listpartner.add(opsi);
 				}
 				while(customer.hasNext()){
@@ -3629,74 +3583,7 @@ public class MongoDBBasic {
 		return nfList;
 	}
 	
-	/*
-	 * chang-zheng
-	 * FOR billOfSell
-	 */
-	/*public static void saveBillOfSell(List<BillOfSell> billOfSellList){
-		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
-		
-		for(BillOfSell bs : billOfSellList){
-			query.put("orderNumber", bs.getOrderNumber());
-			query.put("ordersForChildTableID", bs.getOrdersForChildTableID());
-			DBCursor queryresult = mongoDB.getCollection(collectionBill).find(query).limit(1);
-		
-			
-			if(queryresult!=null){
-				
-				DBObject updateQuery = new BasicDBObject();
-				updateQuery.put("businessType",bs.getBusinessType());
-				updateQuery.put("sellType",bs.getSellType());
-				updateQuery.put("orderNumber",bs.getOrderNumber());
-				updateQuery.put("orderTime",bs.getOrderTime());
-				updateQuery.put("customerName",bs.getCustomerName());
-				updateQuery.put("currency",bs.getCurrency());
-				updateQuery.put("parities",bs.getParities());
-				updateQuery.put("salesDepartments",bs.getSalesDepartments());
-				updateQuery.put("salesman",bs.getSalesman());
-				updateQuery.put("inventoryCoding",bs.getInventoryCoding());
-				updateQuery.put("inventoryCode",bs.getInventoryCode());
-				updateQuery.put("inventoryName",bs.getInventoryName());
-				updateQuery.put("specificationsModels",bs.getSpecificationsModels());
-				updateQuery.put("measurement",bs.getMeasurement());
-				updateQuery.put("count",bs.getCount());
-				
-				updateQuery.put("unitPrice",bs.getUnitPrice());
-				updateQuery.put("priceExcludingTax",bs.getPriceExcludingTax());
-				updateQuery.put("noTaxAmount",bs.getNoTaxAmount());
-				updateQuery.put("tax",bs.getTax());
-				updateQuery.put("totalPriceWithTax",bs.getTotalPriceWithTax());
-				updateQuery.put("taxRateString",bs.getTaxRateString());
-				updateQuery.put("deductible",bs.getDeductible());
-				updateQuery.put("deductible2",bs.getDeductible2());
-				updateQuery.put("advanceShipmentDate",bs.getAdvanceShipmentDate());
-				updateQuery.put("ordersForChildTableID",bs.getOrdersForChildTableID());
-				updateQuery.put("unfilledOrderCount",bs.getUnfilledOrderCount());
-				updateQuery.put("noInvoiceCount",bs.getNoInvoiceCount());
-				updateQuery.put("reservedNum",bs.getReservedNum());
-				updateQuery.put("notDeliverNum",bs.getNotDeliverNum());
-				updateQuery.put("notDeliverAmount",bs.getNotDeliverAmount());
-				updateQuery.put("noInvoiceCounts",bs.getNoInvoiceCounts());
-				updateQuery.put("noInvoiceAmount",bs.getNoInvoiceAmount());
-				updateQuery.put("amountPurchased",bs.getAmountPurchased());
-				updateQuery.put("noamountPurchased",bs.getNoamountPurchased());
-				updateQuery.put("noProduction",bs.getNoProduction());
-				updateQuery.put("noOutsourcing",bs.getNoOutsourcing());
-				updateQuery.put("noImportVolume",bs.getNoImportVolume());
-				
-				BasicDBObject doc = new BasicDBObject();  
-				doc.put("$set", updateQuery);
-				mongoDB.getCollection(collectionBill).update(updateQuery, doc);
-			}else{
-				BasicDBObject doc = BasicDBObject.parse(bs.toString());  
-				mongoDB.getCollection(collectionBill).save(doc);
-			}
-			
-		}
-		
-	}
-	*/
+
 	/*
 	 * chang-zheng
 	 * FOR billOfSell
@@ -3768,230 +3655,6 @@ public class MongoDBBasic {
 		return ret;
 		
 	}
-	
-	/*
-	 * chang-zheng
-	 * FOR OnlineQuotation
-	 */
-	/*public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
-		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
-		String ret="Quotation fail";
-		if(onlineQuotation!=null){
-			if(mongoDB == null){
-				mongoDB = getMongoDB();
-			}
-			query.put("item", onlineQuotation.getItem());
-			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
-
-			DBObject insertQuery = new BasicDBObject();
-			
-			WriteResult writeResult;
-			if(queryresult==null){
-				insertQuery.put("item",onlineQuotation.getItem());
-				insertQuery.put("category",onlineQuotation.getCategory());
-				insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
-				insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-				insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
-				insertQuery.put("comments",onlineQuotation.getComments());
-				insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
-				insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
-				insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
-				insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-				insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
-				insertQuery.put("approveStatus",onlineQuotation.getApproveStatus());
-				
-				writeResult=mongoDB.getCollection(collectionQuotation).insert(insertQuery);
-				ret="insert Quotation ok  -->" + writeResult;
-			}else{
-				if(onlineQuotation.getCategory()==null && queryresult.get("category")!=null){
-					insertQuery.put("category",queryresult.get("category").toString());
-				}else {
-					insertQuery.put("category",onlineQuotation.getCategory());
-				}
-				
-				if(onlineQuotation.getCategoryGrade()==null && queryresult.get("categoryGrade")!=null){
-					insertQuery.put("categoryGrade",queryresult.get("categoryGrade").toString());
-				}else {
-					insertQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
-				}
-				
-				if(onlineQuotation.getQuotationPrice()==null && queryresult.get("quotationPrice")!=null){
-					insertQuery.put("quotationPrice",queryresult.get("quotationPrice").toString());
-				}else {
-					insertQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-				}
-				
-
-				if(onlineQuotation.getAvaliableInventory()==null && queryresult.get("avaliableInventory")!=null){
-					insertQuery.put("avaliableInventory",queryresult.get("avaliableInventory").toString());
-				}else {
-					insertQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
-				}
-
-				if(onlineQuotation.getComments()==null && queryresult.get("comments")!=null){
-					insertQuery.put("comments",queryresult.get("comments").toString());
-				}else {
-					insertQuery.put("comments",onlineQuotation.getComments());
-				}
-				
-				if(onlineQuotation.getOnDelivery()==null && queryresult.get("onDelivery")!=null){
-					insertQuery.put("onDelivery",queryresult.get("onDelivery").toString());
-				}else {
-					insertQuery.put("onDelivery",onlineQuotation.getOnDelivery());
-				}
-
-				if(onlineQuotation.getLocationAmounts()==null && queryresult.get("locationAmounts")!=null){
-					insertQuery.put("locationAmounts",queryresult.get("locationAmounts").toString());
-				}else {
-					insertQuery.put("locationAmounts",onlineQuotation.getLocationAmounts());
-				}
-
-				if(onlineQuotation.getSoldOutOfPay()==null && queryresult.get("soldOutOfPay")!=null){
-					insertQuery.put("soldOutOfPay",queryresult.get("soldOutOfPay").toString());
-				}else {
-					insertQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
-				}
-				
-				if(onlineQuotation.getOriginalProducer()==null && queryresult.get("originalProducer")!=null){
-					insertQuery.put("originalProducer",queryresult.get("originalProducer").toString());
-				}else {
-					insertQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-				}
-				
-
-				if(onlineQuotation.getLastUpdate()==null && queryresult.get("lastUpdate")!=null){
-					insertQuery.put("lastUpdate",queryresult.get("lastUpdate").toString());
-				}else {
-					insertQuery.put("lastUpdate",onlineQuotation.getLastUpdate());
-				}
-				insertQuery.put("approveStatus",onlineQuotation.getApproveStatus());
-				BasicDBObject doc = new BasicDBObject();  
-				doc.put("$set", insertQuery);
-				writeResult=mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", onlineQuotation.getItem()), doc);
-				ret="update Quotation ok  -->" + writeResult;
-			}
-		}
-		return ret;
-	}*/
-	
-	/*
-	 * chang-zheng
-	 * remove OnlineQuotation
-	 */
-/*	public static String delQuotationByItem(String item){
-		String ret = "fail";
-		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
-		query.put("item", item);
-		try{
-			WriteResult wt = mongoDB.getCollection(collectionQuotation).remove(query);  
-	        
-	        if(wt!=null){
-	        	ret = "removed";
-	        }
-		}catch(Exception e){
-			log.info("delQuotationByItem--" + e.getMessage());
-		}
-		return ret;
-	}*/
-	
-	
-	/*public static List<OnlineQuotation> getAllQuotations() {
-		DBCursor cor ;
-		cor = mongoDB.getCollection(collectionQuotation).find();
-		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
-		if(cor!=null){
-			while (cor.hasNext()) {
-				DBObject objQuotation = cor.next();
-				OnlineQuotation qt = new OnlineQuotation();
-				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("category").toString());
-				qt.setCategoryGrade(objQuotation.get("categoryGrade") == null ? "" : objQuotation.get("categoryGrade").toString());
-				qt.setItem(objQuotation.get("item") == null ? "" : objQuotation.get("item").toString());
-				qt.setQuotationPrice(objQuotation.get("quotationPrice") == null ? "" : objQuotation.get("quotationPrice").toString());
-				qt.setComments(objQuotation.get("comments") == null ? "" : objQuotation.get("comments").toString());
-				qt.setLocationAmounts(objQuotation.get("locationAmounts") == null ? "" : objQuotation.get("locationAmounts").toString());
-				qt.setAvaliableInventory(objQuotation.get("avaliableInventory") == null ? "" : objQuotation.get("avaliableInventory").toString());
-				qt.setOnDelivery(objQuotation.get("onDelivery") == null ? "" : objQuotation.get("onDelivery").toString());
-				qt.setSoldOutOfPay(objQuotation.get("soldOutOfPay") == null ? "" : objQuotation.get("soldOutOfPay").toString());
-				qt.setOriginalProducer(objQuotation.get("originalProducer") == null ? "" : objQuotation.get("originalProducer").toString());
-				qt.setLastUpdate(objQuotation.get("lastUpdate") == null ? "" : objQuotation.get("lastUpdate").toString());
-				qt.setApproveStatus(objQuotation.get("approveStatus") == null ? "" : objQuotation.get("approveStatus").toString());
-				quotationList.add(qt);
-			}
-			 
-		}
-		
-		return quotationList;
-	}*/
-	
-	
-	/*
-	 * chang-zheng
-	 * getOneQuotation
-	 */
-	
-/*	public static List<OnlineQuotation> getOneQuotation(String item) {
-		DBObject dbQuotation ;
-		DBObject dbquery = new BasicDBObject();  
-		dbquery.put("item", item);
-		dbQuotation = mongoDB.getCollection(collectionQuotation).findOne(dbquery);
-		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
-		
-			OnlineQuotation qt = new OnlineQuotation();
-			qt.setCategory(dbQuotation.get("category") == null ? "" : dbQuotation.get("category").toString());
-			qt.setCategoryGrade(dbQuotation.get("categoryGrade") == null ? "" : dbQuotation.get("categoryGrade").toString());
-			qt.setItem(dbQuotation.get("item") == null ? "" : dbQuotation.get("item").toString());
-			qt.setQuotationPrice(dbQuotation.get("quotationPrice") == null ? "" : dbQuotation.get("quotationPrice").toString());
-			qt.setComments(dbQuotation.get("comments") == null ? "" : dbQuotation.get("comments").toString());
-			qt.setLocationAmounts(dbQuotation.get("locationAmounts") == null ? "" : dbQuotation.get("locationAmounts").toString());
-			qt.setAvaliableInventory(dbQuotation.get("avaliableInventory") == null ? "" : dbQuotation.get("avaliableInventory").toString());
-			qt.setOnDelivery(dbQuotation.get("onDelivery") == null ? "" : dbQuotation.get("onDelivery").toString());
-			qt.setSoldOutOfPay(dbQuotation.get("soldOutOfPay") == null ? "" : dbQuotation.get("soldOutOfPay").toString());
-			qt.setOriginalProducer(dbQuotation.get("originalProducer") == null ? "" : dbQuotation.get("originalProducer").toString());
-			qt.setLastUpdate(dbQuotation.get("lastUpdate") == null ? "" : dbQuotation.get("lastUpdate").toString());
-			quotationList.add(qt);
-		 
-		return quotationList;
-	}*/
-	
-	/*
-	 * chang-zheng
-	 * getQuotations by query
-	 */
-	
-/*	public static List<OnlineQuotation> getQuotationsByQuery(String category,String item) {
-		DBObject dbquery = new BasicDBObject();
-		if(category!=null){
-			dbquery.put("category", category);
-		}
-		if(item!=null){
-			dbquery.put("item", item);
-		}
-		DBCursor cor  = mongoDB.getCollection(collectionQuotation).find();
-		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
-		if(cor!=null){
-			while (cor.hasNext()) {
-				DBObject objQuotation = cor.next();
-				OnlineQuotation qt = new OnlineQuotation();
-				qt.setCategory(objQuotation.get("category") == null ? "" : objQuotation.get("category").toString());
-				qt.setCategoryGrade(objQuotation.get("categoryGrade") == null ? "" : objQuotation.get("categoryGrade").toString());
-				qt.setItem(objQuotation.get("item") == null ? "" : objQuotation.get("item").toString());
-				qt.setQuotationPrice(objQuotation.get("quotationPrice") == null ? "" : objQuotation.get("quotationPrice").toString());
-				qt.setComments(objQuotation.get("comments") == null ? "" : objQuotation.get("comments").toString());
-				qt.setLocationAmounts(objQuotation.get("locationAmounts") == null ? "" : objQuotation.get("locationAmounts").toString());
-				qt.setAvaliableInventory(objQuotation.get("avaliableInventory") == null ? "" : objQuotation.get("avaliableInventory").toString());
-				qt.setOnDelivery(objQuotation.get("onDelivery") == null ? "" : objQuotation.get("onDelivery").toString());
-				qt.setSoldOutOfPay(objQuotation.get("soldOutOfPay") == null ? "" : objQuotation.get("soldOutOfPay").toString());
-				qt.setOriginalProducer(objQuotation.get("originalProducer") == null ? "" : objQuotation.get("originalProducer").toString());
-				qt.setLastUpdate(objQuotation.get("lastUpdate") == null ? "" : objQuotation.get("lastUpdate").toString());
-				quotationList.add(qt);
-			}
-		}
-		
-		return quotationList;
-			
-	}*/
 	
 	/*
 	 * chang-zheng
@@ -4501,67 +4164,7 @@ public class MongoDBBasic {
 		List<String> dbuser = mongoDB.getCollection(Plastic_Item).distinct("itemNo",query);
 			return dbuser;
 	}
-/*	public static boolean updateVisitedHistory(String num,String openId){
-		mongoDB = getMongoDB();
-		Boolean ret = false;
-	    try{
-	    	HashSet<String> kmSets = new HashSet<String>();
-	    	DBCursor dbcur = mongoDB.getCollection(Article_Message).find(new BasicDBObject().append("num", num));
-            if (null != dbcur) {
-            	while(dbcur.hasNext()){
-            		DBObject o = dbcur.next();
-            		if(o.get("Visited")!=null){
-            			BasicDBList hist = (BasicDBList) o.get("Visited");
-                		Object[] vObjects = hist.toArray();
-                		for(Object dbobj : vObjects){
-                			if(dbobj instanceof String){
-                				
-                					kmSets.add((String) dbobj);
-                				
-                			}
-                		}
-            		}
-            	}
-            }
-            BasicDBObject doc = new BasicDBObject();  
-	    	DBObject update = new BasicDBObject();
-	    		kmSets.add(openId);
-    	    update.put("Visited",kmSets);
-	    	doc.put("$set", update);  
-			WriteResult wr = mongoDB.getCollection(Article_Message).update(new BasicDBObject().append("num",num), doc);
-            ret = true;
-            
-	    }
-		catch(Exception e){
-			log.info("saveUserKM--" + e.getMessage());
-		}
-		return ret;
-	}*/
-/*	public static List<String> queryVisitedHistoryByNum(String num){
-		mongoDB = getMongoDB();
-		List<String> vLists = new ArrayList<String>();
-	    try{
-	    	DBCursor dbcur = mongoDB.getCollection(Article_Message).find(new BasicDBObject().append("num", num));
-            if (null != dbcur) {
-            	while(dbcur.hasNext()){
-            		DBObject o = dbcur.next();
-            		if(o.get("Visited")!=null){
-            			BasicDBList hist = (BasicDBList) o.get("Visited");
-                		Object[] kmObjects = hist.toArray();
-                		for(Object dbobj : kmObjects){
-                			if(dbobj instanceof String){
-                				vLists.add((String) dbobj);
-                			}
-                		}
-            		}
-            	}
-            }
-	    }
-		catch(Exception e){
-			log.info("queryUserKM--" + e.getMessage());
-		}
-		return vLists;
-	}*/
+
 	
 	/*
 	 * CHANG -ZHENG

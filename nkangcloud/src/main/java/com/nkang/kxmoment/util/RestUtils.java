@@ -1746,55 +1746,7 @@ public static String regist(WeChatMDLUser user) {
 			if(user.getSelfIntro()!=null&&!"".equals(user.getSelfIntro())){
 				arr.add("selfIntro="+user.getSelfIntro());
 			}
-			/*if(user.getRole()!=null&&!"".equals(user.getRole())){
-				arr.add("role="+user.getRole());
-			}
-			if(user.getGroupid()!=null&&!"".equals(user.getGroupid())){
-				arr.add("group="+user.getGroupid());
-			}
 			
-			//Skill = html:45,java:50
-			ArrayList list = user.getTag();
-			String skill = "";
-			Map map = null;
-			if(user.getTag().size()>0){
-				for (int i = 0; i < list.size(); i++) {
-					map = (HashMap)list.get(i);
-					ArrayList<String> arrList = new ArrayList<String>();
-						
-					String java = (String)map.get("java");
-					if(java!=null&&!"".equals(java)){
-						arrList.add("java:"+java);
-					}
-					
-					String html = (String)map.get("html");
-					if(html!=null&&!"".equals(html)){
-						arrList.add("html:"+html);
-					}
-					
-					String webservice = (String)map.get("webservice");
-					if(webservice!=null&&!"".equals(webservice)){
-						arrList.add("webservice:"+webservice);
-					}
-					
-					String etl = (String)map.get("etl");
-					if(etl!=null&&!"".equals(etl)){
-						arrList.add("etl:"+etl);
-					}
-					System.err.println(arrList);
-					String skillTemp = "";
-					for(int j=0;j<arrList.size();j++){
-						if(j==0) skillTemp += "";
-						else skillTemp += ",";
-						skillTemp += arrList.get(j);
-					}
-					skill += skillTemp;
-				}
-			}
-			System.out.println(skill);
-			if(user.getTag().size()>0){
-				arr.add("skill="+skill);
-			}*/
 			
 			String temp="";
 			for(int i=0;i<arr.size();i++){
@@ -1872,26 +1824,7 @@ public static String regist(WeChatMDLUser user) {
 		return OrgCountryCodeMap;
 
 	}
-	/*
-	 * 
-	 * chang-zheng get CountryCody json file
-	 
-	public static OrgCountryCode ReadCountryCodeByCountryCode(String readPath,String countryCode) {
-		OrgCountryCode orgCountryCode = new OrgCountryCode();
-		if(OrgCountryCodeMap!=null){
-			orgCountryCode = OrgCountryCodeMap.get(countryCode);
-		}
-		else{
-			OrgCountryCodeMap = ReadCountryCode(readPath);
-			orgCountryCode = OrgCountryCodeMap.get(countryCode);
-		}
-		return orgCountryCode;
-	}*/
 	
-	/*
-	 * 
-	 * chang-zheng get CountryCody json file by name
-	 */
 	public static OrgCountryCode ReadOrgCountryCodeByName(String readPath,String countryName) {
 		OrgCountryCode orgCountryCode = new OrgCountryCode();
 		if(OrgCountryCodeMap!=null){
@@ -2265,10 +2198,7 @@ public static String regist(WeChatMDLUser user) {
 	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 	           http.setDoOutput(true);
 	           http.setDoInput(true);
-//	           if(localInd == "Y"){
-//		           System.setProperty("http.proxyHost", Constants.proxyInfo);  
-//		           System.setProperty("http.proxyPort", "8080");  
-//	           }
+
 	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
 	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
 	           http.connect();
@@ -2290,114 +2220,7 @@ public static String regist(WeChatMDLUser user) {
 	}
     
     
-    /*
-     * chang-zheng
-     */
-   /* public static String callOnlineQuotation(OnlineQuotation quotation) throws UnsupportedEncodingException {
-		String url = "http://"+Constants.baehost+"/saveQuotation?";
-		if(quotation != null){
-			if(!StringUtils.isEmpty(quotation.getCategory())){
-				url = url + "category="+URLEncoder.encode(quotation.getCategory(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getCategoryGrade())){
-				url = url + "&categoryGrade="+URLEncoder.encode(quotation.getCategoryGrade(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getItem())){
-				url = url + "&item="+URLEncoder.encode(quotation.getItem(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getQuotationPrice())){
-				url = url + "&quotationPrice="+URLEncoder.encode(quotation.getQuotationPrice(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getComments())){
-				url = url + "&comments="+URLEncoder.encode(quotation.getComments(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getLocationAmounts())){
-				url = url + "&locationAmounts="+URLEncoder.encode(quotation.getLocationAmounts(),"UTF-8");
-			}
-			
-			if(!StringUtils.isEmpty(quotation.getAvaliableInventory())){
-				url = url + "&avaliableInventory="+URLEncoder.encode(quotation.getAvaliableInventory(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getOnDelivery())){
-				url = url + "&onDelivery="+URLEncoder.encode(quotation.getOnDelivery(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getSoldOutOfPay())){
-				url = url + "&soldOutOfPay="+URLEncoder.encode(quotation.getSoldOutOfPay(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(quotation.getOriginalProducer())){
-				url = url + "&originalProducer="+URLEncoder.encode(quotation.getOriginalProducer(),"UTF-8");
-			}
-		}
-		String message= "errorrrr";
-		try {
-	           URL urlGet = new URL(url);
-	           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-	           http.setRequestMethod("PUT"); //must be get request
-	           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-	           http.setDoOutput(true);
-	           http.setDoInput(true);
-	           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-	           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-	           http.connect();
-	           InputStream is = http.getInputStream();
-	           int size = is.available();
-	           byte[] jsonBytes = new byte[size];
-	           is.read(jsonBytes);
-	           message = new String(jsonBytes, "UTF-8");
-	           is.close();
-	       } catch (Exception e) {
-	    	   System.out.println("error:::" + message + " failed http ---------" + url);
-	    	   System.out.println(e.getMessage());
-	    	   log.error("callSaveBills faild",e);
-	    	   return "failed";
-	       } 
-		 System.out.println(url);
-		return message;
-    }*/
-    /*
-     * chang-zheng
-     * saveLocation
-     */
-   /* public static String callSaveLocation(String item, Location location) throws UnsupportedEncodingException {
-		String url = "http://"+Constants.baehost+"/saveLocation?";
-		if(location != null){
-			url = url + "item="+URLEncoder.encode(item,"UTF-8");
-			
-			if(!StringUtils.isEmpty(location.getChengDu())){
-				url = url + "&chengDu="+URLEncoder.encode(location.getChengDu(),"UTF-8");
-			}
-			if(!StringUtils.isEmpty(location.getChongQing())){
-				url = url + "&chongQing="+URLEncoder.encode(location.getChongQing(),"UTF-8");
-			}
-		}
-			String message= "errorrrr";
-			try {
-		           URL urlGet = new URL(url);
-		           HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-		           http.setRequestMethod("PUT"); //must be get request
-		           http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-		           http.setDoOutput(true);
-		           http.setDoInput(true);
-		           System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-		           System.setProperty("sun.net.client.defaultReadTimeout", "30000"); 
-		           http.connect();
-		           InputStream is = http.getInputStream();
-		           int size = is.available();
-		           byte[] jsonBytes = new byte[size];
-		           is.read(jsonBytes);
-		           message = new String(jsonBytes, "UTF-8");
-		           is.close();
-		       } catch (Exception e) {
-		    	   System.out.println("error:::" + message + " failed http ---------" + url);
-		    	   System.out.println(e.getMessage());
-		    	   log.error("callSaveBills faild",e);
-		    	   return "failed";
-		       } 
-		
-		 System.out.println(url);
-		return message;
-    }
-		*/	
+  
     
     /*
      * chang-zheng
@@ -2511,8 +2334,7 @@ public static String regist(WeChatMDLUser user) {
 	           message = new String(jsonBytes, "UTF-8");
 	           is.close();
 	       } catch (Exception e) {
-	    	  // System.out.println("error:::" + message + " failed http ---------" + url);
-	    	   //System.out.println(e.getMessage());
+
 	    	   log.error("callSaveBills faild",e);
 	    	   return "failed";
 	       } 
@@ -2708,13 +2530,6 @@ public static String regist(WeChatMDLUser user) {
     	List<Rate> lt = new ArrayList<Rate>();
 
 		String url = "";
-//				"http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.xchange where pair in ("+ 
-//				"\""
-//				+ "USDEUR"
-//				+ "\""
-//				+ ")&env=store://datatables.org/alltableswithkeys";
-		
-		//url="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDEUR%22,%20%22USDJPY%22,%20%22USDBGN%22,%20%22USDCZK%22,%20%22USDDKK%22,%20%22USDGBP%22,%20%22USDHUF%22,%20%22USDLTL%22,%20%22USDLVL%22,%20%22USDPLN%22,%20%22USDRON%22,%20%22USDSEK%22,%20%22USDCHF%22,%20%22USDNOK%22,%20%22USDHRK%22,%20%22USDRUB%22,%20%22USDTRY%22,%20%22USDAUD%22,%20%22USDBRL%22,%20%22USDCAD%22,%20%22USDCNY%22,%20%22USDHKD%22,%20%22USDIDR%22,%20%22USDILS%22,%20%22USDINR%22,%20%22USDKRW%22,%20%22USDMXN%22,%20%22USDMYR%22,%20%22USDNZD%22,%20%22USDPHP%22,%20%22USDSGD%22,%20%22USDTHB%22,%20%22USDZAR%22,%20%22USDISK%22)&env=store://datatables.org/alltableswithkeys";
 		url="http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22USDCNY%22,%20%22EURCNY%22,%20%22JPYCNY%22,%20%22KRWCNY%22,%20%22SGDCNY%22,%20%22TWDCNY%22,%20%22HUFCNY%22)&env=store://datatables.org/alltableswithkeys";
 		String message= "";
 		try {
@@ -2877,9 +2692,6 @@ public static String regist(WeChatMDLUser user) {
 				+ "\",\"content_source_url\":\""+url
 				+"\",\"content\":\"" + content
 				+ "\",\"digest\":\"\",\"show_cover_pic\":1}]}";
-		// System.out.println(str);
-		// str="{\"articles\": [{\"thumb_media_id\":\"IvZtXKL8uF5UzX8mSLO66rSHyrGxrmR0OiG4-FXb8v8eNbqVIkANc5Lv0oFJaUn5\",\"author\":\"panda\",\"title\":\"test\",\"content_source_url\":\"www.qq.com\",\"content\":\"test for send message\",\"digest\":\"test for..\",\"show_cover_pic\":1}]}";
-	//	 String access_token ="YRJm7nuItwIjgXFjTUVRBZjw33Z4IVywsR4tLjQG2OFyvtMR1cF5hWyG4w2YmVSgsYUXNPmemrBBob169vmjtwxYUVScYpfTJ2q6xJOtxiDZRp4auQepY0SjEv7p7vu8GEYfAHAWUO";
 		String access_token = MongoDBBasic.getValidAccessKey();
 
 		String action = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token="

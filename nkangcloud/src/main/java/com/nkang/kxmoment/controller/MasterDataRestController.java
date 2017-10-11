@@ -51,22 +51,7 @@ public class MasterDataRestController {
 	@RequestMapping("/getForwardMessage")
 	public boolean getForwardMessage(@RequestParam(value="num", required=false) String num,@RequestParam(value="type", required=false) String type){
 		if("video".equals(type)){
-			/*List<VideoMessage>  list=MongoDBBasic.getVideoMessageByNum(num);
-			VideoMessage mes=list.get(0);
-			//微信
-			List<WeChatMDLUser> allUser = MongoDBBasic.getWeChatUserFromMongoDB("");
-	
-			String content=mes.getContent();
-			String title=mes.getTitle();
-			String uri=mes.getWebUrl();
-			content+="\n【更多消息请点击微信公众号菜单：\n      发现附近-->往期回顾-->视频消息】";
-			for(int i=0;i<allUser.size();i++){
-			//	if(allUser.get(i).getOpenid().equals("oqPI_xACjXB7pVPGi5KH9Nzqonj4")){
-					log.info("getForwardMessage==========video================send to "+allUser.get(i).getOpenid());
-					RestUtils.sendQuotationToUser(allUser.get(i),content,"https://c.ap1.content.force.com/servlet/servlet.ImageServer?id=0159000000EVbgB&oid=00D90000000pkXM","【"+allUser.get(i).getNickname()+"】"+title,uri);
-			//	}
-			}
-			MongoDBBasic.updateVideoMessageByNum(num);*/
+
 		}else{
 			List<ArticleMessage>  list=MongoDBBasic.getArticleMessageByNum(num);
 			ArticleMessage mes=list.get(0);
@@ -581,42 +566,7 @@ public class MasterDataRestController {
 		}
 		return ret;
 	}
-	
-/*	@RequestMapping(value="/LoadClientIntoMongoDB", method = RequestMethod.POST)
-	public static String CallLoadClientIntoMongoDB(HttpServletResponse response, HttpServletRequest request){
-		String ret="Completed";
-		try{
-			request.setCharacterEncoding("UTF-8");
-			log.info("--request---" + request.toString());
-			BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-			String jsonStr = null;
-			StringBuilder result = new StringBuilder();
-			try {
-				while ((jsonStr = reader.readLine()) != null) {
-					result.append(jsonStr);
-				}
-				log.info("--ret---" + result.toString());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			log.info("--2222111---");
-			reader.close();
-			JSONObject jsonObject = new JSONObject(result.toString());
-			log.info("--22222---");
-			String ClientID = jsonObject.getString("ClientID");
-			String ClientIdentifier = jsonObject.getString("ClientIdentifier");
-			String ClientDesc = jsonObject.getString("ClientDesc");
-			String WebService = jsonObject.getString("WebService");
-			log.info("--4444---");
-			ret = MongoDBBasic.CallLoadClientIntoMongoDB(ClientID,ClientIdentifier,ClientDesc, WebService);
-			log.info("--55555---");
-		}		
-		catch(Exception e){
-			ret = ret + "error occurs..." + e.getMessage();
-		}
-		return ret;
-	}
-	*/
+
 	@RequestMapping("/CallGetClientFromMongoDB")
 	public static List<ClientInformation> CallGetClientFromMongoDB(){
 		List<ClientInformation> ret = new ArrayList<ClientInformation>();
@@ -750,11 +700,7 @@ public class MasterDataRestController {
 			@RequestParam(value="phone", required=false) String phone,
 			@RequestParam(value="name", required=false) String name,
 			@RequestParam(value="selfIntro", required=false) String selfIntro
-			//@RequestParam(value="role", required=false) String role,
-			//@RequestParam(value="selfIntro", required=false) String selfIntro,
-			//@RequestParam(value="group", required=false) String groupid,
-			//@RequestParam(value="suppovisor", required=false) String suppovisor,
-			//@RequestParam(value="skill", required=false) String skill
+
 			){
 		boolean ret = false;
 		Teamer teamer = new Teamer();
@@ -764,22 +710,7 @@ public class MasterDataRestController {
 		teamer.setPhone(phone);
 		teamer.setSelfIntro(selfIntro);
 		teamer.setRealName(name);
-		//teamer.setRole(role);
-		//teamer.setGroupid(groupid);
-		//teamer.setSelfIntro(selfIntro);
-		//teamer.setSuppovisor(suppovisor);
-		/*ArrayList taglist=new ArrayList();
-		String[] tagArr = skill.split(",");
-		for(int i=0;i<tagArr.length;i++){
-			String[] tag=tagArr[i].split(":");
-			if(tag.length==2){
-				HashMap<String, String> temp=new HashMap<String, String>();
-				temp.put("key", tag[0]);
-				temp.put("value", tag[1]);
-				taglist.add(temp);
-			}
-		}
-		teamer.setTag(taglist);*/
+
 		try{
 			ret = MongoDBBasic.registerUser(teamer);
 		}		
@@ -846,20 +777,7 @@ public class MasterDataRestController {
 	{
 		return  MongoDBBasic.getDataQualityReportbynonatinCity(state, City, cityRegion);
 	}
-	/*
-	 * 
-	 * chang-zheng
-	 */
-	/*@RequestMapping("/InsertOrgCountryCode")
-	public @ResponseBody boolean InsertOrgCountryCode(HttpServletRequest request,HttpServletResponse response,@RequestParam(value = "OrgCountryCode") OrgCountryCode octc)
-	{
-		return  MongoDBBasic.createcountryCodes(octc);
-		
-	}*/
-	/*
-	 * chang-zheng
-	 * 
-	 */
+
 	@RequestMapping("/ReadOrgCountryCode")
 	public @ResponseBody Map<String,OrgCountryCode> ReadOrgCountryCode(){
 		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
@@ -871,26 +789,7 @@ public class MasterDataRestController {
 		return map;
 	}
 	
-	/*
-	 * chang-zheng
-	 * 
-	 */
-	/*@RequestMapping("/ReadCountryCodeByCountryCode")
-	public @ResponseBody Map<String,String> ReadCountryCodeByCountryCode(@RequestParam(value = "countryCode") String countryCode){
-		OrgCountryCode orgcode = new OrgCountryCode();
-		Map<String,String> codeMap = new HashMap<String,String>();
-		URL xmlpath = MasterDataRestController.class.getClassLoader().getResource("sumOrgCountCountryCode.json"); 
-		String path = xmlpath.toString();
-		path=path.substring(5);  
-		System.out.println(xmlpath);
-		String url = path;
-		orgcode = RestUtils.ReadCountryCodeByCountryCode(url,countryCode);
-		String orgcountrycode = "机遇:"+orgcode.getTotalCount()+"<br/>客户："+orgcode.getCustomerCount()+"<br/>伙伴:"+orgcode.getPartnerCount()+"<br/>竞争:"+orgcode.getCompetitorCount();
-				"countryCode:"+orgcode.getCountryCode()+",countryName:"+orgcode.getCountryName()+",totalCount:"+orgcode.getTotalCount()+",customerCount:"+orgcode.getCustomerCount()+",partnerCount:"+orgcode.getPartnerCount()+",competitorCount:"+orgcode.getCompetitorCount();
-		//" "机遇:600514<br/>客户:16856<br/>伙伴:6045<br/>竞争:119")
-		codeMap.put(countryCode, orgcountrycode);
-		return codeMap;
-	}*/
+	
 
 	@RequestMapping("/CallCommandOPSIIntoMongoDB")
 	public static Boolean CallUpdateOpptLatLngIntoMongoDB( 
@@ -1213,61 +1112,7 @@ public class MasterDataRestController {
 		return ret;
 	}
 	
-	/*
-	 * chang-zheng
-	 * FOR OnlineQuotation
-	 */
-	/*@RequestMapping("/saveQuotation")
-	public static String saveQuotation(@RequestParam(value="category", required=false) String category,
-			@RequestParam(value="categoryGrade", required=false) String categoryGrade,
-			@RequestParam(value="item", required=false) String item,
-			@RequestParam(value="quotationPrice", required=false) String quotationPrice,
-			@RequestParam(value="comments", required=false) String comments,
-			@RequestParam(value="locationAmounts", required=false) String locationAmounts,
-			@RequestParam(value="avaliableInventory", required=false) String avaliableInventory,
-			@RequestParam(value="onDelivery", required=false) String onDelivery,
-			@RequestParam(value="soldOutOfPay", required=false) String soldOutOfPay,
-			@RequestParam(value="originalProducer", required=false) String originalProducer
-			){
-		java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-		
-		OnlineQuotation quotation = new OnlineQuotation();
-		quotation.setCategory(category);
-		quotation.setCategoryGrade(categoryGrade);
-		quotation.setItem(item);
-		quotation.setComments(comments);
-		quotation.setQuotationPrice(quotationPrice);
-		quotation.setLocationAmounts(locationAmounts);
-		quotation.setAvaliableInventory(avaliableInventory);
-		quotation.setOnDelivery(onDelivery);
-		quotation.setSoldOutOfPay(soldOutOfPay);
-		quotation.setOriginalProducer(originalProducer);
-		quotation.setLastUpdate(cursqlTS.toString());
-		
-		String ret = MongoDBBasic.saveOnlineQuotation(quotation);
-		return ret;
-		
-	}*/
-	
-	/*
-	 * chang-zheng
-	 * FOR OnlineQuotation
-	 */
-	/*@RequestMapping("/saveLocation")
-	public static String saveLocation(@RequestParam(value="item", required=false) String item,
-			@RequestParam(value="chongQing", required=false) String chongQing,
-			@RequestParam(value="chengDu", required=false) String chengDu
-			){
-		Location location = new Location();
-		location.setChengDu(chengDu);
-		location.setChongQing(chongQing);
-		String ret="";
-		ret=MongoDBBasic.saveLocation(item,location);
-		
-		return ret;
-	}
-		*/
-	
+
 	/*
 	 * chang-zheng
 	 * FOR Inventory
