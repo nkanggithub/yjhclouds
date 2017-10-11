@@ -77,7 +77,7 @@ public class MongoDBBasic {
 	private static String ClientMeta = "Client_Meta";
 	private static String Article_Message = "Article_Message";
 	private static String collectionBill = "SaleBill";
-	private static String collectionQuotation = "Quotation";
+/*	private static String collectionQuotation = "Quotation";*/
 	private static String short_news = "ShortNews";
 	private static String collectionInventory = "Inventory";
 	private static String collectionOnDelivery = "OnDelivery";
@@ -3773,7 +3773,7 @@ public class MongoDBBasic {
 	 * chang-zheng
 	 * FOR OnlineQuotation
 	 */
-	public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
+	/*public static String saveOnlineQuotation(OnlineQuotation onlineQuotation){
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		String ret="Quotation fail";
@@ -3873,13 +3873,13 @@ public class MongoDBBasic {
 			}
 		}
 		return ret;
-	}
+	}*/
 	
 	/*
 	 * chang-zheng
 	 * remove OnlineQuotation
 	 */
-	public static String delQuotationByItem(String item){
+/*	public static String delQuotationByItem(String item){
 		String ret = "fail";
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
@@ -3894,112 +3894,10 @@ public class MongoDBBasic {
 			log.info("delQuotationByItem--" + e.getMessage());
 		}
 		return ret;
-	}
+	}*/
 	
-	/*
-	 * chang-zheng
-	 * FOR OnlineQuotation
-	 */
-	/*public static String UpdateOnlineQuotation(OnlineQuotation onlineQuotation){
-		mongoDB = getMongoDB();
-		DBObject query = new BasicDBObject();
-		String ret="Quotation fail";
-		if(onlineQuotation!=null){
-			if(mongoDB == null){
-				mongoDB = getMongoDB();
-			}
-			query.put("item", onlineQuotation.getItem());
-			DBObject queryresult = mongoDB.getCollection(collectionQuotation).findOne(query);
-			if(queryresult!=null){
-				DBObject updateQuery = new BasicDBObject();
-				updateQuery.put("category",onlineQuotation.getCategory());
-				updateQuery.put("categoryGrade",onlineQuotation.getCategoryGrade());
-				updateQuery.put("item",onlineQuotation.getItem());
-				updateQuery.put("quotationPrice",onlineQuotation.getQuotationPrice());
-				updateQuery.put("locationList",onlineQuotation.getLocationList());
-				updateQuery.put("avaliableInventory",onlineQuotation.getAvaliableInventory());
-				updateQuery.put("onDelivery",onlineQuotation.getOnDelivery());
-				updateQuery.put("soldOutOfPay",onlineQuotation.getSoldOutOfPay());
-				updateQuery.put("originalProducer",onlineQuotation.getOriginalProducer());
-				WriteResult writeResult;
-				writeResult=mongoDB.getCollection(collectionQuotation).insert(updateQuery);
-			}
-		}
-		return ret;
-	}
-	*/
 	
-	/*
-	 * chang-zheng
-	 * FOR OnlineQuotation
-	 */
-	/*public static String saveLocation(String item, Location location){
-		mongoDB = getMongoDB();
-		//DBObject query = new BasicDBObject();
-		String ret="saveLocation fail";
-		if(location!=null){
-			if(mongoDB == null){
-				mongoDB = getMongoDB();
-			}
-
-			List<DBObject> locationList = new ArrayList<DBObject>();
-			DBCursor onlineQuotation = mongoDB.getCollection(collectionQuotation).find(new BasicDBObject().append("item", item));
-			if (null != onlineQuotation) {
-				BasicDBObject doc = new BasicDBObject();
-				DBObject update = new BasicDBObject();
-//				DBObject innerInsert = new BasicDBObject();
-//				innerInsert.put("chengDu",location.getChengDu() );
-//				innerInsert.put("chongQing", location.getChongQing());
-				
-				while (onlineQuotation.hasNext()) {
-					DBObject o = onlineQuotation.next();
-					BasicDBList hist = (BasicDBList) o.get("locationList");
-					if (hist != null) {
-						Object[] locations = hist.toArray();
-						for (Object dbobj : locations) {
-							if (dbobj instanceof DBObject) {
-								if(location.getChengDu()!=null){
-									((DBObject) dbobj).put("chengDu",location.getChengDu() );
-								}
-								if(location.getChongQing()!=null){
-									((DBObject) dbobj).put("chongQing", location.getChongQing() );
-								}
-								
-								locationList.add((DBObject) dbobj);
-							}
-						}
-					}
-					else{
-						DBObject innerInsert = new BasicDBObject();
-						innerInsert.put("chengDu",location.getChengDu() );
-						innerInsert.put("chongQing", location.getChongQing());
-						
-						locationList.add(innerInsert);
-					}
-				}
-
-				
-				
-				
-				update.put("locationList", locationList);
-				
-				doc.put("$set", update);
-				WriteResult wr = mongoDB.getCollection(collectionQuotation).update(new BasicDBObject().append("item", item), doc);
-				if(wr!=null){
-					ret = "saveLocation success";
-				}
-			}
-		}
-			
-		return ret;
-	}
-	*/
-	/*
-	 * chang-zheng
-	 * getAllQuotations
-	 */
-	
-	public static List<OnlineQuotation> getAllQuotations() {
+	/*public static List<OnlineQuotation> getAllQuotations() {
 		DBCursor cor ;
 		cor = mongoDB.getCollection(collectionQuotation).find();
 		List<OnlineQuotation> quotationList = new ArrayList<OnlineQuotation>();
@@ -4025,7 +3923,7 @@ public class MongoDBBasic {
 		}
 		
 		return quotationList;
-	}
+	}*/
 	
 	
 	/*
@@ -4033,7 +3931,7 @@ public class MongoDBBasic {
 	 * getOneQuotation
 	 */
 	
-	public static List<OnlineQuotation> getOneQuotation(String item) {
+/*	public static List<OnlineQuotation> getOneQuotation(String item) {
 		DBObject dbQuotation ;
 		DBObject dbquery = new BasicDBObject();  
 		dbquery.put("item", item);
@@ -4055,14 +3953,14 @@ public class MongoDBBasic {
 			quotationList.add(qt);
 		 
 		return quotationList;
-	}
+	}*/
 	
 	/*
 	 * chang-zheng
 	 * getQuotations by query
 	 */
 	
-	public static List<OnlineQuotation> getQuotationsByQuery(String category,String item) {
+/*	public static List<OnlineQuotation> getQuotationsByQuery(String category,String item) {
 		DBObject dbquery = new BasicDBObject();
 		if(category!=null){
 			dbquery.put("category", category);
@@ -4093,7 +3991,7 @@ public class MongoDBBasic {
 		
 		return quotationList;
 			
-	}
+	}*/
 	
 	/*
 	 * chang-zheng
@@ -4267,76 +4165,32 @@ public class MongoDBBasic {
 				mongoDB = getMongoDB();
 			}
 			DBObject queryresult = null;
-			/*if(!StringUtils.isEmpty(mongoID) ){
-				DBObject Query = new BasicDBObject();
-				Query.put("_id", mongoID);
-				queryresult = mongoDB.getCollection(collectionQuotationList).findOne(Query);
-			}*/
 			WriteResult writeResult;
 			DBObject insertQuery = new BasicDBObject();
 			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-			/*if(queryresult!=null && queryresult.get("status")!="Y"){
-				insertQuery.put("plasticItem", queryresult.get("plasticItem"));
-				insertQuery.put("status", quotation.getStatus());
-				insertQuery.put("approveBy",quotation.getApproveBy());
-				insertQuery.put("editBy",quotation.getEditBy());
-				insertQuery.put("dateTime",queryresult.get("dateTime"));
-				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
-				insertQuery.put("lastUpdate",cursqlTS.toString());
-				
-				BasicDBObject doc = new BasicDBObject();  
-				doc.put("$set", insertQuery);
-				writeResult=mongoDB.getCollection(collectionQuotationList).update(new BasicDBObject().append("_id", mongoID), doc);
-				
-				ret="update QuotationList ok  -->" + writeResult;
-			}else{*/
-				insertQuery.put("plasticItem", quotation.getPlasticItem());
-				insertQuery.put("status", quotation.getStatus());
-				insertQuery.put("approveBy", quotation.getApproveBy());
-				insertQuery.put("editBy",quotation.getEditBy());
-				insertQuery.put("dateTime",quotation.getDateTime());
-				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
-				insertQuery.put("lastUpdate",cursqlTS.toString());
-				insertQuery.put("type",quotation.getType());
-				writeResult=mongoDB.getCollection(collectionQuotationList).insert(insertQuery);
-				ret="insert quotation ok  -->" + writeResult;
-				
-				Float price = null;
-				if(quotation.getSuggestPrice() != null){
-					price = Float.parseFloat(quotation.getSuggestPrice()+"");
-				}
-				// æ›´æ–°ä»·æ ¼
-				PlasticItemService.updatePriceInfo(quotation.getPlasticItem(), price, quotation.getType());
+			insertQuery.put("plasticItem", quotation.getPlasticItem());
+			insertQuery.put("status", quotation.getStatus());
+			insertQuery.put("approveBy", quotation.getApproveBy());
+			insertQuery.put("editBy",quotation.getEditBy());
+			insertQuery.put("dateTime",quotation.getDateTime());
+			insertQuery.put("suggestPrice",quotation.getSuggestPrice());
+			insertQuery.put("lastUpdate",cursqlTS.toString());
+			insertQuery.put("type",quotation.getType());
+			writeResult=mongoDB.getCollection(collectionQuotationList).insert(insertQuery);
+			ret="insert quotation ok  -->" + writeResult;
+			
+			Float price = null;
+			if(quotation.getSuggestPrice() != null){
+				price = Float.parseFloat(quotation.getSuggestPrice()+"");
+			}
+			PlasticItemService.updatePriceInfo(quotation.getPlasticItem(), price, quotation.getType());
 			
 				
 		}
 		return ret;
 	
 	}
-	/*public static String insertQuotationList(QuotationList quotation){
-		mongoDB = getMongoDB();
-		String ret="Quotation fail";
-		if(quotation!=null){
-			if(mongoDB == null){
-				mongoDB = getMongoDB();
-			}
-			DBObject queryresult = null;
-			WriteResult writeResult;
-			DBObject insertQuery = new BasicDBObject();
-			java.sql.Timestamp cursqlTS = new java.sql.Timestamp(new java.util.Date().getTime()); 
-				insertQuery.put("plasticItem", quotation.getPlasticItem());
-				insertQuery.put("status", quotation.getStatus());
-				insertQuery.put("approveBy", quotation.getApproveBy());
-				insertQuery.put("editBy",quotation.getEditBy());
-				insertQuery.put("dateTime",quotation.getDateTime());
-				insertQuery.put("suggestPrice",quotation.getSuggestPrice());
-				insertQuery.put("lastUpdate",cursqlTS.toString());
-				writeResult=mongoDB.getCollection(collectionOrderNopay).insert(insertQuery);
-				ret="insert quotation ok  -->" + writeResult;
-		}
-		return ret;
-	
-	}*/
+
 	/*
 	 * CHANG -ZHENG
 	 *
@@ -4347,7 +4201,6 @@ public class MongoDBBasic {
 	WriteResult wr = mongoDB.getCollection(dbName).remove(query);
 	return wr;
 	}
-	
 	
 	
 	public static String saveArticleMessage(ArticleMessage articleMessage){

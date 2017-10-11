@@ -37,7 +37,7 @@ import com.nkang.kxmoment.util.RestUtils;
 @Controller
 public class QuotationController {
 
-	@RequestMapping("/updateQuotation")
+	/*@RequestMapping("/updateQuotation")
 	@ResponseBody
 	public String updateQuotation(@RequestParam(value="category", required=false) String category,
 			@RequestParam(value="categoryGrade", required=false) String categoryGrade,
@@ -67,10 +67,10 @@ public class QuotationController {
 		
 		return ret;
 		
-	}
+	}*/
 	
 	
-	@RequestMapping("/updateQuotationByItem")
+	/*@RequestMapping("/updateQuotationByItem")
 	@ResponseBody
 	public String updateQuotation(HttpServletRequest request, HttpServletResponse response){
 		OnlineQuotation quotation = new OnlineQuotation();
@@ -98,39 +98,39 @@ public class QuotationController {
 		return ret;
 		
 	}
-	
+	*/
 
-	@RequestMapping("/removeQuotationByItem")
+/*	@RequestMapping("/removeQuotationByItem")
 	@ResponseBody
 	public String removeQuotationByItem(@RequestParam(value="item", required=true) String item){
 		String ret="";
 		ret=MongoDBBasic.delQuotationByItem(item);
 		return ret;
-	}
+	}*/
 			
-	@RequestMapping("/getAllQuotations")
+/*	@RequestMapping("/getAllQuotations")
 	public @ResponseBody List<OnlineQuotation> getAllQuotations(){
 		
 		return MongoDBBasic.getAllQuotations();
 		
-	}
+	}*/
 	
-	@RequestMapping("/getOneQuotation")
+/*	@RequestMapping("/getOneQuotation")
 	public @ResponseBody List<OnlineQuotation> getOneQuotation(@RequestParam(value="item", required=true) String item){
 		List<OnlineQuotation> Quotation =new ArrayList<OnlineQuotation>();
 		Quotation=MongoDBBasic.getOneQuotation(item);
 		return Quotation;
-	}
+	}*/
 	
-	@RequestMapping("/getQuotationsByQuery")
+/*	@RequestMapping("/getQuotationsByQuery")
 	public @ResponseBody List<OnlineQuotation> getQuotationsByQuery(@RequestParam(value="category", required=false) String category,
 			@RequestParam(value="item", required=false) String item){
 		
 		return MongoDBBasic.getQuotationsByQuery(category,item);
 		
-	}
+	}*/
 	
-	@RequestMapping("/updateStatus")
+/*	@RequestMapping("/updateStatus")
 	public @ResponseBody String updateStatus(@RequestParam(value="item", required=true) String item,
 			@RequestParam(value="approveStatus", required=false) String approveStatus){
 		OnlineQuotation onlineQuotation = new OnlineQuotation();
@@ -138,7 +138,7 @@ public class QuotationController {
 		onlineQuotation.setItem(item);
 		return MongoDBBasic.saveOnlineQuotation(onlineQuotation);
 		
-	}
+	}*/
 	
 
 	@RequestMapping("/saveQuotationList")

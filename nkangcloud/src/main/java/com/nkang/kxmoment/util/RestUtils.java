@@ -2293,7 +2293,7 @@ public static String regist(WeChatMDLUser user) {
     /*
      * chang-zheng
      */
-    public static String callOnlineQuotation(OnlineQuotation quotation) throws UnsupportedEncodingException {
+   /* public static String callOnlineQuotation(OnlineQuotation quotation) throws UnsupportedEncodingException {
 		String url = "http://"+Constants.baehost+"/saveQuotation?";
 		if(quotation != null){
 			if(!StringUtils.isEmpty(quotation.getCategory())){
@@ -2353,7 +2353,7 @@ public static String regist(WeChatMDLUser user) {
 	       } 
 		 System.out.println(url);
 		return message;
-    }
+    }*/
     /*
      * chang-zheng
      * saveLocation

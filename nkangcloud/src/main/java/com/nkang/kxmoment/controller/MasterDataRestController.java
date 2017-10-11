@@ -1217,7 +1217,7 @@ public class MasterDataRestController {
 	 * chang-zheng
 	 * FOR OnlineQuotation
 	 */
-	@RequestMapping("/saveQuotation")
+	/*@RequestMapping("/saveQuotation")
 	public static String saveQuotation(@RequestParam(value="category", required=false) String category,
 			@RequestParam(value="categoryGrade", required=false) String categoryGrade,
 			@RequestParam(value="item", required=false) String item,
@@ -1247,7 +1247,7 @@ public class MasterDataRestController {
 		String ret = MongoDBBasic.saveOnlineQuotation(quotation);
 		return ret;
 		
-	}
+	}*/
 	
 	/*
 	 * chang-zheng
