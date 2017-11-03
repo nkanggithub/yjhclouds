@@ -1,8 +1,4 @@
 package com.nkang.kxmoment.util;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,12 +7,10 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -4125,7 +4119,7 @@ public class MongoDBBasic {
 	    try{
             BasicDBObject doc = new BasicDBObject();
 			DBObject update = new BasicDBObject();
-			update.put("ItemType", type);
+			update.put("itemType", type);
 			doc.put("$set", update); 
 			WriteResult wr = mongoDB.getCollection(Plastic_Item).update(new BasicDBObject().append("itemNo", itemNo), doc);     
 			ret = true;
@@ -4144,7 +4138,7 @@ public class MongoDBBasic {
 				if(dbcur!=null){
 					while (dbcur.hasNext()) {
 						DBObject objam = dbcur.next();
-						type=objam.get("ItemType") == null ? "" : objam.get("ItemType").toString();
+						type=objam.get("itemType") == null ? "" : objam.get("itemType").toString();
 					}
 				}
             
@@ -4159,7 +4153,7 @@ public class MongoDBBasic {
 		mongoDB = getMongoDB();
 		DBObject query = new BasicDBObject();
 		Pattern pattern = Pattern.compile("^.*"+type+".*$", Pattern.CASE_INSENSITIVE);
-		query.put("ItemType", pattern);
+		query.put("itemType", pattern);
 		@SuppressWarnings("unchecked")
 		List<String> dbuser = mongoDB.getCollection(Plastic_Item).distinct("itemNo",query);
 			return dbuser;

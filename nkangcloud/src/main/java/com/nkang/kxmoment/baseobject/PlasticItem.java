@@ -18,6 +18,8 @@ public class PlasticItem {
 	private String batch;
 	// 价格
 	private float price;
+	//牌号类型
+	private String ItemType;
 	// 变化价格
 	private float diffPrice;
 	// 价格状态，0:initial; 1:edit; 2:approve
@@ -138,5 +140,12 @@ public class PlasticItem {
 	}
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	public String getItemType() {
+		return ItemType;
+	}
+	public void setItemType(String itemType) {
+		ItemType = itemType;
 	}
 }
