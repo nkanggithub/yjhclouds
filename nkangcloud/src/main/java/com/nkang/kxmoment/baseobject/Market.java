@@ -19,8 +19,8 @@ public class Market {
 		arrayList.add(new String[]{"采购经理","罗斯威","13883743587"});
 		arrayList.add(new String[]{"重庆销售","康宁","15123944895"});
 		arrayList.add(new String[]{"重庆销售","天小婷","13661995272"});
-		arrayList.add(new String[]{"重庆销售","杨康莉","13661995272"});
-		arrayList.add(new String[]{"重庆销售","杨惟翔","13661995272"});
+		arrayList.add(new String[]{"重庆销售","杨康莉","13688080920"});
+		arrayList.add(new String[]{"重庆销售","杨惟翔","15308228368"});
 	}
 	public String[] getMarket(String name){
 		for(String[] market:arrayList){
