@@ -139,13 +139,13 @@
 		
 		
 		
-		<dependency>
+<!-- 		<dependency>
                <artifactId>solr-solrj</artifactId>
                <groupId>org.apache.solr</groupId>
                <version>4.7.0</version>
                <type>jar</type>
                <scope>compile</scope>
-        </dependency>
+        </dependency> -->
 <!--         <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
