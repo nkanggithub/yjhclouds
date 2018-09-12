@@ -60,7 +60,7 @@
 	</servlet-mapping> -->
 
     <welcome-file-list>  
-        <welcome-file>/mdm/DQMenu.jsp</welcome-file>  
+        <welcome-file>/fancychina/index.html</welcome-file>  
     </welcome-file-list> 
 
 </web-app>  
